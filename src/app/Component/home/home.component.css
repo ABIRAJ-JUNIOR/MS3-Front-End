@@ -18,5 +18,88 @@
 }
 
 .login-btn:active{
-    scale:0.95;
+    scale:0.98;
 }
+
+.navbar-brand span {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .navbar-nav .nav-link {
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .navbar-toggler {
+    border: none;
+  }
+  
+  .navbar-toggler-icon {
+    background-color: #333;
+  }
+  
+  .d-flex a i {
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  @media (max-width: 992px) {
+    .navbar-nav {
+      margin-top: 10px;
+    }
+  
+    .d-flex {
+      justify-content: flex-end;
+    }
+  }
+  
+  .carousel-item img {
+    height: 500px;
+    object-fit: cover;
+  }
+  
+  .carousel-caption h5 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .carousel-caption p {
+    font-size: 1rem;
+  }
+  
+  .carousel-control-prev-icon, 
+  .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+  }
+  
+  .carousel-indicators li {
+    background-color: #007bff;
+  }
+  
+
+  .features i {
+    color: #007bff;
+    margin-bottom: 15px;
+  }
+  
+  .features h4 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .features p {
+    font-size: 1rem;
+    color: #6c757d;
+  }
+  
+  .features .col-md-4 {
+    margin-bottom: 30px;
+  }
+  
+  .features .row {
+    margin-top: 20px;
+  }
+  

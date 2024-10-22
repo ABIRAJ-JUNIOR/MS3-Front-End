@@ -1,0 +1,22 @@
+.login-btn{
+    margin-top: 100px;
+    width: 200px;
+    height: 50px;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    font-weight: bold;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    font-size: 19px;
+    letter-spacing: 1px;
+}
+
+.login-btn:hover{
+    border:1px solid #f44336 ;
+    background: #f44336;
+}
+
+.login-btn:active{
+    scale:0.95;
+}

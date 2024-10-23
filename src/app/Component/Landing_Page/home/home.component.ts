@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FooterComponent } from '../footer/footer.component';
-import { Navebar01Component } from '../navebar-01/navebar-01.component';
+import { FooterComponent } from '../../common_components/footer/footer.component';
+import { Navebar01Component } from '../../common_components/navebar-01/navebar-01.component';
+
 
 @Component({
   selector: 'app-home',

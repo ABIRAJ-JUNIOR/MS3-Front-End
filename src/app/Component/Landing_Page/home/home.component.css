@@ -43,6 +43,10 @@
     font-size: 1.5rem;
     color: #333;
   }
+
+  .swipeDown:active{
+    scale: 0.98;
+  }
   
   @media (max-width: 992px) {
     .navbar-nav {
@@ -79,6 +83,7 @@
   }
   
 
+
   .features i {
     color: #34393f;
     margin-bottom: 15px;
@@ -103,6 +108,7 @@
     margin-top: 20px;
   }
   
+
 
   .partners img {
     max-width: 100px;

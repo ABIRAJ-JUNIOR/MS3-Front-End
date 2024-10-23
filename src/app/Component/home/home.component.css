@@ -80,7 +80,7 @@
   
 
   .features i {
-    color: #007bff;
+    color: #34393f;
     margin-bottom: 15px;
   }
   
@@ -92,7 +92,7 @@
   
   .features p {
     font-size: 1rem;
-    color: #6c757d;
+    color: #677581;
   }
   
   .features .col-md-4 {
@@ -101,5 +101,26 @@
   
   .features .row {
     margin-top: 20px;
+  }
+  
+
+  .partners img {
+    max-width: 100px;
+    filter: grayscale(100%);
+    transition: filter 0.3s;
+  }
+  
+  .partners img:hover {
+    filter: none;
+  }
+  
+  .partners p {
+    font-size: 1rem;
+    color: #333;
+    margin-top: 10px;
+  }
+  
+  .partners .col-md-2 {
+    margin-bottom: 20px;
   }
   

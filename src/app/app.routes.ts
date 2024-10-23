@@ -5,7 +5,7 @@ import { AdminLoginComponent } from './Component/Admin_Pages/admin-login/admin-l
 
 export const routes: Routes = [
 
-    {path:'' , component:AdminLoginComponent},
+    {path:'' , component:HomeComponent},
     {path:'home' , component:HomeComponent},
     {path:'contact' , component:ContactComponent},
     {path:'admin-login' , component:AdminLoginComponent},

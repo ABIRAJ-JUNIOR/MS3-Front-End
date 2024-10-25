@@ -4,7 +4,7 @@
     
   <section>
     <div id="intro" class="bg-image vh-100" style="
-          background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)), url('pexels-molnartamasphotography-14031189.jpg');
+          background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)), url('Home/pexels-molnartamasphotography-14031189.jpg');
           background-position: center;
           background-size: cover;
         ">
@@ -20,30 +20,33 @@
       </button>
     </div>
     <div style="position: absolute; left: 50%; top: 88%; transform: translate(-50%);">
-      <a href="#down"><img src="Picsart_24-10-22_22-56-15-571.png" class="swipeDown" alt="swipe down" width="400px"></a>
+      <a href="#down"><img src="Home/Picsart_24-10-22_22-56-15-571.png" class="swipeDown" alt="swipe down" width="400px"></a>
     </div>
   </section>
 
 </header>
 
+
 <div class="container my-5" id="course-container">
   <div class="mb-3">
-    <h1>Course We Offer</h1>
+    <h1>Courses We Offer</h1>
     <p>Start your programming journey with an introduction to the world of code and basic concepts.</p>
   </div>
   <div class="row">
     <div class="col-lg-4 col-md-6 mb-4" *ngFor="let course of courses">
-      <div class="card h-100 shadow-sm">
-        <img src="{{course.image}}" class="card-img-top" alt="{{course.title}}">
+      <div class="card h-100 shadow-sm" #courseCard>
+        <img src="{{ course.image }}" class="card-img-top" alt="{{ course.title }}">
         <div class="card-body">
-          <h5 class="card-title">{{course.title}}</h5>
-          <p class="card-text">{{course.description}}</p>
-          <a href="{{course.link}}" class="btn btn-primary">Learn More</a>
+          <h5 class="card-title">{{ course.title }}</h5>
+          <p class="card-text">{{ course.description }}</p>
+          <a href="{{ course.link }}" class="btn btn-primary">Learn More</a>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
 
 <section class="features py-5 bg-white">
   <div class="container">
@@ -123,21 +126,21 @@
 
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="main_building.jpg" class="d-block w-100" alt="Building 1">
+      <img src="Home/main_building.jpg" class="d-block w-100" alt="Building 1">
       <div class="carousel-caption d-none d-md-block">
         <h5>Main Campus Building</h5>
         <p>A beautiful view of the main campus building.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="295ec2d83114458eb872c97a765c8dd8.jpg" class="d-block w-100" alt="Building 2">
+      <img src="Home/295ec2d83114458eb872c97a765c8dd8.jpg" class="d-block w-100" alt="Building 2">
       <div class="carousel-caption d-none d-md-block">
         <h5>Library Building</h5>
         <p>Our extensive library building with modern architecture.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="Lab-Site-Selection-2.jpg" class="d-block w-100" alt="Building 3">
+      <img src="Home/Lab-Site-Selection-2.jpg" class="d-block w-100" alt="Building 3">
       <div class="carousel-caption d-none d-md-block">
         <h5>Laboratory Building</h5>
         <p>State-of-the-art labs for research and development.</p>
@@ -168,27 +171,27 @@
     <div class="row justify-content-center">
 
       <div class="col-md-2 col-6">
-        <img src="icons8-microsoft-48.png" alt="Partner 1" class="img-fluid mb-3">
+        <img src="Home/icons8-microsoft-48.png" alt="Partner 1" class="img-fluid mb-3">
         <p>Microsoft</p>
       </div>
 
       <div class="col-md-2 col-6">
-        <img src="icons8-aws-48.png" alt="Partner 2" class="img-fluid mb-3">
+        <img src="Home/icons8-aws-48.png" alt="Partner 2" class="img-fluid mb-3">
         <p>Amazon Web Services</p>
       </div>
 
       <div class="col-md-2 col-6">
-        <img src="icons8-google-cloud-48.png" alt="Partner 3" class="img-fluid mb-3">
+        <img src="Home/icons8-google-cloud-48.png" alt="Partner 3" class="img-fluid mb-3">
         <p>Google Cloud</p>
       </div>
 
       <div class="col-md-2 col-6">
-        <img src="icons8-ibm-48.png" alt="Partner 7" class="img-fluid mb-3">
+        <img src="Home/icons8-ibm-48.png" alt="Partner 7" class="img-fluid mb-3">
         <p>IBM</p>
       </div>
 
       <div class="col-md-2 col-6">
-        <img src="icons8-adobe-48.png" alt="Partner 9" class="img-fluid mb-3">
+        <img src="Home/icons8-adobe-48.png" alt="Partner 9" class="img-fluid mb-3">
         <p>Adobe</p>
       </div>
     </div>

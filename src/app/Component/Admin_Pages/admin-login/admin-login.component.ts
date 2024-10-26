@@ -14,7 +14,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AdminLoginComponent {
   loginForm: FormGroup;
-  submitted:boolean = false;
   showPassword:boolean = false;
   loading:boolean = false
 
@@ -36,7 +35,6 @@ export class AdminLoginComponent {
   }
 
   onSubmit() {
-    this.submitted = true;
 
     if (this.AdminUsername == this.loginForm.value.username && this.AdminPassword == this.loginForm.value.password){
       this.toastr.success("Login Successfully.." , "" , {
@@ -54,6 +52,5 @@ export class AdminLoginComponent {
       this.loginForm.reset();
     }
     
-    console.log(this.loginForm.value);
   }
 }

@@ -49,7 +49,7 @@ export class HomeComponent {
             }
           });
         },
-        { threshold: 0.6 } 
+        { threshold: 0.3 } 
       );
   
       this.courseCards.forEach(card => observer.observe(card.nativeElement));

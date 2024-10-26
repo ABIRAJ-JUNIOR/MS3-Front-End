@@ -1,0 +1,134 @@
+<app-navebar-01></app-navebar-01>
+
+<div class="container-fluid p-5 hero-section text-white d-flex align-items-center justify-content-center">
+    <div class="text-center">
+      <h1 class="display-4">Welcome to Way Makers</h1>
+      <p class="lead">Shaping the future with cutting-edge IT education and innovation.</p>
+      <a href="#about" class="btn btn-light btn-lg mt-3">Learn More</a>
+    </div>
+</div>
+
+<div class="container my-5" id="about">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <img src="About/programing.jpg" class="img-fluid rounded" alt="Institute Image">
+      </div>
+      <div class="col-lg-6">
+        <h2>About Our Institute</h2>
+        <p>Way Makers has been at the forefront of IT education since 2020. With a commitment to quality and hands-on learning, we empower students to succeed in the tech world.</p>
+        <p>We offer comprehensive courses in programming, data science, and web development, tailored to industry demands and future trends.</p>
+      </div>
+    </div>
+</div>
+
+
+<div class="container my-5">
+    <div class="row text-center">
+      <div class="col-md-4">
+        <i class="bi bi-lightbulb display-3 text-secondary"></i>
+        <h4>Our Mission</h4>
+        <p>Empowering students with industry-relevant skills and practical knowledge.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-binoculars display-3 text-secondary"></i>
+        <h4>Our Vision</h4>
+        <p>To lead in IT education and innovation, inspiring future generations.</p>
+      </div>
+      <div class="col-md-4">
+        <i class="bi bi-people display-3 text-secondary"></i>
+        <h4>Our Values</h4>
+        <p>Integrity, Excellence, Innovation, and Collaboration.</p>
+      </div>
+    </div>
+</div>
+  
+
+<div class="container my-5" id="branches">
+    <h2 class="text-center mb-4">Our Branches</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let branch of branches">
+        <div class="branch-card">
+          <img src="{{branch.image}}" class="img-fluid rounded" alt="Branch Image">
+          <div class="overlay">
+            <span>{{branch.name}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="container my-5 text-center">
+    <h2>Our Achievements</h2>
+    <div class="row mt-4">
+      <div class="col-md-3">
+        <h3><span class="counter" data-count="1000">0</span>+</h3>
+        <p>Graduates</p>
+      </div>
+      <div class="col-md-3">
+        <h3><span class="counter" data-count="500">0</span>+</h3>
+        <p>Industry Partners</p>
+      </div>
+      <div class="col-md-3">
+        <h3><span class="counter" data-count="50">0</span>+</h3>
+        <p>Courses</p>
+      </div>
+      <div class="col-md-3">
+        <h3><span class="counter" data-count="10">0</span>+</h3>
+        <p>Years of Excellence</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container my-5" id="student-activities">
+    <h2 class="text-center mb-4">Student Activities</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let activity of activities">
+        <div class="card h-100 shadow-sm">
+          <img src="{{activity.image}}" class="card-img-top" alt="{{activity.title}}">
+          <div class="card-body">
+            <h5 class="card-title">{{activity.title}}</h5>
+            <p class="card-text">{{activity.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="container my-5">
+    <h2 class="text-center">What Our Students Say</h2>
+    <div id="testimonialCarousel" class="carousel slide mt-4" data-bs-ride="carousel">
+      <div class="carousel-inner text-center">
+        <div class="carousel-item active">
+          <blockquote class="blockquote">
+            <p>"This institute transformed my career. Highly recommended!"</p>
+            <footer class="blockquote-footer">Mary, Class of 2023</footer>
+          </blockquote>
+        </div>
+        <div class="carousel-item">
+          <blockquote class="blockquote">
+            <p>"Excellent learning environment with top-notch instructors!"</p>
+            <footer class="blockquote-footer">Jack, Class of 2024</footer>
+          </blockquote>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+
+
+  <div class="container-fluid call-to-action text-center d-flex align-items-center justify-content-center">
+    <div>
+      <h2 class="text-dark">Ready to Build Your Future?</h2>
+    </div>
+  </div>
+
+  <app-footer></app-footer>

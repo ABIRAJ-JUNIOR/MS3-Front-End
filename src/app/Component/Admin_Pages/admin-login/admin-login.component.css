@@ -1,0 +1,13 @@
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+}
+
+.backgroundimage{
+  background: url('../../../../../public/Admin_login/blue-surface-with-study-tools.jpg');
+  background-position: center;
+  background-size: cover;
+  object-fit: contain;
+}
+

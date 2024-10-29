@@ -1,0 +1,57 @@
+<div class="container-fluid">
+  
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow">
+    <a class="navbar-brand ms-3" href="#">Admin Dashboard</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fas fa-bell me-1"></i>Notifications</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fas fa-cog me-1"></i>Settings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fas fa-sign-out-alt me-1"></i>Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  
+  <div class="row" style="margin-top: 70px;">
+    
+    <div class="col-md-3 col-lg-2 bg-dark sidebar text-white py-4 shadow-lg" style="height: 100vh;">
+      <div class="d-flex flex-column">
+        <div class="text-center mb-4 mt-5">
+          <img src="logo.png" class="rounded-circle" alt="Admin Profile">
+          <h5 class="mt-2">Admin</h5>
+        </div>
+        <ul class="nav flex-column text-white">
+          <li class="nav-item mb-3">
+            <a class="nav-link text-white" [routerLink]="['/admin-dashboard/home']"><i class="bi bi-house-fill me-2"></i> Home</a>
+          </li>
+          <li class="nav-item mb-3">
+            <a class="nav-link text-white" [routerLink]="['/admin-dashboard/student-registration']" ><i class="fas fa-user-plus me-2"></i> Student Registration</a>
+          </li>
+          <li class="nav-item mb-3">
+            <a class="nav-link text-white" href="#"><i class="fas fa-dollar-sign me-2"></i> Payment</a>
+          </li>
+          <li class="nav-item mb-3">
+            <a class="nav-link text-white" href="#"><i class="fas fa-book-open me-2"></i> Course Offering</a>
+          </li>
+          <li class="nav-item mb-3">
+            <a class="nav-link text-white" href="#"><i class="fas fa-chart-line me-2"></i> Report</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    
+    <div class="col-md-9 col-lg-10 main-content p-5">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

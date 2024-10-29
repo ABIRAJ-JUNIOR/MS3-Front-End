@@ -1,0 +1,26 @@
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(90deg, #0062E6, #33AEFF);
+}
+
+.bg-gradient-success {
+  background: linear-gradient(90deg, #28a745, #85d188);
+}
+
+.bg-gradient-warning {
+  background: linear-gradient(90deg, #ffc107, #ffecb3);
+}
+
+.bg-gradient-danger {
+  background: linear-gradient(90deg, #dc3545, #f19c9e);
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 0;
+}
+.custom-scroll {
+  overflow-y: auto;
+}

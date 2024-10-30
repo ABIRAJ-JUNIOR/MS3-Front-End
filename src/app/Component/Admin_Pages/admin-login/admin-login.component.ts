@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FooterComponent } from '../../common_components/footer/footer.component';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-login',
@@ -21,7 +22,7 @@ export class AdminLoginComponent {
   AdminPassword:string = "admin1234"
 
 
-  constructor(private formBuilder: FormBuilder, private toastr: ToastrService) {
+  constructor(private formBuilder: FormBuilder, private toastr: ToastrService ,private router:Router) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -43,6 +44,7 @@ export class AdminLoginComponent {
         timeOut:4000
       })
     this.loading = true;
+    this.router.navigate(['/admin-dashboard'])
     }else{
       this.toastr.warning("username or password incorrect." , "" , {
         positionClass:"toast-top-right",

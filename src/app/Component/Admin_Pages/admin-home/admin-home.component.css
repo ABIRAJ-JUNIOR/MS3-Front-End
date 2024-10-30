@@ -1,0 +1,68 @@
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(90deg, #0062E6, #33AEFF);
+}
+
+.bg-gradient-success {
+  background: linear-gradient(90deg, #28a745, #85d188);
+}
+
+.bg-gradient-warning {
+  background: linear-gradient(90deg, #ffc107, #ffecb3);
+}
+
+.bg-gradient-danger {
+  background: linear-gradient(90deg, #dc3545, #f19c9e);
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 0;
+}
+.custom-scroll {
+  overflow-y: auto;
+}
+
+/* Overview Card Hover Effect */
+.overview-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.overview-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.search-input {
+  max-width: 300px;
+  transition: box-shadow 0.3s ease;
+}
+.search-input:focus {
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.4);
+}
+.search-btn:hover {
+  background-color: #004085;
+}
+
+.table-row {
+  transition: transform 0.3s ease;
+}
+.table-row:hover {
+  transform: translateX(5px);
+}
+
+.action-btn {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.action-btn:hover {
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.animate__fadeInLeft {
+  animation: fadeInLeft 0.5s ease forwards;
+}
+.animate__fadeInUp {
+  animation: fadeInUp 0.6s ease forwards;
+}

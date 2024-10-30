@@ -6,3 +6,10 @@
 .pointer{
     cursor: pointer;
 }
+
+html{
+    overscroll-behavior: none;
+}
+body{
+    overscroll-behavior: none;
+}

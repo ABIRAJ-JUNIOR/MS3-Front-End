@@ -1,66 +1,89 @@
-<div class="col-4">
-    <div class="card p-4 shadow-lg">
-      <h3 class="text-center mb-4">Student Registration</h3>
-      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+<div class="container">
+  <div class="card p-5 shadow-lg" style="border-radius: 12px;">
+    <h3 class="text-center mb-4" style="color: #0056b3;">Student Registration</h3>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      
+      <div class="d-flex flex-wrap">
+        
+        <!-- Personal Details Section -->
+        <div class="col-md-6 pe-md-3">
+          <h4 class="text-center mb-3" style="color: #0056b3;">Personal Details</h4>
+          
+          <!-- NIC Number -->
+          <div class="form-group mb-3">
+            <label for="nic">NIC Number</label>
+            <input type="text" id="nic" formControlName="nic" class="form-control" placeholder="Enter NIC number" />
+            <small class="text-danger" *ngIf="nic?.invalid && (nic?.dirty || nic?.touched)">
+              NIC Number must be 9 numbers followed by V/v or 12 numbers.
+            </small>
+          </div>
 
-        <div class="form-group mb-3">
-          <label for="nic">NIC Number</label>
-          <input type="text" id="nic" formControlName="nic" class="form-control" placeholder="Enter NIC number" />
-          <small class="text-danger" *ngIf="nic?.invalid && (nic?.dirty || nic?.touched)">
-            NIC Number must be 9 numbers followed by V/v or 12 numbers.
-          </small>
-        </div>
-  
-        <div class="form-group mb-3">
-          <label for="firstName">First Name</label>
-          <input type="text" id="firstName" formControlName="firstName" class="form-control" placeholder="Enter first name" />
-          <small class="text-danger" *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)">
-            First Name is required.
-          </small>
-        </div>
-  
-        <div class="form-group mb-3">
-          <label for="lastName">Last Name</label>
-          <input type="text" id="lastName" formControlName="lastName" class="form-control" placeholder="Enter last name" />
-        </div>
-  
-        <div class="form-group mb-3">
-          <label>Gender</label>
-          <div>
-            <input type="radio" formControlName="gender" value="Male" /> Male
-            <input type="radio" formControlName="gender" value="Female" /> Female
-            <input type="radio" formControlName="gender" value="More" /> More
+          <!-- First Name -->
+          <div class="form-group mb-3">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" formControlName="firstName" class="form-control" placeholder="Enter first name" />
+            <small class="text-danger" *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)">
+              First Name is required.
+            </small>
+          </div>
+
+          <!-- Last Name -->
+          <div class="form-group mb-3">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" formControlName="lastName" class="form-control" placeholder="Enter last name" />
+          </div>
+
+          <!-- Gender -->
+          <div class="form-group mb-3">
+            <label>Gender</label>
+            <div>
+              <input type="radio" formControlName="gender" value="Male" /> Male
+              <input type="radio" formControlName="gender" value="Female" /> Female
+              <input type="radio" formControlName="gender" value="Other" /> Other
+            </div>
           </div>
         </div>
-  
-        <div class="form-group mb-3">
-          <label for="email">Email Address</label>
-          <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter email" />
-          <small class="text-danger" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
-            Enter a valid email address.
-          </small>
+
+        <!-- Contact Details Section -->
+        <div class="col-md-6 ps-md-3">
+          <h4 class="text-center mb-3" style="color: #0056b3;">Contact Details</h4>
+          
+          <!-- Email Address -->
+          <div class="form-group mb-3">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter email" />
+            <small class="text-danger" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+              Enter a valid email address.
+            </small>
+          </div>
+
+          <!-- Phone Number -->
+          <div class="form-group mb-3">
+            <label for="phone">Phone Number</label>
+            <input type="text" id="phone" formControlName="phone" class="form-control" placeholder="Enter phone number" />
+            <small class="text-danger" *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)">
+              Phone Number is required.
+            </small>
+          </div>
+
+          <!-- Password -->
+          <div class="form-group mb-3">
+            <label for="password">Password</label>
+            <input type="password" id="password" formControlName="password" class="form-control" placeholder="Create password" />
+            <small class="text-danger" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+              Password must be at least 8 characters, with uppercase, lowercase, number, and special character.
+            </small>
+          </div>
         </div>
-  
-        <div class="form-group mb-3">
-          <label for="phone">Phone Number</label>
-          <input type="text" id="phone" formControlName="phone" class="form-control" placeholder="Enter phone number" />
-          <small class="text-danger" *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)">
-            Phone Number is required.
-          </small>
-        </div>
-  
-        <div class="form-group mb-3">
-          <label for="password">Password</label>
-          <input type="password" id="password" formControlName="password" class="form-control" placeholder="Create password" />
-          <small class="text-danger" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
-            Password must be at least 8 characters, with uppercase, lowercase, number, and special character.
-          </small>
-        </div>
-  
-        <div class="form-group d-grid">
-          <button type="submit" class="btn btn-primary" [disabled]="registrationForm.invalid">Register</button>
-        </div>
-      </form>
-    </div>
+        
+      </div>
+
+      <!-- Submit Button -->
+      <div class="form-group d-grid mt-3">
+        <button type="submit" class="btn btn-primary" [disabled]="registrationForm.invalid" style="background-color: #0056b3; border: none; border-radius: 6px;">
+          Register
+        </button>
+      </div>
+    </form>
   </div>
-  
+</div>

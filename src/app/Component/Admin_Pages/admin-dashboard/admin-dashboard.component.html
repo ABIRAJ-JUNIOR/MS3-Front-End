@@ -1,6 +1,7 @@
 <div class="container-fluid">
   
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
     <a class="navbar-brand ms-3" href="#">Admin Dashboard</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
       <span class="navbar-toggler-icon"></span>
@@ -11,22 +12,20 @@
           <a class="nav-link" href="#"><i class="fas fa-bell me-1"></i>Notifications</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-cog me-1"></i>Settings</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="#"><i class="fas fa-sign-out-alt me-1"></i>Logout</a>
         </li>
       </ul>
     </div>
   </nav>
 
-  
+  <!-- Main Content -->
   <div class="row" style="margin-top: 70px;">
     
-    <div class="col-md-3 col-lg-2 bg-dark sidebar text-white py-4 shadow-lg" style="height: 100vh;">
+    <!-- Sidebar -->
+    <div class="col-md-3 col-lg-2 bg-dark sidebar text-white py-4 shadow-lg d-none d-md-block" style="height: 100vh;">
       <div class="d-flex flex-column">
         <div class="text-center mb-4 mt-5">
-          <img src="logo.png" class="rounded-circle" alt="Admin Profile">
+          <img src="logo.png" class="rounded-circle img-fluid" alt="Admin Profile" style="width: 100px;">
           <h5 class="mt-2">Admin</h5>
         </div>
         <ul class="nav flex-column text-white">
@@ -49,7 +48,37 @@
       </div>
     </div>
 
-    
+    <!-- Sidebar for Mobile -->
+    <div class="d-md-none">
+      <div class="bg-dark text-white p-3">
+        <button class="btn btn-outline-light w-100" type="button" data-bs-toggle="collapse" data-bs-target="#mobileSidebar" aria-expanded="false" aria-controls="mobileSidebar">
+          <i class="fas fa-bars"></i> Menu
+        </button>
+      </div>
+      <div class="collapse" id="mobileSidebar">
+        <div class="bg-dark text-white p-3">
+          <ul class="nav flex-column">
+            <li class="nav-item mb-3">
+              <a class="nav-link text-white" [routerLink]="['/admin-dashboard/home']"><i class="bi bi-house-fill me-2"></i> Home</a>
+            </li>
+            <li class="nav-item mb-3">
+              <a class="nav-link text-white" [routerLink]="['/admin-dashboard/student-registration']"><i class="fas fa-user-plus me-2"></i> Student Registration</a>
+            </li>
+            <li class="nav-item mb-3">
+              <a class="nav-link text-white" href="#"><i class="fas fa-dollar-sign me-2"></i> Payment</a>
+            </li>
+            <li class="nav-item mb-3">
+              <a class="nav-link text-white" href="#"><i class="fas fa-book-open me-2"></i> Course Offering</a>
+            </li>
+            <li class="nav-item mb-3">
+              <a class="nav-link text-white" href="#"><i class="fas fa-chart-line me-2"></i> Report</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
     <div class="col-md-9 col-lg-10 main-content p-5">
       <router-outlet></router-outlet>
     </div>

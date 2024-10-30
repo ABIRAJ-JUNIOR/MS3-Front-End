@@ -1,24 +1,25 @@
-<h2 class="mb-4">Dashboard Overview</h2>
+<h2 class="mb-4 text-dark fw-bold">Dashboard Overview</h2>
 
+<!-- Overview Cards Section -->
 <div class="row mb-4">
     <div class="col-md-3 mb-4">
-        <div class="card text-white bg-gradient-primary shadow-lg border-0">
-        <div class="card-body">
-            <h5 class="card-title"><i class="fas fa-users me-2"></i> New Students</h5>
-            <p class="display-6 fw-bold">45</p>
-        </div>
-        </div>
-    </div>
-    <div class="col-md-3 mb-4">
-        <div class="card text-white bg-gradient-success shadow-lg border-0">
-        <div class="card-body">
-            <h5 class="card-title"><i class="fas fa-coins me-2"></i> Payments</h5>
-            <p class="display-6 fw-bold">120</p>
-        </div>
+        <div class="card text-white bg-gradient-primary shadow-lg border-0 overview-card animate__animated animate__fadeInLeft">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-users me-2"></i> New Students</h5>
+                <p class="display-6 fw-bold">45</p>
+            </div>
         </div>
     </div>
     <div class="col-md-3 mb-4">
-        <div class="card text-white bg-gradient-warning shadow-lg border-0">
+        <div class="card text-white bg-gradient-success shadow-lg border-0 overview-card animate__animated animate__fadeInLeft" style="animation-delay: 0.2s;">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-coins me-2"></i> Payments</h5>
+                <p class="display-6 fw-bold">120</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4">
+        <div class="card text-white bg-gradient-warning shadow-lg border-0 overview-card animate__animated animate__fadeInLeft" style="animation-delay: 0.4s;">
             <div class="card-body">
                 <h5 class="card-title"><i class="fas fa-book me-2"></i> Courses</h5>
                 <p class="display-6 fw-bold">15</p>
@@ -26,7 +27,7 @@
         </div>
     </div>
     <div class="col-md-3 mb-4">
-        <div class="card text-white bg-gradient-danger shadow-lg border-0">
+        <div class="card text-white bg-gradient-danger shadow-lg border-0 overview-card animate__animated animate__fadeInLeft" style="animation-delay: 0.6s;">
             <div class="card-body">
                 <h5 class="card-title"><i class="fas fa-file-alt me-2"></i> Reports</h5>
                 <p class="display-6 fw-bold">20</p>
@@ -36,14 +37,12 @@
 </div>
 
 <!-- Content Section -->
-
-<div class="card shadow p-4 border-0" style="height: 430px;">
-
+<div class="card shadow p-4 border-0 animate__animated animate__fadeInUp" style="height: 430px;">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h5 class="fw-semibold text-dark">Student Activity</h5>
-        <div class="d-flex gap-3" style="width: 25%;">
-            <input type="text" class="form-control form-control-sm" placeholder="Search by Name or NIC number" style="max-width: 300px;">
-            <button class="btn btn-primary btn-sm d-flex align-items-center">
+        <div class="d-flex gap-3 col-lg-3 col-md-5 col-sm-7">
+            <input type="text" class="form-control form-control-sm search-input" placeholder="Search by Name or NIC number">
+            <button class="btn btn-primary btn-sm d-flex align-items-center search-btn">
                 <i class="bi bi-person-plus-fill me-2"></i>Student
             </button>
         </div>
@@ -63,7 +62,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr class="table-row animate__animated animate__fadeInUp">
               <td>1</td>
               <td>John Doe</td>
               <td>Male</td>
@@ -71,31 +70,16 @@
               <td>john.doeexample.com</td>
               <td>+94 712345678</td>
               <td>
-                <button class="btn btn-sm btn-outline-primary me-2">
+                <button class="btn btn-sm btn-outline-primary me-2 action-btn">
                   <i class="bi bi-pencil-fill"></i> 
                 </button>
-                <button class="btn btn-sm btn-outline-danger">
+                <button class="btn btn-sm btn-outline-danger action-btn">
                   <i class="bi bi-trash-fill"></i> 
                 </button>
               </td>
             </tr>
-            <tr>
-              <td>2</td>
-              <td>Jane Smith</td>
-              <td>Female</td>
-              <td>987654321V</td>
-              <td>jane.smithexample.com</td>
-              <td>+94 712345679</td>
-              <td>
-                <button class="btn btn-sm btn-outline-primary me-2">
-                  <i class="bi bi-pencil-fill"></i>
-                </button>
-                <button class="btn btn-sm btn-outline-danger">
-                  <i class="bi bi-trash-fill"></i>
-                </button>
-              </td>
-            </tr>
+            <!-- Additional rows here... -->
           </tbody>
         </table>
       </div>
-</div>                                                                    
+</div>

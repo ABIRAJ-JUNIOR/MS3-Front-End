@@ -1,17 +1,17 @@
-<div class="container">
-  <div class="card p-5 shadow-lg" style="border-radius: 12px;">
-    <h3 class="text-center mb-4" style="color: #0056b3;">Student Registration</h3>
+<div class="container my-5">
+  <div class="card p-4 shadow-lg" style="border-radius: 15px; background-color: #f8f9fa;">
+    <h3 class="text-center mb-4" style="color: #343a40;">Student Registration</h3>
     <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
       
       <div class="d-flex flex-wrap">
         
         <!-- Personal Details Section -->
-        <div class="col-md-6 pe-md-3">
-          <h4 class="text-center mb-3" style="color: #0056b3;">Personal Details</h4>
+        <div class="col-md-6 pe-md-3 mb-4">
+          <h4 class="text-center mb-3" style="color: #343a40;">Personal Details</h4>
           
           <!-- NIC Number -->
           <div class="form-group mb-3">
-            <label for="nic">NIC Number</label>
+            <label for="nic" class="form-label">NIC Number</label>
             <input type="text" id="nic" formControlName="nic" class="form-control" placeholder="Enter NIC number" />
             <small class="text-danger" *ngIf="nic?.invalid && (nic?.dirty || nic?.touched)">
               NIC Number must be 9 numbers followed by V/v or 12 numbers.
@@ -20,7 +20,7 @@
 
           <!-- First Name -->
           <div class="form-group mb-3">
-            <label for="firstName">First Name</label>
+            <label for="firstName" class="form-label">First Name</label>
             <input type="text" id="firstName" formControlName="firstName" class="form-control" placeholder="Enter first name" />
             <small class="text-danger" *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)">
               First Name is required.
@@ -29,28 +29,28 @@
 
           <!-- Last Name -->
           <div class="form-group mb-3">
-            <label for="lastName">Last Name</label>
+            <label for="lastName" class="form-label">Last Name</label>
             <input type="text" id="lastName" formControlName="lastName" class="form-control" placeholder="Enter last name" />
           </div>
 
           <!-- Gender -->
           <div class="form-group mb-3">
-            <label>Gender</label>
+            <label class="form-label">Gender</label>
             <div>
-              <input type="radio" formControlName="gender" value="Male" /> Male
-              <input type="radio" formControlName="gender" value="Female" /> Female
-              <input type="radio" formControlName="gender" value="Other" /> Other
+              <input type="radio" formControlName="gender" value="Male" class="form-check-input me-1"/> Male
+              <input type="radio" formControlName="gender" value="Female" class="form-check-input ms-3 me-1"/> Female
+              <input type="radio" formControlName="gender" value="Other" class="form-check-input ms-3 me-1"/> Other
             </div>
           </div>
         </div>
 
         <!-- Contact Details Section -->
         <div class="col-md-6 ps-md-3">
-          <h4 class="text-center mb-3" style="color: #0056b3;">Contact Details</h4>
+          <h4 class="text-center mb-3" style="color: #343a40;">Contact Details</h4>
           
           <!-- Email Address -->
           <div class="form-group mb-3">
-            <label for="email">Email Address</label>
+            <label for="email" class="form-label">Email Address</label>
             <input type="email" id="email" formControlName="email" class="form-control" placeholder="Enter email" />
             <small class="text-danger" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
               Enter a valid email address.
@@ -59,7 +59,7 @@
 
           <!-- Phone Number -->
           <div class="form-group mb-3">
-            <label for="phone">Phone Number</label>
+            <label for="phone" class="form-label">Phone Number</label>
             <input type="text" id="phone" formControlName="phone" class="form-control" placeholder="Enter phone number" />
             <small class="text-danger" *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)">
               Phone Number is required.
@@ -68,7 +68,7 @@
 
           <!-- Password -->
           <div class="form-group mb-3">
-            <label for="password">Password</label>
+            <label for="password" class="form-label">Password</label>
             <input type="password" id="password" formControlName="password" class="form-control" placeholder="Create password" />
             <small class="text-danger" *ngIf="password?.invalid && (password?.dirty || password?.touched)">
               Password must be at least 8 characters, with uppercase, lowercase, number, and special character.
@@ -79,8 +79,8 @@
       </div>
 
       <!-- Submit Button -->
-      <div class="form-group d-grid mt-3">
-        <button type="submit" class="btn btn-primary" [disabled]="registrationForm.invalid" style="background-color: #0056b3; border: none; border-radius: 6px;">
+      <div class="form-group d-grid mt-4">
+        <button type="submit" class="btn btn-dark" [disabled]="registrationForm.invalid" style="border-radius: 6px;">
           Register
         </button>
       </div>

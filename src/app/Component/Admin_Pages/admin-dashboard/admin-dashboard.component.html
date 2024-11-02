@@ -1,21 +1,8 @@
 <div class="container-fluid">
   
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow">
     <a class="navbar-brand ms-3" href="#">Admin Dashboard</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarContent">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-bell me-1"></i>Notifications</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-sign-out-alt me-1"></i>Logout</a>
-        </li>
-      </ul>
-    </div>
   </nav>
 
   <!-- Main Content -->
@@ -44,7 +31,11 @@
           <li class="nav-item mb-3">
             <a class="nav-link text-white" href="#"><i class="fas fa-chart-line me-2"></i> Report</a>
           </li>
+          <li class="nav-item " style="position: fixed; bottom: 10px;">
+            <a class="nav-link text-danger" href="#"><i class="fas fa-sign-out-alt me-1"></i>Logout</a>
+          </li>
         </ul>
+
       </div>
     </div>
 
@@ -59,10 +50,10 @@
         <div class="bg-dark text-white p-3">
           <ul class="nav flex-column">
             <li class="nav-item mb-3">
-              <a class="nav-link text-white" [routerLink]="['/admin-dashboard/home']"><i class="bi bi-house-fill me-2"></i> Home</a>
+              <a class="nav-link text-white" [routerLink]="['/admin-dashboard/home']" routerLinkActive="active"><i class="bi bi-house-fill me-2"></i> Home</a>
             </li>
             <li class="nav-item mb-3">
-              <a class="nav-link text-white" [routerLink]="['/admin-dashboard/student-registration']"><i class="fas fa-user-plus me-2"></i> Student Registration</a>
+              <a class="nav-link text-white" [routerLink]="['/admin-dashboard/student-registration']" routerLinkActive="active"><i class="fas fa-user-plus me-2"></i> Student Registration</a>
             </li>
             <li class="nav-item mb-3">
               <a class="nav-link text-white" href="#"><i class="fas fa-dollar-sign me-2"></i> Payment</a>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { SearchStudentsPipe } from './Pipes/search-students.pipe';
 
 @Component({
   selector: 'app-root',

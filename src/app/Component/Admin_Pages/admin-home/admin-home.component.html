@@ -1,12 +1,11 @@
 <h2 class="mb-4 text-dark fw-bold">Dashboard Overview</h2>
 
-<!-- Overview Cards Section -->
 <div class="row mb-4">
     <div class="col-md-3 mb-4">
         <div class="card text-white bg-gradient-primary shadow-lg border-0 overview-card animate__animated animate__fadeInLeft">
             <div class="card-body">
                 <h5 class="card-title"><i class="fas fa-users me-2"></i> New Students</h5>
-                <p class="display-6 fw-bold">45</p>
+                <p class="display-6 fw-bold">{{numberOfStudents}}</p>
             </div>
         </div>
     </div>
@@ -36,13 +35,12 @@
     </div>
 </div>
 
-<!-- Content Section -->
 <div class="card shadow p-4 border-0 animate__animated animate__fadeInUp" style="height: 430px;">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h5 class="fw-semibold text-dark">Student Activity</h5>
         <div class="d-flex gap-3 col-lg-3 col-md-5 col-sm-7">
-            <input type="text" class="form-control form-control-sm search-input" placeholder="Search by Name or NIC number">
-            <button class="btn btn-primary btn-sm d-flex align-items-center search-btn">
+            <input type="text" class="form-control form-control-sm search-input" placeholder="Search by Name or NIC number" name="search" [(ngModel)]="SearchText">
+            <button class="btn btn-primary btn-sm d-flex align-items-center search-btn" [routerLink]="['/admin-dashboard/student-registration']">
                 <i class="bi bi-person-plus-fill me-2"></i>Student
             </button>
         </div>
@@ -53,22 +51,24 @@
           <thead class="table-light">
             <tr>
               <th>#</th>
+              <th>NIC Number</th>
               <th>Name</th>
               <th>Gender</th>
-              <th>NIC Number</th>
               <th>Email</th>
               <th>Phone</th>
+              <th>Address</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="table-row animate__animated animate__fadeInUp">
-              <td>1</td>
-              <td>John Doe</td>
-              <td>Male</td>
-              <td>123456789V</td>
-              <td>john.doeexample.com</td>
-              <td>+94 712345678</td>
+            <tr class="table-row animate__animated animate__fadeInUp" *ngFor="let student of students | searchStudents:SearchText">
+              <td>{{student.id}}</td>
+              <td>{{student.nic}}</td>
+              <td>{{student.firstName}} {{student.lastName}}</td>
+              <td>{{student.gender}}</td>
+              <td>{{student.email}}</td>
+              <td>{{student.phone}}</td>
+              <td>{{student.address != null ? student.address : "N/A"}}</td>
               <td>
                 <button class="btn btn-sm btn-outline-primary me-2 action-btn">
                   <i class="bi bi-pencil-fill"></i> 

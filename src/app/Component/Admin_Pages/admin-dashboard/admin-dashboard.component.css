@@ -1,25 +1,54 @@
-body {
-  font-family: 'Arial', sans-serif;
+/* Colors */
+.bg-blue {
+  background-color: #1e3a8a; /* Dark Blue */
 }
 
-.sidebar {
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  right: 0;
-  padding-top: 60px;
-  color: #fff;
+.bg-dark-blue {
+  background-color: #1f2937; /* Sidebar Dark Gray */
 }
 
-.navbar {
-  background-color: #13181e;
+.bg-light-gray {
+  background-color: #f3f4f6; /* Light Gray for Main Content */
 }
 
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+/* Sidebar Styling */
+.sidebar .nav-link {
+  color: #cbd5e1;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background-color: #3b82f6;
+  color: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Adjust Profile Picture */
+.sidebar .text-center h5 {
+  font-size: 1.1rem;
+  color: #e0e0e0;
+}
+
+/* Main Content Styling */
 .main-content {
-  margin-left: 0;
+  min-height: 100vh;
 }
 
-.card h5, .card p {
-  color: #fff;
+/* Responsive Mobile Sidebar */
+.btn-outline-light {
+  border-color: #ffffff;
+  color: #ffffff;
 }
-
+.btn-outline-light:hover {
+  background-color: #3b82f6;
+  color: #ffffff;
+  border-color: #3b82f6;
+}

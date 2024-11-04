@@ -5,6 +5,9 @@ import { SearchStudentsPipe } from '../../../Pipes/search-students.pipe';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+import Chart from 'chart.js/auto';
+import { getRelativePosition } from 'chart.js/helpers';
+
 @Component({
   selector: 'app-admin-home',
   standalone: true,
@@ -33,4 +36,6 @@ export class AdminHomeComponent{
     })
 
   }
+
+  
 }

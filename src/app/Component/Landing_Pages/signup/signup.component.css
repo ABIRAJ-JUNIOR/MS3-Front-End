@@ -1,0 +1,24 @@
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes hoverGlow {
+    0% {
+        box-shadow: 0 4px 15px rgba(0, 123, 255, 0);
+    }
+    100% {
+        box-shadow: 0 4px 15px rgba(0, 123, 255, 0.5);
+    }
+}
+
+.btn:hover {
+    background: #0b5ed7;
+    box-shadow: 0 4px 20px rgba(0, 123, 255, 0.6);
+}

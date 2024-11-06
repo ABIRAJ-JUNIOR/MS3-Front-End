@@ -1,0 +1,71 @@
+<!-- Section: Design Block -->
+<section class="text-center">
+    <!-- Background image -->
+    <div class="p-5 bg-image" style="
+          background-image: url('signupBackground.webp');
+          height: 300px;
+          background-size: cover;
+          background-position: center;
+          filter: brightness(0.8);
+    "></div>
+    <!-- Background image -->
+
+    <div class="d-flex justify-content-center">
+        <div class="card mx-4 mx-md-5 shadow-lg col-7" style="
+              margin-top: -100px;
+              border-radius: 1rem;
+              backdrop-filter: blur(20px);
+              background-color: rgba(255, 255, 255, 0.9);
+              animation: fadeInUp 0.6s ease-in-out;
+        ">
+            <div class="card-body py-5 px-md-5">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-8">
+                        <h2 class="fw-bold mb-5" style="color: #0d6efd;">Sign in</h2>
+                        <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+                            <!-- Role Selection -->
+                            <div class="mb-4">
+                                <select class="form-select form-control-md" formControlName="role" required>
+                                    <option selected disabled>Role</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="student">Student</option>
+                                </select>
+                            </div>
+
+                            <!-- Email input -->
+                            <div class="mb-4">
+                                <input type="email" class="form-control form-control-md" placeholder="Email Address" formControlName="email" required />
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="mb-4">
+                                <input [type]="showPassword ? 'text' : 'password'" class="form-control form-control-md" placeholder="Password" formControlName="password" required />
+                            </div>
+
+                            <!-- Show password checkbox -->
+                            <div class="form-check d-flex mb-4">
+                                <input class="form-check-input me-2" type="checkbox" (change)="togglePasswordVisibility()" />
+                                <label class="form-check-label">Show password</label>
+                            </div>
+
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-md btn-block col-12" style="
+                                  background: linear-gradient(135deg, #0d6efd, #66b2ff);
+                                  animation: hoverGlow 0.5s ease-in-out forwards;
+                                  transition: background-color 0.3s;
+                            " [disabled]="!signInForm.valid">
+                                Sign In
+                            </button>
+
+                            <!-- Register and Forgot password links -->
+                            <div class="text-center mt-4">
+                                <p>Don't have an account? <a [routerLink]="['/signup']" routerLinkActive="router-link-active"  style="color: #0d6efd;">Register here</a></p>
+                                <a href="#!" style="color: #0d6efd;">Forgot password?</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

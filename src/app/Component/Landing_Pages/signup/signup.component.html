@@ -1,0 +1,88 @@
+<!-- Section: Design Block -->
+<section class="text-center">
+    <!-- Background image -->
+    <div class="p-5 bg-image" style="
+          background-image: url('signupBackground.webp');
+          height: 300px;
+          background-size: cover;
+          background-position: center;
+          filter: brightness(0.8);
+    "></div>
+    <!-- Background image -->
+
+    <div class="d-flex justify-content-center">
+        <div class="card mx-4 mx-md-5 shadow-lg col-7" style="
+              margin-top: -100px;
+              border-radius: 1rem;
+              backdrop-filter: blur(20px);
+              background-color: rgba(255, 255, 255);
+              animation: fadeInUp 0.6s ease-in-out;
+        ">
+            <div class="card-body py-5 px-md-5">
+
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-8">
+                        <h2 class="fw-bold mb-5" style="color: #0d6efd;">Sign up now</h2>
+                        <form>
+                            <!-- Full Name -->
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <input type="text" class="form-control form-control-md" placeholder="First Name" required />
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <input type="text" class="form-control form-control-md" placeholder="Last Name" required />
+                                </div>
+                            </div>
+
+                            <!-- NIC and DOB -->
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <input type="text" class="form-control form-control-md" placeholder="NIC Number" required />
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <input type="date" class="form-control form-control-md" required />
+                                </div>
+                            </div>
+
+                            <!-- Email input -->
+                            <div class="mb-4">
+                                <input type="email" class="form-control form-control-md" placeholder="Email Address" required />
+                            </div>
+
+                            <!-- Gender -->
+                            <div class="mb-4">
+                                <select class="form-select form-control-md" required>
+                                    <option selected disabled>Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <!-- Password inputs -->
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <input type="password" class="form-control form-control-md" placeholder="Password" required />
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <input type="password" class="form-control form-control-md" placeholder="Confirm Password" required />
+                                </div>
+                            </div>
+
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-md btn-block col-12" style="
+                                  background: linear-gradient(135deg, #0d6efd, #66b2ff);
+                                  animation: hoverGlow 0.5s ease-in-out forwards;
+                                  transition: background-color 0.3s;
+                            ">
+                                Sign Up
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

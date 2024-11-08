@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { SearchStudentsPipe } from '../../../Pipes/search-students.pipe';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-admin-home',
   standalone: true,
-  imports: [CommonModule,SearchStudentsPipe,FormsModule,RouterModule],
+  imports: [CommonModule, SearchStudentsPipe, FormsModule, RouterModule],
   templateUrl: './admin-home.component.html',
   styleUrl: './admin-home.component.css'
 })
@@ -32,7 +33,7 @@ export class AdminHomeComponent{
       
     })
 
+    
   }
-
   
 }

@@ -66,3 +66,21 @@ body {
 .animate__fadeInUp {
   animation: fadeInUp 0.6s ease forwards;
 }
+
+
+
+.chart-container{
+  width: 250px;
+  height: 250px;
+}
+
+/* dashboard.component.css */
+.card {
+  border-radius: 8px;
+}
+.card-header {
+  font-weight: 600;
+}
+canvas {
+  height: 300px;
+}

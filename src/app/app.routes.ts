@@ -6,6 +6,7 @@ import { AdminDashboardComponent } from './Component/Admin_Pages/admin-dashboard
 import { AdminHomeComponent } from './Component/Admin_Pages/admin-home/admin-home.component';
 import { SignupComponent } from './Component/Landing_Pages/signup/signup.component';
 import { SigninComponent } from './Component/Landing_Pages/signin/signin.component';
+import { StudentDashboardComponent } from './Component/Student_Pages/student-dashboard/student-dashboard.component';
 
 export const routes: Routes = [
 
@@ -20,6 +21,12 @@ export const routes: Routes = [
         path:'admin-dashboard', component:AdminDashboardComponent , children:[
             {path:'', component:AdminHomeComponent},
             {path:'home', component:AdminHomeComponent},
+        ]
+
+    },
+    {
+        path:'student-dashboard', component:StudentDashboardComponent , children:[
+
         ]
     }
 

@@ -1,19 +1,16 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-admin-dashboard',
+  selector: 'app-student-dashboard',
   standalone: true,
   imports: [RouterOutlet,CommonModule,FormsModule],
-  templateUrl: './admin-dashboard.component.html',
-  styleUrl: './admin-dashboard.component.css'
+  templateUrl: './student-dashboard.component.html',
+  styleUrl: './student-dashboard.component.css'
 })
-export class AdminDashboardComponent {
-  logout(){
-
-  }
+export class StudentDashboardComponent {
   sidebarCollapsed = false;
   toggleSidebar() {
     this.sidebarCollapsed = !this.sidebarCollapsed;

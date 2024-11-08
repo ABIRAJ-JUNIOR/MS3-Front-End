@@ -25,7 +25,6 @@ body {
   overflow-y: auto;
 }
 
-/* Overview Card Hover Effect */
 .overview-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -69,18 +68,44 @@ body {
 
 
 
-.chart-container{
-  width: 250px;
-  height: 250px;
+/* Chart Design */
+
+.card {
+  border-radius: 12px;
 }
 
-/* dashboard.component.css */
-.card {
-  border-radius: 8px;
+.card h5 {
+  margin-bottom: 0;
+  font-weight: bold;
 }
-.card-header {
-  font-weight: 600;
+
+.chart-card {
+  height: 350px;
 }
+
+.chart-card .card-body {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
 canvas {
-  height: 300px;
+  max-width: 100% !important;
+  max-height: 270px;
+}
+
+.card-header {
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 12px 12px 0 0;
+}
+
+.row .card {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); 
+}
+
+.card-header.text-white {
+  color: white;
 }

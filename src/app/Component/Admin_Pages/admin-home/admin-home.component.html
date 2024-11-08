@@ -82,3 +82,68 @@
         </table>
       </div>
 </div>
+
+
+<!-- dashboard.component.html -->
+<div class="container-fluid py-4">
+  <div class="row justify-content-center">
+    <!-- Enrollment Stats Bar Chart -->
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card shadow chart-card">
+        <div class="card-header text-white text-center" style="background: linear-gradient(135deg, #4c6ef5, #5a8dfd);">
+          <h5>Enrollment Stats</h5>
+        </div>
+        <div class="card-body d-flex align-items-center justify-content-center">
+          <canvas id="enrollmentChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Overview Doughnut Chart -->
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card shadow chart-card">
+        <div class="card-header text-white text-center" style="background: linear-gradient(135deg, #28a745, #34d058);">
+          <h5>Payment Overview</h5>
+        </div>
+        <div class="card-body d-flex align-items-center justify-content-center">
+          <canvas id="paymentChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Course Popularity Line Chart -->
+    <div class="col-lg-4 col-md-12 mb-4">
+      <div class="card shadow chart-card">
+        <div class="card-header text-white text-center" style="background: linear-gradient(135deg, #ffb700, #ffdf5b);">
+          <h5>Course Popularity</h5>
+        </div>
+        <div class="card-body d-flex align-items-center justify-content-center">
+          <canvas id="popularityChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Recent Notifications Panel -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-secondary text-white">
+          <h5 class="m-0">Recent Notifications</h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item">New enrollment in Course A</li>
+            <li class="list-group-item">Payment received from Student XYZ</li>
+            <li class="list-group-item">Upcoming course deadline reminder</li>
+            <li class="list-group-item">New course added: Course B</li>
+            <li class="list-group-item">Payment overdue for Student ABC</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

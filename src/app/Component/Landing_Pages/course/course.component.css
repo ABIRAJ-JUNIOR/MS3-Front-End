@@ -1,0 +1,67 @@
+.hometag {
+    text-decoration: none;
+    color: white;
+}
+
+.hometag:hover {
+    text-decoration: underline;
+}
+
+.headCon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 350px;
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)),
+        url(/course/courseHeader1.jpg);
+
+    background-position: center 40%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.fsSize {
+    font-size: 70px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.filter p {
+    font-size: 20px;
+    padding: 0%;
+    margin: 0%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-right: 10px;
+}
+
+.filter select {
+    color: red;
+    padding: 5px;
+    width: 100px;
+    border: rgb(207, 207, 207) solid 1px;
+}
+
+.coursetype {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 500;
+}
+
+.card {
+    border: none;
+
+}
+
+.card p {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.imageText{
+    position: absolute;
+    z-index: 1;
+    top: 8%;
+}
+.headingCourses{
+    font-size: 40px;
+    margin-top: 15px;
+}

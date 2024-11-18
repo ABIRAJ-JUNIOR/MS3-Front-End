@@ -1,0 +1,21 @@
+.top-bar {
+    color: white;
+    font-size: 20px;
+    padding: 15px;
+    font-family:'Times New Roman', Times, serif ;
+  }
+  .top-bar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 20px;
+  }
+  .top-bar a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 970px) {
+   .top-bar{
+    display: none;
+   }
+}

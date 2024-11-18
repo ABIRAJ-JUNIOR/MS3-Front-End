@@ -1,0 +1,114 @@
+<div class="wrapper">
+    <aside id="sidebar" [ngClass]="{'collapsed': sidebarCollapsed}" class="text-light js-sidebar shadow-lg">
+      <div class="h-100">
+        <div class="sidebar-logo">
+          <a href="#">Way Makers</a>
+        </div>
+        <ul class="sidebar-nav">
+          <!-- Sidebar Header -->
+          <li class="sidebar-header">Student Dashboard</li>
+  
+          <!-- Dashboard Link -->
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link">
+              <i class="fa-solid fa-house pe-2"></i>
+              Dashboard
+            </a>
+          </li>
+  
+          <!-- Profile Section -->
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link">
+              <i class="fa-regular fa-user pe-2"></i>
+              Profile
+            </a>
+          </li>
+  
+          <!-- Courses Section -->
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed" data-bs-target="#courses" data-bs-toggle="collapse" aria-expanded="false">
+              <i class="fa-solid fa-book-open pe-2"></i>
+              My Courses
+            </a>
+            <ul id="courses" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+              <li class="sidebar-item">
+                <a href="#" class="sidebar-link">Enrolled Courses</a>
+              </li>
+              <li class="sidebar-item">
+                <a href="#" class="sidebar-link">Completed Courses</a>
+              </li>
+            </ul>
+          </li>
+  
+          <!-- Grades Section -->
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link">
+              <i class="fa-solid fa-graduation-cap pe-2"></i>
+              Grades
+            </a>
+          </li>
+  
+          <!-- Notifications Section -->
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link">
+              <i class="fa-solid fa-bell pe-2"></i>
+              Notifications
+            </a>
+          </li>
+  
+          <!-- Support Section -->
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link">
+              <i class="fa-solid fa-life-ring pe-2"></i>
+              Support
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+  
+    <!-- Main Content Area -->
+    <div class="main">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand px-3 border-bottom">
+        <div class="navbar-collapse navbar">
+          <button class="btn" id="sidebar-toggle" type="button" (click)="toggleSidebar()">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item dropdown">
+              <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                <img src="profile.jpg" class="avatar img-fluid rounded" alt="">
+              </a>
+              <div class="dropdown-menu dropdown-menu-end">
+                <a href="#" class="dropdown-item">Profile</a>
+                <a href="#" class="dropdown-item">Settings</a>
+                <a href="#" class="dropdown-item">Logout</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+  
+      <!-- Main Content Area for Student Dashboard -->
+      <main class="content px-3 py-2">
+        <router-outlet></router-outlet>
+      </main>
+  
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="container-fluid">
+          <div class="row text-muted">
+            <div class="col-6 text-start">
+              <p class="mb-3">
+                <a href="#" class="text-muted">
+                  <strong>Way Makers</strong>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+  

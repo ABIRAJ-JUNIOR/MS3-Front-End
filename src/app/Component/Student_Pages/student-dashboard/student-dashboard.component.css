@@ -57,6 +57,9 @@ h4 {
 }
 
 /* Sidebar Elements Style */
+#sidebar{
+    background-color: rgb(230, 5, 5);
+}
 
 .sidebar-logo {
     padding: 1.15rem;

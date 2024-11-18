@@ -1,12 +1,11 @@
 <h2 class="mb-4 text-dark fw-bold">Dashboard Overview</h2>
 
-<!-- Overview Cards Section -->
 <div class="row mb-4">
     <div class="col-md-3 mb-4">
         <div class="card text-white bg-gradient-primary shadow-lg border-0 overview-card animate__animated animate__fadeInLeft">
             <div class="card-body">
                 <h5 class="card-title"><i class="fas fa-users me-2"></i> New Students</h5>
-                <p class="display-6 fw-bold">45</p>
+                <p class="display-6 fw-bold">{{numberOfStudents}}</p>
             </div>
         </div>
     </div>
@@ -36,13 +35,12 @@
     </div>
 </div>
 
-<!-- Content Section -->
 <div class="card shadow p-4 border-0 animate__animated animate__fadeInUp" style="height: 430px;">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h5 class="fw-semibold text-dark">Student Activity</h5>
         <div class="d-flex gap-3 col-lg-3 col-md-5 col-sm-7">
-            <input type="text" class="form-control form-control-sm search-input" placeholder="Search by Name or NIC number">
-            <button class="btn btn-primary btn-sm d-flex align-items-center search-btn">
+            <input type="text" class="form-control form-control-sm search-input" placeholder="Search by Name or NIC number" name="search" [(ngModel)]="SearchText">
+            <button class="btn btn-primary btn-sm d-flex align-items-center search-btn" [routerLink]="['/admin-dashboard/student-registration']">
                 <i class="bi bi-person-plus-fill me-2"></i>Student
             </button>
         </div>
@@ -53,22 +51,24 @@
           <thead class="table-light">
             <tr>
               <th>#</th>
+              <th>NIC Number</th>
               <th>Name</th>
               <th>Gender</th>
-              <th>NIC Number</th>
               <th>Email</th>
               <th>Phone</th>
+              <th>Address</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="table-row animate__animated animate__fadeInUp">
-              <td>1</td>
-              <td>John Doe</td>
-              <td>Male</td>
-              <td>123456789V</td>
-              <td>john.doeexample.com</td>
-              <td>+94 712345678</td>
+            <tr class="table-row animate__animated animate__fadeInUp" *ngFor="let student of students | searchStudents:SearchText ; let i = index">
+              <td>{{i+1}}</td>
+              <td>{{student.nic}}</td>
+              <td>{{student.firstName}} {{student.lastName}}</td>
+              <td>{{student.gender == "1" ? "Male" : "Female" || "Other"}}</td>
+              <td>{{student.email}}</td>
+              <td>{{student.phone}}</td>
+              <td>{{student.address != null ? student.address : "N/A"}}</td>
               <td>
                 <button class="btn btn-sm btn-outline-primary me-2 action-btn">
                   <i class="bi bi-pencil-fill"></i> 
@@ -78,8 +78,72 @@
                 </button>
               </td>
             </tr>
-            <!-- Additional rows here... -->
           </tbody>
         </table>
       </div>
+</div>
+
+
+<!-- dashboard.component.html -->
+<div class="container-fluid py-4">
+  <div class="row justify-content-center">
+    <!-- Enrollment Stats Bar Chart -->
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card shadow chart-card">
+        <div class="card-header text-white text-center" style="background: linear-gradient(135deg, #4c6ef5, #5a8dfd);">
+          <h5>Enrollment Stats</h5>
+        </div>
+        <div class="card-body d-flex align-items-center justify-content-center">
+          <canvas id="enrollmentChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Overview Doughnut Chart -->
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card shadow chart-card">
+        <div class="card-header text-white text-center" style="background: linear-gradient(135deg, #28a745, #34d058);">
+          <h5>Payment Overview</h5>
+        </div>
+        <div class="card-body d-flex align-items-center justify-content-center">
+          <canvas id="paymentChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Course Popularity Line Chart -->
+    <div class="col-lg-4 col-md-12 mb-4">
+      <div class="card shadow chart-card">
+        <div class="card-header text-white text-center" style="background: linear-gradient(135deg, #ffb700, #ffdf5b);">
+          <h5>Course Popularity</h5>
+        </div>
+        <div class="card-body d-flex align-items-center justify-content-center">
+          <canvas id="popularityChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Recent Notifications Panel -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-secondary text-white">
+          <h5 class="m-0">Recent Payments</h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item">New enrollment in Course A</li>
+            <li class="list-group-item">Payment received from Student XYZ</li>
+            <li class="list-group-item">Upcoming course deadline reminder</li>
+            <li class="list-group-item">New course added: Course B</li>
+            <li class="list-group-item">Payment overdue for Student ABC</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

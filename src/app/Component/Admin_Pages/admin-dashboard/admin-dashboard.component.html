@@ -1,86 +1,132 @@
-<div class="container-fluid">
-  
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
-    <a class="navbar-brand ms-3" href="#">Admin Dashboard</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarContent">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-bell me-1"></i>Notifications</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-sign-out-alt me-1"></i>Logout</a>
-        </li>
+<div class="wrapper">
+  <aside id="sidebar" [ngClass]="{'collapsed': sidebarCollapsed}" class="bg-dark text-light js-sidebar shadow-lg">
+    
+    <div class="h-100">
+      <div class="sidebar-logo">
+          <a >Way Makers</a>
+      </div>
+      <ul class="sidebar-nav">
+          <li class="sidebar-header">
+              Admin Elements
+          </li>
+          <li class="sidebar-item">
+              <a [routerLink]="['/admin-dashboard/home']" class="sidebar-link">
+                <i class="fa-solid fa-home pe-2"></i>
+                  Home
+              </a>
+          </li>
+          <li class="sidebar-item">
+              <a  class="sidebar-link collapsed" data-bs-target="#pages" data-bs-toggle="collapse"
+                  aria-expanded="false"><i class="fa-solid fa-file-lines pe-2"></i>
+                  Admin
+              </a>
+              <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                  <li class="sidebar-item" [routerLink]="['/admin-dashboard/admin-list']">
+                      <a class="sidebar-link">List</a>
+                  </li>
+                  <li class="sidebar-item" [routerLink]="['/admin-dashboard/audit-log']">
+                      <a  class="sidebar-link">Audit Logs</a>
+                  </li>
+              </ul>
+          </li>
+          <li class="sidebar-item">
+              <a  class="sidebar-link collapsed" data-bs-target="#posts" data-bs-toggle="collapse"
+                  aria-expanded="false"><i class="fa-solid fa-sliders pe-2"></i>
+                  Student
+              </a>
+              <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                  <li class="sidebar-item" [routerLink]="['/admin-dashboard/student-list']" routerLinkActive="router-link-active"  >
+                      <a   class="sidebar-link">List</a>
+                  </li>
+                  <li class="sidebar-item">
+                      <a  class="sidebar-link">Report</a>
+                  </li>
+                  <li class="sidebar-item">
+                      <a  class="sidebar-link">Post 3</a>
+                  </li>
+              </ul>
+          </li>
+          <li class="sidebar-item">
+              <a  class="sidebar-link collapsed" data-bs-target="#auth" data-bs-toggle="collapse"
+                  aria-expanded="false"><i class="fa-regular fa-user pe-2"></i>
+                  Course
+              </a>
+              <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                  <li class="sidebar-item">
+                      <a  class="sidebar-link">List</a>
+                  </li>
+                  <li class="sidebar-item">
+                      <a  class="sidebar-link">Shedule</a>
+                  </li>
+                  <li class="sidebar-item">
+                      <a  class="sidebar-link">Assessment</a>
+                  </li>
+              </ul>
+          </li>
+          <li class="sidebar-header">
+              Multi Level Menu
+          </li>
+          <li class="sidebar-item">
+              <a  class="sidebar-link collapsed" data-bs-target="#multi" data-bs-toggle="collapse"
+                  aria-expanded="false"><i class="fa-solid fa-share-nodes pe-2"></i>
+                  Multi Dropdown
+              </a>
+              <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                  <li class="sidebar-item">
+                      <a  class="sidebar-link collapsed" data-bs-target="#level-1"
+                          data-bs-toggle="collapse" aria-expanded="false">Level 1</a>
+                      <ul id="level-1" class="sidebar-dropdown list-unstyled collapse">
+                          <li class="sidebar-item">
+                              <a  class="sidebar-link">Level 1.1</a>
+                          </li>
+                          <li class="sidebar-item">
+                              <a  class="sidebar-link">Level 1.2</a>
+                          </li>
+                      </ul>
+                  </li>
+              </ul>
+          </li>
       </ul>
     </div>
-  </nav>
-
-  <!-- Main Content -->
-  <div class="row" style="margin-top: 70px;">
-    
-    <!-- Sidebar -->
-    <div class="col-md-3 col-lg-2 bg-dark sidebar text-white py-4 shadow-lg d-none d-md-block" style="height: 100vh;">
-      <div class="d-flex flex-column">
-        <div class="text-center mb-4 mt-5">
-          <img src="logo.png" class="rounded-circle img-fluid" alt="Admin Profile" style="width: 100px;">
-          <h5 class="mt-2">Admin</h5>
-        </div>
-        <ul class="nav flex-column text-white">
-          <li class="nav-item mb-3">
-            <a class="nav-link text-white" [routerLink]="['/admin-dashboard/home']"><i class="bi bi-house-fill me-2"></i> Home</a>
-          </li>
-          <li class="nav-item mb-3">
-            <a class="nav-link text-white" [routerLink]="['/admin-dashboard/student-registration']" ><i class="fas fa-user-plus me-2"></i> Student Registration</a>
-          </li>
-          <li class="nav-item mb-3">
-            <a class="nav-link text-white" href="#"><i class="fas fa-dollar-sign me-2"></i> Payment</a>
-          </li>
-          <li class="nav-item mb-3">
-            <a class="nav-link text-white" href="#"><i class="fas fa-book-open me-2"></i> Course Offering</a>
-          </li>
-          <li class="nav-item mb-3">
-            <a class="nav-link text-white" href="#"><i class="fas fa-chart-line me-2"></i> Report</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Sidebar for Mobile -->
-    <div class="d-md-none">
-      <div class="bg-dark text-white p-3">
-        <button class="btn btn-outline-light w-100" type="button" data-bs-toggle="collapse" data-bs-target="#mobileSidebar" aria-expanded="false" aria-controls="mobileSidebar">
-          <i class="fas fa-bars"></i> Menu
-        </button>
-      </div>
-      <div class="collapse" id="mobileSidebar">
-        <div class="bg-dark text-white p-3">
-          <ul class="nav flex-column">
-            <li class="nav-item mb-3">
-              <a class="nav-link text-white" [routerLink]="['/admin-dashboard/home']"><i class="bi bi-house-fill me-2"></i> Home</a>
-            </li>
-            <li class="nav-item mb-3">
-              <a class="nav-link text-white" [routerLink]="['/admin-dashboard/student-registration']"><i class="fas fa-user-plus me-2"></i> Student Registration</a>
-            </li>
-            <li class="nav-item mb-3">
-              <a class="nav-link text-white" href="#"><i class="fas fa-dollar-sign me-2"></i> Payment</a>
-            </li>
-            <li class="nav-item mb-3">
-              <a class="nav-link text-white" href="#"><i class="fas fa-book-open me-2"></i> Course Offering</a>
-            </li>
-            <li class="nav-item mb-3">
-              <a class="nav-link text-white" href="#"><i class="fas fa-chart-line me-2"></i> Report</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Main Content Area -->
-    <div class="col-md-9 col-lg-10 main-content p-5">
-      <router-outlet></router-outlet>
-    </div>
+  </aside>
+  <div class="main">
+      <nav class="navbar navbar-expand px-3 border-bottom">
+          <div class="navbar-collapse navbar">
+              <button class="btn" id="sidebar-toggle" type="button" (click)="toggleSidebar()">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <ul class="navbar-nav">
+                  <li class="nav-item dropdown">
+                      <a  data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                          <img src="profile.jpg" class="avatar img-fluid rounded" alt="">
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-end">
+                          <a  class="dropdown-item">Profile</a>
+                          <a  class="dropdown-item">Setting</a>
+                          <a  class="dropdown-item">Logout</a>
+                      </div>
+                  </li>
+              </ul>
+          </div>
+      </nav>
+      <main class="content px-3 py-2">
+          <router-outlet></router-outlet>
+      </main>
+      <footer class="footer">
+          <div class="container-fluid">
+              <div class="row text-muted">
+                  <div class="col-6 text-start">
+                      <p class="mb-3">
+                          <a  class="text-muted">
+                              <strong>Way Makers</strong>
+                          </a>
+                      </p>
+                  </div>
+              </div>
+          </div>
+      </footer>
   </div>
 </div>
+
+
+

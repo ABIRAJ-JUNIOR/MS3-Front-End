@@ -22,4 +22,8 @@ export class FooterComponent {
   GoToContact(){
     this.router.navigate(['/contact'])
   }
+
+  GoToCourse(){
+    this.router.navigate(['/course'])
+  }
 }

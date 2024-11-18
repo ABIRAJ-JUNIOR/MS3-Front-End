@@ -27,7 +27,6 @@
                       <th>NIC</th>
                       <th>Name</th>
                       <th>Gender</th>
-                      <th>Email</th>
                       <th>Phone</th>
                       <th>Address</th>
                       <th class="text-center">Actions</th>
@@ -38,10 +37,9 @@
                       <td>{{i + 1}}</td>
                       <td>{{student.nic}}</td>
                       <td>{{student.firstName}} {{student.lastName}}</td>
-                      <td>{{student.gender == "1" ? "Male" : "Female" || "Other"}}</td>
-                      <td>{{student.email}}</td>
+                      <td>{{student.gender == "1" ? "Male" : "Female" }}</td>
                       <td>{{student.phone}}</td>
-                      <td>{{student.address != null ? student.address : "N/A"}}</td>
+                      <td>{{student.address != null ? student.address.addressLine1 + ", " + student.address.addressLine2 + ", " + student.address.city : "N/A"}}</td>
                       <td class="text-center">
                         <a href="#" class="text-primary me-3" aria-label="Edit Student">
                           <i class="bi bi-pencil-square"></i>
@@ -59,16 +57,16 @@
               <div class="d-flex justify-content-between align-items-center px-3 py-2 bg-light border-top">
                 <div class="hint-text">Showing <b>{{currentLength}}</b> out of <b>{{totalItems}}</b> entries</div>
                 <ul class="pagination mb-0">
-                  <li class="page-item" [class.disabled]="currentPage === 1">
+                  <li class="page-item pointer" [class.disabled]="currentPage === 1">
                     <a class="page-link" (click)="goToPage(currentPage - 1)">Previous</a>
                   </li>
             
-                  <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" 
+                  <li class="page-item pointer" *ngFor="let page of [].constructor(totalPages); let i = index" 
                       [class.active]="currentPage === i + 1">
                     <a class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</a>
                   </li>
             
-                  <li class="page-item" [class.disabled]="currentPage === totalPages">
+                  <li class="page-item pointer" [class.disabled]="currentPage === totalPages">
                     <a class="page-link" (click)="goToPage(currentPage + 1)">Next</a>
                   </li>
                 </ul>

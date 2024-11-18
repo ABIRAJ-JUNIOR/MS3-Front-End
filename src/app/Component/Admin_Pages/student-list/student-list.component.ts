@@ -18,6 +18,8 @@ export class StudentListComponent implements OnInit {
   currentLength:number = 0;
   totalItems:number = 0;
 
+  gender = Object.values(Gender);
+
   constructor(private paginationService: StudentService) {}
 
   ngOnInit(): void {
@@ -43,4 +45,10 @@ export class StudentListComponent implements OnInit {
       this.loadItems();
     }
   }
+}
+
+export enum Gender{
+  Male = 1,
+  Female = 2,
+  More =3
 }

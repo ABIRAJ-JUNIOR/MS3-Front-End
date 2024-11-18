@@ -7,6 +7,9 @@ import { AdminHomeComponent } from './Component/Admin_Pages/admin-home/admin-hom
 import { SignupComponent } from './Component/Landing_Pages/signup/signup.component';
 import { SigninComponent } from './Component/Landing_Pages/signin/signin.component';
 import { StudentDashboardComponent } from './Component/Student_Pages/student-dashboard/student-dashboard.component';
+import { StudentListComponent } from './Component/Admin_Pages/student-list/student-list.component';
+import { AdminListComponent } from './Component/Admin_Pages/admin-list/admin-list.component';
+import { AuditLogComponent } from './Component/Admin_Pages/audit-log/audit-log.component';
 
 export const routes: Routes = [
 
@@ -21,6 +24,9 @@ export const routes: Routes = [
         path:'admin-dashboard', component:AdminDashboardComponent , children:[
             {path:'', component:AdminHomeComponent},
             {path:'home', component:AdminHomeComponent},
+            {path:'student-list', component:StudentListComponent},
+            {path:'admin-list', component:AdminListComponent},
+            {path:'audit-log', component:AuditLogComponent},
         ]
 
     },
@@ -29,7 +35,4 @@ export const routes: Routes = [
 
         ]
     }
-
-    
-
 ];

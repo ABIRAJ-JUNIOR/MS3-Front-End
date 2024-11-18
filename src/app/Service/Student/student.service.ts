@@ -8,10 +8,14 @@ export class StudentService {
 
   constructor(private http:HttpClient) { }
 
-  studentUrl:string = 'http://localhost:5266/api/Student'
+  private apiUrl = 'https://localhost:7044/api/Student'
 
   getStudents(){
-    return this.http.get<Student[]>(this.studentUrl + '/get-all-students')
+    return this.http.get<Student[]>(this.apiUrl + '/getall')
+  }
+
+  pagination(pageNumber:number , pageSize:number){
+    return this.http.get(this.apiUrl + `/Pagination?pageNumber=${pageNumber}&pageSize=${pageSize}`)
   }
 }
 

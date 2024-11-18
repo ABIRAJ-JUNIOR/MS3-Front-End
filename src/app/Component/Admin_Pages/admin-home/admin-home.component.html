@@ -61,11 +61,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="table-row animate__animated animate__fadeInUp" *ngFor="let student of students | searchStudents:SearchText">
-              <td>{{student.id}}</td>
+            <tr class="table-row animate__animated animate__fadeInUp" *ngFor="let student of students | searchStudents:SearchText ; let i = index">
+              <td>{{i+1}}</td>
               <td>{{student.nic}}</td>
               <td>{{student.firstName}} {{student.lastName}}</td>
-              <td>{{student.gender}}</td>
+              <td>{{student.gender == "1" ? "Male" : "Female" || "Other"}}</td>
               <td>{{student.email}}</td>
               <td>{{student.phone}}</td>
               <td>{{student.address != null ? student.address : "N/A"}}</td>
@@ -132,7 +132,7 @@
     <div class="col-lg-12 mb-4">
       <div class="card shadow-sm">
         <div class="card-header bg-secondary text-white">
-          <h5 class="m-0">Recent Notifications</h5>
+          <h5 class="m-0">Recent Payments</h5>
         </div>
         <div class="card-body">
           <ul class="list-group">

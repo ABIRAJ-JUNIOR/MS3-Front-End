@@ -10,11 +10,13 @@ import { StudentDashboardComponent } from './Component/Student_Pages/student-das
 import { StudentListComponent } from './Component/Admin_Pages/student-list/student-list.component';
 import { AdminListComponent } from './Component/Admin_Pages/admin-list/admin-list.component';
 import { AuditLogComponent } from './Component/Admin_Pages/audit-log/audit-log.component';
+import { CourseComponent } from './Component/Landing_Pages/course/course.component';
 
 export const routes: Routes = [
 
     {path:'' , component:HomeComponent},
     {path:'home' , component:HomeComponent},
+    {path:'course',component:CourseComponent},
     {path:'contact' , component:ContactComponent},
     {path:'about' , component:AboutComponent},
     {path:'signin' , component:SigninComponent},

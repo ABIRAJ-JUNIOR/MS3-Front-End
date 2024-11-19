@@ -11,6 +11,7 @@ import { StudentListComponent } from './Component/Admin_Pages/student-list/stude
 import { AdminListComponent } from './Component/Admin_Pages/admin-list/admin-list.component';
 import { AuditLogComponent } from './Component/Admin_Pages/audit-log/audit-log.component';
 import { CourseComponent } from './Component/Landing_Pages/course/course.component';
+import { AdminProfileComponent } from './Component/Admin_Pages/admin-profile/admin-profile.component';
 
 export const routes: Routes = [
 
@@ -29,6 +30,7 @@ export const routes: Routes = [
             {path:'student-list', component:StudentListComponent},
             {path:'admin-list', component:AdminListComponent},
             {path:'audit-log', component:AuditLogComponent},
+            {path:'admin-profile', component:AdminProfileComponent},
         ]
 
     },

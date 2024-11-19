@@ -1,27 +1,27 @@
 <div class="container">
-    <div class="table-wrapper">
-      <div class="table-title">Audit Log</div>
-      <table class="table table-bordered table-hover">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Action</th>
-            <th>Action Date</th>
-            <th>Details</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of auditLog; let i = index">
-            <td data-label="#">{{i+1}}</td>
-            <td data-label="Name">{{item.adminResponse.firstName}} {{item.adminResponse.lastName}}</td>
-            <td data-label="Phone">{{item.adminResponse.phone}}</td>
-            <td data-label="Action">{{item.action}}</td>
-            <td data-label="Action Date">{{item.actionDate | date}}</td>
-            <td data-label="Details">{{item.details}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="table-wrapper">
+    <div class="table-title">Audit Log</div>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Action</th>
+          <th>Action Date</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of auditLog; let i = index">
+          <td data-label="#">{{i+1}}</td>
+          <td data-label="Name">{{item.adminResponse.firstName}} {{item.adminResponse.lastName}}</td>
+          <td data-label="Phone">{{item.adminResponse.phone}}</td>
+          <td data-label="Action">{{item.action}}</td>
+          <td data-label="Action Date">{{item.actionDate | date}}</td>
+          <td data-label="Details">{{item.details}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+</div>

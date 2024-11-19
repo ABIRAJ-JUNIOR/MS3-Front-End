@@ -12,10 +12,11 @@ import { AdminListComponent } from './Component/Admin_Pages/admin-list/admin-lis
 import { AuditLogComponent } from './Component/Admin_Pages/audit-log/audit-log.component';
 import { CourseComponent } from './Component/Landing_Pages/course/course.component';
 import { AdminProfileComponent } from './Component/Admin_Pages/admin-profile/admin-profile.component';
+import { CourseListComponent } from './Component/Admin_Pages/course-list/course-list.component';
 
 export const routes: Routes = [
 
-    {path:'' , component:HomeComponent},
+    {path:'' , component:CourseListComponent},
     {path:'home' , component:HomeComponent},
     {path:'course',component:CourseComponent},
     {path:'contact' , component:ContactComponent},

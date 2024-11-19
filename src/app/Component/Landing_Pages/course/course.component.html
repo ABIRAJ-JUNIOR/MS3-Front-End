@@ -55,30 +55,8 @@
         <h1 class="headingCourses">Offline Courses</h1>
         <hr>
     </div>
-    <!-- <div class="row">
-        <div class="col-md-4 col-sm-6 col-12 mb-4" *ngFor="let course of courses">
-            <div class="card shadow-lg">
-                <div>
-                    <div class="imageText">
-                        <p class="card-text text-white m-0 p-2 bg-primary rounded"> {{course.level}}</p>
-                    </div>
-                    <img src="{{course.imagePath}}" class="card-img-top" alt="Course Image">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{course.title}}</h5>
-                    <p class="card-text text-success m-0">{{course.price}}</p>
-                    <div class="d-flex justify-content-between align-items-center mt-2">
-                        <div>
-                            <button class="btn btn-sm btn-danger d-block d-sm-none">Enroll Now</button>
-                            <button class="btn btn-md btn-danger d-none d-sm-block">Enroll Now</button>
-                        </div>
-                        <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop">View more</a>
-                    </div>
 
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6 col-12 mb-4">
+    <!-- <div class="col-md-4 col-sm-6 col-12 mb-4">
             <div class="card shadow-lg">
                 <div>
                     <div class="imageText">
@@ -100,54 +78,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-sm-6 col-12 mb-4">
-            <div class="card shadow-lg">
-                <div>
-                    <div class="imageText">
-                        <p class="card-text text-white m-0 p-2 bg-primary rounded"> Beginner</p>
-                    </div>
-                    <img src="/course/courseHeader1.jpg" class="card-img-top" alt="Course Image">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Complete Python Bootcamp: From Zero to Hero</h5>
+    </div>  -->
 
-                    <p class="card-text text-success m-0">Rs10000</p>
-                    <div class="d-flex justify-content-between align-items-center mt-2">
-                        <div>
-                            <button class="btn btn-sm btn-danger d-block d-sm-none">Enroll Now</button>
-                            <button class="btn btn-md btn-danger d-none d-sm-block">Enroll Now</button>
-                        </div>
-                        <a href="">View more</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6 col-12 mb-4">
-            <div class="card shadow-lg">
-                <div>
-                    <div class="imageText">
-                        <p class="card-text text-white m-0 p-2 bg-primary rounded"> Beginner</p>
-                    </div>
-                    <img src="/course/courseHeader1.jpg" class="card-img-top" alt="Course Image">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Complete Python Bootcamp: From Zero to Hero</h5>
-
-                    <p class="card-text text-success m-0">Rs10000</p>
-                    <div class="d-flex justify-content-between align-items-center mt-2">
-                        <div>
-                            <button class="btn btn-sm btn-danger d-block d-sm-none">Enroll Now</button>
-                            <button class="btn btn-md btn-danger d-none d-sm-block">Enroll Now</button>
-                        </div>
-                        <a href="">View more</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <div class="row">
-        <div class="col-md-4 col-sm-6 col-12 mb-4" *ngFor="let course of courses">
-            <div class="card shadow-sm border-0 rounded-2 course-card">
+    <div class="row py-4">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-4" *ngFor="let course of courses">
+            <div class="card border-0  rounded-2 course-card">
                 <div class="position-relative">
                     <!-- Badge for Level -->
                     <div class="badge-level">
@@ -159,19 +94,25 @@
                 <div class="card-body">
                     <!-- Course Title -->
                     <h5 class="card-title mb-2 text-dark fw-bold">{{ course.title }}</h5>
+                    <!--rating-->
+                    <div class=" pb-2">
+                        <i class="bi bi-star-fill text-warning" *ngFor="let i of [].constructor(course.rating)"></i>
+                    </div>
                     <!-- Price -->
-                    <p class="card-text text-success fw-semibold">{{ course.price }}</p>
+                    <p class="card-text text-danger fw-semibold">Rs {{ course.price }}</p>
                     <!-- Enroll & View More -->
                     <div class="d-flex justify-content-between align-items-center mt-3">
-                        <button class="btn btn-primary btn-enroll">Enroll Now</button>
-                        <a href="#" class="text-decoration-none view-more" data-bs-toggle="modal" data-bs-target="#staticBackdrop">View More</a>
+                        <button class="btn btn-primary btn-enroll" (mouseenter)="changeNameEnter($event)" (mouseleave)="changeNameMouseleave($event)">{{EnrollBtnName}}</button>
+                        <a href="#" class="text-decoration-none view-more" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop" (mouseenter)="viewProduct(course)">View More</a>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
-    
-    
+
+
 
     <!-- Pagination -->
     <nav aria-label="Page navigation example">
@@ -193,23 +134,46 @@
     </nav>
 
 
-  <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div *ngIf="ModalProduct.length>0">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 text-danger" id="staticBackdropLabel">Course Description</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            (click)="ClearModal()"></button>
+                    </div>
+                    <div class="modal-body overflow-x-hidden">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                                <img src="{{ModalProduct[0].imagePath}}" alt="" class="modalImg"  width="100%">
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-12  pt-lg-0 pt-md-2 pt-sm-2 pt-2">
+                                <!-- Course Title -->
+                                <h5 class="card-title mb-2 text-dark fw-bold ">{{ ModalProduct[0].title }}</h5>
+                                <!--rating-->
+                                <div class=" pb-2">
+                                    <i class="bi bi-star-fill text-warning"
+                                        *ngFor="let i of [].constructor(ModalProduct[0].rating)"></i>
+                                </div>
+                               
+                                <!-- Price -->
+                                <p class="card-text text-primary fw-semibold">Rs {{ ModalProduct[0].price }}</p>
+                               
+                                <!-- description -->
+                                <div>
+                                    <p>{{ModalProduct[0].description}}</p>
+                                </div>
+                                <button class="btn btn-primary btn-enroll" (mouseenter)="changeNameEnter($event)" (mouseleave)="changeNameMouseleave($event)">{{EnrollBtnName}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Understood</button>
-        </div>
-      </div>
     </div>
-  </div>
 </div>
 <app-footer></app-footer>

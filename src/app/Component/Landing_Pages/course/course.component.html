@@ -55,7 +55,7 @@
         <h1 class="headingCourses">Offline Courses</h1>
         <hr>
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-md-4 col-sm-6 col-12 mb-4" *ngFor="let course of courses">
             <div class="card shadow-lg">
                 <div>
@@ -144,8 +144,34 @@
                 </div>
             </div>
         </div>
-
+    </div> -->
+    <div class="row">
+        <div class="col-md-4 col-sm-6 col-12 mb-4" *ngFor="let course of courses">
+            <div class="card shadow-sm border-0 rounded-2 course-card">
+                <div class="position-relative">
+                    <!-- Badge for Level -->
+                    <div class="badge-level">
+                        <span>{{ course.level }}</span>
+                    </div>
+                    <!-- Course Image -->
+                    <img src="{{ course.imagePath }}" class="card-img-top" alt="Course Image">
+                </div>
+                <div class="card-body">
+                    <!-- Course Title -->
+                    <h5 class="card-title mb-2 text-dark fw-bold">{{ course.title }}</h5>
+                    <!-- Price -->
+                    <p class="card-text text-success fw-semibold">{{ course.price }}</p>
+                    <!-- Enroll & View More -->
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <button class="btn btn-primary btn-enroll">Enroll Now</button>
+                        <a href="#" class="text-decoration-none view-more" data-bs-toggle="modal" data-bs-target="#staticBackdrop">View More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    
+    
 
     <!-- Pagination -->
     <nav aria-label="Page navigation example">

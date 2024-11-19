@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Student, StudentService } from '../../../Service/Student/student.service';
 import { CommonModule } from '@angular/common';
+import { Course, CourseService, Shedule } from '../../../Service/Course/course.service';
 
 @Component({
   selector: 'app-course-list',
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './course-list.component.css'
 })
 export class CourseListComponent {
-  students: Student[] = [];
+  courses: Course[] = [];
   currentPage: number = 1;
   pageSize: number = 13;
   totalPages: number = 0;
@@ -18,21 +18,30 @@ export class CourseListComponent {
   totalItems:number = 0;
 
 
-  constructor(private paginationService: StudentService) {}
+  constructor(private courseService: CourseService) {}
 
   ngOnInit(): void {
     this.loadItems();
   }
 
   loadItems(): void {
-    this.paginationService.pagination(this.currentPage , this.pageSize).subscribe({
+    this.courseService.pagination(this.currentPage , this.pageSize).subscribe({
       next:((response:any) => {
-        this.students = response.items
         this.totalPages = response.totalPages
         this.totalItems = response.totalItem
+        response.items.forEach((a:Course) => {
+          a.imagePath = "https://localhost:7044/" + a.imagePath
+          let count = 0
+          a.shedules.forEach((s:Shedule) => {
+            count++
+          })
+          a.shedulesCount = count;
+        })
+        this.courses = response.items
       }),
       complete:() => {
-        this.currentLength = this.students.length
+        this.currentLength = this.courses.length
+
       }
     });
   }

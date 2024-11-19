@@ -16,7 +16,7 @@ import { CourseListComponent } from './Component/Admin_Pages/course-list/course-
 
 export const routes: Routes = [
 
-    {path:'' , component:CourseListComponent},
+    {path:'' , component:HomeComponent},
     {path:'home' , component:HomeComponent},
     {path:'course',component:CourseComponent},
     {path:'contact' , component:ContactComponent},
@@ -32,6 +32,7 @@ export const routes: Routes = [
             {path:'admin-list', component:AdminListComponent},
             {path:'audit-log', component:AuditLogComponent},
             {path:'admin-profile', component:AdminProfileComponent},
+            {path:'course-list', component:CourseListComponent},
         ]
 
     },

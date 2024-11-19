@@ -13,6 +13,10 @@ export class CourseService {
   getCourses(){
     return this.http.get<Course[]>(this.apiUrl + '/Course/Course')
   }
+
+  pagination(pageNumber:number , pageSize:number){
+    return this.http.get<any>(this.apiUrl + `/Course/Pagination/${pageNumber}/${pageSize}`)
+  }
 }
 
 export interface Course{
@@ -25,5 +29,23 @@ export interface Course{
   prerequisites:string,
   imagePath:string,
   createdDate:Date,
-  updatedDate:Date
+  updatedDate:Date,
+  shedulesCount:number,
+
+  shedules:Shedule[]
+}
+
+export interface Shedule{
+  id:string,
+  courseid:string,
+  startDate:Date,
+  endDate:Date,
+  duration:number,
+  time:string,
+  location:string,
+  maxStudents:number,
+  enrollCount:number,
+  createdDate:Date,
+  updatedDate:Date,
+  scheduleStatus:number
 }

@@ -1,17 +1,40 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './Component/Landing_Pages/home/home.component';
 import { ContactComponent } from './Component/Landing_Pages/contact/contact.component';
-import { AdminLoginComponent } from './Component/Admin_Pages/admin-login/admin-login.component';
 import { AboutComponent } from './Component/Landing_Pages/about/about.component';
-import { StudentLoginComponent } from './Component/Student_Pages/student-login/student-login.component';
+import { AdminDashboardComponent } from './Component/Admin_Pages/admin-dashboard/admin-dashboard.component';
+import { AdminHomeComponent } from './Component/Admin_Pages/admin-home/admin-home.component';
+import { SignupComponent } from './Component/Landing_Pages/signup/signup.component';
+import { SigninComponent } from './Component/Landing_Pages/signin/signin.component';
+import { StudentDashboardComponent } from './Component/Student_Pages/student-dashboard/student-dashboard.component';
+import { StudentListComponent } from './Component/Admin_Pages/student-list/student-list.component';
+import { AdminListComponent } from './Component/Admin_Pages/admin-list/admin-list.component';
+import { AuditLogComponent } from './Component/Admin_Pages/audit-log/audit-log.component';
+import { CourseComponent } from './Component/Landing_Pages/course/course.component';
 
 export const routes: Routes = [
 
     {path:'' , component:HomeComponent},
     {path:'home' , component:HomeComponent},
+    {path:'course',component:CourseComponent},
     {path:'contact' , component:ContactComponent},
-    {path:'admin-login' , component:AdminLoginComponent},
     {path:'about' , component:AboutComponent},
-    {path:'student-login' , component:StudentLoginComponent},
+    {path:'signin' , component:SigninComponent},
+    {path:'signup' , component:SignupComponent},
 
+    {
+        path:'admin-dashboard', component:AdminDashboardComponent , children:[
+            {path:'', component:AdminHomeComponent},
+            {path:'home', component:AdminHomeComponent},
+            {path:'student-list', component:StudentListComponent},
+            {path:'admin-list', component:AdminListComponent},
+            {path:'audit-log', component:AuditLogComponent},
+        ]
+
+    },
+    {
+        path:'student-dashboard', component:StudentDashboardComponent , children:[
+
+        ]
+    }
 ];

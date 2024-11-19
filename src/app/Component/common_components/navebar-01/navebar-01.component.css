@@ -1,3 +1,17 @@
 .active_Link{
     color: red;
 }
+.btnSearch{
+    border: none;
+    border-radius: 0%;
+}
+.form-control{
+    border-radius: 0%;
+   
+}
+
+.form-control:focus {
+    border-bottom: 2px solid #000000;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); 
+    outline: none; 
+  }

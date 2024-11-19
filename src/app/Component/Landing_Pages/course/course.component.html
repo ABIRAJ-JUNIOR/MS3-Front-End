@@ -1,0 +1,215 @@
+<app-navebar-01></app-navebar-01>
+
+<header>
+    <div class="container-fluid headCon">
+        <div class="text-white text-center">
+            <h1 class="fw-bold fsSize">Our Courses</h1>
+            <p><a href="" class="hometag">Home</a>-course</p>
+        </div>
+    </div>
+</header>
+
+<!-- course filter -->
+
+<div class="container py-5 filter">
+    <div class="row">
+        <div class="col-lg-2 col-md-6 col-sm-12 col-12 d-flex justify-content-between align-items-center mb-1">
+            <p>Added:</p>
+            <select class="w-75" aria-label="Small select example">
+                <option selected>Recently</option>
+                <option value="1">Past</option>
+                <option value="2">Feauture</option>
+            </select>
+        </div>
+        <div class=" col-lg-2 col-md-6 col-sm-12 col-12 d-flex justify-content-between align-items-center mb-1">
+            <p>Type:</p>
+            <select class="w-75" aria-label="Small select example">
+                <option selected>Offline</option>
+                <option value="1">Online</option>
+            </select>
+        </div>
+        <div class=" col-lg-2 col-md-6 col-sm-12 col-12 d-flex justify-content-between align-items-center mb-1">
+            <p>Level:</p>
+            <select class="w-75" aria-label="Small select example">
+                <option selected>Advance</option>
+                <option value="1">Medium</option>
+                <option value="2">Low</option>
+            </select>
+        </div>
+        <div class=" col-lg-2 col-md-6 col-sm-12 col-12 d-flex justify-content-between align-items-center mb-1">
+            <p>Price:</p>
+            <select class="w-75" aria-label="Small select example">
+                <option selected>10000-30000</option>
+                <option value="1">30000-50000</option>
+                <option value="2">50000-80000</option>
+                <option value="3">80000-100000</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<!-- Coruse Card -->
+
+<div class="container">
+    <div>
+        <h1 class="headingCourses">Offline Courses</h1>
+        <hr>
+    </div>
+    <!-- <div class="row">
+        <div class="col-md-4 col-sm-6 col-12 mb-4" *ngFor="let course of courses">
+            <div class="card shadow-lg">
+                <div>
+                    <div class="imageText">
+                        <p class="card-text text-white m-0 p-2 bg-primary rounded"> {{course.level}}</p>
+                    </div>
+                    <img src="{{course.imagePath}}" class="card-img-top" alt="Course Image">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{course.title}}</h5>
+                    <p class="card-text text-success m-0">{{course.price}}</p>
+                    <div class="d-flex justify-content-between align-items-center mt-2">
+                        <div>
+                            <button class="btn btn-sm btn-danger d-block d-sm-none">Enroll Now</button>
+                            <button class="btn btn-md btn-danger d-none d-sm-block">Enroll Now</button>
+                        </div>
+                        <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop">View more</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-12 mb-4">
+            <div class="card shadow-lg">
+                <div>
+                    <div class="imageText">
+                        <p class="card-text text-white m-0 p-2 bg-primary rounded"> Beginner</p>
+                    </div>
+                    <img src="/course/courseHeader1.jpg" class="card-img-top" alt="Course Image">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Complete Python Bootcamp: From Zero to Hero</h5>
+
+                    <p class="card-text text-success m-0">Rs10000</p>
+                    <div class="d-flex justify-content-between align-items-center mt-2">
+                        <div>
+                            <button class="btn btn-sm btn-danger d-block d-sm-none">Enroll Now</button>
+                            <button class="btn btn-md btn-danger d-none d-sm-block">Enroll Now</button>
+                        </div>
+                        <a href="">View more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-12 mb-4">
+            <div class="card shadow-lg">
+                <div>
+                    <div class="imageText">
+                        <p class="card-text text-white m-0 p-2 bg-primary rounded"> Beginner</p>
+                    </div>
+                    <img src="/course/courseHeader1.jpg" class="card-img-top" alt="Course Image">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Complete Python Bootcamp: From Zero to Hero</h5>
+
+                    <p class="card-text text-success m-0">Rs10000</p>
+                    <div class="d-flex justify-content-between align-items-center mt-2">
+                        <div>
+                            <button class="btn btn-sm btn-danger d-block d-sm-none">Enroll Now</button>
+                            <button class="btn btn-md btn-danger d-none d-sm-block">Enroll Now</button>
+                        </div>
+                        <a href="">View more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-12 mb-4">
+            <div class="card shadow-lg">
+                <div>
+                    <div class="imageText">
+                        <p class="card-text text-white m-0 p-2 bg-primary rounded"> Beginner</p>
+                    </div>
+                    <img src="/course/courseHeader1.jpg" class="card-img-top" alt="Course Image">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Complete Python Bootcamp: From Zero to Hero</h5>
+
+                    <p class="card-text text-success m-0">Rs10000</p>
+                    <div class="d-flex justify-content-between align-items-center mt-2">
+                        <div>
+                            <button class="btn btn-sm btn-danger d-block d-sm-none">Enroll Now</button>
+                            <button class="btn btn-md btn-danger d-none d-sm-block">Enroll Now</button>
+                        </div>
+                        <a href="">View more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="col-md-4 col-sm-6 col-12 mb-4" *ngFor="let course of courses">
+            <div class="card shadow-sm border-0 rounded-2 course-card">
+                <div class="position-relative">
+                    <!-- Badge for Level -->
+                    <div class="badge-level">
+                        <span>{{ course.level }}</span>
+                    </div>
+                    <!-- Course Image -->
+                    <img src="{{ course.imagePath }}" class="card-img-top" alt="Course Image">
+                </div>
+                <div class="card-body">
+                    <!-- Course Title -->
+                    <h5 class="card-title mb-2 text-dark fw-bold">{{ course.title }}</h5>
+                    <!-- Price -->
+                    <p class="card-text text-success fw-semibold">{{ course.price }}</p>
+                    <!-- Enroll & View More -->
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <button class="btn btn-primary btn-enroll">Enroll Now</button>
+                        <a href="#" class="text-decoration-none view-more" data-bs-toggle="modal" data-bs-target="#staticBackdrop">View More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

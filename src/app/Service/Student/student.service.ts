@@ -15,19 +15,18 @@ export class StudentService {
   }
 
   pagination(pageNumber:number , pageSize:number){
-    return this.http.get(this.apiUrl + `/Pagination?pageNumber=${pageNumber}&pageSize=${pageSize}`)
+    return this.http.get(this.apiUrl + `/Pagination/${pageNumber}/${pageSize}`)
   }
 }
 
 export interface Student{
-  id:number,
+  id:string,
   nic:string,
   firstName:string,
   lastName:string,
+  dateOfBirth:Date
   gender:string,
-  email:string,
   phone:string,
-  password:string,
   address:Address
 }
 
@@ -36,6 +35,7 @@ export interface Address{
   addressLine1:string,
   addressLine2:string,
   city:string,
+  postalCode:number,
   country:string
 }
 

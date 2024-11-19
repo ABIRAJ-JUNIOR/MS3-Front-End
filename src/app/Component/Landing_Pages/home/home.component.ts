@@ -6,11 +6,11 @@ import { Navebar01Component } from '../../common_components/navebar-01/navebar-0
 
 
 @Component({
-  selector: 'app-Home',
+  selector: 'app-home',
   standalone: true,
   imports: [RouterModule,CommonModule,FooterComponent,Navebar01Component],
-  templateUrl: './Home.component.html',
-  styleUrl: './Home.component.css'
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css'
 })
 export class HomeComponent {
   courses = [
@@ -34,24 +34,26 @@ export class HomeComponent {
     }
   ];
 
-    @ViewChildren('courseCard') courseCards!: QueryList<ElementRef>;
-  
-    ngOnInit(): void {}
-  
-    ngAfterViewInit(): void {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('in-view');
-            } else {
-              entry.target.classList.remove('in-view');
-            }
-          });
-        },
-        { threshold: 0.3 } 
-      );
-  
-      this.courseCards.forEach(card => observer.observe(card.nativeElement));
-    }
+  @ViewChildren('courseCard') courseCards!: QueryList<ElementRef>;
+
+  ngAfterViewInit(): void {
+    if (!this.courseCards) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const target = entry.target as HTMLElement;
+
+          if (entry.isIntersecting) {
+            target.classList.add('in-view');
+          } else {
+            target.classList.remove('in-view');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    this.courseCards.forEach((card) => observer.observe(card.nativeElement));
+  }
 }

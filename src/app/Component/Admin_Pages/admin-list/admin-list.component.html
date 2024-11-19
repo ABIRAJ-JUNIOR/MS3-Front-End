@@ -27,21 +27,17 @@
                       <th>NIC</th>
                       <th>Image</th>
                       <th>Name</th>
-                      <th>Gender</th>
-                      <th>Email</th>
                       <th>Phone</th>
                       <th class="text-center">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>200224204071</td>
-                      <th><img src="profile.jpg" alt="" width="45px"></th>
-                      <td>Thomas Hardy</td>
-                      <td>Male</td>
-                      <td>thomashardymail.com</td>
-                      <td>(171) 555-2222</td>
+                    <tr class="table-row animate__animated animate__fadeInUp" *ngFor="let admin of admins; let i = index">
+                      <td>{{i + 1}}</td>
+                      <td>{{admin.nic}}</td>
+                      <td><img src="{{admin.imagePath}}"  alt="profile image" class="rounded-circle" width="50" height="50"></td>
+                      <td>{{admin.firstName}} {{admin.lastName}}</td>
+                      <td>{{admin.phone}}</td>
                       <td class="text-center">
                         <a href="#" class="text-primary me-3" aria-label="Edit Student">
                           <i class="bi bi-pencil-square"></i>
@@ -57,28 +53,19 @@
           
               <!-- Pagination Section -->
               <div class="d-flex justify-content-between align-items-center px-3 py-2 bg-light border-top">
-                <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                <div class="hint-text">Showing <b>{{currentLength}}</b> out of <b>{{totalItems}}</b> entries</div>
                 <ul class="pagination mb-0">
-                  <li class="page-item disabled">
-                    <a href="#" class="page-link">Previous</a>
+                  <li class="page-item pointer" [class.disabled]="currentPage === 1">
+                    <a class="page-link" (click)="goToPage(currentPage - 1)">Previous</a>
                   </li>
-                  <li class="page-item">
-                    <a href="#" class="page-link">1</a>
+            
+                  <li class="page-item pointer" *ngFor="let page of [].constructor(totalPages); let i = index" 
+                      [class.active]="currentPage === i + 1">
+                    <a class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</a>
                   </li>
-                  <li class="page-item">
-                    <a href="#" class="page-link">2</a>
-                  </li>
-                  <li class="page-item active">
-                    <a href="#" class="page-link">3</a>
-                  </li>
-                  <li class="page-item">
-                    <a href="#" class="page-link">4</a>
-                  </li>
-                  <li class="page-item">
-                    <a href="#" class="page-link">5</a>
-                  </li>
-                  <li class="page-item">
-                    <a href="#" class="page-link">Next</a>
+            
+                  <li class="page-item pointer" [class.disabled]="currentPage === totalPages">
+                    <a class="page-link" (click)="goToPage(currentPage + 1)">Next</a>
                   </li>
                 </ul>
               </div>

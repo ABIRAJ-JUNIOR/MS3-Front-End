@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './student-list.component.css'
 })
 export class StudentListComponent implements OnInit {
-  items: Student[] = [];
+  students: Student[] = [];
   currentPage: number = 1;
   pageSize: number = 13;
   totalPages: number = 0;
@@ -29,12 +29,12 @@ export class StudentListComponent implements OnInit {
   loadItems(): void {
     this.paginationService.pagination(this.currentPage , this.pageSize).subscribe({
       next:((response:any) => {
-        this.items = response.items
+        this.students = response.items
         this.totalPages = response.totalPages
         this.totalItems = response.totalItem
       }),
       complete:() => {
-        this.currentLength = this.items.length
+        this.currentLength = this.students.length
       }
     });
   }

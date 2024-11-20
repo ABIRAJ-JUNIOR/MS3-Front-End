@@ -8,7 +8,7 @@ export interface Student {
   phone: string;
   address: Address;
 
-  enrollments: any;
+  enrollments: Enrollment;
 }
 
 export interface Address {
@@ -68,4 +68,13 @@ export interface Shedule {
   createdDate: Date;
   updatedDate: Date;
   scheduleStatus: number;
+}
+
+export interface Enrollment {
+    id:string;
+    enrollmentDate:Date;
+    paymentStatus:string;
+    isActive:boolean;
+    studentId:string;
+    CourseSheduleId:string;
 }

@@ -25,16 +25,16 @@ export class CourseComponent {
       "rating": 4,
       "schedules": [
         {
-          "StartDate": new Date(2024, 0, 15), // January 15, 2024
-          "EndDate": new Date(2024, 3, 15), // April 15, 2024
+          "StartDate":"Sun Mar 10 2024",
+          "EndDate": "Sun Mar 10 2024", 
           "Duration": 3,
           "Time": "10:00 AM - 12:00 PM",
           "Location": "Room 101, Main Campus",
           "MaxStudents": 30
         },
         {
-          "StartDate": new Date(2024, 6, 1), // July 1, 2024
-          "EndDate": new Date(2024, 8, 30), // September 30, 2024
+          "StartDate": "Sun Mar 10 2024",
+          "EndDate":"Sun Mar 10 2024", 
           "Duration": 3,
           "Time": "2:00 PM - 4:00 PM",
           "Location": "Online",
@@ -51,8 +51,8 @@ export class CourseComponent {
       "rating": 2,
       "schedules": [
         {
-          "StartDate": new Date(2024, 2, 10),
-          "EndDate": new Date(2024, 5, 10),
+          "StartDate": "Sun Mar 10 2024",
+          "EndDate": "Sun Mar 10 2024",
           "Duration": 3,
           "Time": "1:00 PM - 3:00 PM",
           "Location": "Room 202, Main Campus",
@@ -69,8 +69,8 @@ export class CourseComponent {
       "rating": 3,
       "schedules": [
         {
-          "StartDate": new Date(2024, 1, 1),
-          "EndDate": new Date(2024, 3, 31),
+          "StartDate":"Sun Mar 10 2024",
+          "EndDate": "Sun Mar 10 2024",
           "Duration": 3,
           "Time": "9:00 AM - 11:00 AM",
           "Location": "Room 303, Tech Building",
@@ -87,16 +87,16 @@ export class CourseComponent {
       "rating": 1,
       "schedules": [
         {
-          "StartDate": new Date(2024, 4, 5),
-          "EndDate": new Date(2024, 6, 25),
+          "StartDate": "Sun Mar 10 2024",
+          "EndDate": "Sun Mar 10 2024",
           "Duration": 2,
           "Time": "3:00 PM - 5:00 PM",
           "Location": "Room 404, Coding Lab",
           "MaxStudents": 35
         },
         {
-          "StartDate": new Date(2024, 8, 15),
-          "EndDate": new Date(2024, 10, 15),
+          "StartDate": "Sun Mar 10 2024",
+          "EndDate": "Sun Mar 10 2024",
           "Duration": 2,
           "Time": "6:00 PM - 8:00 PM",
           "Location": "Online",
@@ -113,8 +113,8 @@ export class CourseComponent {
       "rating": 4,
       "schedules": [
         {
-          "StartDate": new Date(2024, 6, 20),
-          "EndDate": new Date(2024, 9, 20),
+          "StartDate": "Sun Mar 10 2024",
+          "EndDate": "Sun Mar 10 2024",
           "Duration": 3,
           "Time": "10:00 AM - 1:00 PM",
           "Location": "Room 505, AI Center",
@@ -131,8 +131,8 @@ export class CourseComponent {
       "rating": 3,
       "schedules": [
         {
-          "StartDate": new Date(2024, 3, 10),
-          "EndDate": new Date(2024, 8, 10),
+          "StartDate": "Sun Mar 10 2024",
+          "EndDate": "new Date(2024, 8, 10)",
           "Duration": 5,
           "Time": "8:00 AM - 10:00 AM",
           "Location": "Room 606, Web Dev Lab",
@@ -164,6 +164,7 @@ export class CourseComponent {
     const buttonElement = event?.target as HTMLButtonElement;
     buttonElement.innerText = "Click To Buy"
   }
+
 
 
 }

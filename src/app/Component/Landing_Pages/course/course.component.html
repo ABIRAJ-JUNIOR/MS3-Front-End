@@ -83,8 +83,8 @@
                     <!-- Enroll & View More -->
                     <div class="d-flex justify-content-between align-items-center mt-3">
                         <button class="btn btn-primary btn-enroll" data-bs-toggle="modal" data-bs-target="#ScheduleView"
-                            (mouseenter)="changeNameEnter($event)"
-                            (mouseleave)="changeNameMouseleave($event)" (click)="viewProduct(course)">{{EnrollBtnName}}</button>
+                            (mouseenter)="changeNameEnter($event)" (mouseleave)="changeNameMouseleave($event)"
+                            (click)="viewProduct(course)">{{EnrollBtnName}}</button>
                         <a href="#" class="text-decoration-none view-more" data-bs-toggle="modal"
                             data-bs-target="#CourseView" (mouseenter)="viewProduct(course)">View More</a>
                     </div>
@@ -163,59 +163,52 @@
     <!-- SheduleView -->
     <div class="modal fade" id="ScheduleView" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-custom">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div>
                     <div class="modal-body overflow-x-hidden">
                         <div class="row">
+
                             <div *ngIf="ModalProduct.length>0">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5 text-danger" id="staticBackdropLabel">Course Description</h1>
+                                    <h1 class="modal-title fs-5 text-danger" id="staticBackdropLabel">{{
+                                        ModalProduct[0].CourseName }}</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                                         (click)="ClearModal()"></button>
                                 </div>
-                                <div class="modal-body overflow-x-hidden">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-12 col-sm-12 col-12">
-                                            <img src="{{ModalProduct[0].imagePath}}" alt="" class="modalImg" width="100%">
-                                        </div>
-                                        <div class="col-lg-6 col-md-12 col-sm-12 col-12  pt-lg-0 pt-md-2 pt-sm-2 pt-2">
-                                            <!-- Course Title -->
-                                            <h5 class="card-title mb-2 text-dark fw-bold ">{{ ModalProduct[0].CourseName }}</h5>
-                                            <div *ngFor="let sechdule of ModalProduct[0].schedules">
-                                                <div class="row">
-                                                    <div class="col-2">
-                                                        <input type="checkbox">
-                                                    </div>
-                                                    <div class="col-10">
-                                                        <div class="d-flex justify-content-between">
-                                                            <p>StartDate:</p>
-                                                            <p>{{sechdule.StartDate}}</p>
-                                                        </div>
-                                                        <div class="d-flex justify-content-between">
-                                                            <p>EndDate: </p>
-                                                            <p>{{sechdule.EndDate}}</p>
-                                                        </div>
-                                                        <div class="d-flex justify-content-between">
-                                                            <p>Duration: </p>
-                                                            <p>{{sechdule.Duration}}</p>
-                                                        </div>
-                                                        <div class="d-flex justify-content-between">
-                                                            <p>Time: </p>
-                                                            <p>{{sechdule.Time}}</p>
-                                                        </div>
-                                                        <div class="d-flex justify-content-between">
-                                                            <p>MaxStudents: </p>
-                                                            <p>{{sechdule.MaxStudents}}</p>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
+
+                                <div class="row d-flex justify-content-evenly">
+                                    <div class="card shadow-lg border-0 col-lg-6 col-md-12 col-sm-12 col-12 p-2" style="width: 30rem;"  *ngFor="let sechdule of ModalProduct[0].schedules">
+                                        <img src="{{ModalProduct[0].imagePath}}" class="card-img-top" alt="...">
+                                        <div class="card-body ScheduleBody">
+                                            <div class="d-flex ">
+                                                <p class="fw-bold  pe-1">Location:</p>
+                                                <p>{{sechdule.Location}}</p>
                                             </div>
-                                            <button class="btn btn-primary btn-enroll">Purchase</button>
+                                            <div class="d-flex ">
+                                                <p class="fw-bold pe-1">StartDate:</p>
+                                                <p>{{sechdule.StartDate}}</p>
+                                            </div>
+                                            <div class="d-flex ">
+                                                <p class="fw-bold pe-1">EndDate:</p>
+                                                <p>{{sechdule.EndDate}}</p>
+                                            </div>
+                                            <div class="d-flex ">
+                                                <p class="fw-bold pe-1">Duration: </p>
+                                                <p>{{sechdule.Duration}}</p>
+                                            </div>
+                                            <div class="d-flex ">
+                                                <p class="fw-bold pe-1">Time: </p>
+                                                <p>{{sechdule.Time}}</p>
+                                            </div>
+                                            <button class="btn btn-primary btn-enroll mt-3">Purchase</button>
                                         </div>
                                     </div>
+
+                                 
+
                                 </div>
+
                             </div>
                         </div>
                     </div>

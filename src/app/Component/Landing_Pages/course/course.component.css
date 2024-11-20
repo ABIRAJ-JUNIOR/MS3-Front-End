@@ -140,14 +140,21 @@
 
 .modal-custom {
     max-width: 60%;
-    width: max-content;
 }
 .ScheduleBody p{
   margin: 1px;
 }
+.card-custom {
+    max-width: 30rem; 
+  }
 
 @media screen and (max-width: 1005px) {
     .modal-custom {
         max-width: 100%;
     }
 }
+@media screen and (max-width: 576px) { 
+    .card-custom {
+      max-width: 20rem; 
+    }
+  }

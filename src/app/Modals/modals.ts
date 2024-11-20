@@ -115,3 +115,12 @@ export interface StudentAssessment{
     dateEvaluated:Date;
     studentAssessmentStatus:string;
 }
+
+export interface Notification{
+    id:string;
+    studentId:string;
+    message:string;
+    dateSent:Date;
+    NotificationType:string;
+    isRead:boolean;
+}

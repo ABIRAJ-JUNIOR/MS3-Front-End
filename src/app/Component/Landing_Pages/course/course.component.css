@@ -155,6 +155,6 @@
 }
 @media screen and (max-width: 576px) { 
     .card-custom {
-      max-width: 20rem; 
+      max-width: 25rem; 
     }
   }

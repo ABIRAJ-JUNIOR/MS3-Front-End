@@ -163,7 +163,7 @@
     <!-- SheduleView -->
     <div class="modal fade" id="ScheduleView" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-md">
+        <div class="modal-dialog modal-custom">
             <div class="modal-content">
                 <div>
                     <div class="modal-body overflow-x-hidden">
@@ -178,7 +178,7 @@
                                 </div>
 
                                 <div class="row d-flex justify-content-evenly">
-                                    <div class="card shadow-lg border-0 col-lg-6 col-md-12 col-sm-12 col-12 p-2" style="width: 30rem;"  *ngFor="let sechdule of ModalProduct[0].schedules">
+                                    <div class="card shadow-lg border-0 col-lg-6 col-md-12 col-sm-12 col-12 p-2 m-3" style="width: 30rem;"  *ngFor="let sechdule of ModalProduct[0].schedules">
                                         <img src="{{ModalProduct[0].imagePath}}" class="card-img-top" alt="...">
                                         <div class="card-body ScheduleBody">
                                             <div class="d-flex ">

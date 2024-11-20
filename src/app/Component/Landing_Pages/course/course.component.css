@@ -139,8 +139,15 @@
 
 
 .modal-custom {
-    max-width: 80%;
+    max-width: 60%;
+    width: max-content;
 }
 .ScheduleBody p{
   margin: 1px;
+}
+
+@media screen and (max-width: 1005px) {
+    .modal-custom {
+        max-width: 100%;
+    }
 }

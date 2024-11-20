@@ -137,6 +137,30 @@ export class CourseComponent {
           "Time": "8:00 AM - 10:00 AM",
           "Location": "Room 606, Web Dev Lab",
           "MaxStudents": 40
+        },
+        {
+          "StartDate": "Sun Mar 10 2024",
+          "EndDate": "new Date(2024, 8, 10)",
+          "Duration": 5,
+          "Time": "8:00 AM - 10:00 AM",
+          "Location": "Room 606, Web Dev Lab",
+          "MaxStudents": 40
+        },
+        {
+          "StartDate": "Sun Mar 10 2024",
+          "EndDate": "new Date(2024, 8, 10)",
+          "Duration": 5,
+          "Time": "8:00 AM - 10:00 AM",
+          "Location": "Room 606, Web Dev Lab",
+          "MaxStudents": 40
+        },
+        {
+          "StartDate": "Sun Mar 10 2024",
+          "EndDate": "new Date(2024, 8, 10)",
+          "Duration": 5,
+          "Time": "8:00 AM - 10:00 AM",
+          "Location": "Room 606, Web Dev Lab",
+          "MaxStudents": 40
         }
       ]
     }

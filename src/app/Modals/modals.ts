@@ -143,3 +143,12 @@ export interface ContactUs{
     dateSubmited:Date;
     isRead:boolean;
 }
+
+export interface Announcement{
+    id:string;
+    title:string;
+    datePosted:Date;
+    expirationDate:Date;
+    audienceType:string;
+    isActive:boolean;
+}

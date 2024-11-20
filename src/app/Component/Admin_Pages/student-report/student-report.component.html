@@ -1,154 +1,155 @@
-<div class="container py-4">
+<div class="container py-4" >
     <!-- Page Title -->
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2 class="m-0">Student Report</h2>
-      <button class="btn btn-primary" (click)="downloadReport()"><i class="bi bi-download me-2"></i>Download Report</button>
+      <button class="btn btn-primary" (click)="downloadReportAsPng()"><i class="bi bi-download me-2"></i>Download Report</button>
     </div>
-  
-    <!-- Student Profile Section -->
+    <div id="reportContent">
+      <!-- Student Profile Section -->
     <div class="card shadow border-0 mb-4">
-      <div class="card-body d-flex flex-column flex-md-row align-items-center">
-        <div class="profile-pic mb-3 mb-md-0">
-          <img
-            src="https://via.placeholder.com/150"
-            alt="Profile"
-            class="rounded-circle border"
-            width="150"
-            height="150"
-          />
-        </div>
-        <div class="ms-md-4">
-          <h4 class="mb-1">John Doe</h4>
-          <p class="text-muted mb-2">Student ID: <strong>123456</strong></p>
-          <p class="text-muted mb-0">Email: <strong>johndoeexample.com</strong></p>
-        </div>
-      </div>
-    </div>
-  
-    <!-- Personal Info & Address -->
-    <div class="card shadow border-0 mb-4">
-      <div class="card-body">
-        <h5 class="card-title">Personal Information</h5>
-        <div class="row">
-          <div class="col-md-6">
-            <p class="mb-1"><strong>NIC:</strong> 987654321V</p>
-            <p class="mb-1"><strong>Gender:</strong> Male</p>
-            <p class="mb-1"><strong>Date of Birth:</strong> 12 Jan 2000</p>
+        <div class="card-body d-flex flex-column flex-md-row align-items-center">
+          <div class="profile-pic mb-3 mb-md-0">
+            <img
+              src="https://via.placeholder.com/150"
+              alt="Profile"
+              class="rounded-circle border"
+              width="150"
+              height="150"
+            />
           </div>
-          <div class="col-md-6">
-            <p class="mb-1"><strong>Phone:</strong> +1 234-567-890</p>
-            <p class="mb-1"><strong>Address:</strong> 123, Main Street, City, Country</p>
+          <div class="ms-md-4">
+            <h4 class="mb-1">{{studentData.firstName}} {{studentData.lastName}}</h4>
+            <p class="text-muted mb-2">Student ID: <strong>{{studentData.id}}</strong></p>
+            <p class="text-muted mb-0">Email: <strong>johndoeexample.com</strong></p>
           </div>
         </div>
       </div>
-    </div>
-  
-    <!-- Enrolled Courses -->
-    <div class="card shadow border-0 mb-4">
-      <div class="card-body">
-        <h5 class="card-title mb-3">Enrolled Courses</h5>
-        <div class="table-responsive">
-          <table class="table table-striped align-middle mb-0">
-            <thead class="table-dark">
-              <tr>
-                <th>#</th>
-                <th>Course Name</th>
-                <th>Level</th>
-                <th>Duration</th>
-                <th>Fee</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Web Development</td>
-                <td>Beginner</td>
-                <td>3 Months</td>
-                <td>$500</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Data Science</td>
-                <td>Intermediate</td>
-                <td>6 Months</td>
-                <td>$1000</td>
-              </tr>
-            </tbody>
-          </table>
+    
+      <!-- Personal Info & Address -->
+      <div class="card shadow border-0 mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Personal Information</h5>
+          <div class="row">
+            <div class="col-md-6">
+              <p class="mb-1"><strong>NIC:</strong> {{studentData.nic}}</p>
+              <p class="mb-1"><strong>Gender:</strong> {{studentData.gender}}</p>
+              <p class="mb-1"><strong>Date of Birth:</strong> {{studentData.dateOfBirth | date}}</p>
+            </div>
+            <div class="col-md-6">
+              <p class="mb-1"><strong>Phone:</strong> {{studentData.phone}}</p>
+              <p class="mb-1" ><strong>Address:</strong> {{studentData.address.addressLine1}}, {{studentData.address.addressLine2}}, {{studentData.address.city}}, {{studentData.address.country}}</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  
-    <!-- Payments Section -->
-    <div class="card shadow border-0 mb-4">
-      <div class="card-body">
-        <h5 class="card-title mb-3">Payments</h5>
-        <div class="table-responsive">
-          <table class="table table-striped align-middle mb-0">
-            <thead class="table-dark">
-              <tr>
-                <th>#</th>
-                <th>Payment Date</th>
-                <th>Amount</th>
-                <th>Payment Method</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>01 Jan 2024</td>
-                <td>$500</td>
-                <td>Credit Card</td>
-                <td><span class="badge bg-success">Paid</span></td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>01 Mar 2024</td>
-                <td>$1000</td>
-                <td>Bank Transfer</td>
-                <td><span class="badge bg-warning">Pending</span></td>
-              </tr>
-            </tbody>
-          </table>
+    
+      <!-- Enrolled Courses -->
+      <div class="card shadow border-0 mb-4">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Enrolled Courses</h5>
+          <div class="table-responsive">
+            <table class="table table-striped align-middle mb-0">
+              <thead class="table-dark">
+                <tr>
+                  <th>#</th>
+                  <th>Course Name</th>
+                  <th>Level</th>
+                  <th>Duration</th>
+                  <th>Fee</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Web Development</td>
+                  <td>Beginner</td>
+                  <td>3 Months</td>
+                  <td>$500</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Data Science</td>
+                  <td>Intermediate</td>
+                  <td>6 Months</td>
+                  <td>$1000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
-  
-    <!-- Attempted Assessments -->
-    <div class="card shadow border-0">
-      <div class="card-body">
-        <h5 class="card-title mb-3">Attempted Assessments</h5>
-        <div class="table-responsive">
-          <table class="table table-striped align-middle mb-0">
-            <thead class="table-dark">
-              <tr>
-                <th>#</th>
-                <th>Assessment Name</th>
-                <th>Course</th>
-                <th>Score</th>
-                <th>Date Attempted</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>HTML Basics</td>
-                <td>Web Development</td>
-                <td>85%</td>
-                <td>15 Jan 2024</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Data Cleaning</td>
-                <td>Data Science</td>
-                <td>90%</td>
-                <td>20 Mar 2024</td>
-              </tr>
-            </tbody>
-          </table>
+    
+      <!-- Payments Section -->
+      <div class="card shadow border-0 mb-4">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Payments</h5>
+          <div class="table-responsive">
+            <table class="table table-striped align-middle mb-0">
+              <thead class="table-dark">
+                <tr>
+                  <th>#</th>
+                  <th>Payment Date</th>
+                  <th>Amount</th>
+                  <th>Payment Method</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>01 Jan 2024</td>
+                  <td>$500</td>
+                  <td>Credit Card</td>
+                  <td><span class="badge bg-success">Paid</span></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>01 Mar 2024</td>
+                  <td>$1000</td>
+                  <td>Bank Transfer</td>
+                  <td><span class="badge bg-warning">Pending</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
+    
+      <!-- Attempted Assessments -->
+      <div class="card shadow border-0">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Attempted Assessments</h5>
+          <div class="table-responsive">
+            <table class="table table-striped align-middle mb-0">
+              <thead class="table-dark">
+                <tr>
+                  <th>#</th>
+                  <th>Assessment Name</th>
+                  <th>Course</th>
+                  <th>Score</th>
+                  <th>Date Attempted</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>HTML Basics</td>
+                  <td>Web Development</td>
+                  <td>85%</td>
+                  <td>15 Jan 2024</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Data Cleaning</td>
+                  <td>Data Science</td>
+                  <td>90%</td>
+                  <td>20 Mar 2024</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>  
+    </div> 
+</div>
   

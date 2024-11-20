@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import html2canvas from 'html2canvas';
+import { Student, StudentService } from '../../../Service/Student/student.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-student-report',
@@ -8,54 +11,53 @@ import { Component } from '@angular/core';
   templateUrl: './student-report.component.html',
   styleUrl: './student-report.component.css'
 })
-export class StudentReportComponent {
-  studentData = {
-    personalInfo: {
-      name: 'John Doe',
-      studentId: '123456',
-      email: 'johndoe@example.com',
-      phone: '+1 234-567-890',
-      address: '123, Main Street, City, Country',
-      nic: '987654321V',
-      gender: 'Male',
-      dob: '12 Jan 2000',
-    },
-    enrolledCourses: [
-      { name: 'Web Development', level: 'Beginner', duration: '3 Months', fee: '$500' },
-      { name: 'Data Science', level: 'Intermediate', duration: '6 Months', fee: '$1000' },
-    ],
-    payments: [
-      { date: '01 Jan 2024', amount: '$500', method: 'Credit Card', status: 'Paid' },
-      { date: '01 Mar 2024', amount: '$1000', method: 'Bank Transfer', status: 'Pending' },
-    ],
-    attemptedAssessments: [
-      { name: 'HTML Basics', course: 'Web Development', score: '85%', date: '15 Jan 2024' },
-      { name: 'Data Cleaning', course: 'Data Science', score: '90%', date: '20 Mar 2024' },
-    ],
-  };
+export class StudentReportComponent implements OnInit{
+  studentData!:Student;
+  paymentData:any;
 
-  downloadReport() {
-    const reportData = {
-      Personal_Information: this.studentData.personalInfo,
-      Enrolled_Courses: this.studentData.enrolledCourses,
-      Payments: this.studentData.payments,
-      Attempted_Assessments: this.studentData.attemptedAssessments,
-    };
+  studentID:string = ""
 
-    const reportString = JSON.stringify(reportData, null, 2);
-
-    const blob = new Blob([reportString], { type: 'application/json' });
-
-    const url = window.URL.createObjectURL(blob);
-
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `${this.studentData.personalInfo.name}_Report.json`; 
-    document.body.appendChild(a);
-
-    a.click();
-    document.body.removeChild(a);
-
-    window.URL.revokeObjectURL(url);
+  constructor(private studentService:StudentService ,private rout:ActivatedRoute){
+    this.studentID = this.rout.snapshot.params['id'];
   }
+
+  ngOnInit(): void {
+    this.loadItems()
+  }
+
+  loadItems(): void {
+    this.studentService.getStudent(this.studentID).subscribe({
+      next:((response:Student) => {
+        this.studentData = response
+      }),
+      complete:() => {
+        this.studentData
+      }
+    });
+  }
+
+  downloadReportAsPng() {
+    const element = document.getElementById('reportContent');
+    if (!element) {
+      console.error('Element not found!');
+      return;
+    }
+    html2canvas(element, {
+      scale: 3,
+      useCORS: true,
+      backgroundColor: '#ffffff',
+    })
+      .then((canvas) => {
+        const imageData = canvas.toDataURL('image/png', 1.0);
+
+        const link = document.createElement('a');
+        link.href = imageData;
+        link.download = `${this.studentData.firstName}-${this.studentData.lastName}.png`;
+        link.click();
+      })
+      .catch((err) => console.error('Error generating high-quality PNG:', err));
+  }
+
 }
+
+

@@ -14,6 +14,10 @@ export class StudentService {
     return this.http.get<Student[]>(this.apiUrl + '/Student/getall')
   }
 
+  getStudent(id:string){
+    return this.http.get<Student>(this.apiUrl + '/Student/' + id)
+  }
+
   pagination(pageNumber:number , pageSize:number){
     return this.http.get(this.apiUrl + `/Student/Pagination/${pageNumber}/${pageSize}`)
   }
@@ -27,7 +31,9 @@ export interface Student{
   dateOfBirth:Date
   gender:string,
   phone:string,
-  address:Address
+  address:Address,
+
+  enrollments:any,
 }
 
 export interface Address{

@@ -15,7 +15,12 @@
       </button>
       <!-- Middle Nav Links -->
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-       
+        <div class="d-flex align-items-center">
+          <div class="mx-2 d-flex align-items-center w-100 mt-lg-0 mt-md-2 mt-sm-2 mt-2">
+            <input type="text" class="form-control search-input" placeholder="Search...">
+            <button class="btn btn-danger btnSearch"> <i class="bi bi-search search-icon"></i></button>
+          </div>
+        </div>
         <ul class="navbar-nav mx-2">
           <li class="nav-item">
             <a class="nav-link " aria-current="page" [routerLink]="['/home']" [routerLinkActive]="['active_Link']">Home</a>
@@ -32,22 +37,5 @@
         </ul>
       </div>
   
-      <!-- Right Side Social Media Icons  -->
-       <div class="d-lg-flex d-md-none d-sm-none d-none" >
-        <a href="https://instagram.com/institute" target="_blank" class="me-3 text-dark">
-          <i class="bi bi-facebook text-dark"></i>
-        </a>
-        <a href="https://instagram.com/institute" target="_blank" class="me-3 text-dark">
-          <i class="bi bi-twitter"></i>
-        </a>
-        <a href="https://instagram.com/institute" target="_blank" class="me-3 text-dark">
-          <i class="bi bi-linkedin"></i>
-        </a>
-        <a href="https://instagram.com/institute" target="_blank" class="me-3 text-dark">
-          <i class="bi bi-instagram"></i>
-        </a>
-      </div>
-
-     
     </div>
   </nav>

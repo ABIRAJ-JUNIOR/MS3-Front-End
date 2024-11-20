@@ -1,0 +1,173 @@
+<div class="container mt-5">
+  <div class="card shadow-sm border-0 mb-5">
+    <div class="card-body p-0 position-relative">
+      <img
+        src="https://via.placeholder.com/1200x300"
+        alt="Cover Photo"
+        class="w-100 rounded-top"
+        style="height: 250px; object-fit: cover"
+      />
+
+      <button
+        class="btn btn-light btn-sm shadow-sm position-absolute"
+        style="top: 10px; right: 10px; border-radius: 4px"
+        data-bs-toggle="tooltip"
+        data-bs-placement="left"
+        title="Change Cover Photo"
+      >
+        <i class="bi bi-camera-fill"></i>
+      </button>
+
+      <div
+        class="position-absolute"
+        style="bottom: -50px; left: 50%; transform: translateX(-50%)"
+      >
+        <div class="position-relative">
+          <img
+            src="https://via.placeholder.com/150"
+            alt="Admin Profile"
+            class="rounded-circle border border-white shadow-lg"
+            style="width: 150px; height: 150px; object-fit: cover"
+          />
+          <button
+            class="btn btn-light btn-sm rounded-circle shadow position-absolute"
+            style="bottom: 0; right: -10px; border-radius: 4px"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="Change Profile Picture"
+          >
+            <i class="bi bi-pencil-fill"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="card shadow-sm border-0 mb-4"
+    style="margin-top: 60px; border-radius: 8px"
+  >
+    <div class="card-header bg-dark text-white fw-bold">
+      Personal Information
+    </div>
+    <div class="card-body">
+      <div class="row gy-4">
+        <div class="col-md-6">
+          <div class="d-flex align-items-start">
+            <i class="bi bi-person-fill text-danger fs-5 me-3"></i>
+            <div>
+              <h6 class="mb-1">Full Name</h6>
+              <p class="text-muted mb-0">John Doe</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="d-flex align-items-start">
+            <i class="bi bi-envelope-fill text-danger fs-5 me-3"></i>
+            <div>
+              <h6 class="mb-1">Email</h6>
+              <p class="text-muted mb-0">adminexample.com</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="d-flex align-items-start">
+            <i class="bi bi-telephone-fill text-danger fs-5 me-3"></i>
+            <div>
+              <h6 class="mb-1">Phone</h6>
+              <p class="text-muted mb-0">+94 712345678</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="d-flex align-items-start">
+            <i class="bi bi-geo-alt-fill text-danger fs-5 me-3"></i>
+            <div>
+              <h6 class="mb-1">Address</h6>
+              <p class="text-muted mb-0">123 Street, City, Country</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="d-flex align-items-start">
+            <i class="bi bi-person-vcard-fill text-danger fs-5 me-3"></i>
+            <div>
+              <h6 class="mb-1">NIC</h6>
+              <p class="text-muted mb-0">123456789V</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="d-flex align-items-start">
+            <i class="bi bi-person-badge text-danger fs-5 me-3"></i>
+            <div>
+              <h6 class="mb-1">Role</h6>
+              <p class="text-muted mb-0">Administrator</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="d-flex align-items-start">
+            <i class="bi bi-calendar-fill text-danger fs-5 me-3"></i>
+            <div>
+              <h6 class="mb-1">Created Date</h6>
+              <p class="text-muted mb-0">2024-01-01</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-secondary text-white fw-bold d-flex justify-content-between">
+      About
+      <button
+        class="btn btn-sm btn-light shadow-sm"
+        data-bs-toggle="collapse"
+        data-bs-target="#bioCollapse"
+        aria-expanded="true"
+        aria-controls="bioCollapse"
+        style="border-radius: 4px"
+      >
+        <i class="bi bi-chevron-down"></i>
+      </button>
+    </div>
+    <div class="collapse show" id="bioCollapse">
+      <div class="card-body">
+        <p class="text-muted mb-0">
+          Hello, I’m <strong>John Doe</strong>, an experienced administrator
+          passionate about managing IT institute operations effectively. I aim
+          to streamline processes and foster a collaborative environment for
+          success.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Actions Section -->
+  <div
+    class="d-flex justify-content-center align-items-center gap-3 flex-wrap mb-4"
+  >
+    <button
+      class="btn btn-danger d-flex align-items-center gap-2 px-4 py-2 shadow"
+      style="border-radius: 4px"
+    >
+      <i class="bi bi-pencil-fill"></i> Edit Profile
+    </button>
+    <button
+      class="btn btn-outline-danger d-flex align-items-center gap-2 px-4 py-2 shadow"
+      style="border-radius: 4px"
+    >
+      <i class="bi bi-gear-fill"></i> Account Settings
+    </button>
+    <button
+      class="btn btn-danger d-flex align-items-center gap-2 px-4 py-2 shadow"
+      style="border-radius: 4px"
+    >
+      <i class="bi bi-box-arrow-right"></i> Logout
+    </button>
+  </div>
+</div>

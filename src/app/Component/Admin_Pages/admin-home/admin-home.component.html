@@ -54,7 +54,6 @@
               <th>NIC Number</th>
               <th>Name</th>
               <th>Gender</th>
-              <th>Email</th>
               <th>Phone</th>
               <th>Address</th>
               <th>Actions</th>
@@ -65,10 +64,9 @@
               <td>{{i+1}}</td>
               <td>{{student.nic}}</td>
               <td>{{student.firstName}} {{student.lastName}}</td>
-              <td>{{student.gender == "1" ? "Male" : "Female"}}</td>
-              <td>{{student.email}}</td>
+              <td>{{student.gender}}</td>
               <td>{{student.phone}}</td>
-              <td>{{student.address != null ? student.address : "N/A"}}</td>
+              <td>{{ student.address ? student.address.addressLine1 + ", " + student.address.addressLine2 + ", " + student.address.city : "N/A" }}</td>
               <td>
                 <button class="btn btn-sm btn-outline-primary me-2 action-btn">
                   <i class="bi bi-pencil-fill"></i> 

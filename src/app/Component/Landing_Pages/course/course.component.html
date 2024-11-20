@@ -82,7 +82,8 @@
                     <p class="card-text text-danger fw-semibold">Rs {{ course.price }}</p>
                     <!-- Enroll & View More -->
                     <div class="d-flex justify-content-between align-items-center mt-3">
-                        <button class="btn btn-primary btn-enroll" (mouseenter)="changeNameEnter($event)" (mouseleave)="changeNameMouseleave($event)">{{EnrollBtnName}}</button>
+                        <button class="btn btn-primary btn-enroll" (mouseenter)="changeNameEnter($event)"
+                            (mouseleave)="changeNameMouseleave($event)">{{EnrollBtnName}}</button>
                         <a href="#" class="text-decoration-none view-more" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop" (mouseenter)="viewProduct(course)">View More</a>
                     </div>
@@ -93,3 +94,22 @@
     </div>
 
 
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>

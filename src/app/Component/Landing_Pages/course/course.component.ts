@@ -67,6 +67,16 @@ export class CourseComponent {
   ]
 
 
+  ModalProduct: any[] = [];
+
+  viewProduct(product: any) {
+    this.ModalProduct = []
+    this.ModalProduct.push(product)
+
+  }
+  ClearModal() {
+    this.ModalProduct = []
+  }
 
 
 }

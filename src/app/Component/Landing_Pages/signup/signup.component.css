@@ -67,3 +67,14 @@
 .text-danger {
     font-size: 12px;
 }
+
+@media (max-width: 1000px) {
+    .sign-width {
+        padding-left:20px;
+        max-width: 100%;
+        width: 100%;
+    }
+    .gap{
+        padding-right: 0%;
+    }
+}

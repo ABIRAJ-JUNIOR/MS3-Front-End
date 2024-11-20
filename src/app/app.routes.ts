@@ -13,6 +13,7 @@ import { AuditLogComponent } from './Component/Admin_Pages/audit-log/audit-log.c
 import { CourseComponent } from './Component/Landing_Pages/course/course.component';
 import { AdminProfileComponent } from './Component/Admin_Pages/admin-profile/admin-profile.component';
 import { CourseListComponent } from './Component/Admin_Pages/course-list/course-list.component';
+import { StudentReportComponent } from './Component/Admin_Pages/student-report/student-report.component';
 
 export const routes: Routes = [
 
@@ -33,6 +34,7 @@ export const routes: Routes = [
             {path:'audit-log', component:AuditLogComponent},
             {path:'admin-profile', component:AdminProfileComponent},
             {path:'course-list', component:CourseListComponent},
+            {path:'student-report', component:StudentReportComponent},
         ]
 
     },

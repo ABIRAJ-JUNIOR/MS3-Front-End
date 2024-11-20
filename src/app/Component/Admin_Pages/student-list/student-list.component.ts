@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 export class StudentListComponent implements OnInit {
   students: Student[] = [];
   currentPage: number = 1;
-  pageSize: number = 13;
+  pageSize: number = 12;
   totalPages: number = 0;
   currentLength:number = 0;
   totalItems:number = 0;

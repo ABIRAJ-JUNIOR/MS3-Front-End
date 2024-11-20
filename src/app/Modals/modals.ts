@@ -133,3 +133,13 @@ export interface FeedBack{
     studentId:string;
     courseId:string;
 }
+
+export interface ContactUs{
+    id:string;
+    name:string;
+    email:string;
+    message:string;
+    response:string;
+    dateSubmited:Date;
+    isRead:boolean;
+}

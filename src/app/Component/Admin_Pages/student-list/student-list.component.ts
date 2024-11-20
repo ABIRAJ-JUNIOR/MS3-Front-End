@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Student, StudentService } from '../../../Service/Student/student.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student-list',
@@ -20,7 +21,7 @@ export class StudentListComponent implements OnInit {
 
   gender = Object.values(Gender);
 
-  constructor(private paginationService: StudentService) {}
+  constructor(private paginationService: StudentService , private router:Router) {}
 
   ngOnInit(): void {
     this.loadItems();
@@ -44,6 +45,10 @@ export class StudentListComponent implements OnInit {
       this.currentPage = page;
       this.loadItems();
     }
+  }
+
+  GoToReport(id:string){
+    this.router.navigate(['/admin-dashboard/student-report' , id])
   }
 }
 

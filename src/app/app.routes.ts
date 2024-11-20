@@ -34,7 +34,7 @@ export const routes: Routes = [
             {path:'audit-log', component:AuditLogComponent},
             {path:'admin-profile', component:AdminProfileComponent},
             {path:'course-list', component:CourseListComponent},
-            {path:'student-report', component:StudentReportComponent},
+            {path:'student-report/:id', component:StudentReportComponent},
         ]
 
     },

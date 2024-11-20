@@ -124,3 +124,12 @@ export interface Notification{
     NotificationType:string;
     isRead:boolean;
 }
+
+export interface FeedBack{
+    id:string;
+    feedBackText:string;
+    rating:number;
+    feedBackDate:Date;
+    studentId:string;
+    courseId:string;
+}

@@ -27,4 +27,8 @@
     background-color: #0dcaf0;
     color: #fff;
   }
-  
+  @media (max-width: 970px) {
+    .top-bar{
+     display: none;
+    }
+  }

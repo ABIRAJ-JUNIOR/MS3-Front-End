@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Student } from '../../Modals/modals';
 
 @Injectable({
   providedIn: 'root'
@@ -23,26 +24,5 @@ export class StudentService {
   }
 }
 
-export interface Student{
-  id:string,
-  nic:string,
-  firstName:string,
-  lastName:string,
-  dateOfBirth:Date
-  gender:string,
-  phone:string,
-  address:Address,
-
-  enrollments:any,
-}
-
-export interface Address{
-  id:string,
-  addressLine1:string,
-  addressLine2:string,
-  city:string,
-  postalCode:number,
-  country:string
-}
 
 

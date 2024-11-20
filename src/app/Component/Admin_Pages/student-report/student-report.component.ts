@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import html2canvas from 'html2canvas';
-import { Student, StudentService } from '../../../Service/Student/student.service';
+import { StudentService } from '../../../Service/Student/student.service';
 import { ActivatedRoute } from '@angular/router';
+import { Student } from '../../../Modals/modals';
 
 @Component({
   selector: 'app-student-report',

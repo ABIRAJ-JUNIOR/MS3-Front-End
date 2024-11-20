@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Admin, AdminService } from '../../../Service/Admin/admin.service';
+import { AdminService } from '../../../Service/Admin/admin.service';
+import { Admin } from '../../../Modals/modals';
 
 @Component({
   selector: 'app-admin-list',

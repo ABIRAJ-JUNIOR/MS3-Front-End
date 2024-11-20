@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Admin, AuditLog } from '../../Modals/modals';
 
 @Injectable({
   providedIn: 'root'
@@ -22,21 +23,3 @@ export class AdminService {
   }
 }
 
-export interface Admin{
-  id:string,
-  nic:string,
-  firstName:string,
-  lastName:string,
-  phone:string,
-  imagePath:string,
-  auditLog:AuditLog[]
-}
-
-export interface AuditLog{
-  id:string,
-  action:string,
-  actionDate:Date,
-  details:string,
-  adminId:string,
-  adminResponse:Admin
-}

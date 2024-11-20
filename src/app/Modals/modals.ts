@@ -80,6 +80,17 @@ export interface Enrollment {
     CourseSheduleId:string;
 }
 
+export interface Payment{
+    id:string;
+    enrollmentId:string;
+    paymentType:string;
+    paymentMethod:string;
+    AmountPaid:number;
+    paymentDate:Date;
+    imagePath:string;
+    installmentNumber:string;
+}
+
 export interface Assessment {
     id:string;
     courseId:string;

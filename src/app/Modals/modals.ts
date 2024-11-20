@@ -78,3 +78,16 @@ export interface Enrollment {
     studentId:string;
     CourseSheduleId:string;
 }
+
+export interface Assessment {
+    id:string;
+    courseId:string;
+    assessmentType:string;
+    startDate:Date;
+    endDate:Date;
+    totalMarks:number;
+    passMarks:number
+    createdDate:Date;
+    UpdateDate:Date;
+    Status:string;
+}

@@ -78,5 +78,16 @@ export class CourseComponent {
     this.ModalProduct = []
   }
 
+  EnrollBtnName: string = "Enroll now"
+
+  changeNameMouseleave($event: MouseEvent) {
+  const buttonElement = event?.target as HTMLButtonElement;
+    buttonElement.innerText = "Enroll now"
+  }
+  changeNameEnter($event: MouseEvent) {
+    const buttonElement = event?.target as HTMLButtonElement;
+    buttonElement.innerText = "Click To Buy"
+  }
+
 
 }

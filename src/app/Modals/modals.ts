@@ -8,7 +8,8 @@ export interface Student {
   phone: string;
   address: Address;
 
-  enrollments: Enrollment;
+  enrollments: Enrollment[];
+  studentAssessments:StudentAssessment[]
 }
 
 export interface Address {
@@ -90,4 +91,16 @@ export interface Assessment {
     createdDate:Date;
     UpdateDate:Date;
     Status:string;
+}
+
+export interface StudentAssessment{
+    id:string;
+    studentId:string;
+    assessmentId:string;
+    markObtaines:Int16Array;
+    grade:string;
+    feedBack:string;
+    dateSubmitted:Date;
+    dateEvaluated:Date;
+    studentAssessmentStatus:string;
 }

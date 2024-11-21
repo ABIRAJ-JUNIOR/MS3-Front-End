@@ -303,4 +303,10 @@ export class CourseComponent {
   paginatedCourses: any[] = [];
 
 
+  paginateCourses() {
+    const start = this.currentPage * this.pageSize;
+    const end = start + this.pageSize;
+    this.paginatedCourses = this.courses.slice(start, end);
+  }
+
 }

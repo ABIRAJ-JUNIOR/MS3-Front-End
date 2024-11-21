@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Student, StudentService } from '../../../Service/Student/student.service';
+import { StudentService } from '../../../Service/Student/student.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Student } from '../../../Modals/modals';
 
 @Component({
   selector: 'app-student-list',

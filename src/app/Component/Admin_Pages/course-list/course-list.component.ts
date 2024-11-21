@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Course, CourseService, Shedule } from '../../../Service/Course/course.service';
+import {   CourseService } from '../../../Service/Course/course.service';
+import { Course, Shedule } from '../../../Modals/modals';
 
 @Component({
   selector: 'app-course-list',

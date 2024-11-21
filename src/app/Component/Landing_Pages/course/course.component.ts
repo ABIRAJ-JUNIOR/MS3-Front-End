@@ -308,5 +308,9 @@ export class CourseComponent {
     const end = start + this.pageSize;
     this.paginatedCourses = this.courses.slice(start, end);
   }
+  calculatePagination() {
+    this.totalPages = Math.ceil(this.courses.length / this.pageSize);
+    this.pageNumbers = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  }
 
 }

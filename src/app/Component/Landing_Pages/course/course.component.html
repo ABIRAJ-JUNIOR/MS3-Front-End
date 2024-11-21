@@ -49,12 +49,12 @@
 
 <div class="container">
     <div>
-        <h1 class="headingCourses">Offline Courses</h1>
+        <h1 class="headingCourses">Courses</h1>
         <hr>
     </div>
 
     <div class="row py-4">
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-4" *ngFor="let course of courses">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-4" *ngFor="let course of paginatedCourses">
             <div class="card border-0  rounded-2 course-card">
                 <div class="position-relative">
                     <!-- Badge for Level -->
@@ -92,21 +92,27 @@
     <!-- Pagination -->
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
+            <!-- Previous Button -->
+            <li class="page-item" [class.disabled]="currentPage === 0">
+                <a class="page-link" type="button" (click)="changePage(currentPage - 1)" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
+
+            <!-- Page Number Buttons -->
+            <li *ngFor="let page of pageNumbers" class="page-item" [class.active]="page === currentPage + 1">
+                <a class="page-link" type="button" (click)="changePage(page - 1)">{{ page }}</a>
+            </li>
+
+            <!-- Next Button -->
+            <li class="page-item" [class.disabled]="currentPage === totalPages - 1">
+                <a class="page-link" type="button" (click)="changePage(currentPage + 1)" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
         </ul>
     </nav>
+
 
     <!-- Modal -->
     <div class="modal fade" id="CourseView" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -164,40 +170,55 @@
 
                             <div *ngIf="ModalProduct.length>0">
                                 <div class="modal-header">
-                                    <h3
+                                    <h3 class="text-primary"
                                         style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
                                         Your Course Schedules</h3>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                                         (click)="ClearModal()"></button>
                                 </div>
-                                <h1 class="modal-title fs-5 text-danger" id="staticBackdropLabel">{{ ModalProduct[0].CourseName }}</h1>
-                                 <h5>{{ModalProduct[0].description}}</h5>
+                                <p class="">{{ModalProduct[0].description}}</p>
                                 <div class="row d-flex justify-content-evenly">
-                                    <div class="card shadow-lg border-0 col-lg-6 col-md-12 col-sm-12 col-12 m-3 card-custom"
+                                    <div class="card shadow-lg border-0 col-lg-6 col-md-12 col-sm-12 col-12 m-3 card-custom hovercard"
                                         *ngFor="let sechdule of ModalProduct[0].schedules">
-                                        <img src="{{ModalProduct[0].imagePath}}" class="card-img-top" alt="...">
-                                        <div class="card-body ScheduleBody">
-                                            <div class="d-flex ">
-                                                <p class="fw-bold  pe-1">Location:</p>
-                                                <p>{{sechdule.Location}}</p>
-                                            </div>
-                                            <div class="d-flex ">
-                                                <p class="fw-bold pe-1">StartDate:</p>
-                                                <p>{{sechdule.StartDate}}</p>
-                                            </div>
-                                            <div class="d-flex ">
-                                                <p class="fw-bold pe-1">EndDate:</p>
-                                                <p>{{sechdule.EndDate}}</p>
-                                            </div>
-                                            <div class="d-flex ">
-                                                <p class="fw-bold pe-1">Duration: </p>
-                                                <p>{{sechdule.Duration}}</p>
-                                            </div>
-                                            <div class="d-flex ">
-                                                <p class="fw-bold pe-1">Time: </p>
+
+                                        <div class="card-body ScheduleBody py-1">
+                                            <h5 class="modal-title fs-5 text-danger" id="staticBackdropLabel">{{
+                                                ModalProduct[0].CourseName }}</h5>
+                                            <div class="d-flex py-2">
+                                                <p class="fw-bold pe-1"><i class="bi bi-clock"></i> </p>
                                                 <p>{{sechdule.Time}}</p>
                                             </div>
-                                            <button class="btn btn-primary btn-enroll mt-3">Purchase</button>
+                                           
+
+                                            <div class="d-flex py-1">
+                                                <p class="fw-bold  pe-1"><i class="bi bi-geo-alt-fill"></i></p>
+                                                <p>{{sechdule.Location}}</p>
+                                            </div>
+                                            <div class="d-flex py-1">
+                                                <div class="d-flex"> 
+                                                <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
+                                                <p>{{sechdule.StartDate}}</p>
+                                                </div> <p class="px-2">-</p>
+                                                <div class="d-flex ">
+                                                    <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
+                                                    <p>{{sechdule.EndDate}}</p>
+                                                </div>
+                                            </div>
+                                          
+
+
+                                            <div class="d-flex py-1">
+                                                <p class="fw-bold pe-1"><i class="bi bi-hourglass-split"></i> </p>
+                                                <p>{{sechdule.Duration}} Hours</p>
+                                            </div>
+                                            <hr>
+                                            <div class="d-flex py-1 align-items-center">
+                                                <img src="{{ModalProduct[0].imagePath}}" class="rounded-circle" width="50px" height="50px"
+                                                    alt="...">
+                                                    
+                                                <p class="fs-5 px-2">It Institute Jaffna</p>
+                                                
+                                            </div>
                                         </div>
                                     </div>
 

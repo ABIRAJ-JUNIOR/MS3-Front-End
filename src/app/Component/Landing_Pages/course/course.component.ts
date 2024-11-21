@@ -312,5 +312,9 @@ export class CourseComponent {
     this.totalPages = Math.ceil(this.courses.length / this.pageSize);
     this.pageNumbers = Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
+  changePage(pageIndex: number) {
+    this.currentPage = pageIndex;
+    this.paginateCourses();
+  }
 
 }

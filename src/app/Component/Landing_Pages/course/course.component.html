@@ -92,21 +92,27 @@
     <!-- Pagination -->
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
+          <!-- Previous Button -->
+          <li class="page-item" [class.disabled]="currentPage === 0">
+            <a class="page-link" type="button" (click)="changePage(currentPage - 1)" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          
+          <!-- Page Number Buttons -->
+          <li *ngFor="let page of pageNumbers" class="page-item" [class.active]="page === currentPage + 1">
+            <a class="page-link" type="button" (click)="changePage(page - 1)">{{ page }}</a>
+          </li>
+      
+          <!-- Next Button -->
+          <li class="page-item" [class.disabled]="currentPage === totalPages - 1">
+            <a class="page-link" type="button" (click)="changePage(currentPage + 1)" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
         </ul>
-    </nav>
+      </nav>
+
 
     <!-- Modal -->
     <div class="modal fade" id="CourseView" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"

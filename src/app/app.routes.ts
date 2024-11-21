@@ -14,6 +14,7 @@ import { CourseComponent } from './Component/Landing_Pages/course/course.compone
 import { AdminProfileComponent } from './Component/Admin_Pages/admin-profile/admin-profile.component';
 import { CourseListComponent } from './Component/Admin_Pages/course-list/course-list.component';
 import { StudentReportComponent } from './Component/Admin_Pages/student-report/student-report.component';
+import { CourseScheduleComponent } from './Component/Admin_Pages/course-schedule/course-schedule.component';
 
 export const routes: Routes = [
 
@@ -35,6 +36,7 @@ export const routes: Routes = [
             {path:'admin-profile', component:AdminProfileComponent},
             {path:'course-list', component:CourseListComponent},
             {path:'student-report/:id', component:StudentReportComponent},
+            {path:'schedule-list', component:CourseScheduleComponent},
         ]
 
     },

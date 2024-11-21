@@ -52,12 +52,12 @@ export interface Course {
   imagePath: string;
   createdDate: Date;
   updatedDate: Date;
-  shedulesCount: number;
+  schedulesCount: number;
 
-  shedules: Shedule[];
+  schedules: Schedule[];
 }
 
-export interface Shedule {
+export interface Schedule {
   id: string;
   courseid: string;
   startDate: Date;
@@ -80,9 +80,9 @@ export interface Enrollment {
     paymentStatus:string;
     isActive:boolean;
     studentId:string;
-    courseSheduleId:string;
+    courseScheduleId:string;
 
-    courseSheduleResponse:Shedule;
+    courseScheduleResponse:Schedule;
     paymentResponse:Payment[];
 }
 

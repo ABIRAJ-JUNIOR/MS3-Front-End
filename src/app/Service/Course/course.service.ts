@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Course } from '../../Modals/modals';
+import { Course, Schedule } from '../../Modals/modals';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +21,9 @@ export class CourseService {
 
   pagination(pageNumber:number , pageSize:number){
     return this.http.get<any>(this.apiUrl + `/Course/Pagination/${pageNumber}/${pageSize}`)
+  }
+
+  schedulePagination(pageNumber:number , pageSize:number){
+    return this.http.get<any>(this.apiUrl + `/CourseSchedule/Pagination/${pageNumber}/${pageSize}`)
   }
 }

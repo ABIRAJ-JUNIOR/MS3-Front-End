@@ -15,6 +15,7 @@
               class="rounded-circle border"
               width="150"
               height="150"
+              crossorigin="anonymous"
             />
           </div>
           <div class="ms-md-4">
@@ -66,7 +67,7 @@
                     <td>{{enroll.courseSheduleResponse.courseResponse.level}}</td>
                     <td>{{enroll.courseSheduleResponse.duration}} Days</td>
                     <td>{{enroll.courseSheduleResponse.courseResponse.courseFee}} Rs</td>
-                    <td>{{enroll.paymentStatus}}</td>
+                    <td [ngClass]="{'color-for-paid' : enroll.paymentStatus == 'Paid' , 'color-for-inprogress' : enroll.paymentStatus == 'InProcess'}">{{enroll.paymentStatus}}</td>
                 </tr>
               </tbody>
             </table>

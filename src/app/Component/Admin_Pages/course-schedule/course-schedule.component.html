@@ -1,0 +1,81 @@
+<div class="main-content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-wrapper border rounded shadow-sm">
+          <!-- Table Title Section -->
+          <div class="table-title p-3 text-white">
+            <div class="row">
+              <div class="col-lg-6 d-flex justify-content-lg-start justify-content-center align-items-center">
+                <h2 class="m-0">Course Schedules</h2>
+              </div>
+              <div class="col-lg-6 d-flex justify-content-lg-end justify-content-center align-items-center">
+                <a class="btn btn-success d-flex align-items-center">
+                  <i class="bi bi-plus-circle me-2"></i> <span>Add New Schedule</span>
+                </a>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Table Section -->
+          <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle mb-0">
+              <thead class="table-dark">
+                <tr>
+                  <th>#</th>
+                  <th>Course</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Duration</th>
+                  <th>Time</th>
+                  <th>Location</th>
+                  <th>Max Student</th>
+                  <th>Enroll Count</th>
+                  <th>Status</th>
+                  <th class="text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="table-row animate__animated animate__fadeInUp" *ngFor="let schedule of schedules; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{schedule.courseResponse.courseName}}</td>
+                  <td>{{schedule.startDate | date}}</td>
+                  <td>{{schedule.endDate | date}}</td>
+                  <td>{{schedule.duration}} Days</td>
+                  <td>{{schedule.time}}</td>
+                  <td>{{schedule.location}}</td>
+                  <td>{{schedule.maxStudents}}</td>
+                  <td>{{schedule.enrollCount}}</td>
+                  <td>{{schedule.scheduleStatus}}</td>
+                  <td class="text-center">
+                    <a href="#" class="text-primary me-3" aria-label="Edit Student">
+                      <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <a href="#" class="text-danger" aria-label="Delete Student">
+                      <i class="bi bi-trash3-fill"></i>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  
+          <!-- Pagination Section -->
+          <div class="d-flex justify-content-between align-items-center px-3 py-2 bg-light border-top">
+            <div class="hint-text">Showing <b>{{ currentLength }}</b> out of <b>{{ totalItems }}</b> entries</div>
+            <ul class="pagination mb-0">
+              <li class="page-item pointer" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="goToPage(currentPage - 1)">Previous</a>
+              </li>
+              <li class="page-item pointer" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+                <a class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</a>
+              </li>
+              <li class="page-item pointer" [class.disabled]="currentPage === totalPages">
+                <a class="page-link" (click)="goToPage(currentPage + 1)">Next</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

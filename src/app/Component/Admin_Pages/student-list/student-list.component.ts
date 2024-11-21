@@ -8,7 +8,7 @@ import { Student } from '../../../Modals/modals';
 @Component({
   selector: 'app-student-list',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css'
 })
@@ -19,8 +19,6 @@ export class StudentListComponent implements OnInit {
   totalPages: number = 0;
   currentLength:number = 0;
   totalItems:number = 0;
-
-  gender = Object.values(Gender);
 
   constructor(private paginationService: StudentService , private router:Router) {}
 
@@ -51,10 +49,4 @@ export class StudentListComponent implements OnInit {
   GoToReport(id:string){
     this.router.navigate(['/admin-dashboard/student-report' , id])
   }
-}
-
-export enum Gender{
-  Male = 1,
-  Female = 2,
-  More =3
 }

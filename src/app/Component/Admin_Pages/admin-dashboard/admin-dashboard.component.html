@@ -1,7 +1,7 @@
 <div class="wrapper">
-  <aside id="sidebar" [ngClass]="{'collapsed': sidebarCollapsed}" class="bg-dark text-light js-sidebar shadow-lg">
+  <aside id="sidebar" [ngClass]="{'collapsed': sidebarCollapsed}" class="bg-dark  text-light js-sidebar shadow-lg">
     
-    <div class="h-100">
+    <div class="h-100 position-fixed">
       <div class="sidebar-logo">
           <a >Way Makers</a>
       </div>
@@ -17,12 +17,12 @@
           </li>
           <li class="sidebar-item">
               <a  class="sidebar-link collapsed" data-bs-target="#pages" data-bs-toggle="collapse"
-                  aria-expanded="false"><i class="fa-solid fa-file-lines pe-2"></i>
+                  aria-expanded="false"><i class="fa-regular fa-circle-user pe-2"></i>
                   Admin
               </a>
               <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                   <li class="sidebar-item" [routerLink]="['/admin-dashboard/admin-list']">
-                      <a class="sidebar-link">List</a>
+                      <a class="sidebar-link">Admin List</a>
                   </li>
                   <li class="sidebar-item" [routerLink]="['/admin-dashboard/audit-log']">
                       <a  class="sidebar-link">Audit Logs</a>
@@ -31,29 +31,26 @@
           </li>
           <li class="sidebar-item">
               <a  class="sidebar-link collapsed" data-bs-target="#posts" data-bs-toggle="collapse"
-                  aria-expanded="false"><i class="fa-solid fa-sliders pe-2"></i>
+                  aria-expanded="false"><i class="fa-regular fa-user pe-2"></i>
                   Student
               </a>
               <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                   <li class="sidebar-item" [routerLink]="['/admin-dashboard/student-list']" routerLinkActive="router-link-active"  >
-                      <a   class="sidebar-link">List</a>
-                  </li>
-                  <li class="sidebar-item">
-                      <a  class="sidebar-link">Post 3</a>
+                      <a   class="sidebar-link">Student List</a>
                   </li>
               </ul>
           </li>
           <li class="sidebar-item">
               <a  class="sidebar-link collapsed" data-bs-target="#auth" data-bs-toggle="collapse"
-                  aria-expanded="false"><i class="fa-regular fa-user pe-2"></i>
+                  aria-expanded="false"><i class="fa-solid fa-book pe-2"></i>
                   Course
               </a>
               <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                   <li class="sidebar-item" [routerLink]="['/admin-dashboard/course-list']">
-                      <a  class="sidebar-link">List</a>
+                      <a  class="sidebar-link">Course List</a>
                   </li>
-                  <li class="sidebar-item">
-                      <a  class="sidebar-link">Shedule</a>
+                  <li class="sidebar-item" [routerLink]="['/admin-dashboard/schedule-list']">
+                      <a  class="sidebar-link">Schedule</a>
                   </li>
                   <li class="sidebar-item">
                       <a  class="sidebar-link">Assessment</a>

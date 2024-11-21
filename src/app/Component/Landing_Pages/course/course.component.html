@@ -49,7 +49,7 @@
 
 <div class="container">
     <div>
-        <h1 class="headingCourses">Offline Courses</h1>
+        <h1 class="headingCourses">Courses</h1>
         <hr>
     </div>
 
@@ -176,7 +176,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                                         (click)="ClearModal()"></button>
                                 </div>
-                                <p class="fw-bold">{{ModalProduct[0].description}}</p>
+                                <p class="">{{ModalProduct[0].description}}</p>
                                 <div class="row d-flex justify-content-evenly">
                                     <div class="card shadow-lg border-0 col-lg-6 col-md-12 col-sm-12 col-12 m-3 card-custom hovercard"
                                         *ngFor="let sechdule of ModalProduct[0].schedules">

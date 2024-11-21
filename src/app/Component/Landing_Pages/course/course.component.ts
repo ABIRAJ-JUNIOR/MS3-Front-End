@@ -302,7 +302,10 @@ export class CourseComponent implements OnInit {
   pageNumbers: number[] = []; // Array of page numbers to display
   paginatedCourses: any[] = [];
 
-
+  ngOnInit() {
+    this.calculatePagination();
+    this.paginateCourses();
+  }
 
   paginateCourses() {
     const start = this.currentPage * this.pageSize;

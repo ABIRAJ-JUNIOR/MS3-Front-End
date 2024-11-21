@@ -296,6 +296,11 @@ export class CourseComponent {
     buttonElement.innerText = "Click To Buy"
   }
 
+  pageSize: number = 6; // Courses per page
+  currentPage: number = 0; // Current page index
+  totalPages: number = 0; // Total number of pages
+  pageNumbers: number[] = []; // Array of page numbers to display
+  paginatedCourses: any[] = [];
 
 
 }

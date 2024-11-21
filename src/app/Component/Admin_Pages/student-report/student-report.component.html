@@ -63,10 +63,10 @@
               <tbody>
                 <tr *ngFor="let enroll of studentData.enrollments; let i = index">
                     <th>{{i+1}}</th>
-                    <td>{{enroll.courseSheduleResponse.courseResponse.courseName}}</td>
-                    <td>{{enroll.courseSheduleResponse.courseResponse.level}}</td>
-                    <td>{{enroll.courseSheduleResponse.duration}} Days</td>
-                    <td>{{enroll.courseSheduleResponse.courseResponse.courseFee}} Rs</td>
+                    <td>{{enroll.courseScheduleResponse.courseResponse.courseName}}</td>
+                    <td>{{enroll.courseScheduleResponse.courseResponse.level}}</td>
+                    <td>{{enroll.courseScheduleResponse.duration}} Days</td>
+                    <td>{{enroll.courseScheduleResponse.courseResponse.courseFee}} Rs</td>
                     <td [ngClass]="{'color-for-paid' : enroll.paymentStatus == 'Paid' , 'color-for-inprogress' : enroll.paymentStatus == 'InProcess'}">{{enroll.paymentStatus}}</td>
                 </tr>
               </tbody>

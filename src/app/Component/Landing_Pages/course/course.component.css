@@ -145,8 +145,10 @@
   margin: 1px;
 }
 .card-custom {
-    max-width: 30rem; 
+    max-width: 27rem; 
+    cursor: pointer;
   }
+
 
 @media screen and (max-width: 1005px) {
     .modal-custom {

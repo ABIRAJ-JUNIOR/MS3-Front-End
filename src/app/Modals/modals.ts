@@ -68,7 +68,7 @@ export interface Shedule {
   enrollCount: number;
   createdDate: Date;
   updatedDate: Date;
-  scheduleStatus: number;
+  scheduleStatus: string;
 }
 
 export interface Enrollment {

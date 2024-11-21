@@ -48,7 +48,7 @@ export class StudentReportComponent implements OnInit{
       useCORS: true,
       backgroundColor: '#ffffff',
     })
-      .then((canvas) => {
+      .then((canvas:any) => {
         const imageData = canvas.toDataURL('image/png', 1.0);
 
         const link = document.createElement('a');
@@ -56,7 +56,7 @@ export class StudentReportComponent implements OnInit{
         link.download = `${this.studentData.firstName}-${this.studentData.lastName}.png`;
         link.click();
       })
-      .catch((err) => console.error('Error generating high-quality PNG:', err));
+      .catch((err:any) => console.error('Error generating high-quality PNG:', err));
   }
 
 }

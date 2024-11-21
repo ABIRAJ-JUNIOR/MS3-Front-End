@@ -70,6 +70,8 @@ export interface Shedule {
   createdDate: Date;
   updatedDate: Date;
   scheduleStatus: string;
+
+  courseResponse:Course;
 }
 
 export interface Enrollment {
@@ -78,7 +80,10 @@ export interface Enrollment {
     paymentStatus:string;
     isActive:boolean;
     studentId:string;
-    CourseSheduleId:string;
+    courseSheduleId:string;
+
+    courseSheduleResponse:Shedule;
+    paymentResponse:Payment[];
 }
 
 export interface Payment{
@@ -86,7 +91,7 @@ export interface Payment{
     enrollmentId:string;
     paymentType:string;
     paymentMethod:string;
-    AmountPaid:number;
+    amountPaid:number;
     paymentDate:Date;
     imagePath:string;
     installmentNumber:string;
@@ -101,20 +106,22 @@ export interface Assessment {
     totalMarks:number;
     passMarks:number
     createdDate:Date;
-    UpdateDate:Date;
-    Status:string;
+    updateDate:Date;
+    status:string;
 }
 
 export interface StudentAssessment{
     id:string;
     studentId:string;
     assessmentId:string;
-    markObtaines:Int16Array;
+    marksObtaines:Int16Array;
     grade:string;
     feedBack:string;
     dateSubmitted:Date;
     dateEvaluated:Date;
     studentAssessmentStatus:string;
+
+    assessmentResponse:Assessment;
 }
 
 export interface Notification{
@@ -122,7 +129,7 @@ export interface Notification{
     studentId:string;
     message:string;
     dateSent:Date;
-    NotificationType:string;
+    notificationType:string;
     isRead:boolean;
 }
 

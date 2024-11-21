@@ -15,6 +15,10 @@ export class CourseService {
     return this.http.get<Course[]>(this.apiUrl + '/Course/Course')
   }
 
+  getCourseByID(Id:string){
+    return this.http.get<Course>(this.apiUrl + '/Course/CourseById/' + Id)
+  }
+
   pagination(pageNumber:number , pageSize:number){
     return this.http.get<any>(this.apiUrl + `/Course/Pagination/${pageNumber}/${pageSize}`)
   }

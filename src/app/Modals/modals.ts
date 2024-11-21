@@ -7,6 +7,7 @@ export interface Student {
   gender: string;
   phone: string;
   address: Address;
+  imagePath?:string;
 
   enrollments: Enrollment[];
   studentAssessments:StudentAssessment[]

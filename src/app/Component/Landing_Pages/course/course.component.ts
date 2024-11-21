@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Navebar01Component } from '../../common_components/navebar-01/navebar-01.component';
 import { FooterComponent } from '../../common_components/footer/footer.component';
 import { RouterModule } from '@angular/router';
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './course.component.html',
   styleUrl: './course.component.css'
 })
-export class CourseComponent {
+export class CourseComponent implements OnInit {
 
 
 
@@ -301,6 +301,7 @@ export class CourseComponent {
   totalPages: number = 0; // Total number of pages
   pageNumbers: number[] = []; // Array of page numbers to display
   paginatedCourses: any[] = [];
+
 
 
   paginateCourses() {

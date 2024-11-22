@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12 col-12 p-0 m-0 ps-2 d-flex align-items-center justify-content-between">
-                <form class="sign-width px-lg-3 px-md-3 px-sm-3 px-5 ">
+                <form class="sign-width px-lg-3 px-md-3 px-sm-3 px-5 " [formGroup]="StudentRegistration">
                     <div class="px-2">
                         <div class="col-12 d-flex justify-content-center align-items-center pt-2">
                             <img src="/logo.png" class="" alt="" height="70px">
@@ -45,21 +45,19 @@
                         <div class="row">
                             <div class="col-lg-6 gap">
                                 <div class="form-group">
-                                    <input type="text" class="form-control px-2" placeholder="" style="width: 100%;">
+                                    <input type="text" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="firstname">
                                     <label for="">FirstName</label>
-                                    <!-- <div class="text-danger p-0">
-                                        <p class="p-0 m-0">FirstName Field is Require</p>
-                                    </div> -->
+                                   <div *ngIf="StudentRegistration.get('firstname')?.invalid && StudentRegistration.get('firstname')?.touched" class="text-danger">
+                                        First Name is required.
+                                    </div>
                                 </div>
 
                             </div>
                             <div class="col-lg-6 ">
                                 <div class="form-group">
-                                    <input type="text" class="form-control px-2" placeholder="" style="width: 100%;">
+                                    <input type="text" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="LastName">
                                     <label for="">LastName</label>
-                                  <!-- <div class="text-danger p-0">
-                                        <p class="p-0 m-0">LastName Field is Require</p>
-                                    </div> -->
+                                  
                                 </div>
                             </div>
                         </div>
@@ -68,9 +66,9 @@
                             <div class="form-group">
                                 <input type="email" class="form-control px-2" placeholder="" style="width: 100%;">
                                 <label for="">Email</label>
-                                <!-- <div class="text-danger p-0">
-                                    <p class="p-0 m-0">Email Field is Require</p>
-                                </div> -->
+                                <div *ngIf="StudentRegistration.get('email')?.invalid && StudentRegistration.get('email')?.touched" class="text-danger" formControlName="email">
+                                    Please enter a valid email address.
+                                </div>
                             </div>
                         </div>
                         <div class="row mt-1">
@@ -78,53 +76,55 @@
                                 <div class="form-group">
                                     <input type="password" class="form-control px-2" placeholder="" style="width: 100%;">
                                     <label for="">Password</label>
-                                    <!-- <div class="text-danger p-0">
-                                        <p class="p-0 m-0">Password Field is Require</p>
-                                    </div> -->
+                                    <div *ngIf="StudentRegistration.get('password')?.invalid && StudentRegistration.get('password')?.touched" class="text-danger" formControlName="password">
+                                        Password must be at least 4 characters long.
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="col-12  col-lg-6">
                                 <div class="form-group">
-                                    <input type="password" class="form-control px-2" placeholder="" style="width: 100%;">
+                                    <input type="password" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="repeatPassword">
                                     <label for="">Repeat Password</label>
-                                    <!-- <div class="text-danger p-0">
-                                        <p class="p-0 m-0">Password Field is Require</p>
-                                    </div> -->
+                                    <div *ngIf="StudentRegistration.get('repeatPassword')?.invalid && StudentRegistration.get('repeatPassword')?.touched" class="text-danger">
+                                        Repeat Password is required.
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6 gap">
                                 <div class="form-group">
-                                    <input type="date" class="form-control px-2" placeholder="" style="width: 100%;">
+                                    <input type="date" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="dateOfbirth">
                                     <label for="">DateOfBirth</label>
-                                    <!-- <div class="text-danger p-0">
-                                        <p class="p-0 m-0">DateOfBirth Field is Require</p>
-                                    </div> -->
+                                    <div *ngIf="StudentRegistration.get('dateOfbirth')?.invalid && StudentRegistration.get('dateOfbirth')?.touched" class="text-danger">
+                                        Date of Birth is required.
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <select name="gender" id="gender" class="form-control px-2">
+                                    <select name="gender" id="gender" class="form-control px-2" formControlName="gender">
                                         <option value="0" disabled selected>Select your gender</option>
                                         <option value="1">Male</option>
                                         <option value="2">Female</option>
                                         <option value="3">Other</option>
                                     </select>
-                                    <!-- <div class="text-danger">Gender selection is required</div> -->
+                                    <div *ngIf="StudentRegistration.get('gender')?.invalid && StudentRegistration.get('gender')?.touched" class="text-danger">
+                                        Please select your gender.
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row mt-1">
                             <div class="form-group">
-                                <input type="number" class="form-control px-2" placeholder="" style="width: 100%;">
+                                <input type="text" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="contact">
                                 <label for="">ContactNumber</label>
-                                <!-- <div class="text-danger p-0">
-                                    <p class="p-0 m-0">ContactNumber Field is Require</p>
-                                </div> -->
+                                <div *ngIf="StudentRegistration.get('contact')?.invalid && StudentRegistration.get('contact')?.touched" class="text-danger">
+                                    Contact Number is required.
+                                </div>
                             </div>
                         </div>
                         <div class="row mt-1">

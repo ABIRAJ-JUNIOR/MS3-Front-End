@@ -89,10 +89,10 @@
             </li>
     
             <!-- Page Number Buttons -->
-            <li  class="page-item" [class.active]="currentPage === currentPage">
-                <a class="page-link" type="button" (click)="changePage(currentPage)">{{ currentPage }}</a>
+            <li  class="page-item " >
+                <a class="page-link bg-dark text-light  border-0" type="button" (click)="changePage(currentPage)">{{ currentPage }}</a>
             </li>
-    
+     
             <!-- Next Button -->
             <li class="page-item" [class.disabled]="currentPage === totalPages">
                 <a class="page-link" type="button" (click)="changePage(currentPage + 1)" aria-label="Next">

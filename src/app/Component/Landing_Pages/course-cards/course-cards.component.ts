@@ -349,7 +349,7 @@ export class CourseCardsComponent implements OnInit {
     buttonElement.innerText = "Click To Buy"
   }
 
-  pageSize: number = 6; // Courses per page
+  pageSize: number = 3; // Courses per page
   currentPage: number = 1; // Current page index
   totalPages: number = 0; // Total number of pages
   pageNumbers: number[] = []; // Array of page numbers to display

@@ -15,6 +15,7 @@ import { AdminProfileComponent } from './Component/Admin_Pages/admin-profile/adm
 import { CourseListComponent } from './Component/Admin_Pages/course-list/course-list.component';
 import { StudentReportComponent } from './Component/Admin_Pages/student-report/student-report.component';
 import { CourseScheduleComponent } from './Component/Admin_Pages/course-schedule/course-schedule.component';
+import { CourseAssessmentComponent } from './Component/Admin_Pages/course-assessment/course-assessment.component';
 
 export const routes: Routes = [
 
@@ -31,12 +32,13 @@ export const routes: Routes = [
             {path:'', component:AdminHomeComponent},
             {path:'home', component:AdminHomeComponent},
             {path:'student-list', component:StudentListComponent},
+            {path:'student-report/:id', component:StudentReportComponent},
             {path:'admin-list', component:AdminListComponent},
             {path:'audit-log', component:AuditLogComponent},
             {path:'admin-profile', component:AdminProfileComponent},
             {path:'course-list', component:CourseListComponent},
-            {path:'student-report/:id', component:StudentReportComponent},
             {path:'schedule-list', component:CourseScheduleComponent},
+            {path:'assessment-list', component:CourseAssessmentComponent},
         ]
 
     },

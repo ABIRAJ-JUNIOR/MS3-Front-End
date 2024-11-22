@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../../../Service/Student/student.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Student } from '../../../Modals/modals';
 
 @Component({
   selector: 'app-student-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css'
 })

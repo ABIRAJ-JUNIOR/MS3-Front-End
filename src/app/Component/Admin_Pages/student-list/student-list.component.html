@@ -85,12 +85,48 @@
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content bg-light text-dark rounded-4 border-0 shadow-lg">
 
-        <!-- Modal Header -->
+         <!-- Modal Header -->
         <div class="modal-header border-0" style="background-color: #2C2F3A; color: #E5E5E5; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);">
           <h4 class="modal-title fw-bold" id="userFormLabel">Add Student Details</h4>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-  
+        <div class="modal-body">
+          <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="row g-4">
+          <!-- Profile Picture Section -->
+          <div class="col-12 col-md-3 d-flex flex-column align-items-center text-center">
+            <div class="position-relative">
+              <img
+                [src]="profileImageUrl || 'https://via.placeholder.com/150'"
+                alt="Profile Picture"
+                class="rounded border border-white shadow-lg"
+                style="width: 120px; height: 120px; object-fit: cover"
+              />
+              <input
+                type="file"
+                id="imgInput"
+                #fileInput
+                class="d-none"
+                accept="image/*"
+                (change)="onFileSelected($event)"
+              />
+              <button
+                type="button"
+                class="btn btn-light btn-sm rounded-circle shadow position-absolute"
+                style="bottom: 0; right: -10px; border-radius: 4px"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Change Profile Picture"
+                (click)="fileInput.click()"
+              >
+                <i class="bi bi-pencil-fill"></i>
+              </button>
+            </div>
+            <p class="mt-2 text-muted" style="font-size: 14px;">Upload a profile picture</p>
+          </div>
+
+          </form>
+
+        </div>
 
     </div>
   </div>

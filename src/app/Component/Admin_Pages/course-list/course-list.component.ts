@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {   CourseService } from '../../../Service/Course/course.service';
 import { Course, Schedule } from '../../../Modals/modals';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-course-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './course-list.component.html',
   styleUrl: './course-list.component.css'
 })

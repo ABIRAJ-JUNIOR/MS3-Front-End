@@ -82,5 +82,19 @@ export class AdminListComponent {
     }
   }
 
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input?.files && input.files[0]) {
+      const file = input.files[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        this.profileImageUrl = reader.result as string; // Update the preview
+      };
+
+      reader.readAsDataURL(file); // Read file as data URL
+    }
+  }
+
 
 }

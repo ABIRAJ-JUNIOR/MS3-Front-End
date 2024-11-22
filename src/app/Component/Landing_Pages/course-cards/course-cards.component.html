@@ -84,19 +84,19 @@
             <!-- Previous Button -->
             <li class="page-item" [class.disabled]="currentPage === 1">
                 <a class="page-link" type="button" (click)="changePage(currentPage - 1)" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
+                    <span aria-hidden="true">Previuos</span>
                 </a>
             </li>
     
             <!-- Page Number Buttons -->
-            <li  class="page-item " >
-                <a class="page-link bg-dark text-light  border-0" type="button" (click)="changePage(currentPage)">{{ currentPage }}</a>
+            <li  class="page-item " *ngFor="let page of [].constructor(totalPages) let i = index"  [class.active]="i+1 === currentPage">
+                <a class="page-link " type="button" (click)="changePage(currentPage)">{{ i + 1 }}</a>
             </li>
      
             <!-- Next Button -->
             <li class="page-item" [class.disabled]="currentPage === totalPages">
                 <a class="page-link" type="button" (click)="changePage(currentPage + 1)" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
+                    <span aria-hidden="true">Next</span>
                 </a>
             </li>
         </ul>

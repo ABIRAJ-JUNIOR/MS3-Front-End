@@ -1,4 +1,3 @@
-
 .filter p {
     font-size: 20px;
     padding: 0%;
@@ -113,13 +112,15 @@
 .modal-custom {
     max-width: 55%;
 }
-.ScheduleBody p{
-  margin: 1px;
+
+.ScheduleBody p {
+    margin: 1px;
 }
+
 .card-custom {
-    max-width: 27rem; 
+    max-width: 27rem;
     cursor: pointer;
-  }
+}
 
 
 
@@ -128,8 +129,9 @@
         max-width: 100%;
     }
 }
-@media screen and (max-width: 576px) { 
+
+@media screen and (max-width: 576px) {
     .card-custom {
-      max-width: 25rem; 
+        max-width: 25rem;
     }
-  }
+}

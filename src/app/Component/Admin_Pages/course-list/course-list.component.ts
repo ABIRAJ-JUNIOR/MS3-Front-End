@@ -35,6 +35,23 @@ export class CourseListComponent {
     });
   }
 
+   // Handle course image selection
+   onCourseImageSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      this.courseForm.patchValue({ courseImage: file });
+
+      // Preview the selected image
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.courseImageUrl = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+
   ngOnInit(): void {
     this.loadItems();
   }

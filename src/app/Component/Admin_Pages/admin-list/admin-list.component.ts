@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { AdminService } from '../../../Service/Admin/admin.service';
 import { Admin } from '../../../Modals/modals';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-list',
@@ -18,6 +18,9 @@ export class AdminListComponent {
   totalPages: number = 0;
   currentLength:number = 0;
   totalItems:number = 0;
+
+  profileForm: FormGroup;
+  profileImageUrl: string | null = null;
 
 
   constructor(private adminService: AdminService) {}

@@ -135,6 +135,16 @@
                 NIC is required.
               </div>
             </div>
+            <div class="col-12 col-md-6">
+              <label for="firstName" class="form-label fw-bold text-dark">First Name</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                <input type="text" formControlName="firstName" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter first name">
+              </div>
+              <div *ngIf="profileForm.controls['firstName'].invalid && profileForm.controls['firstName'].touched" class="text-danger">
+                First Name is required.
+              </div>
+            </div>
 
           </form>
 

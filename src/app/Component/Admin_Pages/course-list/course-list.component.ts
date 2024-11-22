@@ -84,4 +84,41 @@ export class CourseListComponent {
       this.loadItems();
     }
   }
+
+  onSubmit() {
+    if (this.courseForm.valid) {
+      const formData = new FormData();
+      formData.append('courseName', this.courseForm.get('courseName')?.value);
+      formData.append(
+        'courseCategory',
+        this.courseForm.get('courseCategory')?.value
+      );
+      formData.append('courseLevel', this.courseForm.get('courseLevel')?.value);
+      formData.append('courseFee', this.courseForm.get('courseFee')?.value);
+      formData.append(
+        'description',
+        this.courseForm.get('description')?.value
+      );
+      formData.append(
+        'prerequisites',
+        this.courseForm.get('prerequisites')?.value
+      );
+
+      // Handle image upload if it exists
+      const courseImage = this.courseForm.get('courseImage')?.value;
+      if (courseImage) {
+        formData.append('courseImage', courseImage);
+      }
+
+      // Replace this console log with your API call to submit data
+      console.log('Form data ready for submission:', formData);
+      alert('Course details submitted successfully!');
+
+      // Clear the form (optional)
+      this.courseForm.reset();
+      this.courseImageUrl = null;
+    } else {
+      alert('Please fill out all required fields.');
+    }
+  }
 }

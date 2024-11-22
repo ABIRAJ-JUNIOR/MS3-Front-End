@@ -184,6 +184,8 @@
   aria-hidden="true"
 >
   <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-light text-dark rounded-4 border-0 shadow-lg">
+
          
       <!-- Modal Header -->
       <div
@@ -241,6 +243,8 @@
             Upload a profile picture
           </p>
         </div>
+
+        <div class="col-12 col-md-9 row g-3">
              <!-- Input Fields -->
 
                   <!-- NIC -->
@@ -459,18 +463,37 @@
                     >
                   </div>
                 </div>
-              </div>
+              
 
 
 
-        <div class="col-12 col-md-9 row g-3">
+       
 
 
         </div>
+
+          <!-- Modal Footer -->
+          <div class="modal-footer border-0 bg-light">
+            <button
+              type="button"
+              class="btn btn-outline-dark"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="submit"
+              [disabled]="profileForm.invalid"
+              class="btn btn-dark px-4"
+            >
+              Submit
+            </button>
+          </div>
+
         </form>
 
       </div>
-
+    </div>
    </div>
   
 </div>

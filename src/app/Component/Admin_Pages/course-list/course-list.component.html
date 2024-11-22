@@ -155,15 +155,22 @@
                             </select>
                         </div>
 
-                         <!-- Course Fee -->
-            <div class="col-md-6">
-                <label for="courseFee" class="form-label fw-bold text-dark">Course Fee</label>
-                <input
-                  type="number"
-                  formControlName="courseFee"
+                        <!-- Course Fee -->
+                        <div class="col-md-6">
+                            <label for="courseFee" class="form-label fw-bold text-dark">Course Fee</label>
+                            <input type="number" formControlName="courseFee"
+                                class="form-control border rounded-3 shadow-sm" placeholder="Enter course fee" />
+                        </div>
+
+                          <!-- Description -->
+            <div class="col-12">
+                <label for="description" class="form-label fw-bold text-dark">Description</label>
+                <textarea
+                  formControlName="description"
                   class="form-control border rounded-3 shadow-sm"
-                  placeholder="Enter course fee"
-                />
+                  rows="3"
+                  placeholder="Enter course description"
+                ></textarea>
               </div>
 
 

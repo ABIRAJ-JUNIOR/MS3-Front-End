@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../../../Service/Student/student.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Student } from '../../../Modals/modals';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -21,10 +21,34 @@ export class StudentListComponent implements OnInit {
   currentLength:number = 0;
   totalItems:number = 0;
 
-  constructor(private paginationService: StudentService , private router:Router) {}
+  profileForm!: FormGroup;
+
+  constructor(private paginationService: StudentService , private router:Router,private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.profileForm = this.fb.group({
+   
+      nic: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
+      gender: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern(/(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])/)]],
+      confirmPassword: ['', Validators.required],
+      addressLine1: [''], 
+      addressLine2: [''], 
+      city: [''],
+      postalCode: [''],
+      country: [''] 
+    });
     this.loadItems();
+
+    
   }
 
   loadItems(): void {

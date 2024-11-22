@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { AdminService } from '../../../Service/Admin/admin.service';
 import { Admin } from '../../../Modals/modals';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './admin-list.component.html',
   styleUrl: './admin-list.component.css'
 })

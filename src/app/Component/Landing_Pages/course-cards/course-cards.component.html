@@ -1,46 +1,52 @@
+<div class="container py-5">
+    <div *ngIf="isFilterVisible" class="filter-options mt-3">
+        <div class="container py-3 filter">
+            <div class="row">
+                <div class="col-lg-2 col-md-6 col-sm-12 col-12 d-flex justify-content-between align-items-center mb-1">
+                    <p>Added:</p>
+                    <select class="w-75" aria-label="Small select example">
+                        <option selected>Select by time </option>
+                        <option selected>Recently</option>
+                        <option value="1">Past</option>
+                        <option value="2">Feauture</option>
+                    </select>
+                </div>
+                <div class=" col-lg-2 col-md-6 col-sm-12 col-12 d-flex justify-content-between align-items-center mb-1">
+                    <p>Level:</p>
+                    <select class="w-75" aria-label="Small select example">
+                        <option selected>Select Level</option>
+                        <option >Advance</option>
+                        <option value="1">Medium</option>
+                        <option value="2">Low</option>
+                    </select>
+                </div>
+                <div class=" col-lg-2 col-md-6 col-sm-12 col-12 d-flex justify-content-between align-items-center mb-1">
+                    <p>Price:</p>
+                    <select class="w-75" aria-label="Small select example">
+                        <option selected>Select price</option>
+                        <option >10000-30000</option>
+                        <option value="1">30000-50000</option>
+                        <option value="2">50000-80000</option>
+                        <option value="3">80000-100000</option>
+                    </select>
+                </div>
+            </div>
+        </div>
 
-<!-- course filter -->
-
-<div class="container py-5 filter">
-    <div class="row">
-        <div class="col-lg-2 col-md-6 col-sm-12 col-12 d-flex justify-content-between align-items-center mb-1">
-            <p>Added:</p>
-            <select class="w-75" aria-label="Small select example">
-                <option selected>Recently</option>
-                <option value="1">Past</option>
-                <option value="2">Feauture</option>
-            </select>
-        </div>
-        <div class=" col-lg-2 col-md-6 col-sm-12 col-12 d-flex justify-content-between align-items-center mb-1">
-            <p>Level:</p>
-            <select class="w-75" aria-label="Small select example">
-                <option selected>Advance</option>
-                <option value="1">Medium</option>
-                <option value="2">Low</option>
-            </select>
-        </div>
-        <div class=" col-lg-2 col-md-6 col-sm-12 col-12 d-flex justify-content-between align-items-center mb-1">
-            <p>Price:</p>
-            <select class="w-75" aria-label="Small select example">
-                <option selected>10000-30000</option>
-                <option value="1">30000-50000</option>
-                <option value="2">50000-80000</option>
-                <option value="3">80000-100000</option>
-            </select>
-        </div>
+        <button class="btn btn-success btn-md mt-3" (click)="applyFilter()">APPLY FILTER</button>
     </div>
 </div>
 
 
 
-
-<!-- Coruse Card -->
-
 <div class="container">
-    <div>
+    <div class="d-flex justify-content-between align-items-center">
         <h1 class="headingCourses">Courses</h1>
-        <hr>
+
+        <button class="btn btn-primary btn-md" (click)="toggleFilter()"><i class="bi bi-funnel"></i>FILTER COURSES</button>
     </div>
+    <hr>
+
 
     <div class="row py-4">
         <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-4" *ngFor="let course of paginatedCourses">
@@ -87,12 +93,13 @@
                     <span aria-hidden="true">Previuos</span>
                 </a>
             </li>
-    
+
             <!-- Page Number Buttons -->
-            <li  class="page-item " *ngFor="let page of [].constructor(totalPages) let i = index"  [class.active]="i+1 === currentPage">
+            <li class="page-item " *ngFor="let page of [].constructor(totalPages) let i = index"
+                [class.active]="i+1 === currentPage">
                 <a class="page-link " type="button" (click)="changePage(currentPage)">{{ i + 1 }}</a>
             </li>
-     
+
             <!-- Next Button -->
             <li class="page-item" [class.disabled]="currentPage === totalPages">
                 <a class="page-link" type="button" (click)="changePage(currentPage + 1)" aria-label="Next">
@@ -101,7 +108,7 @@
             </li>
         </ul>
     </nav>
-    
+
 
 
     <!-- Modal -->
@@ -125,8 +132,7 @@
                                 <h5 class="card-title mb-2 text-dark fw-bold ">{{ ModalProduct[0].courseName }}</h5>
                                 <!--rating-->
                                 <div class=" pb-2">
-                                    <i class="bi bi-star-fill text-warning"
-                                        *ngFor="let i of [].constructor(3)"></i>
+                                    <i class="bi bi-star-fill text-warning" *ngFor="let i of [].constructor(3)"></i>
                                 </div>
 
                                 <!-- Price -->
@@ -178,23 +184,24 @@
                                                 <p class="fw-bold pe-1"><i class="bi bi-clock"></i> </p>
                                                 <p>{{sechdule.time}}</p>
                                             </div>
-                                           
+
 
                                             <div class="d-flex py-1">
                                                 <p class="fw-bold  pe-1"><i class="bi bi-geo-alt-fill"></i></p>
                                                 <p>{{sechdule.location}}</p>
                                             </div>
                                             <div class="d-flex py-1">
-                                                <div class="d-flex"> 
-                                                <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
-                                                <p>{{sechdule.startDate}}</p>
-                                                </div> <p class="px-2">-</p>
+                                                <div class="d-flex">
+                                                    <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
+                                                    <p>{{sechdule.startDate}}</p>
+                                                </div>
+                                                <p class="px-2">-</p>
                                                 <div class="d-flex ">
                                                     <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
                                                     <p>{{sechdule.endDate}}</p>
                                                 </div>
                                             </div>
-                                          
+
 
 
                                             <div class="d-flex py-1">
@@ -203,11 +210,11 @@
                                             </div>
                                             <hr>
                                             <div class="d-flex py-1 align-items-center">
-                                                <img src="{{ModalProduct[0].imagePath}}" class="rounded-circle" width="50px" height="50px"
-                                                    alt="...">
-                                                    
+                                                <img src="{{ModalProduct[0].imagePath}}" class="rounded-circle"
+                                                    width="50px" height="50px" alt="...">
+
                                                 <p class="fs-5 px-2">Way Makers Acadamy</p>
-                                                
+
                                             </div>
                                         </div>
                                     </div>

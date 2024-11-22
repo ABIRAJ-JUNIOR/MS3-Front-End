@@ -122,7 +122,13 @@
     cursor: pointer;
 }
 
-
+.filter-options {
+    border: 1px solid #ddd;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+  }
+  
 
 @media screen and (max-width: 1005px) {
     .modal-custom {

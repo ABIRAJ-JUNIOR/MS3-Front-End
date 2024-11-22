@@ -116,7 +116,41 @@
 
     <div class="modal-body">
         <form [formGroup]="courseForm" (ngSubmit)="onSubmit()" class="row g-4">
-            
+              
+              <!-- Course Picture Section -->
+          <div class="col-12 col-md-3 d-flex flex-column align-items-center text-center">
+            <div class="position-relative">
+              <img
+                [src]="courseImageUrl || 'https://via.placeholder.com/150'"
+                alt="Course Picture"
+                class="rounded border border-white shadow-lg"
+                style="width: 120px; height: 120px; object-fit: cover"
+              />
+              <input
+                type="file"
+                id="courseImgInput"
+                #fileInput
+                class="d-none"
+                accept="image/*"
+                (change)="onCourseImageSelected($event)"
+              />
+              <button
+                type="button"
+                class="btn btn-light btn-sm rounded-circle shadow position-absolute"
+                style="bottom: 0; right: -10px; border-radius: 4px"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Change Course Picture"
+                (click)="fileInput.click()"
+              >
+                <i class="bi bi-pencil-fill"></i>
+              </button>
+            </div>
+            <p class="mt-2 text-muted" style="font-size: 14px">
+              Upload a course picture
+            </p>
+          </div>
+          
         </form>
 
     </div>

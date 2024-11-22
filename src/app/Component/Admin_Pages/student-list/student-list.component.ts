@@ -74,4 +74,17 @@ export class StudentListComponent implements OnInit {
   GoToReport(id:string){
     this.router.navigate(['/admin-dashboard/student-report' , id])
   }
+
+  onSubmit(): void {
+    if (this.profileForm.valid) {
+      let formData=this.profileForm.value
+      for (let key in formData) {
+        if (formData[key] === '') {
+          formData[key] = null;
+        }
+      }
+      console.log('Form Submitted', this.profileForm.value);
+    }
+    this.profileForm.reset()
+  }
 }

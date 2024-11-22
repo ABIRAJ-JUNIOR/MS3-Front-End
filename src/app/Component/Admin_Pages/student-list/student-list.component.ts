@@ -91,4 +91,20 @@ export class StudentListComponent implements OnInit {
     return this.profileForm.controls;
   }
 
+  profileImageUrl: string | undefined;
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    console.log(file)
+    if (file) {
+      this.previewImage(file);
+    }
+  }
+  previewImage(file: File): void {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.profileImageUrl = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
 }

@@ -383,25 +383,13 @@ export class CourseCardsComponent implements OnInit {
 
   isFilterVisible: boolean = false;
 
-  // Filter options (you can fetch these from an API or define them statically)
-  categories: string[] = ['Technology', 'Business', 'Design', 'Science'];
-  difficulties: string[] = ['Beginner', 'Intermediate', 'Advanced'];
-
-  // Selected filter values
-  selectedCategory: string = '';
-  selectedDifficulty: string = '';
-
-  // Toggle the visibility of filter options
+ 
   toggleFilter() {
     this.isFilterVisible = !this.isFilterVisible;
   }
 
-  // Apply the selected filters (you can implement logic to filter the course list here)
+  
   applyFilter() {
-    console.log('Filter applied:', {
-      category: this.selectedCategory,
-      difficulty: this.selectedDifficulty
-    });
-    // Add logic to filter courses based on the selected category and difficulty
+    
   }
 }

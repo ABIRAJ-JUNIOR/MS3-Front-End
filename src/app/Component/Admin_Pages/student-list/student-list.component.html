@@ -228,6 +228,21 @@
                 </div>
               </div>
 
+              <div class="col-12 col-md-6">
+                <label for="confirmPassword" class="form-label fw-bold text-dark">Confirm Password</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                  <input type="password" formControlName="confirmPassword" class="form-control border rounded-end-3 shadow-sm" placeholder="Confirm password" />
+                </div>
+                <div *ngIf="profileForm.controls['confirmPassword'].invalid && profileForm.controls['confirmPassword'].touched" class="text-danger">
+                  <div *ngIf="profileForm.controls['confirmPassword'].hasError('required')">Confirm Password is required.</div>
+                </div>
+                <div *ngIf="profileForm.controls['confirmPassword'].value !== profileForm.controls['password'].value && profileForm.controls['confirmPassword'].touched" class="text-danger">
+                  Passwords do not match.
+                </div>
+              </div>
+            </div>
+
           </form>
 
         </div>

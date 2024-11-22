@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-course-cards',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './course-cards.component.html',
   styleUrl: './course-cards.component.css'
 })

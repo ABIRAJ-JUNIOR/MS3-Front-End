@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {   CourseService } from '../../../Service/Course/course.service';
 import { Course, Schedule } from '../../../Modals/modals';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-course-list',
@@ -22,7 +22,18 @@ export class CourseListComponent {
   courseForm: FormGroup;
   courseImageUrl: string | null = null; // To display the course image preview
 
-  constructor(private courseService: CourseService,private fb: FormBuilder) {}
+  constructor(private courseService: CourseService,private fb: FormBuilder) {
+
+    this.courseForm = this.fb.group({
+      courseName: ['', Validators.required],
+      courseCategory: ['', Validators.required],
+      courseLevel: ['', Validators.required],
+      courseFee: ['', [Validators.required, Validators.min(0)]],
+      description: ['', [Validators.required, Validators.maxLength(500)]],
+      prerequisites: ['', Validators.maxLength(300)],
+      courseImage: [null], // For storing the file object
+    });
+  }
 
   ngOnInit(): void {
     this.loadItems();

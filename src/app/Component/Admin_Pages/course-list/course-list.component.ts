@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {   CourseService } from '../../../Service/Course/course.service';
-import { Course, Shedule } from '../../../Modals/modals';
+import { Course, Schedule } from '../../../Modals/modals';
 
 @Component({
   selector: 'app-course-list',
@@ -33,10 +33,10 @@ export class CourseListComponent {
         response.items.forEach((a:Course) => {
           a.imagePath = "https://localhost:7044/" + a.imagePath
           let count = 0
-          a.shedules.forEach((s:Shedule) => {
+          a.schedules.forEach((s:Schedule) => {
             count++
           })
-          a.shedulesCount = count;
+          a.schedulesCount = count;
         })
         this.courses = response.items
       }),

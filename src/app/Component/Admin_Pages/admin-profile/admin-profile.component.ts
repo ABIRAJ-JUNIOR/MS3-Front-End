@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-admin-profile',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './admin-profile.component.html',
   styleUrl: './admin-profile.component.css'
 })

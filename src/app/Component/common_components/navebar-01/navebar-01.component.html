@@ -1,41 +1,57 @@
 <app-topinfo></app-topinfo>
 
 <nav class="container-lg navbar navbar-expand-lg navbar-light">
-    <div class="container-fluid d-flex justify-content-between">
-      <!-- Logo and Institute Name -->
-      <a class="navbar-brand d-flex align-items-center" href="#">
-        <img src="logo.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top me-2">
-        <span class="fw-bolder">Way Makers Academy</span>
-      </a>
-  
-    
-      <!-- Navbar Toggler for mobile -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="bi bi-list fs-1"></i>
-      </button>
-      <!-- Middle Nav Links -->
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <div class="d-flex align-items-center">
-          <div class="mx-2 d-flex align-items-center w-100 mt-lg-0 mt-md-2 mt-sm-2 mt-2">
-            <input type="text" class="form-control search-input" placeholder="Search...">
-            <button class="btn btn-danger btnSearch"> <i class="bi bi-search search-icon"></i></button>
-          </div>
+  <div class="container-fluid d-flex justify-content-between">
+    <!-- Logo and Institute Name -->
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <img src="logo.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top me-2">
+      <span class="fw-bolder">Way Makers Academy</span>
+    </a>
+
+
+    <!-- Navbar Toggler for mobile -->
+    <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="bi bi-list fs-1"></i>
+    </button>
+    <!-- Middle Nav Links -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <div class="d-flex align-items-center">
+        <div class="mx-2 d-flex align-items-center w-100 mt-lg-0 mt-md-2 mt-sm-2 mt-2">
+          <input type="text" class="form-control search-input" placeholder="Search...">
+          <button class="btn btn-danger btnSearch"> <i class="bi bi-search search-icon"></i></button>
         </div>
-        <ul class="navbar-nav mx-2">
-          <li class="nav-item">
-            <a class="nav-link " aria-current="page" [routerLink]="['/home']" [routerLinkActive]="['active_Link']">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" [routerLink]="['/course']"  [routerLinkActive]="['active_Link']">Courses</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" [routerLink]="['/about']" [routerLinkActive]="['active_Link']">About Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/contact']" [routerLinkActive]="['active_Link']">Contact</a>
-          </li>
-        </ul>
       </div>
-  
+      <ul class="navbar-nav mx-2">
+        <li class="nav-item">
+          <a class="nav-link " aria-current="page" [routerLink]="['/home']"
+            [routerLinkActive]="['active_Link']">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" [routerLink]="['/course']" [routerLinkActive]="['active_Link']">Courses</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" [routerLink]="['/about']" [routerLinkActive]="['active_Link']">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/contact']" [routerLinkActive]="['active_Link']">Contact</a>
+        </li>
+        <li class="nav-item dropdown ms-md-4 ms-lg-4">
+          <a data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+            <img src="profile.jpg" class="avatar img-fluid rounded" alt="">
+          </a>
+          <a [routerLink]="['/admin-dashboard/admin-profile']" style="text-decoration: none;" class="text-dark px-1">Username</a>
+          <div class="dropdown-menu dropdown-menu-end">
+            <a class="dropdown-item" [routerLink]="['/admin-dashboard/admin-profile']">Profile</a>
+            <a class="dropdown-item">Setting</a>
+            <a class="dropdown-item">Logout</a>
+          </div>
+        </li>
+      </ul>
+    
+
     </div>
-  </nav>
+
+
+  </div>
+</nav>

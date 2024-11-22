@@ -55,13 +55,13 @@
                 </div>
                 <div class="card-body">
                     <!-- Course Title -->
-                    <h5 class="card-title mb-2 text-dark fw-bold">{{ course.CourseName }}</h5>
+                    <h5 class="card-title mb-2 text-dark fw-bold">{{ course.courseName }}</h5>
                     <!--rating-->
                     <div class=" pb-2">
-                        <i class="bi bi-star-fill text-warning" *ngFor="let i of [].constructor(course.rating)"></i>
+                        <i class="bi bi-star-fill text-warning" *ngFor="let i of [].constructor(3)"></i>
                     </div>
                     <!-- Price -->
-                    <p class="card-text text-danger fw-semibold">Rs {{ course.price }}</p>
+                    <p class="card-text text-danger fw-semibold">Rs {{ course.courseFee }}</p>
                     <!-- Enroll & View More -->
                     <div class="d-flex justify-content-between align-items-center mt-3">
                         <button class="btn btn-primary btn-enroll" data-bs-toggle="modal" data-bs-target="#ScheduleView"
@@ -82,25 +82,26 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <!-- Previous Button -->
-            <li class="page-item" [class.disabled]="currentPage === 0">
+            <li class="page-item" [class.disabled]="currentPage === 1">
                 <a class="page-link" type="button" (click)="changePage(currentPage - 1)" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-
+    
             <!-- Page Number Buttons -->
-            <li *ngFor="let page of pageNumbers" class="page-item" [class.active]="page === currentPage + 1">
-                <a class="page-link" type="button" (click)="changePage(page - 1)">{{ page }}</a>
+            <li  class="page-item" [class.active]="currentPage === currentPage">
+                <a class="page-link" type="button" (click)="changePage(currentPage)">{{ currentPage }}</a>
             </li>
-
+    
             <!-- Next Button -->
-            <li class="page-item" [class.disabled]="currentPage === totalPages - 1">
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
                 <a class="page-link" type="button" (click)="changePage(currentPage + 1)" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
         </ul>
     </nav>
+    
 
 
     <!-- Modal -->
@@ -121,15 +122,15 @@
                             </div>
                             <div class="col-lg-6 col-md-12 col-sm-12 col-12  pt-lg-0 pt-md-2 pt-sm-2 pt-2">
                                 <!-- Course Title -->
-                                <h5 class="card-title mb-2 text-dark fw-bold ">{{ ModalProduct[0].CourseName }}</h5>
+                                <h5 class="card-title mb-2 text-dark fw-bold ">{{ ModalProduct[0].courseName }}</h5>
                                 <!--rating-->
                                 <div class=" pb-2">
                                     <i class="bi bi-star-fill text-warning"
-                                        *ngFor="let i of [].constructor(ModalProduct[0].rating)"></i>
+                                        *ngFor="let i of [].constructor(3)"></i>
                                 </div>
 
                                 <!-- Price -->
-                                <p class="card-text text-primary fw-semibold">Rs {{ ModalProduct[0].price }}</p>
+                                <p class="card-text text-primary fw-semibold">Rs {{ ModalProduct[0].courseFee }}</p>
 
                                 <!-- description -->
                                 <div>
@@ -168,29 +169,29 @@
                                 <p class="">{{ModalProduct[0].description}}</p>
                                 <div class="row d-flex justify-content-evenly">
                                     <div class="card shadow-lg border-0 col-lg-6 col-md-12 col-sm-12 col-12 m-3 card-custom hovercard"
-                                        *ngFor="let sechdule of ModalProduct[0].schedules">
+                                        *ngFor="let sechdule of ModalProduct[0].shedules">
 
                                         <div class="card-body ScheduleBody py-1">
                                             <h5 class="modal-title fs-5 text-danger" id="staticBackdropLabel">{{
-                                                ModalProduct[0].CourseName }}</h5>
+                                                ModalProduct[0].courseName }}</h5>
                                             <div class="d-flex py-2">
                                                 <p class="fw-bold pe-1"><i class="bi bi-clock"></i> </p>
-                                                <p>{{sechdule.Time}}</p>
+                                                <p>{{sechdule.time}}</p>
                                             </div>
                                            
 
                                             <div class="d-flex py-1">
                                                 <p class="fw-bold  pe-1"><i class="bi bi-geo-alt-fill"></i></p>
-                                                <p>{{sechdule.Location}}</p>
+                                                <p>{{sechdule.location}}</p>
                                             </div>
                                             <div class="d-flex py-1">
                                                 <div class="d-flex"> 
                                                 <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
-                                                <p>{{sechdule.StartDate}}</p>
+                                                <p>{{sechdule.startDate}}</p>
                                                 </div> <p class="px-2">-</p>
                                                 <div class="d-flex ">
                                                     <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
-                                                    <p>{{sechdule.EndDate}}</p>
+                                                    <p>{{sechdule.endDate}}</p>
                                                 </div>
                                             </div>
                                           
@@ -198,14 +199,14 @@
 
                                             <div class="d-flex py-1">
                                                 <p class="fw-bold pe-1"><i class="bi bi-hourglass-split"></i> </p>
-                                                <p>{{sechdule.Duration}} Hours</p>
+                                                <p>{{sechdule.duration}} Days</p>
                                             </div>
                                             <hr>
                                             <div class="d-flex py-1 align-items-center">
                                                 <img src="{{ModalProduct[0].imagePath}}" class="rounded-circle" width="50px" height="50px"
                                                     alt="...">
                                                     
-                                                <p class="fs-5 px-2">It Institute Jaffna</p>
+                                                <p class="fs-5 px-2">Way Makers Acadamy</p>
                                                 
                                             </div>
                                         </div>

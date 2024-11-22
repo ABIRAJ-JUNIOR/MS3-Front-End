@@ -349,5 +349,34 @@ export class CourseCardsComponent implements OnInit {
     buttonElement.innerText = "Click To Buy"
   }
 
+  pageSize: number = 6; // Courses per page
+  currentPage: number = 1; // Current page index
+  totalPages: number = 0; // Total number of pages
+  pageNumbers: number[] = []; // Array of page numbers to display
+  paginatedCourses: any[] = [];
+
+  ngOnInit() {
+    this.paginateCourses()
+  }
+
+  paginateCourses() {
+    this.CourseService.pagination(this.currentPage,this.pageSize).subscribe({
+      next:((courses:any)=>{
+        courses.items.forEach((c:any)=>{
+          c.imagePath="https://localhost:7044/" + c.imagePath
+        })
+        this.paginatedCourses=courses.items
+        console.log(this.paginatedCourses)
+        this.totalPages=courses.totalPages
+        this.pageSize=courses.pageSize
+        this.currentPage=courses.currentPage
+      })
+    })
+  }
+
+  changePage(pageIndex: number) {
+    this.currentPage = pageIndex;
+    this.paginateCourses();
+  }
 
 }

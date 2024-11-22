@@ -34,17 +34,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let course of courses; let i = index" class="table-row">
-                                <td>{{i + 1}}</td>
-                                <td>{{course.courseName}}</td>
-                                <td>
-                                    <img src="{{course.imagePath}}" alt="Course image" class="rounded-circle" width="45" height="45">
-                                </td>
-                                <td>{{course.level}}</td>
-                                <td>{{course.courseFee}} Rs</td>
-                                <td>{{course.description}}</td>
-                                <td>{{course.prerequisites}}</td>
-                                <td>{{course.schedulesCount}}</td>
+                            <tr *ngFor="let assessment of assessments; let i = index" class="table-row">
+                                <td>{{i+1}}</td>
+                                <td>{{assessment.courseResponse.courseName}}</td>
+                                <td>{{assessment.assessmentType}}</td>
+                                <td>{{assessment.startDate}}</td>
+                                <td>{{assessment.endDate}}</td>
+                                <td>{{assessment.totalMarks}}</td>
+                                <td>{{assessment.passMarks}}</td>
+                                <td>{{assessment.status}}</td>
                                 <td class="text-center">
                                     <a href="#" class="text-primary me-3" aria-label="Edit">
                                         <i class="bi bi-pencil-square"></i>

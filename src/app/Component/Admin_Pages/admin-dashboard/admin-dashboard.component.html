@@ -2,7 +2,7 @@
   <aside id="sidebar" [ngClass]="{'collapsed': sidebarCollapsed}" class="bg-dark  text-light js-sidebar shadow-lg">
     
     <div class="h-100 position-fixed">
-      <div class="sidebar-logo">
+      <div class="sidebar-logo text-center">
           <a >Way Makers</a>
       </div>
       <ul class="sidebar-nav">
@@ -57,29 +57,7 @@
                   </li>
               </ul>
           </li>
-          <li class="sidebar-header">
-              Multi Level Menu
-          </li>
-          <li class="sidebar-item">
-              <a  class="sidebar-link collapsed" data-bs-target="#multi" data-bs-toggle="collapse"
-                  aria-expanded="false"><i class="fa-solid fa-share-nodes pe-2"></i>
-                  Multi Dropdown
-              </a>
-              <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                  <li class="sidebar-item">
-                      <a  class="sidebar-link collapsed" data-bs-target="#level-1"
-                          data-bs-toggle="collapse" aria-expanded="false">Level 1</a>
-                      <ul id="level-1" class="sidebar-dropdown list-unstyled collapse">
-                          <li class="sidebar-item">
-                              <a  class="sidebar-link">Level 1.1</a>
-                          </li>
-                          <li class="sidebar-item">
-                              <a  class="sidebar-link">Level 1.2</a>
-                          </li>
-                      </ul>
-                  </li>
-              </ul>
-          </li>
+
       </ul>
     </div>
   </aside>

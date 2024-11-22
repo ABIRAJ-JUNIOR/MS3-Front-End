@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Course, Schedule } from '../../../Modals/modals';
+import { Assessment, Course, Schedule } from '../../../Modals/modals';
 import { CourseService } from '../../../Service/Course/course.service';
 import { CommonModule } from '@angular/common';
 
@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './course-assessment.component.css'
 })
 export class CourseAssessmentComponent {
-  courses: Course[] = [];
+  assessments: Assessment[] = [];
   currentPage: number = 1;
   pageSize: number = 13;
   totalPages: number = 0;
@@ -26,22 +26,14 @@ export class CourseAssessmentComponent {
   }
 
   loadItems(): void {
-    this.courseService.pagination(this.currentPage , this.pageSize).subscribe({
+    this.courseService.assessmentPagination(this.currentPage , this.pageSize).subscribe({
       next:((response:any) => {
+        this.assessments = response.items
         this.totalPages = response.totalPages
         this.totalItems = response.totalItem
-        response.items.forEach((a:Course) => {
-          a.imagePath = "https://localhost:7044/" + a.imagePath
-          let count = 0
-          a.schedules.forEach((s:Schedule) => {
-            count++
-          })
-          a.schedulesCount = count;
-        })
-        this.courses = response.items
       }),
       complete:() => {
-        this.currentLength = this.courses.length
+        this.currentLength = this.assessments.length
 
       }
     });

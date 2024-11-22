@@ -87,4 +87,8 @@ export class StudentListComponent implements OnInit {
     }
     this.profileForm.reset()
   }
+  get formControls() {
+    return this.profileForm.controls;
+  }
+
 }

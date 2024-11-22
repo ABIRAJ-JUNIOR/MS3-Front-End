@@ -64,20 +64,24 @@
 
                         <div class=" row  mt-1">
                             <div class="form-group">
-                                <input type="email" class="form-control px-2" placeholder="" style="width: 100%;">
+                                <input type="email" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="email">
                                 <label for="">Email</label>
-                                <div *ngIf="StudentRegistration.get('email')?.invalid && StudentRegistration.get('email')?.touched" class="text-danger" formControlName="email">
-                                    Please enter a valid email address.
+                                <div *ngIf="StudentRegistration.get('email')?.touched">
+                                    <p class="text-danger" *ngIf="StudentRegistration.get('email')?.errors?.['required']">Email
+                                        field is required</p>
+                                    <p class="text-danger" *ngIf="StudentRegistration.get('email')?.errors?.['email']">Email is not
+                                        valid format</p>
                                 </div>
                             </div>
                         </div>
                         <div class="row mt-1">
                             <div class="col-lg-6 gap">
                                 <div class="form-group">
-                                    <input type="password" class="form-control px-2" placeholder="" style="width: 100%;">
+                                    <input type="password" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="password">
                                     <label for="">Password</label>
-                                    <div *ngIf="StudentRegistration.get('password')?.invalid && StudentRegistration.get('password')?.touched" class="text-danger" formControlName="password">
-                                        Password must be at least 4 characters long.
+                                    <div *ngIf="StudentRegistration.get('password')?.touched" class="text-danger" >
+                                      <p *ngIf="StudentRegistration.get('password')?.errors?.['required']">Password field is required</p>
+                                      <p *ngIf="StudentRegistration.get('password')?.errors?.['minlength']">  Password must be at least 4 characters long.</p>
                                     </div>
                                 </div>
                             </div>
@@ -86,9 +90,10 @@
                                 <div class="form-group">
                                     <input type="password" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="repeatPassword">
                                     <label for="">Repeat Password</label>
-                                    <div *ngIf="StudentRegistration.get('repeatPassword')?.invalid && StudentRegistration.get('repeatPassword')?.touched" class="text-danger">
-                                        Repeat Password is required.
-                                    </div>
+                                    <div class="text-danger"
+                                    *ngIf="StudentRegistration.get('repeatPassword')?.touched && StudentRegistration.get('repeatPassword')?.invalid">
+                                    <p> Reapeat Password Field is Require</p>
+                                </div>
                                 </div>
                             </div>
                         </div>

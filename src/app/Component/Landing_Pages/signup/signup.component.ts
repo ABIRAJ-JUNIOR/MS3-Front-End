@@ -19,8 +19,8 @@ export class SignupComponent {
     this.StudentRegistration=this.fb.group({
       firstname :['',Validators.required],
       lastname :[''],
-      email:['',Validators.required,Validators.email],
-      password:['',Validators.required,Validators.minLength(4)],
+      email:['',[Validators.required,Validators.email]],
+      password:['',[Validators.required,Validators.minLength(4)]],
       repeatPassword:['',Validators.required],
       dateOfbirth:['',Validators.required],
       gender:['',Validators.required],

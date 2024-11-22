@@ -202,6 +202,19 @@
                 </div>
               </div>
 
+              <!-- Phone Input -->
+              <div class="col-12 col-md-6">
+                <label for="phone" class="form-label fw-bold text-dark">Phone</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="bi bi-phone-fill"></i></span>
+                  <input type="text" formControlName="phone" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter phone number">
+                </div>
+                <div *ngIf="profileForm.controls['phone'].invalid && profileForm.controls['phone'].touched" class="text-danger">
+                  <div *ngIf="profileForm.controls['phone'].errors?.['required']">Phone number is required.</div>
+                  <div *ngIf="profileForm.controls['phone'].errors?.['pattern']">Invalid phone number format (10 digits).</div>
+                </div>
+              </div>
+
           </form>
 
         </div>

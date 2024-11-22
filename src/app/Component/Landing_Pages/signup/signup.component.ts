@@ -12,4 +12,21 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 })
 export class SignupComponent {
  
+
+  StudentRegistration:FormGroup;
+
+  constructor(private fb:FormBuilder){
+    this.StudentRegistration=this.fb.group({
+      firstname :['',Validators.required],
+      lastname :[''],
+      email:['',Validators.required,Validators.email],
+      password:['',Validators.required,Validators.minLength(4)],
+      repeatPassword:['',Validators.required],
+      dateOfbirth:['',Validators.required],
+      gender:['',Validators.required],
+      contact:['',Validators.required],
+      
+
+    })
+  }
 }

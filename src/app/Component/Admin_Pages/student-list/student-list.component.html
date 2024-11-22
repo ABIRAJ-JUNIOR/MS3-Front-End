@@ -123,6 +123,18 @@
             </div>
             <p class="mt-2 text-muted" style="font-size: 14px;">Upload a profile picture</p>
           </div>
+           <!-- Input Fields -->
+           <div class="col-12 col-md-9 row g-3">
+            <div class="col-md-6">
+              <label for="nic" class="form-label fw-bold text-dark">NIC</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+                <input type="text" formControlName="nic" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter NIC">
+              </div>
+              <div *ngIf="profileForm.controls['nic'].invalid && profileForm.controls['nic'].touched" class="text-danger">
+                NIC is required.
+              </div>
+            </div>
 
           </form>
 

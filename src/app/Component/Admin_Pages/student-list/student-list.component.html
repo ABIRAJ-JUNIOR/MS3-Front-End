@@ -168,6 +168,28 @@
               </div>
             </div>
 
+              <!-- Gender Section -->
+              <div class="col-12">
+                <label class="form-label fw-bold text-dark">Gender</label>
+                <div class="d-flex gap-4">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" formControlName="gender" value="Male">
+                    <label class="form-check-label">Male</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" formControlName="gender" value="Female">
+                    <label class="form-check-label">Female</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" formControlName="gender" value="Other">
+                    <label class="form-check-label">Other</label>
+                  </div>
+                </div>
+                <div *ngIf="profileForm.controls['gender'].invalid && profileForm.controls['gender'].touched" class="text-danger">
+                  Gender is required.
+                </div>
+              </div>
+
           </form>
 
         </div>

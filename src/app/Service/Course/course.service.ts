@@ -26,4 +26,8 @@ export class CourseService {
   schedulePagination(pageNumber:number , pageSize:number){
     return this.http.get<any>(this.apiUrl + `/CourseSchedule/Pagination/${pageNumber}/${pageSize}`)
   }
+
+  assessmentPagination(pageNumber:number , pageSize:number){
+    return this.http.get<any>(this.apiUrl + `/Assessment/Pagination/${pageNumber}/${pageSize}`)
+  }
 }

@@ -108,6 +108,9 @@ export interface Assessment {
     createdDate:Date;
     updateDate:Date;
     status:string;
+
+    courseResponse:Course;
+    studentAssessmentResponses:StudentAssessment[];
 }
 
 export interface StudentAssessment{

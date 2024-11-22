@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-12 col-sm-12 col-12 p-0 m-0 ps-2 d-flex align-items-center justify-content-between">
-                <form class="sign-width px-lg-3 px-md-3 px-sm-3 px-5 " [formGroup]="StudentRegistration">
+                <form class="sign-width px-lg-3 px-md-3 px-sm-3 px-5 " [formGroup]="StudentRegistration" (ngSubmit)="onSubmit()">
                     <div class="px-2">
                         <div class="col-12 d-flex justify-content-center align-items-center pt-2">
                             <img src="/logo.png" class="" alt="" height="70px">
@@ -42,10 +42,21 @@
                             <h5 style="font-weight: 350; font-size: 15px;">Your journey to knowledge starts here! Please
                                 sign in to access your courses and resources.</h5>
                         </div>
+                        <div class="row mt-1">
+                            <div class="form-group">
+                                <input type="text" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="nic">
+                                <label for="">NIC</label>
+                                <div *ngIf="StudentRegistration.get('nic')?.touched">
+                                    <p class="text-danger" *ngIf="StudentRegistration.get('nic')?.errors?.['required']">NIC is required.</p>
+                                    <p class="text-danger" *ngIf="StudentRegistration.get('nic')?.errors?.['pattern']">Invalid NIC format.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="row">
                             <div class="col-lg-6 gap">
                                 <div class="form-group">
-                                    <input type="text" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="firstname">
+                                    <input type="text" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="firstName">
                                     <label for="">FirstName</label>
                                    <div *ngIf="StudentRegistration.get('firstname')?.invalid && StudentRegistration.get('firstname')?.touched" class="text-danger">
                                         First Name is required.
@@ -55,7 +66,7 @@
                             </div>
                             <div class="col-lg-6 ">
                                 <div class="form-group">
-                                    <input type="text" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="LastName">
+                                    <input type="text" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="lastName">
                                     <label for="">LastName</label>
                                   
                                 </div>
@@ -88,19 +99,22 @@
 
                             <div class="col-12  col-lg-6">
                                 <div class="form-group">
-                                    <input type="password" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="repeatPassword">
-                                    <label for="">Repeat Password</label>
+                                    <input type="password" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="confirmPassword">
+                                    <label for="">Confirm Password</label>
                                     <div class="text-danger"
-                                    *ngIf="StudentRegistration.get('repeatPassword')?.touched && StudentRegistration.get('repeatPassword')?.invalid">
-                                    <p> Reapeat Password Field is Require</p>
-                                </div>
+                                    *ngIf="StudentRegistration.get('confirmPassword')?.touched && StudentRegistration.get('confirmPassword')?.invalid">
+                                    <p> Confirm Password is Require</p>
+                                    </div>
+                                    <div *ngIf="StudentRegistration.controls['confirmPassword'].value !== StudentRegistration.controls['password'].value && StudentRegistration.controls['confirmPassword'].touched" class="text-danger">
+                                        Passwords do not match.
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6 gap">
                                 <div class="form-group">
-                                    <input type="date" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="dateOfbirth">
+                                    <input type="date" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="dateOfBirth">
                                     <label for="">DateOfBirth</label>
                                     <div *ngIf="StudentRegistration.get('dateOfbirth')?.invalid && StudentRegistration.get('dateOfbirth')?.touched" class="text-danger">
                                         Date of Birth is required.
@@ -125,7 +139,7 @@
 
                         <div class="row mt-1">
                             <div class="form-group">
-                                <input type="text" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="contact">
+                                <input type="text" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="phone">
                                 <label for="">ContactNumber</label>
                                 <div *ngIf="StudentRegistration.get('contact')?.invalid && StudentRegistration.get('contact')?.touched" class="text-danger">
                                     Contact Number is required.
@@ -133,7 +147,7 @@
                             </div>
                         </div>
                         <div class="row mt-1">
-                            <button class="btn btn-lg btn-danger mt-1 p-1" style="border-radius: 5px; width: 100%;">Your
+                            <button type="submit" class="btn btn-lg btn-danger mt-1 p-1" style="border-radius: 5px; width: 100%;">Your
                                 Future Begins Here</button>
                             <div class="d-flex justify-content-center mt-2">
                                 <p class="ps-2 mb-lg-0 mb-md-5 mb-sm-5 mb-5 pe-1">If you already have an account?</p> <a

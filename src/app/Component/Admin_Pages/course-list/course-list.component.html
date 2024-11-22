@@ -162,43 +162,34 @@
                                 class="form-control border rounded-3 shadow-sm" placeholder="Enter course fee" />
                         </div>
 
-                          <!-- Description -->
-            <div class="col-12">
-                <label for="description" class="form-label fw-bold text-dark">Description</label>
-                <textarea
-                  formControlName="description"
-                  class="form-control border rounded-3 shadow-sm"
-                  rows="3"
-                  placeholder="Enter course description"
-                ></textarea>
-              </div>
+                        <!-- Description -->
+                        <div class="col-12">
+                            <label for="description" class="form-label fw-bold text-dark">Description</label>
+                            <textarea formControlName="description" class="form-control border rounded-3 shadow-sm"
+                                rows="3" placeholder="Enter course description"></textarea>
+                        </div>
 
-                <!-- Prerequisites -->
-            <div class="col-12">
-                <label for="prerequisites" class="form-label fw-bold text-dark">Prerequisites</label>
-                <textarea
-                  formControlName="prerequisites"
-                  class="form-control border rounded-3 shadow-sm"
-                  rows="2"
-                  placeholder="Enter prerequisites"
-                ></textarea>
-              </div>
-
-              
-
+                        <!-- Prerequisites -->
+                        <div class="col-12">
+                            <label for="prerequisites" class="form-label fw-bold text-dark">Prerequisites</label>
+                            <textarea formControlName="prerequisites" class="form-control border rounded-3 shadow-sm"
+                                rows="2" placeholder="Enter prerequisites"></textarea>
+                        </div>
 
                     </div>
-
+                    <!-- Modal Footer -->
+                    <div class="modal-footer border-0 bg-light">
+                        <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" [disabled]="courseForm.invalid" class="btn btn-dark px-4">
+                            Submit
+                        </button>
+                    </div>
 
                 </form>
-
             </div>
-
-
 
         </div>
     </div>
-
-
-
 </div>

@@ -1,12 +1,13 @@
 <div class="container py-5">
     <div *ngIf="isFilterVisible" class="filter-options mt-3">
         <div class="container py-3 filter">
+            <h4 class="mb-2 text-danger">Filter Your Future</h4>
             <div class="row">
                 <div class="col-lg-2 col-md-6 col-sm-12 col-12 d-flex justify-content-between align-items-center mb-1">
                     <p>Added:</p>
                     <select class="w-75" aria-label="Small select example">
                         <option selected>Select by time </option>
-                        <option selected>Recently</option>
+                        <option value="0">Recently</option>
                         <option value="1">Past</option>
                         <option value="2">Feauture</option>
                     </select>
@@ -15,7 +16,7 @@
                     <p>Level:</p>
                     <select class="w-75" aria-label="Small select example">
                         <option selected>Select Level</option>
-                        <option >Advance</option>
+                        <option value="0">Advance</option>
                         <option value="1">Medium</option>
                         <option value="2">Low</option>
                     </select>
@@ -24,7 +25,7 @@
                     <p>Price:</p>
                     <select class="w-75" aria-label="Small select example">
                         <option selected>Select price</option>
-                        <option >10000-30000</option>
+                        <option value="0">10000-30000</option>
                         <option value="1">30000-50000</option>
                         <option value="2">50000-80000</option>
                         <option value="3">80000-100000</option>
@@ -32,8 +33,7 @@
                 </div>
             </div>
         </div>
-
-        <button class="btn btn-success btn-md mt-3" (click)="applyFilter()">APPLY FILTER</button>
+        <button class="btn btn-info btn-md mt-1" style="float: left;" (click)="applyFilter()">APPLY FILTER</button>
     </div>
 </div>
 
@@ -43,7 +43,7 @@
     <div class="d-flex justify-content-between align-items-center">
         <h1 class="headingCourses">Courses</h1>
 
-        <button class="btn btn-primary btn-md" (click)="toggleFilter()"><i class="bi bi-funnel"></i>FILTER COURSES</button>
+        <button class="btn btn-primary btn-md" (click)="toggleFilter()"><i class="bi bi-funnel"></i> FILTER COURSES</button>
     </div>
     <hr>
 

@@ -215,6 +215,19 @@
                 </div>
               </div>
 
+              <div class="col-12 col-md-6">
+                <label for="password" class="form-label fw-bold text-dark">Password</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                  <input type="password" formControlName="password" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter password" />
+                </div>
+                <div *ngIf="profileForm.controls['password'].invalid && profileForm.controls['password'].touched" class="text-danger">
+                  <div *ngIf="profileForm.controls['password'].hasError('required')">Password is required.</div>
+                  <div *ngIf="profileForm.controls['password'].hasError('minlength')">Password must be at least 8 characters long.</div>
+                  <div *ngIf="profileForm.controls['password'].hasError('pattern')">Password must contain at least one number and one special character.</div>
+                </div>
+              </div>
+
           </form>
 
         </div>

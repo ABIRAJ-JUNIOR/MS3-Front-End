@@ -146,6 +146,17 @@
               </div>
             </div>
 
+            <div class="col-12 col-md-6">
+              <label for="lastName" class="form-label fw-bold text-dark">Last Name</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                <input type="text" formControlName="lastName" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter last name">
+              </div>
+              <div *ngIf="profileForm.controls['lastName'].invalid && profileForm.controls['lastName'].touched" class="text-danger">
+                Last Name is required.
+              </div>
+            </div>
+
           </form>
 
         </div>

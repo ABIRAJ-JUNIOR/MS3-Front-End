@@ -429,6 +429,39 @@
             </div>
 
 
+                 <!-- Role -->
+                 <div class="col-12">
+                  <label for="role" class="form-label fw-bold text-dark"
+                    >Role</label
+                  >
+                  <div class="input-group">
+                    <span class="input-group-text"
+                      ><i class="bi bi-person-badge-fill"></i
+                    ></span>
+                    <select
+                      formControlName="role"
+                      class="form-select border rounded-end-3 shadow-sm"
+                    >
+                      <option value="">Select a role</option>
+                      <option value="1">Administrator</option>
+                      <option value="2">Instructor</option>
+                    </select>
+                  </div>
+                  <div
+                    *ngIf="
+                      profileForm.get('role')?.touched &&
+                      profileForm.get('role')?.invalid
+                    "
+                    class="text-danger small"
+                  >
+                    <span *ngIf="profileForm.get('role')?.hasError('required')"
+                      >Role is required.</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+
 
         <div class="col-12 col-md-9 row g-3">
 

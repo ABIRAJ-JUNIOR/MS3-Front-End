@@ -71,4 +71,16 @@ export class AdminListComponent {
       this.loadItems();
     }
   }
+  onSubmit() {
+    if (this.profileForm.valid) {
+      const formData = this.profileForm.value;
+      console.log('Form Data:', formData);
+      alert('User details submitted successfully!');
+      this.profileForm.reset(); // Reset form after successful submission
+    } else {
+      alert('Please fill out all required fields correctly.');
+    }
+  }
+
+
 }

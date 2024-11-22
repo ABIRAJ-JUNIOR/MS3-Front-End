@@ -306,6 +306,69 @@
                 </div>
               </div>
 
+                   <!-- Last Name -->
+            <div class="col-md-6">
+              <label for="lastName" class="form-label fw-bold text-dark"
+                >Last Name</label
+              >
+              <div class="input-group">
+                <span class="input-group-text"
+                  ><i class="bi bi-person-fill"></i
+                ></span>
+                <input
+                  type="text"
+                  formControlName="lastName"
+                  class="form-control border rounded-end-3 shadow-sm"
+                  placeholder="Enter last name"
+                />
+              </div>
+              <div
+                *ngIf="
+                  profileForm.get('lastName')?.touched &&
+                  profileForm.get('lastName')?.invalid
+                "
+                class="text-danger small"
+              >
+                <span *ngIf="profileForm.get('lastName')?.hasError('required')"
+                  >Last name is required.</span
+                >
+              </div>
+            </div>
+
+                <!-- Email -->
+                <div class="col-md-6">
+                  <label for="email" class="form-label fw-bold text-dark"
+                    >Email</label
+                  >
+                  <div class="input-group">
+                    <span class="input-group-text"
+                      ><i class="bi bi-envelope-fill"></i
+                    ></span>
+                    <input
+                      type="email"
+                      formControlName="email"
+                      class="form-control border rounded-end-3 shadow-sm"
+                      placeholder="Enter email"
+                    />
+                  </div>
+                  <div
+                    *ngIf="
+                      profileForm.get('email')?.touched &&
+                      profileForm.get('email')?.invalid
+                    "
+                    class="text-danger small"
+                  >
+                    <span *ngIf="profileForm.get('email')?.hasError('required')"
+                      >Email is required.</span
+                    >
+                    <span *ngIf="profileForm.get('email')?.hasError('email')"
+                      >Enter a valid email address.</span
+                    >
+                  </div>
+                </div>
+
+
+
         <div class="col-12 col-md-9 row g-3">
 
 

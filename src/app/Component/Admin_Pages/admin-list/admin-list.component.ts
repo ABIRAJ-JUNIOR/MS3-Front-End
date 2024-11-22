@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { AdminService } from '../../../Service/Admin/admin.service';
 import { Admin } from '../../../Modals/modals';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-list',
@@ -23,7 +23,27 @@ export class AdminListComponent {
   profileImageUrl: string | null = null;
 
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService,private fb: FormBuilder) {
+
+    this.profileForm = this.fb.group({
+      nic: ['', [Validators.required, Validators.pattern(/^\d{9}[Vv]|\d{12}$/)]], // Example NIC validation
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required],
+      role: ['', Validators.required],
+    },
+    { validators: this.passwordMatchValidator }
+  )
+  }
+
+  passwordMatchValidator(control: AbstractControl) {
+    const password = control.get('password')?.value;
+    const confirmPassword = control.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { passwordMismatch: true };
+  }
 
   ngOnInit(): void {
     this.loadItems();

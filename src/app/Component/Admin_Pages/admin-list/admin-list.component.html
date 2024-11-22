@@ -273,6 +273,39 @@
               </div>
             </div>
 
+               <!-- First Name -->
+               <div class="col-md-6">
+                <label for="firstName" class="form-label fw-bold text-dark"
+                  >First Name</label
+                >
+                <div class="input-group">
+                  <span class="input-group-text"
+                    ><i class="bi bi-person-fill"></i
+                  ></span>
+                  <input
+                    type="text"
+                    formControlName="firstName"
+                    class="form-control border rounded-end-3 shadow-sm"
+                    placeholder="Enter first name"
+                  />
+                </div>
+                <div
+                  *ngIf="
+                    profileForm.get('firstName')?.touched &&
+                    profileForm.get('firstName')?.invalid
+                  "
+                  class="text-danger small"
+                >
+                  <span *ngIf="profileForm.get('firstName')?.hasError('required')"
+                    >First name is required.</span
+                  >
+                  <span
+                    *ngIf="profileForm.get('firstName')?.hasError('minlength')"
+                    >Must be at least 2 characters.</span
+                  >
+                </div>
+              </div>
+
         <div class="col-12 col-md-9 row g-3">
 
 

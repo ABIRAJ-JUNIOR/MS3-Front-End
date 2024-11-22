@@ -205,7 +205,78 @@
 
       <div class="modal-body">
         <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="row g-4">
-          
+             
+                    <!-- Profile Picture Section -->
+          <div
+          class="col-12 col-md-3 d-flex flex-column align-items-center text-center"
+        >
+          <div class="position-relative">
+            <img
+              [src]="profileImageUrl || 'https://via.placeholder.com/150'"
+              alt="Profile Picture"
+              class="rounded border border-white shadow-lg"
+              style="width: 120px; height: 120px; object-fit: cover"
+            />
+            <input
+              type="file"
+              id="imgInput"
+              #fileInput
+              class="d-none"
+              accept="image/*"
+              (change)="onFileSelected($event)"
+            />
+            <button
+              type="button"
+              class="btn btn-light btn-sm rounded-circle shadow position-absolute"
+              style="bottom: 0; right: -10px; border-radius: 4px"
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              title="Change Profile Picture"
+              (click)="fileInput.click()"
+            >
+              <i class="bi bi-pencil-fill"></i>
+            </button>
+          </div>
+          <p class="mt-2 text-muted" style="font-size: 14px">
+            Upload a profile picture
+          </p>
+        </div>
+             <!-- Input Fields -->
+
+                  <!-- NIC -->
+            <div class="col-md-6">
+              <label for="nic" class="form-label fw-bold text-dark">NIC</label>
+              <div class="input-group">
+                <span class="input-group-text"
+                  ><i class="bi bi-card-text"></i
+                ></span>
+                <input
+                  type="text"
+                  formControlName="nic"
+                  class="form-control border rounded-end-3 shadow-sm"
+                  placeholder="Enter NIC"
+                />
+              </div>
+              <div
+                *ngIf="
+                  profileForm.get('nic')?.touched &&
+                  profileForm.get('nic')?.invalid
+                "
+                class="text-danger small"
+              >
+                <span *ngIf="profileForm.get('nic')?.hasError('required')"
+                  >NIC is required.</span
+                >
+                <span *ngIf="profileForm.get('nic')?.hasError('pattern')"
+                  >Invalid NIC format.</span
+                >
+              </div>
+            </div>
+
+        <div class="col-12 col-md-9 row g-3">
+
+
+        </div>
         </form>
 
       </div>

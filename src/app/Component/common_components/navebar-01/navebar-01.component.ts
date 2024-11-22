@@ -11,4 +11,8 @@ import { TopinfoComponent } from '../topinfo/topinfo.component';
 })
 export class Navebar01Component {
 
+  sidebarCollapsed = false;
+  toggleSidebar() {
+    this.sidebarCollapsed = !this.sidebarCollapsed;
+  }
 }

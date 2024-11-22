@@ -10,19 +10,26 @@ export class CourseFilterPipe implements PipeTransform {
 
     if (!Courses) return [];
     if (level) {
-      Courses=Courses.find(x=>x.level == level )
+      if (level === '0') {
+        Courses = Courses.filter(x => x.level.toLowerCase() === "beginner");
+      } else if (level === '1') {
+        Courses = Courses.filter(x => x.level.toLowerCase() === "intermediate");
+      } else if (level === '2') {
+        Courses = Courses.filter(x => x.level.toLowerCase() === "advanced");
+      }
     }
+    
     if(price){
       Courses = Courses.filter(item => {
-        const priceRange = item.price;
+        const priceRange = item.courseFee;
         if (price === '0') {
-          return priceRange >= 10000 && priceRange <= 30000;
+          return priceRange >= 100 && priceRange <= 500;
         } else if (price === '1') {
-          return priceRange >= 30000 && priceRange <= 50000;
+          return priceRange >= 500 && priceRange <= 1000;
         } else if (price === '2') {
-          return priceRange >= 50000 && priceRange <= 80000;
+          return priceRange >= 1000 && priceRange <= 1500;
         } else if (price === '3') {
-          return priceRange >= 80000 && priceRange <= 100000;
+          return priceRange >= 1500 && priceRange <= 2000;
         }
         return true;
       });

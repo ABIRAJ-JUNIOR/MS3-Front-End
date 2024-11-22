@@ -3,15 +3,17 @@ import { Component, OnInit } from '@angular/core';
 import { CourseService } from '../../../Service/Course/course.service';
 import { Course } from '../../../Modals/modals';
 import { FormsModule } from '@angular/forms';
+import { CourseFilterPipe } from '../../../Pipes/course-filter.pipe';
 
 @Component({
   selector: 'app-course-cards',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,CourseFilterPipe],
   templateUrl: './course-cards.component.html',
   styleUrl: './course-cards.component.css'
 })
 export class CourseCardsComponent implements OnInit {
+
 
   constructor(private CourseService:CourseService){
     
@@ -371,6 +373,7 @@ export class CourseCardsComponent implements OnInit {
         this.totalPages=courses.totalPages
         this.pageSize=courses.pageSize
         this.currentPage=courses.currentPage
+        console.log(this.paginatedCourses)
       })
     })
   }
@@ -383,13 +386,22 @@ export class CourseCardsComponent implements OnInit {
 
   isFilterVisible: boolean = false;
 
- 
+  filterlevel: string="";
+  filterPrice: string="";
+
   toggleFilter() {
     this.isFilterVisible = !this.isFilterVisible;
+    this.filterlevel="";
+    this.filterPrice=""
+
   }
 
-  
+
   applyFilter() {
-    
+    let level=document.getElementById('CourseLevel') as HTMLInputElement
+    let price=document.getElementById('Price') as HTMLInputElement
+    this.filterlevel=level.value
+    this.filterPrice=price.value
+    this.paginateCourses()
   }
 }

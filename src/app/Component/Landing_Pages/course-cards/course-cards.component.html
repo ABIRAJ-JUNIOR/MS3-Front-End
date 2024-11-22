@@ -2,33 +2,33 @@
     <div *ngIf="isFilterVisible" class="filter-options mt-3">
         <div class="container py-3 filter">
             <h4 class="mb-2 text-danger">Filter Your Future</h4>
-            <div class="row">
-                <div class="col-lg-2 col-md-6 col-sm-12 col-12 d-flex justify-content-between align-items-center mb-1">
+            <div class="row ">
+                <div class="col-lg-4 col-md-6 col-sm-12 col-12 d-flex justify-content-between align-items-center mb-1">
                     <p>Added:</p>
-                    <select class="w-75" aria-label="Small select example">
-                        <option selected>Select by time </option>
+                    <select class="w-75" aria-label="Small select example" disabled>
+                        <option selected>Pending </option>
                         <option value="0">Recently</option>
                         <option value="1">Past</option>
                         <option value="2">Feauture</option>
                     </select>
                 </div>
-                <div class=" col-lg-2 col-md-6 col-sm-12 col-12 d-flex justify-content-between align-items-center mb-1">
+                <div class=" col-lg-4 col-md-6 col-sm-12 col-12 d-flex justify-content-between align-items-center mb-1">
                     <p>Level:</p>
-                    <select class="w-75" aria-label="Small select example">
-                        <option selected>Select Level</option>
-                        <option value="0">Advance</option>
-                        <option value="1">Medium</option>
-                        <option value="2">Low</option>
+                    <select class="w-75" aria-label="Small select example" id="CourseLevel">
+                        <option selected>All Level</option>
+                        <option value="0">Biginner</option>
+                        <option value="1">Intermediate</option>
+                        <option value="2">Advanced</option>
                     </select>
                 </div>
-                <div class=" col-lg-2 col-md-6 col-sm-12 col-12 d-flex justify-content-between align-items-center mb-1">
+                <div class=" col-lg-4 col-md-6 col-sm-12 col-12 d-flex justify-content-between align-items-center mb-1">
                     <p>Price:</p>
-                    <select class="w-75" aria-label="Small select example">
-                        <option selected>Select price</option>
-                        <option value="0">10000-30000</option>
-                        <option value="1">30000-50000</option>
-                        <option value="2">50000-80000</option>
-                        <option value="3">80000-100000</option>
+                    <select class="w-75" aria-label="Small select example" id="Price">
+                        <option selected>All price</option>
+                        <option value="0">100-500</option>
+                        <option value="1">500-1000</option>
+                        <option value="2">1000-1500</option>
+                        <option value="3">1500-2000</option>
                     </select>
                 </div>
             </div>
@@ -49,7 +49,7 @@
 
 
     <div class="row py-4">
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-4" *ngFor="let course of paginatedCourses">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-4" *ngFor="let course of paginatedCourses | courseFilter:filterlevel : filterPrice">
             <div class="card border-0  rounded-2 course-card">
                 <div class="position-relative">
                     <!-- Badge for Level -->

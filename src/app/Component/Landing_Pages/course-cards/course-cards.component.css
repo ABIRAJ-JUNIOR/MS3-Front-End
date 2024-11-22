@@ -9,7 +9,6 @@
 .filter select {
     color: red;
     padding: 5px;
-    width: 100px;
     border: rgb(207, 207, 207) solid 1px;
 }
 

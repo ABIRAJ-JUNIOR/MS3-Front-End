@@ -1,41 +1,48 @@
 <div class="container py-5">
-    <div *ngIf="isFilterVisible" class="filter-options mt-3">
-        <div class="container py-3 filter">
-            <h4 class="mb-2 text-danger">Filter Your Future</h4>
-            <div class="row ">
-                <div class="col-lg-4 col-md-6 col-sm-12 col-12 d-flex justify-content-between align-items-center mb-1">
-                    <p>Added:</p>
-                    <select class="w-75" aria-label="Small select example" disabled>
-                        <option selected>Pending </option>
-                        <option value="0">Recently</option>
-                        <option value="1">Past</option>
-                        <option value="2">Feauture</option>
-                    </select>
-                </div>
-                <div class=" col-lg-4 col-md-6 col-sm-12 col-12 d-flex justify-content-between align-items-center mb-1">
-                    <p>Level:</p>
-                    <select class="w-75" aria-label="Small select example" id="CourseLevel">
-                        <option selected>All Level</option>
-                        <option value="0">Biginner</option>
-                        <option value="1">Intermediate</option>
-                        <option value="2">Advanced</option>
-                    </select>
-                </div>
-                <div class=" col-lg-4 col-md-6 col-sm-12 col-12 d-flex justify-content-between align-items-center mb-1">
-                    <p>Price:</p>
-                    <select class="w-75" aria-label="Small select example" id="Price">
-                        <option selected>All price</option>
-                        <option value="0">100-500</option>
-                        <option value="1">500-1000</option>
-                        <option value="2">1000-1500</option>
-                        <option value="3">1500-2000</option>
-                    </select>
-                </div>
-            </div>
+    <div *ngIf="isFilterVisible" class="filter-options bg-light rounded shadow-sm p-4">
+      <h4 class="mb-3 text-primary text-center fw-bold">Filter Your Future</h4>
+      <div class="row g-3">
+        <!-- Added Filter -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <label for="AddedFilter" class="form-label fw-semibold text-muted">Added:</label>
+          <select id="AddedFilter" class="form-select">
+            <option selected>Pending</option>
+            <option value="0">Recently</option>
+            <option value="1">Past</option>
+            <option value="2">Future</option>
+          </select>
         </div>
-        <button class="btn btn-info btn-md mt-1" style="float: left;" (click)="applyFilter()">APPLY FILTER</button>
+        <!-- Level Filter -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <label for="CourseLevel" class="form-label fw-semibold text-muted">Level:</label>
+          <select id="CourseLevel" class="form-select">
+            <option selected>All Levels</option>
+            <option value="0">Beginner</option>
+            <option value="1">Intermediate</option>
+            <option value="2">Advanced</option>
+          </select>
+        </div>
+        <!-- Price Filter -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <label for="Price" class="form-label fw-semibold text-muted">Price:</label>
+          <select id="Price" class="form-select">
+            <option selected>All Prices</option>
+            <option value="0">100-500</option>
+            <option value="1">500-1000</option>
+            <option value="2">1000-1500</option>
+            <option value="3">1500-2000</option>
+          </select>
+        </div>
+      </div>
+      <!-- Apply Filter Button -->
+      <div class="d-flex justify-content-center mt-4">
+        <button class="btn btn-primary btn-lg px-4 shadow-sm" (click)="applyFilter()">
+          APPLY FILTER
+        </button>
+      </div>
     </div>
-</div>
+  </div>
+  
 
 
 
@@ -87,24 +94,14 @@
     <!-- Pagination -->
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            <!-- Previous Button -->
-            <li class="page-item" [class.disabled]="currentPage === 1">
-                <a class="page-link" type="button" (click)="changePage(currentPage - 1)" aria-label="Previous">
-                    <span aria-hidden="true">Previuos</span>
-                </a>
+            <li class="page-item pointer" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="goToPage(currentPage - 1)">Previous</a>
             </li>
-
-            <!-- Page Number Buttons -->
-            <li class="page-item " *ngFor="let page of [].constructor(totalPages) let i = index"
-                [class.active]="i+1 === currentPage">
-                <a class="page-link " type="button" (click)="changePage(currentPage)">{{ i + 1 }}</a>
+            <li class="page-item pointer" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+                <a class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</a>
             </li>
-
-            <!-- Next Button -->
-            <li class="page-item" [class.disabled]="currentPage === totalPages">
-                <a class="page-link" type="button" (click)="changePage(currentPage + 1)" aria-label="Next">
-                    <span aria-hidden="true">Next</span>
-                </a>
+            <li class="page-item pointer" [class.disabled]="currentPage === totalPages">
+                <a class="page-link" (click)="goToPage(currentPage + 1)">Next</a>
             </li>
         </ul>
     </nav>

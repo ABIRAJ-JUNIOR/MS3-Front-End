@@ -352,7 +352,7 @@ export class CourseCardsComponent implements OnInit {
     buttonElement.innerText = "Click To Buy"
   }
 
-  pageSize: number = 3; // Courses per page
+  pageSize: number = 6; // Courses per page
   currentPage: number = 1; // Current page index
   totalPages: number = 0; // Total number of pages
   pageNumbers: number[] = []; // Array of page numbers to display
@@ -378,9 +378,11 @@ export class CourseCardsComponent implements OnInit {
     })
   }
 
-  changePage(pageIndex: number) {
-    this.currentPage = pageIndex;
-    this.paginateCourses();
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.paginateCourses();
+    }
   }
 
 

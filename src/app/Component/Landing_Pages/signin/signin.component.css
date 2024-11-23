@@ -28,7 +28,13 @@
     font-size: 30px;
 }
 .sign-width{
-    max-width: 450px;
+    max-width: 600px;
+    /* min-height: 700px; */
+    height: 100%;
+}
+.carousel-inner img {
+    height: 900px; /* Adjust as needed */
+    object-fit: cover;
 }
 
 .form-group {

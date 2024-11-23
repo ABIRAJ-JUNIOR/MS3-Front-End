@@ -43,24 +43,27 @@ export class SignupComponent {
       phone:form.phone,
       password:form.password
     }
+
     this.authService.signUp(student).subscribe({
       next:(response) =>{
-        this.toastr.success("User SignUp Successfully.." , "" , {
+        this.toastr.success("User SignUp Successfull" , "" , {
           positionClass:"toast-top-right",
           progressBar:true,
-          timeOut:4000
+          timeOut:3000
         })
+        
+        this.StudentRegistration.reset()
       },complete:()=>{
         this.rout.navigate(['/signin'])
       },error:(error)=>{
-        console.log(error)
-        this.toastr.warning(error.error , "" , {
+        this.toastr.warning(error.error.title, "" , {
           positionClass:"toast-top-right",
           progressBar:true,
-          timeOut:4000
+          timeOut:3000
         })
       }
     })
+
   }
 
 }

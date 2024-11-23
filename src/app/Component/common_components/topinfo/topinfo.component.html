@@ -26,7 +26,7 @@
             <a href="#" class="text-white me-2">
                 <i class="bi bi-instagram"></i>
             </a>
-            <a href="#" class="btn btn-sm btn-outline-danger ms-2" [routerLink]="['/signin']">Login</a>
+            <a href="#" class="btn btn-sm btn-outline-danger ms-2" [routerLink]="['/signin']"  *ngIf="!isAdmin && !isStudent" >Login</a>
         </div>
     </div>
 </div>

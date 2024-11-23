@@ -46,117 +46,116 @@
                             <div class="form-group">
                                 <input type="text" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="nic">
                                 <label for="">NIC</label>
-                                <div *ngIf="StudentRegistration.get('nic')?.touched">
-                                    <p class="text-danger" *ngIf="StudentRegistration.get('nic')?.errors?.['required']">NIC is required.</p>
-                                    <p class="text-danger" *ngIf="StudentRegistration.get('nic')?.errors?.['pattern']">Invalid NIC format.</p>
+                                <div *ngIf="StudentRegistration.controls['nic'].touched">
+                                    <p class="text-danger" *ngIf="StudentRegistration.controls['nic']?.errors?.['required']">NIC is required.</p>
+                                    <p class="text-danger" *ngIf="StudentRegistration.controls['nic']?.errors?.['pattern']">Invalid NIC format.</p>
                                 </div>
                             </div>
                         </div>
-                        
+                
                         <div class="row">
                             <div class="col-lg-6 gap">
                                 <div class="form-group">
                                     <input type="text" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="firstName">
                                     <label for="">FirstName</label>
-                                   <div *ngIf="StudentRegistration.get('firstname')?.invalid && StudentRegistration.get('firstname')?.touched" class="text-danger">
-                                        First Name is required.
+                                    <div *ngIf="StudentRegistration.controls['firstName'].touched">
+                                        <p class="text-danger" *ngIf="StudentRegistration.controls['firstName']?.errors?.['required']">First Name is required.</p>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="col-lg-6 ">
                                 <div class="form-group">
                                     <input type="text" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="lastName">
                                     <label for="">LastName</label>
-                                  
+                                    <div *ngIf="StudentRegistration.controls['lastName'].touched">
+                                        <p class="text-danger" *ngIf="StudentRegistration.controls['lastName']?.errors?.['required']">Last Name is required.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class=" row  mt-1">
+                
+                        <div class="row mt-1">
                             <div class="form-group">
                                 <input type="email" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="email">
                                 <label for="">Email</label>
-                                <div *ngIf="StudentRegistration.get('email')?.touched">
-                                    <p class="text-danger" *ngIf="StudentRegistration.get('email')?.errors?.['required']">Email
-                                        field is required</p>
-                                    <p class="text-danger" *ngIf="StudentRegistration.get('email')?.errors?.['email']">Email is not
-                                        valid format</p>
+                                <div *ngIf="StudentRegistration.controls['email'].touched">
+                                    <p class="text-danger" *ngIf="StudentRegistration.controls['email']?.errors?.['required']">Email is required.</p>
+                                    <p class="text-danger" *ngIf="StudentRegistration.controls['email']?.errors?.['email']">Email is not valid format.</p>
                                 </div>
                             </div>
                         </div>
+                
                         <div class="row mt-1">
                             <div class="col-lg-6 gap">
                                 <div class="form-group">
                                     <input type="password" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="password">
                                     <label for="">Password</label>
-                                    <div *ngIf="StudentRegistration.get('password')?.touched" class="text-danger" >
-                                      <p *ngIf="StudentRegistration.get('password')?.errors?.['required']">Password field is required</p>
-                                      <p *ngIf="StudentRegistration.get('password')?.errors?.['minlength']">  Password must be at least 4 characters long.</p>
+                                    <div *ngIf="StudentRegistration.controls['password'].touched">
+                                        <p class="text-danger" *ngIf="StudentRegistration.controls['password']?.errors?.['required']">Password field is required.</p>
+                                        <p class="text-danger" *ngIf="StudentRegistration.controls['password']?.errors?.['minlength']">Password must be at least 4 characters long.</p>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-12  col-lg-6">
+                
+                            <div class="col-12 col-lg-6">
                                 <div class="form-group">
                                     <input type="password" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="confirmPassword">
                                     <label for="">Confirm Password</label>
-                                    <div class="text-danger"
-                                    *ngIf="StudentRegistration.get('confirmPassword')?.touched && StudentRegistration.get('confirmPassword')?.invalid">
-                                    <p> Confirm Password is Require</p>
-                                    </div>
-                                    <div *ngIf="StudentRegistration.controls['confirmPassword'].value !== StudentRegistration.controls['password'].value && StudentRegistration.controls['confirmPassword'].touched" class="text-danger">
-                                        Passwords do not match.
+                                    <div *ngIf="StudentRegistration.controls['confirmPassword'].touched">
+                                        <p class="text-danger" *ngIf="StudentRegistration.controls['confirmPassword']?.errors?.['required']">Confirm Password is required.</p>
+                                        <p class="text-danger" *ngIf="StudentRegistration.controls['confirmPassword'].value !== StudentRegistration.controls['password'].value">Passwords do not match.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                
                         <div class="row">
                             <div class="col-lg-6 gap">
                                 <div class="form-group">
                                     <input type="date" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="dateOfBirth">
                                     <label for="">DateOfBirth</label>
-                                    <div *ngIf="StudentRegistration.get('dateOfbirth')?.invalid && StudentRegistration.get('dateOfbirth')?.touched" class="text-danger">
-                                        Date of Birth is required.
+                                    <div *ngIf="StudentRegistration.controls['dateOfBirth'].touched">
+                                        <p class="text-danger" *ngIf="StudentRegistration.controls['dateOfBirth']?.errors?.['required']">Date of Birth is required.</p>
                                     </div>
                                 </div>
                             </div>
-
+                
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <select name="gender" id="gender" class="form-control px-2" formControlName="gender">
-                                        <option value="0" disabled selected>Select your gender</option>
+                                        <option value="" disabled selected>Select your gender</option>
                                         <option value="1">Male</option>
                                         <option value="2">Female</option>
                                         <option value="3">Other</option>
                                     </select>
-                                    <div *ngIf="StudentRegistration.get('gender')?.invalid && StudentRegistration.get('gender')?.touched" class="text-danger">
-                                        Please select your gender.
+                                    <div *ngIf="StudentRegistration.controls['gender'].touched">
+                                        <p class="text-danger" *ngIf="StudentRegistration.controls['gender']?.errors?.['required']">Please select your gender.</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                
                         <div class="row mt-1">
                             <div class="form-group">
                                 <input type="text" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="phone">
                                 <label for="">ContactNumber</label>
-                                <div *ngIf="StudentRegistration.get('contact')?.invalid && StudentRegistration.get('contact')?.touched" class="text-danger">
-                                    Contact Number is required.
+                                <div *ngIf="StudentRegistration.controls['phone'].touched">
+                                    <p class="text-danger" *ngIf="StudentRegistration.controls['phone']?.errors?.['required']">Contact Number is required.</p>
                                 </div>
                             </div>
                         </div>
+                
                         <div class="row mt-1">
-                            <button type="submit" class="btn btn-lg btn-danger mt-1 p-1" style="border-radius: 5px; width: 100%;">Your
+                            <button type="submit" class="btn btn-lg btn-danger mt-1 p-1" style="border-radius: 5px; width: 100%;" [disabled]="StudentRegistration.invalid" >Your
                                 Future Begins Here</button>
                             <div class="d-flex justify-content-center mt-2">
-                                <p class="ps-2 mb-lg-0 mb-md-5 mb-sm-5 mb-5 pe-1">If you already have an account?</p> <a
-                                    [routerLink]="['/signin']"> sign in here!</a>
+                                <p class="ps-2 mb-lg-0 mb-md-5 mb-sm-5 mb-5 pe-1">If you already have an account?</p>
+                                <a [routerLink]="['/signin']">sign in here!</a>
                             </div>
                         </div>
                     </div>
-
                 </form>
+                
             </div>
         </div>
 

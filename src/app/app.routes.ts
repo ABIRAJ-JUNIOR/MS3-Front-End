@@ -16,6 +16,7 @@ import { CourseListComponent } from './Component/Admin_Pages/course-list/course-
 import { StudentReportComponent } from './Component/Admin_Pages/student-report/student-report.component';
 import { CourseScheduleComponent } from './Component/Admin_Pages/course-schedule/course-schedule.component';
 import { CourseAssessmentComponent } from './Component/Admin_Pages/course-assessment/course-assessment.component';
+import { adminAuthGuard } from './Guard/Admin/admin-auth.guard';
 
 export const routes: Routes = [
 
@@ -39,8 +40,8 @@ export const routes: Routes = [
             {path:'course-list', component:CourseListComponent},
             {path:'schedule-list', component:CourseScheduleComponent},
             {path:'assessment-list', component:CourseAssessmentComponent},
-        ]
-
+        ],
+        canActivate:[adminAuthGuard]
     },
     {
         path:'student-dashboard', component:StudentDashboardComponent , children:[

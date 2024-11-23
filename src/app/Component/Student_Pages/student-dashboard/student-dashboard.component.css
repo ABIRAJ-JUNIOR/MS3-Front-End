@@ -59,6 +59,9 @@ h4 {
 #sidebar{
     background-color: #004085;
 }
+#sidebar:hover{
+    background-color:#343A40;
+}
 
 .sidebar-logo {
     padding: 1.15rem;
@@ -178,7 +181,7 @@ a.sidebar-link {
   }
 
   button .badge {
-    font-size: 10px;
+    font-size: 14px;
     padding: 5px 8px;
     z-index: 10; 
   }

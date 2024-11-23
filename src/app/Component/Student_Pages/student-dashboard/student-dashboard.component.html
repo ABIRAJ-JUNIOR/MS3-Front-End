@@ -70,7 +70,7 @@
       </div>
 
     </div>
-    
+
   </aside>
 
   <!-- Main Content Area -->
@@ -78,33 +78,40 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand px-3 border-bottom">
       <div class="navbar-collapse navbar">
-       
+        <button class="btn" id="sidebar-toggle" type="button" (click)="toggleSidebar()">
+          <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="d-flex align-items-center">
-          <button class="btn" id="sidebar-toggle" type="button" (click)="toggleSidebar()">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-             <!-- Button trigger modal -->
-          <button class="btn btn-sm btn-outline-dark  mx-2 border-0 fs-5 OverideBtn"  type="button" data-bs-toggle="modal" data-bs-target="#Notification"  ><i class="bi bi-bell-fill"></i></button>
-          <!-- Button trigger modal -->
-          <button class="btn btn-sm btn-outline-dark border-0 fs-5 OverideBtn"   type="button" data-bs-toggle="modal" data-bs-target="#Anouncement"><i class="bi bi-envelope"></i></button>
 
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">Brand</a>
-              <form class="d-flex ms-auto">
-                <input
-                  class="form-control me-2"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                />
-                <button class="btn btn-outline-success OverideBtn" type="button">
-                  <i class="bi bi-search"></i>
-                </button>
-              </form>
-            </div>
-          </nav>
-          
+          <!-- Button trigger modal -->
+          <div class="d-flex align-items-center">
+            <!-- Notification Button -->
+            <button class="btn btn-sm btn-outline-dark mx-2 position-relative OverideBtn" type="button"
+              data-bs-toggle="modal" data-bs-target="#Notification">
+              <i class="bi bi-bell-fill"></i>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                0
+              </span>
+            </button>
+
+            <!-- Announcement Button -->
+            <button class="btn btn-sm btn-outline-dark position-relative OverideBtn" type="button"
+              data-bs-toggle="modal" data-bs-target="#Anouncement">
+              <i class="bi bi-envelope"></i>
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                0
+              </span>
+            </button>
+          </div>
+          <div class="container-fluid">
+            <form class="d-flex ms-auto">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+              <button class="btn btn-outline-dark OverideBtn" type="button">
+                <i class="bi bi-search"></i>
+              </button>
+            </form>
+          </div>
+
         </div>
       </div>
     </nav>

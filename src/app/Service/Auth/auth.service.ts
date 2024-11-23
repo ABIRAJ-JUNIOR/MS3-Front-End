@@ -12,7 +12,9 @@ export class AuthService {
   private apiUrl = 'https://localhost:7044/api'
 
   signUp(student:SignUp){
-    return this.http.post(`${this.apiUrl}/Auth/SignUp` , student)
+    return this.http.post(`${this.apiUrl}/Auth/SignUp` , student,{
+      responseType:'text'
+    })
   }
 
   signIn(auth:SignIn){

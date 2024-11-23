@@ -3,6 +3,7 @@ import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FooterComponent } from '../../common_components/footer/footer.component';
 import { Navebar01Component } from '../../common_components/navebar-01/navebar-01.component';
+import { AuthService } from '../../../Service/Auth/auth.service';
 
 
 @Component({
@@ -13,6 +14,23 @@ import { Navebar01Component } from '../../common_components/navebar-01/navebar-0
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  isAdmin:boolean = false;
+  isStudent:boolean = false;
+
+  sidebarCollapsed = false;
+
+  constructor(private authService:AuthService){
+    if(authService.isLoggedInAdmin()){
+      this.isAdmin = true
+      this.isStudent = false
+    }
+
+    if(authService.isLoggedInStudent()){
+      this.isAdmin = false
+      this.isStudent = true
+    }
+  }
+
   courses = [
     {
       title: 'Web Development',

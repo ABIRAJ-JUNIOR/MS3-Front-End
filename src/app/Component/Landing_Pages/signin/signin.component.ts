@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../Service/Auth/auth.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-signin',
@@ -31,7 +32,16 @@ export class SigninComponent {
           timeOut:3000
         })
         localStorage.setItem('token',res)
-      },error:(error)=>{
+      },complete:()=>{
+        const token:string = localStorage.getItem("token")!;
+        const decode:any = jwtDecode(token)
+        if(decode.Role == "Administrator" || decode.Role == "Instructor"){
+          this.rout.navigate(['/admin-dashboard'])
+        }else if(decode.Role == "Student"){
+          this.rout.navigate(['/home'])
+        }
+      }
+      ,error:(error)=>{
         this.toastr.warning(error.error, "" , {
           positionClass:"toast-top-right",
           progressBar:true,

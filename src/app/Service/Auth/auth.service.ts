@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { jwtDecode } from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,26 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/Auth/SignIn`, auth,{
       responseType:'text'
     })
+  }
+
+  isLoggedInAdmin():boolean{
+    const token:string = localStorage.getItem("token")!;
+    const decode:any = jwtDecode(token)
+    if(decode.Role == "Administrator" || decode.Role == "Instructor"){  
+      return true
+    }else{
+      return false
+    }
+  }
+
+  isLoggedInStudent():boolean{
+    const token:string = localStorage.getItem("token")!;
+    const decode:any = jwtDecode(token)
+    if(decode.Role == "Student"){  
+      return true
+    }else{
+      return false
+    }
   }
 }
 

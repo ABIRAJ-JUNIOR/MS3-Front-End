@@ -163,3 +163,9 @@ export interface Announcement{
     audienceType:string;
     isActive:boolean;
 }
+
+export interface CourseCategory{
+  id:string;
+  categoryName:string;
+  description:string;
+}

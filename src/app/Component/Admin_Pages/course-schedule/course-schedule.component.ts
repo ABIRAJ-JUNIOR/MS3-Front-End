@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { StudentService } from '../../../Service/Student/student.service';
 import { Router } from '@angular/router';
-import { Schedule, Student } from '../../../Modals/modals';
+import { Course, Schedule, Student } from '../../../Modals/modals';
 import { CourseService } from '../../../Service/Course/course.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -22,9 +22,9 @@ export class CourseScheduleComponent {
   totalItems:number = 0;
 
   scheduleForm: FormGroup;
-  courses: string[] = ['Web Development', 'Data Science', 'Design']; // Hardcoded course array
+  courses: DropDown[] = []
 
-  constructor(private paginationService: CourseService,private fb: FormBuilder) {
+  constructor(private courseService: CourseService,private fb: FormBuilder) {
     this.scheduleForm = this.fb.group({
       course: ['', Validators.required],
       startDate: ['', Validators.required],
@@ -40,10 +40,22 @@ export class CourseScheduleComponent {
 
   ngOnInit(): void {
     this.loadItems();
+    this.courseService.getCourses().subscribe({
+      next: (data:Course[]) => {
+        console.log(data)
+        data.forEach(c => {
+          const course = {
+            name:c.courseName,
+            id:c.id
+          }
+          this.courses.push(course)
+        })
+      }
+    })
   }
 
   loadItems(): void {
-    this.paginationService.schedulePagination(this.currentPage , this.pageSize).subscribe({
+    this.courseService.schedulePagination(this.currentPage , this.pageSize).subscribe({
       next:((response:any) => {
         this.schedules = response.items
         this.totalPages = response.totalPages
@@ -69,4 +81,9 @@ export class CourseScheduleComponent {
       // Implement further actions, e.g., API call or storing data.
     }
   }
+}
+
+export interface DropDown{
+  name:string;
+  id:string;
 }

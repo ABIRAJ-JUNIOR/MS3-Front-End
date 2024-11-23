@@ -30,4 +30,7 @@ export class CourseService {
   assessmentPagination(pageNumber:number , pageSize:number){
     return this.http.get<any>(this.apiUrl + `/Assessment/Pagination/${pageNumber}/${pageSize}`)
   }
+  addCourseSchedule(CourseSchedule:any){
+    return this.http.post<Schedule>(this.apiUrl + '/CourseSchedule', CourseSchedule)
+  }
 }

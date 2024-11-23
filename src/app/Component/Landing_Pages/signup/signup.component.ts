@@ -46,10 +46,10 @@ export class SignupComponent {
 
     this.authService.signUp(student).subscribe({
       next:(response) =>{
-        this.toastr.success("User SignUp Successfully.." , "" , {
+        this.toastr.success("User SignUp Successfull" , "" , {
           positionClass:"toast-top-right",
           progressBar:true,
-          timeOut:4000
+          timeOut:3000
         })
         
         this.StudentRegistration.reset()
@@ -59,7 +59,7 @@ export class SignupComponent {
         this.toastr.warning(error.error.title, "" , {
           positionClass:"toast-top-right",
           progressBar:true,
-          timeOut:4000
+          timeOut:3000
         })
       }
     })

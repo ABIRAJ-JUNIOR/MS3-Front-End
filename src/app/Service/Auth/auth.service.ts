@@ -13,6 +13,12 @@ export class AuthService {
   signUp(student:SignUp){
     return this.http.post(`${this.apiUrl}/Auth/SignUp` , student)
   }
+
+  signIn(auth:SignIn){
+    return this.http.post(`${this.apiUrl}/Auth/SignIn`, auth,{
+      responseType:'text'
+    })
+  }
 }
 
 export interface SignUp{
@@ -23,5 +29,10 @@ export interface SignUp{
   gender:number;
   email:string;
   phone:string;
+  password:string;
+}
+
+export interface SignIn{
+  email:string;
   password:string;
 }

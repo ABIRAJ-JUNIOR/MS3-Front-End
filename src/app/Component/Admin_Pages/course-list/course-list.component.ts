@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {   CourseService } from '../../../Service/Course/course.service';
-import { Course, Schedule } from '../../../Modals/modals';
+import { Course, CourseCategory, Schedule } from '../../../Modals/modals';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -22,7 +22,7 @@ export class CourseListComponent {
   courseForm: FormGroup;
   courseImageUrl: string | null = null; // To display the course image preview
 
-  CourseCategory:any[]=[]
+  CourseCategory:CourseCategory[]=[]
 
   constructor(private courseService: CourseService,private fb: FormBuilder) {
 
@@ -57,7 +57,9 @@ export class CourseListComponent {
   ngOnInit(): void {
     this.loadItems();
     this.courseService.GetAllCategory().subscribe({
-      next: (data:any[]) => {
+      next: (data:CourseCategory[]) => {
+        console.log(data)
+        this.CourseCategory=data
     }})
   }
 

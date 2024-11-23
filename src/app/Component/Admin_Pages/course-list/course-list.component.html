@@ -137,7 +137,9 @@
                             <label for="courseCategory" class="form-label fw-bold text-dark">Course Category</label>
                             <select formControlName="courseCategory" class="form-select border rounded-3 shadow-sm">
                                 <option value="">Select a category</option>
-                               
+                                <ng-container *ngFor="let course of CourseCategory">
+                                    <option [value]="course.id">{{ course.categoryName }}</option>
+                                  </ng-container>
                             </select>
                         </div>
 

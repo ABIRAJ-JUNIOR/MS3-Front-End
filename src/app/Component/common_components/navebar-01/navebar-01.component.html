@@ -36,14 +36,14 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/contact']" [routerLinkActive]="['active_Link']">Contact</a>
         </li>
-        <li class="nav-item dropdown ms-md-4 ms-lg-4">
+        <li class="nav-item dropdown ms-md-4 ms-lg-4" *ngIf="isAdmin || isStudent">
           <a data-bs-toggle="dropdown" class="nav-icon pe-md-0">
             <img src="profile.jpg" class="avatar img-fluid rounded" alt="">
           </a>
           <div class="dropdown-menu dropdown-menu-end">
             <a class="dropdown-item" [routerLink]="['/admin-dashboard/admin-profile']">Profile</a>
             <a class="dropdown-item">Dashboard</a>
-            <a class="dropdown-item">Logout</a>
+            <a class="dropdown-item" (click)="logout()">Logout</a>
           </div>
         </li>
       </ul>

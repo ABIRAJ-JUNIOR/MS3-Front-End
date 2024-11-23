@@ -22,8 +22,8 @@ export class AuthService {
   }
 
   isLoggedInAdmin():boolean{
-    const token:string = localStorage.getItem("token")!;
-    const decode:any = jwtDecode(token)
+    const token = localStorage.getItem("token");
+    const decode:any = token != null ? jwtDecode(token) : ""
     if(decode.Role == "Administrator" || decode.Role == "Instructor"){  
       return true
     }else{
@@ -33,12 +33,19 @@ export class AuthService {
 
   isLoggedInStudent():boolean{
     const token:string = localStorage.getItem("token")!;
+    if(token == null){
+      return false
+    }
     const decode:any = jwtDecode(token)
     if(decode.Role == "Student"){  
       return true
     }else{
       return false
     }
+  }
+
+  logout(){
+    localStorage.removeItem("token")
   }
 }
 

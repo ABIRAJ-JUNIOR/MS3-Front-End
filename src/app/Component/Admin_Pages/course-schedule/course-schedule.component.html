@@ -114,9 +114,11 @@
               <span class="input-group-text bg-light border-0">
                 <i class="bi bi-book"></i>
               </span>
-              <select formControlName="course" class="form-select border rounded-3">
+              <select formControlName="course" class="form-select border rounded-end-3">
                 <option value="">Select a course</option>
-                <option *ngFor="let course of courses" [value]="course">{{ course }}</option>
+                <ng-container *ngFor="let course of courses">
+                  <option [value]="course.id">{{ course.name }}</option>
+                </ng-container>
               </select>
             </div>
           </div>
@@ -128,7 +130,7 @@
               <span class="input-group-text bg-light border-0">
                 <i class="bi bi-calendar"></i>
               </span>
-              <input type="date" formControlName="startDate" class="form-control border rounded-3" />
+              <input type="date" formControlName="startDate" class="form-control border rounded-end-3" />
             </div>
           </div>
 
@@ -139,7 +141,7 @@
               <span class="input-group-text bg-light border-0">
                 <i class="bi bi-calendar-check"></i>
               </span>
-              <input type="date" formControlName="endDate" class="form-control border rounded-3" />
+              <input type="date" formControlName="endDate" class="form-control border rounded-end-3" />
             </div>
           </div>
 
@@ -150,7 +152,7 @@
               <span class="input-group-text bg-light border-0">
                 <i class="bi bi-clock"></i>
               </span>
-              <input type="number" formControlName="duration" class="form-control border rounded-3"
+              <input type="number" formControlName="duration" class="form-control border rounded-end-3"
                 placeholder="Enter duration" />
             </div>
           </div>
@@ -162,7 +164,7 @@
               <span class="input-group-text bg-light border-0">
                 <i class="bi bi-geo-alt"></i>
               </span>
-              <input type="text" formControlName="location" class="form-control border rounded-3"
+              <input type="text" formControlName="location" class="form-control border rounded-end-3"
                 placeholder="Enter location" />
             </div>
           </div>
@@ -175,7 +177,7 @@
               <span class="input-group-text bg-light border-0">
                 <i class="bi bi-people"></i>
               </span>
-              <input type="number" formControlName="maxStudents" class="form-control border rounded-3"
+              <input type="number" formControlName="maxStudents" class="form-control border rounded-end-3"
                 placeholder="Enter max students" />
             </div>
           </div>
@@ -186,7 +188,7 @@
               <span class="input-group-text bg-light border-0">
                 <i class="bi bi-info-circle"></i>
               </span>
-              <select formControlName="scheduleStatus" class="form-select border rounded-3">
+              <select formControlName="scheduleStatus" class="form-select border rounded-end-3">
                 <option value="">Select status</option>
                 <option value="1">Open</option>
                 <option value="2">Closed</option>

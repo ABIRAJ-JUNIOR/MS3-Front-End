@@ -4,7 +4,7 @@ export interface Student {
   firstName: string;
   lastName: string;
   dateOfBirth: Date;
-  gender: string;
+  gender: number;
   phone: string;
   address: Address;
   imagePath?:string;
@@ -162,4 +162,10 @@ export interface Announcement{
     expirationDate:Date;
     audienceType:string;
     isActive:boolean;
+}
+
+export interface CourseCategory{
+  id:string;
+  categoryName:string;
+  description:string;
 }

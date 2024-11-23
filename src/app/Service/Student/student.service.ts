@@ -18,7 +18,7 @@ export class StudentService {
   getStudent(id:string){
     return this.http.get<Student>(this.apiUrl + '/Student/' + id)
   }
-  addStudent(Student:Student){
+  addStudent(Student:FormData){
     return this.http.post<Student>(this.apiUrl + '/Student/student', Student)
   }
 

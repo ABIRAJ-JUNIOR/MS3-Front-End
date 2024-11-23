@@ -65,7 +65,12 @@
           </a>
         </li>
       </ul>
+      <div style="margin-top: 400px; margin-left: 40px;">
+        <img src="/StudentDashboard/student.webp" alt="" height="150px" style="border-radius: 50%;">
+      </div>
+
     </div>
+    
   </aside>
 
   <!-- Main Content Area -->
@@ -73,14 +78,15 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand px-3 border-bottom">
       <div class="navbar-collapse navbar">
-        <button class="btn" id="sidebar-toggle" type="button" (click)="toggleSidebar()">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+       
         <div class="d-flex align-items-center">
+          <button class="btn" id="sidebar-toggle" type="button" (click)="toggleSidebar()">
+            <span class="navbar-toggler-icon"></span>
+          </button>
              <!-- Button trigger modal -->
-          <button class="btn btn-sm btn-outline-primary mx-2"  type="button" data-bs-toggle="modal" data-bs-target="#Notification" ><i class="bi bi-bell"></i> </button>
+          <button class="btn btn-sm btn-outline-dark  mx-2 border-0 fs-5"  type="button" data-bs-toggle="modal" data-bs-target="#Notification" style="background: none; color: black;" ><i class="bi bi-bell-fill"></i></button>
           <!-- Button trigger modal -->
-          <button class="btn btn-sm btn-outline-success"   type="button" data-bs-toggle="modal" data-bs-target="#Anouncement"><i class="bi bi-envelope"></i></button>
+          <button class="btn btn-sm btn-outline-dark border-0 fs-5"   type="button" data-bs-toggle="modal" data-bs-target="#Anouncement" style="background: none; color: black;"><i class="bi bi-envelope"></i></button>
         </div>
       </div>
     </nav>

@@ -17,6 +17,7 @@ import { StudentReportComponent } from './Component/Admin_Pages/student-report/s
 import { CourseScheduleComponent } from './Component/Admin_Pages/course-schedule/course-schedule.component';
 import { CourseAssessmentComponent } from './Component/Admin_Pages/course-assessment/course-assessment.component';
 import { adminAuthGuard } from './Guard/Admin/admin-auth.guard';
+import { DashContentComponent } from './Component/Student_Pages/dash-content/dash-content.component';
 
 export const routes: Routes = [
 
@@ -45,7 +46,7 @@ export const routes: Routes = [
     },
     {
         path: 'student-dashboard', component: StudentDashboardComponent, children: [
-
+                {path:'',component:DashContentComponent}
         ]
     }
 ];

@@ -21,8 +21,8 @@ export class StudentListComponent implements OnInit {
   currentLength:number = 0;
   totalItems:number = 0;
 
+  profileImage!:File;
   profileForm!: FormGroup;
-
   constructor(private paginationService: StudentService , private router:Router,private fb: FormBuilder) {}
 
   ngOnInit(): void {
@@ -77,12 +77,34 @@ export class StudentListComponent implements OnInit {
 
   onSubmit(): void {
     if (this.profileForm.valid) {
-      let formData=this.profileForm.value
-      for (let key in formData) {
-        if (formData[key] === '') {
-          formData[key] = null;
+      let form=this.profileForm.value
+      for (let key in form) {
+        if (form[key] === '') {
+          form[key] = null;
         }
       }
+      const gender:number = Number(form.gender)
+    const formdata:FormData = new FormData();
+    formdata.append('nic',form.nic),
+    formdata.append('firstName',form.firstName),
+    formdata.append('lastName',form.lastName),
+    formdata.append('dateOfBirth',form.dateOfBirth),
+    formdata.append('gender',form.gender),
+    formdata.append('email',form.email),
+    formdata.append('phone',form.phone),
+    formdata.append('password',form.password),
+    // formdata.append('address.addressLine1',form.nic),
+    // formdata.append('address.addressLine2',form.nic),
+    // formdata.append('address.city',form.nic),
+    // formdata.append('address.postalCode',form.nic),
+    // formdata.append('address.country',form.nic),
+    
+
+
+    this.paginationService.addStudent(formdata).subscribe(data=>{
+      console.log(data)
+    })
+
       console.log('Form Submitted', this.profileForm.value);
     }
     this.profileForm.reset()
@@ -94,6 +116,7 @@ export class StudentListComponent implements OnInit {
   profileImageUrl: string | undefined;
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
+    this.profileImage = file
     console.log(file)
     if (file) {
       this.previewImage(file);

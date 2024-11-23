@@ -20,31 +20,31 @@ import { adminAuthGuard } from './Guard/Admin/admin-auth.guard';
 
 export const routes: Routes = [
 
-    {path:'' , component:HomeComponent},
-    {path:'home' , component:HomeComponent},
-    {path:'course',component:CourseComponent},
-    {path:'contact' , component:ContactComponent},
-    {path:'about' , component:AboutComponent},
-    {path:'signin' , component:SigninComponent},
-    {path:'signup' , component:SignupComponent},
+    { path: '', component: HomeComponent },
+    { path: 'home', component: HomeComponent },
+    { path: 'course', component: CourseComponent },
+    { path: 'contact', component: ContactComponent },
+    { path: 'about', component: AboutComponent },
+    { path: 'signin', component: SigninComponent },
+    { path: 'signup', component: SignupComponent },
 
     {
-        path:'admin-dashboard', component:AdminDashboardComponent , children:[
-            {path:'', component:AdminHomeComponent},
-            {path:'home', component:AdminHomeComponent},
-            {path:'student-list', component:StudentListComponent},
-            {path:'student-report/:id', component:StudentReportComponent},
-            {path:'admin-list', component:AdminListComponent},
-            {path:'audit-log', component:AuditLogComponent},
-            {path:'admin-profile', component:AdminProfileComponent},
-            {path:'course-list', component:CourseListComponent},
-            {path:'schedule-list', component:CourseScheduleComponent},
-            {path:'assessment-list', component:CourseAssessmentComponent},
+        path: 'admin-dashboard', component: AdminDashboardComponent, children: [
+            { path: '', component: AdminHomeComponent },
+            { path: 'home', component: AdminHomeComponent },
+            { path: 'student-list', component: StudentListComponent },
+            { path: 'student-report/:id', component: StudentReportComponent },
+            { path: 'admin-list', component: AdminListComponent },
+            { path: 'audit-log', component: AuditLogComponent },
+            { path: 'admin-profile', component: AdminProfileComponent },
+            { path: 'course-list', component: CourseListComponent },
+            { path: 'schedule-list', component: CourseScheduleComponent },
+            { path: 'assessment-list', component: CourseAssessmentComponent },
         ],
-        canActivate:[adminAuthGuard]
+        canActivate: [adminAuthGuard]
     },
     {
-        path:'student-dashboard', component:StudentDashboardComponent , children:[
+        path: 'student-dashboard', component: StudentDashboardComponent, children: [
 
         ]
     }

@@ -33,4 +33,7 @@ export class CourseService {
   addCourseSchedule(CourseSchedule:any){
     return this.http.post<Schedule>(this.apiUrl + '/CourseSchedule', CourseSchedule)
   }
+  GetAllCategory(){
+    return this.http.get<any>(this.apiUrl + '/CourseCategory/GetAllCategory')
+  }
 }

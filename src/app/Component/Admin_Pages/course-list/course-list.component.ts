@@ -22,6 +22,8 @@ export class CourseListComponent {
   courseForm: FormGroup;
   courseImageUrl: string | null = null; // To display the course image preview
 
+  CourseCategory:any[]=[]
+
   constructor(private courseService: CourseService,private fb: FormBuilder) {
 
     this.courseForm = this.fb.group({
@@ -54,6 +56,9 @@ export class CourseListComponent {
 
   ngOnInit(): void {
     this.loadItems();
+    this.courseService.GetAllCategory().subscribe({
+      next: (data:any[]) => {
+    }})
   }
 
   loadItems(): void {

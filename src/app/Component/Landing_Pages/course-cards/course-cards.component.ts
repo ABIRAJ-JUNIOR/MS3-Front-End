@@ -5,7 +5,7 @@ import { Course } from '../../../Modals/modals';
 import { FormsModule } from '@angular/forms';
 import { CourseFilterPipe } from '../../../Pipes/course-filter.pipe';
 import { PaymentDataService } from '../../../Service/Payment/payment-data.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-course-cards',
@@ -17,7 +17,7 @@ import { RouterModule } from '@angular/router';
 export class CourseCardsComponent implements OnInit {
 
 
-  constructor(private CourseService:CourseService,private PaymentService:PaymentDataService){
+  constructor(private CourseService:CourseService,private PaymentService:PaymentDataService , private route:Router){
     
   }
 
@@ -410,7 +410,15 @@ export class CourseCardsComponent implements OnInit {
   }
 
 
-  sendPaymentData(data:any) {
-    this.PaymentService.changeData(data); // Send the array to the service
+  sendPaymentData(data:any,sechdule:any) {
+    let PurchaseDetails={
+      "courseName":data.courseName,
+      "courseFee":data.courseFee,
+      "courseId":data.id,
+      ...sechdule
+    }
+    console.log(PurchaseDetails)
+    this.PaymentService.changeData(PurchaseDetails); // Send the array to the service
+    this.route.navigate(['/payment']);
   }
 }

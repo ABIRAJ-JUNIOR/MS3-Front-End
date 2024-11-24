@@ -22,7 +22,7 @@ export class CourseCardsComponent implements OnInit {
   // courses: any = [
   //   {
   //     "level": "Beginner",
-  //     "imagePath": "/course/card1.jpg",
+  //     "imageUrl": "/course/card1.jpg",
   //     "CourseName": "Complete Python Bootcamp",
   //     "price": 10000,
   //     "description": "This course is designed for beginners who want to learn Python from scratch. You'll start with basic syntax and progress to more advanced concepts like object-oriented programming, web scraping, and data analysis.",
@@ -48,7 +48,7 @@ export class CourseCardsComponent implements OnInit {
   //   },
   //   {
   //     "level": "Beginner",
-  //     "imagePath": "/course/card1.jpg",
+  //     "imageUrl": "/course/card1.jpg",
   //     "CourseName": "Complete Python Bootcamp",
   //     "price": 10000,
   //     "description": "This course is designed for beginners who want to learn Python from scratch. You'll start with basic syntax and progress to more advanced concepts like object-oriented programming, web scraping, and data analysis.",
@@ -74,7 +74,7 @@ export class CourseCardsComponent implements OnInit {
   //   },
   //   {
   //     "level": "Beginner",
-  //     "imagePath": "/course/card1.jpg",
+  //     "imageUrl": "/course/card1.jpg",
   //     "CourseName": "Complete Python Bootcamp",
   //     "price": 10000,
   //     "description": "This course is designed for beginners who want to learn Python from scratch. You'll start with basic syntax and progress to more advanced concepts like object-oriented programming, web scraping, and data analysis.",
@@ -100,7 +100,7 @@ export class CourseCardsComponent implements OnInit {
   //   },
   //   {
   //     "level": "Beginner",
-  //     "imagePath": "/course/card2.jpg",
+  //     "imageUrl": "/course/card2.jpg",
   //     "CourseName": "Introduction to JavaScript",
   //     "price": 7500,
   //     "description": "A beginner-friendly course to introduce you to JavaScript. You'll learn how to write interactive scripts for web pages, including variables, loops, functions, and event handling.",
@@ -118,7 +118,7 @@ export class CourseCardsComponent implements OnInit {
   //   },
   //   {
   //     "level": "Intermediate",
-  //     "imagePath": "/course/card3.jpg",
+  //     "imageUrl": "/course/card3.jpg",
   //     "CourseName": "Advanced Python Programming",
   //     "price": 15000,
   //     "description": "This course dives into more advanced topics like decorators, generators, multi-threading, and Python libraries for machine learning and data science.",
@@ -136,7 +136,7 @@ export class CourseCardsComponent implements OnInit {
   //   },
   //   {
   //     "level": "Intermediate",
-  //     "imagePath": "/course/card4.jpg",
+  //     "imageUrl": "/course/card4.jpg",
   //     "CourseName": "Angular for Beginners to Advanced",
   //     "price": 12000,
   //     "description": "Learn Angular from scratch and build dynamic web applications. This course covers everything from basic concepts like components to more advanced topics like RxJS and state management.",
@@ -162,7 +162,7 @@ export class CourseCardsComponent implements OnInit {
   //   },
   //   {
   //     "level": "Advanced",
-  //     "imagePath": "/course/card5.jpg",
+  //     "imageUrl": "/course/card5.jpg",
   //     "CourseName": "Mastering Machine Learning",
   //     "price": 20000,
   //     "description": "This advanced course covers machine learning models using Python, including regression, classification, clustering, and deep learning.",
@@ -180,7 +180,7 @@ export class CourseCardsComponent implements OnInit {
   //   },
   //   {
   //     "level": "Advanced",
-  //     "imagePath": "/course/courseHeader1.jpg",
+  //     "imageUrl": "/course/courseHeader1.jpg",
   //     "CourseName": "Full Stack Web Development",
   //     "price": 25000,
   //     "description": "Master front-end and back-end web development with technologies like HTML, CSS, JavaScript, Node.js, and MongoDB.",
@@ -222,7 +222,7 @@ export class CourseCardsComponent implements OnInit {
   //   },
   //   {
   //     "level": "Beginner",
-  //     "imagePath": "/course/card4.jpg",
+  //     "imageUrl": "/course/card4.jpg",
   //     "CourseName": "Data Science with Python",
   //     "price": 12000,
   //     "description": "Learn to analyze data using Python's powerful libraries like pandas and NumPy. This course includes data wrangling, visualization, and building models.",
@@ -240,7 +240,7 @@ export class CourseCardsComponent implements OnInit {
   //   },
   //   {
   //     "level": "Beginner",
-  //     "imagePath": "/course/card1.jpg",
+  //     "imageUrl": "/course/card1.jpg",
   //     "CourseName": "Web Development Bootcamp",
   //     "price": 13000,
   //     "description": "Learn web development by building real-world projects using HTML, CSS, JavaScript, and frameworks like Bootstrap.",
@@ -258,7 +258,7 @@ export class CourseCardsComponent implements OnInit {
   //   },
   //   {
   //     "level": "Intermediate",
-  //     "imagePath": "/course/card3.jpg",
+  //     "imageUrl": "/course/card3.jpg",
   //     "CourseName": "Deep Learning with TensorFlow",
   //     "price": 15000,
   //     "description": "Dive deep into neural networks, CNNs, and RNNs. Learn to build AI models with TensorFlow and Keras, applied to image and text data.",
@@ -276,7 +276,7 @@ export class CourseCardsComponent implements OnInit {
   //   },
   //   {
   //     "level": "Advanced",
-  //     "imagePath": "/course/card5.jpg",
+  //     "imageUrl": "/course/card5.jpg",
   //     "CourseName": "Cloud Computing with AWS",
   //     "price": 20000,
   //     "description": "Learn to design and deploy scalable applications on AWS. Explore services like EC2, S3, Lambda, and more.",
@@ -294,7 +294,7 @@ export class CourseCardsComponent implements OnInit {
   //   },
   //   {
   //     "level": "Advanced",
-  //     "imagePath": "/course/card2.jpg",
+  //     "imageUrl": "/course/card2.jpg",
   //     "CourseName": "Blockchain Development",
   //     "price": 22000,
   //     "description": "Learn the fundamentals of blockchain technology and smart contract development. Apply your knowledge by building decentralized applications (dApps).",
@@ -312,7 +312,7 @@ export class CourseCardsComponent implements OnInit {
   //   },
   //   {
   //     "level": "Intermediate",
-  //     "imagePath": "/course/courseHeader1.jpg",
+  //     "imageUrl": "/course/courseHeader1.jpg",
   //     "CourseName": "Digital Marketing",
   //     "price": 18000,
   //     "description": "This course will teach you strategies for SEO, SEM, content marketing, social media advertising, and more. Become a certified digital marketer.",
@@ -365,9 +365,6 @@ export class CourseCardsComponent implements OnInit {
   paginateCourses() {
     this.CourseService.pagination(this.currentPage,this.pageSize).subscribe({
       next:((courses:any)=>{
-        courses.items.forEach((c:any)=>{
-          c.imagePath="https://localhost:7044/" + c.imagePath
-        })
         this.paginatedCourses=courses.items
         console.log(this.paginatedCourses)
         this.totalPages=courses.totalPages

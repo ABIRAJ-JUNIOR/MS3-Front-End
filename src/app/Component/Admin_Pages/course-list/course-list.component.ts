@@ -69,7 +69,7 @@ export class CourseListComponent {
         this.totalPages = response.totalPages
         this.totalItems = response.totalItem
         response.items.forEach((a:Course) => {
-          a.imagePath = "https://localhost:7044/" + a.imagePath
+          a.imageUrl = "https://localhost:7044/" + a.imageUrl
           let count = 0
           a.schedules.forEach((s:Schedule) => {
             count++

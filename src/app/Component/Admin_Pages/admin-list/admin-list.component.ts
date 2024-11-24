@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { AdminService } from '../../../Service/Admin/admin.service';
 import { Admin } from '../../../Modals/modals';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-admin-list',
@@ -20,10 +21,10 @@ export class AdminListComponent {
   totalItems:number = 0;
 
   profileForm: FormGroup;
-  profileImageUrl: string | null = null;
+ 
 
 
-  constructor(private adminService: AdminService,private fb: FormBuilder) {
+  constructor(private adminService: AdminService,private fb: FormBuilder, private toastr:ToastrService) {
 
     this.profileForm = this.fb.group({
       nic: ['', [Validators.required, Validators.pattern(/^\d{9}[Vv]|\d{12}$/)]], // Example NIC validation
@@ -52,11 +53,9 @@ export class AdminListComponent {
   loadItems(): void {
     this.adminService.pagination(this.currentPage , this.pageSize).subscribe({
       next:((response:any) => {
+        console.log(response)
         this.totalPages = response.totalPages
         this.totalItems = response.totalItem
-        response.items.forEach((a:Admin) => {
-          a.imagePath = "https://localhost:7044/" + a.imagePath
-        })
         this.admins = response.items
       }),
       complete:() => {
@@ -71,30 +70,80 @@ export class AdminListComponent {
       this.loadItems();
     }
   }
-  onSubmit() {
-    if (this.profileForm.valid) {
-      const formData = this.profileForm.value;
-      console.log('Form Data:', formData);
-      alert('User details submitted successfully!');
-      this.profileForm.reset(); // Reset form after successful submission
-    } else {
-      alert('Please fill out all required fields correctly.');
-    }
-  }
+
+  profileImageUrl: string | null = null;
+  selectedFile:File | null = null;
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input?.files && input.files[0]) {
       const file = input.files[0];
+      this.selectedFile = file
+      console.log(this.selectedFile)
       const reader = new FileReader();
 
       reader.onload = () => {
-        this.profileImageUrl = reader.result as string; // Update the preview
+        this.profileImageUrl = reader.result as string;
       };
 
-      reader.readAsDataURL(file); // Read file as data URL
+      reader.readAsDataURL(file);
     }
   }
 
 
+  private adminId:string = ''
+  onSubmit() {
+    const formData = this.profileForm.value
+    formData.role = Number(formData.role)
+
+    const admindata:AdminRequest = {
+      nic:formData.nic,
+      firstName: formData.firstName,
+      lastName:formData.lastName,
+      role:formData.role,
+      email:formData.email,
+      phone:formData.phone,
+      password:formData.password,
+    }   
+
+    this.adminService.addAdmin(admindata).subscribe({
+      next: (response:any) => {
+        this.adminId = response.id
+        this.toastr.success("Register Successfull" , "" , {
+          positionClass:"toast-top-right",
+          progressBar:true,
+          timeOut:3000
+        })
+      this.profileForm.reset();
+      },
+      complete:()=>{
+        const formdata = new FormData();
+        formdata.append('imageFile' , this.selectedFile!);
+        this.adminService.addimage(this.adminId , formdata).subscribe({
+          next:(response:any)=>{
+          }
+        })
+        this.loadItems();
+      },
+      error:(error)=>{
+        this.toastr.warning(error.error , "" , {
+          positionClass:"toast-top-right",
+          progressBar:true,
+          timeOut:3000
+        })
+      }
+    })
+
+  
+  } 
+}
+
+export interface AdminRequest{
+  nic: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email:string
+  password:string
+  role:number
 }

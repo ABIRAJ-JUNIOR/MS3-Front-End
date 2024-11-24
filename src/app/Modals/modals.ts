@@ -7,7 +7,7 @@ export interface Student {
   gender: number;
   phone: string;
   address: Address;
-  imagePath?:string;
+  imageUrl?:string;
 
   enrollments: Enrollment[];
   studentAssessments:StudentAssessment[]
@@ -28,7 +28,8 @@ export interface Admin {
   firstName: string;
   lastName: string;
   phone: string;
-  imagePath: string;
+  imageUrl: string;
+  role:number
   auditLog: AuditLog[];
 }
 
@@ -49,7 +50,7 @@ export interface Course {
   courseFee: number;
   description: string;
   prerequisites: string;
-  imagePath: string;
+  imageUrl: string;
   createdDate: Date;
   updatedDate: Date;
   schedulesCount: number;
@@ -93,7 +94,7 @@ export interface Payment{
     paymentMethod:string;
     amountPaid:number;
     paymentDate:Date;
-    imagePath:string;
+    imageUrl:string;
     installmentNumber:string;
 }
 

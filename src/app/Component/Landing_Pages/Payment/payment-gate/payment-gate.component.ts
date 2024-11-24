@@ -61,6 +61,7 @@ export class PaymentGateComponent {
 
 
   CardFormSubmited(form: FormData) {
+    this.CardDetails=[]
     this.CardDetails.push(form)
     console.log(this.CardDetails);
   }

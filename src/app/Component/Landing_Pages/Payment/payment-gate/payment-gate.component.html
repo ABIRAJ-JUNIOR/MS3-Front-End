@@ -23,10 +23,16 @@
                             Your Course fees will be processed and any necessary adjustments will be applied after the
                             review.
                         </p>
-                        <div class="rounded d-flex bg-body-tertiary">
-                            <div class="p-2">University Payment Plan</div>
-                            <div class="ms-auto p-2">Installment Plan</div>
-                        </div>
+                        <div class="mb-3">
+                            <label for="paymentPlans" class="form-label  text-dark">Select Payment Plan</label>
+                            <select class="form-select bg-light border-2 border-primary rounded-3 shadow-sm" id="paymentPlans" aria-label="Select payment plan">
+                              <option value="" disabled selected>Select a  Payment Plans</option>
+                              <option value="2">Installment Plan - Pay in manageable monthly installments </option>
+                              <option value="3">Full Payment - One-time payment with additional benefits.</option>
+                            </select>
+                            <small class="form-text text-muted">Choose the payment plan that best suits your financial preferences.</small>
+                          </div>
+                          
                         <hr />
                         <div class="pt-2">
                             <div class="d-flex justify-content-between pb-2">
@@ -79,50 +85,73 @@
                             <h6><a href="#!">Cancel and return to website</a></h6>
                         </div>
                         <div class="rounded d-flex flex-column p-2 bg-body-tertiary">
+                            <!-- Payment Schedule Section -->
                             <div class="p-2 me-3">
                                 <h4>Payment Schedule</h4>
                             </div>
-                            <div class="p-2 d-flex">
-                                <div class="col-8">First Payment</div>
-                                <div class="ms-auto">$50.00</div>
-                            </div>
-                            <div class="p-2 d-flex">
-                                <div class="col-8">Second Payment</div>
-                                <div class="ms-auto">$30.00</div>
-                            </div>
-                            <div class="p-2 d-flex">
-                                <div class="col-8">Final Payment</div>
-                                <div class="ms-auto">$20.00</div>
-                            </div>
-                            <div class="border-top px-2 mx-2"></div>
-                            <div class="p-2 d-flex pt-3">
-                                <div class="col-8">Total Payment Due</div>
-                                <div class="ms-auto">$100.00</div>
-                            </div>
-                            <div class="p-2 d-flex">
-                                <div class="col-8">
-                                    Maximum out-of-pocket limit (if applicable)
+                            
+                            <!-- Installment Plan Section -->
+                            <div class="p-2 border-bottom">
+                                <h5>Installment Plan</h5>
+                                <div class="p-2 d-flex">
+                                    <div class="col-8 text-success">First Installment Payment</div>
+                                    <div class="ms-auto text-success">$50.00</div>
                                 </div>
-                                <div class="ms-auto">$2000.00</div>
+                                <div class="p-2 d-flex">
+                                    <div class="col-8">Second Installment Payment</div>
+                                    <div class="ms-auto">$30.00</div>
+                                </div>
+                                <div class="p-2 d-flex">
+                                    <div class="col-8">Final Installment Payment</div>
+                                    <div class="ms-auto">$20.00</div>
+                                </div>
+                                <div class="border-top px-2 mx-2"></div>
+                    
+                                <!-- Total Payment for Installments -->
+                                <div class="p-2 d-flex pt-3">
+                                    <div class="col-8">Total Payment Due (Installment Plan)</div>
+                                    <div class="ms-auto">$100.00</div>
+                                </div>
                             </div>
+                            
+                            <!-- Full Payment Section -->
+                            <div class="p-2 border-bottom">
+                                <h5>Full Payment</h5>
+                                <div class="p-2 d-flex">
+                                    <div class="col-8">Full Payment Option</div>
+                                    <div class="ms-auto">$100.00</div>
+                                </div>
+                                <div class="border-top px-2 mx-2"></div>
+                    
+                                <!-- Total Payment for Full Payment Option -->
+                                <div class="p-2 d-flex pt-3">
+                                    <div class="col-8">Total Payment Due (Full Payment)</div>
+                                    <div class="ms-auto">$100.00</div>
+                                </div>
+                            </div>
+                    
+                           
+                            
                             <div class="border-top px-2 mx-2"></div>
+                    
+                            <!-- Institution Responsibility Section -->
                             <div class="p-2 d-flex pt-3">
                                 <div class="col-8"><b>Institution Responsibility</b></div>
                                 <div class="ms-auto"><b>$80.00</b></div>
                             </div>
-                            <div class="p-2 d-flex">
-                                <div class="col-8">
-                                    Student Balance <span class="fa fa-question-circle text-dark"></span>
-                                </div>
-                                <div class="ms-auto"><b>$20.00</b></div>
-                            </div>
+                    
+                          
+                            
                             <div class="border-top px-2 mx-2"></div>
+                            
+                            <!-- Final Total Section -->
                             <div class="p-2 d-flex pt-3">
                                 <div class="col-8"><b>Total</b></div>
                                 <div class="ms-auto"><b class="text-success">$100.00</b></div>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -184,7 +213,8 @@
                                     </div>
                                     <div class="d-flex justify-content-center">
                                         <button type="submit" [disabled]="CardFormData.invalid"
-                                            class="btn btn-sm fs-5 btn-success text-light pb-2  w-100 mb-3"  data-bs-dismiss="modal" aria-label="Close">Add
+                                            class="btn btn-sm fs-5 btn-success text-light pb-2  w-100 mb-3"
+                                            data-bs-dismiss="modal" aria-label="Close">Add
                                             Payment</button>
                                     </div>
                                     <div>

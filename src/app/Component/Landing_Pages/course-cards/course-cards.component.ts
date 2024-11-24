@@ -335,8 +335,11 @@ export class CourseCardsComponent implements OnInit {
   viewProduct(product: any) {
     this.ModalProduct = []
     this.ModalProduct.push(product)
-
+   console.log(this.ModalProduct)
   }
+
+
+
   ClearModal() {
     this.ModalProduct = []
   }

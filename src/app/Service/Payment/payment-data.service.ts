@@ -13,4 +13,7 @@ export class PaymentDataService {
   PurchaseDetailsSetLocal(data:any):void{
     localStorage.setItem('PurchaseCourse',JSON.stringify(data))
   }
+  PurchaseDetailGetLocal():any{
+    return localStorage.getItem('PurchaseCourse') || []
+  }
 }

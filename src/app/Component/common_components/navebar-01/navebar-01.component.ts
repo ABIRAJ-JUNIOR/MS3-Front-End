@@ -37,7 +37,6 @@ export class Navebar01Component {
 
   logout(){
     this.authService.logout();
-    this.router.navigate(['/home']);
     this.refreshPage()
   }
 

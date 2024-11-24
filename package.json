@@ -18,6 +18,8 @@
     "@angular/platform-browser": "^18.2.0",
     "@angular/platform-browser-dynamic": "^18.2.0",
     "@angular/router": "^18.2.0",
+    "@cloudinary/ng": "^2.1.1",
+    "@cloudinary/url-gen": "^1.21.0",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "chart.js": "^4.4.6",

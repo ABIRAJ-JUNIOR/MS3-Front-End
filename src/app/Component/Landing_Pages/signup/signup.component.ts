@@ -56,7 +56,7 @@ export class SignupComponent {
       },complete:()=>{
         this.rout.navigate(['/signin'])
       },error:(error)=>{
-        this.toastr.warning(error.error.title, "" , {
+        this.toastr.warning(error.error, "" , {
           positionClass:"toast-top-right",
           progressBar:true,
           timeOut:3000

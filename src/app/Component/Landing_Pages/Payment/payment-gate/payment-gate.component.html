@@ -146,7 +146,8 @@
                             <!-- Final Total Section -->
                             <div class="p-2 d-flex pt-3">
                                 <div class="col-8"><b>Total</b></div>
-                                <div class="ms-auto"><b class="text-success">Rs {{recievedModalItems[0].courseFee}}</b></div>
+                                <div class="ms-auto"><b class="text-success"  *ngIf="PaymentPlans == 1">Rs {{DeivdeInstallment}}</b></div>
+                                <div class="ms-auto"><b class="text-success"  *ngIf="PaymentPlans == 2">Rs {{recievedModalItems[0].courseFee}}</b></div>
                             </div>
                         </div>
                     </div>

@@ -17,7 +17,7 @@
                                             class="text-success">Rs.{{recievedModalItems[0].courseFee}}</span></b>
                                 </p>
                             </div>
-                           
+
                         </div>
                         <p>
                             Your Course fees will be processed and any necessary adjustments will be applied after the
@@ -36,9 +36,9 @@
                                     </p>
                                 </div>
                                 <button class="text-primary btn btn-md border-0" data-bs-toggle="modal"
-                                data-bs-target="#AddCard">
-                                <i class="fas fa-plus-circle text-primary pe-1"></i>Add payment card
-                            </button>
+                                    data-bs-target="#AddCard">
+                                    <i class="fas fa-plus-circle text-primary pe-1"></i>Add payment card
+                                </button>
                             </div>
                             <p>
                                 This is the amount due for your enrollment. Adjustments will be made once the payment is
@@ -69,7 +69,7 @@
                                     </div>
                                 </div> -->
                             </form>
-                          <button class="btn btn-danger btn-md">Proceed to payment</button>
+                            <button class="btn btn-danger btn-md">Proceed to payment</button>
                         </div>
                     </div>
 
@@ -143,9 +143,8 @@
             <div class="modal-body">
                 <div class="container-fluid">
                     <div class="d-flex justify-content-center align-items-center">
-                        <form [formGroup]="CardFormData">
+                        <form [formGroup]="CardFormData" (ngSubmit)="CardFormSubmited(CardFormData.value)">
 
-                        </form>
                             <div class="row">
                                 <div class="col-12">
                                     <div class="pb-3">
@@ -168,12 +167,14 @@
                                         <div class="col-6">
                                             <p>Expiration Date</p>
                                             <input type="text" placeholder="MM/YY"
-                                                style="outline: none; border: none; border-bottom:solid 1px;" formControlName="expiration">
+                                                style="outline: none; border: none; border-bottom:solid 1px;"
+                                                formControlName="expiration">
                                         </div>
                                         <div class="col-6">
                                             <p>CVV</p>
                                             <input type="text" placeholder="XXX"
-                                                style="outline: none; border: none; border-bottom:solid 1px;" formControlName="cvv">
+                                                style="outline: none; border: none; border-bottom:solid 1px;"
+                                                formControlName="cvv">
                                         </div>
                                     </div>
                                     <div class="d-flex pb-3 mb-2">
@@ -181,21 +182,28 @@
                                         <p class="fs-6 text-secondary m-0 px-2">Save card details</p>
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                        <button type="submit" class="btn btn-sm fs-5 btn-success text-light pb-2  w-100 mb-3">Add Payment</button>
+                                        <button type="submit" [disabled]="CardFormData.invalid"
+                                            class="btn btn-sm fs-5 btn-success text-light pb-2  w-100 mb-3"  data-bs-dismiss="modal" aria-label="Close">Add
+                                            Payment</button>
                                     </div>
                                     <div>
-                                        <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                        <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing
+                                            elit.
                                             Blanditiis
                                             voluptatem error eligendi quasi quia hic
                                         </p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
+
+                    </div>
+
                 </div>
-            
+
+
             </div>
-         
+
         </div>
     </div>
 </div>

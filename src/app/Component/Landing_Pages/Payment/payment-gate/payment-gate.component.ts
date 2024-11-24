@@ -20,18 +20,18 @@ export class PaymentGateComponent {
 
     this.CardFormData = this.fb.group({
       name: ['', [Validators.required]],
-      number: ['',[
-          Validators.required,
-          Validators.pattern('^[0-9]{13,19}$'), 
-        ],
+      number: ['', [
+        Validators.required,
+        Validators.pattern('^[0-9]{13,19}$'),
+      ],
       ],
       expiration: ['', [Validators.required]],
-      cvv: ['',[
-          Validators.required,
-          Validators.maxLength(3),
-          Validators.minLength(3),
-          Validators.pattern('^[0-9]{3}$'), 
-        ],
+      cvv: ['', [
+        Validators.required,
+        Validators.maxLength(3),
+        Validators.minLength(3),
+        Validators.pattern('^[0-9]{3}$'),
+      ],
       ],
     });
 
@@ -57,6 +57,12 @@ export class PaymentGateComponent {
 
   AddCardDetails() {
 
+  }
+
+
+  CardFormSubmited(form: FormData) {
+    this.CardDetails.push(form)
+    console.log(this.CardDetails);
   }
 
 }

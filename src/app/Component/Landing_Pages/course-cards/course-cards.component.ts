@@ -4,6 +4,7 @@ import { CourseService } from '../../../Service/Course/course.service';
 import { Course } from '../../../Modals/modals';
 import { FormsModule } from '@angular/forms';
 import { CourseFilterPipe } from '../../../Pipes/course-filter.pipe';
+import { PaymentDataService } from '../../../Service/Payment/payment-data.service';
 
 @Component({
   selector: 'app-course-cards',
@@ -15,7 +16,7 @@ import { CourseFilterPipe } from '../../../Pipes/course-filter.pipe';
 export class CourseCardsComponent implements OnInit {
 
 
-  constructor(private CourseService:CourseService){
+  constructor(private CourseService:CourseService,private PaymentService:PaymentDataService){
     
   }
 
@@ -406,4 +407,7 @@ export class CourseCardsComponent implements OnInit {
     this.filterPrice=price.value
     this.paginateCourses()
   }
+
+
+
 }

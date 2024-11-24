@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { PaymentDataService } from '../../../Service/Payment/payment-data.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-payment',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.css'
 })

@@ -18,7 +18,7 @@ export class PaymentDataService {
   // Method to change the array data
   changeData(data: any[]) {
     this.dataSource.next(data); // Update the array with new data
-    this.route.navigate(['/payment']);
+    this.route.navigate(['payment']);
 
   }
 }

@@ -42,7 +42,7 @@ export const routes: Routes = [
             { path: 'schedule-list', component: CourseScheduleComponent },
             { path: 'assessment-list', component: CourseAssessmentComponent },
         ],
-        canActivate: [adminAuthGuard]
+        // canActivate: [adminAuthGuard]
     },
     {
         path: 'student-dashboard', component: StudentDashboardComponent, children: [

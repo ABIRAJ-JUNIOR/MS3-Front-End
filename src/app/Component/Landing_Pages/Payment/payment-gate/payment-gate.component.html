@@ -25,9 +25,9 @@
                         </p>
                         <div class="mb-3">
                             <label for="paymentPlans" class="form-label  text-dark">Select Payment Plan</label>
-                            <select class="form-select bg-light border-2 border-primary rounded-3 shadow-sm" >
+                            <select class="form-select bg-light border-2 border-primary rounded-3 shadow-sm"  [(ngModel)]="PaymentPlans">
                               <option value="1" >Installment Plan - Pay in manageable monthly installments </option>
-                              <option value="2" selected>Full Payment - One-time payment with additional benefits.</option>
+                              <option value="2" >Full Payment - One-time payment with additional benefits.</option>
                             </select>
                             <small class="form-text text-muted">Choose the payment plan that best suits your financial preferences.</small>
                           </div>
@@ -90,42 +90,42 @@
                             </div>
                             
                             <!-- Installment Plan Section -->
-                            <div class="p-2 border-bottom" *ngIf="PaymentPlans === 1">
+                            <div class="p-2 border-bottom" *ngIf="PaymentPlans == 1">
                                 <h5>Installment Plan</h5>
                                 <div class="p-2 d-flex">
                                     <div class="col-8 text-success">First Installment Payment</div>
-                                    <div class="ms-auto text-success">$50.00</div>
+                                    <div class="ms-auto text-success">Rs {{DeivdeInstallment}}</div>
                                 </div>
                                 <div class="p-2 d-flex">
                                     <div class="col-8">Second Installment Payment</div>
-                                    <div class="ms-auto">$30.00</div>
+                                    <div class="ms-auto">Rs {{DeivdeInstallment}}</div>
                                 </div>
                                 <div class="p-2 d-flex">
                                     <div class="col-8">Final Installment Payment</div>
-                                    <div class="ms-auto">$20.00</div>
+                                    <div class="ms-auto">Rs {{DeivdeInstallment}}</div>
                                 </div>
                                 <div class="border-top px-2 mx-2"></div>
                     
                                 <!-- Total Payment for Installments -->
                                 <div class="p-2 d-flex pt-3">
                                     <div class="col-8">Total Payment Due (Installment Plan)</div>
-                                    <div class="ms-auto">$100.00</div>
+                                    <div class="ms-auto">Rs {{recievedModalItems[0].courseFee}}</div>
                                 </div>
                             </div>
                             
                             <!-- Full Payment Section -->
-                            <div class="p-2 border-bottom" *ngIf="PaymentPlans === 2">
+                            <div class="p-2 border-bottom" *ngIf="PaymentPlans == 2">
                                 <h5>Full Payment</h5>
-                                <div class="p-2 d-flex">
+                                <div class="p-2 d-flex text-success">
                                     <div class="col-8">Full Payment Option</div>
-                                    <div class="ms-auto">$100.00</div>
+                                    <div class="ms-auto">Rs {{recievedModalItems[0].courseFee}}</div>
                                 </div>
                                 <div class="border-top px-2 mx-2"></div>
                     
                                 <!-- Total Payment for Full Payment Option -->
                                 <div class="p-2 d-flex pt-3">
                                     <div class="col-8">Total Payment Due (Full Payment)</div>
-                                    <div class="ms-auto">$100.00</div>
+                                    <div class="ms-auto">Rs {{recievedModalItems[0].courseFee}}</div>
                                 </div>
                             </div>
                     
@@ -136,7 +136,7 @@
                             <!-- Institution Responsibility Section -->
                             <div class="p-2 d-flex pt-3">
                                 <div class="col-8"><b>Institution Responsibility</b></div>
-                                <div class="ms-auto"><b>$80.00</b></div>
+                                <div class="ms-auto"><b>Rs {{recievedModalItems[0].courseFee}}</b></div>
                             </div>
                     
                           
@@ -146,7 +146,7 @@
                             <!-- Final Total Section -->
                             <div class="p-2 d-flex pt-3">
                                 <div class="col-8"><b>Total</b></div>
-                                <div class="ms-auto"><b class="text-success">$100.00</b></div>
+                                <div class="ms-auto"><b class="text-success">Rs {{recievedModalItems[0].courseFee}}</b></div>
                             </div>
                         </div>
                     </div>

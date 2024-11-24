@@ -14,6 +14,8 @@ export class PaymentGateComponent {
 
   recievedModalItems: any[] = []; // Array to hold the received data
 
+  
+
   CardFormData: FormGroup;
 
   constructor(private PaymentDataService: PaymentDataService, private fb: FormBuilder) {
@@ -46,9 +48,14 @@ export class PaymentGateComponent {
 
   }
 
+  DeivdeInstallment:number = 0;
   loadItems(): void {
     this.recievedModalItems.push(JSON.parse(this.PaymentDataService.PurchaseDetailGetLocal()))
     console.log(this.recievedModalItems)
+    let TembFee =this.recievedModalItems[0].courseFee / 3 
+
+    this.DeivdeInstallment = Math.round(TembFee * 100) / 100
+
   }
 
 
@@ -67,6 +74,6 @@ export class PaymentGateComponent {
   }
 
 
-  PaymentPlans: number = 2;
+  PaymentPlans: number = 1;
 
 }

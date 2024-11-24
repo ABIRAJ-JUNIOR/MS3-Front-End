@@ -28,6 +28,7 @@ export const routes: Routes = [
     { path: 'about', component: AboutComponent },
     { path: 'signin', component: SigninComponent },
     { path: 'signup', component: SignupComponent },
+    {path:'payment',component:SignupComponent},
 
     {
         path: 'admin-dashboard', component: AdminDashboardComponent, children: [

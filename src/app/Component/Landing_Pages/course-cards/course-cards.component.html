@@ -171,50 +171,52 @@
                                 </div>
                                 <p class="">{{ModalProduct[0].description}}</p>
                                 <div class="row d-flex justify-content-evenly">
-                                    <div class="card shadow-lg border-0 col-lg-6 col-md-12 col-sm-12 col-12 m-3 card-custom "
-                                        *ngFor="let sechdule of ModalProduct[0].schedules">
+                                    <div   *ngFor="let sechdule of ModalProduct[0].schedules" class=" shadow-lg border-0 col-lg-6 col-md-12 col-sm-12 col-12 m-3">
+                                        <div class="card card-custom " (click)="sendPaymentData(ModalProduct[0])">
 
-                                        <div class="card-body ScheduleBody py-1">
-                                            <h5 class="modal-title fs-5 text-danger" id="staticBackdropLabel">{{
-                                                ModalProduct[0].courseName }}</h5>
-                                            <div class="d-flex py-2">
-                                                <p class="fw-bold pe-1"><i class="bi bi-clock"></i> </p>
-                                                <p>{{sechdule.time}}</p>
-                                            </div>
-
-
-                                            <div class="d-flex py-1">
-                                                <p class="fw-bold  pe-1"><i class="bi bi-geo-alt-fill"></i></p>
-                                                <p>{{sechdule.location}}</p>
-                                            </div>
-                                            <div class="d-flex py-1">
-                                                <div class="d-flex">
-                                                    <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
-                                                    <p>{{sechdule.startDate}}</p>
+                                            <div class="card-body ScheduleBody py-1">
+                                                <h5 class="modal-title fs-5 text-danger" id="staticBackdropLabel">{{
+                                                    ModalProduct[0].courseName }}</h5>
+                                                <div class="d-flex py-2">
+                                                    <p class="fw-bold pe-1"><i class="bi bi-clock"></i> </p>
+                                                    <p>{{sechdule.time}}</p>
                                                 </div>
-                                                <p class="px-2">-</p>
-                                                <div class="d-flex ">
-                                                    <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
-                                                    <p>{{sechdule.endDate}}</p>
+    
+    
+                                                <div class="d-flex py-1">
+                                                    <p class="fw-bold  pe-1"><i class="bi bi-geo-alt-fill"></i></p>
+                                                    <p>{{sechdule.location}}</p>
                                                 </div>
-                                            </div>
-
-
-
-                                            <div class="d-flex py-1">
-                                                <p class="fw-bold pe-1"><i class="bi bi-hourglass-split"></i> </p>
-                                                <p>{{sechdule.duration}} Days</p>
-                                            </div>
-                                            <hr>
-                                            <div class="d-flex py-1 align-items-center">
-                                                <img src="{{ModalProduct[0].imageUrl}}" class="rounded-circle"
-                                                    width="50px" height="50px" alt="...">
-
-                                                <p class="fs-5 px-2">Way Makers Acadamy</p>
-
+                                                <div class="d-flex py-1">
+                                                    <div class="d-flex">
+                                                        <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
+                                                        <p>{{sechdule.startDate}}</p>
+                                                    </div>
+                                                    <p class="px-2">-</p>
+                                                    <div class="d-flex ">
+                                                        <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
+                                                        <p>{{sechdule.endDate}}</p>
+                                                    </div>
+                                                </div>
+    
+    
+    
+                                                <div class="d-flex py-1">
+                                                    <p class="fw-bold pe-1"><i class="bi bi-hourglass-split"></i> </p>
+                                                    <p>{{sechdule.duration}} Days</p>
+                                                </div>
+                                                <hr>
+                                                <div class="d-flex py-1 align-items-center">
+                                                    <img src="{{ModalProduct[0].imageUrl}}" class="rounded-circle"
+                                                        width="50px" height="50px" alt="...">
+    
+                                                    <p class="fs-5 px-2">Way Makers Acadamy</p>
+    
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                  
 
 
 

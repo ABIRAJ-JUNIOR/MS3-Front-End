@@ -409,5 +409,7 @@ export class CourseCardsComponent implements OnInit {
   }
 
 
-
+  sendPaymentData(data:any) {
+    this.PaymentService.changeData(data); // Send the array to the service
+  }
 }

@@ -9,8 +9,9 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 // Chart.js 
 import { Chart, registerables } from 'chart.js';
 import { authInterceptorInterceptor } from './Interceptor/auth-interceptor.interceptor';
+import { BrowserModule } from '@angular/platform-browser';
 Chart.register(...registerables);
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideAnimations(), provideToastr(), provideHttpClient(withInterceptors([authInterceptorInterceptor]))]
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideAnimations(), provideToastr(), provideHttpClient(withInterceptors([authInterceptorInterceptor])) ,]
 };

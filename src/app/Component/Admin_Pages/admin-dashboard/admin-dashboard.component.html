@@ -1,104 +1,134 @@
 <div class="wrapper">
-  <aside id="sidebar" [ngClass]="{'collapsed': sidebarCollapsed}" class="bg-dark  text-light js-sidebar shadow-lg">
-    
-    <div class="h-100 position-fixed">
-      <div class="sidebar-logo text-center">
-          <a >Way Makers</a>
+    <!-- Sidebar -->
+    <aside id="sidebar" [ngClass]="{'collapsed': sidebarCollapsed}" class="bg-dark text-light js-sidebar shadow-lg">
+      <div class="h-100 ">
+        <div class="sidebar-logo">
+          <a>Way Makers</a>
+        </div>
+        <ul class="sidebar-nav">
+          <!-- Sidebar Header -->
+          <li class="sidebar-header">Admin Elements</li>
+          
+          <!-- Home Link -->
+          <li class="sidebar-item">
+            <a [routerLink]="['/admin-dashboard/home']" class="sidebar-link">
+              <i class="fa-solid fa-home pe-2"></i>
+              Home
+            </a>
+          </li>
+  
+          <!-- Admin Section -->
+          <li class="sidebar-item">
+            <a class="sidebar-link collapsed" data-bs-target="#pages" data-bs-toggle="collapse" aria-expanded="false">
+              <i class="fa-regular fa-circle-user pe-2"></i>
+              Admin
+            </a>
+            <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+              <li class="sidebar-item" [routerLink]="['/admin-dashboard/admin-list']">
+                <a class="sidebar-link">Admin List</a>
+              </li>
+              <li class="sidebar-item" [routerLink]="['/admin-dashboard/audit-log']">
+                <a class="sidebar-link">Audit Logs</a>
+              </li>
+            </ul>
+          </li>
+  
+          <!-- Student Section -->
+          <li class="sidebar-item">
+            <a class="sidebar-link collapsed" data-bs-target="#posts" data-bs-toggle="collapse" aria-expanded="false">
+              <i class="fa-regular fa-user pe-2"></i>
+              Student
+            </a>
+            <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+              <li class="sidebar-item" [routerLink]="['/admin-dashboard/student-list']" routerLinkActive="router-link-active">
+                <a class="sidebar-link">Student List</a>
+              </li>
+            </ul>
+          </li>
+  
+          <!-- Course Section -->
+          <li class="sidebar-item">
+            <a class="sidebar-link collapsed" data-bs-target="#auth" data-bs-toggle="collapse" aria-expanded="false">
+              <i class="fa-solid fa-book pe-2"></i>
+              Course
+            </a>
+            <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+              <li class="sidebar-item" [routerLink]="['/admin-dashboard/course-list']">
+                <a class="sidebar-link">Course List</a>
+              </li>
+              <li class="sidebar-item" [routerLink]="['/admin-dashboard/schedule-list']">
+                <a class="sidebar-link">Schedule</a>
+              </li>
+              <li class="sidebar-item" [routerLink]="['/admin-dashboard/assessment-list']">
+                <a class="sidebar-link">Assessment</a>
+              </li>
+            </ul>
+          </li>
+  
+          <!-- My Courses Section (Optional) -->
+          <li class="sidebar-item">
+            <a href="#" class="sidebar-link collapsed" data-bs-target="#courses" data-bs-toggle="collapse" aria-expanded="false">
+              <i class="fa-solid fa-book-open pe-2"></i>
+              My Courses
+            </a>
+            <ul id="courses" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+              <li class="sidebar-item">
+                <a href="#" class="sidebar-link">Enrolled Courses</a>
+              </li>
+              <li class="sidebar-item">
+                <a href="#" class="sidebar-link">Completed Courses</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </div>
-      <ul class="sidebar-nav">
-          <li class="sidebar-header">
-              Admin Elements
-          </li>
-          <li class="sidebar-item">
-              <a [routerLink]="['/admin-dashboard/home']" class="sidebar-link">
-                <i class="fa-solid fa-home pe-2"></i>
-                  Home
-              </a>
-          </li>
-          <li class="sidebar-item">
-              <a  class="sidebar-link collapsed" data-bs-target="#pages" data-bs-toggle="collapse"
-                  aria-expanded="false"><i class="fa-regular fa-circle-user pe-2"></i>
-                  Admin
-              </a>
-              <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                  <li class="sidebar-item" [routerLink]="['/admin-dashboard/admin-list']">
-                      <a class="sidebar-link">Admin List</a>
-                  </li>
-                  <li class="sidebar-item" [routerLink]="['/admin-dashboard/audit-log']">
-                      <a  class="sidebar-link">Audit Logs</a>
-                  </li>
-              </ul>
-          </li>
-          <li class="sidebar-item">
-              <a  class="sidebar-link collapsed" data-bs-target="#posts" data-bs-toggle="collapse"
-                  aria-expanded="false"><i class="fa-regular fa-user pe-2"></i>
-                  Student
-              </a>
-              <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                  <li class="sidebar-item" [routerLink]="['/admin-dashboard/student-list']" routerLinkActive="router-link-active"  >
-                      <a   class="sidebar-link">Student List</a>
-                  </li>
-              </ul>
-          </li>
-          <li class="sidebar-item">
-              <a  class="sidebar-link collapsed" data-bs-target="#auth" data-bs-toggle="collapse"
-                  aria-expanded="false"><i class="fa-solid fa-book pe-2"></i>
-                  Course
-              </a>
-              <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                  <li class="sidebar-item" [routerLink]="['/admin-dashboard/course-list']">
-                      <a  class="sidebar-link">Course List</a>
-                  </li>
-                  <li class="sidebar-item" [routerLink]="['/admin-dashboard/schedule-list']">
-                      <a  class="sidebar-link">Schedule</a>
-                  </li>
-                  <li class="sidebar-item" [routerLink]="['/admin-dashboard/assessment-list']">
-                      <a  class="sidebar-link">Assessment</a>
-                  </li>
-              </ul>
-          </li>
-
-      </ul>
-    </div>
-  </aside>
-  <div class="main">
+    </aside>
+  
+    <!-- Main Content Area -->
+    <div class="main">
+      <!-- Navbar -->
       <nav class="navbar navbar-expand px-3 border-bottom">
-          <div class="navbar-collapse navbar">
-              <button class="btn" id="sidebar-toggle" type="button" (click)="toggleSidebar()">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <ul class="navbar-nav">
-                  <li class="nav-item dropdown">
-                      <a  data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-                          <img src="profile.jpg" class="avatar img-fluid rounded" alt="">
-                      </a>
-                      <div class="dropdown-menu dropdown-menu-end">
-                          <a  class="dropdown-item" [routerLink]="['/admin-dashboard/admin-profile']">Profile</a>
-                          <a  class="dropdown-item">Setting</a>
-                          <a  class="dropdown-item" (click)="logout()">Logout</a>
-                      </div>
-                  </li>
-              </ul>
-          </div>
-      </nav>
-      <main class="content px-3 py-2">
-          <router-outlet></router-outlet>
-      </main>
-      <footer class="footer">
-          <div class="container-fluid">
-              <div class="row text-muted">
-                  <div class="col-6 text-start">
-                      <p class="mb-3">
-                          <a  class="text-muted">
-                              <strong>Way Makers</strong>
-                          </a>
-                      </p>
-                  </div>
+        <div class="navbar-collapse navbar">
+          <!-- Sidebar Toggle Button -->
+          <button class="btn" id="sidebar-toggle" type="button" (click)="toggleSidebar()">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+  
+          <!-- Profile Dropdown -->
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item dropdown">
+              <a data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                <img src="profile.jpg" class="avatar img-fluid rounded" alt="User Profile">
+              </a>
+              <div class="dropdown-menu dropdown-menu-end">
+                <a class="dropdown-item" [routerLink]="['/admin-dashboard/admin-profile']">Profile</a>
+                <a class="dropdown-item">Settings</a>
+                <a class="dropdown-item" (click)="logout()">Logout</a>
               </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+  
+      <!-- Main Content Area for Admin Dashboard -->
+      <main class="content px-3 py-2">
+        <router-outlet></router-outlet>
+      </main>
+  
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="container-fluid">
+          <div class="row text-muted">
+            <div class="col-6 text-start">
+              <p class="mb-3">
+                <a class="text-muted">
+                  <strong>Way Makers</strong>
+                </a>
+              </p>
+            </div>
           </div>
+        </div>
       </footer>
+    </div>
   </div>
-</div>
-
-
-
+  

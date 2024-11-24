@@ -45,13 +45,14 @@
                                 processed.
                             </p>
                             <form class="pb-3">
-                                <div class="d-flex flex-row pb-3">
+                                <div class="d-flex flex-row pb-3" *ngFor="let card of CardDetails">
                                     <div class="rounded border d-flex w-100 p-3 align-items-center">
                                         <p class="mb-0">
                                             <i class="fab fa-cc-visa fa-lg text-primary pe-2"></i>Visa Debit
                                             Card
                                         </p>
-                                        <div class="ms-auto">************4534</div>
+                                        <div class="ms-auto">************{{ card.number | slice:-4 }}</div>
+
                                     </div>
                                 </div>
 

@@ -1,19 +1,19 @@
 <section style="background-color: #eee; height: 100vh;">
     <div class="container py-5">
-      <div class="card" *ngIf="recievedModalItems !== null">
+      <div class="card" *ngIf="recievedModalItems != null">
         <div class="card-body">
           <div class="row d-flex justify-content-center pb-5">
             <div class="col-md-7 col-xl-5 mb-4 mb-md-0">
               <div class="py-4 d-flex flex-row">
-                <h5><span class="far fa-check-square pe-2"></span><b>ELIGIBLE</b> |</h5>
+                <h5><img src="/logo.png" alt="" height="30px"><b>WayMaker</b> |</h5>
                 <span class="ps-2">Pay</span>
               </div>
-              <h4 class="text-success">$100.00</h4>
+              <h4 class="text-success">Rs.{{recievedModalItems[0].courseFee}}</h4>
               <h4>Course Enrollment & Materials</h4>
               <div class="d-flex pt-2">
                 <div>
                   <p>
-                    <b>Institution's Responsibility <span class="text-success">{{recievedModalItems[0].courseFee}}</span></b>
+                    <b>The institution covers  <span class="text-success">Rs.{{recievedModalItems[0].courseFee}}</span></b>
                   </p>
                 </div>
                 <div class="ms-auto">
@@ -23,7 +23,7 @@
                 </div>
               </div>
               <p>
-                Your tuition fees will be processed and any necessary adjustments will be applied after the review.
+                Your Course fees will be processed and any necessary adjustments will be applied after the review.
               </p>
               <div class="rounded d-flex bg-body-tertiary">
                 <div class="p-2">University Payment Plan</div>

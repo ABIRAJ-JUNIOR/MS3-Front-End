@@ -6,14 +6,15 @@ import { Router } from '@angular/router';
 })
 export class PaymentDataService {
 
-  constructor(private route:Router){
+  constructor(private route: Router) {
 
   }
-  
-  PurchaseDetailsSetLocal(data:any):void{
-    localStorage.setItem('PurchaseCourse',JSON.stringify(data))
+
+  PurchaseDetailsSetLocal(data: any): void {
+    localStorage.setItem('PurchaseCourse', JSON.stringify(data))
+    this.route.navigate(['/paymentgate'])
   }
-  PurchaseDetailGetLocal():any{
+  PurchaseDetailGetLocal(): any {
     return localStorage.getItem('PurchaseCourse') || []
   }
 }

@@ -410,14 +410,14 @@ export class CourseCardsComponent implements OnInit {
   }
 
 
-  sendPaymentData(data:any,sechdule:any) {
+  sendPaymentData(sechdule:any) {
     let PurchaseDetails={
-      "courseName":data.courseName,
-      "courseFee":data.courseFee,
-      "courseId":data.id,
+      "courseName":this.ModalProduct[0].courseName,
+      "courseFee":this.ModalProduct[0].courseFee,
+      "courseId":this.ModalProduct[0].id,
       ...sechdule
     }
-    
+    this.PaymentService.PurchaseDetailsSetLocal(PurchaseDetails);
   }
  
 }

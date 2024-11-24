@@ -29,7 +29,7 @@ export class CourseScheduleComponent {
       course: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      duration: ['', [Validators.required, Validators.min(1)]],
+      time: ['', [Validators.required, Validators.required]],
       location: ['', Validators.required],
       maxStudents: ['', [Validators.required, Validators.min(1)]],
       scheduleStatus: ['', Validators.required],
@@ -77,6 +77,8 @@ export class CourseScheduleComponent {
   onSubmit() {
     if (this.scheduleForm.valid) {
       const scheduleData = this.scheduleForm.value;
+      scheduleData.scheduleStatus = Number(scheduleData.scheduleStatus)
+      this.courseService.addCourseSchedule(scheduleData).subscribe({})
       console.log('Course Schedule Data:', scheduleData);
       // Implement further actions, e.g., API call or storing data.
     }

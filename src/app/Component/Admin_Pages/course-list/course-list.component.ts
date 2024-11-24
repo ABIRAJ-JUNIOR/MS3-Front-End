@@ -119,6 +119,8 @@ export class CourseListComponent {
 
       // Replace this console log with your API call to submit data
       console.log('Form data ready for submission:', formData);
+      console.log(this.courseForm.value);
+      
       alert('Course details submitted successfully!');
 
       // Clear the form (optional)

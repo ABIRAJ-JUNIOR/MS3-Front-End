@@ -417,6 +417,7 @@ export class CourseCardsComponent implements OnInit {
       "courseId":data.id,
       ...sechdule
     }
-    this.PaymentService.changeData(PurchaseDetails); // Send the array to the service
+    
   }
+ 
 }

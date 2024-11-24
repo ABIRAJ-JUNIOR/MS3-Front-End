@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PaymentDataService } from '../../../Service/Payment/payment-data.service';
 import { CommonModule } from '@angular/common';
 
@@ -9,16 +9,15 @@ import { CommonModule } from '@angular/common';
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.css'
 })
-export class PaymentComponent {
-  recievedModalItems: string[] = []; // Array to hold the received data
+export class PaymentComponent implements OnInit{
+  recievedModalItems: any[] = []; // Array to hold the received data
 
-  constructor(private PaymentDataService: PaymentDataService) { }
+  constructor(private PaymentDataService: PaymentDataService) {
+    
+   }
 
-  ngOnInit() {
-    this.PaymentDataService.currentData.subscribe((data) => {
-      this.recievedModalItems = data; // Update the array with received data
-      console.log(this.recievedModalItems)
-
-    });
+  ngOnInit():void{
+    
   }
+ 
 }

@@ -28,8 +28,15 @@
 }
 
 .sign-width{
-    max-width: 450px;
+    max-width: 600px;
+    /* min-height: 700px; */
+    height: 100%;
 }
+.carousel-inner img {
+    height: 900px; /* Adjust as needed */
+    object-fit: cover;
+}
+
 .gap{
     padding-right: 10px;
 }
@@ -37,7 +44,7 @@
 
 .form-group {
     position: relative;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .form-group label {
@@ -78,3 +85,20 @@
         padding-right: 0%;
     }
 }
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#logo-container {
+    animation: fadeIn 1.2s ease-in-out;
+}
+

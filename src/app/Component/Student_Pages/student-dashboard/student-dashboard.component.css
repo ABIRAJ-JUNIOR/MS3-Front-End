@@ -53,12 +53,14 @@ h4 {
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     width: 100%;
-    background: var(--bs-dark-bg-subtle);
 }
 
 /* Sidebar Elements Style */
 #sidebar{
-    background-color: rgb(230, 5, 5);
+    background-color: #004085;
+}
+#sidebar:hover{
+    background-color:#343A40;
 }
 
 .sidebar-logo {
@@ -152,6 +154,37 @@ a.sidebar-link {
 #sidebar.collapsed {
     margin-left: -264px;
 }
+
+.form-control {
+    border-radius: 20px; /* Makes the input more rounded */
+    box-shadow: none; /* Removes the default shadow */
+  }
+  
+  .form-control:focus {
+    border-color: #007bff; /* Adds blue border on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Glow effect */
+  }
+  
+  .btn-primary {
+    border-radius: 20px; /* Matches the input's rounded style */
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+
+  .OverideBtn{
+    background: none; color: black;
+    border: none;
+    font-size: 16px;
+    background: none;
+  }
+
+  button .badge {
+    font-size: 14px;
+    padding: 5px 8px;
+    z-index: 10; 
+  }
 
 /* Footer and Nav */
 

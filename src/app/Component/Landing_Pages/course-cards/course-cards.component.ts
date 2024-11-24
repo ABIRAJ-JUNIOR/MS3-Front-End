@@ -419,6 +419,5 @@ export class CourseCardsComponent implements OnInit {
     }
     console.log(PurchaseDetails)
     this.PaymentService.changeData(PurchaseDetails); // Send the array to the service
-    this.route.navigate(['/payment']);
   }
 }

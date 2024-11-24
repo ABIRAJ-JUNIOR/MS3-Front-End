@@ -25,10 +25,9 @@
                         </p>
                         <div class="mb-3">
                             <label for="paymentPlans" class="form-label  text-dark">Select Payment Plan</label>
-                            <select class="form-select bg-light border-2 border-primary rounded-3 shadow-sm" id="paymentPlans" aria-label="Select payment plan">
-                              <option value="" disabled selected>Select a  Payment Plans</option>
-                              <option value="2">Installment Plan - Pay in manageable monthly installments </option>
-                              <option value="3">Full Payment - One-time payment with additional benefits.</option>
+                            <select class="form-select bg-light border-2 border-primary rounded-3 shadow-sm" >
+                              <option value="1" >Installment Plan - Pay in manageable monthly installments </option>
+                              <option value="2" selected>Full Payment - One-time payment with additional benefits.</option>
                             </select>
                             <small class="form-text text-muted">Choose the payment plan that best suits your financial preferences.</small>
                           </div>
@@ -91,7 +90,7 @@
                             </div>
                             
                             <!-- Installment Plan Section -->
-                            <div class="p-2 border-bottom">
+                            <div class="p-2 border-bottom" *ngIf="PaymentPlans === 1">
                                 <h5>Installment Plan</h5>
                                 <div class="p-2 d-flex">
                                     <div class="col-8 text-success">First Installment Payment</div>
@@ -115,7 +114,7 @@
                             </div>
                             
                             <!-- Full Payment Section -->
-                            <div class="p-2 border-bottom">
+                            <div class="p-2 border-bottom" *ngIf="PaymentPlans === 2">
                                 <h5>Full Payment</h5>
                                 <div class="p-2 d-flex">
                                     <div class="col-8">Full Payment Option</div>

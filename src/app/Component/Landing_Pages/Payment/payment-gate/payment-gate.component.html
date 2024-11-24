@@ -145,7 +145,53 @@
                     <div class="d-flex justify-content-center align-items-center">
                         <form [formGroup]="CardFormData">
 
-                       
+                        </form>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="pb-3">
+                                        <p>Card Name</p>
+                                        <div class="border p-2 d-flex align-item-center ">
+                                            <input type="text" class="w-100" placeholder="Way Maker"
+                                                style="outline: none; border: none;" formControlName="name">
+                                            <i class="fa fa-credit-card-alt pt-1" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <div class="pb-3">
+                                        <p>Card Number</p>
+                                        <div class="border p-2 d-flex align-item-center ">
+                                            <input type="text" class="w-100" placeholder="0000 0000 0000 0000"
+                                                style="outline: none; border: none;" formControlName="number">
+                                            <i class="fa fa-credit-card-alt pt-1" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row pb-3">
+                                        <div class="col-6">
+                                            <p>Expiration Date</p>
+                                            <input type="text" placeholder="MM/YY"
+                                                style="outline: none; border: none; border-bottom:solid 1px;" formControlName="expiration">
+                                        </div>
+                                        <div class="col-6">
+                                            <p>CVV</p>
+                                            <input type="text" placeholder="XXX"
+                                                style="outline: none; border: none; border-bottom:solid 1px;" formControlName="cvv">
+                                        </div>
+                                    </div>
+                                    <div class="d-flex pb-3 mb-2">
+                                        <input type="checkbox" name="saveCard" id="">
+                                        <p class="fs-6 text-secondary m-0 px-2">Save card details</p>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-sm fs-5 btn-success text-light pb-2  w-100 mb-3">Add Payment</button>
+                                    </div>
+                                    <div>
+                                        <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                            Blanditiis
+                                            voluptatem error eligendi quasi quia hic
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </div>
             
             </div>

@@ -5,11 +5,12 @@ import { Course } from '../../../Modals/modals';
 import { FormsModule } from '@angular/forms';
 import { CourseFilterPipe } from '../../../Pipes/course-filter.pipe';
 import { PaymentDataService } from '../../../Service/Payment/payment-data.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-course-cards',
   standalone: true,
-  imports: [CommonModule,FormsModule,CourseFilterPipe],
+  imports: [CommonModule,FormsModule,CourseFilterPipe,RouterModule],
   templateUrl: './course-cards.component.html',
   styleUrl: './course-cards.component.css'
 })

@@ -16,6 +16,8 @@ export class PaymentComponent {
   ngOnInit() {
     this.PaymentDataService.currentData.subscribe((data) => {
       this.recievedModalItems = data; // Update the array with received data
+      console.log(this.recievedModalItems)
+
     });
   }
 }

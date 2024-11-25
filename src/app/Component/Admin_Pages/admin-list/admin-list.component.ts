@@ -80,7 +80,6 @@ export class AdminListComponent {
     if (input?.files && input.files[0]) {
       const file = input.files[0];
       this.selectedFile = file
-      console.log(this.selectedFile)
       const reader = new FileReader();
 
       reader.onload = () => {
@@ -93,7 +92,7 @@ export class AdminListComponent {
 
 
   private adminId:string = ''
-  onSubmit() {
+  onSubmit(fileInput: HTMLInputElement) {
     const formData = this.profileForm.value
     formData.role = Number(formData.role)
 
@@ -122,9 +121,12 @@ export class AdminListComponent {
         formdata.append('imageFile' , this.selectedFile!);
         this.adminService.addimage(this.adminId , formdata).subscribe({
           next:(response:any)=>{
+            this.loadItems();
           }
         })
-        this.loadItems();
+        this.profileImageUrl = null;
+        this.selectedFile = null;
+        fileInput.value = '';
       },
       error:(error)=>{
         this.toastr.warning(error.error , "" , {

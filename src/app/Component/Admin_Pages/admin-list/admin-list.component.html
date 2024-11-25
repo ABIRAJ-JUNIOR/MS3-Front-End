@@ -126,13 +126,13 @@
 
       <!-- Modal Body -->
       <div class="modal-body">
-        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="row g-4">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit(fileInput)" class="row g-4">
           
           <!-- Profile Picture Section -->
           <div class="col-12 col-md-3 d-flex flex-column align-items-center text-center">
             <div class="position-relative">
               <img [src]="profileImageUrl || 'https://via.placeholder.com/150'" alt="Profile Picture" class="rounded border border-white shadow-lg" style="width: 120px; height: 120px; object-fit: cover" />
-              <input type="file" id="imgInput" #fileInput class="d-none" accept="image/*" (change)="onFileSelected($event)" />
+              <input type="file" id="imgInput" #fileInput class="d-none" accept="image/*" (change)="onFileSelected($event)"/>
               <button type="button" class="btn btn-light btn-sm rounded-circle shadow position-absolute" style="bottom: 0; right: -10px; border-radius: 4px" data-bs-toggle="tooltip" data-bs-placement="top" title="Change Profile Picture" (click)="fileInput.click()">
                 <i class="bi bi-pencil-fill"></i>
               </button>

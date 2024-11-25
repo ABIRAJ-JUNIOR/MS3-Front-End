@@ -82,4 +82,80 @@
 
 
 
+<div class="modal fade" id="assessmentForm" tabindex="-1" aria-labelledby="assessmentFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content bg-light text-dark rounded-4 border-0 shadow-lg">
+  
+        <!-- Modal Header -->
+        <div class="modal-header border-0" style="
+              background-color: #2c2f3a;
+              color: #e5e5e5;
+              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            ">
+          <h4 class="modal-title fw-bold" id="assessmentFormLabel">Add Assessment</h4>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+  
+        <!-- Modal Body -->
+        <div class="modal-body">
+          <form [formGroup]="assessmentForm" (ngSubmit)="onSubmit()" class="row g-4">
+  
+            <!-- Course Selection -->
+            <div class="col-md-6">
+              <label for="course" class="form-label fw-bold text-dark">Course</label>
+              <select formControlName="courseId" class="form-select border rounded-3 shadow-sm">
+                <option value="">Select a course</option>
+                <ng-container *ngFor="let course of courses">
+                    <option value="{{course.id}}">{{ course.courseName }}</option>
+                  </ng-container>
+                <!-- Add more hardcoded options as needed -->
+              </select>
+            </div>
+  
+            <!-- Assessment Type -->
+            <div class="col-md-6">
+              <label for="assessmentType" class="form-label fw-bold text-dark">Assessment Type</label>
+              <select formControlName="assessmentType" class="form-select border rounded-3 shadow-sm">
+                <option value="">Select an assessment type</option>
+                <option value="1">Quiz</option>
+                <option value="2">Exam</option>
+              </select>
+            </div>
+  
+            <!-- Start Date -->
+            <div class="col-md-6">
+              <label for="startDate" class="form-label fw-bold text-dark">Start Date</label>
+              <input type="date" formControlName="startDate" class="form-control border rounded-3 shadow-sm" />
+            </div>
+  
+            <!-- End Date -->
+            <div class="col-md-6">
+              <label for="endDate" class="form-label fw-bold text-dark">End Date</label>
+              <input type="date" formControlName="endDate" class="form-control border rounded-3 shadow-sm" />
+            </div>
+  
+            <!-- Total Marks -->
+            <div class="col-md-6">
+              <label for="totalMarks" class="form-label fw-bold text-dark">Total Marks</label>
+              <input type="number" formControlName="totalMarks" class="form-control border rounded-3 shadow-sm" placeholder="Enter total marks" />
+            </div>
+  
+            <!-- Pass Marks -->
+            <div class="col-md-6">
+              <label for="passMarks" class="form-label fw-bold text-dark">Pass Marks</label>
+              <input type="number" formControlName="passMarks" class="form-control border rounded-3 shadow-sm" placeholder="Enter pass marks" />
+            </div>
+  
+            <!-- Modal Footer -->
+            <div class="modal-footer border-0 bg-light">
+              <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+              <button type="submit" [disabled]="assessmentForm.invalid" class="btn btn-dark px-4">Submit</button>
+            </div>
+  
+          </form>
+        </div>
+  
+      </div>
+    </div>
+  </div>
   

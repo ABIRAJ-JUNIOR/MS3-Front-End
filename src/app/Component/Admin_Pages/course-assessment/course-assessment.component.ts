@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import { Assessment, Course, Schedule } from '../../../Modals/modals';
+import { Assessment, Course} from '../../../Modals/modals';
 import { CourseService } from '../../../Service/Course/course.service';
 import { CommonModule } from '@angular/common';
-import { REACTIVE_NODE } from '@angular/core/primitives/signals';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-course-assessment',
@@ -19,13 +18,27 @@ export class CourseAssessmentComponent {
   totalPages: number = 0;
   currentLength:number = 0;
   totalItems:number = 0;
-  assessmentForm!: FormGroup;
+  courses:Course[]=[]
 
-  constructor(private courseService: CourseService,private fb: FormBuilder) {}
+  assessmentForm!: FormGroup;
+  constructor(private courseService: CourseService,private fb: FormBuilder) {
+    this.assessmentForm = this.fb.group({
+      courseId: ['', Validators.required],
+      assessmentType: ['', Validators.required],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
+      totalMarks: ['', [Validators.required, Validators.min(0)]],
+      passMarks: ['', [Validators.required, Validators.min(0)]]
+    });
+  }
 
   ngOnInit(): void {
     this.loadItems();
+    this.courseService.getCourses().subscribe(data=>{
+          this.courses=data
+    })
   }
+
 
   loadItems(): void {
     this.courseService.assessmentPagination(this.currentPage , this.pageSize).subscribe({
@@ -46,5 +59,14 @@ export class CourseAssessmentComponent {
       this.currentPage = page;
       this.loadItems();
     }
+    
   }
+
+  onSubmit() {
+    if (this.assessmentForm.valid) {
+      console.log(this.assessmentForm.value);
+    }
+  }
+
+  
 }

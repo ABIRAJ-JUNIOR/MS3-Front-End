@@ -55,3 +55,8 @@ body {
     background-color: #343a40;
     color: white;
 }
+
+.motivation {
+    background: linear-gradient(135deg, #343a40, #495057); /* Dark gradient */
+    border: 1px solid #6c757d; /* Subtle border */
+}

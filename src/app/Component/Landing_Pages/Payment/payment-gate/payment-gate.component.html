@@ -78,7 +78,7 @@
                                 </div> -->
                             </div>
                             <button class="btn btn-danger btn-md" data-bs-toggle="modal"
-                                data-bs-target="#PaymentComfirmation">Proceed to payment</button>
+                                data-bs-target="#PaymentComfirmation"  [disabled]="!LocalCardDetails || LocalCardDetails.length === -1">>Proceed to payment</button>
                         </div>
                     </div>
 

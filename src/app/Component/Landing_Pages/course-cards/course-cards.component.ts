@@ -409,6 +409,7 @@ export class CourseCardsComponent implements OnInit {
     this.paginateCourses()
   }
 
+  PaymentCourse:any[]=[]
 
   sendPaymentData(sechdule:any) {
     let PurchaseDetails={
@@ -417,7 +418,14 @@ export class CourseCardsComponent implements OnInit {
       "courseId":this.ModalProduct[0].id,
       ...sechdule
     }
-    this.PaymentService.PurchaseDetailsSetLocal(PurchaseDetails);
+    this.PaymentCourse.push(PurchaseDetails)
+   
+  }
+  ConfirmationPayment(){
+    this.PaymentService.PurchaseDetailsSetLocal(this.PaymentCourse[0]);
   }
  
+  CancelPurchase(){
+    this.PaymentCourse = []
+  }
 }

@@ -176,7 +176,7 @@
                                 <div class="row d-flex justify-content-evenly">
                                     <div *ngFor="let sechdule of ModalProduct[0].schedules"
                                         class="col-lg-6 col-md-12 col-sm-12 col-12 m-3 card shadow-lg border-0  card-custom">
-                                        <div (click)="sendPaymentData(sechdule)" data-bs-dismiss="modal" aria-label="Close">
+                                        <div class="btn border-0" (click)="sendPaymentData(sechdule)" data-bs-toggle="modal" data-bs-target="#PaymmentConfirmation">
 
                                             <div class="card-body ScheduleBody py-1">
                                                 <h5 class="modal-title fs-5 text-danger" id="staticBackdropLabel">{{
@@ -236,24 +236,47 @@
 
 <!-- PaymentConfirm -->
  <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-  </button>
+
   
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="PaymmentConfirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Payment Confirmation</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h4 class="text-danger">Course Schedule Confirmation</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="CancelPurchase()"></button>
         </div>
-        <div class="modal-body">
-          ...
+        <div class="modal-body" *ngIf="PaymentCourse.length >0">
+         
+            <p class="text-primary">You have successfully selected your course schedule. Please review the details below:</p>
+            <div class="d-flex py-2">
+                <p class="fw-bold pe-1"><i class="bi bi-clock"></i> </p>
+                <p>{{PaymentCourse[0].time}}</p>
+            </div>
+            <div class="d-flex py-1">
+                <p class="fw-bold  pe-1"><i class="bi bi-geo-alt-fill"></i></p>
+                <p>{{PaymentCourse[0].location}}</p>
+            </div>
+            <div class="d-flex py-1">
+                <div class="d-flex">
+                    <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
+                    <p>{{PaymentCourse[0].startDate}}</p>
+                </div>
+                <p class="px-2">-</p>
+                <div class="d-flex ">
+                    <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
+                    <p>{{PaymentCourse[0].endDate}}</p>
+                </div>
+            </div>
+
+            <div class="d-flex py-1">
+                <p class="fw-bold pe-1"><i class="bi bi-hourglass-split"></i> </p>
+                <p>{{PaymentCourse[0].duration}} Days</p>
+            </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Confirm</button>
-          <button type="button" class="btn btn-danger">Cancel</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="ConfirmationPayment()">Confirm</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CancelPurchase()">Cancel</button>
         </div>
       </div>
     </div>

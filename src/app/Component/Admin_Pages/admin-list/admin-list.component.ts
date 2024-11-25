@@ -106,36 +106,68 @@ export class AdminListComponent {
       password:formData.password,
     }   
 
-    this.adminService.addAdmin(admindata).subscribe({
-      next: (response:any) => {
-        this.adminId = response.id
-        this.toastr.success("Register Successfull" , "" , {
-          positionClass:"toast-top-right",
-          progressBar:true,
-          timeOut:3000
-        })
-      this.profileForm.reset();
-      },
-      complete:()=>{
-        const formdata = new FormData();
-        formdata.append('imageFile' , this.selectedFile!);
-        this.adminService.addimage(this.adminId , formdata).subscribe({
-          next:(response:any)=>{
-            this.loadItems();
-          }
-        })
-        this.profileImageUrl = null;
-        this.selectedFile = null;
-        fileInput.value = '';
-      },
-      error:(error)=>{
-        this.toastr.warning(error.error , "" , {
-          positionClass:"toast-top-right",
-          progressBar:true,
-          timeOut:3000
-        })
-      }
-    })
+    if(this.isUpdate != true){
+      this.adminService.addAdmin(admindata).subscribe({
+        next: (response:any) => {
+          this.adminId = response.id
+          this.toastr.success("Register Successfull" , "" , {
+            positionClass:"toast-top-right",
+            progressBar:true,
+            timeOut:3000
+          })
+        this.profileForm.reset();
+        },
+        complete:()=>{
+          const formdata = new FormData();
+          formdata.append('imageFile' , this.selectedFile!);
+          this.adminService.addimage(this.adminId , formdata).subscribe({
+            next:(response:any)=>{
+              this.loadItems();
+            }
+          })
+          this.profileImageUrl = null;
+          this.selectedFile = null;
+          fileInput.value = '';
+        },
+        error:(error)=>{
+          this.toastr.warning(error.error , "" , {
+            positionClass:"toast-top-right",
+            progressBar:true,
+            timeOut:3000
+          })
+        }
+      })
+    }else if(this.isUpdate == true){
+      this.adminService.updateFullDetails(this.adminId,admindata).subscribe({
+        next:(response:any) => {
+          this.toastr.success("Register Successfull" , "" , {
+            positionClass:"toast-top-right",
+            progressBar:true,
+            timeOut:3000
+          })
+        this.profileForm.reset();
+        },
+        complete:() => {
+          const formdata = new FormData();
+          formdata.append('imageFile' , this.selectedFile!);
+          this.adminService.addimage(this.adminId , formdata).subscribe({
+            next:(response:any)=>{
+              this.loadItems();
+            }
+          })
+          this.profileImageUrl = null;
+          this.selectedFile = null;
+          fileInput.value = '';
+        },
+        error:(error:any) =>{
+          this.toastr.warning(error.error , "" , {
+            positionClass:"toast-top-right",
+            progressBar:true,
+            timeOut:3000
+          })
+        }
+      })
+    }
   } 
 
   editAdmin(number:Number){
@@ -144,6 +176,13 @@ export class AdminListComponent {
     }else if(number == 2){
       this.isUpdate = true;
     }
+  }
+
+  patchData(admin:Admin){
+    this.profileForm.patchValue(admin);
+    this.adminId = admin.id;
+    console.log(this.adminId);
+    
   }
 
   selectedImage: string | null = null;

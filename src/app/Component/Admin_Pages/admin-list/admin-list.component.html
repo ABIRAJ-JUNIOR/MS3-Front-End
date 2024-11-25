@@ -42,10 +42,10 @@
                 <td>{{ admin.firstName }} {{ admin.lastName }}</td>
                 <td>{{ admin.phone }}</td>
                 <td class="text-center">
-                  <a href="#" class="text-primary me-3" aria-label="Edit Admin">
+                  <a  class="text-primary me-3 pointer" aria-label="Edit Admin">
                     <i class="bi bi-pencil-square"></i>
                   </a>
-                  <a class="text-danger" aria-label="Delete Admin" (click)="openModal(deleteEmployeeModal)">
+                  <a class="text-danger pointer" aria-label="Delete Admin" (click)="openModal(deleteEmployeeModal , admin.id)">
                     <i class="bi bi-trash3-fill"></i>
                   </a>
                 </td>

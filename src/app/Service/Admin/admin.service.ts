@@ -20,6 +20,10 @@ export class AdminService {
     return this.http.post(`${this.apiUrl}/Admin/image/${adminId}`, image);
   }
 
+  deleteAdmin(adminId:string){
+    return this.http.delete(`${this.apiUrl}/Admin/${adminId}`);
+  }
+
   getAdmins(){
     return this.http.get<Admin[]>(this.apiUrl + '/Admin/GetAll')
   }

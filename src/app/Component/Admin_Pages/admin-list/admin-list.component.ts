@@ -143,12 +143,26 @@ export class AdminListComponent {
     this.selectedImage = image;
     this.modalRef = this.modalService.show(template);
   }
-  openModal(template: any): void {
+
+  private deleteAdminId:string = ''
+  openModal(template: any , adminId:string): void {
     this.modalRef = this.modalService.show(template);
+    this.deleteAdminId = adminId
   }
 
   deleteEmployee(): void {
-    console.log('Employee deleted');
+    this.adminService.deleteAdmin(this.deleteAdminId).subscribe({
+      next: (response: any) => {
+        this.toastr.success("Delete Successfull" , "" , {
+          positionClass:"toast-top-right",
+          progressBar:true,
+          timeOut:3000
+        })
+      },
+      complete:()=>{
+        this.loadItems();
+      }
+    })
     this.modalRef?.hide();
   }
 }

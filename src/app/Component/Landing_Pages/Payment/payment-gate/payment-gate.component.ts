@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { jwtDecode } from "jwt-decode";
+import { Enrollment } from '../../../../Modals/modals';
 
 @Component({
   selector: 'app-payment-gate',
@@ -45,11 +46,11 @@ export class PaymentGateComponent {
   }
 
 
-  LocalCardDetails:any;
+  LocalCardDetails: any;
 
   ngOnInit(): void {
     this.loadItems();
-   this.AddCardDetails()
+    this.AddCardDetails()
     window.onpopstate = function () {
       history.pushState(null, '', location.href);
     };
@@ -66,14 +67,14 @@ export class PaymentGateComponent {
 
   }
 
-  
+
 
 
 
 
 
   AddCardDetails() {
-    this.LocalCardDetails=JSON.parse(this.PaymentDataService.GetCardDetails())
+    this.LocalCardDetails = JSON.parse(this.PaymentDataService.GetCardDetails())
   }
 
 
@@ -96,34 +97,40 @@ export class PaymentGateComponent {
 
 
   ConfirmPayment() {
-    this.router.navigate(['paymen-auth/otp-auth'])
+
     this.PaymentDataService.generateRandomNumber();
     const token = localStorage.getItem("token");
-    const decode:any = token != null ? jwtDecode(token) : ""
+    const decode: any = token != null ? jwtDecode(token) : ""
     let Payment:any;
 
     if (this.PaymentPlans == 1) {
-      Payment={
-        studentId:decode.studentId,
-        courseScheduleId:this.recievedModalItems[0].courseScheduleId,
-        paymentType:this.PaymentPlans,
-        paymentMethod:1,
-        amountPaid:this.DeivdeInstallment,
-        installmentNumber:1
+      Payment = {
+        studentId: decode.Id,
+        courseScheduleId: this.recievedModalItems[0].id,
+        paymentRequest:{
+        paymentType: Number(this.PaymentPlans),
+        paymentMethod: 1,
+        amountPaid: Number(this.DeivdeInstallment),
+        installmentNumber: 1
+        }
       }
-    }else if(this.PaymentPlans == 2){
-      Payment={
-        studentId:decode.studentId,
-        courseScheduleId:this.recievedModalItems[0].courseScheduleId,
-        paymentType:this.PaymentPlans,
-        paymentMethod:2,
-        amountPaid:this.recievedModalItems[0].courseFee,
-        installmentNumber:0
+    } else if (this.PaymentPlans == 2) {
+      Payment = {
+        studentId: decode.Id,
+        courseScheduleId: this.recievedModalItems[0].id,
+        paymentRequest:{
+          paymentType: Number(this.PaymentPlans),
+          paymentMethod: 2,
+          amountPaid: Number(this.recievedModalItems[0].courseFee),
+          installmentNumber: 0
+        }
+       
       }
     }
 
+    console.log(Payment)
     this.PaymentDataService.adddPendingpayment(Payment)
-
+    this.router.navigate(['paymen-auth/otp-auth'])
   }
 
 }

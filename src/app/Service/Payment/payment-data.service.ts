@@ -17,7 +17,9 @@ export class PaymentDataService {
   PurchaseDetailGetLocal(): any {
     return localStorage.getItem('PurchaseCourse') || []
   }
-   generateRandomNumber(): number {
-    return Math.floor(100000 + Math.random() * 900000);
-}
+  generateRandomNumber(){
+    let otp: number = Math.floor(100000 + Math.random() * 900000);
+    sessionStorage.setItem('paymentOtp',JSON.stringify(otp))
+
+  }
 }

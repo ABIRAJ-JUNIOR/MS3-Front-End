@@ -1,0 +1,104 @@
+
+*{
+    padding: 0%;
+    box-sizing: border-box;
+}
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-floating label {
+    color: #6c757d;
+}
+
+.form-floating .form-control:focus~label {
+    color: #007bff;
+}
+
+#logo-container p {
+    font-size: 25px;
+    font-weight: bolder;
+    color: rgb(0, 0, 0);
+}
+
+#logo-container p::first-letter {
+    color: orange;
+    font-size: 30px;
+}
+
+.sign-width{
+    max-width: 600px;
+    /* min-height: 700px; */
+    height: 100%;
+}
+.carousel-inner img {
+    height: 900px; /* Adjust as needed */
+    object-fit: cover;
+}
+
+.gap{
+    padding-right: 10px;
+}
+
+
+.form-group {
+    position: relative;
+    margin-top: 15px;
+}
+
+.form-group label {
+    position: absolute;
+    left: 10px;
+    top: 35%;
+    transform: translateY(-50%);
+    color: #999;
+    transition: 0.2s ease all;
+    pointer-events: none;
+}
+
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label {
+    top: 0;
+    font-size: 12px;
+    color: #007bff;
+    background: white;
+    padding: 0 5px;
+}
+
+.form-control {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.text-danger {
+    font-size: 12px;
+}
+
+@media (max-width: 1000px) {
+    .sign-width {
+        padding-left:20px;
+        max-width: 100%;
+        width: 100%;
+    }
+    .gap{
+        padding-right: 0%;
+    }
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#logo-container {
+    animation: fadeIn 1.2s ease-in-out;
+}
+

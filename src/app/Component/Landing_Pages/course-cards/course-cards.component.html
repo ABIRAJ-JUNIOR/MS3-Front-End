@@ -1,0 +1,233 @@
+<div class="container py-5">
+    <div *ngIf="isFilterVisible" class="filter-options bg-light rounded shadow-sm p-4">
+      <h4 class="mb-4 text-danger fw-bold text-uppercase">Filter Your Future</h4>
+      <div class="row g-4">
+        <!-- Added Filter -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <label for="AddedFilter" class="form-label fw-semibold text-muted">Added:</label>
+          <select id="AddedFilter" class="form-select">
+            <option selected>Pending</option>
+            <option value="0">Recently</option>
+            <option value="1">Past</option>
+            <option value="2">Future</option>
+          </select>
+        </div>
+        <!-- Level Filter -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <label for="CourseLevel" class="form-label fw-semibold text-muted">Level:</label>
+          <select id="CourseLevel" class="form-select">
+            <option selected>All Levels</option>
+            <option value="0">Beginner</option>
+            <option value="1">Intermediate</option>
+            <option value="2">Advanced</option>
+          </select>
+        </div>
+        <!-- Price Filter -->
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <label for="Price" class="form-label fw-semibold text-muted">Price:</label>
+          <select id="Price" class="form-select">
+            <option selected>All Prices</option>
+            <option value="0">100-500</option>
+            <option value="1">500-1000</option>
+            <option value="2">1000-1500</option>
+            <option value="3">1500-2000</option>
+          </select>
+        </div>
+      </div>
+      <!-- Apply Filter Button -->
+      <div class="mt-4">
+        <button class="btn btn-primary btn-md px-4 shadow-sm" (click)="applyFilter()">
+          APPLY FILTER
+        </button>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="headingCourses">Courses</h1>
+
+        <button class="btn btn-primary btn-md" (click)="toggleFilter()"><i class="bi bi-funnel"></i> FILTER COURSES</button>
+    </div>
+    <hr>
+
+
+    <div class="row py-4">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-4" *ngFor="let course of paginatedCourses | courseFilter:filterlevel : filterPrice">
+            <div class="card border-0  rounded-2 course-card">
+                <div class="position-relative">
+                    <!-- Badge for Level -->
+                    <div class="badge-level">
+                        <span>{{ course.level }}</span>
+                    </div>
+                    <!-- Course Image -->
+                    <img src="{{ course.imageUrl }}" class="card-img-top" alt="Course Image">
+                </div>
+                <div class="card-body">
+                    <!-- Course Title -->
+                    <h5 class="card-title mb-2 text-dark fw-bold">{{ course.courseName }}</h5>
+                    <!--rating-->
+                    <div class=" pb-2">
+                        <i class="bi bi-star-fill text-warning" *ngFor="let i of [].constructor(3)"></i>
+                    </div>
+                    <!-- Price -->
+                    <p class="card-text text-danger fw-semibold">Rs {{ course.courseFee }}</p>
+                    <!-- Enroll & View More -->
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <button class="btn btn-primary btn-enroll" data-bs-toggle="modal" data-bs-target="#ScheduleView"
+                            (mouseenter)="changeNameEnter($event)" (mouseleave)="changeNameMouseleave($event)"
+                            (click)="viewProduct(course)">{{EnrollBtnName}}</button>
+                        <a href="#" class="text-decoration-none view-more" data-bs-toggle="modal"
+                            data-bs-target="#CourseView" (mouseenter)="viewProduct(course)">View More</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item pointer" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="goToPage(currentPage - 1)">Previous</a>
+            </li>
+            <li class="page-item pointer" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+                <a class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</a>
+            </li>
+            <li class="page-item pointer" [class.disabled]="currentPage === totalPages">
+                <a class="page-link" (click)="goToPage(currentPage + 1)">Next</a>
+            </li>
+        </ul>
+    </nav>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="CourseView" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div *ngIf="ModalProduct.length>0">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 text-danger" id="staticBackdropLabel">Course Description</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            (click)="ClearModal()"></button>
+                    </div>
+                    <div class="modal-body overflow-x-hidden">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                                <img src="{{ModalProduct[0].imageUrl}}" alt="" class="modalImg" width="100%">
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-12  pt-lg-0 pt-md-2 pt-sm-2 pt-2">
+                                <!-- Course Title -->
+                                <h5 class="card-title mb-2 text-dark fw-bold ">{{ ModalProduct[0].courseName }}</h5>
+                                <!--rating-->
+                                <div class=" pb-2">
+                                    <i class="bi bi-star-fill text-warning" *ngFor="let i of [].constructor(3)"></i>
+                                </div>
+
+                                <!-- Price -->
+                                <p class="card-text text-primary fw-semibold">Rs {{ ModalProduct[0].courseFee }}</p>
+
+                                <!-- description -->
+                                <div>
+                                    <p>{{ModalProduct[0].description}}</p>
+                                </div>
+                                <button class="btn btn-primary btn-enroll" data-bs-toggle="modal"
+                                    data-bs-target="#ScheduleView" (mouseenter)="changeNameEnter($event)"
+                                    (mouseleave)="changeNameMouseleave($event)">{{EnrollBtnName}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SheduleView -->
+    <div class="modal fade" id="ScheduleView" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-custom">
+            <div class="modal-content">
+                <div>
+                    <div class="modal-body overflow-x-hidden">
+                        <div class="row">
+
+                            <div *ngIf="ModalProduct.length>0">
+                                <div class="modal-header">
+                                    <h3 class="text-primary"
+                                        style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                        Your Course Schedules</h3>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                        (click)="ClearModal()"></button>
+                                </div>
+                                <p class="">{{ModalProduct[0].description}}</p>
+                                <div class="row d-flex justify-content-evenly">
+                                    <div class="card shadow-lg border-0 col-lg-6 col-md-12 col-sm-12 col-12 m-3 card-custom hovercard"
+                                        *ngFor="let sechdule of ModalProduct[0].shedules">
+
+                                        <div class="card-body ScheduleBody py-1">
+                                            <h5 class="modal-title fs-5 text-danger" id="staticBackdropLabel">{{
+                                                ModalProduct[0].courseName }}</h5>
+                                            <div class="d-flex py-2">
+                                                <p class="fw-bold pe-1"><i class="bi bi-clock"></i> </p>
+                                                <p>{{sechdule.time}}</p>
+                                            </div>
+
+
+                                            <div class="d-flex py-1">
+                                                <p class="fw-bold  pe-1"><i class="bi bi-geo-alt-fill"></i></p>
+                                                <p>{{sechdule.location}}</p>
+                                            </div>
+                                            <div class="d-flex py-1">
+                                                <div class="d-flex">
+                                                    <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
+                                                    <p>{{sechdule.startDate}}</p>
+                                                </div>
+                                                <p class="px-2">-</p>
+                                                <div class="d-flex ">
+                                                    <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
+                                                    <p>{{sechdule.endDate}}</p>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="d-flex py-1">
+                                                <p class="fw-bold pe-1"><i class="bi bi-hourglass-split"></i> </p>
+                                                <p>{{sechdule.duration}} Days</p>
+                                            </div>
+                                            <hr>
+                                            <div class="d-flex py-1 align-items-center">
+                                                <img src="{{ModalProduct[0].imageUrl}}" class="rounded-circle"
+                                                    width="50px" height="50px" alt="...">
+
+                                                <p class="fs-5 px-2">Way Makers Acadamy</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

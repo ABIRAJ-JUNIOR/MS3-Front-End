@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Student } from '../Service/Student/student.service';
+import { Student } from '../Modals/modals';
 
 @Pipe({
   name: 'searchStudents',

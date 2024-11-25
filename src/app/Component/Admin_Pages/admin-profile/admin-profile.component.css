@@ -1,0 +1,55 @@
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light-theme {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+body.dark-theme {
+  background-color: #343a40;
+  color: #f8f9fa;
+}
+
+.card {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.card.light-theme {
+  background-color: white;
+  color: #212529;
+}
+
+.card.dark-theme {
+  background-color: #495057;
+  color: #f8f9fa;
+}
+
+.card-header.light-theme {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.card-header.dark-theme {
+  background-color: #212529;
+  color: #ffffff;
+}
+
+.text-primary {
+  color: #007bff !important;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+.btn-outline-danger {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: #ffffff;
+}

@@ -18,9 +18,9 @@ body {
   background: linear-gradient(90deg, #dc3545, #f19c9e);
 }
 
-.custom-scroll::-webkit-scrollbar {
+/* .custom-scroll::-webkit-scrollbar {
   width: 0;
-}
+} */
 .custom-scroll {
   overflow-y: auto;
 }
@@ -43,14 +43,6 @@ body {
 .search-btn:hover {
   background-color: #004085;
 }
-
-.table-row {
-  transition: transform 0.3s ease;
-}
-.table-row:hover {
-  transform: translateX(5px);
-}
-
 .action-btn {
   transition: transform 0.2s ease, color 0.2s ease;
 }

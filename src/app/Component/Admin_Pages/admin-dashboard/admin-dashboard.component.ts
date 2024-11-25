@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../../Service/Auth/auth.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -11,8 +12,16 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './admin-dashboard.component.css'
 })
 export class AdminDashboardComponent {
-  logout(){
 
+  constructor(private authService:AuthService){}
+
+  logout(){
+    this.authService.logout();
+    this.refreshPage()
+  }
+
+  refreshPage(): void {
+    window.location.reload();
   }
   sidebarCollapsed = false;
   toggleSidebar() {

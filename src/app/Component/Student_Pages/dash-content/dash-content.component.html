@@ -1,0 +1,102 @@
+<!-- Dashboard Overview Section -->
+<h2 class="mb-4 text-dark fw-bold">Dashboard Overview</h2>
+
+<div class="row mb-4">
+  <div class="col-md-3 mb-4">
+      <div class="card text-white bg-dark shadow-lg border-0 overview-card">
+          <div class="card-body">
+              <h5 class="card-title text-primary"><i class="fas fa-users me-2"></i> New Assesments</h5>
+              <p class="display-6 fw-bold">2</p>
+          </div>
+      </div>
+  </div>
+  
+  <div class="col-md-3 mb-4">
+      <div class="card text-white bg-gradient-primary shadow-lg border-0 overview-card" style="background: linear-gradient(135deg, #2c3e50, #34495e);">
+          <div class="card-body">
+              <h5 class="card-title text-light"><i class="fas fa-coins me-2"></i> Payments</h5>
+              <p class="display-6 fw-bold">120</p>
+          </div>
+      </div>
+  </div>
+  
+  <div class="col-md-3 mb-4">
+      <div class="card text-white bg-gradient-info shadow-lg border-0 overview-card" style="background: linear-gradient(135deg, #1abc9c, #16a085);">
+          <div class="card-body">
+              <h5 class="card-title text-light"><i class="fas fa-book me-2"></i> Courses</h5>
+              <p class="display-6 fw-bold">15</p>
+          </div>
+      </div>
+  </div>
+  
+  <div class="col-md-3 mb-4">
+      <div class="card text-white bg-gradient-danger shadow-lg border-0 overview-card" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+          <div class="card-body">
+              <h5 class="card-title text-light"><i class="fas fa-file-alt me-2"></i> Reports</h5>
+              <p class="display-6 fw-bold">20</p>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+<!-- Charts Section -->
+<div class="container-fluid py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card shadow chart-card">
+        <div class="card-header text-white text-center" style="background: linear-gradient(135deg, #007bff, #5bc0de);">
+          <h5>Grade Stats</h5>
+        </div>
+        <div class="card-body d-flex align-items-center justify-content-center">
+          <canvas id="enrollmentChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card shadow chart-card">
+        <div class="card-header text-white text-center" style="background: linear-gradient(135deg, #28a745, #34d058);">
+          <h5>Payment Overview</h5>
+        </div>
+        <div class="card-body d-flex align-items-center justify-content-center">
+          <canvas id="paymentChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-12 mb-4">
+      <div class="card shadow chart-card">
+        <div class="card-header text-white text-center" style="background: linear-gradient(135deg, #ffb700, #ffdf5b);">
+          <h5>Course Popularity</h5>
+        </div>
+        <div class="card-body d-flex align-items-center justify-content-center">
+          <canvas id="popularityChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Recent Notifications Panel -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-secondary text-white">
+          <h5 class="m-0">Recent Payments</h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item">Upcoming assesment remider</li>
+            <li class="list-group-item">Upcoming course  reminder</li>
+            <li class="list-group-item">New course added: Course B</li>
+            <li class="list-group-item">Payment overdue for Student ABC</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

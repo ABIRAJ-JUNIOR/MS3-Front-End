@@ -1,0 +1,141 @@
+<div class="container py-4" *ngIf="studentData">
+    <!-- Page Title -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="m-0">Student Report</h2>
+      <button class="btn btn-primary" (click)="downloadReportAsPng()"><i class="bi bi-download me-2"></i>Download Report</button>
+    </div>
+    <div id="reportContent">
+      <!-- Student Profile Section -->
+    <div class="card shadow border-0 mb-4">
+        <div class="card-body d-flex flex-column flex-md-row align-items-center">
+          <div class="profile-pic mb-3 mb-md-0">
+            <img
+              [src]="studentData != undefined ? studentData.imageUrl : 'https://via.placeholder.com/150'"
+              alt="Profile"
+              class="rounded-circle border"
+              width="150"
+              height="150"
+              crossorigin="anonymous"
+            />
+          </div>
+          <div class="ms-md-4">
+            <h4 class="mb-1">{{studentData.firstName}} {{studentData.lastName}}</h4>
+            <p class="text-muted mb-2">Student ID: <strong>{{studentData.id}}</strong></p>
+            <p class="text-muted mb-0">Email: <strong>johndoeexample.com</strong></p>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Personal Info & Address -->
+      <div class="card shadow border-0 mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Personal Information</h5>
+          <div class="row">
+            <div class="col-md-6">
+              <p class="mb-1"><strong>NIC:</strong> {{studentData.nic}}</p>
+              <p class="mb-1"><strong>Gender:</strong> {{studentData.gender}}</p>
+              <p class="mb-1"><strong>Date of Birth:</strong> {{studentData.dateOfBirth | date}}</p>
+            </div>
+            <div class="col-md-6">
+              <p class="mb-1"><strong>Phone:</strong> {{studentData.phone}}</p>
+              <p class="mb-1" ><strong>Address:</strong> {{studentData.address.addressLine1}}, {{studentData.address.addressLine2}}, {{studentData.address.city}}, {{studentData.address.country}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Enrolled Courses -->
+      <div class="card shadow border-0 mb-4">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Enrolled Details</h5>
+          <div class="table-responsive">
+            <table class="table table-striped align-middle mb-0">
+              <thead class="table-dark">
+                <tr>
+                  <th>#</th>
+                  <th>Course Name</th>
+                  <th>Level</th>
+                  <th>Duration</th>
+                  <th>Fee</th>
+                  <th>Payment Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let enroll of studentData.enrollments; let i = index">
+                    <th>{{i+1}}</th>
+                    <td>{{enroll.courseScheduleResponse.courseResponse.courseName}}</td>
+                    <td>{{enroll.courseScheduleResponse.courseResponse.level}}</td>
+                    <td>{{enroll.courseScheduleResponse.duration}} Days</td>
+                    <td>{{enroll.courseScheduleResponse.courseResponse.courseFee}} Rs</td>
+                    <td [ngClass]="{'color-for-paid' : enroll.paymentStatus == 'Paid' , 'color-for-inprogress' : enroll.paymentStatus == 'InProcess'}">{{enroll.paymentStatus}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Payments Section -->
+      <div class="card shadow border-0 mb-4">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Payments</h5>
+          <div class="table-responsive">
+            <table class="table table-striped align-middle mb-0">
+              <thead class="table-dark">
+                <tr>
+                  <th>#</th>
+                  <th>Payment Date</th>
+                  <th>Amount</th>
+                  <th>Payment Type</th>
+                  <th>Payment Method</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let payment of paymentDatas; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{payment.paymentDate | date}}</td>
+                  <td>{{payment.amountPaid}} Rs</td>
+                  <td>{{payment.paymentType}}</td>
+                  <td>{{payment.paymentMethod}}</td>
+                  <td><span class="badge bg-success">Paid</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Attempted Assessments -->
+      <div class="card shadow border-0">
+        <div class="card-body">
+          <h5 class="card-title mb-3">Attempted Assessments</h5>
+          <div class="table-responsive">
+            <table class="table table-striped align-middle mb-0">
+              <thead class="table-dark">
+                <tr>
+                  <th>#</th>
+                  <th>Assessment Type</th>
+                  <th>Score</th>
+                  <th>Grade</th>
+                  <th>FeedBack</th>
+                  <th>Date Attempted</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let assessment of studentData.studentAssessments; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{assessment.assessmentResponse.assessmentType}}</td>
+                  <td>{{assessment.marksObtaines != null ? assessment.marksObtaines : 'Not Evaluvate'}}</td>
+                  <td>{{assessment.grade != null ? assessment.grade : 'Not Evaluvate'}}</td>
+                  <td>{{assessment.feedBack != "" ? assessment.feedBack : 'Not Evaluvate'}}</td>
+                  <td>{{assessment.dateSubmitted | date}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>  
+    </div> 
+</div>
+  

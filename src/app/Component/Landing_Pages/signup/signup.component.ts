@@ -1,15 +1,69 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService, SignUp } from '../../../Service/Auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [],
+  imports: [RouterModule,ReactiveFormsModule,CommonModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
 export class SignupComponent {
  
+
+  StudentRegistration:FormGroup;
+
+  constructor(private fb:FormBuilder , private authService:AuthService ,private toastr:ToastrService , private rout:Router){
+    this.StudentRegistration=this.fb.group({
+      nic:['' , [Validators.required , Validators.pattern('^[0-9]{9}[Vv]$|^[0-9]{12}$')]],
+      firstName :['',Validators.required],
+      lastName :[''],
+      email:['',[Validators.required,Validators.email]],
+      password:['',[Validators.required,Validators.minLength(4)]],
+      confirmPassword:['',Validators.required],
+      dateOfBirth:['',Validators.required],
+      gender:['',Validators.required],
+      phone:['',Validators.required],
+    })
+  }
+
+  onSubmit(){
+    const form = this.StudentRegistration.value;
+    const student:SignUp = {
+      nic: form.nic,
+      firstName:form.firstName,
+      lastName:form.lastName,
+      dateOfBirth:form.dateOfBirth,
+      gender:Number(form.gender),
+      email:form.email,
+      phone:form.phone,
+      password:form.password
+    }
+
+    this.authService.signUp(student).subscribe({
+      next:(response) =>{
+        this.toastr.success("User SignUp Successfull" , "" , {
+          positionClass:"toast-top-right",
+          progressBar:true,
+          timeOut:3000
+        })
+        
+        this.StudentRegistration.reset()
+      },complete:()=>{
+        this.rout.navigate(['/signin'])
+      },error:(error)=>{
+        this.toastr.warning(error.error, "" , {
+          positionClass:"toast-top-right",
+          progressBar:true,
+          timeOut:3000
+        })
+      }
+    })
+
+  }
+
 }

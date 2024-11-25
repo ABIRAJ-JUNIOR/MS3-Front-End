@@ -11,7 +11,7 @@
               <h2 class="m-0">Admins</h2>
             </div>
             <div class="col-lg-6 d-flex justify-content-lg-end align-items-center">
-              <a class="btn btn-success d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#userForm1">
+              <a class="btn btn-success d-flex align-items-center" (click)="editAdmin(1) "  data-bs-toggle="modal" data-bs-target="#userForm1">
                 <i class="bi bi-plus-circle me-2"></i>
                 <span>Add New Admin</span>
               </a>
@@ -42,10 +42,10 @@
                 <td>{{ admin.firstName }} {{ admin.lastName }}</td>
                 <td>{{ admin.phone }}</td>
                 <td class="text-center">
-                  <a href="#" class="text-primary me-3" aria-label="Edit Admin">
+                  <a  class="text-primary me-3 pointer" aria-label="Edit Admin" data-bs-toggle="modal" data-bs-target="#userForm1" (click)="editAdmin(2) ; patchData(admin)">
                     <i class="bi bi-pencil-square"></i>
                   </a>
-                  <a class="text-danger" aria-label="Delete Admin" (click)="openModal(deleteEmployeeModal)">
+                  <a class="text-danger pointer" aria-label="Delete Admin" (click)="openModal(deleteEmployeeModal , admin.id)">
                     <i class="bi bi-trash3-fill"></i>
                   </a>
                 </td>
@@ -120,19 +120,19 @@
       
       <!-- Modal Header -->
       <div class="modal-header border-0" style="background-color: #2c2f3a; color: #e5e5e5; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);">
-        <h4 class="modal-title fw-bold" id="userFormLabel">Add User Details</h4>
+        <h4 class="modal-title fw-bold" id="userFormLabel">{{ isUpdate != true ? "Add User Details" : "Update User Details"}}</h4>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
       <!-- Modal Body -->
       <div class="modal-body">
-        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="row g-4">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit(fileInput)" class="row g-4">
           
           <!-- Profile Picture Section -->
           <div class="col-12 col-md-3 d-flex flex-column align-items-center text-center">
             <div class="position-relative">
               <img [src]="profileImageUrl || 'https://via.placeholder.com/150'" alt="Profile Picture" class="rounded border border-white shadow-lg" style="width: 120px; height: 120px; object-fit: cover" />
-              <input type="file" id="imgInput" #fileInput class="d-none" accept="image/*" (change)="onFileSelected($event)" />
+              <input type="file" id="imgInput" #fileInput class="d-none" accept="image/*" (change)="onFileSelected($event)"/>
               <button type="button" class="btn btn-light btn-sm rounded-circle shadow position-absolute" style="bottom: 0; right: -10px; border-radius: 4px" data-bs-toggle="tooltip" data-bs-placement="top" title="Change Profile Picture" (click)="fileInput.click()">
                 <i class="bi bi-pencil-fill"></i>
               </button>

@@ -17,7 +17,17 @@ export class AdminService {
   }
 
   addimage(adminId:string , image:any){
-    return this.http.post(`${this.apiUrl}/Admin/image/${adminId}`, image);
+    return this.http.post(`${this.apiUrl}/Admin/image/${adminId}`, image,{
+      responseType:'text'
+    });
+  }
+
+  updateFullDetails(adminId:string , admin:AdminRequest){
+    return this.http.put(`${this.apiUrl}/Update-Full-Details/${adminId}`,admin)
+  }
+
+  deleteAdmin(adminId:string){
+    return this.http.delete(`${this.apiUrl}/Admin/${adminId}`);
   }
 
   getAdmins(){

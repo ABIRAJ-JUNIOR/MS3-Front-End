@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Course, Schedule, Student } from '../../../Modals/modals';
 import { CourseService } from '../../../Service/Course/course.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-course-schedule',
@@ -24,7 +25,7 @@ export class CourseScheduleComponent {
   scheduleForm: FormGroup;
   courses: DropDown[] = []
 
-  constructor(private courseService: CourseService,private fb: FormBuilder) {
+  constructor(private courseService: CourseService,private fb: FormBuilder,private toastr:ToastrService) {
     this.scheduleForm = this.fb.group({
       course: ['', Validators.required],
       startDate: ['', Validators.required],
@@ -78,14 +79,54 @@ export class CourseScheduleComponent {
     if (this.scheduleForm.valid) {
       const scheduleData = this.scheduleForm.value;
       scheduleData.scheduleStatus = Number(scheduleData.scheduleStatus)
-      this.courseService.addCourseSchedule(scheduleData).subscribe({})
+      const scheduledetails:CourseScheduleRequest={
+        courseId:scheduleData.course,
+        startDate:scheduleData.startDate,
+        endDate:scheduleData.endDate,
+        time:scheduleData.time,
+        location:scheduleData.location,
+        maxStudents:scheduleData.maxStudents,
+        scheduleStatus:scheduleData.scheduleStatus
+      }
+      this.courseService.addCourseSchedule(scheduledetails).subscribe({
+        next: (data:any) => {
+
+        },
+        complete:()=> {
+          this.toastr.success("CourseSchedule Added Successfull" , "" , {
+            positionClass:"toast-top-right",
+            progressBar:true,
+            timeOut:3000
+
+          })
+          this.scheduleForm.reset();
+        },
+        error:(err:any)=> {
+          this.toastr.warning(err.error , "" , {
+            positionClass:"toast-top-right",
+            progressBar:true,
+            timeOut:3000
+          })
+        }
+      })
       console.log('Course Schedule Data:', scheduleData);
       // Implement further actions, e.g., API call or storing data.
     }
   }
+
 }
 
 export interface DropDown{
   name:string;
   id:string;
+}
+
+export interface CourseScheduleRequest{
+  courseId:string;
+  startDate:string;
+  endDate:string;
+  time:string
+  location:string;
+  maxStudents:number;
+  scheduleStatus: number;
 }

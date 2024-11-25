@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Student } from '../../Modals/modals';
+import { StudentReqest } from '../../Component/Admin_Pages/student-list/student-list.component';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,12 @@ export class StudentService {
   getStudent(id:string){
     return this.http.get<Student>(this.apiUrl + '/Student/' + id)
   }
-  addStudent(Student:FormData){
+  addStudent(Student:StudentReqest){
     return this.http.post<Student>(this.apiUrl + '/Student/student', Student)
+  }
+  addimage(adminId:string,image:any){
+    return this.http.post<Student>(this.apiUrl + `/Student/Image/${adminId}`,image)
+
   }
 
   pagination(pageNumber:number , pageSize:number){

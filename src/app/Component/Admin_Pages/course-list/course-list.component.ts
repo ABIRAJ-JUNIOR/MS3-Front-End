@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, numberAttribute } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {   CourseService } from '../../../Service/Course/course.service';
 import { Course, CourseCategory, Schedule } from '../../../Modals/modals';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-course-list',
@@ -18,17 +19,18 @@ export class CourseListComponent {
   totalPages: number = 0;
   currentLength:number = 0;
   totalItems:number = 0;
+  profileImage!:File;
 
   courseForm: FormGroup;
   courseImageUrl: string | null = null; // To display the course image preview
 
   CourseCategory:CourseCategory[]=[]
 
-  constructor(private courseService: CourseService,private fb: FormBuilder) {
+  constructor(private courseService: CourseService,private fb: FormBuilder, private toastr:ToastrService) {
 
     this.courseForm = this.fb.group({
       courseName: ['', Validators.required],
-      courseCategory: ['', Validators.required],
+      courseCategoryId: ['', Validators.required],
       courseLevel: ['', Validators.required],
       courseFee: ['', [Validators.required, Validators.min(0)]],
       description: ['', [Validators.required, Validators.maxLength(500)]],
@@ -42,6 +44,8 @@ export class CourseListComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const file = input.files[0];
+      this.profileImage=file
+      
       this.courseForm.patchValue({ courseImage: file });
 
       // Preview the selected image
@@ -90,38 +94,52 @@ export class CourseListComponent {
       this.loadItems();
     }
   }
-
+private CourseId:string=''
   onSubmit() {
     if (this.courseForm.valid) {
-      const formData = new FormData();
-      formData.append('courseName', this.courseForm.get('courseName')?.value);
-      formData.append(
-        'courseCategory',
-        this.courseForm.get('courseCategory')?.value
-      );
-      formData.append('courseLevel', this.courseForm.get('courseLevel')?.value);
-      formData.append('courseFee', this.courseForm.get('courseFee')?.value);
-      formData.append(
-        'description',
-        this.courseForm.get('description')?.value
-      );
-      formData.append(
-        'prerequisites',
-        this.courseForm.get('prerequisites')?.value
-      );
-
-      // Handle image upload if it exists
-      const courseImage = this.courseForm.get('courseImage')?.value;
-      if (courseImage) {
-        formData.append('courseImage', courseImage);
-      }
-
+    const form=this.courseForm.value
+    console.log(form);
+    
+    form.courseLevel=Number(form.courseLevel)
       // Replace this console log with your API call to submit data
-      console.log('Form data ready for submission:', formData);
-      console.log(this.courseForm.value);
-      
+      // console.log('Form data ready for submission:', formData);
+      console.log(this.profileImage);
+      const coursedata:CourseRequest={
+        courseCategoryId:form.courseCategoryId,
+        courseName:form.courseName,
+        level:form.courseLevel,
+        courseFee:form.courseFee,
+        description:form.description,
+        prerequisites:form.prerequisites
+      }
       alert('Course details submitted successfully!');
-
+        this.courseService.AddCourse(coursedata).subscribe({
+          next: (response: any) => {
+              this.CourseId=response.id
+              
+              this.toastr.success("Added Successfull" , "" , {
+                positionClass:"toast-top-right",
+                progressBar:true,
+                timeOut:3000
+              })
+          },
+          complete:()=> {
+            const formdata= new FormData();
+            formdata.append('image',this.profileImage);
+            this.courseService.Addimage(this.CourseId,formdata).subscribe({
+              next:(response:any)=>{}
+            })
+            this.courseImageUrl=null
+            
+          },
+          error:(err) =>{
+            this.toastr.warning(err.error , "" , {
+              positionClass:"toast-top-right",
+              progressBar:true,
+              timeOut:3000
+            })
+          },
+        })
       // Clear the form (optional)
       this.courseForm.reset();
       this.courseImageUrl = null;
@@ -129,4 +147,14 @@ export class CourseListComponent {
       alert('Please fill out all required fields.');
     }
   }
+}
+
+
+export interface CourseRequest{
+  courseCategoryId:string;
+  courseName:string;
+  level:Number;
+  courseFee:Number;
+  description:string;
+  prerequisites:string;
 }

@@ -43,11 +43,16 @@ export class PaymentGateComponent {
 
   }
 
+
+  LocalCardDetails:any;
+
   ngOnInit(): void {
-    this.loadItems()
+    this.loadItems();
+   this.AddCardDetails()
     window.onpopstate = function () {
-      history.pushState(null, '', location.href); 
+      history.pushState(null, '', location.href);
     };
+    console.log(this.LocalCardDetails)
   }
 
   DeivdeInstallment: number = 0;
@@ -62,18 +67,20 @@ export class PaymentGateComponent {
 
 
 
-  CardDetails: any[] = []
+
 
   AddCardDetails() {
-
+    this.LocalCardDetails=JSON.parse(this.PaymentDataService.GetCardDetails())
   }
 
 
   CardFormSubmited(form: FormData) {
-    this.CardDetails = []
-    this.CardDetails.push(form)
-    console.log(this.CardDetails);
+    localStorage.setItem('bankcard', JSON.stringify(form))
+    this.AddCardDetails()
+
   }
+
+
 
 
   PaymentPlans: number = 1;

@@ -42,8 +42,8 @@
                                         <b>Add your Payment Card</b>
                                     </p>
                                 </div>
-                                <button class="text-primary btn btn-md border-0" data-bs-toggle="modal"
-                                    data-bs-target="#AddCard">
+                                <button class="text-primary btn btn-md border-0" data-bs-toggle="modal" 
+                                    data-bs-target="#AddCard" (click)="AddCardDetails()">
                                     <i class="fas fa-plus-circle text-primary pe-1"></i>Add payment card
                                 </button>
                             </div>
@@ -52,13 +52,13 @@
                                 processed.
                             </p>
                             <form class="pb-3">
-                                <div class="d-flex flex-row pb-3" *ngFor="let card of CardDetails">
+                                <div class="d-flex flex-row pb-3" *ngIf="LocalCardDetails">
                                     <div class="rounded border d-flex w-100 p-3 align-items-center">
                                         <p class="mb-0">
                                             <i class="fab fa-cc-visa fa-lg text-primary pe-2"></i>Visa Debit
                                             Card
                                         </p>
-                                        <div class="ms-auto">************{{ card.number | slice:-4 }}</div>
+                                        <div class="ms-auto">************{{ LocalCardDetails.number | slice:-4 }}</div>
 
                                     </div>
                                 </div>

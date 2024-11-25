@@ -27,4 +27,8 @@ export class PaymentDataService {
     this.generateRandomNumber()
     return sessionStorage.getItem('paymentOtp')
   }
+
+  GetCardDetails():any{
+    return localStorage.getItem('bankcard')
+  }
 }

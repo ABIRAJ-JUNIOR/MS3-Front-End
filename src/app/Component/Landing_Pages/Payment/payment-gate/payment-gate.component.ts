@@ -86,5 +86,7 @@ export class PaymentGateComponent {
 
   ConfirmPayment(){
     this.router.navigate(['paymen-auth/otp-auth'])
+    this.PaymentDataService.generateRandomNumber();
   }
+
 }

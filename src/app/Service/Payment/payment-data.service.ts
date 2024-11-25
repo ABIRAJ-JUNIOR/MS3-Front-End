@@ -22,4 +22,8 @@ export class PaymentDataService {
     sessionStorage.setItem('paymentOtp',JSON.stringify(otp))
 
   }
+
+  GetOtp():any {
+    return sessionStorage.getItem('paymentOtp')
+  }
 }

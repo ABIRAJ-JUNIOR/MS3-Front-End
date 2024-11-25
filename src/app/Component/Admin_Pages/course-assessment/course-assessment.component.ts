@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { Assessment, Course, Schedule } from '../../../Modals/modals';
 import { CourseService } from '../../../Service/Course/course.service';
 import { CommonModule } from '@angular/common';
+import { REACTIVE_NODE } from '@angular/core/primitives/signals';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-course-assessment',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './course-assessment.component.html',
   styleUrl: './course-assessment.component.css'
 })
@@ -17,9 +19,9 @@ export class CourseAssessmentComponent {
   totalPages: number = 0;
   currentLength:number = 0;
   totalItems:number = 0;
+  assessmentForm!: FormGroup;
 
-
-  constructor(private courseService: CourseService) {}
+  constructor(private courseService: CourseService,private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.loadItems();

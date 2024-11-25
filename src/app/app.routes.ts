@@ -19,6 +19,7 @@ import { CourseAssessmentComponent } from './Component/Admin_Pages/course-assess
 import { adminAuthGuard } from './Guard/Admin/admin-auth.guard';
 import { DashContentComponent } from './Component/Student_Pages/dash-content/dash-content.component';
 import { PaymentGateComponent } from './Component/Landing_Pages/Payment/payment-gate/payment-gate.component';
+import { payAuthGuard } from './Guard/Payment/pay-auth.guard';
 
 export const routes: Routes = [
 
@@ -29,7 +30,11 @@ export const routes: Routes = [
     { path: 'about', component: AboutComponent },
     { path: 'signin', component: SigninComponent },
     { path: 'signup', component: SignupComponent },
-    {path:'paymentgate',component:PaymentGateComponent},
+    {
+        path: 'paymentgate',
+        component: PaymentGateComponent,
+        canActivate : [payAuthGuard]},
+
 
     {
         path: 'admin-dashboard', component: AdminDashboardComponent, children: [
@@ -44,11 +49,11 @@ export const routes: Routes = [
             { path: 'schedule-list', component: CourseScheduleComponent },
             { path: 'assessment-list', component: CourseAssessmentComponent },
         ],
-        // canActivate: [adminAuthGuard]
+        canActivate: [adminAuthGuard]
     },
     {
         path: 'student-dashboard', component: StudentDashboardComponent, children: [
-                {path:'',component:DashContentComponent}
+            { path: '', component: DashContentComponent }
         ]
     }
 ];

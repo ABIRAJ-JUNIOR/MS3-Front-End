@@ -107,7 +107,7 @@ private CourseId:string=''
       const coursedata:CourseRequest={
         courseCategoryId:form.courseCategoryId,
         courseName:form.courseName,
-        level:form.level,
+        level:form.courseLevel,
         courseFee:form.courseFee,
         description:form.description,
         prerequisites:form.prerequisites
@@ -129,6 +129,8 @@ private CourseId:string=''
             this.courseService.Addimage(this.CourseId,formdata).subscribe({
               next:(response:any)=>{}
             })
+            this.courseImageUrl=null
+            
           },
           error:(err) =>{
             this.toastr.warning(err.error , "" , {

@@ -21,9 +21,8 @@ export class AdminListComponent {
   totalPages: number = 0;
   currentLength:number = 0;
   totalItems:number = 0;
-
   profileForm: FormGroup;
- 
+  isUpdate:boolean = false;
 
 
   constructor(private adminService: AdminService,private fb: FormBuilder, private toastr:ToastrService ,private modalService: BsModalService) {
@@ -92,6 +91,7 @@ export class AdminListComponent {
 
 
   private adminId:string = ''
+
   onSubmit(fileInput: HTMLInputElement) {
     const formData = this.profileForm.value
     formData.role = Number(formData.role)
@@ -137,6 +137,14 @@ export class AdminListComponent {
       }
     })
   } 
+
+  editAdmin(number:Number){
+    if(number == 1){
+      this.isUpdate = false;
+    }else if(number == 2){
+      this.isUpdate = true;
+    }
+  }
 
   selectedImage: string | null = null;
   modalRef?: BsModalRef;

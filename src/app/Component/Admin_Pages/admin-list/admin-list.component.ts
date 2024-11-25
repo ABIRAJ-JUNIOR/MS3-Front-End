@@ -116,6 +116,7 @@ export class AdminListComponent {
             timeOut:3000
           })
         this.profileForm.reset();
+        this.loadItems();
         },
         complete:()=>{
           const formdata = new FormData();
@@ -127,7 +128,6 @@ export class AdminListComponent {
           })
           this.profileImageUrl = null;
           this.selectedFile = null;
-          fileInput.value = '';
         },
         error:(error)=>{
           this.toastr.warning(error.error , "" , {
@@ -146,6 +146,7 @@ export class AdminListComponent {
             timeOut:3000
           })
         this.profileForm.reset();
+        this.loadItems();
         },
         complete:() => {
           const formdata = new FormData();
@@ -157,7 +158,6 @@ export class AdminListComponent {
           })
           this.profileImageUrl = null;
           this.selectedFile = null;
-          fileInput.value = '';
         },
         error:(error:any) =>{
           this.toastr.warning(error.error , "" , {
@@ -172,6 +172,7 @@ export class AdminListComponent {
 
   editAdmin(number:Number){
     if(number == 1){
+      this.profileForm.reset();
       this.isUpdate = false;
     }else if(number == 2){
       this.isUpdate = true;
@@ -179,7 +180,12 @@ export class AdminListComponent {
   }
 
   patchData(admin:Admin){
-    this.profileForm.patchValue(admin);
+    this.profileForm.patchValue({
+      firstName: admin.firstName,
+      lastName:admin.lastName,
+      nic:admin.nic,
+      phone:admin.phone,
+    });
     this.adminId = admin.id;
     console.log(this.adminId);
     

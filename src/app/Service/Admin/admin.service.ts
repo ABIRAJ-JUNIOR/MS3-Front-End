@@ -23,7 +23,7 @@ export class AdminService {
   }
 
   updateFullDetails(adminId:string , admin:AdminRequest){
-    return this.http.put(`${this.apiUrl}/Update-Full-Details/${adminId}`,admin)
+    return this.http.put(`${this.apiUrl}/Admin/Update-Full-Details/${adminId}`,admin)
   }
 
   deleteAdmin(adminId:string){

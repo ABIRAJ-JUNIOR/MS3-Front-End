@@ -29,7 +29,6 @@ export interface Admin {
   lastName: string;
   phone: string;
   imageUrl: string;
-  role:number
   auditLog: AuditLog[];
 }
 

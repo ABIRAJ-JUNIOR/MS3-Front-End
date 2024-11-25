@@ -25,13 +25,15 @@
                         </p>
                         <div class="mb-3">
                             <label for="paymentPlans" class="form-label  text-dark">Select Payment Plan</label>
-                            <select class="form-select bg-light border-2 border-primary rounded-3 shadow-sm"  [(ngModel)]="PaymentPlans">
-                              <option value="1" >Installment Plan - Pay in manageable monthly installments </option>
-                              <option value="2" >Full Payment - One-time payment with additional benefits.</option>
+                            <select class="form-select bg-light border-2 border-primary rounded-3 shadow-sm"
+                                [(ngModel)]="PaymentPlans">
+                                <option value="1">Installment Plan - Pay in manageable monthly installments </option>
+                                <option value="2">Full Payment - One-time payment with additional benefits.</option>
                             </select>
-                            <small class="form-text text-muted">Choose the payment plan that best suits your financial preferences.</small>
-                          </div>
-                          
+                            <small class="form-text text-muted">Choose the payment plan that best suits your financial
+                                preferences.</small>
+                        </div>
+
                         <hr />
                         <div class="pt-2">
                             <div class="d-flex justify-content-between pb-2">
@@ -40,8 +42,8 @@
                                         <b>Add your Payment Card</b>
                                     </p>
                                 </div>
-                                <button class="text-primary btn btn-md border-0" data-bs-toggle="modal"
-                                    data-bs-target="#AddCard">
+                                <button class="text-primary btn btn-md border-0" data-bs-toggle="modal" 
+                                    data-bs-target="#AddCard" (click)="AddCardDetails()">
                                     <i class="fas fa-plus-circle text-primary pe-1"></i>Add payment card
                                 </button>
                             </div>
@@ -49,14 +51,14 @@
                                 This is the amount due for your enrollment. Adjustments will be made once the payment is
                                 processed.
                             </p>
-                            <form class="pb-3">
-                                <div class="d-flex flex-row pb-3" *ngFor="let card of CardDetails">
+                            <div class="pb-3">
+                                <div class="d-flex flex-row pb-3" *ngIf="LocalCardDetails">
                                     <div class="rounded border d-flex w-100 p-3 align-items-center">
                                         <p class="mb-0">
                                             <i class="fab fa-cc-visa fa-lg text-primary pe-2"></i>Visa Debit
                                             Card
                                         </p>
-                                        <div class="ms-auto">************{{ card.number | slice:-4 }}</div>
+                                        <div class="ms-auto">************{{ LocalCardDetails.number | slice:-4 }}</div>
 
                                     </div>
                                 </div>
@@ -74,21 +76,23 @@
                                         <div class="ms-auto">************1038</div>
                                     </div>
                                 </div> -->
-                            </form>
-                            <button class="btn btn-danger btn-md">Proceed to payment</button>
+                            </div>
+                            <button class="btn btn-danger btn-md" data-bs-toggle="modal"
+                                data-bs-target="#PaymentComfirmation">Proceed to payment</button>
                         </div>
                     </div>
 
                     <div class="col-md-5 col-xl-4 offset-xl-1">
                         <div class="py-4 d-flex justify-content-end">
-                            <h6><a href="#!">Cancel and return to website</a></h6>
+                            <h6 style="cursor: pointer; color: rgb(0, 106, 255);" (click)="CancelPayment()">Cancel and
+                                return to website</h6>
                         </div>
                         <div class="rounded d-flex flex-column p-2 bg-body-tertiary">
                             <!-- Payment Schedule Section -->
                             <div class="p-2 me-3">
                                 <h4>Payment Schedule</h4>
                             </div>
-                            
+
                             <!-- Installment Plan Section -->
                             <div class="p-2 border-bottom" *ngIf="PaymentPlans == 1">
                                 <h5>Installment Plan</h5>
@@ -105,14 +109,14 @@
                                     <div class="ms-auto">Rs {{DeivdeInstallment}}</div>
                                 </div>
                                 <div class="border-top px-2 mx-2"></div>
-                    
+
                                 <!-- Total Payment for Installments -->
                                 <div class="p-2 d-flex pt-3">
                                     <div class="col-8">Total Payment Due (Installment Plan)</div>
                                     <div class="ms-auto">Rs {{recievedModalItems[0].courseFee}}</div>
                                 </div>
                             </div>
-                            
+
                             <!-- Full Payment Section -->
                             <div class="p-2 border-bottom" *ngIf="PaymentPlans == 2">
                                 <h5>Full Payment</h5>
@@ -121,37 +125,39 @@
                                     <div class="ms-auto">Rs {{recievedModalItems[0].courseFee}}</div>
                                 </div>
                                 <div class="border-top px-2 mx-2"></div>
-                    
+
                                 <!-- Total Payment for Full Payment Option -->
                                 <div class="p-2 d-flex pt-3">
                                     <div class="col-8">Total Payment Due (Full Payment)</div>
                                     <div class="ms-auto">Rs {{recievedModalItems[0].courseFee}}</div>
                                 </div>
                             </div>
-                    
-                           
-                            
+
+
+
                             <div class="border-top px-2 mx-2"></div>
-                    
+
                             <!-- Institution Responsibility Section -->
                             <div class="p-2 d-flex pt-3">
                                 <div class="col-8"><b>Institution Responsibility</b></div>
                                 <div class="ms-auto"><b>Rs {{recievedModalItems[0].courseFee}}</b></div>
                             </div>
-                    
-                          
-                            
+
+
+
                             <div class="border-top px-2 mx-2"></div>
-                            
+
                             <!-- Final Total Section -->
                             <div class="p-2 d-flex pt-3">
                                 <div class="col-8"><b>Total</b></div>
-                                <div class="ms-auto"><b class="text-success"  *ngIf="PaymentPlans == 1">Rs {{DeivdeInstallment}}</b></div>
-                                <div class="ms-auto"><b class="text-success"  *ngIf="PaymentPlans == 2">Rs {{recievedModalItems[0].courseFee}}</b></div>
+                                <div class="ms-auto"><b class="text-success" *ngIf="PaymentPlans == 1">Rs
+                                        {{DeivdeInstallment}}</b></div>
+                                <div class="ms-auto"><b class="text-success" *ngIf="PaymentPlans == 2">Rs
+                                        {{recievedModalItems[0].courseFee}}</b></div>
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -238,3 +244,32 @@
         </div>
     </div>
 </div>
+
+
+
+<!--payConfirm Modal -->
+<div class="modal fade" id="PaymentComfirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+           
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-danger" id="exampleModalLabel">Confirm Your Payment</h1>
+            </div>
+            <img src="/payment/payConfirm.png" class="card-img-top" alt="Course Image">
+           
+
+            <div class="modal-body">
+                <p class="" style="font-size: 18px;">Are you sure you want to proceed with the payment?</p>
+                <p>To finalize the transaction,
+                    please verify your identity by entering the One-Time Password (OTP) sent to your phone</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="ConfirmPayment()">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- otp modal  -->

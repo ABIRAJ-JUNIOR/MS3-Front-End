@@ -19,6 +19,9 @@ import { CourseAssessmentComponent } from './Component/Admin_Pages/course-assess
 import { adminAuthGuard } from './Guard/Admin/admin-auth.guard';
 import { DashContentComponent } from './Component/Student_Pages/dash-content/dash-content.component';
 import { PaymentGateComponent } from './Component/Landing_Pages/Payment/payment-gate/payment-gate.component';
+import { payAuthGuard } from './Guard/Payment/pay-auth.guard';
+import { OtpAuthenticationComponent } from './Component/Landing_Pages/otp-authentication/otp-authentication.component';
+import { PaymentAuthenticationComponent } from './Component/Landing_Pages/payment-authentication/payment-authentication.component';
 
 export const routes: Routes = [
 
@@ -29,7 +32,22 @@ export const routes: Routes = [
     { path: 'about', component: AboutComponent },
     { path: 'signin', component: SigninComponent },
     { path: 'signup', component: SignupComponent },
-    {path:'paymentgate',component:PaymentGateComponent},
+    {
+        path: 'paymen-auth',
+        component: PaymentAuthenticationComponent, children:[
+            {
+                path:'paymentgate',
+                component:PaymentGateComponent
+            },
+            {
+                path:'otp-auth',
+                component:OtpAuthenticationComponent
+            } 
+        ],
+        canActivate : [payAuthGuard]
+    },
+   
+
 
     {
         path: 'admin-dashboard', component: AdminDashboardComponent, children: [
@@ -45,11 +63,11 @@ export const routes: Routes = [
             { path: 'assessment-list', component: CourseAssessmentComponent },
             {path:'**' , redirectTo:'home',pathMatch:'full'}
         ],
-        // canActivate: [adminAuthGuard]
+        canActivate: [adminAuthGuard]
     },
     {
         path: 'student-dashboard', component: StudentDashboardComponent, children: [
-                {path:'',component:DashContentComponent}
+            { path: '', component: DashContentComponent }
         ]
     },
     { path: '**', redirectTo: 'home', pathMatch: 'full' },

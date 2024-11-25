@@ -4,11 +4,13 @@ import { AdminService } from '../../../Service/Admin/admin.service';
 import { Admin } from '../../../Modals/modals';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-admin-list',
   standalone: true,
   imports: [CommonModule,ReactiveFormsModule],
+  providers: [BsModalService],
   templateUrl: './admin-list.component.html',
   styleUrl: './admin-list.component.css'
 })
@@ -24,7 +26,7 @@ export class AdminListComponent {
  
 
 
-  constructor(private adminService: AdminService,private fb: FormBuilder, private toastr:ToastrService) {
+  constructor(private adminService: AdminService,private fb: FormBuilder, private toastr:ToastrService ,private modalService: BsModalService) {
 
     this.profileForm = this.fb.group({
       nic: ['', [Validators.required, Validators.pattern(/^\d{9}[Vv]|\d{12}$/)]], // Example NIC validation
@@ -53,7 +55,6 @@ export class AdminListComponent {
   loadItems(): void {
     this.adminService.pagination(this.currentPage , this.pageSize).subscribe({
       next:((response:any) => {
-        console.log(response)
         this.totalPages = response.totalPages
         this.totalItems = response.totalItem
         this.admins = response.items
@@ -133,9 +134,23 @@ export class AdminListComponent {
         })
       }
     })
-
-  
   } 
+
+  selectedImage: string | null = null;
+  modalRef?: BsModalRef;
+
+  openPreViewModal(template: any, image: string): void {
+    this.selectedImage = image;
+    this.modalRef = this.modalService.show(template);
+  }
+  openModal(template: any): void {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  deleteEmployee(): void {
+    console.log('Employee deleted');
+    this.modalRef?.hide();
+  }
 }
 
 export interface AdminRequest{

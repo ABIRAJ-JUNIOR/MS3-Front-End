@@ -148,7 +148,8 @@ export class StudentListComponent implements OnInit {
           this.paginationService.addimage(this.adminId,formdata).subscribe({
             next:(response:any)=>{}
           })
-      }
+      },
+      
     })
 
       console.log('Form Submitted', this.profileForm.value);

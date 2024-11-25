@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {   CourseService } from '../../../Service/Course/course.service';
 import { Course, CourseCategory, Schedule } from '../../../Modals/modals';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-course-list',
@@ -25,7 +26,7 @@ export class CourseListComponent {
 
   CourseCategory:CourseCategory[]=[]
 
-  constructor(private courseService: CourseService,private fb: FormBuilder) {
+  constructor(private courseService: CourseService,private fb: FormBuilder, private toastr:ToastrService) {
 
     this.courseForm = this.fb.group({
       courseName: ['', Validators.required],
@@ -93,7 +94,7 @@ export class CourseListComponent {
       this.loadItems();
     }
   }
-
+private CourseId:string=''
   onSubmit() {
     if (this.courseForm.valid) {
     const form=this.courseForm.value
@@ -110,7 +111,26 @@ export class CourseListComponent {
         prerequisites:form.prerequisites
       }
       alert('Course details submitted successfully!');
-        
+        this.courseService.AddCourse(coursedata).subscribe({
+          next: (response: any) => {
+              this.CourseId=response.Id
+              this.toastr.success("Added Successfull" , "" , {
+                positionClass:"toast-top-right",
+                progressBar:true,
+                timeOut:3000
+              })
+          },
+          complete:()=> {
+            
+          },
+          error:(err) =>{
+            this.toastr.warning(err.error , "" , {
+              positionClass:"toast-top-right",
+              progressBar:true,
+              timeOut:3000
+            })
+          },
+        })
       // Clear the form (optional)
       this.courseForm.reset();
       this.courseImageUrl = null;

@@ -149,6 +149,14 @@ export class StudentListComponent implements OnInit {
             next:(response:any)=>{}
           })
       },
+      error:(error: any) => 
+        {
+          this.toastr.warning(error.error , "" , {
+            positionClass:"toast-top-right",
+            progressBar:true,
+            timeOut:3000
+          })
+        }
       
     })
 

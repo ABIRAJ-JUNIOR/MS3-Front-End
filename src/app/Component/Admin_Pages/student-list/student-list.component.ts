@@ -75,7 +75,29 @@ export class StudentListComponent implements OnInit {
   GoToReport(id:string){
     this.router.navigate(['/admin-dashboard/student-report' , id])
   }
-   private adminId:string=''
+
+  get formControls() {
+    return this.profileForm.controls;
+  }
+
+  profileImageUrl: string | undefined;
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    this.profileImage = file
+    console.log(file)
+    if (file) {
+      this.previewImage(file);
+    }
+  }
+  previewImage(file: File): void {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.profileImageUrl = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  private adminId:string=''
   onSubmit(): void {
     if (this.profileForm.valid) {
       let form=this.profileForm.value
@@ -93,7 +115,7 @@ export class StudentListComponent implements OnInit {
         lastName:form.lastName,
         dateOfBirth:form.dateOfBirth,
         gender:form.gender,
-        phone:form.gender,
+        phone:form.phone,
         email:form.email,
         password:form.password,
       }
@@ -122,33 +144,15 @@ export class StudentListComponent implements OnInit {
       },
       complete:()=>{
         const formdata=new FormData();
-        formdata.append('imageUrl',this.profileImage)
-
+        formdata.append('image',this.profileImage)
+          this.paginationService.addimage(this.adminId,formdata).subscribe({
+            next:(response:any)=>{}
+          })
       }
     })
 
       console.log('Form Submitted', this.profileForm.value);
     }
-  }
-  get formControls() {
-    return this.profileForm.controls;
-  }
-
-  profileImageUrl: string | undefined;
-  onFileSelected(event: any): void {
-    const file: File = event.target.files[0];
-    this.profileImage = file
-    console.log(file)
-    if (file) {
-      this.previewImage(file);
-    }
-  }
-  previewImage(file: File): void {
-    const reader = new FileReader();
-    reader.onload = (e: any) => {
-      this.profileImageUrl = e.target.result;
-    };
-    reader.readAsDataURL(file);
   }
 
 }

@@ -17,5 +17,7 @@ export class PaymentDataService {
   PurchaseDetailGetLocal(): any {
     return localStorage.getItem('PurchaseCourse') || []
   }
-  
+   generateRandomNumber(): number {
+    return Math.floor(100000 + Math.random() * 900000);
+}
 }

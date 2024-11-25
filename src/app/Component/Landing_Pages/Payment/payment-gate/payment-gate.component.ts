@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PaymentDataService } from '../../../../Service/Payment/payment-data.service';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment-gate',
@@ -18,7 +19,7 @@ export class PaymentGateComponent {
 
   CardFormData: FormGroup;
 
-  constructor(private PaymentDataService: PaymentDataService, private fb: FormBuilder) {
+  constructor(private PaymentDataService: PaymentDataService, private fb: FormBuilder ,private router : Router) {
 
     this.CardFormData = this.fb.group({
       name: ['', [Validators.required]],
@@ -75,5 +76,11 @@ export class PaymentGateComponent {
 
 
   PaymentPlans: number = 1;
+
+
+  CancelPayment(){
+    this.router.navigate(['/course']);
+    localStorage.removeItem("PurchaseCourse")
+  }
 
 }

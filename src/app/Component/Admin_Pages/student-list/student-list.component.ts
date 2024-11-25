@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { Router } from '@angular/router';
 import { Student } from '../../../Modals/modals';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-student-list',
@@ -23,7 +24,7 @@ export class StudentListComponent implements OnInit {
 
   profileImage!:File;
   profileForm!: FormGroup;
-  constructor(private paginationService: StudentService , private router:Router,private fb: FormBuilder) {}
+  constructor(private paginationService: StudentService , private router:Router,private fb: FormBuilder, private toastr:ToastrService) {}
 
   ngOnInit(): void {
     this.profileForm = this.fb.group({
@@ -74,7 +75,7 @@ export class StudentListComponent implements OnInit {
   GoToReport(id:string){
     this.router.navigate(['/admin-dashboard/student-report' , id])
   }
-
+   private adminId:string=''
   onSubmit(): void {
     if (this.profileForm.valid) {
       let form=this.profileForm.value
@@ -109,12 +110,25 @@ export class StudentListComponent implements OnInit {
       }
 
     this.paginationService.addStudent(Studentdata).subscribe({
-      
+      next:(response:any)=>{
+         this.adminId=response.id
+        this.toastr.success("Register Successfull" , "" , {
+          positionClass:"toast-top-right",
+          progressBar:true,
+          timeOut:3000
+        })
+       this.profileForm.reset()
+
+      },
+      complete:()=>{
+        const formdata=new FormData();
+        formdata.append('imageUrl',this.profileImage)
+
+      }
     })
 
       console.log('Form Submitted', this.profileForm.value);
     }
-    this.profileForm.reset()
   }
   get formControls() {
     return this.profileForm.controls;

@@ -30,7 +30,7 @@ export class CourseListComponent {
 
     this.courseForm = this.fb.group({
       courseName: ['', Validators.required],
-      courseCategory: ['', Validators.required],
+      courseCategoryId: ['', Validators.required],
       courseLevel: ['', Validators.required],
       courseFee: ['', [Validators.required, Validators.min(0)]],
       description: ['', [Validators.required, Validators.maxLength(500)]],
@@ -98,6 +98,8 @@ private CourseId:string=''
   onSubmit() {
     if (this.courseForm.valid) {
     const form=this.courseForm.value
+    console.log(form);
+    
     form.courseLevel=Number(form.courseLevel)
       // Replace this console log with your API call to submit data
       // console.log('Form data ready for submission:', formData);
@@ -113,7 +115,8 @@ private CourseId:string=''
       alert('Course details submitted successfully!');
         this.courseService.AddCourse(coursedata).subscribe({
           next: (response: any) => {
-              this.CourseId=response.Id
+              this.CourseId=response.id
+              
               this.toastr.success("Added Successfull" , "" , {
                 positionClass:"toast-top-right",
                 progressBar:true,
@@ -121,7 +124,11 @@ private CourseId:string=''
               })
           },
           complete:()=> {
-            
+            const formdata= new FormData();
+            formdata.append('image',this.profileImage);
+            this.courseService.Addimage(this.CourseId,formdata).subscribe({
+              next:(response:any)=>{}
+            })
           },
           error:(err) =>{
             this.toastr.warning(err.error , "" , {

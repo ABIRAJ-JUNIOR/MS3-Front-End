@@ -40,4 +40,8 @@ export class CourseService {
   AddCourse(Course:CourseRequest){
     return this.http.post<Course>(this.apiUrl + '/Course/Course', Course)
   }
+  Addimage(CourseID:string,image:any){
+    return this.http.post(this.apiUrl + '/Course/image/' + CourseID, image)
+  }
+  
 }

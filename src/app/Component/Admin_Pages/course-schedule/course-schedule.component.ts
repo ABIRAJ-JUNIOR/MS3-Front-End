@@ -78,6 +78,15 @@ export class CourseScheduleComponent {
     if (this.scheduleForm.valid) {
       const scheduleData = this.scheduleForm.value;
       scheduleData.scheduleStatus = Number(scheduleData.scheduleStatus)
+      const scheduledetails:CourseScheduleRequest={
+        courseId:scheduleData.courseName,
+        startDate:scheduleData.startDate,
+        endDate:scheduleData.endDate,
+        time:scheduleData.time,
+        location:scheduleData.location,
+        maxStudents:scheduleData.maxStudents,
+        scheduleStatus:scheduleData.scheduleStatus
+      }
       this.courseService.addCourseSchedule(scheduleData).subscribe({})
       console.log('Course Schedule Data:', scheduleData);
       // Implement further actions, e.g., API call or storing data.
@@ -88,4 +97,14 @@ export class CourseScheduleComponent {
 export interface DropDown{
   name:string;
   id:string;
+}
+
+export interface CourseScheduleRequest{
+  courseId:string;
+  startDate:string;
+  endDate:string;
+  time:string
+  location:string;
+  maxStudents:number;
+  scheduleStatus: number;
 }

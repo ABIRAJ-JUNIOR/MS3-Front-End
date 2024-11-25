@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Course, Schedule } from '../../Modals/modals';
+import { Course, CourseCategory, Schedule } from '../../Modals/modals';
 import { CourseRequest } from '../../Component/Admin_Pages/course-list/course-list.component';
+import { CourseScheduleRequest } from '../../Component/Admin_Pages/course-schedule/course-schedule.component';
 
 @Injectable({
   providedIn: 'root'
@@ -31,11 +32,11 @@ export class CourseService {
   assessmentPagination(pageNumber:number , pageSize:number){
     return this.http.get<any>(this.apiUrl + `/Assessment/Pagination/${pageNumber}/${pageSize}`)
   }
-  addCourseSchedule(CourseSchedule:any){
+  addCourseSchedule(CourseSchedule:CourseScheduleRequest){
     return this.http.post<Schedule>(this.apiUrl + '/CourseSchedule', CourseSchedule)
   }
   GetAllCategory(){
-    return this.http.get<any>(this.apiUrl + '/CourseCategory/GetAllCategory')
+    return this.http.get<CourseCategory[]>(this.apiUrl + '/CourseCategory/GetAllCategory')
   }
   AddCourse(Course:CourseRequest){
     return this.http.post<Course>(this.apiUrl + '/Course/Course', Course)

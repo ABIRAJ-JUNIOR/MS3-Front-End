@@ -22,7 +22,7 @@ import { PaymentGateComponent } from './Component/Landing_Pages/Payment/payment-
 
 export const routes: Routes = [
 
-    { path: '', component: HomeComponent },
+    { path: '', redirectTo: 'home' , pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'course', component: CourseComponent },
     { path: 'contact', component: ContactComponent },
@@ -33,7 +33,7 @@ export const routes: Routes = [
 
     {
         path: 'admin-dashboard', component: AdminDashboardComponent, children: [
-            { path: '', component: AdminHomeComponent },
+            { path: '', redirectTo: 'home' ,pathMatch:'full' },
             { path: 'home', component: AdminHomeComponent },
             { path: 'student-list', component: StudentListComponent },
             { path: 'student-report/:id', component: StudentReportComponent },
@@ -43,6 +43,7 @@ export const routes: Routes = [
             { path: 'course-list', component: CourseListComponent },
             { path: 'schedule-list', component: CourseScheduleComponent },
             { path: 'assessment-list', component: CourseAssessmentComponent },
+            {path:'**' , redirectTo:'home',pathMatch:'full'}
         ],
         // canActivate: [adminAuthGuard]
     },
@@ -50,5 +51,6 @@ export const routes: Routes = [
         path: 'student-dashboard', component: StudentDashboardComponent, children: [
                 {path:'',component:DashContentComponent}
         ]
-    }
+    },
+    { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

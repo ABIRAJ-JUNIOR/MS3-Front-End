@@ -1,48 +1,48 @@
 <div class="container py-5">
     <div *ngIf="isFilterVisible" class="filter-options bg-light rounded shadow-sm p-4">
-      <h4 class="mb-4 text-danger fw-bold text-uppercase">Filter Your Future</h4>
-      <div class="row g-4">
-        <!-- Added Filter -->
-        <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="AddedFilter" class="form-label fw-semibold text-muted">Added:</label>
-          <select id="AddedFilter" class="form-select">
-            <option selected>Pending</option>
-            <option value="0">Recently</option>
-            <option value="1">Past</option>
-            <option value="2">Future</option>
-          </select>
+        <h4 class="mb-4 text-danger fw-bold text-uppercase">Filter Your Future</h4>
+        <div class="row g-4">
+            <!-- Added Filter -->
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label for="AddedFilter" class="form-label fw-semibold text-muted">Added:</label>
+                <select id="AddedFilter" class="form-select">
+                    <option selected>Pending</option>
+                    <option value="0">Recently</option>
+                    <option value="1">Past</option>
+                    <option value="2">Future</option>
+                </select>
+            </div>
+            <!-- Level Filter -->
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label for="CourseLevel" class="form-label fw-semibold text-muted">Level:</label>
+                <select id="CourseLevel" class="form-select">
+                    <option selected>All Levels</option>
+                    <option value="0">Beginner</option>
+                    <option value="1">Intermediate</option>
+                    <option value="2">Advanced</option>
+                </select>
+            </div>
+            <!-- Price Filter -->
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <label for="Price" class="form-label fw-semibold text-muted">Price:</label>
+                <select id="Price" class="form-select">
+                    <option selected>All Prices</option>
+                    <option value="0">100-500</option>
+                    <option value="1">500-1000</option>
+                    <option value="2">1000-1500</option>
+                    <option value="3">1500-2000</option>
+                </select>
+            </div>
         </div>
-        <!-- Level Filter -->
-        <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="CourseLevel" class="form-label fw-semibold text-muted">Level:</label>
-          <select id="CourseLevel" class="form-select">
-            <option selected>All Levels</option>
-            <option value="0">Beginner</option>
-            <option value="1">Intermediate</option>
-            <option value="2">Advanced</option>
-          </select>
+        <!-- Apply Filter Button -->
+        <div class="mt-4">
+            <button class="btn btn-primary btn-md px-4 shadow-sm" (click)="applyFilter()">
+                APPLY FILTER
+            </button>
         </div>
-        <!-- Price Filter -->
-        <div class="col-lg-4 col-md-6 col-sm-12">
-          <label for="Price" class="form-label fw-semibold text-muted">Price:</label>
-          <select id="Price" class="form-select">
-            <option selected>All Prices</option>
-            <option value="0">100-500</option>
-            <option value="1">500-1000</option>
-            <option value="2">1000-1500</option>
-            <option value="3">1500-2000</option>
-          </select>
-        </div>
-      </div>
-      <!-- Apply Filter Button -->
-      <div class="mt-4">
-        <button class="btn btn-primary btn-md px-4 shadow-sm" (click)="applyFilter()">
-          APPLY FILTER
-        </button>
-      </div>
     </div>
-  </div>
-  
+</div>
+
 
 
 
@@ -50,13 +50,15 @@
     <div class="d-flex justify-content-between align-items-center">
         <h1 class="headingCourses">Courses</h1>
 
-        <button class="btn btn-primary btn-md" (click)="toggleFilter()"><i class="bi bi-funnel"></i> FILTER COURSES</button>
+        <button class="btn btn-primary btn-md" (click)="toggleFilter()"><i class="bi bi-funnel"></i> FILTER
+            COURSES</button>
     </div>
     <hr>
 
 
     <div class="row py-4">
-        <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-4" *ngFor="let course of paginatedCourses | courseFilter:filterlevel : filterPrice">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-4"
+            *ngFor="let course of paginatedCourses | courseFilter:filterlevel : filterPrice">
             <div class="card border-0  rounded-2 course-card">
                 <div class="position-relative">
                     <!-- Badge for Level -->
@@ -97,7 +99,8 @@
             <li class="page-item pointer" [class.disabled]="currentPage === 1">
                 <a class="page-link" (click)="goToPage(currentPage - 1)">Previous</a>
             </li>
-            <li class="page-item pointer" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+            <li class="page-item pointer" *ngFor="let page of [].constructor(totalPages); let i = index"
+                [class.active]="currentPage === i + 1">
                 <a class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</a>
             </li>
             <li class="page-item pointer" [class.disabled]="currentPage === totalPages">
@@ -171,52 +174,50 @@
                                 </div>
                                 <p class="">{{ModalProduct[0].description}}</p>
                                 <div class="row d-flex justify-content-evenly">
-                                    <div class="card shadow-lg border-0 col-lg-6 col-md-12 col-sm-12 col-12 m-3 card-custom hovercard"
-                                        *ngFor="let sechdule of ModalProduct[0].shedules">
+                                    <div *ngFor="let sechdule of ModalProduct[0].schedules"
+                                        class="col-lg-6 col-md-12 col-sm-12 col-12 m-3 card shadow-lg border-0  card-custom">
+                                        <div (click)="sendPaymentData(sechdule)" data-bs-dismiss="modal" aria-label="Close">
 
-                                        <div class="card-body ScheduleBody py-1">
-                                            <h5 class="modal-title fs-5 text-danger" id="staticBackdropLabel">{{
-                                                ModalProduct[0].courseName }}</h5>
-                                            <div class="d-flex py-2">
-                                                <p class="fw-bold pe-1"><i class="bi bi-clock"></i> </p>
-                                                <p>{{sechdule.time}}</p>
-                                            </div>
-
-
-                                            <div class="d-flex py-1">
-                                                <p class="fw-bold  pe-1"><i class="bi bi-geo-alt-fill"></i></p>
-                                                <p>{{sechdule.location}}</p>
-                                            </div>
-                                            <div class="d-flex py-1">
-                                                <div class="d-flex">
-                                                    <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
-                                                    <p>{{sechdule.startDate}}</p>
+                                            <div class="card-body ScheduleBody py-1">
+                                                <h5 class="modal-title fs-5 text-danger" id="staticBackdropLabel">{{
+                                                    ModalProduct[0].courseName }}</h5>
+                                                <div class="d-flex py-2">
+                                                    <p class="fw-bold pe-1"><i class="bi bi-clock"></i> </p>
+                                                    <p>{{sechdule.time}}</p>
                                                 </div>
-                                                <p class="px-2">-</p>
-                                                <div class="d-flex ">
-                                                    <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
-                                                    <p>{{sechdule.endDate}}</p>
+
+
+                                                <div class="d-flex py-1">
+                                                    <p class="fw-bold  pe-1"><i class="bi bi-geo-alt-fill"></i></p>
+                                                    <p>{{sechdule.location}}</p>
                                                 </div>
-                                            </div>
+                                                <div class="d-flex py-1">
+                                                    <div class="d-flex">
+                                                        <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
+                                                        <p>{{sechdule.startDate}}</p>
+                                                    </div>
+                                                    <p class="px-2">-</p>
+                                                    <div class="d-flex ">
+                                                        <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
+                                                        <p>{{sechdule.endDate}}</p>
+                                                    </div>
+                                                </div>
 
+                                                <div class="d-flex py-1">
+                                                    <p class="fw-bold pe-1"><i class="bi bi-hourglass-split"></i> </p>
+                                                    <p>{{sechdule.duration}} Days</p>
+                                                </div>
+                                                <hr>
+                                                <div class="d-flex py-1 align-items-center">
+                                                    <img src="{{ModalProduct[0].imageUrl}}" class="rounded-circle"
+                                                        width="50px" height="50px" alt="...">
 
+                                                    <p class="fs-5 px-2">Way Makers Acadamy</p>
 
-                                            <div class="d-flex py-1">
-                                                <p class="fw-bold pe-1"><i class="bi bi-hourglass-split"></i> </p>
-                                                <p>{{sechdule.duration}} Days</p>
-                                            </div>
-                                            <hr>
-                                            <div class="d-flex py-1 align-items-center">
-                                                <img src="{{ModalProduct[0].imageUrl}}" class="rounded-circle"
-                                                    width="50px" height="50px" alt="...">
-
-                                                <p class="fs-5 px-2">Way Makers Acadamy</p>
-
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-
-
 
                                 </div>
 

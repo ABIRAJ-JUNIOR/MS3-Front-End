@@ -18,6 +18,7 @@ import { CourseScheduleComponent } from './Component/Admin_Pages/course-schedule
 import { CourseAssessmentComponent } from './Component/Admin_Pages/course-assessment/course-assessment.component';
 import { adminAuthGuard } from './Guard/Admin/admin-auth.guard';
 import { DashContentComponent } from './Component/Student_Pages/dash-content/dash-content.component';
+import { PaymentGateComponent } from './Component/Landing_Pages/Payment/payment-gate/payment-gate.component';
 
 export const routes: Routes = [
 
@@ -28,6 +29,7 @@ export const routes: Routes = [
     { path: 'about', component: AboutComponent },
     { path: 'signin', component: SigninComponent },
     { path: 'signup', component: SignupComponent },
+    {path:'paymentgate',component:PaymentGateComponent},
 
     {
         path: 'admin-dashboard', component: AdminDashboardComponent, children: [

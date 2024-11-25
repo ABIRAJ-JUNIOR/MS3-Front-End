@@ -4,18 +4,20 @@ import { CourseService } from '../../../Service/Course/course.service';
 import { Course } from '../../../Modals/modals';
 import { FormsModule } from '@angular/forms';
 import { CourseFilterPipe } from '../../../Pipes/course-filter.pipe';
+import { PaymentDataService } from '../../../Service/Payment/payment-data.service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-course-cards',
   standalone: true,
-  imports: [CommonModule,FormsModule,CourseFilterPipe],
+  imports: [CommonModule,FormsModule,CourseFilterPipe,RouterModule],
   templateUrl: './course-cards.component.html',
   styleUrl: './course-cards.component.css'
 })
 export class CourseCardsComponent implements OnInit {
 
 
-  constructor(private CourseService:CourseService){
+  constructor(private CourseService:CourseService,private PaymentService:PaymentDataService , private route:Router){
     
   }
 
@@ -335,8 +337,11 @@ export class CourseCardsComponent implements OnInit {
   viewProduct(product: any) {
     this.ModalProduct = []
     this.ModalProduct.push(product)
-
+   console.log(this.ModalProduct)
   }
+
+
+
   ClearModal() {
     this.ModalProduct = []
   }
@@ -403,4 +408,16 @@ export class CourseCardsComponent implements OnInit {
     this.filterPrice=price.value
     this.paginateCourses()
   }
+
+
+  sendPaymentData(sechdule:any) {
+    let PurchaseDetails={
+      "courseName":this.ModalProduct[0].courseName,
+      "courseFee":this.ModalProduct[0].courseFee,
+      "courseId":this.ModalProduct[0].id,
+      ...sechdule
+    }
+    this.PaymentService.PurchaseDetailsSetLocal(PurchaseDetails);
+  }
+ 
 }

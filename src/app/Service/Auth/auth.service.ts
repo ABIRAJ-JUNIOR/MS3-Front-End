@@ -46,9 +46,20 @@ export class AuthService {
     }
   }
 
-  logout(){
-    localStorage.removeItem("token")
+  IsPaymentInStudent():boolean{
+    let payCourse:any=localStorage.getItem("PurchaseCourse")
+    if (payCourse) {
+      return true
+    }else{
+      return false
+    }
   }
+
+  logout(){
+    localStorage.removeItem("token");
+    localStorage.removeItem("PurchaseCourse");
+  }
+
 }
 
 export interface SignUp{

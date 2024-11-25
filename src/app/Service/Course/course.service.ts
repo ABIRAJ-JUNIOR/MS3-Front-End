@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Course, Schedule } from '../../Modals/modals';
+import { CourseRequest } from '../../Component/Admin_Pages/course-list/course-list.component';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +36,8 @@ export class CourseService {
   }
   GetAllCategory(){
     return this.http.get<any>(this.apiUrl + '/CourseCategory/GetAllCategory')
+  }
+  AddCourse(Course:CourseRequest){
+    return this.http.post<Course>(this.apiUrl + '/Course/Course', Course)
   }
 }

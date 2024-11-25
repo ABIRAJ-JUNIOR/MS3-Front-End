@@ -83,4 +83,8 @@ export class PaymentGateComponent {
     localStorage.removeItem("PurchaseCourse")
   }
 
+
+  ConfirmPayment(){
+    this.router.navigate(['paymen-auth/otp-auth'])
+  }
 }

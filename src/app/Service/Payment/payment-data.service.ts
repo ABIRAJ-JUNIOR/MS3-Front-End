@@ -12,9 +12,10 @@ export class PaymentDataService {
 
   PurchaseDetailsSetLocal(data: any): void {
     localStorage.setItem('PurchaseCourse', JSON.stringify(data))
-    this.route.navigate(['/paymentgate'])
+    this.route.navigate(['paymen-auth/paymentgate'])
   }
   PurchaseDetailGetLocal(): any {
     return localStorage.getItem('PurchaseCourse') || []
   }
+  
 }

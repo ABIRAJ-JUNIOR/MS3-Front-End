@@ -3,6 +3,7 @@ import { PaymentDataService } from '../../../../Service/Payment/payment-data.ser
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { jwtDecode } from "jwt-decode";
 
 @Component({
   selector: 'app-payment-gate',
@@ -65,6 +66,8 @@ export class PaymentGateComponent {
 
   }
 
+  
+
 
 
 
@@ -95,6 +98,32 @@ export class PaymentGateComponent {
   ConfirmPayment() {
     this.router.navigate(['paymen-auth/otp-auth'])
     this.PaymentDataService.generateRandomNumber();
+    const token = localStorage.getItem("token");
+    const decode:any = token != null ? jwtDecode(token) : ""
+    let Payment:any;
+
+    if (this.PaymentPlans == 1) {
+      Payment={
+        studentId:decode.studentId,
+        courseScheduleId:this.recievedModalItems[0].courseScheduleId,
+        paymentType:this.PaymentPlans,
+        paymentMethod:1,
+        amountPaid:this.DeivdeInstallment,
+        installmentNumber:1
+      }
+    }else if(this.PaymentPlans == 2){
+      Payment={
+        studentId:decode.studentId,
+        courseScheduleId:this.recievedModalItems[0].courseScheduleId,
+        paymentType:this.PaymentPlans,
+        paymentMethod:2,
+        amountPaid:this.recievedModalItems[0].courseFee,
+        installmentNumber:0
+      }
+    }
+
+    this.PaymentDataService.adddPendingpayment(Payment)
+
   }
 
 }

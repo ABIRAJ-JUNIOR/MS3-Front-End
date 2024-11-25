@@ -31,12 +31,16 @@ export class OtpAuthenticationComponent implements OnInit {
     let enteredOtp = document.getElementById('otp') as HTMLInputElement
     if (enteredOtp.value == this.otp) {
       this.toastr.clear();
+
       this.toastr.success('Your Payment succesfull')
     } else {
       this.toastr.clear();
       this.toastr.error("Enter Valid OTP")
     }
   }
+
+
+
 
 
 }

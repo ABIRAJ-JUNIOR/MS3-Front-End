@@ -28,7 +28,18 @@ export class PaymentDataService {
     return sessionStorage.getItem('paymentOtp')
   }
 
-  GetCardDetails():any{
+  GetCardDetails(): any {
     return localStorage.getItem('bankcard')
   }
+
+
+
+  adddPendingpayment(data: any) {
+    localStorage.setItem('pendingPayment', JSON.stringify(data))
+  }
+
+  getPendingPayment():any{
+    return localStorage.getItem('pendingPayment')
+  }
+
 }

@@ -83,16 +83,18 @@ export class StudentListComponent implements OnInit {
           form[key] = null;
         }
       }
-      const gender:number = Number(form.gender)
-    const formdata:FormData = new FormData();
-    formdata.append('nic',form.nic),
-    formdata.append('firstName',form.firstName),
-    formdata.append('lastName',form.lastName),
-    formdata.append('dateOfBirth',form.dateOfBirth),
-    formdata.append('gender',form.gender),
-    formdata.append('email',form.email),
-    formdata.append('phone',form.phone),
-    formdata.append('password',form.password),
+      form.gender=Number(form.gender)
+      const Studentdata:Student={}
+    //   const gender:number = Number(form.gender)
+    // const formdata:FormData = new FormData();
+    // formdata.append('nic',form.nic),
+    // formdata.append('firstName',form.firstName),
+    // formdata.append('lastName',form.lastName),
+    // formdata.append('dateOfBirth',form.dateOfBirth),
+    // formdata.append('gender',form.gender),
+    // formdata.append('email',form.email),
+    // formdata.append('phone',form.phone),
+    // formdata.append('password',form.password),
     // formdata.append('address.addressLine1',form.nic),
     // formdata.append('address.addressLine2',form.nic),
     // formdata.append('address.city',form.nic),
@@ -130,4 +132,24 @@ export class StudentListComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
+}
+
+export interface StudentReqest{
+  nic:string;
+  firstName:string;
+  lastName:string;
+  dateOfBirth:string;
+  gender:number;
+  phone:string;
+  email:string;
+  password:string;
+  address:AddressRequest;
+}
+
+export interface AddressRequest {
+  addressLine1:string;
+  addressLine2:string;
+  city:string;
+  postalCode:string;
+  country:string;
 }

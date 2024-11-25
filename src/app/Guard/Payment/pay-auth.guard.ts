@@ -8,8 +8,9 @@ export const payAuthGuard: CanActivateFn = (route, state) => {
   if(authService.isLoggedInStudent()){
     return true
   }else{
-    return false
     router.navigate(['/signin'])
+    return false
+    
   }
 
   

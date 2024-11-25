@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Course, CourseCategory, Schedule } from '../../Modals/modals';
 import { CourseRequest } from '../../Component/Admin_Pages/course-list/course-list.component';
 import { CourseScheduleRequest } from '../../Component/Admin_Pages/course-schedule/course-schedule.component';
+import { AssessmentRequest } from '../../Component/Admin_Pages/course-assessment/course-assessment.component';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,9 @@ export class CourseService {
   }
   Addimage(CourseID:string,image:any){
     return this.http.post(this.apiUrl + '/Course/image/' + CourseID, image)
+  }
+  addAssessment(Assessment:AssessmentRequest){
+    return this.http.post(this.apiUrl + '/Assessment/Assessment', Assessment)
   }
   
 }

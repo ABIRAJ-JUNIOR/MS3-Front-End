@@ -22,6 +22,10 @@ export class StudentService {
   addStudent(Student:StudentReqest){
     return this.http.post<Student>(this.apiUrl + '/Student/student', Student)
   }
+  addimage(adminId:string,image:any){
+    return this.http.post<Student>(this.apiUrl + `/Student/Image/${adminId}`,image)
+
+  }
 
   pagination(pageNumber:number , pageSize:number){
     return this.http.get(this.apiUrl + `/Student/Pagination/${pageNumber}/${pageSize}`)

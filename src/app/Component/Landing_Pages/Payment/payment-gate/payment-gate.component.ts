@@ -15,11 +15,11 @@ export class PaymentGateComponent {
 
   recievedModalItems: any[] = []; // Array to hold the received data
 
-  
+
 
   CardFormData: FormGroup;
 
-  constructor(private PaymentDataService: PaymentDataService, private fb: FormBuilder ,private router : Router) {
+  constructor(private PaymentDataService: PaymentDataService, private fb: FormBuilder, private router: Router) {
 
     this.CardFormData = this.fb.group({
       name: ['', [Validators.required]],
@@ -44,16 +44,17 @@ export class PaymentGateComponent {
   }
 
   ngOnInit(): void {
-
     this.loadItems()
-
+    window.onpopstate = function () {
+      history.pushState(null, '', location.href); 
+    };
   }
 
-  DeivdeInstallment:number = 0;
+  DeivdeInstallment: number = 0;
   loadItems(): void {
     this.recievedModalItems.push(JSON.parse(this.PaymentDataService.PurchaseDetailGetLocal()))
     console.log(this.recievedModalItems)
-    let TembFee =this.recievedModalItems[0].courseFee / 3 
+    let TembFee = this.recievedModalItems[0].courseFee / 3
 
     this.DeivdeInstallment = Math.round(TembFee * 100) / 100
 
@@ -78,13 +79,13 @@ export class PaymentGateComponent {
   PaymentPlans: number = 1;
 
 
-  CancelPayment(){
+  CancelPayment() {
     this.router.navigate(['/course']);
     localStorage.removeItem("PurchaseCourse")
   }
 
 
-  ConfirmPayment(){
+  ConfirmPayment() {
     this.router.navigate(['paymen-auth/otp-auth'])
     this.PaymentDataService.generateRandomNumber();
   }

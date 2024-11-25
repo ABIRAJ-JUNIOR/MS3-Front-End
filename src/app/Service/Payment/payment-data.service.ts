@@ -36,11 +36,17 @@ export class PaymentDataService {
 
   adddPendingpayment(data: any) {
     localStorage.setItem('pendingPayment', JSON.stringify(data))
-    
+
   }
 
   getPendingPayment():any{
     return localStorage.getItem('pendingPayment')
+  }
+
+  ClearAllPAymentData(){
+    localStorage.removeItem('paymentOtp')
+    localStorage.removeItem('PurchaseCourse')
+    localStorage.removeItem('pendingPayment')
   }
 
 }

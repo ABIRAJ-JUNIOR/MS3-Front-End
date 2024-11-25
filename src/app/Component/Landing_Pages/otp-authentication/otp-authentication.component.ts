@@ -39,6 +39,7 @@ export class OtpAuthenticationComponent implements OnInit {
       this.PaymentApiServices.AddEnrollment(data).subscribe(
         (d: any) => {
           this.toastr.success('Your Payment is successful');
+          this.paymentDataService.ClearAllPAymentData()
           this.router.navigate(['/student-dashboard'])
         },
         (error) => {

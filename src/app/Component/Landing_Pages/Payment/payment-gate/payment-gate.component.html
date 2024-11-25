@@ -77,7 +77,8 @@
                                     </div>
                                 </div> -->
                             </form>
-                            <button class="btn btn-danger btn-md" >Proceed to payment</button>
+                            <button class="btn btn-danger btn-md" data-bs-toggle="modal"
+                                data-bs-target="#PaymentComfirmation">Proceed to payment</button>
                         </div>
                     </div>
 
@@ -246,44 +247,24 @@
 
 
 
-<!-- otp modal  -->
-
-<div class="modal fade" id="OtpModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--payConfirm Modal -->
+<div class="modal fade" id="PaymentComfirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="card-title text-center">Enter OTP to Complete Payment</h4>
-               
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm Your Payment</h1>
             </div>
             <div class="modal-body">
-
-
-                <form>
-                    <div class="form-group">
-                        <label for="otp">One-Time Password (OTP)</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="otp" placeholder="Enter OTP" maxlength="6"
-                                required>
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" id="sendOtp">Send
-                                    OTP</button>
-                            </div>
-                        </div>
-                        <small id="otpHelp" class="form-text text-muted">Please enter the 6-digit
-                            OTP sent to your phone/email.</small>
-                    </div>
-
-                    
-                </form>
-
+                <p><strong>Are you sure you want to proceed with the payment?</strong> <br> To finalize the transaction,
+                    please verify your identity by entering the One-Time Password (OTP) sent to your phone</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <div class="form-group text-center">
-                    <button type="submit" class="btn btn-success">Verify OTP and
-                        Proceed</button>
-                </div>
+                <button type="button" class="btn btn-danger" >Confirm</button>
             </div>
         </div>
     </div>
 </div>
+
+
+<!-- otp modal  -->

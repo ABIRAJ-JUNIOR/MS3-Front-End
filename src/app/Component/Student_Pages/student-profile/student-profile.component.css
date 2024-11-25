@@ -25,15 +25,12 @@ body {
 .container {
     background: #ffffff;
     border-radius: 10px;
-    padding: 20px;
+    padding: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .card {
-    background-color: #f8f9fa;
     border: none;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 15px;
 }
 

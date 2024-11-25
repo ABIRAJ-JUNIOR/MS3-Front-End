@@ -1,15 +1,15 @@
 <!-- OTP Verification Page -->
-<div class="container mt-5">
+<div class="container-fluid mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-lg-4 col-md-6">
             <div class="card">
-                <div class="card-header text-center">
+                <div class="card-header ">
                     <h4 class="card-title">Enter OTP to Complete Payment</h4>
                 </div>
                 <div class="card-body">
                     <form>
                         <div class="form-group">
-                            <label for="otp">One-Time Password ({{otp}})</label>
+                            <label for="otp">One-Time Password (OTP)</label>
                             <div class="input-group my-3">
                                 <input type="text" class="form-control" id="otp" placeholder="Enter OTP" maxlength="6" required>
                                 <div class="input-group-append">
@@ -19,8 +19,9 @@
                             <small id="otpHelp" class="form-text text-muted">
                                 Please enter the 6-digit OTP sent to your phone/email.
                             </small>
+                            <p class="text-danger">({{otp}})</p>
                         </div>
-                        <div class="form-group text-center">
+                        <div class="form-group ">
                             <button type="submit" class="btn btn-success">Verify OTP and Proceed</button>
                         </div>
                     </form>

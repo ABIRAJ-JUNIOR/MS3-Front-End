@@ -9,7 +9,7 @@
               <h2 class="m-0">Students</h2>
             </div>
             <div class="col-lg-6 d-flex justify-content-lg-end justify-content-center align-items-center">
-              <a class="btn btn-success d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#userForm" (click)="editAdmin(1)">
+              <a class="btn btn-success d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#userForm">
                 <i class="bi bi-plus-circle me-2"></i> <span>Add New Student</span>
               </a>
             </div>
@@ -35,7 +35,7 @@
               <tr class="table-row animate__animated animate__fadeInUp" *ngFor="let student of students; let i = index">
                 <td>{{ i + 1 }}</td>
                 <td>{{ student.nic }}</td>
-                <td><img src="{{student.imageUrl || 'https://via.placeholder.com/150'}}" alt="profile image" class="rounded" width="50" height="50" class="pointer" (click)="openPreViewModal(template, student.imageUrl!)" /></td>
+                <td><img src="{{student.imageUrl || 'https://via.placeholder.com/150'}}" alt="profile image" class="rounded" width="50" height="50" class="pointer" (click)="openPreviewModal(template, student.imageUrl!)" /></td>
                 <td>{{ student.firstName }} {{ student.lastName }}</td>
                 <td>{{ student.gender }}</td>
                 <td>{{ student.phone }}</td>
@@ -46,10 +46,10 @@
                   <a class="text-primary me-3 pointer" aria-label="Report Student" (click)="GoToReport(student.id)">
                     <i class="bi bi-file-earmark-text"></i>
                   </a>
-                  <a class="text-primary me-3" aria-label="Edit Student" (click)="editAdmin(2) ; patchData(student)" data-bs-toggle="modal" data-bs-target="#userForm" >
+                  <a class="text-primary me-3" aria-label="Edit Student" (click)=" patchData(student)" data-bs-toggle="modal" data-bs-target="#userForm" >
                     <i class="bi bi-pencil-square"></i>
                   </a>
-                  <a  class="text-danger" aria-label="Delete Student" (click)="openModal(deleteStudentModal , student.id)">
+                  <a  class="text-danger" aria-label="Delete Student" (click)="openDeleteModal(deleteStudentModal , student.id)">
                     <i class="bi bi-trash3-fill"></i>
                   </a>
                 </td>

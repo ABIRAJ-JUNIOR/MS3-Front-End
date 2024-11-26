@@ -61,12 +61,3 @@
     transform: rotate(45deg);
   }
 
-  input {
-    border: none;
-    border-bottom: solid 1px #ccc;
-  }
-  
-  input:focus {
-    border: none; 
-    border-bottom: solid 1px #007bff; 
-  }

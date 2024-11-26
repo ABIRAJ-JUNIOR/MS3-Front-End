@@ -4,6 +4,7 @@ import { StudentDashDataServiceService } from '../../../Service/Student/student-
 import { Student } from '../../../Modals/modals';
 import { StudentService } from '../../../Service/Student/student.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-student-setting',
@@ -19,15 +20,15 @@ export class StudentSettingComponent implements OnInit {
   StudentTokenDetails: any;
   studentForm: FormGroup;
 
-  constructor(private StudentDashDataService: StudentDashDataServiceService, private StudentApiService: StudentService, private fb: FormBuilder) {
+  constructor(private StudentDashDataService: StudentDashDataServiceService, private StudentApiService: StudentService, private fb: FormBuilder, private toastr: ToastrService) {
 
     this.studentForm = this.fb.group({
-      firstName: ['Anojan'],
-      lastName: ['anoj'],
-      phone: ['+1 234 567 890'],
-      address: ['1234 Main St, City, Country'],
-      dateOfBirth: ['2004/09/30'],
-      gender: ['male'] // Initialize gender field
+      firstName: [''],
+      lastName: [''],
+      phone: [''],
+      address: [''],
+      dateOfBirth: [''],
+      gender: [1]
     });
   }
 
@@ -36,21 +37,46 @@ export class StudentSettingComponent implements OnInit {
   ngOnInit(): void {
     this.studentForm.disable();
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
+    console.log(this.StudentTokenDetails)
 
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
       this.StudentDetails = student
+      console.log(this.StudentDetails)
       this.assignStudentData();
 
-    }
-      ,
+    },
       (error) => {
+        alert("Error")
       })
 
   }
 
 
-  onSubmit(studentData:FormData) {
-  
+  onSubmit() {
+    const studentData = this.studentForm.value;
+    const student: StudenUpdateRequest = {
+      firstName: studentData.firstName,
+      lastName: studentData.lastName,
+      dateOfBirth: studentData.dateOfBirth,
+      gender: Number(studentData.gender),
+      phone: studentData.phone,
+      id: this.StudentTokenDetails.Id,
+      address: studentData.address
+    }
+    console.log(student)
+    this.StudentApiService.updateStudent(student).subscribe(
+      (data: any) => {
+        this.toastr.success("User SignUp Successfull", "", {
+          positionClass: "toast-top-right",
+          progressBar: true,
+          timeOut: 3000
+        })
+      },
+      (error) => {
+        alert(error)
+
+      }
+    )
   }
 
   assignStudentData() {
@@ -61,6 +87,7 @@ export class StudentSettingComponent implements OnInit {
       address: this.StudentDetails.address,
       dateOfBirth: this.StudentDetails.dateOfBirth,
       gender: this.StudentDetails.gender
+
     });
   }
 
@@ -76,4 +103,14 @@ export class StudentSettingComponent implements OnInit {
   }
 
 
+}
+
+export interface StudenUpdateRequest {
+  firstName: string;
+  lastName?: string;
+  dateOfBirth: string;
+  gender: number;
+  phone: string;
+  address?: string;
+  id: string;
 }

@@ -228,7 +228,7 @@
                                                             <div class="card-header bg-dark text-white">
                                                                 <i class="bi bi-person-fill me-2"></i> Profile Settings
                                                             </div>
-                                                            <form [formGroup]="studentForm" (ngSubmit)="onSubmit(studentForm.value)">
+                                                            <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
                                                                 <div class="card-body">
                                                                     <!-- First Name -->
                                                                     <div class="row pt-4">
@@ -273,12 +273,11 @@
                                                                                             class="bi bi-gender-ambiguous"></i></span>
                                                                                 </div>
                                                                                 <select class="form-control"
-                                                                                    [disabled]="!IsEditMode"
                                                                                     formControlName="gender">
-                                                                                    <option value="male">Male</option>
-                                                                                    <option value="female">Female
+                                                                                    <option value="1">Male</option>
+                                                                                    <option value="2">Female
                                                                                     </option>
-                                                                                    <option value="other">Other</option>
+                                                                                    <option value="3">Other</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -295,7 +294,6 @@
                                                                                             class="bi bi-telephone"></i></span>
                                                                                 </div>
                                                                                 <input class="form-control text-muted"
-                                                                                    [disabled]="!IsEditMode"
                                                                                     formControlName="phone">
                                                                             </div>
                                                                         </div>
@@ -310,7 +308,6 @@
                                                                                             class="bi bi-house-door"></i></span>
                                                                                 </div>
                                                                                 <input class="form-control text-muted"
-                                                                                    [disabled]="!IsEditMode"
                                                                                     formControlName="address">
                                                                             </div>
                                                                         </div>
@@ -327,7 +324,6 @@
                                                                                             class="bi bi-calendar"></i></span>
                                                                                 </div>
                                                                                 <input class="form-control text-muted"
-                                                                                    [disabled]="!IsEditMode"
                                                                                     formControlName="dateOfBirth">
                                                                             </div>
                                                                         </div>

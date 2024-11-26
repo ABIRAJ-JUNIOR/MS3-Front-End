@@ -1,9 +1,9 @@
-<div class="container-fluid rounded bg-white py-5" style="min-height: 100vh;">
-    <div class="container ">
-        <div class="card">
+<div class="container-fluid rounded bg-white py-4" style="min-height: 100vh;">
+    <div class="container-fluid">
+        <div class="card shadow">
             <div class="card-body text-center">
-                <img src="logo.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top me-2">
-                <h5 class="card-title">
+                <img src="logo.png" alt="Logo" width="40" height="40" class="logo d-inline-block align-text-top me-2">
+                <h5 class="card-title text-dark">
                     Way Makers' Insight
                 </h5>
                 <p class="card-text text-danger" *ngIf="selectedQuote">
@@ -13,147 +13,159 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row mt-5 ">
         <!-- Profile Picture Section -->
-        <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-
-                <img class="rounded-circle mt-5" width="150px"
+        <div class=" col-12 col-md-12 col-lg-4  py-5 border-right">
+            <div class="d-flex flex-column align-items-center text-center  py-5 p-1 bg-white rounded ">
+                <img class="rounded-circle mt-4" width="150px"
                     [src]="StudentDetails.imageUrl || NoImage"
-                    alt="Student Picture">
-                <span class="font-weight-bold">{{StudentDetails.firstName}} {{StudentDetails.lastName}}</span>
-                <span class="text-black-50">{{StudentTokenDetails.Email}}</span>
-                <span>Student ID: UT-{{StudentDetails.nic | slice: -4 }}</span>
-                <div class="d-flex justify-content-center  gap-3 flex-wrap mb-4 mt-2">
-                    <button class="btn btn-outline-primary  d-flex align-items-center gap-2 px-4 py-2 shadow"
-                        type="button" style="border-radius: 4px">Change Picture</button>
-
+                    alt="Student Picture" style="border: 2px solid #007bff; padding: 5px;">
+                
+                <span class="font-weight-bold fs-5 mt-3 fw-bold" style="color: #333;">{{StudentDetails.firstName}} {{StudentDetails.lastName}}</span>
+                
+                <span class="text-muted d-block mb-2">{{StudentTokenDetails.Email}}</span>
+                
+                <span class="text-muted mb-3">Student ID: UT-{{StudentDetails.nic | slice: -4 }}</span>
+                
+                <div class="d-flex justify-content-center gap-3 flex-wrap mb-4 mt-2">
+                    <button class="btn btn-outline-primary d-flex align-items-center gap-2 px-4 py-2 shadow-sm"
+                        type="button" style="border-radius: 4px; transition: all 0.3s ease;">
+                        <i class="bi bi-camera-fill"></i> Change Picture
+                    </button>
                 </div>
             </div>
-
         </div>
+        
 
         <!-- Profile Information Section -->
-        <div class="col-md-6 border-right">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4>Student Profile</h4>
-
-
+        <div class="col-11 col-md-12 col-lg-6 mx-auto">
+            <div class="p-4 py-5 rounded  bg-white">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="text-dark font-weight-bold">Student Profile</h4>
                 </div>
+                <hr>
                 <div class="card-body">
                     <div class="row gy-4">
+                        <!-- Full Name -->
                         <div class="col-md-6">
                             <div class="d-flex align-items-start">
-                                <i class="bi bi-person-fill text-dark fs-5 me-3"></i>
+                                <i class="bi bi-person-fill text-primary fs-5 me-3"></i>
                                 <div>
                                     <h6 class="mb-1">Full Name</h6>
                                     <p class="text-muted mb-0">{{StudentDetails.firstName}} {{StudentDetails.lastName}}</p>
                                 </div>
                             </div>
                         </div>
+                        <!-- Email -->
                         <div class="col-md-6">
                             <div class="d-flex align-items-start">
-                                <i class="bi bi-envelope-fill text-dark fs-5 me-3"></i>
+                                <i class="bi bi-envelope-fill text-primary fs-5 me-3"></i>
                                 <div>
                                     <h6 class="mb-1">Email</h6>
                                     <p class="text-muted mb-0">{{StudentTokenDetails.Email}}</p>
                                 </div>
                             </div>
                         </div>
+                        <!-- Phone -->
                         <div class="col-md-6">
                             <div class="d-flex align-items-start">
-                                <i class="bi bi-telephone-fill text-dark fs-5 me-3"></i>
+                                <i class="bi bi-telephone-fill text-primary fs-5 me-3"></i>
                                 <div>
                                     <h6 class="mb-1">Phone</h6>
                                     <p class="text-muted mb-0">{{StudentDetails.phone}}</p>
                                 </div>
                             </div>
                         </div>
+                        <!-- Address -->
                         <div class="col-md-6">
                             <div class="d-flex align-items-start">
-                                <i class="bi bi-geo-alt-fill text-dark fs-5 me-3"></i>
-                                    <div>
-                                        <h6 class="mb-1">Address</h6>
-                                        <p class="text-muted mb-0">{{StudentDetails.address || "We need your address.Please add it for better service."}}</p>
-                                    </div>
+                                <i class="bi bi-geo-alt-fill text-primary fs-5 me-3"></i>
+                                <div>
+                                    <h6 class="mb-1">Address</h6>
+                                    <p class="text-muted mb-0">{{StudentDetails.address || "We need your address. Please add it for better service."}}</p>
+                                </div>
                             </div>
                         </div>
-
+                        <!-- NIC -->
                         <div class="col-md-6">
                             <div class="d-flex align-items-start">
-                                <i class="bi bi-person-vcard-fill text-dark fs-5 me-3"></i>
+                                <i class="bi bi-person-vcard-fill text-primary fs-5 me-3"></i>
                                 <div>
                                     <h6 class="mb-1">NIC</h6>
                                     <p class="text-muted mb-0">{{StudentDetails.nic}}</p>
                                 </div>
                             </div>
                         </div>
+                        <!-- Role -->
                         <div class="col-md-6">
                             <div class="d-flex align-items-start">
-                                <i class="bi bi-person-badge text-dark fs-5 me-3"></i>
+                                <i class="bi bi-person-badge text-primary fs-5 me-3"></i>
                                 <div>
                                     <h6 class="mb-1">Role</h6>
                                     <p class="text-muted mb-0">{{StudentTokenDetails.Role}}</p>
                                 </div>
                             </div>
                         </div>
+                        <!-- Created Date -->
                         <div class="col-md-6">
                             <div class="d-flex align-items-start">
-                                <i class="bi bi-calendar-fill text-dark fs-5 me-3"></i>
+                                <i class="bi bi-calendar-fill text-primary fs-5 me-3"></i>
                                 <div>
                                     <h6 class="mb-1">Created Date</h6>
                                     <p class="text-muted mb-0">{{StudentDetails.cteatedDate}}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 d-flex ">
-                            <button class="btn btn-outline-dark d-flex align-items-center gap-2 px-4 py-2 shadow"
-                                style="border-radius: 4px" [routerLink]="['/student-dashboard/setting']" routerLinkActive="router-link-active" >
+                        <!-- Action Buttons -->
+                        <div class="col-md-12 d-flex gap-3 mt-4">
+                            <button class="btn btn-outline-primary d-flex align-items-center gap-2 px-4 py-2 shadow-sm" [routerLink]="['/student-dashboard/setting']"
+                                style="border-radius: 4px;">
                                 <i class="bi bi-gear-fill"></i> Account Settings
                             </button>
-                            <button class="btn btn-danger d-flex align-items-center gap-2 mx-3 px-4 py-2 shadow"
-                                style="border-radius: 4px">
+                            <button class="btn btn-danger d-flex align-items-center gap-2 px-4 py-2 shadow-sm"
+                                style="border-radius: 4px;">
                                 <i class="bi bi-box-arrow-right"></i> Logout
                             </button>
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
+        
 
         <!-- Additional Information Section -->
-        <div class="col-md-3">
-            <div class="p-3 py-5">
-                <h5>Performance Metrics</h5>
+        <div class="col-md-11 mx-auto my-3">
+            <div class="p-4 py-5 bg-white rounded shadow">
+                <h5 class="text-dark font-weight-bold">Performance Metrics</h5>
+        
                 <div class="col-md-12 mt-3">
                     <select class="form-select" aria-label="Default select example" [(ngModel)]="SelectId" (change)="onCourseSelect()">
                         <option value="" selected disabled>Select Course and View Course State</option>
-                        <option value="{{item.id}}" *ngFor="let item of StudentDetails?.enrollments" >
+                        <option value="{{item.id}}" *ngFor="let item of StudentDetails?.enrollments">
                             {{item.courseScheduleResponse.courseResponse.courseName}}
                         </option>
                     </select>
                 </div>
-                <div *ngIf="!SelectId" class="alert alert-info mt-3">
+        
+                <div *ngIf="!SelectId" class="alert alert-info mt-3 d-flex align-items-center">
+                    <i class="bi bi-info-circle-fill me-2"></i>
                     Please select a course to view its details.
                 </div>
-
-               <div *ngIf="SelectId">  
-                <div class="col-md-12 mt-3">
-                    <label class="labels">Grades</label>
-                    <input type="text" class="form-control" placeholder="Enter grades" value="{{selectedGrade}}" disabled>
+        
+                <div *ngIf="SelectId">  
+                    <div class="col-md-12 mt-3">
+                        <label class="labels">Grades</label>
+                        <input type="text" class="form-control" placeholder="Enter grades" value="{{selectedGrade}}" disabled>
+                    </div>
+        
+                    <div class="col-md-12 mt-3">
+                        <label class="labels">Total Fees Paid</label>
+                        <input type="text" class="form-control" placeholder="Enter fees" value="{{paymentFee}}" disabled>
+                    </div>
                 </div>
-               
-                <div class="col-md-12 mt-3">
-                    <label class="labels">Total Fees Paid</label>
-                    <input type="text" class="form-control" placeholder="Enter fees" value="{{paymentFee}}" disabled>
-                </div>
-               </div>
-              
             </div>
         </div>
+        
     </div>
     
     <div class="container my-5">

@@ -158,13 +158,14 @@
     
     <div class="container my-5">
         <div class="row">
-            <div class="col-md-4">
-                <div class="card shadow-sm border-0 rounded">
+            <div class="col-md-4" *ngFor="let item of StudentDetails.enrollments">
+                <div class="card shadow-sm border-0 rounded" >
                     <div class="card-header  text-white text-center bg-primary" >
-                        <h5>Advanced Angular</h5>
+                        <h5>{{item.courseScheduleResponse.courseResponse.courseName}}</h5>
                     </div>
                     <div class="card-body">
-                        <p><strong>Start Date:</strong> Jan 10, 2024</p>
+                        <p><strong>Start Date:</strong> {{item.courseScheduleResponse.startDate}}</p>
+                        <p><strong>Start Time:</strong> {{item.courseScheduleResponse.time}}</p>
                         <p><strong>Progress:</strong> 
                             <span class="text-dark"> In Process</span>
                         </p>

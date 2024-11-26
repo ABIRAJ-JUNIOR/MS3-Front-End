@@ -34,13 +34,13 @@ export class CourseService {
     return this.http.get<any>(this.apiUrl + `/Assessment/Pagination/${pageNumber}/${pageSize}`)
   }
   addCourseSchedule(CourseSchedule:CourseScheduleRequest){
-    return this.http.post<Schedule>(this.apiUrl + '/CourseSchedule', CourseSchedule)
+    return this.http.post(this.apiUrl + '/CourseSchedule', CourseSchedule)
   }
   GetAllCategory(){
     return this.http.get<CourseCategory[]>(this.apiUrl + '/CourseCategory/GetAllCategory')
   }
   AddCourse(Course:CourseRequest){
-    return this.http.post<Course>(this.apiUrl + '/Course/Course', Course)
+    return this.http.post(this.apiUrl + '/Course/Course', Course)
   }
   Addimage(CourseID:string,image:any){
     return this.http.post(this.apiUrl + '/Course/image/' + CourseID, image)

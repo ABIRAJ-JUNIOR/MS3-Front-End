@@ -9,7 +9,6 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 // Chart.js 
 import { Chart, registerables } from 'chart.js';
 import { authInterceptorInterceptor } from './Interceptor/auth-interceptor.interceptor';
-import { BrowserModule } from '@angular/platform-browser';
 Chart.register(...registerables);
 
 export const appConfig: ApplicationConfig = {

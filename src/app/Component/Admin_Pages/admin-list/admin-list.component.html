@@ -29,6 +29,8 @@
                 <th>Image</th>
                 <th>Name</th>
                 <th>Phone</th>
+                <th>Email</th>
+                <th>Role</th>
                 <th class="text-center">Actions</th>
               </tr>
             </thead>
@@ -41,6 +43,8 @@
                 </td>
                 <td>{{ admin.firstName }} {{ admin.lastName }}</td>
                 <td>{{ admin.phone }}</td>
+                <td>{{ admin.email }}</td>
+                <td>{{ admin.roleName }}</td>
                 <td class="text-center">
                   <a  class="text-primary me-3 pointer" aria-label="Edit Admin" data-bs-toggle="modal" data-bs-target="#userForm1" (click)="editAdmin(true) ; patchData(admin)">
                     <i class="bi bi-pencil-square"></i>
@@ -259,7 +263,7 @@
           <!-- Modal Footer -->
           <div class="modal-footer border-0 bg-light">
             <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-            <button type="submit" [disabled]="profileForm.invalid" class="btn btn-dark px-4">Submit</button>
+            <button type="submit" [disabled]="!isUpdate && profileForm.invalid" class="btn btn-dark px-4">Submit</button>
           </div>
 
         </form>

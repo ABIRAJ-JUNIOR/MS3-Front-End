@@ -1,9 +1,0 @@
-<!-- src/app/components/upload/upload.component.html -->
-<div class="upload-container">
-    <input type="file" (change)="onFileSelected($event)" />
-    <button [disabled]="!selectedFile" (click)="uploadFile()">Upload</button>
-    <div *ngIf="imageUrl">
-      <p>Uploaded Image:</p>
-      <img [src]="imageUrl" alt="Uploaded Image" />
-    </div>
-  </div>

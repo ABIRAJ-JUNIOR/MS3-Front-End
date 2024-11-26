@@ -151,6 +151,7 @@ export class AdminListComponent implements OnInit{
       complete: () => {
         this.uploadImage()
         this.resetForm();
+        this.loadItems();
       },
       error: (error:any) => {
         this.toastr.error(error.error, '', {
@@ -169,12 +170,11 @@ export class AdminListComponent implements OnInit{
           positionClass: 'toast-top-right',
           progressBar: true,
         });
-        this.resetForm();
         this.loadItems();
       },
       complete: () => {
         this.uploadImage()
-        this.resetForm();
+        this.loadItems();
       },
       error: (error:any) => {
         this.toastr.error(error.error, '', {
@@ -204,7 +204,12 @@ export class AdminListComponent implements OnInit{
   // Edit admin mode toggle
   editAdmin(isEditMode: boolean): void {
     this.isUpdate = isEditMode;
-    if (!isEditMode) this.resetForm();
+    if (!isEditMode){
+      this.profileForm.get('nic')?.enable();
+      this.profileForm.get('email')?.enable();
+      this.resetForm();
+    }
+      
   }
 
   // Patch admin data to form for editing
@@ -215,8 +220,12 @@ export class AdminListComponent implements OnInit{
       firstName: admin.firstName,
       lastName: admin.lastName,
       phone: admin.phone,
+      email:admin.email,
+      role:admin.roleName == "Administrator" ? "1" : "2"
     });
     this.adminId = admin.id;
+    this.profileForm.get('nic')?.disable();
+    this.profileForm.get('email')?.disable();
   }
 
   // Open modal to preview image

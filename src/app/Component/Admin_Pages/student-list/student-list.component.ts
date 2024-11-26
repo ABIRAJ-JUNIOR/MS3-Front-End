@@ -249,6 +249,7 @@ export class StudentListComponent implements OnInit {
       dateOfBirth: new Date(student.dateOfBirth).toLocaleString(),
       gender:student.gender === "Male" ? "1": student.gender === "Female" ? "2": "3",
       phone:student.phone,
+      email:student.email,
       address:{
         addressLine1:student.address != null ? student.address.addressLine1 : null,
         addressLine2:student.address != null ? student.address.addressLine2 : null,

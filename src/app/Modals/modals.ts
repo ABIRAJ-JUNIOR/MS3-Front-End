@@ -6,6 +6,7 @@ export interface Student {
   dateOfBirth: Date;
   gender: string;
   phone: string;
+  email:string;
   address: Address;
   imageUrl?:string;
 
@@ -25,9 +26,11 @@ export interface Address {
 export interface Admin {
   id: string;
   nic: string;
+  roleName:string;
   firstName: string;
   lastName: string;
   phone: string;
+  email:string;
   imageUrl: string;
   auditLog: AuditLog[];
 }

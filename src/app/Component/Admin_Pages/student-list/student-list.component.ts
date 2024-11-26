@@ -235,6 +235,8 @@ export class StudentListComponent implements OnInit {
 
   onAdd(){
     this.resetForm();
+    this.profileForm.get('nic')?.enable();
+    this.profileForm.get('email')?.enable();
   }
 
   // Patch data to the form for editing
@@ -257,6 +259,8 @@ export class StudentListComponent implements OnInit {
     });
     this.studentId = student.id;
     this.isUpdate = true;
+    this.profileForm.get('nic')?.disable();
+    this.profileForm.get('email')?.disable();
   }
 
   // Open preview modal

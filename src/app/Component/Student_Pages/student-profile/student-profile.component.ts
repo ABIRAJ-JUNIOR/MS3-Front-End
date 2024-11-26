@@ -62,23 +62,22 @@ export class StudentProfileComponent {
 
   selectedGrade: string = 'Update Soon';  // Default grade
   Enrollments: any;
-  paymentFee:number=0;
-  SelectId:string='';
+  paymentFee: number = 0;
+  SelectId: string = '';
 
   onCourseSelect() {
-    alert("pay")
     console.log(this.SelectId);
 
-  this.Enrollments =  this.StudentDetails.enrollments.find((Data:any)=>{
-      return Data.id===this.SelectId
+    this.Enrollments = this.StudentDetails.enrollments.find((Data: any) => {
+      return Data.id === this.SelectId
     })
     console.log(this.Enrollments);
-    
-    this.paymentFee=0
-    for (let i:number = 0; i < this.Enrollments.Payments.paymentResponse.length; i++) {
-      const element = this.Enrollments.Payments.paymentResponse[i];
+
+    this.paymentFee = 0
+    for (let i: number = 0; i < this.Enrollments.paymentResponse.length; i++) {
+      const element = this.Enrollments.paymentResponse[i];
       console.log(element)
-      this.paymentFee+=element.amountPaid
+      this.paymentFee += element.amountPaid
     }
     console.log(this.paymentFee)
   }

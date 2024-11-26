@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
+import { StudentService } from '../../../Service/Student/student.service';
+import { Student } from '../../../Modals/modals';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student-profile',
@@ -22,7 +25,7 @@ export class StudentProfileComponent {
 
   selectedQuote: string = '';
 
-  constructor(private StudentDashDataService:StudentDashDataServiceService) {
+  constructor(private StudentDashDataService:StudentDashDataServiceService , private StudentApiService :StudentService , private router : Router) {
     this.generateNewQuote();
   }
 
@@ -38,10 +41,24 @@ export class StudentProfileComponent {
   }
 
   StudentDetails: any;
-
+  StudentTokenDetails:any;
+  NoImage:string="https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
   ngOnInit(): void {
-    this.StudentDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
+
+    this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
+     
+    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student:Student)=>{
+      this.StudentDetails=student
+      console.log(this.StudentDetails)
+    }
+    ,
+    (error) => {
+     this.router.navigate([''])
+    })
+    
   }
+
+
 
 }

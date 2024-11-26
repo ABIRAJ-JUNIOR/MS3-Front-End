@@ -19,11 +19,11 @@
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
 
                 <img class="rounded-circle mt-5" width="150px"
-                    src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                    [src]="StudentDetails.imageUrl || NoImage"
                     alt="Student Picture">
-                <span class="font-weight-bold">A.Anojan </span>
-                <span class="text-black-50">anojan923.com</span>
-                <span>Student ID: UT-1520</span>
+                <span class="font-weight-bold">{{StudentDetails.firstName}} {{StudentDetails.lastName}}</span>
+                <span class="text-black-50">{{StudentTokenDetails.Email}}</span>
+                <span>Student ID: UT-{{StudentDetails.nic | slice: -4 }}</span>
                 <div class="d-flex justify-content-center  gap-3 flex-wrap mb-4 mt-2">
                     <button class="btn btn-outline-primary  d-flex align-items-center gap-2 px-4 py-2 shadow"
                         type="button" style="border-radius: 4px">Change Picture</button>
@@ -48,7 +48,7 @@
                                 <i class="bi bi-person-fill text-dark fs-5 me-3"></i>
                                 <div>
                                     <h6 class="mb-1">Full Name</h6>
-                                    <p class="text-muted mb-0">John Doe</p>
+                                    <p class="text-muted mb-0">{{StudentDetails.firstName}} {{StudentDetails.lastName}}</p>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                                 <i class="bi bi-envelope-fill text-dark fs-5 me-3"></i>
                                 <div>
                                     <h6 class="mb-1">Email</h6>
-                                    <p class="text-muted mb-0">adminaexample.com</p>
+                                    <p class="text-muted mb-0">{{StudentTokenDetails.Email}}</p>
                                 </div>
                             </div>
                         </div>
@@ -66,17 +66,17 @@
                                 <i class="bi bi-telephone-fill text-dark fs-5 me-3"></i>
                                 <div>
                                     <h6 class="mb-1">Phone</h6>
-                                    <p class="text-muted mb-0">+94 712345678</p>
+                                    <p class="text-muted mb-0">{{StudentDetails.phone}}</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="d-flex align-items-start">
                                 <i class="bi bi-geo-alt-fill text-dark fs-5 me-3"></i>
-                                <div>
-                                    <h6 class="mb-1">Address</h6>
-                                    <p class="text-muted mb-0">123 Street, City, Country</p>
-                                </div>
+                                    <div>
+                                        <h6 class="mb-1">Address</h6>
+                                        <p class="text-muted mb-0">{{StudentDetails.address || "We need your address.Please add it for better service."}}</p>
+                                    </div>
                             </div>
                         </div>
 
@@ -85,7 +85,7 @@
                                 <i class="bi bi-person-vcard-fill text-dark fs-5 me-3"></i>
                                 <div>
                                     <h6 class="mb-1">NIC</h6>
-                                    <p class="text-muted mb-0">123456789V</p>
+                                    <p class="text-muted mb-0">{{StudentDetails.nic}}</p>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                                 <i class="bi bi-person-badge text-dark fs-5 me-3"></i>
                                 <div>
                                     <h6 class="mb-1">Role</h6>
-                                    <p class="text-muted mb-0">Administrator</p>
+                                    <p class="text-muted mb-0">{{StudentTokenDetails.Role}}</p>
                                 </div>
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                                 <i class="bi bi-calendar-fill text-dark fs-5 me-3"></i>
                                 <div>
                                     <h6 class="mb-1">Created Date</h6>
-                                    <p class="text-muted mb-0">2024-01-01</p>
+                                    <p class="text-muted mb-0">{{StudentDetails.cteatedDate}}</p>
                                 </div>
                             </div>
                         </div>
@@ -131,9 +131,9 @@
                 <div class="col-md-12 mt-3">
                     <label class="labels">Select and View Course State</label>
                     <select class="form-select" aria-label="Default select example">
-                        <option value="1">Course Name 1</option>
-                        <option value="2">Course Name 2</option>
-                        <option value="3">Course Name 3</option>
+                        <option value="{{item.id}}" *ngFor="let item of StudentDetails?.enrollments">
+                            {{item.courseScheduleResponse.courseResponse.courseName}}
+                        </option>
                     </select>
                 </div>
                 <div class="col-md-12 mt-3">

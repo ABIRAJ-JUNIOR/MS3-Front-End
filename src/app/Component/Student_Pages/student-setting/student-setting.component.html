@@ -228,98 +228,119 @@
                                                             <div class="card-header bg-dark text-white">
                                                                 <i class="bi bi-person-fill me-2"></i> Profile Settings
                                                             </div>
-                                                            <div class="card-body">
-                                                                <div class="row pt-4">
-                                                                    <div class="col-12 col-md-6">
-                                                                        <label class="font-weight-normal">First
-                                                                            Name</label>
-                                                                        <div class="input-group">
-                                                                            <div class="input-group-prepend">
-                                                                                <span class="input-group-text"><i
-                                                                                        class="bi bi-person"></i></span>
+                                                            <form action="">
+                                                                <div class="card-body">
+                                                                    <div class="row pt-4">
+                                                                        <div class="col-12 col-md-6">
+                                                                            <label class="font-weight-normal">First
+                                                                                Name</label>
+                                                                            <div class="input-group">
+                                                                                <div class="input-group-prepend">
+                                                                                    <span class="input-group-text"><i
+                                                                                            class="bi bi-person"></i></span>
+                                                                                </div>
+                                                                                <input class="form-control text-muted"
+                                                                                    value="Anojan"
+                                                                                    [disabled]="!IsEditMode">
                                                                             </div>
-                                                                            <input class="form-control text-muted"
-                                                                                value="Anojan">
+                                                                        </div>
+                                                                        <div class="col-12 col-md-6">
+                                                                            <label class="font-weight-normal">Last
+                                                                                Name</label>
+                                                                            <div class="input-group">
+                                                                                <div class="input-group-prepend">
+                                                                                    <span class="input-group-text"><i
+                                                                                            class="bi bi-person"></i></span>
+                                                                                </div>
+                                                                                <input class="form-control text-muted"
+                                                                                    value="anoj"
+                                                                                    [disabled]="!IsEditMode">
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-12 col-md-6">
-                                                                        <label class="font-weight-normal">Last
-                                                                            Name</label>
-                                                                        <div class="input-group">
-                                                                            <div class="input-group-prepend">
-                                                                                <span class="input-group-text"><i
-                                                                                        class="bi bi-person"></i></span>
-                                                                            </div>
-                                                                            <input class="form-control text-muted"
-                                                                                value="anoj">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
 
-                                                                <div class="row pt-4">
-                                                                    <div class="col-12 col-md-6">
-                                                                        <label class="font-weight-normal">Phone</label>
-                                                                        <div class="input-group">
-                                                                            <div class="input-group-prepend">
-                                                                                <span class="input-group-text"><i
-                                                                                        class="bi bi-telephone"></i></span>
+                                                                    <div class="row pt-4">
+                                                                        <div class="col-12 col-md-6">
+                                                                            <label
+                                                                                class="font-weight-normal">Phone</label>
+                                                                            <div class="input-group">
+                                                                                <div class="input-group-prepend">
+                                                                                    <span class="input-group-text"><i
+                                                                                            class="bi bi-telephone"></i></span>
+                                                                                </div>
+                                                                                <input class="form-control text-muted"
+                                                                                    value="+1 234 567 890"
+                                                                                    [disabled]="!IsEditMode">
                                                                             </div>
-                                                                            <input class="form-control text-muted"
-                                                                                value="+1 234 567 890">
+                                                                        </div>
+                                                                        <div class="col-12 col-md-6">
+                                                                            <label
+                                                                                class="font-weight-normal">Address</label>
+                                                                            <div class="input-group">
+                                                                                <div class="input-group-prepend">
+                                                                                    <span class="input-group-text"><i
+                                                                                            class="bi bi-house-door"></i></span>
+                                                                                </div>
+                                                                                <input class="form-control text-muted"
+                                                                                    value="1234 Main St, City, Country"
+                                                                                    [disabled]="!IsEditMode">
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-12 col-md-6">
-                                                                        <label
-                                                                            class="font-weight-normal">Address</label>
-                                                                        <div class="input-group">
-                                                                            <div class="input-group-prepend">
-                                                                                <span class="input-group-text"><i
-                                                                                        class="bi bi-house-door"></i></span>
-                                                                            </div>
-                                                                            <input class="form-control text-muted"
-                                                                                value="1234 Main St, City, Country">
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
 
-                                                                <div class="row pt-4">
-                                                                    <div class="col-12 col-md-6">
-                                                                        <label class="font-weight-normal">Date of
-                                                                            Birth</label>
-                                                                        <div class="input-group">
-                                                                            <div class="input-group-prepend">
-                                                                                <span class="input-group-text"><i
-                                                                                        class="bi bi-calendar"></i></span>
+                                                                    <div class="row pt-4">
+                                                                        <div class="col-12 col-md-6">
+                                                                            <label class="font-weight-normal">Date of
+                                                                                Birth</label>
+                                                                            <div class="input-group">
+                                                                                <div class="input-group-prepend">
+                                                                                    <span class="input-group-text"><i
+                                                                                            class="bi bi-calendar"></i></span>
+                                                                                </div>
+                                                                                <input class="form-control text-muted"
+                                                                                    value="2004/09/30"
+                                                                                    [disabled]="!IsEditMode">
                                                                             </div>
-                                                                            <input class="form-control text-muted"
-                                                                                value="2004/09/30">
+                                                                        </div>
+                                                                        <div class="col-12 col-md-6">
+                                                                            <label
+                                                                                class="font-weight-normal">Phone</label>
+                                                                            <div class="input-group">
+                                                                                <div class="input-group-prepend">
+                                                                                    <span class="input-group-text"><i
+                                                                                            class="bi bi-telephone"></i></span>
+                                                                                </div>
+                                                                                <input class="form-control text-muted"
+                                                                                    value="0762639379"
+                                                                                    [disabled]="!IsEditMode">
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-12 col-md-6">
-                                                                        <label class="font-weight-normal">Phone</label>
-                                                                        <div class="input-group">
-                                                                            <div class="input-group-prepend">
-                                                                                <span class="input-group-text"><i
-                                                                                        class="bi bi-telephone"></i></span>
-                                                                            </div>
-                                                                            <input class="form-control text-muted"
-                                                                                value="0762639379">
+                                                                    <div class="row pt-4">
+                                                                        <div class="col-12 col-md-6"
+                                                                            *ngIf="!IsEditMode">
+                                                                            <button (click)="changeEditMode()"
+                                                                                type="button"
+                                                                                class="btn btn-success btn-md d-flex align-items-center gap-2 px-4 py-2 shadow-lg border-0 rounded-3 transition-all hover-shadow">
+                                                                                <i class="bi bi-save"></i> Update
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="col-12 col-md-6 d-flex"
+                                                                            *ngIf="IsEditMode">
+                                                                            <button type="submit"
+                                                                                class="btn btn-primary btn-md d-flex align-items-center gap-2 px-4 py-2 shadow-lg border-0 rounded-3 transition-all hover-shadow">
+                                                                                <i class="bi bi-save"></i> Save
+                                                                            </button>
+                                                                            <button (click)="changeEditMode()"
+                                                                                type="button"
+                                                                                class="btn btn-secondary btn-md d-flex align-items-center mx-1 gap-2 px-4 py-2 shadow-lg border-0 rounded-3 transition-all hover-shadow">
+                                                                                <i class="bi bi-arrow-repeat"></i>
+                                                                                Cancel
+                                                                            </button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="row pt-4">
-                                                                    <div class="col-12 col-md-6 d-flex">
-                                                                        <button
-                                                                            class="btn btn-primary btn-md d-flex align-items-center gap-2 px-4 py-2 shadow-lg border-0 rounded-3 transition-all hover-shadow">
-                                                                            <i class="bi bi-save"></i> Save
-                                                                        </button>
-                                                                        <button
-                                                                            class="btn btn-secondary btn-md d-flex align-items-center mx-1 gap-2 px-4 py-2 shadow-lg border-0 rounded-3 transition-all hover-shadow">
-                                                                            <i class="bi bi-arrow-repeat"></i> Cancel
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            </form>
 
                                                         </div>
                                                     </div>
@@ -352,35 +373,57 @@
 
                                                                 </li>
                                                             </ul>
-                                                            
+
                                                         </div>
                                                         <div class="card shadow-sm mb-2">
                                                             <div class="card-header bg-danger text-white">
-                                                                <i class="bi bi-question-circle-fill me-2"></i> Frequently Asked Questions
+                                                                <i class="bi bi-question-circle-fill me-2"></i>
+                                                                Frequently Asked Questions
                                                             </div>
                                                             <div class="card-body">
                                                                 <div class="accordion" id="profileSettingsFAQ">
                                                                     <div class="accordion-item">
                                                                         <h2 class="accordion-header" id="headingOne">
-                                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                            <button class="accordion-button"
+                                                                                type="button" data-bs-toggle="collapse"
+                                                                                data-bs-target="#collapseOne"
+                                                                                aria-expanded="true"
+                                                                                aria-controls="collapseOne">
                                                                                 How do I change my username?
                                                                             </button>
                                                                         </h2>
-                                                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#profileSettingsFAQ">
+                                                                        <div id="collapseOne"
+                                                                            class="accordion-collapse collapse show"
+                                                                            aria-labelledby="headingOne"
+                                                                            data-bs-parent="#profileSettingsFAQ">
                                                                             <div class="accordion-body">
-                                                                                Currently, the option to change your username is unavailable. You can update your email address or full name in the "Personal Information" section.
+                                                                                Currently, the option to change your
+                                                                                username is unavailable. You can update
+                                                                                your email address or full name in the
+                                                                                "Personal Information" section.
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="accordion-item">
                                                                         <h2 class="accordion-header" id="headingTwo">
-                                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                                                How can I reset my password if I forgot it?
+                                                                            <button class="accordion-button collapsed"
+                                                                                type="button" data-bs-toggle="collapse"
+                                                                                data-bs-target="#collapseTwo"
+                                                                                aria-expanded="false"
+                                                                                aria-controls="collapseTwo">
+                                                                                How can I reset my password if I forgot
+                                                                                it?
                                                                             </button>
                                                                         </h2>
-                                                                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#profileSettingsFAQ">
+                                                                        <div id="collapseTwo"
+                                                                            class="accordion-collapse collapse"
+                                                                            aria-labelledby="headingTwo"
+                                                                            data-bs-parent="#profileSettingsFAQ">
                                                                             <div class="accordion-body">
-                                                                                If you've forgotten your password, click on the "Forgot Password" link on the login page. You'll be sent a reset link to your registered email address.
+                                                                                If you've forgotten your password, click
+                                                                                on the "Forgot Password" link on the
+                                                                                login page. You'll be sent a reset link
+                                                                                to your registered email address.
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -388,7 +431,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        
+
 
                                                     </div>
 

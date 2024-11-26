@@ -228,119 +228,107 @@
                                                             <div class="card-header bg-dark text-white">
                                                                 <i class="bi bi-person-fill me-2"></i> Profile Settings
                                                             </div>
-                                                            <form action="">
+                                                            <form [formGroup]="studentForm">
                                                                 <div class="card-body">
-                                                                    <div class="row pt-4">
-                                                                        <div class="col-12 col-md-6">
-                                                                            <label class="font-weight-normal">First
-                                                                                Name</label>
-                                                                            <div class="input-group">
-                                                                                <div class="input-group-prepend">
-                                                                                    <span class="input-group-text"><i
-                                                                                            class="bi bi-person"></i></span>
-                                                                                </div>
-                                                                                <input class="form-control text-muted"
-                                                                                    value="Anojan"
-                                                                                    [disabled]="!IsEditMode">
-                                                                            </div>
+                                                                  <!-- First Name -->
+                                                                  <div class="row pt-4">
+                                                                    <div class="col-12 col-md-6">
+                                                                      <label class="font-weight-normal">First Name</label>
+                                                                      <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                          <span class="input-group-text"><i class="bi bi-person"></i></span>
                                                                         </div>
-                                                                        <div class="col-12 col-md-6">
-                                                                            <label class="font-weight-normal">Last
-                                                                                Name</label>
-                                                                            <div class="input-group">
-                                                                                <div class="input-group-prepend">
-                                                                                    <span class="input-group-text"><i
-                                                                                            class="bi bi-person"></i></span>
-                                                                                </div>
-                                                                                <input class="form-control text-muted"
-                                                                                    value="anoj"
-                                                                                    [disabled]="!IsEditMode">
-                                                                            </div>
-                                                                        </div>
+                                                                        <input class="form-control text-muted" [disabled]="!IsEditMode" formControlName="firstName">
+                                                                      </div>
                                                                     </div>
-
-                                                                    <div class="row pt-4">
-                                                                        <div class="col-12 col-md-6">
-                                                                            <label
-                                                                                class="font-weight-normal">Phone</label>
-                                                                            <div class="input-group">
-                                                                                <div class="input-group-prepend">
-                                                                                    <span class="input-group-text"><i
-                                                                                            class="bi bi-telephone"></i></span>
-                                                                                </div>
-                                                                                <input class="form-control text-muted"
-                                                                                    value="+1 234 567 890"
-                                                                                    [disabled]="!IsEditMode">
-                                                                            </div>
+                                                              
+                                                                    <!-- Last Name -->
+                                                                    <div class="col-12 col-md-6">
+                                                                      <label class="font-weight-normal">Last Name</label>
+                                                                      <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                          <span class="input-group-text"><i class="bi bi-person"></i></span>
                                                                         </div>
-                                                                        <div class="col-12 col-md-6">
-                                                                            <label
-                                                                                class="font-weight-normal">Address</label>
-                                                                            <div class="input-group">
-                                                                                <div class="input-group-prepend">
-                                                                                    <span class="input-group-text"><i
-                                                                                            class="bi bi-house-door"></i></span>
-                                                                                </div>
-                                                                                <input class="form-control text-muted"
-                                                                                    value="1234 Main St, City, Country"
-                                                                                    [disabled]="!IsEditMode">
-                                                                            </div>
-                                                                        </div>
+                                                                        <input class="form-control text-muted" [disabled]="!IsEditMode" formControlName="lastName">
+                                                                      </div>
                                                                     </div>
-
-                                                                    <div class="row pt-4">
-                                                                        <div class="col-12 col-md-6">
-                                                                            <label class="font-weight-normal">Date of
-                                                                                Birth</label>
-                                                                            <div class="input-group">
-                                                                                <div class="input-group-prepend">
-                                                                                    <span class="input-group-text"><i
-                                                                                            class="bi bi-calendar"></i></span>
-                                                                                </div>
-                                                                                <input class="form-control text-muted"
-                                                                                    value="2004/09/30"
-                                                                                    [disabled]="!IsEditMode">
-                                                                            </div>
+                                                                  </div>
+                                                              
+                                                                  <!-- Gender -->
+                                                                  <div class="row pt-4">
+                                                                    <div class="col-12 col-md-6">
+                                                                      <label class="font-weight-normal">Gender</label>
+                                                                      <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                          <span class="input-group-text"><i class="bi bi-gender-ambiguous"></i></span>
                                                                         </div>
-                                                                        <div class="col-12 col-md-6">
-                                                                            <label
-                                                                                class="font-weight-normal">Phone</label>
-                                                                            <div class="input-group">
-                                                                                <div class="input-group-prepend">
-                                                                                    <span class="input-group-text"><i
-                                                                                            class="bi bi-telephone"></i></span>
-                                                                                </div>
-                                                                                <input class="form-control text-muted"
-                                                                                    value="0762639379"
-                                                                                    [disabled]="!IsEditMode">
-                                                                            </div>
-                                                                        </div>
+                                                                        <select class="form-control" [disabled]="!IsEditMode" formControlName="gender">
+                                                                          <option value="male">Male</option>
+                                                                          <option value="female">Female</option>
+                                                                          <option value="other">Other</option>
+                                                                        </select>
+                                                                      </div>
                                                                     </div>
-                                                                    <div class="row pt-4">
-                                                                        <div class="col-12 col-md-6"
-                                                                            *ngIf="!IsEditMode">
-                                                                            <button (click)="changeEditMode()"
-                                                                                type="button"
-                                                                                class="btn btn-success btn-md d-flex align-items-center gap-2 px-4 py-2 shadow-lg border-0 rounded-3 transition-all hover-shadow">
-                                                                                <i class="bi bi-save"></i> Update
-                                                                            </button>
+                                                                  </div>
+                                                              
+                                                                  <!-- Phone -->
+                                                                  <div class="row pt-4">
+                                                                    <div class="col-12 col-md-6">
+                                                                      <label class="font-weight-normal">Phone</label>
+                                                                      <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                          <span class="input-group-text"><i class="bi bi-telephone"></i></span>
                                                                         </div>
-                                                                        <div class="col-12 col-md-6 d-flex"
-                                                                            *ngIf="IsEditMode">
-                                                                            <button type="submit"
-                                                                                class="btn btn-primary btn-md d-flex align-items-center gap-2 px-4 py-2 shadow-lg border-0 rounded-3 transition-all hover-shadow">
-                                                                                <i class="bi bi-save"></i> Save
-                                                                            </button>
-                                                                            <button (click)="changeEditMode()"
-                                                                                type="button"
-                                                                                class="btn btn-secondary btn-md d-flex align-items-center mx-1 gap-2 px-4 py-2 shadow-lg border-0 rounded-3 transition-all hover-shadow">
-                                                                                <i class="bi bi-arrow-repeat"></i>
-                                                                                Cancel
-                                                                            </button>
-                                                                        </div>
+                                                                        <input class="form-control text-muted" [disabled]="!IsEditMode" formControlName="phone">
+                                                                      </div>
                                                                     </div>
+                                                              
+                                                                    <!-- Address -->
+                                                                    <div class="col-12 col-md-6">
+                                                                      <label class="font-weight-normal">Address</label>
+                                                                      <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                          <span class="input-group-text"><i class="bi bi-house-door"></i></span>
+                                                                        </div>
+                                                                        <input class="form-control text-muted" [disabled]="!IsEditMode" formControlName="address">
+                                                                      </div>
+                                                                    </div>
+                                                                  </div>
+                                                              
+                                                                  <!-- Date of Birth -->
+                                                                  <div class="row pt-4">
+                                                                    <div class="col-12 col-md-6">
+                                                                      <label class="font-weight-normal">Date of Birth</label>
+                                                                      <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                          <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+                                                                        </div>
+                                                                        <input class="form-control text-muted" [disabled]="!IsEditMode" formControlName="dateOfBirth">
+                                                                      </div>
+                                                                    </div>
+                                                                  </div>
+                                                              
+                                                                  <!-- Buttons -->
+                                                                  <div class="row pt-4">
+                                                                    <!-- Button to switch between view mode and edit mode -->
+                                                                    <div class="col-12 col-md-6" *ngIf="!IsEditMode">
+                                                                      <button (click)="changeEditMode()" type="button" class="btn btn-success btn-md">
+                                                                        <i class="bi bi-pencil"></i> Edit
+                                                                      </button>
+                                                                    </div>
+                                                                    <div class="col-12 col-md-6" *ngIf="IsEditMode">
+                                                                      <button type="submit" class="btn btn-primary btn-md">
+                                                                        <i class="bi bi-save"></i> Save
+                                                                      </button>
+                                                                      <button (click)="changeEditMode()" type="button" class="btn btn-secondary btn-md mx-2">
+                                                                        <i class="bi bi-arrow-repeat"></i> Cancel
+                                                                      </button>
+                                                                    </div>
+                                                                  </div>
                                                                 </div>
-                                                            </form>
+                                                              </form>
+                                                              
+
 
                                                         </div>
                                                     </div>

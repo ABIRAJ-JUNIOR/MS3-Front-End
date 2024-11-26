@@ -24,6 +24,7 @@ import { OtpAuthenticationComponent } from './Component/Landing_Pages/otp-authen
 import { PaymentAuthenticationComponent } from './Component/Landing_Pages/payment-authentication/payment-authentication.component';
 import { StudentProfileComponent } from './Component/Student_Pages/student-profile/student-profile.component';
 import { StudentSettingComponent } from './Component/Student_Pages/student-setting/student-setting.component';
+import { StudentAssesmentComponent } from './Component/Student_Pages/student-assesment/student-assesment.component';
 
 export const routes: Routes = [
 
@@ -71,7 +72,8 @@ export const routes: Routes = [
         path: 'student-dashboard', component: StudentDashboardComponent, children: [
             { path: '', component: DashContentComponent },
             { path: 'profile', component:StudentProfileComponent },
-            {path:'setting',component:StudentSettingComponent}
+            {path:'setting',component:StudentSettingComponent},
+            {path:'assesment',component:StudentAssesmentComponent}
         ]
     },
     { path: '**', redirectTo: 'home', pathMatch: 'full' },

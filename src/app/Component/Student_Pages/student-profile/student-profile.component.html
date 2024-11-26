@@ -130,8 +130,8 @@
                 <h5>Performance Metrics</h5>
                 <div class="col-md-12 mt-3">
                     <label class="labels">Select and View Course State</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option value="{{item.id}}" *ngFor="let item of StudentDetails?.enrollments">
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="SelectId" (change)="onCourseSelect()">
+                        <option value="{{item.id}}" *ngFor="let item of StudentDetails?.enrollments" >
                             {{item.courseScheduleResponse.courseResponse.courseName}}
                         </option>
                     </select>
@@ -142,7 +142,7 @@
                 </div>
                 <div class="col-md-12 mt-3">
                     <label class="labels">Total Fees Paid</label>
-                    <input type="text" class="form-control" placeholder="Enter fees" value="$1200">
+                    <input type="text" class="form-control" placeholder="Enter fees" value="{{paymentFee}}">
                 </div>
             </div>
         </div>

@@ -25,7 +25,7 @@ export class StudentProfileComponent {
 
   selectedQuote: string = '';
 
-  constructor(private StudentDashDataService:StudentDashDataServiceService , private StudentApiService :StudentService , private router : Router) {
+  constructor(private StudentDashDataService: StudentDashDataServiceService, private StudentApiService: StudentService, private router: Router) {
     this.generateNewQuote();
   }
 
@@ -41,24 +41,45 @@ export class StudentProfileComponent {
   }
 
   StudentDetails: any;
-  StudentTokenDetails:any;
-  NoImage:string="https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
+  StudentTokenDetails: any;
+  NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
   ngOnInit(): void {
 
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
-     
-    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student:Student)=>{
-      this.StudentDetails=student
+
+    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
+      this.StudentDetails = student
       console.log(this.StudentDetails)
     }
-    ,
-    (error) => {
-     this.router.navigate([''])
-    })
-    
+      ,
+      (error) => {
+        this.router.navigate([''])
+      })
+
   }
 
 
+  selectedGrade: string = 'Update Soon';  // Default grade
+  Enrollments: any;
+  paymentFee:number=0;
+  SelectId:string='';
 
+  onCourseSelect() {
+    alert("pay")
+    console.log(this.SelectId);
+
+  this.Enrollments =  this.StudentDetails.enrollments.find((Data:any)=>{
+      return Data.id===this.SelectId
+    })
+    console.log(this.Enrollments);
+    
+    this.paymentFee=0
+    for (let i:number = 0; i < this.Enrollments.Payments.paymentResponse.length; i++) {
+      const element = this.Enrollments.Payments.paymentResponse[i];
+      console.log(element)
+      this.paymentFee+=element.amountPaid
+    }
+    console.log(this.paymentFee)
+  }
 }

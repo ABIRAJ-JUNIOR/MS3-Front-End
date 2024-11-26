@@ -30,6 +30,9 @@ export class StudentService {
   pagination(pageNumber:number , pageSize:number){
     return this.http.get(this.apiUrl + `/Student/Pagination/${pageNumber}/${pageSize}`)
   }
+  updateStudent(id:string,student:StudentReqest){
+    return this.http.put(this.apiUrl +"/Student/update" ,student)
+  }
 }
 
 

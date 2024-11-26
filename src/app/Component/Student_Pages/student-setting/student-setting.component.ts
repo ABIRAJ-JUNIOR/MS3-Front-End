@@ -48,6 +48,11 @@ export class StudentSettingComponent implements OnInit {
 
   }
 
+
+  onSubmit(studentData:FormData) {
+  
+  }
+
   assignStudentData() {
     this.studentForm.setValue({
       firstName: this.StudentDetails.firstName,

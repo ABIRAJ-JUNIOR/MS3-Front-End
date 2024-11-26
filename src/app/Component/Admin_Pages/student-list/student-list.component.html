@@ -9,7 +9,7 @@
               <h2 class="m-0">Students</h2>
             </div>
             <div class="col-lg-6 d-flex justify-content-lg-end justify-content-center align-items-center">
-              <a class="btn btn-success d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#userForm">
+              <a class="btn btn-success d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#userForm" (click)="onAdd()">
                 <i class="bi bi-plus-circle me-2"></i> <span>Add New Student</span>
               </a>
             </div>
@@ -162,7 +162,7 @@
               <label for="nic" class="form-label fw-bold text-dark">NIC</label>
               <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-card-text"></i></span>
-                <input type="text" formControlName="nic" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter NIC">
+                <input type="text" formControlName="nic" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter NIC" >
               </div>
               <div *ngIf="profileForm.controls['nic'].invalid && profileForm.controls['nic'].touched" class="text-danger">
                 NIC is required.
@@ -318,7 +318,7 @@
            <!-- Modal Footer -->
            <div class="modal-footer border-0 bg-light">
             <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-            <button type="submit" [disabled]="profileForm.invalid" class="btn btn-dark px-4">Submit</button>
+            <button type="submit" [disabled]="!isUpdate && profileForm.invalid"  class="btn btn-dark px-4">Submit</button>
           </div>
 
 

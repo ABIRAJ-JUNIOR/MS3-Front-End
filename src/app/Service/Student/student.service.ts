@@ -20,10 +20,12 @@ export class StudentService {
     return this.http.get<Student>(this.apiUrl + '/Student/' + id)
   }
   addStudent(Student:StudentReqest){
-    return this.http.post<Student>(this.apiUrl + '/Student/student', Student)
+    return this.http.post(this.apiUrl + '/Student/student', Student)
   }
   addimage(studentId:string,image:any){
-    return this.http.post<Student>(this.apiUrl + `/Student/Image/${studentId}`,image)
+    return this.http.post(this.apiUrl + `/Student/Image/${studentId}`,image,{
+      responseType:'text'
+    });
   }
   deleteStudent(studentId:string){
     return this.http.delete(this.apiUrl + `/Student/delete/${studentId}`,{
@@ -31,7 +33,7 @@ export class StudentService {
     })
   }
   updateFullDetails(studentId:string , student:StudentReqest){
-    return this.http.put<Student>(this.apiUrl + `/Student/Update-Full-Details/${studentId}` , student)
+    return this.http.put(this.apiUrl + `/Student/Update-Full-Details/${studentId}` , student)
   }
   pagination(pageNumber:number , pageSize:number){
     return this.http.get(this.apiUrl + `/Student/Pagination/${pageNumber}/${pageSize}`)

@@ -17,8 +17,10 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
   styleUrl: './student-list.component.css'
 })
 export class StudentListComponent implements OnInit {
+  
   students: Student[] = [];
-  studentId: string = '';
+
+  private studentId: string = '';
   private deleteStudentId:string = ''
   selectedImage: string | null = null;
   modalRef?: BsModalRef;
@@ -35,11 +37,8 @@ export class StudentListComponent implements OnInit {
 
  // Form and File Handling
   profileForm!: FormGroup;
-  profileImage!:File;
+  profileImage:File | null = null;
   profileImageUrl: string | null = "";
-  selectedFile:File | null = null;
-
-
 
   constructor(
     private readonly studentService: StudentService,
@@ -57,12 +56,12 @@ export class StudentListComponent implements OnInit {
   // Initialize the profile form with validation
   private initializeForm(): void {
     this.profileForm = this.fb.group({
-      nic: ['', Validators.required],
+      nic: ['',Validators.required,],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
       gender: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['',[Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       password: [
         '',
@@ -136,7 +135,6 @@ export class StudentListComponent implements OnInit {
   // Submit the form for add or update
   onSubmit(): void {
     const formData = this.prepareFormData();
-
     if (!this.isUpdate) {
       this.addStudent(formData);
     } else {
@@ -148,11 +146,12 @@ export class StudentListComponent implements OnInit {
   private prepareFormData(): any {
     const form = this.profileForm.value;
 
-    for (const key in form) {
-      if (form[key] === '') form[key] = null;
+    if(!this.isUpdate){
+      for (const key in form) {
+        if (form[key] === '') form[key] = null;
+      }
     }
 
-    // Address handling
     if (
       !form.address?.addressLine1 &&
       !form.address?.addressLine2 &&
@@ -163,13 +162,13 @@ export class StudentListComponent implements OnInit {
       form.address = null;
     }
 
-    // Convert gender to number
     form.gender = Number(form.gender);
+    console.log(form)
     return form;
   }
 
   // Add a new student
-  public addStudent(formData: any): void {
+  private addStudent(formData: any): void {
     this.studentService.addStudent(formData).subscribe({
       next: (response: any) => {
         this.studentId = response.id;
@@ -178,8 +177,9 @@ export class StudentListComponent implements OnInit {
           progressBar: true,
           timeOut: 3000,
         });
-        this.resetForm();
+      },complete:()=>{
         this.uploadImage(this.studentId);
+        this.resetForm();
       },
       error: (error: any) => {
         this.handleError(error);
@@ -188,9 +188,9 @@ export class StudentListComponent implements OnInit {
   }
 
   // Update an existing student
-  public updateStudent(formData: any): void {
+  private updateStudent(formData: any): void {
     formData.dateOfBirth = new Date(formData.dateOfBirth);
-
+    console.log(formData)
     this.studentService.updateFullDetails(this.studentId, formData).subscribe({
       next: () => {
         this.toastr.success('Update Successful', '', {
@@ -198,7 +198,7 @@ export class StudentListComponent implements OnInit {
           progressBar: true,
           timeOut: 3000,
         });
-        this.resetForm();
+      },complete:()=>{
         this.uploadImage(this.studentId);
       },
       error: (error: any) => {
@@ -214,17 +214,27 @@ export class StudentListComponent implements OnInit {
       formData.append('image', this.profileImage);
 
       this.studentService.addimage(studentId, formData).subscribe({
-        complete: () => this.loadStudents(),
+        next: (response:any) => {
+        },
+        complete:()=>{
+          this.loadStudents()
+        }
       });
+    }else{
+      this.loadStudents()
     }
   }
 
   // Reset form and image data
   private resetForm(): void {
     this.profileForm.reset();
-    // this.profileImage = null;
+    this.profileImage = null;
     this.profileImageUrl = '';
     this.isUpdate = false;
+  }
+
+  onAdd(){
+    this.resetForm();
   }
 
   // Patch data to the form for editing
@@ -234,8 +244,8 @@ export class StudentListComponent implements OnInit {
       nic:student.nic,
       firstName: student.firstName,
       lastName:student.lastName,
-      dateOfBirth: new Date(student.dateOfBirth).toISOString().split('T')[0],
-      gender:1,
+      dateOfBirth: new Date(student.dateOfBirth).toLocaleString(),
+      gender:student.gender === "Male" ? "1": student.gender === "Female" ? "2": "3",
       phone:student.phone,
       address:{
         addressLine1:student.address != null ? student.address.addressLine1 : null,
@@ -284,142 +294,6 @@ export class StudentListComponent implements OnInit {
       timeOut: 3000,
     });
   }
-
-  // onSubmit(): void {
-
-  //   let form = this.profileForm.value
-  //   for (let key in form) {
-  //     if (form[key] === '') {
-  //       form[key] = null;
-  //     }
-  //   }
-  //   if(form.address.addressLine1 == null && form.address.addressLine2 == null && form.address.city == null && form.postalCode == null && form.country == null){
-  //     form.address = null
-  //   }
-  //   form.gender=Number(form.gender)
-
-  //   if(this.isUpdate == false){
-  //     this.studentService.addStudent(form).subscribe({
-  //     next:(response:any)=>{
-  //       this.studentId=response.id
-  //       this.toastr.success("Register Successfull" , "" , {
-  //         positionClass:"toast-top-right",
-  //         progressBar:true,
-  //         timeOut:3000
-  //       })
-  //       this.profileForm.reset();
-  //       this.profileImageUrl = "";
-  //       this.selectedFile = null;
-  //     },
-  //     complete:()=>{
-  //       const formdata=new FormData();
-  //       formdata.append('image',this.profileImage)
-  //       this.studentService.addimage(this.studentId,formdata).subscribe({
-  //         next:(response:any)=>{},
-  //         complete:()=>{this.loadStudents()},
-  //       })
-  //     },
-  //     error:(error: any) => 
-  //       {
-  //         this.toastr.warning(error.error , "" , {
-  //           positionClass:"toast-top-right",
-  //           progressBar:true,
-  //           timeOut:3000
-  //         })
-  //       }
-  //     })
-  //   }else{
-  //     form.dateOfBirth = new Date(form.dateOfBirth)
-  //     this.studentService.updateFullDetails(this.studentId,form).subscribe({
-  //       next:(response:Student) => {
-  //         this.toastr.success("Update Successfull" , "" , {
-  //           positionClass:"toast-top-right",
-  //           progressBar:true,
-  //           timeOut:3000
-  //         })
-  //       this.profileForm.reset();
-  //       this.loadStudents();
-  //       },
-  //       complete:()=>{
-  //         const formdata = new FormData();
-  //         formdata.append('imageFile' , this.selectedFile!);
-  //         this.studentService.addimage(this.studentId , formdata).subscribe({
-  //           next:(response:any)=>{
-  //             this.loadStudents();
-  //           }
-  //         })
-  //         this.profileImageUrl = null;
-  //         this.selectedFile = null;
-  //       },
-  //       error:(error:any)=>{
-  //         this.toastr.warning(error.error , "" , {
-  //           positionClass:"toast-top-right",
-  //           progressBar:true,
-  //           timeOut:3000
-  //         })
-  //       }
-  //     })
-  //   }
-  // }
-
-  // editAdmin(number:Number){
-  //   if(number == 1){
-  //     this.profileImageUrl = "";
-  //     this.selectedFile = null;
-  //     this.profileForm.reset();
-  //     this.isUpdate = false;
-  //   }else if(number == 2){
-  //     this.isUpdate = true;
-  //   }
-  // }
-
-  // patchData(student:Student){
-  //   this.profileImageUrl = student.imageUrl!
-  //   this.profileForm.patchValue({
-  //     nic:student.nic,
-  //     firstName: student.firstName,
-  //     lastName:student.lastName,
-  //     dateOfBirth: new Date(student.dateOfBirth).toISOString().split('T')[0],
-  //     gender:1,
-  //     phone:student.phone,
-  //     address:{
-  //       addressLine1:student.address != null ? student.address.addressLine1 : null,
-  //       addressLine2:student.address != null ? student.address.addressLine2 : null,
-  //       city:student.address != null ? student.address.city : null,
-  //       postalCode:student.address != null ? student.address.postalCode : null,
-  //       country:student.address != null ? student.address.country : null,
-  //     }
-  //   });
-  //   this.studentId = student.id;
-  // }
-
-  // openPreViewModal(template: any, image: string): void {
-  //   this.selectedImage = image;
-  //   this.modalRef = this.modalService.show(template);
-  // }
-
-
-  // openModal(template: any , studentId:string): void {
-  //   this.modalRef = this.modalService.show(template);
-  //   this.deleteStudentId = studentId
-  // }
-
-  // deleteStudent(): void {
-  //   this.studentService.deleteStudent(this.deleteStudentId).subscribe({
-  //     next: (response: any) => {
-  //       this.toastr.success("Delete Successfull" , "" , {
-  //         positionClass:"toast-top-right",
-  //         progressBar:true,
-  //         timeOut:3000
-  //       })
-  //     },
-  //     complete:()=>{
-  //       this.loadStudents();
-  //     }
-  //   })
-  //   this.modalRef?.hide();
-  // }
-
 }
 
 export interface StudentReqest{
@@ -429,8 +303,8 @@ export interface StudentReqest{
   dateOfBirth:string;
   gender:number;
   phone:string;
-  email:string;
-  password:string;
+  email?:string;
+  password?:string;
   address?:AddressRequest;
 }
 

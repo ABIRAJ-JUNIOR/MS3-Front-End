@@ -14,7 +14,7 @@
         <h1 class="fade-in" style="font-weight: bolder; font-size: 55px;">World's Biggest Academy</h1>
         <p class="slide-up" style="font-size:20px ;">"Education is the most powerful weapon which you can use to change the world."<br>An investment in knowledge payes the best interest</p>
       </div>
-      <button class="text-white login-btn" routerLink="/signin" *ngIf="!isAdmin && !isStudent" >
+      <button class="text-white login-btn" [routerLink]="['/signin']" routerLinkActive="router-link-active"  *ngIf="!isAdmin && !isStudent" >
         Sign in Here
       </button>
     </div>

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Student } from '../../Modals/modals';
 import { StudentReqest } from '../../Component/Admin_Pages/student-list/student-list.component';
+import { StudenUpdateRequest } from '../../Component/Student_Pages/student-setting/student-setting.component';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,10 @@ export class StudentService {
 
   pagination(pageNumber:number , pageSize:number){
     return this.http.get(this.apiUrl + `/Student/Pagination/${pageNumber}/${pageSize}`)
+  }
+
+  updateStudent(student:StudenUpdateRequest){
+    return this.http.put(this.apiUrl +"/Student/update" ,student)
   }
 }
 

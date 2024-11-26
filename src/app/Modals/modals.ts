@@ -94,7 +94,6 @@ export interface Payment{
     paymentMethod:string;
     amountPaid:number;
     paymentDate:Date;
-    imageUrl:string;
     installmentNumber:string;
 }
 

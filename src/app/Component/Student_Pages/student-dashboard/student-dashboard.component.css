@@ -19,6 +19,9 @@ a {
     text-decoration: none;
     font-family: 'Poppins', sans-serif;
 }
+a:active{
+    color: black;
+}
 
 li {
     list-style: none;

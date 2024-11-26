@@ -1,6 +1,6 @@
 <div class="wrapper">
   <aside id="sidebar" [ngClass]="{'collapsed': sidebarCollapsed}" class="text-light js-sidebar shadow-lg">
-    <div class="h-100">
+    <div class="h-100" style="position: fixed; width: 400px;">
       <div class="sidebar-logo">
         <a href="#">Way Makers</a>
       </div>
@@ -10,7 +10,7 @@
 
         <!-- Dashboard Link -->
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link">
+          <a [routerLink]="['/student-dashboard']"    [routerLinkActive]="['active_Link']" class="sidebar-link">
             <i class="fa-solid fa-house pe-2"></i>
             Dashboard
           </a>
@@ -18,7 +18,7 @@
 
         <!-- Profile Section -->
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link">
+          <a [routerLink]="['/student-dashboard/profile']" [routerLinkActive]="['active_Link']" class="sidebar-link">
             <i class="fa-regular fa-user pe-2"></i>
             Profile
           </a>
@@ -82,7 +82,7 @@
         </li>
       </ul>
       <hr>
-      <div class="mt-3 ms-3 d-flex align-items-center">
+      <div class="mt-3 ms-3 d-flex align-items-center" *ngIf="StudentDetails">
         <ul class="navbar-nav pe-3">
           <li class="nav-item dropdown">
             <a data-bs-toggle="dropdown" class="nav-icon pe-md-0">
@@ -95,7 +95,7 @@
             </div>
           </li>
         </ul>
-        <h5 data-bs-toggle="dropdown">A.Anojan</h5>
+        <h5 data-bs-toggle="dropdown">{{StudentDetails.Name}}</h5>
       </div>
 
     </div>
@@ -123,8 +123,7 @@
         <div class="d-flex align-items-center mx-5">
           <!-- Button trigger modal -->
           <!-- Notification Button -->
-          <button class="btn btn-sm btn-outline-dark mx-2 position-relative OverideBtn" type="button"
-            data-bs-toggle="modal" data-bs-target="#Notification">
+          <button class="btn btn-sm btn-outline-dark mx-2 position-relative OverideBtn" type="button"data-bs-toggle="modal" data-bs-target="#topLeftModal">
             <i class="bi bi-bell-fill"></i>
             <span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger">
               0
@@ -146,7 +145,7 @@
     </nav>
 
     <!-- Main Content Area for Student Dashboard -->
-    <main class="content px-3 py-2 bg-white">
+    <main class="content px-3 py-2 "  style="background-color: #eee;">
       <router-outlet></router-outlet>
     </main>
 
@@ -170,10 +169,12 @@
 
 <!-- Modal Section -->
 
-<!-- Notification -->
-<div class="modal fade" id="Notification" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+
+
+<!-- Anouncement -->
+<div class="modal fade" id="Anouncement" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog customModal">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
@@ -184,27 +185,24 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Anouncement -->
-<div class="modal fade" id="Anouncement" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<!-- Modal Structure -->
+<div class="modal fade" id="topLeftModal" tabindex="-1" aria-labelledby="topLeftModalLabel" aria-hidden="true" >
+  <div class="modal-dialog customModal">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <h5 class="modal-title" id="topLeftModalLabel">Top-Left Modal</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        This modal appears in the top-left corner of the page.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
       </div>
     </div>
   </div>

@@ -179,6 +179,21 @@
                         <h2 class="h3 mb-4 page-title"><i class="bi bi-person"></i> Profile Settings
                         </h2>
                         <p>Set preferences for your Profile's updates.</p>
+
+                       <div class="row">
+                        <div class="col-md-6">
+                            <div class="col-12 col-md-6">
+                                <label class="font-weight-normal">Language</label>
+                                <select class="form-select" id="languageSelect">
+                                    <option value="en" selected>English</option>
+                                    <option value="es">Spanish</option>
+                                    <option value="fr">French</option>
+                                    <option value="de">German</option>
+                                </select>
+                            </div>
+
+                        </div>
+                       </div>
                         <div class="list-group mb-5 ">
                             <div class="container-fluid bg-white">
                                 <div class="row justify-content-center pt-5">
@@ -204,7 +219,8 @@
                                                             <label class="font-weight-normal">First Name</label>
                                                             <div class="input-group">
                                                                 <div class="input-group-prepend">
-                                                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                                                    <span class="input-group-text"><i
+                                                                            class="bi bi-person"></i></span>
                                                                 </div>
                                                                 <input class="form-control text-muted" value="Anojan">
                                                             </div>
@@ -213,64 +229,103 @@
                                                             <label class="font-weight-normal">Last Name</label>
                                                             <div class="input-group">
                                                                 <div class="input-group-prepend">
-                                                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                                                    <span class="input-group-text"><i
+                                                                            class="bi bi-person"></i></span>
                                                                 </div>
                                                                 <input class="form-control text-muted" value="anoj">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="row pt-4">
                                                         <div class="col-12 col-md-6">
                                                             <label class="font-weight-normal">Phone</label>
                                                             <div class="input-group">
                                                                 <div class="input-group-prepend">
-                                                                    <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                                                                    <span class="input-group-text"><i
+                                                                            class="bi bi-telephone"></i></span>
                                                                 </div>
-                                                                <input class="form-control text-muted" value="+1 234 567 890">
+                                                                <input class="form-control text-muted"
+                                                                    value="+1 234 567 890">
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-6">
                                                             <label class="font-weight-normal">Address</label>
                                                             <div class="input-group">
                                                                 <div class="input-group-prepend">
-                                                                    <span class="input-group-text"><i class="bi bi-house-door"></i></span>
+                                                                    <span class="input-group-text"><i
+                                                                            class="bi bi-house-door"></i></span>
                                                                 </div>
-                                                                <input class="form-control text-muted" value="1234 Main St, City, Country">
+                                                                <input class="form-control text-muted"
+                                                                    value="1234 Main St, City, Country">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="row pt-4">
                                                         <div class="col-12 col-md-6">
                                                             <label class="font-weight-normal">Date of Birth</label>
                                                             <div class="input-group">
                                                                 <div class="input-group-prepend">
-                                                                    <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+                                                                    <span class="input-group-text"><i
+                                                                            class="bi bi-calendar"></i></span>
                                                                 </div>
-                                                                <input class="form-control text-muted" value="2004/09/30">
+                                                                <input class="form-control text-muted"
+                                                                    value="2004/09/30">
                                                             </div>
                                                         </div>
                                                         <div class="col-12 col-md-6">
                                                             <label class="font-weight-normal">Phone</label>
                                                             <div class="input-group">
                                                                 <div class="input-group-prepend">
-                                                                    <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                                                                    <span class="input-group-text"><i
+                                                                            class="bi bi-telephone"></i></span>
                                                                 </div>
-                                                                <input class="form-control text-muted" value="0762639379">
+                                                                <input class="form-control text-muted"
+                                                                    value="0762639379">
                                                             </div>
                                                         </div>
                                                     </div>
-                                                   
-                                                    
+                                                    <div class="row pt-4">
+                                                        <div class="col-12 col-md-6 d-flex">
+                                                            <button
+                                                                class="btn btn-primary btn-md d-flex align-items-center gap-2 px-4 py-2 shadow-lg border-0 rounded-3 transition-all hover-shadow">
+                                                                <i class="bi bi-save"></i> Save
+                                                            </button>
+                                                            <button
+                                                                class="btn btn-secondary btn-md d-flex align-items-center mx-1 gap-2 px-4 py-2 shadow-lg border-0 rounded-3 transition-all hover-shadow">
+                                                                <i class="bi bi-arrow-repeat"></i> Cancel
+                                                            </button>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
-                                                
+
                                             </div>
 
                                         </div>
                                     </div>
                                 </div>
 
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="col-12">
+                                            <label class="font-weight-normal">Account Activity</label>
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Recent Logins
+                                                </div>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">Last Update 2024-11-23 03:02 PM</li>
+                                                    <li class="list-group-item">Password Change - 2024-11-20 10:15 AM
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
 

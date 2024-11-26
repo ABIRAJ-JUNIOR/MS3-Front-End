@@ -4,12 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
 import { StudentService } from '../../../Service/Student/student.service';
 import { Student } from '../../../Modals/modals';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-student-profile',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule ,RouterModule],
   templateUrl: './student-profile.component.html',
   styleUrl: './student-profile.component.css'
 })

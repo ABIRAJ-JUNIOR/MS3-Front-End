@@ -28,26 +28,31 @@ export class StudentSettingComponent implements OnInit {
       phone: [''],
       address: [''],
       dateOfBirth: [''],
-      gender: [1]
+      gender: [0]
     });
   }
 
 
   StudentDetails: any;
+
   ngOnInit(): void {
-    this.studentForm.disable();
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
     console.log(this.StudentTokenDetails)
 
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
       this.StudentDetails = student
-      console.log(this.StudentDetails)
       this.assignStudentData();
+      this.studentForm.disable();
 
     },
       (error) => {
-        alert("Error")
+        this.toastr.error("Failed to load student details. Please try again later.", "Error", {
+          positionClass: "toast-top-right",
+          progressBar: true,
+          timeOut: 3000
+        });
       })
+
 
   }
 
@@ -66,27 +71,42 @@ export class StudentSettingComponent implements OnInit {
     console.log(student)
     this.StudentApiService.updateStudent(student).subscribe(
       (data: any) => {
-        this.toastr.success("User SignUp Successfull", "", {
+        this.toastr.success("User Update Successfull", "", {
           positionClass: "toast-top-right",
           progressBar: true,
           timeOut: 3000
         })
+        this.studentForm.disable()
       },
       (error) => {
-        alert(error)
+        this.toastr.error("User Update Failed try again later", "", {
+          positionClass: "toast-top-right",
+          progressBar: true,
+          timeOut: 3000
+        })
 
       }
     )
   }
 
   assignStudentData() {
+    let gender = 3;
+
+    const genderValue = this.StudentDetails.gender.toLowerCase();
+
+    if (genderValue === "male") {
+      gender = 1;
+    } else if (genderValue === "female") {
+      gender = 2;
+    }
+
     this.studentForm.setValue({
       firstName: this.StudentDetails.firstName,
       lastName: this.StudentDetails.lastName,
       phone: this.StudentDetails.phone,
-      address: this.StudentDetails.address,
+      address: this.StudentDetails.address || "Address Field Is Soon",
       dateOfBirth: this.StudentDetails.dateOfBirth,
-      gender: this.StudentDetails.gender
+      gender: gender
 
     });
   }
@@ -97,8 +117,18 @@ export class StudentSettingComponent implements OnInit {
 
     if (this.IsEditMode) {
       this.studentForm.enable();
+      this.toastr.success("Profile Edit Mode Activated", "", {
+        positionClass: "toast-top-right",
+        progressBar: true,
+        timeOut: 3000
+      })
     } else {
       this.studentForm.disable();
+      this.toastr.success("Your profile is now in view-only mode.", "", {
+        positionClass: "toast-top-right",
+        progressBar: true,
+        timeOut: 3000
+      })
     }
   }
 

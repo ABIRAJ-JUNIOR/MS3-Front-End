@@ -49,13 +49,11 @@ export class StudentSettingComponent implements OnInit {
     },
       (error) => {
         this.toastr.error("Failed to load student details. Please try again later.", "Error", {
-          positionClass: "toast-top-right", // This ensures the toast appears at the top-right
+          positionClass: "toast-top-right", 
           progressBar: true,
           timeOut: 3000,
-          closeButton: true, // Optional: Adds a close button for the toast
-          extendedTimeOut: 1000, // Optional: Time out for when the user hovers over the toast
-          enableHtml: true, // Optional: Enable HTML content in toastr message
-          toastClass: "custom-toast" // Custom class for the toast
+          closeButton: true
+       
         });
       })
 

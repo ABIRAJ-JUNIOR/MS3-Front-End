@@ -15,5 +15,33 @@ export class StudentAssesmentComponent implements OnInit {
   constructor(private assesmentService:AssesmentService){
 
   }
+  pageSize: number = 12; // Courses per page
+  currentPage: number = 1; // Current page index
+  totalPages: number = 4; // Total number of pages
+  pageNumbers: number[] = []; // Array of page numbers to display
+  paginatedAssesment: any[] = [];
+
+  ngOnInit() {
+    this.paginateAssesment()
+  }
+
+  paginateAssesment(){
+    this.assesmentService.getPagination(this.currentPage,this.pageSize).subscribe((d:any)=>{
+      this.paginatedAssesment = d.items
+      console.log(this.paginatedAssesment)
+    },(error)=>{
+      console.log(error)
+    }
+  )
+  }
+
+  
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.paginateAssesment();
+    }
+  }
+
  
 }

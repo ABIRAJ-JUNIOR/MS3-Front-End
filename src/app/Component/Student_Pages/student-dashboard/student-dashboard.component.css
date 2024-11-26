@@ -62,9 +62,7 @@ h4 {
 #sidebar{
     background-color: #004085;
 }
-#sidebar:hover{
-    background-color:#343A40;
-}
+
 
 .sidebar-logo {
     padding: 1.15rem;

@@ -14,4 +14,7 @@ export class AssesmentService {
   getPagination(pagenumber:number , pageSize:number){
     return this.http.get(this.CommonUrl + `/Assessment/Pagination/${pagenumber}/${pageSize}`)
   }
+  getAllAssesment(){
+    return this.http.get(this.CommonUrl+"/Assessment/Assessments")
+  }
 }

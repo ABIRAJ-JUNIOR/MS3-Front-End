@@ -60,3 +60,16 @@ body {
     background: linear-gradient(135deg, #343a40, #495057); /* Dark gradient */
     border: 1px solid #6c757d; /* Subtle border */
 }
+
+
+  .low-progress {
+    background-color: #ff5733; /* Red color for low progress */
+  }
+  
+  .medium-progress {
+    background-color: #ffcc00; /* Yellow color for medium progress */
+  }
+  
+  .high-progress {
+    background-color: #28a745; /* Green color for high progress */
+  }

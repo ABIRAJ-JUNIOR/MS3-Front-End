@@ -23,6 +23,7 @@ import { payAuthGuard } from './Guard/Payment/pay-auth.guard';
 import { OtpAuthenticationComponent } from './Component/Landing_Pages/otp-authentication/otp-authentication.component';
 import { PaymentAuthenticationComponent } from './Component/Landing_Pages/payment-authentication/payment-authentication.component';
 import { StudentProfileComponent } from './Component/Student_Pages/student-profile/student-profile.component';
+import { StudentSettingComponent } from './Component/Student_Pages/student-setting/student-setting.component';
 
 export const routes: Routes = [
 
@@ -69,7 +70,8 @@ export const routes: Routes = [
     {
         path: 'student-dashboard', component: StudentDashboardComponent, children: [
             { path: '', component: DashContentComponent },
-            { path: 'profile', component:StudentProfileComponent }
+            { path: 'profile', component:StudentProfileComponent },
+            {path:'setting',component:StudentSettingComponent}
         ]
     },
     { path: '**', redirectTo: 'home', pathMatch: 'full' },

@@ -88,7 +88,6 @@ export class StudentProfileComponent {
     const endDate = new Date(item.courseScheduleResponse.endDate);
     const currentDate = new Date();
 
-    // Ensure that the progress doesn't go below 0% or above 100%
     if (currentDate < startDate) {
       return 0;  // Progress is 0 if the course hasn't started
     } else if (currentDate > endDate) {
@@ -98,6 +97,18 @@ export class StudentProfileComponent {
       const totalDuration = endDate.getTime() - startDate.getTime();
       const elapsedTime = currentDate.getTime() - startDate.getTime();
       return (elapsedTime / totalDuration) * 100;
+    }
+  }
+
+  getProgressBarClass(item: any): string {
+    const progress = this.getProgress(item);
+
+    if (progress <= 30) {
+      return 'low-progress';   // Low progress (Red)
+    } else if (progress <= 70) {
+      return 'medium-progress'; // Medium progress (Yellow)
+    } else {
+      return 'high-progress';   // High progress (Green)
     }
   }
 

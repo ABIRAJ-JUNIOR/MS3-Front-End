@@ -160,7 +160,7 @@
         <div class="row">
             <div class="col-md-4" *ngFor="let item of StudentDetails.enrollments">
                 <div class="card shadow-sm border-0 rounded" >
-                    <div class="card-header  text-white text-center bg-primary" >
+                    <div class="card-header  text-white text-center"    [ngClass]="getProgressBarClass(item)" >
                         <h5>{{item.courseScheduleResponse.courseResponse.courseName}}</h5>
                     </div>
                     <div class="card-body">
@@ -186,29 +186,11 @@
                 </div>
             </div>
     
-            <div class="col-md-4">
-                <div class="card shadow-sm border-0 rounded">
-                    <div class="card-header bg-warning text-white text-center bg-warning">
-                        <h5>SQL Mastery</h5>
-                    </div>
-                    <div class="card-body">
-                        <p><strong>Start Date:</strong> Feb 15, 2024</p>
-                        <p><strong>Progress:</strong> 
-                            <span class="text-dark"> Soon</span>
-                        </p>
-                        <div class="progress mb-3" style="height: 10px;">
-                            <div class="progress-bar bg-warning" style="width: 50%;" role="progressbar"></div>
-                        </div>
-                      
-                    </div>
-                 
-                </div>
-            </div>
     
             <div class="col-md-4">
                 <div class="card shadow-sm border-0 rounded">
                     <div class="card-header  text-white text-center bg-success">
-                        <h5>UI/UX Basics</h5>
+                        <h5>Hard Code For Final Design</h5>
                     </div>
                     <div class="card-body">
                         <p><strong>Start Date:</strong> Mar 1, 2024</p>

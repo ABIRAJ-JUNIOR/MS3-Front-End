@@ -1,6 +1,6 @@
 <div class="wrapper">
   <aside id="sidebar" [ngClass]="{'collapsed': sidebarCollapsed}" class="text-light js-sidebar shadow-lg">
-    <div class="h-100" style="position: fixed;">
+    <div class="h-100" style="position: fixed; width: 400px;">
       <div class="sidebar-logo">
         <a href="#">Way Makers</a>
       </div>
@@ -82,7 +82,7 @@
         </li>
       </ul>
       <hr>
-      <div class="mt-3 ms-3 d-flex align-items-center">
+      <div class="mt-3 ms-3 d-flex align-items-center" *ngIf="StudentDetails">
         <ul class="navbar-nav pe-3">
           <li class="nav-item dropdown">
             <a data-bs-toggle="dropdown" class="nav-icon pe-md-0">
@@ -95,7 +95,7 @@
             </div>
           </li>
         </ul>
-        <h5 data-bs-toggle="dropdown">A.Anojan</h5>
+        <h5 data-bs-toggle="dropdown">{{StudentDetails.Name}}</h5>
       </div>
 
     </div>
@@ -174,7 +174,7 @@
 <!-- Anouncement -->
 <div class="modal fade" id="Anouncement" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog customModal">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
@@ -185,15 +185,14 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Modal Structure -->
-<div class="modal fade" id="topLeftModal" tabindex="-1" aria-labelledby="topLeftModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal fade" id="topLeftModal" tabindex="-1" aria-labelledby="topLeftModalLabel" aria-hidden="true" >
+  <div class="modal-dialog customModal">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="topLeftModalLabel">Top-Left Modal</h5>

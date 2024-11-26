@@ -88,7 +88,7 @@ export class StudentListComponent implements OnInit {
       next: (response: any) => {
         this.students = response.items;
         this.totalPages = response.totalPages;
-        this.totalItems = response.totalItems;
+        this.totalItems = response.totalItem;
       },
       complete:() => {
       this.currentLength = this.students.length
@@ -213,7 +213,7 @@ export class StudentListComponent implements OnInit {
       const formData = new FormData();
       formData.append('image', this.profileImage);
 
-      this.studentService.addimage(studentId, formData).subscribe({
+      this.studentService.addImage(studentId, formData).subscribe({
         next: (response:any) => {
         },
         complete:()=>{

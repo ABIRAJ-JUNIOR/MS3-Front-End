@@ -22,7 +22,7 @@ export class StudentService {
   addStudent(Student:StudentReqest){
     return this.http.post(this.apiUrl + '/Student/student', Student)
   }
-  addimage(studentId:string,image:any){
+  addImage(studentId:string,image:any){
     return this.http.post(this.apiUrl + `/Student/Image/${studentId}`,image,{
       responseType:'text'
     });

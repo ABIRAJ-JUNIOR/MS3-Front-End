@@ -16,7 +16,7 @@ export class AdminService {
     return this.http.post(`${this.apiUrl}/Admin`, admin);
   }
 
-  addimage(adminId:string , image:any){
+  addImage(adminId:string , image:any){
     return this.http.post(`${this.apiUrl}/Admin/image/${adminId}`, image,{
       responseType:'text'
     });

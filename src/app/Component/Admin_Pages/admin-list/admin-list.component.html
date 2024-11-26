@@ -11,7 +11,7 @@
               <h2 class="m-0">Admins</h2>
             </div>
             <div class="col-lg-6 d-flex justify-content-lg-end align-items-center">
-              <a class="btn btn-success d-flex align-items-center" (click)="editAdmin(1) "  data-bs-toggle="modal" data-bs-target="#userForm1">
+              <a class="btn btn-success d-flex align-items-center" (click)="editAdmin(false) "  data-bs-toggle="modal" data-bs-target="#userForm1">
                 <i class="bi bi-plus-circle me-2"></i>
                 <span>Add New Admin</span>
               </a>
@@ -37,15 +37,15 @@
                 <td>{{ i + 1 }}</td>
                 <td>{{ admin.nic }}</td>
                 <td>
-                  <img src="{{admin.imageUrl}}" alt="profile image" class="rounded" width="50" height="50" class="pointer" (click)="openPreViewModal(template, admin.imageUrl)" />
+                  <img src="{{admin.imageUrl || 'https://via.placeholder.com/150'}}" alt="profile image" class="rounded" width="50" height="50" class="pointer" (click)="openPreviewModal(template, admin.imageUrl)" />
                 </td>
                 <td>{{ admin.firstName }} {{ admin.lastName }}</td>
                 <td>{{ admin.phone }}</td>
                 <td class="text-center">
-                  <a  class="text-primary me-3 pointer" aria-label="Edit Admin" data-bs-toggle="modal" data-bs-target="#userForm1" (click)="editAdmin(2) ; patchData(admin)">
+                  <a  class="text-primary me-3 pointer" aria-label="Edit Admin" data-bs-toggle="modal" data-bs-target="#userForm1" (click)="editAdmin(true) ; patchData(admin)">
                     <i class="bi bi-pencil-square"></i>
                   </a>
-                  <a class="text-danger pointer" aria-label="Delete Admin" (click)="openModal(deleteEmployeeModal , admin.id)">
+                  <a class="text-danger pointer" aria-label="Delete Admin" (click)="openDeleteModal(deleteEmployeeModal , admin.id)">
                     <i class="bi bi-trash3-fill"></i>
                   </a>
                 </td>
@@ -85,7 +85,7 @@
     <button type="button" class="btn-close" (click)="modalRef?.hide()" aria-label="Close"></button>
   </div>
   <div class="modal-body text-center p-4">
-    <img [src]="selectedImage" class="img-fluid rounded shadow-lg" alt="Full Image" />
+    <img [src]="selectedImage || 'https://via.placeholder.com/150'" class="img-fluid rounded shadow-lg" alt="Full Image" />
   </div>
 </ng-template>
 
@@ -105,7 +105,7 @@
     <button type="button" class="btn btn-light btn-lg" (click)="modalRef?.hide()">
       <i class="fas fa-times-circle"></i> Cancel
     </button>
-    <button type="button" class="btn btn-danger btn-lg" (click)="deleteEmployee()" style="transition: all 0.3s ease;">
+    <button type="button" class="btn btn-danger btn-lg" (click)="deleteAdmin()" style="transition: all 0.3s ease;">
       <i class="fas fa-check-circle"></i> Delete
     </button>
   </div>
@@ -126,7 +126,7 @@
 
       <!-- Modal Body -->
       <div class="modal-body">
-        <form [formGroup]="profileForm" (ngSubmit)="onSubmit(fileInput)" class="row g-4">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="row g-4">
           
           <!-- Profile Picture Section -->
           <div class="col-12 col-md-3 d-flex flex-column align-items-center text-center">

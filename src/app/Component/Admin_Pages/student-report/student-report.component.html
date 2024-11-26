@@ -10,12 +10,13 @@
         <div class="card-body d-flex flex-column flex-md-row align-items-center">
           <div class="profile-pic mb-3 mb-md-0">
             <img
-              [src]="studentData != undefined ? studentData.imageUrl : 'https://via.placeholder.com/150'"
+              [src]="studentData.imageUrl != null ? studentData.imageUrl : 'https://via.placeholder.com/150'"
               alt="Profile"
               class="rounded-circle border"
               width="150"
               height="150"
               crossorigin="anonymous"
+              style="object-fit: cover;"
             />
           </div>
           <div class="ms-md-4">
@@ -38,7 +39,7 @@
             </div>
             <div class="col-md-6">
               <p class="mb-1"><strong>Phone:</strong> {{studentData.phone}}</p>
-              <p class="mb-1" ><strong>Address:</strong> {{studentData.address.addressLine1}}, {{studentData.address.addressLine2}}, {{studentData.address.city}}, {{studentData.address.country}}</p>
+              <p class="mb-1" *ngIf="studentData.address != null"><strong>Address:</strong> {{studentData.address.addressLine1}}, {{studentData.address.addressLine2}}, {{studentData.address.city}}, {{studentData.address.country}}</p>
             </div>
           </div>
         </div>

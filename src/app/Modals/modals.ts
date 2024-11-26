@@ -4,7 +4,7 @@ export interface Student {
   firstName: string;
   lastName: string;
   dateOfBirth: Date;
-  gender: number;
+  gender: string;
   phone: string;
   address: Address;
   imageUrl?:string;
@@ -29,7 +29,6 @@ export interface Admin {
   lastName: string;
   phone: string;
   imageUrl: string;
-  role:number
   auditLog: AuditLog[];
 }
 

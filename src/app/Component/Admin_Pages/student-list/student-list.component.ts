@@ -6,72 +6,104 @@ import { Router } from '@angular/router';
 import { Student } from '../../../Modals/modals';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ToastrService } from 'ngx-toastr';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-student-list',
   standalone: true,
   imports: [CommonModule,ReactiveFormsModule,BsDatepickerModule],
+  providers: [BsModalService],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css'
 })
 export class StudentListComponent implements OnInit {
+  
   students: Student[] = [];
+
+  private studentId: string = '';
+  private deleteStudentId:string = ''
+  selectedImage: string | null = null;
+  modalRef?: BsModalRef;
+
+  // Pagination
   currentPage: number = 1;
-  pageSize: number = 12;
+  pageSize: number = 8;
   totalPages: number = 0;
   currentLength:number = 0;
   totalItems:number = 0;
 
-  profileImage!:File;
+  // Update or Add
+  isUpdate:boolean = false;
+
+ // Form and File Handling
   profileForm!: FormGroup;
-  constructor(private paginationService: StudentService , private router:Router,private fb: FormBuilder, private toastr:ToastrService) {}
+  profileImage:File | null = null;
+  profileImageUrl: string | null = "";
+
+  constructor(
+    private readonly studentService: StudentService,
+    private readonly router: Router,
+    private readonly toastr: ToastrService,
+    private readonly fb: FormBuilder,
+    private readonly modalService: BsModalService
+  ) {}
 
   ngOnInit(): void {
+    this.initializeForm()
+    this.loadStudents();
+  }
+
+  // Initialize the profile form with validation
+  private initializeForm(): void {
     this.profileForm = this.fb.group({
-   
-      nic: ['', Validators.required],
+      nic: ['',Validators.required,],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
       gender: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['',[Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-      password: ['', [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.pattern(/(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])/)]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern(/(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])/),
+        ],
+      ],
       confirmPassword: ['', Validators.required],
-      addressLine1: [''], 
-      addressLine2: [''], 
-      city: [''],
-      postalCode: [''],
-      country: [''] 
+      address: this.fb.group({
+        addressLine1: [''],
+        addressLine2: [''],
+        city: [''],
+        postalCode: [''],
+        country: [''],
+      }),
     });
-    this.loadItems();
-
-    
   }
 
-  loadItems(): void {
-    this.paginationService.pagination(this.currentPage , this.pageSize).subscribe({
-      next:((response:any) => {
-        this.students = response.items
-        this.totalPages = response.totalPages
-        this.totalItems = response.totalItem
-      }),
+  // Load students with pagination
+  loadStudents(): void {
+    this.studentService.pagination(this.currentPage, this.pageSize).subscribe({
+      next: (response: any) => {
+        this.students = response.items;
+        this.totalPages = response.totalPages;
+        this.totalItems = response.totalItem;
+      },
       complete:() => {
-        this.currentLength = this.students.length
-      }
+      this.currentLength = this.students.length
+    }
     });
   }
 
   goToPage(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
-      this.loadItems();
+      this.loadStudents();
     }
   }
 
+  // Navigate to the student report page  
   GoToReport(id:string){
     this.router.navigate(['/admin-dashboard/student-report' , id])
   }
@@ -80,16 +112,18 @@ export class StudentListComponent implements OnInit {
     return this.profileForm.controls;
   }
 
-  profileImageUrl: string | undefined;
+  
+  // Handle file selection and preview
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
-    this.profileImage = file
-    console.log(file)
     if (file) {
+      this.profileImage = file;
       this.previewImage(file);
     }
   }
-  previewImage(file: File): void {
+
+  // Preview the selected image
+  private previewImage(file: File): void {
     const reader = new FileReader();
     reader.onload = (e: any) => {
       this.profileImageUrl = e.target.result;
@@ -97,73 +131,173 @@ export class StudentListComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  private adminId:string=''
+
+  // Submit the form for add or update
   onSubmit(): void {
-    if (this.profileForm.valid) {
-      let form=this.profileForm.value
-      for (let key in form) {
-        if (form[key] === '') {
-          form[key] = null;
-        }
-      }
-      form.gender=Number(form.gender)
-
-      const Studentdata:StudentReqest=
-      {
-        nic:form.nic,
-        firstName:form.firstName,
-        lastName:form.lastName,
-        dateOfBirth:form.dateOfBirth,
-        gender:form.gender,
-        phone:form.phone,
-        email:form.email,
-        password:form.password,
-      }
-
-      if(form.addressLine1 != null && form.addressLine2 != null && form.city != null && form.postalCode != null && form.country != null){
-        const address:AddressRequest = {
-          addressLine1:form.addressLine1,
-          addressLine2:form.addressLine2,
-          city:form.city,
-          postalCode:form.postalCode,
-          country:form.country
-        }
-        Studentdata.address = address
-      }
-
-    this.paginationService.addStudent(Studentdata).subscribe({
-      next:(response:any)=>{
-         this.adminId=response.id
-        this.toastr.success("Register Successfull" , "" , {
-          positionClass:"toast-top-right",
-          progressBar:true,
-          timeOut:3000
-        })
-       this.profileForm.reset()
-
-      },
-      complete:()=>{
-        const formdata=new FormData();
-        formdata.append('image',this.profileImage)
-          this.paginationService.addimage(this.adminId,formdata).subscribe({
-            next:(response:any)=>{}
-          })
-      },
-      error:(error: any) => 
-        {
-          this.toastr.warning(error.error , "" , {
-            positionClass:"toast-top-right",
-            progressBar:true,
-            timeOut:3000
-          })
-        }
-      
-    })
-
-      console.log('Form Submitted', this.profileForm.value);
+    const formData = this.prepareFormData();
+    if (!this.isUpdate) {
+      this.addStudent(formData);
+    } else {
+      this.updateStudent(formData);
     }
   }
 
+  // Prepare form data with null checks
+  private prepareFormData(): any {
+    const form = this.profileForm.value;
+
+    if(!this.isUpdate){
+      for (const key in form) {
+        if (form[key] === '') form[key] = null;
+      }
+    }
+
+    if (
+      !form.address?.addressLine1 &&
+      !form.address?.addressLine2 &&
+      !form.address?.city &&
+      !form.address?.postalCode &&
+      !form.address?.country
+    ) {
+      form.address = null;
+    }
+
+    form.gender = Number(form.gender);
+    console.log(form)
+    return form;
+  }
+
+  // Add a new student
+  private addStudent(formData: any): void {
+    this.studentService.addStudent(formData).subscribe({
+      next: (response: any) => {
+        this.studentId = response.id;
+        this.toastr.success('Registration Successful', '', {
+          positionClass: 'toast-top-right',
+          progressBar: true,
+          timeOut: 3000,
+        });
+      },complete:()=>{
+        this.uploadImage(this.studentId);
+        this.resetForm();
+      },
+      error: (error: any) => {
+        this.handleError(error);
+      },
+    });
+  }
+
+  // Update an existing student
+  private updateStudent(formData: any): void {
+    formData.dateOfBirth = new Date(formData.dateOfBirth);
+    console.log(formData)
+    this.studentService.updateFullDetails(this.studentId, formData).subscribe({
+      next: () => {
+        this.toastr.success('Update Successful', '', {
+          positionClass: 'toast-top-right',
+          progressBar: true,
+          timeOut: 3000,
+        });
+      },complete:()=>{
+        this.uploadImage(this.studentId);
+      },
+      error: (error: any) => {
+        this.handleError(error);
+      },
+    });
+  }
+
+  // Upload profile image
+  private uploadImage(studentId: string): void {
+    if (this.profileImage) {
+      const formData = new FormData();
+      formData.append('image', this.profileImage);
+
+      this.studentService.addImage(studentId, formData).subscribe({
+        next: (response:any) => {
+        },
+        complete:()=>{
+          this.loadStudents()
+        }
+      });
+    }else{
+      this.loadStudents()
+    }
+  }
+
+  // Reset form and image data
+  private resetForm(): void {
+    this.profileForm.reset();
+    this.profileImage = null;
+    this.profileImageUrl = '';
+    this.isUpdate = false;
+  }
+
+  onAdd(){
+    this.resetForm();
+    this.profileForm.get('nic')?.enable();
+    this.profileForm.get('email')?.enable();
+  }
+
+  // Patch data to the form for editing
+  patchData(student: Student): void {
+    this.profileImageUrl = student.imageUrl ?? '';
+    this.profileForm.patchValue({
+      nic:student.nic,
+      firstName: student.firstName,
+      lastName:student.lastName,
+      dateOfBirth: new Date(student.dateOfBirth).toLocaleString(),
+      gender:student.gender === "Male" ? "1": student.gender === "Female" ? "2": "3",
+      phone:student.phone,
+      address:{
+        addressLine1:student.address != null ? student.address.addressLine1 : null,
+        addressLine2:student.address != null ? student.address.addressLine2 : null,
+        city:student.address != null ? student.address.city : null,
+        postalCode:student.address != null ? student.address.postalCode : null,
+        country:student.address != null ? student.address.country : null,
+      }
+    });
+    this.studentId = student.id;
+    this.isUpdate = true;
+    this.profileForm.get('nic')?.disable();
+    this.profileForm.get('email')?.disable();
+  }
+
+  // Open preview modal
+  openPreviewModal(template: any, image: string): void {
+    this.selectedImage = image;
+    this.modalRef = this.modalService.show(template);
+  }
+
+  // Open confirmation modal for delete
+  openDeleteModal(template: any, studentId: string): void {
+    this.modalRef = this.modalService.show(template);
+    this.deleteStudentId = studentId;
+  }
+
+  // Delete student by ID
+  deleteStudent(): void {
+    this.studentService.deleteStudent(this.deleteStudentId).subscribe({
+      next: () => {
+        this.toastr.success('Delete Successful', '', {
+          positionClass: 'toast-top-right',
+          progressBar: true,
+          timeOut: 3000,
+        });
+        this.loadStudents();
+      },
+    });
+    this.modalRef?.hide();
+  }
+
+  // Handle errors gracefully
+  private handleError(error: any): void {
+    this.toastr.warning(error.error, '', {
+      positionClass: 'toast-top-right',
+      progressBar: true,
+      timeOut: 3000,
+    });
+  }
 }
 
 export interface StudentReqest{
@@ -173,8 +307,8 @@ export interface StudentReqest{
   dateOfBirth:string;
   gender:number;
   phone:string;
-  email:string;
-  password:string;
+  email?:string;
+  password?:string;
   address?:AddressRequest;
 }
 

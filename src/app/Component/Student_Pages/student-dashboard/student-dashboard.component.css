@@ -206,3 +206,14 @@ a.sidebar-link {
         width: 100vw;
     }
 }
+
+.modal-dialog {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    margin: 0;
+  }
+
+  .modal-content {
+    width: 300px; /* Adjust the size as per your need */
+  }

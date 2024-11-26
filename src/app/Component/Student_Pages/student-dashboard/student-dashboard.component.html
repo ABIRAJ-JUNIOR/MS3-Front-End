@@ -123,8 +123,7 @@
         <div class="d-flex align-items-center mx-5">
           <!-- Button trigger modal -->
           <!-- Notification Button -->
-          <button class="btn btn-sm btn-outline-dark mx-2 position-relative OverideBtn" type="button"
-            data-bs-toggle="modal" data-bs-target="#Notification">
+          <button class="btn btn-sm btn-outline-dark mx-2 position-relative OverideBtn" type="button"data-bs-toggle="modal" data-bs-target="#topLeftModal">
             <i class="bi bi-bell-fill"></i>
             <span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger">
               0
@@ -170,8 +169,10 @@
 
 <!-- Modal Section -->
 
-<!-- Notification -->
-<div class="modal fade" id="Notification" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+
+
+<!-- Anouncement -->
+<div class="modal fade" id="Anouncement" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -190,21 +191,19 @@
   </div>
 </div>
 
-<!-- Anouncement -->
-<div class="modal fade" id="Anouncement" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<!-- Modal Structure -->
+<div class="modal fade" id="topLeftModal" tabindex="-1" aria-labelledby="topLeftModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <h5 class="modal-title" id="topLeftModalLabel">Top-Left Modal</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        This modal appears in the top-left corner of the page.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
       </div>
     </div>
   </div>

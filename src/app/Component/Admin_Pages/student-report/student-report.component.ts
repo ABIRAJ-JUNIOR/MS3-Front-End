@@ -30,7 +30,6 @@ export class StudentReportComponent implements OnInit{
     this.studentService.getStudent(this.studentID).subscribe({
       next:((response:Student) => {
         this.studentData = response
-        this.studentData.imageUrl = response.imageUrl  != null ? "https://localhost:7044/" + response.imageUrl : undefined;
       }),
       complete:() => {
         this.studentData.enrollments.forEach(e => {

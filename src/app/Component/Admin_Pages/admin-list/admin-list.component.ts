@@ -140,7 +140,7 @@ export class AdminListComponent {
     }else if(this.isUpdate == true){
       this.adminService.updateFullDetails(this.adminId,admindata).subscribe({
         next:(response:any) => {
-          this.toastr.success("Register Successfull" , "" , {
+          this.toastr.success("Update Successfull" , "" , {
             positionClass:"toast-top-right",
             progressBar:true,
             timeOut:3000
@@ -187,8 +187,7 @@ export class AdminListComponent {
       phone:admin.phone,
     });
     this.adminId = admin.id;
-    console.log(this.adminId);
-    
+    console.log(this.adminId);   
   }
 
   selectedImage: string | null = null;

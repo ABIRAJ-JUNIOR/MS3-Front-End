@@ -4,7 +4,7 @@ export interface Student {
   firstName: string;
   lastName: string;
   dateOfBirth: Date;
-  gender: number;
+  gender: string;
   phone: string;
   address: Address;
   imageUrl?:string;

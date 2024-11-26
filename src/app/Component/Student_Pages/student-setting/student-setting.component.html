@@ -1,149 +1,215 @@
 <div class="container-fluid bg-white">
     <div class="row justify-content-center pt-5">
         <div class="col-12 col-lg-10 col-xl-8 mx-auto">
-            <h2 class="h3 mb-4 page-title">Settings</h2>
+            <h2 class="h3 mb-4 page-title"><i class="bi bi-gear"></i> Settings</h2>
             <div class="my-4">
                 <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="course-tab" data-toggle="tab" href="#course" role="tab"
+                        <a class="nav-link active" id="course-tab" data-bs-toggle="tab" href="#course" role="tab"
                             aria-controls="course" aria-selected="true">Course Settings</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="institute-tab" data-toggle="tab" href="#institute" role="tab"
-                            aria-controls="institute" aria-selected="false">Institute Settings</a>
+                        <a class="nav-link" id="institute-tab" data-bs-toggle="tab" href="#institute" role="tab"
+                            aria-controls="institute" aria-selected="false">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="notifications-tab" data-toggle="tab" href="#notifications" role="tab"
-                            aria-controls="notifications" aria-selected="false">Email Notifications</a>
+                        <a class="nav-link" id="notifications-tab" data-bs-toggle="tab" href="#notifications" role="tab"
+                            aria-controls="notifications" aria-selected="false">Authentication</a>
                     </li>
                 </ul>
 
-                <h5 class="mb-0 mt-5">Course Settings</h5>
-                <p>Select the courses you are enrolled in and your preferences.</p>
-                <hr class="my-4" />
+                <div class="tab-content" id="myTabContent">
+                    <!-- Course Settings -->
+                    <div class="tab-pane fade show active" id="course" role="tabpanel" aria-labelledby="course-tab">
+                        <h5 class="mb-0 mt-5">Course Settings</h5>
+                        <p>Select the courses you are enrolled in and your preferences.</p>
+                        <hr class="my-4" />
 
-                <strong class="mb-0">Course Preferences</strong>
-                <p>Control which course notifications and updates you wish to receive.</p>
-                <div class="list-group mb-5 shadow">
-                    <div class="list-group-item">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <strong class="mb-0">Notifications for upcoming exams</strong>
-                                <p class="text-muted mb-0">Get notified before your exams or tests start.</p>
+                        <strong class="mb-0">Course Preferences</strong>
+                        <p>Control which course notifications and updates you wish to receive.</p>
+                        <div class="list-group mb-5 shadow">
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-0">Notifications for upcoming exams</strong>
+                                        <p class="text-muted mb-0">Get notified before your exams or tests start.
+                                        </p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="custom-control custom-switch">
+                                            <div class="checkbox-wrapper-57">
+                                                <label class="container">
+                                                    <input type="checkbox">
+                                                    <div class="checkmark"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-auto">
-                                <div class="custom-control custom-switch">
-                                    <div class="checkbox-wrapper-57">
-                                        <label class="container">
-                                            <input type="checkbox">
-                                            <div class="checkmark"></div>
-                                        </label>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-0">New course materials available</strong>
+                                        <p class="text-muted mb-0">Receive updates when new study materials are
+                                            uploaded.</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="custom-control custom-switch">
+                                            <div class="checkbox-wrapper-57">
+                                                <label class="container">
+                                                    <input type="checkbox">
+                                                    <div class="checkmark"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4" />
+
+                        <h5 class="mb-0 mt-5">Institute Settings</h5>
+                        <p>Set preferences for your institute's updates and notifications.</p>
+                        <div class="list-group mb-5 shadow">
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-0">Notify me about campus events</strong>
+                                        <p class="text-muted mb-0">Stay informed about events such as workshops and
+                                            seminars.
+                                        </p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="checkbox-wrapper-57">
+                                            <label class="container">
+                                                <input type="checkbox">
+                                                <div class="checkmark"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-0">Notify me about class cancellations</strong>
+                                        <p class="text-muted mb-0">Get alerts when a class is canceled due to
+                                            unforeseen
+                                            circumstances.</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="custom-control custom-switch">
+                                            <div class="checkbox-wrapper-57">
+                                                <label class="container">
+                                                    <input type="checkbox">
+                                                    <div class="checkmark"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4" />
+
+                        <h5 class="mb-0 mt-5">Email Notifications</h5>
+                        <p>Enable or disable email notifications for various updates.</p>
+                        <div class="list-group mb-5 shadow">
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-0">Notify me about grade updates</strong>
+                                        <p class="text-muted mb-0">Receive emails when new grades are posted.</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="custom-control custom-switch">
+                                            <div class="checkbox-wrapper-57">
+                                                <label class="container">
+                                                    <input type="checkbox">
+                                                    <div class="checkmark"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-group-item">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <strong class="mb-0">Notify me about new course offerings</strong>
+                                        <p class="text-muted mb-0">Get updates about newly offered courses each
+                                            semester.</p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <div class="custom-control custom-switch">
+                                            <div class="checkbox-wrapper-57">
+                                                <label class="container">
+                                                    <input type="checkbox">
+                                                    <div class="checkmark"></div>
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="list-group-item">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <strong class="mb-0">New course materials available</strong>
-                                <p class="text-muted mb-0">Receive updates when new study materials are uploaded.</p>
-                            </div>
-                            <div class="col-auto">
-                                <div class="custom-control custom-switch">
-                                    <div class="checkbox-wrapper-57">
-                                        <label class="container">
-                                            <input type="checkbox">
-                                            <div class="checkmark"></div>
-                                        </label>
+
+                    <!-- Institute Settings -->
+                    <div class="tab-pane fade" id="institute" role="tabpanel" aria-labelledby="institute-tab">
+                        <h2 class="h3 mb-4 page-title"><i class="bi bi-person"></i> Profile Settings
+                        </h2>
+                        <p>Set preferences for your Profile's updates.</p>
+                        <div class="list-group mb-5 shadow">
+                            <div class="container-fluid bg-white">
+                                <div class="row justify-content-center pt-5">
+                                    <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+                                       
+                                        <div class="my-4">
+                                            <!-- Profile Section -->
+                                            <div class="row">
+                                                <div class="col-12 col-md-4 text-center">
+                                                    <img src="https://via.placeholder.com/150" alt="Profile Picture"
+                                                        class="img-fluid rounded-circle mb-3"
+                                                        style="width: 150px; height: 150px;">
+                                                    <button class="btn btn-outline-primary btn-sm">Change
+                                                        Picture</button>
+                                                </div>
+                                                <div class="col-12 col-md-8">
+                                                    <h4>John Doe</h4>
+                                                    <p class="text-muted">johndoeexample.com</p>
+                                                    <hr />
+                                                    <div class="row">
+                                                        <div class="col-12 col-md-6">
+                                                            <strong>Phone:</strong>
+                                                            <input class="text-muted" class="" value="+1 234 567 890" >
+                                                        </div>
+                                                        <div class="col-12 col-md-6">
+                                                            <strong>Address:</strong>
+                                                            <input class="text-muted" class="" value="1234 Main St, City, Country">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
+
+
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <hr class="my-4" />
-
-                <h5 class="mb-0 mt-5">Institute Settings</h5>
-                <p>Set preferences for your institute's updates and notifications.</p>
-                <div class="list-group mb-5 shadow">
-                    <div class="list-group-item">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <strong class="mb-0">Notify me about campus events</strong>
-                                <p class="text-muted mb-0">Stay informed about events such as workshops and seminars.
-                                </p>
-                            </div>
-                            <div class="col-auto">
-                                <div class="checkbox-wrapper-57">
-                                    <label class="container">
-                                        <input type="checkbox">
-                                        <div class="checkmark"></div>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-group-item">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <strong class="mb-0">Notify me about class cancellations</strong>
-                                <p class="text-muted mb-0">Get alerts when a class is canceled due to unforeseen
-                                    circumstances.</p>
-                            </div>
-                            <div class="col-auto">
-                                <div class="custom-control custom-switch">
-                                    <div class="checkbox-wrapper-57">
-                                        <label class="container">
-                                            <input type="checkbox">
-                                            <div class="checkmark"></div>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <hr class="my-4" />
-
-                <h5 class="mb-0 mt-5">Email Notifications</h5>
-                <p>Enable or disable email notifications for various updates.</p>
-                <div class="list-group mb-5 shadow">
-                    <div class="list-group-item">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <strong class="mb-0">Notify me about grade updates</strong>
-                                <p class="text-muted mb-0">Receive emails when new grades are posted.</p>
-                            </div>
-                            <div class="col-auto">
-                                <div class="custom-control custom-switch">
-                                    <div class="checkbox-wrapper-57">
-                                        <label class="container">
-                                            <input type="checkbox">
-                                            <div class="checkmark"></div>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-group-item">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <strong class="mb-0">Notify me about new course offerings</strong>
-                                <p class="text-muted mb-0">Get updates about newly offered courses each semester.</p>
-                            </div>
-                            <div class="col-auto">
-                                <div class="custom-control custom-switch">
-                                    <div class="checkbox-wrapper-57">
-                                        <label class="container">
-                                            <input type="checkbox">
-                                            <div class="checkmark"></div>
-                                        </label>
-                                    </div>
-                                </div>
+                        <!-- Email Notifications -->
+                        <div class="tab-pane fade" id="notifications" role="tabpanel"
+                            aria-labelledby="notifications-tab">
+                            <h5 class="mb-0 mt-5">Email Notifications</h5>
+                            <p>Enable or disable email notifications for various updates.</p>
+                            <div class="list-group mb-5 shadow">
+                                <!-- Add your email notifications settings here -->
                             </div>
                         </div>
                     </div>
@@ -151,4 +217,3 @@
             </div>
         </div>
     </div>
-</div>

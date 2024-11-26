@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
 
 @Component({
   selector: 'app-student-profile',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './student-profile.component.html',
   styleUrl: './student-profile.component.css'
 })
@@ -21,8 +22,8 @@ export class StudentProfileComponent {
 
   selectedQuote: string = '';
 
-  constructor() {
-    this.generateNewQuote(); 
+  constructor(private StudentDashDataService:StudentDashDataServiceService) {
+    this.generateNewQuote();
   }
 
   generateNewQuote(): void {
@@ -30,9 +31,17 @@ export class StudentProfileComponent {
     this.selectedQuote = this.quotes[randomIndex];
   }
 
-  IsReadonly:boolean=true
+  IsReadonly: boolean = true
 
   toggleEdit(): void {
-      this.IsReadonly = !this.IsReadonly;
+    this.IsReadonly = !this.IsReadonly;
   }
+
+  StudentDetails: any;
+
+
+  ngOnInit(): void {
+    this.StudentDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
+  }
+
 }

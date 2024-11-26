@@ -19,6 +19,8 @@ export class StudentSettingComponent implements OnInit {
   IsEditMode: boolean = false;
   StudentTokenDetails: any;
   studentForm: FormGroup;
+  
+  NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
   constructor(private StudentDashDataService: StudentDashDataServiceService, private StudentApiService: StudentService, private fb: FormBuilder, private toastr: ToastrService) {
 
@@ -47,9 +49,13 @@ export class StudentSettingComponent implements OnInit {
     },
       (error) => {
         this.toastr.error("Failed to load student details. Please try again later.", "Error", {
-          positionClass: "toast-top-right",
+          positionClass: "toast-top-right", // This ensures the toast appears at the top-right
           progressBar: true,
-          timeOut: 3000
+          timeOut: 3000,
+          closeButton: true, // Optional: Adds a close button for the toast
+          extendedTimeOut: 1000, // Optional: Time out for when the user hovers over the toast
+          enableHtml: true, // Optional: Enable HTML content in toastr message
+          toastClass: "custom-toast" // Custom class for the toast
         });
       })
 
@@ -72,17 +78,17 @@ export class StudentSettingComponent implements OnInit {
     this.StudentApiService.updateStudent(student).subscribe(
       (data: any) => {
         this.toastr.success("User Update Successfull", "", {
-          positionClass: "toast-top-right",
           progressBar: true,
-          timeOut: 3000
+          timeOut: 3000,
+          positionClass: 'toast-bottom-right' 
         })
         this.studentForm.disable()
       },
       (error) => {
         this.toastr.error("User Update Failed try again later", "", {
-          positionClass: "toast-top-right",
           progressBar: true,
-          timeOut: 3000
+          timeOut: 3000,
+          positionClass: 'toast-bottom-right'
         })
 
       }
@@ -118,16 +124,16 @@ export class StudentSettingComponent implements OnInit {
     if (this.IsEditMode) {
       this.studentForm.enable();
       this.toastr.success("Profile Edit Mode Activated", "", {
-        positionClass: "toast-top-right",
         progressBar: true,
-        timeOut: 3000
+        timeOut: 3000,
+        positionClass: 'toast-bottom-right'
       })
     } else {
       this.studentForm.disable();
       this.toastr.success("Your profile is now in view-only mode.", "", {
-        positionClass: "toast-top-right",
         progressBar: true,
-        timeOut: 3000
+        timeOut: 3000,
+        positionClass: 'toast-bottom-right'
       })
     }
   }

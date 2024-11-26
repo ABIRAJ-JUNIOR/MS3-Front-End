@@ -207,12 +207,12 @@
 
                                                 <div class="col-12 col-md-4 col-xl-12 my-5 mx-auto">
                                                     <div class="col-12 col-md-6 text-center mx-auto">
-                                                        <img src="https://via.placeholder.com/150" alt="Profile Picture"
-                                                            class="img-fluid rounded-circle mb-2"
-                                                            style="width: 150px; height: 150px;">
-                                                        <h4 class="m-1">John Doe</h4>
-                                                        <p class="text-muted m-0">johndoeexample.com</p>
-                                                        <p class="text-muted ">Student Id UT-01520</p>
+                                                        <img class="rounded-circle mt-5" width="150px"
+                                                        [src]="StudentDetails.imageUrl || NoImage"
+                                                        alt="Student Picture">
+                                                        <h4 class="m-1">{{StudentDetails.firstName }} {{StudentDetails.lastName}} </h4>
+                                                        <p class="text-muted m-0">{{StudentDetails.email}}</p>
+                                                        <p class="text-muted ">Student Id UT-{{StudentDetails.nic | slice:-4}}</p>
                                                         <button class="btn btn-outline-primary btn-sm">Change
                                                             Picture</button>
 

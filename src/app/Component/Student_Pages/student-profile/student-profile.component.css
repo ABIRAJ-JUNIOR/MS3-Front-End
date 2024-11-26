@@ -74,5 +74,79 @@ body {
     background-color: #28a745; /* Green color for high progress */
   }
 
-  
+  /* Card Header Styling */
+  .bg-white {
+    background-color: #ffffff;
+}
+
+.shadow-sm {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Section */
+.font-weight-bold {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #343a40;
+}
+
+/* Icons and Text Section */
+.d-flex.align-items-start {
+    padding: 0.5rem 0;
+}
+
+/* Card Body and Layout */
+.card-body {
+    padding: 1rem;
+}
+
+.fs-5 {
+    font-size: 1.25rem;
+}
+
+/* Action Buttons */
+.btn {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-outline-primary:hover,
+.btn-danger:hover {
+    transform: scale(1.05);
+}
+
+.btn-outline-primary {
+    border: 1px solid #007bff;
+    color: #007bff;
+    background-color: white;
+}
+
+.btn-danger {
+    border: 1px solid #dc3545;
+    color: white;
+    background-color: #dc3545;
+}
+
+.btn i {
+    font-size: 1.1rem;
+}
+
+/* Adjust for Smaller Screens */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .fs-5 {
+        font-size: 1rem;
+    }
+
+    .btn {
+        padding: 0.6rem 1.2rem;
+    }
+}  
 

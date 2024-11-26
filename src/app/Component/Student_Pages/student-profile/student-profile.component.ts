@@ -81,4 +81,29 @@ export class StudentProfileComponent {
     }
     console.log(this.paymentFee)
   }
+
+
+  getProgress(item: any): number {
+    const startDate = new Date(item.courseScheduleResponse.startDate);
+    const endDate = new Date(item.courseScheduleResponse.endDate);
+    const currentDate = new Date();
+
+    // Ensure that the progress doesn't go below 0% or above 100%
+    if (currentDate < startDate) {
+      return 0;  // Progress is 0 if the course hasn't started
+    } else if (currentDate > endDate) {
+      return 100;  // Progress is 100 if the course has ended
+    } else {
+      // Calculate progress based on the current date
+      const totalDuration = endDate.getTime() - startDate.getTime();
+      const elapsedTime = currentDate.getTime() - startDate.getTime();
+      return (elapsedTime / totalDuration) * 100;
+    }
+  }
+
+
+
+
+
+
 }

@@ -169,9 +169,17 @@
                         <p><strong>Progress:</strong> 
                             <span class="text-dark"> In Process</span>
                         </p>
-                        <div class="progress mb-3" style="height: 10px;">
-                            <div class="progress-bar bg-info" style="width: 85%;" role="progressbar"></div>
-                        </div>
+                            <div class="progress mb-3" style="height: 10px;">
+                                <div 
+                                    class="progress-bar bg-info" 
+                                    [style.width]="getProgress(item) + '%'" 
+                                    role="progressbar" 
+                                    [attr.aria-valuenow]="getProgress(item)"
+                                    aria-valuemin="0" 
+                                    aria-valuemax="100">
+                                    {{ getProgress(item) | number: '1.0-0' }}%
+                                </div>
+                            </div>
                       
                     </div>
                    

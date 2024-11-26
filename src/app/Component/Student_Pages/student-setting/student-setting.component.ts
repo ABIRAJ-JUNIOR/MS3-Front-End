@@ -39,12 +39,24 @@ export class StudentSettingComponent implements OnInit {
 
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
       this.StudentDetails = student
+      this.assignStudentData();
 
     }
       ,
       (error) => {
       })
 
+  }
+
+  assignStudentData() {
+    this.studentForm.setValue({
+      firstName: this.StudentDetails.firstName,
+      lastName: this.StudentDetails.lastName,
+      phone: this.StudentDetails.phone,
+      address: this.StudentDetails.address,
+      dateOfBirth: this.StudentDetails.dateOfBirth,
+      gender: this.StudentDetails.gender
+    });
   }
 
 

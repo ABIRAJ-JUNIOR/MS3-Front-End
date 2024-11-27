@@ -184,51 +184,7 @@
 
     </div>
 
-    <div class="container my-5">
-        <div class="row">
-            <div class="col-md-4" *ngFor="let item of StudentDetails.enrollments">
-                <div class="card shadow-sm border-0 rounded">
-                    <div class="card-header  text-white text-center" [ngClass]="getProgressBarClass(item)">
-                        <h5>{{item.courseScheduleResponse.courseResponse.courseName}}</h5>
-                    </div>
-                    <div class="card-body">
-                        <p><strong>Start Date:</strong> {{item.courseScheduleResponse.startDate}}</p>
-                        <p><strong>Start Time:</strong> {{item.courseScheduleResponse.time}}</p>
-                        <p><strong>Progress:</strong>
-                            <span class="text-dark"> In Process</span>
-                        </p>
-                        <div class="progress mb-3" style="height: 10px;">
-                            <div class="progress-bar bg-info" [style.width]="getProgress(item) + '%'" role="progressbar"
-                                [attr.aria-valuenow]="getProgress(item)" aria-valuemin="0" aria-valuemax="100">
-                                {{ getProgress(item) | number: '1.0-0' }}%
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-
-
-            <div class="col-md-4">
-                <div class="card shadow-sm border-0 rounded">
-                    <div class="card-header  text-white text-center bg-success">
-                        <h5>Hard Code For Final Design</h5>
-                    </div>
-                    <div class="card-body">
-                        <p><strong>Start Date:</strong> Mar 1, 2024</p>
-                        <p><strong>Progress:</strong> Completed</p>
-                        <div class="progress mb-3" style="height: 10px;">
-                            <div class="progress-bar bg-success" style="width: 100%;" role="progressbar"></div>
-                        </div>
-                    </div>
-                    <div class="card-footer text-center">
-                        <button class="btn btn-success btn-sm">Download Certificate</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <section class="motivation mt-5">
         <div class="container text-center p-4 bg-gradient bg-dark text-white rounded shadow-lg">

@@ -23,6 +23,8 @@ export class StudentAssesmentComponent implements OnInit {
   pageNumbers: number[] = []; // Array of page numbers to display
   paginatedAssesment: any[] = [];
 
+  StatusCheck:string="Completed"
+
   StudentDetails:any;
   ngOnInit() {
     this.paginateAssesment()

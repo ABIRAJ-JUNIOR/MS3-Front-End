@@ -1,36 +1,39 @@
-
-<!-- table assesment -->
-
-<h2 class="mb-4 text-dark fw-bold">Assesments Overview</h2>
+<h2 class="mb-4 text-dark fw-bold">Assessments Overview</h2>
 <div class="custom-scroll overflow-auto" style="max-height: 400px;">
-  <table class="table table-striped table-hover align-middle mb-0 table-sm h-50">
-    <thead class="table-dark">
-      <tr>
-        <th>#</th>
-        <th>courseName</th>
-        <th>AssessmentType</th>
-        <th>StartDate</th>
-        <th>EndDate</th>
-        <th>TotalMarks</th>
-        <th>PassMarks</th>
-        <th>UpdateDate</th>
-        <th>status</th>
-        <th class="text-center">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th>#</th>
-            <th>courseName</th>
-            <th>AssessmentType</th>
-            <th>StartDate</th>
-            <th>EndDate</th>
-            <th>TotalMarks</th>
-            <th>PassMarks</th>
-            <th>UpdateDate</th>
-            <th>status</th>
-            <th class="text-center">Actions</th>
-          </tr>
-    </tbody>
-  </table>
+    <table class="table table-striped table-hover align-middle mb-0 table-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Course Name</th>
+                <th>Assessment Type</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Date Submitted</th>
+                <th>Marks Obtained</th>
+                <th>Grade</th>
+                <th>Feedback</th>
+                <th>Status</th>
+                <th class="text-center">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let item of StudentDetails; let i = index">
+                <tr *ngFor="let assessmentData of item.studentAssesmentResponse">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ item.courseScheduleResponse.courseResponse.courseName }}</td>
+                    <td>{{ assessmentData.assessmentResponse.assessmentType }}</td>
+                    <td>{{ assessmentData.assessmentResponse.startDate | date: 'shortDate' }}</td>
+                    <td>{{ assessmentData.assessmentResponse.endDate | date: 'shortDate' }}</td>
+                    <td>{{ assessmentData.dateSubmitted | date: 'short' }}</td>
+                    <td>{{ assessmentData.marksObtained || 'Update Later' }}</td>
+                    <td>{{ assessmentData.grade || 'Update Later' }}</td>
+                    <td>{{ assessmentData.feedback || 'Update Later' }}</td>
+                    <td>{{ assessmentData.studentAssessmentStatus }}</td>
+                    <td class="text-center">
+                        <button class="btn btn-outline-primary btn-sm"><i class="bi bi-file-earmark-arrow-down-fill"></i></button>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
 </div>

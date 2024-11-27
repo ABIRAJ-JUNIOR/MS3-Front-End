@@ -1,5 +1,7 @@
 
-
+thead tr th{
+    background-color: gray;
+}
 /* General Styles */
 .table-wrapper {
     background-color: #fff;

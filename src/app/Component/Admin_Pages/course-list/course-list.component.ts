@@ -20,7 +20,7 @@ export class CourseListComponent implements OnInit {
 
   //Pagination fields
   currentPage: number = 1;
-  pageSize: number = 13;
+  pageSize: number = 8;
   totalPages: number = 0;
   currentLength:number = 0;
   totalItems:number = 0;

@@ -129,7 +129,6 @@ export class AdminListComponent implements OnInit{
     }
   }
 
-  // Add a new admin
   private addAdmin(adminData: AdminRequest): void {
     this.adminService.addAdmin(adminData).subscribe({
       next: (response: any) => {
@@ -144,7 +143,6 @@ export class AdminListComponent implements OnInit{
       complete: () => {
         this.uploadImage()
         this.resetForm();
-        this.loadItems();
       },
       error: (error:any) => {
         this.toastr.error(error.error, '', {
@@ -156,7 +154,6 @@ export class AdminListComponent implements OnInit{
     });
   }
 
-  // Update an existing admin
   private updateAdmin(adminData: AdminRequest): void {
     this.adminService.updateFullDetails(this.adminId, adminData).subscribe({
       next: () => {
@@ -169,7 +166,6 @@ export class AdminListComponent implements OnInit{
       },
       complete: () => {
         this.uploadImage()
-        this.loadItems();
       },
       error: (error:any) => {
         this.toastr.error(error.error, '', {
@@ -187,6 +183,9 @@ export class AdminListComponent implements OnInit{
       const formData = new FormData();
       formData.append('imageFile', this.selectedFile);
       this.adminService.addImage(this.adminId, formData).subscribe({
+        complete:()=>{
+          this.loadItems();
+        },
         error: () => {
           this.toastr.error('Image upload failed', '', {
             positionClass: 'toast-top-right',
@@ -240,16 +239,15 @@ export class AdminListComponent implements OnInit{
         });
         this.loadItems();
       },
+      complete: () => this.modalRef?.hide(),
       error: () => {
         this.toastr.error('Failed to delete admin', '', {
           positionClass: 'toast-top-right',
         });
       },
-      complete: () => this.modalRef?.hide(),
     });
   }
 
-  // Reset form and image
   private resetForm(): void {
     this.profileForm.reset();
     this.resetImage();

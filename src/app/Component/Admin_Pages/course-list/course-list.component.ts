@@ -10,6 +10,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
   selector: 'app-course-list',
   standalone: true,
   imports: [CommonModule,ReactiveFormsModule],
+  providers: [BsModalService],
   templateUrl: './course-list.component.html',
   styleUrl: './course-list.component.css'
 })
@@ -144,6 +145,7 @@ export class CourseListComponent implements OnInit {
       },
       complete:()=> {
         this.uploadImage();
+        this.resetForm()
       },
       error:(error) =>{
         this.toastr.warning(error.error , "" , {
@@ -197,6 +199,9 @@ export class CourseListComponent implements OnInit {
 
   editCourse(isEditMode:boolean):void{
     this.isUpdate = isEditMode;
+    if(!isEditMode){
+      this.resetForm()
+    }
   }
 
   patchData(course:Course):void{
@@ -223,7 +228,32 @@ export class CourseListComponent implements OnInit {
   }
 
   deleteCourse():void{
-    
+    this.courseService.deleteCourse(this.courseId).subscribe({
+      next: () => {
+        this.toastr.success('Admin deleted successfully!', '', {
+          positionClass: 'toast-top-right',
+          progressBar: true,
+        });
+        this.loadItems();
+      },
+      complete: () => this.modalRef?.hide(),
+      error: () => {
+        this.toastr.error('Failed to delete admin', '', {
+          positionClass: 'toast-top-right',
+        });
+      },
+    })
+  }
+
+  private resetForm():void{
+    this.courseForm.reset()
+    this.resetImage();
+    this.isUpdate = false
+  }
+
+  private resetImage():void{
+    this.courseImageUrl = null;
+    this.selectedFile = null;
   }
 }
 

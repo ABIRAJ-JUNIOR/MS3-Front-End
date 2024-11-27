@@ -33,6 +33,9 @@ export class CourseService {
   Addimage(CourseID:string,image:any){
     return this.http.post(this.apiUrl + '/Course/image/' + CourseID, image)
   }
+  deleteCourse(CourseId:string){
+    return this.http.delete(this.apiUrl + '/Course/Delete/' + CourseId)
+  }
 
 
   //Course Schedule

@@ -36,7 +36,7 @@ export class CourseListComponent implements OnInit {
   modalRef?: BsModalRef;
 
   //Course ID for Update/delete operation
-  private CourseId:string=''
+  private courseId:string=''
   
 
   constructor(
@@ -134,7 +134,7 @@ export class CourseListComponent implements OnInit {
   private addCourse(courseData:CourseRequest):void{
     this.courseService.AddCourse(courseData).subscribe({
       next: (response: any) => {
-          this.CourseId=response.id
+          this.courseId=response.id
           this.toastr.success("Course added successfull" , "" , {
             positionClass:"toast-top-right",
             progressBar:true,
@@ -156,7 +156,7 @@ export class CourseListComponent implements OnInit {
   }
 
   private updateCourse(courseData:CourseRequest):void{
-    this.courseService.updateCourse(this.CourseId , courseData).subscribe({
+    this.courseService.updateCourse(this.courseId , courseData).subscribe({
       next:()=>{
         this.toastr.success('Course updated successfull!', '', {
           positionClass: 'toast-top-right',
@@ -182,7 +182,7 @@ export class CourseListComponent implements OnInit {
     if(this.selectedFile){
       const formdata= new FormData();
       formdata.append('image',this.selectedFile!);
-      this.courseService.Addimage(this.CourseId,formdata).subscribe({
+      this.courseService.Addimage(this.courseId,formdata).subscribe({
         complete:()=>{
         this.loadItems();
         },
@@ -201,7 +201,7 @@ export class CourseListComponent implements OnInit {
 
   patchData(course:Course):void{
     this.courseImageUrl = course.imageUrl
-    this.CourseId = course.id
+    this.courseId = course.id
     this.courseForm.patchValue({
       courseName: course.courseName,
       courseCategoryId: course.courseCategoryId,
@@ -216,8 +216,16 @@ export class CourseListComponent implements OnInit {
     this.courseImageUrl = image;
     this.modalRef = this.modalService.show(template);
   }
-}
 
+  openDeleteModal(template: any, courseId: string): void {
+    this.modalRef = this.modalService.show(template);
+    this.courseId = courseId;
+  }
+
+  deleteCourse():void{
+    
+  }
+}
 
 export interface CourseRequest{
   courseCategoryId:string;

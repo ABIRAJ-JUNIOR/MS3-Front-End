@@ -25,6 +25,7 @@ import { PaymentAuthenticationComponent } from './Component/Landing_Pages/paymen
 import { StudentProfileComponent } from './Component/Student_Pages/student-profile/student-profile.component';
 import { StudentSettingComponent } from './Component/Student_Pages/student-setting/student-setting.component';
 import { StudentAssesmentComponent } from './Component/Student_Pages/student-assesment/student-assesment.component';
+import { StudentCourseComponent } from './Component/Student_Pages/student-course/student-course.component';
 
 export const routes: Routes = [
 
@@ -73,7 +74,8 @@ export const routes: Routes = [
             { path: '', component: DashContentComponent },
             { path: 'profile', component:StudentProfileComponent },
             {path:'setting',component:StudentSettingComponent},
-            {path:'assesment',component:StudentAssesmentComponent}
+            {path:'assesment',component:StudentAssesmentComponent},
+            {path:'courses',component:StudentCourseComponent}
         ]
     },
     { path: '**', redirectTo: 'home', pathMatch: 'full' },

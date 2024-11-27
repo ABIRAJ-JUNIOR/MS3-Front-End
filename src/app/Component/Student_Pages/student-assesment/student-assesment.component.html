@@ -1,21 +1,18 @@
 <div class="container">
     <h3 class="mt-3">Your Assignments</h3>
+   
+
     <hr>
     <div class="row  ">
-        <div class="col-12 col-sm-12 col-md-12 mx-auto" *ngFor="let Sechdule of paginatedAssesment let i = index">
+        <div class="col-12 col-sm-12 col-md-6 " *ngFor="let Sechdule of paginatedAssesment let i = index">
             <div class="card my-4">
-                <h5 class="card-title font-weight-bold  p-2 py-2 rounded-top-2 text-center text-white m-0 "
-                    style=" background-color:#004085;">
+                <h5 class="card-title font-weight-bold bg-secondary  p-2 py-2 rounded-top-2 text-center text-white m-0 ">
                     <a>{{Sechdule.courseScheduleResponse.courseResponse.courseName}}</a>
                 </h5>
                 <div *ngFor="let assesment of Sechdule.courseScheduleResponse.assessmentResponses ">
                  <div class="row">
-                    <div class="col-md-3">
-
-                        <img src="/course/card{{i+1}}.jpg"
-                        class="card-img-top p-3 " style="border-radius: 25px;"  >
-                    </div>
-                    <div class="col-md-9">
+                 
+                    <div class="col-md-12">
                         <div class="card-body">
                             <div class="col-md-2">
                                 <p class="mb-2 text-white fs-4 bg-danger text-center rounded-2">{{
@@ -67,7 +64,7 @@
                             <div class="card-footer text-end">
                                 <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye me-1"></i>View</button>
                                 <button class="btn btn-sm btn-success mx-2"><i
-                                        class="bi bi-cloud-arrow-up me-1"></i>Submit</button>
+                                        class="bi bi-cloud-arrow-up me-1"></i>Submit Assignment</button>
                             </div>
                         </div>
                         <hr class="m-0">

@@ -69,8 +69,7 @@ export class StudentSettingComponent implements OnInit {
       dateOfBirth: studentData.dateOfBirth,
       gender: Number(studentData.gender),
       phone: studentData.phone,
-      id: this.StudentTokenDetails.Id,
-      address: studentData.address
+      id: this.StudentTokenDetails.Id
     }
     console.log(student)
     this.StudentApiService.updateStudent(student).subscribe(
@@ -81,6 +80,7 @@ export class StudentSettingComponent implements OnInit {
           positionClass: 'toast-bottom-right' 
         })
         this.studentForm.disable()
+        this.IsEditMode = !this.IsEditMode
       },
       (error) => {
         this.toastr.error("User Update Failed try again later", "", {

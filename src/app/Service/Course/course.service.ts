@@ -31,7 +31,9 @@ export class CourseService {
     return this.http.put(this.apiUrl + `/Course/Update/${id}`, Course)
   }
   Addimage(CourseID:string,image:any){
-    return this.http.post(this.apiUrl + '/Course/image/' + CourseID, image)
+    return this.http.post(this.apiUrl + '/Course/image/' + CourseID, image,{
+      responseType:'text'
+    })
   }
   deleteCourse(CourseId:string){
     return this.http.delete(this.apiUrl + '/Course/Delete/' + CourseId)

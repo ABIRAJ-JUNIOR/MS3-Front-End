@@ -148,11 +148,7 @@ export class CourseListComponent implements OnInit {
         this.resetForm()
       },
       error:(error) =>{
-        this.toastr.warning(error.error , "" , {
-          positionClass:"toast-top-right",
-          progressBar:true,
-          timeOut:4000
-        })
+        this.handleError(error);
       },
     })
   }
@@ -171,11 +167,7 @@ export class CourseListComponent implements OnInit {
         this.uploadImage();
       },
       error:(error:any)=>{
-        this.toastr.error(error.error, '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut:4000
-        });
+        this.handleError(error);
       }
     })
   }
@@ -185,8 +177,8 @@ export class CourseListComponent implements OnInit {
       const formdata= new FormData();
       formdata.append('image',this.selectedFile!);
       this.courseService.Addimage(this.courseId,formdata).subscribe({
-        complete:()=>{
-        this.loadItems();
+        next:()=>{
+          this.loadItems();
         },
         error:(error:any) =>{
           this.toastr.error('Image upload failed', '', {
@@ -210,7 +202,7 @@ export class CourseListComponent implements OnInit {
     this.courseForm.patchValue({
       courseName: course.courseName,
       courseCategoryId: course.courseCategoryId,
-      courseLevel: course.level,
+      courseLevel: course.level === "Beginner" ? "1": course.level === "Intermediate" ? "2": "3",
       courseFee: course.courseFee,
       description:course.description,
       prerequisites:course.prerequisites,
@@ -236,13 +228,13 @@ export class CourseListComponent implements OnInit {
         });
         this.loadItems();
       },
-      complete: () => this.modalRef?.hide(),
       error: () => {
         this.toastr.error('Failed to delete admin', '', {
           positionClass: 'toast-top-right',
         });
       },
     })
+    this.modalRef?.hide()
   }
 
   private resetForm():void{
@@ -254,6 +246,14 @@ export class CourseListComponent implements OnInit {
   private resetImage():void{
     this.courseImageUrl = null;
     this.selectedFile = null;
+  }
+
+  private handleError(error: any): void {
+    this.toastr.warning(error.error, '', {
+      positionClass: 'toast-top-right',
+      progressBar: true,
+      timeOut: 4000,
+    });
   }
 }
 

@@ -202,7 +202,6 @@ export class AdminListComponent implements OnInit{
       this.profileForm.get('email')?.enable();
       this.resetForm();
     }
-      
   }
 
   patchData(admin: Admin): void {

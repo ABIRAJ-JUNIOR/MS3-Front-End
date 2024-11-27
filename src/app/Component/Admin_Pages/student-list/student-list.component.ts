@@ -272,10 +272,8 @@ export class StudentListComponent implements OnInit {
         });
         this.loadStudents();
       },
-      error:()=>{
-        this.toastr.error('Failed to delete admin', '', {
-          positionClass: 'toast-top-right',
-        });
+      error:(error:any)=>{
+        this.handleError(error);
       }
     });
     this.modalRef?.hide();

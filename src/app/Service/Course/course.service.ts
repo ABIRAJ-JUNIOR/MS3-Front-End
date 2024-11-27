@@ -36,7 +36,9 @@ export class CourseService {
     })
   }
   deleteCourse(CourseId:string){
-    return this.http.delete(this.apiUrl + '/Course/Delete/' + CourseId)
+    return this.http.delete(this.apiUrl + '/Course/Delete/' + CourseId,{
+      responseType:'text'
+    })
   }
 
 

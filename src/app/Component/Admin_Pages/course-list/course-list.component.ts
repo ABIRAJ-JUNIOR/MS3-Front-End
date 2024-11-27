@@ -222,16 +222,14 @@ export class CourseListComponent implements OnInit {
   deleteCourse():void{
     this.courseService.deleteCourse(this.courseId).subscribe({
       next: () => {
-        this.toastr.success('Admin deleted successfully!', '', {
+        this.toastr.success('Deleted successfully!', '', {
           positionClass: 'toast-top-right',
           progressBar: true,
         });
         this.loadItems();
       },
-      error: () => {
-        this.toastr.error('Failed to delete admin', '', {
-          positionClass: 'toast-top-right',
-        });
+      error: (error:any) => {
+        this.handleError(error);
       },
     })
     this.modalRef?.hide()

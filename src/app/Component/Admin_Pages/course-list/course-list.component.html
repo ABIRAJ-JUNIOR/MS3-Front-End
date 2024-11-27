@@ -38,7 +38,7 @@
                               <td>{{i + 1}}</td>
                               <td>{{course.courseName}}</td>
                               <td>
-                                  <img src="{{course.imageUrl}}" alt="Course image" class="rounded pointer" width="45" height="45" (click)="openPreviewModal(template, course.imageUrl)"> 
+                                  <img src="{{course.imageUrl || 'https://via.placeholder.com/150'}}" alt="Course image" class="rounded pointer" width="45" height="45" (click)="openPreviewModal(template, course.imageUrl)"> 
                               </td>
                               <td>{{course.level}}</td>
                               <td>{{course.courseFee}} Rs</td>

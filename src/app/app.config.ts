@@ -12,5 +12,5 @@ import { authInterceptorInterceptor } from './Interceptor/auth-interceptor.inter
 Chart.register(...registerables);
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideAnimations(), provideToastr(), provideHttpClient(withInterceptors([authInterceptorInterceptor])) ,]
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideAnimations(), provideToastr(), provideHttpClient(withInterceptors([authInterceptorInterceptor]))]
 };

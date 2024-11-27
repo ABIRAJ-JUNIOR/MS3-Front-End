@@ -175,7 +175,7 @@ export class StudentListComponent implements OnInit {
         this.toastr.success('Registration Successful', '', {
           positionClass: 'toast-top-right',
           progressBar: true,
-          timeOut: 3000,
+          timeOut: 4000,
         });
       },complete:()=>{
         this.uploadImage(this.studentId);
@@ -196,7 +196,7 @@ export class StudentListComponent implements OnInit {
         this.toastr.success('Update Successful', '', {
           positionClass: 'toast-top-right',
           progressBar: true,
-          timeOut: 3000,
+          timeOut: 4000,
         });
       },complete:()=>{
         this.uploadImage(this.studentId);
@@ -283,7 +283,7 @@ export class StudentListComponent implements OnInit {
         this.toastr.success('Delete Successful', '', {
           positionClass: 'toast-top-right',
           progressBar: true,
-          timeOut: 3000,
+          timeOut: 4000,
         });
         this.loadStudents();
       },
@@ -296,7 +296,7 @@ export class StudentListComponent implements OnInit {
     this.toastr.warning(error.error, '', {
       positionClass: 'toast-top-right',
       progressBar: true,
-      timeOut: 3000,
+      timeOut: 4000,
     });
   }
 }

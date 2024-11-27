@@ -46,7 +46,7 @@ export const routes: Routes = [
                 component:OtpAuthenticationComponent
             } 
         ],
-        // canActivate : [payAuthGuard]
+        canActivate : [payAuthGuard]
     },
    
 

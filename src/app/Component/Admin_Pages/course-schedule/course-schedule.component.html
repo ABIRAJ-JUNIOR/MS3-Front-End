@@ -9,9 +9,9 @@
               <h2 class="m-0">Course Schedules</h2>
             </div>
             <div class="col-lg-6 d-flex justify-content-lg-end justify-content-center align-items-center">
-              <a class="btn btn-success d-flex align-items-center" data-bs-toggle="modal"
-                data-bs-target="#courseScheduleForm">
-                <i class="bi bi-plus-circle me-2"></i> <span>Add New Schedule</span>
+              <a class="btn btn-success d-flex align-items-center" data-bs-toggle="modal" 
+                data-bs-target="#courseScheduleForm" (click)="editSchedule(false)">
+                <i class="bi bi-plus-circle me-2"></i> <span>{{!isUpdate ? 'Add New Schedule' : 'Update Schedule'}}</span>
               </a>
             </div>
           </div>
@@ -49,11 +49,8 @@
                 <td>{{schedule.enrollCount}}</td>
                 <td>{{schedule.scheduleStatus}}</td>
                 <td class="text-center">
-                  <a href="#" class="text-primary me-3" aria-label="Edit Student">
+                  <a  class="text-primary me-3" aria-label="Edit Student" (click)="patchData(schedule)" data-bs-toggle="modal" data-bs-target="#courseScheduleForm">
                     <i class="bi bi-pencil-square"></i>
-                  </a>
-                  <a href="#" class="text-danger" aria-label="Delete Student">
-                    <i class="bi bi-trash3-fill"></i>
                   </a>
                 </td>
               </tr>
@@ -114,8 +111,8 @@
               <span class="input-group-text bg-light border-0">
                 <i class="bi bi-book"></i>
               </span>
-              <select formControlName="course" class="form-select border rounded-end-3">
-                <option value="">Select a course</option>
+              <select formControlName="courseId" class="form-select border rounded-end-3">
+                <option value="" selected disabled>Select a course</option>
                 <ng-container *ngFor="let course of courses">
                   <option [value]="course.id">{{ course.name }}</option>
                 </ng-container>
@@ -142,7 +139,7 @@
               <span class="input-group-text bg-light border-0">
                 <i class="bi bi-calendar"></i>
               </span>
-              <input type="date" formControlName="startDate" class="form-control border rounded-end-3" />
+              <input type="text" formControlName="startDate" class="form-control border rounded-end-3" bsDatepicker [bsConfig]="{ isAnimated: true }" />
             </div>
           </div>
 
@@ -153,7 +150,7 @@
               <span class="input-group-text bg-light border-0">
                 <i class="bi bi-calendar-check"></i>
               </span>
-              <input type="date" formControlName="endDate" class="form-control border rounded-end-3" />
+              <input type="text" formControlName="endDate" class="form-control border rounded-end-3" bsDatepicker [bsConfig]="{ isAnimated: true }"/>
             </div>
           </div>
 
@@ -189,7 +186,7 @@
                 <i class="bi bi-info-circle"></i>
               </span>
               <select formControlName="scheduleStatus" class="form-select border rounded-end-3">
-                <option value="">Select status</option>
+                <option value="" selected disabled >Select status</option>
                 <option value="1">Open</option>
                 <option value="2">Closed</option>
                 <option value="3">Completed</option>

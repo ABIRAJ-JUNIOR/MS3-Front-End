@@ -36,15 +36,27 @@ export class CourseService {
   addCourseSchedule(CourseSchedule:CourseScheduleRequest){
     return this.http.post(this.apiUrl + '/CourseSchedule', CourseSchedule)
   }
+
+  updateCourseSchedule(id:string ,CourseSchedule:CourseScheduleRequest){
+    return this.http.put(this.apiUrl + `/CourseSchedule/Update/${id}`, CourseSchedule)
+  }
+
   GetAllCategory(){
     return this.http.get<CourseCategory[]>(this.apiUrl + '/CourseCategory/GetAllCategory')
   }
+
   AddCourse(Course:CourseRequest){
     return this.http.post(this.apiUrl + '/Course/Course', Course)
   }
+
+  updateCourse(id:string ,Course:CourseRequest){
+    return this.http.put(this.apiUrl + `/Course/Update/${id}`, Course)
+  }
+
   Addimage(CourseID:string,image:any){
     return this.http.post(this.apiUrl + '/Course/image/' + CourseID, image)
   }
+  
   addAssessment(Assessment:AssessmentRequest){
     return this.http.post(this.apiUrl + '/Assessment/Assessment', Assessment)
   }

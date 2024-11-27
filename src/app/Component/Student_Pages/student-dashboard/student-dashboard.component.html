@@ -1,6 +1,6 @@
 <div class="wrapper">
   <aside id="sidebar" [ngClass]="{'collapsed': sidebarCollapsed}" class="text-light js-sidebar shadow-lg">
-    <div class="h-100" style="position: fixed; width: 400px;">
+    <div class="h-100" style="position: fixed; width: 250px;">
       <div class="sidebar-logo">
         <a href="#">Way Makers</a>
       </div>
@@ -36,7 +36,7 @@
               <a [routerLink]="['/student-dashboard/mycourses']" class="sidebar-link">Enrolled Courses</a>
             </li>
             <li class="sidebar-item">
-              <a href="#" class="sidebar-link">Completed Courses</a>
+              <a [routerLink]="['/student-dashboard/completed-Courses']" class="sidebar-link">Completed Courses</a>
             </li>
           </ul>
         </li>
@@ -45,7 +45,7 @@
         <li class="sidebar-item">
           <a href="#" class="sidebar-link">
             <i class="fa-solid fa-graduation-cap pe-2"></i>
-            Grades
+            Assesment Results
           </a>
         </li>
 

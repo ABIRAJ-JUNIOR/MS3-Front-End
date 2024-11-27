@@ -16,17 +16,17 @@
 
     <div class="row ">
         <!-- Profile Picture Section -->
-        <div class=" col-12 col-md-12 col-lg-4 mx-auto ">
-            <div class="d-flex flex-column align-items-center text-center  py-5 p-1 bg-white rounded  ">
+        <div class=" col-12 col-md-12 col-lg-3 my-5 py-2 mx-auto ">
+            <div class="d-flex flex-column align-items-center text-center  py-3 rounded  ">
                 <img class="rounded-circle mt-4" width="150px" [src]="StudentDetails.imageUrl || NoImage"
-                    alt="Student Picture" style="border: 2px solid #007bff; padding: 5px;">
+                    alt="Student Picture" style="border: 2px solid #ffffff; padding: 5px;">
 
-                <span class="font-weight-bold fs-5 mt-3 fw-bold" style="color: #333;">{{StudentDetails.firstName}}
+                <span class="font-weight-bold fs-5 mt-3 fw-bold" style="color: #000000;">{{StudentDetails.firstName}}
                     {{StudentDetails.lastName}}</span>
 
-                <span class="text-muted d-block mb-2">{{StudentTokenDetails.Email}}</span>
+                <span class="text-dark d-block mb-2">{{StudentTokenDetails.Email}}</span>
 
-                <span class="text-muted mb-3">Student ID: UT-{{StudentDetails.nic | slice: -4 }}</span>
+                <span class="text-dark mb-3">Student ID: UT-{{StudentDetails.nic | slice: -4 }}</span>
 
                 <div class="d-flex justify-content-center gap-3 flex-wrap mb-4 mt-2">
                     <button class="btn btn-outline-primary d-flex align-items-center gap-2 px-4 py-2 shadow-sm"
@@ -51,7 +51,7 @@
                 <div class="card-body p-3 shadow">
                     <div class="row py-4">
                         <!-- Full Name -->
-                        <div class="col-md-6">
+                        <div class="col-md-6 ">
                             <div class="d-flex align-items-start">
                                 <i class="bi bi-person-fill text-primary fs-5 me-3"></i>
                                 <div>
@@ -62,7 +62,7 @@
                         </div>
 
                         <!-- Email -->
-                        <div class="col-md-6">
+                        <div class="col-md-6 ">
                             <div class="d-flex align-items-start">
                                 <i class="bi bi-envelope-fill text-primary fs-5 me-3"></i>
                                 <div>
@@ -73,7 +73,7 @@
                         </div>
 
                         <!-- Phone -->
-                        <div class="col-md-6">
+                        <div class="col-md-6 pt-4">
                             <div class="d-flex align-items-start">
                                 <i class="bi bi-telephone-fill text-primary fs-5 me-3"></i>
                                 <div>
@@ -84,7 +84,7 @@
                         </div>
 
                         <!-- Address -->
-                        <div class="col-md-6">
+                        <div class="col-md-6 pt-4">
                             <div class="d-flex align-items-start">
                                 <i class="bi bi-geo-alt-fill text-primary fs-5 me-3"></i>
                                 <div>
@@ -95,7 +95,7 @@
                         </div>
 
                         <!-- NIC -->
-                        <div class="col-md-6">
+                        <div class="col-md-6 pt-4">
                             <div class="d-flex align-items-start">
                                 <i class="bi bi-person-vcard-fill text-primary fs-5 me-3"></i>
                                 <div>
@@ -106,7 +106,7 @@
                         </div>
 
                         <!-- Role -->
-                        <div class="col-md-6">
+                        <div class="col-md-6 pt-4">
                             <div class="d-flex align-items-start">
                                 <i class="bi bi-person-badge text-primary fs-5 me-3"></i>
                                 <div>
@@ -117,7 +117,7 @@
                         </div>
 
                         <!-- Created Date -->
-                        <div class="col-md-6">
+                        <div class="col-md-6 pt-4">
                             <div class="d-flex align-items-start">
                                 <i class="bi bi-calendar-fill text-primary fs-5 me-3"></i>
                                 <div>

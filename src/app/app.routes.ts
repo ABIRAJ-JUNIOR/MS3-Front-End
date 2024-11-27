@@ -27,6 +27,8 @@ import { StudentSettingComponent } from './Component/Student_Pages/student-setti
 import { StudentAssesmentComponent } from './Component/Student_Pages/student-assesment/student-assesment.component';
 import { StudentCourseComponent } from './Component/Student_Pages/student-course/student-course.component';
 import { StudentMycoursesComponent } from './Component/Student_Pages/student-mycourses/student-mycourses.component';
+import { StudentCompletedcoursesComponent } from './Component/Student_Pages/student-completedcourses/student-completedcourses.component';
+import { StudentResultComponent } from './Component/Student_Pages/student-result/student-result.component';
 
 export const routes: Routes = [
 
@@ -77,7 +79,9 @@ export const routes: Routes = [
             {path:'setting',component:StudentSettingComponent},
             {path:'assesment',component:StudentAssesmentComponent},
             {path:'courses',component:StudentCourseComponent},
-            {path:'mycourses',component:StudentMycoursesComponent}
+            {path:'mycourses',component:StudentMycoursesComponent},
+            {path:'completed-Courses',component:StudentCompletedcoursesComponent},
+            {path:'assesment-result',component:StudentResultComponent}
         ]
     },
     { path: '**', redirectTo: 'home', pathMatch: 'full' },

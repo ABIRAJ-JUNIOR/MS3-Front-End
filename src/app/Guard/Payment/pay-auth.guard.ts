@@ -16,8 +16,8 @@ export const payAuthGuard: CanActivateFn = (route, state) => {
       return false
     }
   }else{
+    tostr.error("Please Login and Purchase a course and schedule before proceeding to payment.")
     return false
-    
   }
 
   

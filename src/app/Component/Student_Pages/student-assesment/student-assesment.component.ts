@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AssesmentService } from '../../../Service/assesment.service';
+import { StudentService } from '../../../Service/Student/student.service';
+import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
 
 @Component({
   selector: 'app-student-assesment',
@@ -12,7 +14,7 @@ import { AssesmentService } from '../../../Service/assesment.service';
 export class StudentAssesmentComponent implements OnInit {
 
 
-  constructor(private assesmentService:AssesmentService){
+  constructor(private StudentService:StudentService  , private studentDataService:StudentDashDataServiceService){
 
   }
   pageSize: number = 12; // Courses per page
@@ -21,13 +23,17 @@ export class StudentAssesmentComponent implements OnInit {
   pageNumbers: number[] = []; // Array of page numbers to display
   paginatedAssesment: any[] = [];
 
+  StudentDetails:any;
   ngOnInit() {
     this.paginateAssesment()
   }
 
   paginateAssesment(){
-    this.assesmentService.getPagination(this.currentPage,this.pageSize).subscribe((d:any)=>{
-      this.paginatedAssesment = d.items
+    this.StudentDetails=this.studentDataService.GetStudentDeatilByLocalStorage()
+    this.StudentService.getStudent(this.StudentDetails.Id).subscribe((d:any)=>{
+      console.log(d)
+
+      this.paginatedAssesment = d.enrollments
       console.log(this.paginatedAssesment)
     },(error)=>{
       console.log(error)

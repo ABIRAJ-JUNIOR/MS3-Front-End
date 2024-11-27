@@ -65,7 +65,7 @@ export const routes: Routes = [
             { path: 'assessment-list', component: CourseAssessmentComponent },
             {path:'**' , redirectTo:'home',pathMatch:'full'}
         ],
-        // canActivate: [adminAuthGuard]
+        canActivate: [adminAuthGuard]
     },
     {
         path: 'student-dashboard', component: StudentDashboardComponent, children: [

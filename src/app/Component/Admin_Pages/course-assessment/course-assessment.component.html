@@ -103,58 +103,83 @@
             <!-- Course Selection -->
             <div class="col-md-6">
               <label for="course" class="form-label fw-bold text-dark">Course</label>
-              <select formControlName="courseId" class="form-select border rounded-3 shadow-sm">
-                <option value="">Select a course</option>
-                <ng-container *ngFor="let course of courses">
+              <div class="input-group">
+                <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-book"></i></span>
+                <select formControlName="courseId" class="form-select border rounded-end shadow-sm">
+                  <option value="">Select a course</option>
+                  <ng-container *ngFor="let course of courses">
                     <option value="{{course.id}}">{{ course.courseName }}</option>
                   </ng-container>
-                <!-- Add more hardcoded options as needed -->
-              </select>
+                </select>
+              </div>
             </div>
-  
+          
             <!-- Assessment Type -->
             <div class="col-md-6">
               <label for="assessmentType" class="form-label fw-bold text-dark">Assessment Type</label>
-              <select formControlName="assessmentType" class="form-select border rounded-3 shadow-sm">
-                <option value="">Select an assessment type</option>
-                <option value="1">Quiz</option>
-                <option value="2">Exam</option>
-              </select>
+              <div class="input-group">
+                <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-list-task"></i></span>
+                <select formControlName="assessmentType" class="form-select border rounded-end shadow-sm">
+                  <option value="" disabled>Select an assessment type</option>
+                  <option value="1">Quiz</option>
+                  <option value="2">Exam</option>
+                </select>
+              </div>
             </div>
-  
+          
             <!-- Start Date -->
             <div class="col-md-6">
               <label for="startDate" class="form-label fw-bold text-dark">Start Date</label>
-              <input type="date" formControlName="startDate" class="form-control border rounded-3 shadow-sm" />
+              <div class="input-group">
+                <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-calendar-event"></i></span>
+                <input type="date" formControlName="startDate" class="form-control border rounded-end shadow-sm" />
+              </div>
             </div>
-  
+          
             <!-- End Date -->
             <div class="col-md-6">
               <label for="endDate" class="form-label fw-bold text-dark">End Date</label>
-              <input type="date" formControlName="endDate" class="form-control border rounded-3 shadow-sm" />
+              <div class="input-group">
+                <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-calendar-check"></i></span>
+                <input type="date" formControlName="endDate" class="form-control border rounded-end shadow-sm" />
+              </div>
             </div>
-  
+          
             <!-- Total Marks -->
             <div class="col-md-6">
               <label for="totalMarks" class="form-label fw-bold text-dark">Total Marks</label>
-              <input type="number" formControlName="totalMarks" class="form-control border rounded-3 shadow-sm" placeholder="Enter total marks" />
+              <div class="input-group">
+                <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-123"></i></span>
+                <input type="number" formControlName="totalMarks" class="form-control border rounded-end shadow-sm" placeholder="Enter total marks" />
+              </div>
             </div>
-  
+          
             <!-- Pass Marks -->
             <div class="col-md-6">
               <label for="passMarks" class="form-label fw-bold text-dark">Pass Marks</label>
-              <input type="number" formControlName="passMarks" class="form-control border rounded-3 shadow-sm" placeholder="Enter pass marks" />
+              <div class="input-group">
+                <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-check-circle"></i></span>
+                <input type="number" formControlName="passMarks" class="form-control border rounded-end shadow-sm" placeholder="Enter pass marks" />
+              </div>
             </div>
-  
+            
+            <!-- Assessment Link -->
+            <div class="col-md-6">
+              <label for="assessmentLink" class="form-label fw-bold text-dark">Assessment Link</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-link-45deg"></i></span>
+                <input type="text" formControlName="assessmentLink" class="form-control border rounded-end shadow-sm" placeholder="Enter Link" />
+              </div>
+            </div>
+          
             <!-- Modal Footer -->
             <div class="modal-footer border-0 bg-light">
               <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
               <button type="submit" [disabled]="assessmentForm.invalid" class="btn btn-dark px-4">Submit</button>
             </div>
-  
-          </form>
+            
+          </form>          
         </div>
-  
       </div>
     </div>
   </div>

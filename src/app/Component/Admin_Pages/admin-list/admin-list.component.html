@@ -152,7 +152,7 @@
               <label for="nic" class="form-label fw-bold text-dark">NIC</label>
               <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-card-text"></i></span>
-                <input type="text" formControlName="nic" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter NIC" />
+                <input type="text" formControlName="nic" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter NIC" required/>
               </div>
               <div *ngIf="profileForm.get('nic')?.touched && profileForm.get('nic')?.invalid" class="text-danger small">
                 <span *ngIf="profileForm.get('nic')?.hasError('required')">NIC is required.</span>
@@ -165,7 +165,7 @@
               <label for="firstName" class="form-label fw-bold text-dark">First Name</label>
               <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-                <input type="text" formControlName="firstName" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter first name" />
+                <input type="text" formControlName="firstName" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter first name" required/>
               </div>
               <div *ngIf="profileForm.get('firstName')?.touched && profileForm.get('firstName')?.invalid" class="text-danger small">
                 <span *ngIf="profileForm.get('firstName')?.hasError('required')">First name is required.</span>
@@ -178,7 +178,7 @@
               <label for="lastName" class="form-label fw-bold text-dark">Last Name</label>
               <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-                <input type="text" formControlName="lastName" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter last name" />
+                <input type="text" formControlName="lastName" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter last name" required/>
               </div>
               <div *ngIf="profileForm.get('lastName')?.touched && profileForm.get('lastName')?.invalid" class="text-danger small">
                 <span *ngIf="profileForm.get('lastName')?.hasError('required')">Last name is required.</span>
@@ -194,7 +194,7 @@
               <label for="email" class="form-label fw-bold text-dark">Email</label>
               <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
-                <input type="email" formControlName="email" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter email" />
+                <input type="email" formControlName="email" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter email" required/>
               </div>
               <div *ngIf="profileForm.get('email')?.touched && profileForm.get('email')?.invalid" class="text-danger small">
                 <span *ngIf="profileForm.get('email')?.hasError('required')">Email is required.</span>
@@ -207,7 +207,7 @@
               <label for="phone" class="form-label fw-bold text-dark">Phone</label>
               <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-phone-fill"></i></span>
-                <input type="text" formControlName="phone" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter phone number" />
+                <input type="text" formControlName="phone" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter phone number" required/>
               </div>
               <div *ngIf="profileForm.get('phone')?.touched && profileForm.get('phone')?.invalid" class="text-danger small">
                 <span *ngIf="profileForm.get('phone')?.hasError('required')">Phone number is required.</span>
@@ -219,7 +219,7 @@
               <label for="password" class="form-label fw-bold text-dark">Password</label>
               <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                <input type="password" formControlName="password" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter password" />
+                <input type="password" formControlName="password" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter password" required/>
               </div>
               <div *ngIf="profileForm.controls['password'].invalid && profileForm.controls['password'].touched" class="text-danger">
                 <div *ngIf="profileForm.controls['password'].hasError('required')">Password is required.</div>
@@ -233,7 +233,7 @@
               <label for="confirmPassword" class="form-label fw-bold text-dark">Confirm Password</label>
               <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                <input type="password" formControlName="confirmPassword" class="form-control border rounded-end-3 shadow-sm" placeholder="Confirm password" />
+                <input type="password" formControlName="confirmPassword" class="form-control border rounded-end-3 shadow-sm" placeholder="Confirm password" required/>
               </div>
               <div *ngIf="profileForm.controls['confirmPassword'].invalid && profileForm.controls['confirmPassword'].touched" class="text-danger">
                 <div *ngIf="profileForm.controls['confirmPassword'].hasError('required')">Confirm Password is required.</div>
@@ -248,8 +248,8 @@
               <label for="role" class="form-label fw-bold text-dark">Role</label>
               <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-person-badge-fill"></i></span>
-                <select formControlName="role" class="form-select border rounded-end-3 shadow-sm">
-                  <option value="">Select a role</option>
+                <select formControlName="role" class="form-select border rounded-end-3 shadow-sm" required>
+                  <option  value="" selected>Select a role</option>
                   <option value="1">Administrator</option>
                   <option value="2">Instructor</option>
                 </select>

@@ -200,7 +200,7 @@ export class AdminListComponent implements OnInit{
     if (!isEditMode){
       this.profileForm.get('nic')?.enable();
       this.profileForm.get('email')?.enable();
-      this.resetForm();
+      // this.resetForm();+
     }
   }
 

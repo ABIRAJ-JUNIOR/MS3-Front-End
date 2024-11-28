@@ -12,4 +12,7 @@ export class AnnouncementService {
 AddAnouncement(announcement:any){
   return this.http.post(`${this.apiUrl}/Announcement`, announcement);
 }
+GetAllAnouncement(){
+  return this.http.get(`${this.apiUrl}/Announcement`);
+}
 }

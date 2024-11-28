@@ -30,6 +30,7 @@ import { StudentMycoursesComponent } from './Component/Student_Pages/student-myc
 import { StudentCompletedcoursesComponent } from './Component/Student_Pages/student-completedcourses/student-completedcourses.component';
 import { StudentResultComponent } from './Component/Student_Pages/student-result/student-result.component';
 import { TestComponent } from './test/test.component';
+import { AnnouncementComponent } from './Component/Admin_Pages/announcement/announcement.component';
 
 export const routes: Routes = [
 
@@ -69,6 +70,7 @@ export const routes: Routes = [
             { path: 'course-list', component: CourseListComponent },
             { path: 'schedule-list', component: CourseScheduleComponent },
             { path: 'assessment-list', component: CourseAssessmentComponent },
+            { path:'announcement',component:AnnouncementComponent},
             {path:'**' , redirectTo:'home',pathMatch:'full'}
         ],
         // canActivate: [adminAuthGuard]

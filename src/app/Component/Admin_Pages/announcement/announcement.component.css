@@ -20,3 +20,14 @@ body {
     width: 48%;  /* Buttons take up equal width */
     transition: background-color 0.3s ease;
   }
+  .btn-custom {
+    background-color: #212121; /* Black button */
+    color: #ffffff;
+  }
+  .btn-custom:hover {
+    background-color: #000000; /* Slightly darker black on hover */
+  }
+  .btn-reset {
+    background-color: #b0bec5; /* Ash color button */
+    color: #212121;
+  }

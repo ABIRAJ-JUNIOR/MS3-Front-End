@@ -1,10 +1,8 @@
 <!-- Payment Progress -->
-<div class="d-flex justify-content-between align-item-center mt-4">
-    <h4 class="">Payment Progress</h4>
-    <button class="btn btn-outline-primary btn-sm p-0 py-2 px-3 ">
-        <i class="bi bi-download"></i> All Payments
-    </button>
-</div>
+<h4 class="mt-4">Payment Progress</h4>
+
+
+
 
 <!-- Table View -->
 <div class="table-responsive mt-4">
@@ -23,7 +21,7 @@
         </thead>
         <tbody>
 
-            <ng-container *ngFor="let item of Enrollments">
+            <ng-container *ngFor="let item of Enrollments" >
                 <!-- Installment Row -->
                 <tr *ngIf="item.paymentResponse[0].installmentNumber == 1">
                     <td>Installment #{{item.paymentResponse[0].installmentNumber}}</td>
@@ -35,9 +33,6 @@
                     <td>{{item.paymentResponse[0].paymentMethod}}</td>
                     <td>{{item.paymentResponse[0].paymentType}}</td>
                     <td>
-                        <button class="btn btn-sm btn-outline-danger p-0 py-2 px-3 m-1">
-                            <i class="bi bi-wallet2"></i> Pay
-                        </button>
                         <button class="btn btn-outline-primary btn-sm p-0 py-2 px-3 m-1">
                             <i class="bi bi-download"></i> Receipt
                         </button>
@@ -45,16 +40,11 @@
                 </tr>
 
                 <!-- Progress Bar Row -->
-                <tr *ngIf="item.paymentResponse[0].installmentNumber == 1">
+                <tr  *ngIf="item.paymentResponse[0].installmentNumber == 1">
                     <td colspan="8">
                         <div class="progress mt-2">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-                                role="progressbar"
-                                [ngClass]="calculateProgressColor(calculatePaymentProgress(item.paymentResponse[0].amountPaid, item.courseScheduleResponse.courseResponse.courseFee))"
-                                [style.width]="calculatePaymentProgress(item.paymentResponse[0].amountPaid, item.courseScheduleResponse.courseResponse.courseFee) + '%'"
-                                aria-valuemin="0" aria-valuemax="100">
-                                {{calculatePaymentProgress(item.paymentResponse[0].amountPaid,
-                                item.courseScheduleResponse.courseResponse.courseFee) | number : '1.0-0'}}% Paid
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success w-100"  role="progressbar"
+                                aria-valuemin="0" aria-valuemax="100">100% Paid
                             </div>
                         </div>
                     </td>

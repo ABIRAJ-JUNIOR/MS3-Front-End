@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Student } from '../../../Modals/modals';
 import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
@@ -6,13 +6,13 @@ import { StudentService } from '../../../Service/Student/student.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-student-payments',
+  selector: 'app-student-payments-history',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './student-payments.component.html',
-  styleUrl: './student-payments.component.css'
+  templateUrl: './student-payments-history.component.html',
+  styleUrl: './student-payments-history.component.css'
 })
-export class StudentPaymentsComponent implements OnInit {
+export class StudentPaymentsHistoryComponent {
   constructor(private StudentDashDataService: StudentDashDataServiceService, private StudentApiService: StudentService, private router: Router) {
   }
 
@@ -33,19 +33,5 @@ export class StudentPaymentsComponent implements OnInit {
         this.router.navigate([''])
       })
 
-  }
-
-  calculatePaymentProgress(amountPaid: number, courseFee: number): number {
-    return (amountPaid / courseFee) * 100;
-  }
-
-  calculateProgressColor(progress: number): string {
-    if (progress < 40) {
-      return 'bg-danger'; 
-    } else if (progress < 60 ) {
-      return 'bg-warning';  
-    } else {
-      return 'bg-success';  
-    }
   }
 }

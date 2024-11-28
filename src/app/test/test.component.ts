@@ -7,38 +7,12 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 @Component({
   selector: 'app-test',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,FormsModule],
+  imports: [],
   templateUrl: './test.component.html',
   styleUrl: './test.component.css'
 })
 export class TestComponent {
-  announcementForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {
-    // Initialize the form with validation rules
-    this.announcementForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(3)]],
-      expirationDate: ['', Validators.required],
-      audienceType: ['', Validators.required]
-    });
-  }
-
-  // Method to handle form submission
-  onSubmit(): void {
-    if (this.announcementForm.valid) {
-      // Log the form value to the console
-      console.log('Form Data:', this.announcementForm.value);
-    } else {
-      console.log('Form is invalid');
-    }
-  }
-
-  // Method to reset the form
-  onReset(): void {
-    this.announcementForm.reset();
-  }
 }
   
 

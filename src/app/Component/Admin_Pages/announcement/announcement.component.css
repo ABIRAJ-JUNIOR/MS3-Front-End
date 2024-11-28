@@ -12,3 +12,11 @@ body {
     background-color: #343a40;
     color: #ffffff;
   }
+  .btn-custom, .btn-reset {
+    padding: 12px 20px;  /* Increased padding for larger buttons */
+    font-size: 1rem;  /* Consistent font size */
+    border-radius: 4px;  /* Rounded corners for both buttons */
+    border: none;
+    width: 48%;  /* Buttons take up equal width */
+    transition: background-color 0.3s ease;
+  }

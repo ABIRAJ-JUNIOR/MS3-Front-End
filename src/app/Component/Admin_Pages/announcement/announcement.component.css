@@ -43,3 +43,14 @@ body {
   h4, .card-header h4 {
     font-size: 1.25rem;  /* Default for large screens */
   }
+  .form-group label {
+    font-size: 1rem; /* Default font size for form labels */
+  }
+
+  .table th, .table td {
+    font-size: 1rem; /* Default font size for table content */
+  }
+
+  .pagination .page-link {
+    font-size: 0.9rem; /* Default font size for pagination */
+  }

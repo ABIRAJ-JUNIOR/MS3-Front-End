@@ -12,7 +12,7 @@ import { AnnouncementService } from '../../../Service/Announcement/announcement.
 })
 export class AnnouncementComponent {
   announcementForm!: FormGroup;
-  constructor(private fb: FormBuilder,Announcemenrservice:AnnouncementService) {}
+  constructor(private fb: FormBuilder,private Announcemenrservice:AnnouncementService) {}
   ngOnInit(): void {
     // Initialize the form with validation rules
     this.announcementForm = this.fb.group({
@@ -25,6 +25,24 @@ export class AnnouncementComponent {
     onSubmit(): void {
       if (this.announcementForm.valid) {
         // Log the form value to the console
+        var data=this.announcementForm.value
+        data.audienceType=Number(data.audienceType)
+        const Formdata:AnnoincemenrReqest={
+          title:data.title,
+          expirationDate:data.expirationDate,
+          audienceType:data.audienceType
+        }
+         this.Announcemenrservice.AddAnouncement(Formdata).subscribe({
+          next:(responce:any)=>{
+
+          },
+          complete:() =>{
+            
+          },
+          error:(err:any)=> {
+            
+          },
+         })
         console.log('Form Data:', this.announcementForm.value);
       } else {
         console.log('Form is invalid');

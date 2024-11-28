@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Student } from '../../../Modals/modals';
 import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
 import { StudentService } from '../../../Service/Student/student.service';
-import { saveAs } from 'file-saver'; // Import the FileSaver.js library
+import html2canvas from 'html2canvas';
 
 
 @Component({
@@ -16,9 +16,9 @@ import { saveAs } from 'file-saver'; // Import the FileSaver.js library
 })
 export class StudentResultComponent {
 
-
   constructor(private StudentDashDataService: StudentDashDataServiceService, private StudentApiService: StudentService,  private toastr: ToastrService) {
 
+    
   }
 
 
@@ -46,10 +46,19 @@ export class StudentResultComponent {
 
   }
 
+  @ViewChild('table', { static: false }) table!: ElementRef;
 
-   // Method to download assessment details as a JSON file
-   downloadAssessmentDetails(data:any) {
-    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    saveAs(blob, 'assessment-details.json');
+  downloadTableAsImage() {
+    // Capture the table using html2canvas
+    html2canvas(this.table.nativeElement).then(canvas => {
+      // Convert the canvas to an image (PNG format)
+      const imageData = canvas.toDataURL('image/png');
+
+      // Create a link element to trigger the download
+      const link = document.createElement('a');
+      link.href = imageData;
+      link.download = 'table-image.png';  // Set the filename for the download
+      link.click();  // Trigger the download
+    });
   }
 }

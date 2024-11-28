@@ -20,4 +20,13 @@ export class AnnouncementComponent {
       audienceType: ['', Validators.required]
     });
   }
+    // Method to handle form submission
+    onSubmit(): void {
+      if (this.announcementForm.valid) {
+        // Log the form value to the console
+        console.log('Form Data:', this.announcementForm.value);
+      } else {
+        console.log('Form is invalid');
+      }
+    }
 }

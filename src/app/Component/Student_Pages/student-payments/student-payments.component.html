@@ -42,7 +42,20 @@
                     </td>
                 </tr>
 
-              
+                <!-- Progress Bar Row -->
+                <tr  *ngIf="item.paymentResponse[0].installmentNumber == 1">
+                    <td colspan="8">
+                        <div class="progress mt-2">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"  role="progressbar"
+                            [ngClass]="calculateProgressColor(calculatePaymentProgress(item.paymentResponse[0].amountPaid, item.courseScheduleResponse.courseResponse.courseFee))"
+                                [style.width]="calculatePaymentProgress(item.paymentResponse[0].amountPaid, item.courseScheduleResponse.courseResponse.courseFee) + '%'"
+                                aria-valuemin="0" aria-valuemax="100">
+                                {{calculatePaymentProgress(item.paymentResponse[0].amountPaid,
+                                item.courseScheduleResponse.courseResponse.courseFee) | number : '1.0-0'}}% Paid
+                            </div>
+                        </div>
+                    </td>
+                </tr>
             </ng-container>
 
         </tbody>

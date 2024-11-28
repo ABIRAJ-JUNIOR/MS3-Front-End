@@ -1,5 +1,8 @@
-<div  #table>
-    <h2 class="mb-4 text-dark fw-bold">Assessments Overview</h2>
+<div style="padding: 20px;"  #table>
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 class="mb-4 text-dark fw-bold">Assessments Overview</h2>
+        <button class="btn btn-outline-primary btn-sm" (click)="downloadTableAsImage()"><i class="bi bi-file-earmark-arrow-down-fill"></i> Download Report</button>
+    </div>
 <div class="custom-scroll overflow-auto" style="max-height: 400px;" >
     <table class="table table-striped table-hover align-middle mb-0 table-sm">
         <thead class="table-dark">
@@ -14,7 +17,6 @@
                 <th>Grade</th>
                 <th>Feedback</th>
                 <th>Status</th>
-                <th class="text-center">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -30,9 +32,7 @@
                     <td>{{ assessmentData.grade || 'Update Later' }}</td>
                     <td>{{ assessmentData.feedback || 'Update Later' }}</td>
                     <td>{{ assessmentData.studentAssessmentStatus }}</td>
-                    <td class="text-center">
-                        <button class="btn btn-outline-primary btn-sm" (click)="downloadTableAsImage()"><i class="bi bi-file-earmark-arrow-down-fill"></i></button>
-                    </td>
+                 
                 </tr>
             </ng-container>
         </tbody>

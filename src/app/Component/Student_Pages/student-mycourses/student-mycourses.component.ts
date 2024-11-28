@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Student } from '../../../Modals/modals';
 import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
@@ -12,7 +12,7 @@ import { StudentService } from '../../../Service/Student/student.service';
   templateUrl: './student-mycourses.component.html',
   styleUrl: './student-mycourses.component.css'
 })
-export class StudentMycoursesComponent {
+export class StudentMycoursesComponent implements OnInit{
 
 
   constructor(private StudentDashDataService: StudentDashDataServiceService, private StudentApiService: StudentService, private router: Router) {

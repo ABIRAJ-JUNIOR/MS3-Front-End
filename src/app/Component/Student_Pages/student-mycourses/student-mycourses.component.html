@@ -1,7 +1,8 @@
-<div class="container my-5">
+<div class="container-fluid my-5">
     <h3>Enrollment Courses</h3>
+    <hr>
     <div class="row">
-        <div class="col-md-4 my-4" *ngFor="let item of StudentDetails.enrollments let i = index" >
+        <div class="col-md-3 my-4" *ngFor="let item of StudentDetails.enrollments let i = index" >
             <div class="card shadow-sm border-0 rounded">
                 <img src="/course/card{{i+1}}.jpg" class="card-img-top" alt="Course image">
                 

@@ -35,12 +35,17 @@ export class StudentCompletedcoursesComponent {
 
   }
 
+
+  NoCourseBool:boolean=true;
   CompleteCourseCalculation(item:any):boolean{
     const currentDate = new Date();
     const endDate = new Date(item.courseScheduleResponse.endDate);
     if (currentDate > endDate) {
       return true;
+      this.NoCourseBool=false
     }else{
+   
+     
       return false;
     }
   }

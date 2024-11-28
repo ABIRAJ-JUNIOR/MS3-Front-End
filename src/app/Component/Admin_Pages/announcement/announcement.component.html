@@ -9,7 +9,16 @@
       </div>
       <div class="card-body">
         <form [formGroup]="announcementForm" (ngSubmit)="onSubmit()">
-            
+               <!-- Title Field -->
+               <div class="form-group mb-3">
+                <label class="font-weight-bold">Title<span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="bi bi-megaphone"></i></span>
+                  </div>
+                  <input formControlName="title" type="text" class="form-control" placeholder="Announcement Title">
+                </div>
+              </div>
         </form>
 
       </div>

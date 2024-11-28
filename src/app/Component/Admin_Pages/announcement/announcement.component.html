@@ -19,6 +19,37 @@
                   <input formControlName="title" type="text" class="form-control" placeholder="Announcement Title">
                 </div>
               </div>
+
+               <!-- Expiration Date Field -->
+            <div class="form-group mb-3">
+                <label class="font-weight-bold">Expiration Date<span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+                  </div>
+                  <input formControlName="expirationDate" type="date" class="form-control">
+                </div>
+              </div>
+
+               <!-- Audience Type Field -->
+            <div class="form-group mb-3">
+                <label class="font-weight-bold">Audience Type<span class="text-danger">*</span></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="bi bi-people"></i></span>
+                  </div>
+                  <select formControlName="audienceType" class="form-control">
+                    <option value="1">Admins</option>
+                    <option value="2">Students</option>
+                    <option value="3">Everyone</option>
+                  </select>
+                </div>
+              </div>
+               <!-- Submit and Reset Buttons -->
+            <div class="d-flex justify-content-between">
+                <button type="button" class="btn btn-reset" (click)="onReset()">Reset</button>
+                <button type="submit" class="btn btn-custom" [disabled]="announcementForm.invalid">Confirm</button>
+              </div>
         </form>
 
       </div>

@@ -29,12 +29,14 @@ export class CourseAssessmentComponent {
     private toastr: ToastrService
   ) {
     this.assessmentForm = this.fb.group({
+      assessmentTitle: ['', Validators.required],
       courseId: ['', Validators.required],
-      assessmentType: ['', Validators.required], 
-      startDate: ['', Validators.required], 
-      endDate: ['', Validators.required], 
-      totalMarks: ['', [Validators.required, Validators.min(0)]], 
-      passMarks: ['', [Validators.required, Validators.min(0)]] 
+      assessmentType: ['', Validators.required],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
+      totalMarks: ['', Validators.required],
+      passMarks: ['', Validators.required],
+      assessmentLink: ['', Validators.required],
     });
   }
 

@@ -79,9 +79,6 @@
 
 
 <!-- moduel -->
-
-
-
 <div class="modal fade" id="assessmentForm" tabindex="-1" aria-labelledby="assessmentFormLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content bg-light text-dark rounded-4 border-0 shadow-lg">
@@ -99,7 +96,21 @@
         <!-- Modal Body -->
         <div class="modal-body">
           <form [formGroup]="assessmentForm" (ngSubmit)="onSubmit()" class="row g-4">
-  
+
+            <!-- Assessment Title -->
+            <div class="col-md-6">
+              <label for="assessmentTitle" class="form-label fw-bold text-dark">Assessment Title</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-pencil"></i></span>
+                <input type="text" formControlName="assessmentTitle" class="form-control border rounded-end shadow-sm" placeholder="Enter assessment title"
+                />
+              </div>
+              <!-- Error Message -->
+              <div *ngIf="assessmentForm.controls['assessmentTitle'].touched && assessmentForm.controls['assessmentTitle'].invalid" class="text-danger small mt-1">
+                Assessment Title is required.
+              </div>
+            </div>
+          
             <!-- Course Selection -->
             <div class="col-md-6">
               <label for="course" class="form-label fw-bold text-dark">Course</label>
@@ -108,9 +119,12 @@
                 <select formControlName="courseId" class="form-select border rounded-end shadow-sm">
                   <option value="">Select a course</option>
                   <ng-container *ngFor="let course of courses">
-                    <option value="{{course.id}}">{{ course.courseName }}</option>
+                    <option value="{{ course.id }}">{{ course.courseName }}</option>
                   </ng-container>
                 </select>
+              </div>
+              <div *ngIf="assessmentForm.controls['courseId'].invalid && assessmentForm.controls['courseId'].touched" class="text-danger small mt-1">
+                Course is required.
               </div>
             </div>
           
@@ -123,7 +137,18 @@
                   <option value="" disabled>Select an assessment type</option>
                   <option value="1">Quiz</option>
                   <option value="2">Exam</option>
+                  <option value="3">Presentation</option>
+                  <option value="4">Practical</option>
+                  <option value="5">Online Test</option>
+                  <option value="6">Midterm</option>
+                  <option value="7">Final Exam</option>
+                  <option value="8">Mock Test</option>
+                  <option value="9">Lab Assessment</option>
+                  <option value="10">Open Book Test</option>
                 </select>
+              </div>
+              <div *ngIf="assessmentForm.controls['assessmentType'].touched && assessmentForm.controls['assessmentType'].invalid" class="text-danger small mt-1">
+                Assessment Type is required.
               </div>
             </div>
           
@@ -134,6 +159,9 @@
                 <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-calendar-event"></i></span>
                 <input type="date" formControlName="startDate" class="form-control border rounded-end shadow-sm" />
               </div>
+              <div *ngIf="assessmentForm.controls['startDate'].touched && assessmentForm.controls['startDate'].invalid" class="text-danger small mt-1">
+                Start Date is required.
+              </div>
             </div>
           
             <!-- End Date -->
@@ -143,6 +171,9 @@
                 <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-calendar-check"></i></span>
                 <input type="date" formControlName="endDate" class="form-control border rounded-end shadow-sm" />
               </div>
+              <div *ngIf="assessmentForm.controls['endDate'].touched && assessmentForm.controls['endDate'].invalid" class="text-danger small mt-1">
+                End Date is required.
+              </div>
             </div>
           
             <!-- Total Marks -->
@@ -150,7 +181,11 @@
               <label for="totalMarks" class="form-label fw-bold text-dark">Total Marks</label>
               <div class="input-group">
                 <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-123"></i></span>
-                <input type="number" formControlName="totalMarks" class="form-control border rounded-end shadow-sm" placeholder="Enter total marks" />
+                <input type="number" formControlName="totalMarks" class="form-control border rounded-end shadow-sm" placeholder="Enter total marks"
+                />
+              </div>
+              <div *ngIf="assessmentForm.controls['totalMarks'].touched && assessmentForm.controls['totalMarks'].invalid" class="text-danger small mt-1">
+                Total Marks are required.
               </div>
             </div>
           
@@ -159,16 +194,24 @@
               <label for="passMarks" class="form-label fw-bold text-dark">Pass Marks</label>
               <div class="input-group">
                 <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-check-circle"></i></span>
-                <input type="number" formControlName="passMarks" class="form-control border rounded-end shadow-sm" placeholder="Enter pass marks" />
+                <input type="number" formControlName="passMarks" class="form-control border rounded-end shadow-sm" placeholder="Enter pass marks"
+                />
+              </div>
+              <div *ngIf="assessmentForm.controls['passMarks'].touched && assessmentForm.controls['passMarks'].invalid" class="text-danger small mt-1">
+                Pass Marks are required.
               </div>
             </div>
-            
+          
             <!-- Assessment Link -->
             <div class="col-md-6">
               <label for="assessmentLink" class="form-label fw-bold text-dark">Assessment Link</label>
               <div class="input-group">
                 <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-link-45deg"></i></span>
-                <input type="text" formControlName="assessmentLink" class="form-control border rounded-end shadow-sm" placeholder="Enter Link" />
+                <input type="text" formControlName="assessmentLink" class="form-control border rounded-end shadow-sm" placeholder="Enter Link"
+                />
+              </div>
+              <div *ngIf="assessmentForm.controls['assessmentLink'].touched && assessmentForm.controls['assessmentLink'].invalid" class="text-danger small mt-1">
+                Assessment Link is required.
               </div>
             </div>
           
@@ -177,8 +220,8 @@
               <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
               <button type="submit" [disabled]="assessmentForm.invalid" class="btn btn-dark px-4">Submit</button>
             </div>
-            
-          </form>          
+          
+          </form>
         </div>
       </div>
     </div>

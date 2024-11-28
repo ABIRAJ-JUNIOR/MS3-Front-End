@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../../../Service/Student/student.service';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Student } from '../../../Modals/modals';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';

@@ -66,3 +66,17 @@ body {
       font-size: 0.95rem; /* Slightly smaller font size for table */
     }
   }
+  @media (max-width: 992px) and (min-width: 768px) {
+    h4, .card-header h4 {
+      font-size: 1rem; /* Smaller on tablets */
+    }
+    .form-group label {
+      font-size: 0.9rem; /* Smaller font size for labels */
+    }
+    .table th, .table td {
+      font-size: 0.9rem; /* Smaller font size for table */
+    }
+    .pagination .page-link {
+      font-size: 0.8rem; /* Smaller font size for pagination */
+    }
+  }

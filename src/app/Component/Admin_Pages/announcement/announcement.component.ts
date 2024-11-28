@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AnnouncementService } from '../../../Service/Announcement/announcement.service';
 
 @Component({
   selector: 'app-announcement',
@@ -11,7 +12,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class AnnouncementComponent {
   announcementForm!: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,Announcemenrservice:AnnouncementService) {}
   ngOnInit(): void {
     // Initialize the form with validation rules
     this.announcementForm = this.fb.group({
@@ -33,4 +34,10 @@ export class AnnouncementComponent {
   onReset(): void {
     this.announcementForm.reset();
   }
+}
+
+export interface AnnoincemenrReqest{
+  title:string;
+  expirationDate:string;
+  audienceType:Number;
 }

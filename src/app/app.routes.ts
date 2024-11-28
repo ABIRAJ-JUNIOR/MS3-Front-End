@@ -29,6 +29,7 @@ import { StudentCourseComponent } from './Component/Student_Pages/student-course
 import { StudentMycoursesComponent } from './Component/Student_Pages/student-mycourses/student-mycourses.component';
 import { StudentCompletedcoursesComponent } from './Component/Student_Pages/student-completedcourses/student-completedcourses.component';
 import { StudentResultComponent } from './Component/Student_Pages/student-result/student-result.component';
+import { StudentPaymentsComponent } from './Component/Student_Pages/student-payments/student-payments.component';
 
 export const routes: Routes = [
 
@@ -81,7 +82,8 @@ export const routes: Routes = [
             {path:'courses',component:StudentCourseComponent},
             {path:'mycourses',component:StudentMycoursesComponent},
             {path:'completed-Courses',component:StudentCompletedcoursesComponent},
-            {path:'assesment-result',component:StudentResultComponent}
+            {path:'assesment-result',component:StudentResultComponent},
+            {path:'enrollCourse-payment',component:StudentPaymentsComponent}
         ]
     },
     { path: '**', redirectTo: 'home', pathMatch: 'full' },

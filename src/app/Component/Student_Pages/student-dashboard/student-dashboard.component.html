@@ -10,7 +10,7 @@
 
         <!-- Dashboard Link -->
         <li class="sidebar-item">
-          <a [routerLink]="['/student-dashboard']"    [routerLinkActive]="['active_Link']" class="sidebar-link">
+          <a [routerLink]="['/student-dashboard']" [routerLinkActive]="['active_Link']" class="sidebar-link">
             <i class="fa-solid fa-house pe-2"></i>
             Dashboard
           </a>
@@ -54,21 +54,34 @@
               <a [routerLink]="['/student-dashboard/assesment']" class="sidebar-link">Your asessesments</a>
             </li>
             <li class="sidebar-item">
-              <a  [routerLink]="['/student-dashboard/assesment-result']" class="sidebar-link">Assesment Results</a>
+              <a [routerLink]="['/student-dashboard/assesment-result']" class="sidebar-link">Assesment Results</a>
             </li>
-           
+
           </ul>
         </li>
 
-       
 
-         <!-- Calendar -->
-         <li class="sidebar-item">
-          <a href="#" class="sidebar-link">
+
+        <!-- Payment -->
+         
+        <li class="sidebar-item">
+          <a href="#" class="sidebar-link collapsed" data-bs-target="#enrollpay" data-bs-toggle="collapse"
+            aria-expanded="false">
             <i class="bi bi-calendar-date-fill pe-2"></i>
-            Calendar
+            Payment & History
           </a>
+          <ul id="enrollpay" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+            <li class="sidebar-item">
+              <a [routerLink]="['/student-dashboard/enrollCourse-payment']" class="sidebar-link">Payments</a>
+            </li>
+            <li class="sidebar-item">
+              <a [routerLink]="['/student-dashboard/assesment-result']" class="sidebar-link">Payment History</a>
+            </li>
+
+          </ul>
         </li>
+
+     
 
         <!-- Notifications Section -->
         <li class="sidebar-item">
@@ -128,7 +141,8 @@
         <div class="d-flex align-items-center mx-5">
           <!-- Button trigger modal -->
           <!-- Notification Button -->
-          <button class="btn btn-sm btn-outline-dark mx-2 position-relative OverideBtn" type="button"data-bs-toggle="modal" data-bs-target="#topLeftModal">
+          <button class="btn btn-sm btn-outline-dark mx-2 position-relative OverideBtn" type="button"
+            data-bs-toggle="modal" data-bs-target="#topLeftModal">
             <i class="bi bi-bell-fill"></i>
             <span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger">
               0
@@ -150,7 +164,7 @@
     </nav>
 
     <!-- Main Content Area for Student Dashboard -->
-    <main class="content px-3 py-2 "  style="background-color: #eee;">
+    <main class="content px-3 py-2 " style="background-color: #eee;">
       <router-outlet></router-outlet>
     </main>
 
@@ -196,7 +210,7 @@
 </div>
 
 <!-- Modal Structure -->
-<div class="modal fade" id="topLeftModal" tabindex="-1" aria-labelledby="topLeftModalLabel" aria-hidden="true" >
+<div class="modal fade" id="topLeftModal" tabindex="-1" aria-labelledby="topLeftModalLabel" aria-hidden="true">
   <div class="modal-dialog customModal">
     <div class="modal-content">
       <div class="modal-header">

@@ -110,8 +110,8 @@ export class PaymentGateComponent {
         paymentRequest:{
         paymentType: Number(this.PaymentPlans),
         paymentMethod: 1,
-        amountPaid: Number(this.DeivdeInstallment),
-        installmentNumber: 1
+        amountPaid:Number(this.recievedModalItems[0].courseFee),
+        installmentNumber: 2
         }
       }
     } else if (this.PaymentPlans == 2) {
@@ -120,9 +120,9 @@ export class PaymentGateComponent {
         courseScheduleId: this.recievedModalItems[0].id,
         paymentRequest:{
           paymentType: Number(this.PaymentPlans),
-          paymentMethod: 2,
-          amountPaid: Number(this.recievedModalItems[0].courseFee),
-          installmentNumber: 0
+          paymentMethod: 1,
+          amountPaid:  Number(this.DeivdeInstallment),
+          installmentNumber: 1
         }
        
       }

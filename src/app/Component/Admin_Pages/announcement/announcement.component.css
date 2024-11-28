@@ -1,0 +1,14 @@
+body {
+    background-color: #f0f2f5;
+    color: #333;
+  }
+  .card {
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .card-header {
+    background-color: #343a40;
+    color: #ffffff;
+  }

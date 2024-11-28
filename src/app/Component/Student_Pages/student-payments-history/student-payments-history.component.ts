@@ -20,6 +20,9 @@ export class StudentPaymentsHistoryComponent {
   StudentTokenDetails: any;
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
+  payCheck: string = "Paid"
+
+
   ngOnInit(): void {
 
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();

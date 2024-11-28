@@ -13,7 +13,7 @@ import { PaymentapiServiceService } from '../../../Service/Paymentapi/paymentapi
   styleUrl: './otp-authentication.component.css'
 })
 export class OtpAuthenticationComponent implements OnInit {
-  constructor(private router:Router,private paymentDataService: PaymentDataService, private toastr: ToastrService, private PaymentApiServices: PaymentapiServiceService) {
+  constructor(private router: Router, private paymentDataService: PaymentDataService, private toastr: ToastrService, private PaymentApiServices: PaymentapiServiceService) {
 
   }
   otp: string = "";
@@ -35,17 +35,31 @@ export class OtpAuthenticationComponent implements OnInit {
       this.toastr.clear();
       let data: any = JSON.parse(this.paymentDataService.getPendingPayment());
       console.log(data)
+      console.log(data.installmentNumber)
 
-      this.PaymentApiServices.AddEnrollment(data).subscribe(
-        (d: any) => {
-          this.toastr.success('Your Payment is successful');
-          this.paymentDataService.ClearAllPAymentData()
-          this.router.navigate(['/student-dashboard'])
-        },
-        (error) => {
-          this.toastr.error('There was an error processing your payment. Please try again later.');
-        }
-      )
+      if (data.installmentNumber <= 1) {
+        this.PaymentApiServices.AddEnrollment(data).subscribe(
+          (d: any) => {
+            this.toastr.success('Your Payment is successful');
+            this.paymentDataService.ClearAllPAymentData()
+            this.router.navigate(['/student-dashboard'])
+          },
+          (error) => {
+            this.toastr.error('There was an error processing your payment. Please try again later.');
+          }
+        )
+      } else {
+        this.PaymentApiServices.addPayment(data).subscribe(
+          (d: any) => {
+            this.toastr.success('Your Payment is successful');
+            this.paymentDataService.ClearAllPAymentData()
+            this.router.navigate(['/student-dashboard'])
+          },
+          (error) => {
+            this.toastr.error('There was an error processing your payment. Please try again later.');
+          }
+        )
+      }
 
     } else {
       this.toastr.clear();

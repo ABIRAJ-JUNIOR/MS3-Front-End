@@ -21,7 +21,13 @@ export class StudentPaymentsComponent implements OnInit {
   ) {
   }
 
+
+  payCheck: string = "InProcess"
+
   Enrollments: any;
+
+  NewEnrollment: any[] = [];
+  NewEnrollmentLength: number = 0
   StudentTokenDetails: any;
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
@@ -31,6 +37,24 @@ export class StudentPaymentsComponent implements OnInit {
 
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
       this.Enrollments = student.enrollments
+
+
+
+      this.Enrollments.forEach((element: any) => {
+        let amount: number = 0
+        element.paymentResponse.forEach((data: any) => {
+          amount += Number(data.amountPaid)
+        })
+        let payment = {
+          ...element,
+          paidTotal: Number(amount)
+        }
+        this.NewEnrollment.push(payment)
+        console.log(this.NewEnrollment)
+      });
+
+
+
       console.log(this.Enrollments)
     }
       ,
@@ -56,21 +80,26 @@ export class StudentPaymentsComponent implements OnInit {
 
   InstallmentPayment: any;
 
- 
+
   payClick(data: any) {
-   
+
     this.InstallmentPayment = data;
     console.log()
   }
 
   ConfirmationPayment() {
-    let PurchaseDetails={
+    let PurchaseDetails = {
       ...this.InstallmentPayment,
-      "PaymentCheck":false
+      "PaymentCheck": false
     }
-    this.PaymentService.PurchaseDetailsSetLocal(PurchaseDetails);
+    console.log(this.InstallmentPayment)
+    if (this.InstallmentPayment.paymentStatus == "InProcess") {
+      this.PaymentService.PurchaseDetailsSetLocal(PurchaseDetails);
+
+    } else {
+    }
   }
-  cancelPayment(){
-    this.InstallmentPayment=""
+  cancelPayment() {
+    this.InstallmentPayment = ""
   }
 }

@@ -26,7 +26,7 @@
                             <label for="paymentPlans" class="form-label  text-dark">Select Payment Plan</label>
                             <div >
                                 <select class="form-select bg-light border-2 border-primary rounded-3 shadow-sm"
-                                    [(ngModel)]="PaymentPlans">
+                                    [(ngModel)]="PaymentPlans" (change)="loadItems()">
                                     <option value="2">Installment Plan - Pay in manageable monthly installments
                                     </option>
                                     <option value="1">Full Payment - One-time payment with additional benefits.</option>
@@ -177,9 +177,9 @@
                             <!-- Final Total Section -->
                             <div class="p-2 d-flex pt-3 " *ngIf="recievedModalItems[0].PaymentCheck">
                                 <div class="col-8"><b>Total</b></div>
-                                <div class="ms-auto"><b class="text-success" *ngIf="PaymentPlans == 1">Rs
-                                        {{DeivdeInstallment}}</b></div>
                                 <div class="ms-auto"><b class="text-success" *ngIf="PaymentPlans == 2">Rs
+                                        {{DeivdeInstallment}}</b></div>
+                                <div class="ms-auto"><b class="text-success" *ngIf="PaymentPlans == 1">Rs
                                         {{recievedModalItems[0].courseFee}}</b></div>
                             </div>
                         </div>

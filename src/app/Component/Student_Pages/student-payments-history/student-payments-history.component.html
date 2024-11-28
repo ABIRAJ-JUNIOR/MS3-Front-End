@@ -23,7 +23,7 @@
 
             <ng-container *ngFor="let item of Enrollments" >
                 <!-- Installment Row -->
-                <tr *ngIf="item.paymentResponse[0].installmentNumber == 1">
+                <tr *ngIf="item.paymentStatus == payCheck || item.paymentResponse.length >= 3">
                     <td>Installment #{{item.paymentResponse[0].installmentNumber}}</td>
                     <td>{{item.courseScheduleResponse.courseResponse.courseName}}</td>
                     <td>{{item.paymentResponse[0].amountPaid}}</td>
@@ -40,7 +40,7 @@
                 </tr>
 
                 <!-- Progress Bar Row -->
-                <tr  *ngIf="item.paymentResponse[0].installmentNumber == 1">
+                <tr  *ngIf="item.paymentStatus == payCheck || item.paymentResponse.length >= 3">
                     <td colspan="8">
                         <div class="progress mt-2">
                             <div class="progress-bar progress-bar-striped progress-bar-animated bg-success w-100"  role="progressbar"

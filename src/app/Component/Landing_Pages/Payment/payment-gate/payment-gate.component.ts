@@ -67,13 +67,12 @@ export class PaymentGateComponent {
 
 
 
-  PaymentPlans: number = 0;
+  PaymentPlans: number = 1;
 
   loadItems(): void {
     this.recievedModalItems.push(JSON.parse(this.PaymentDataService.PurchaseDetailGetLocal()))
     console.log(this.recievedModalItems)
     if (this.recievedModalItems[0].PaymentCheck) {
-      this.PaymentPlans = 1
       this.courseMaterials = this.recievedModalItems[0].courseName
       if (this.PaymentPlans == 1) {
         this.DeivdeInstallment = this.recievedModalItems[0].courseFee
@@ -82,6 +81,7 @@ export class PaymentGateComponent {
         let TembFee = this.recievedModalItems[0].courseFee / 3
 
         this.DeivdeInstallment = Math.round(TembFee * 100) / 100
+
       }
     } else {
 
@@ -191,19 +191,20 @@ export class PaymentGateComponent {
 
     } else {
 
+      let PayLength = this.recievedModalItems[0].paymentResponse
       let payData = this.recievedModalItems[0]
       Payment = {
         paymentType: Number(this.PaymentPlans),
         paymentMethod: 1,
         amountPaid: Number(this.DeivdeInstallment),
-        installmentNumber: payData.length + 1,
+        installmentNumber: PayLength.length + 1,
         enrollmentId: payData.id
       }
 
     }
 
-
     console.log(Payment)
+    this.PaymentDataService.adddPendingpayment(Payment)
     this.router.navigate(['paymen-auth/otp-auth'])
   }
 

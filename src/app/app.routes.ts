@@ -24,6 +24,11 @@ import { OtpAuthenticationComponent } from './Component/Landing_Pages/otp-authen
 import { PaymentAuthenticationComponent } from './Component/Landing_Pages/payment-authentication/payment-authentication.component';
 import { StudentProfileComponent } from './Component/Student_Pages/student-profile/student-profile.component';
 import { StudentSettingComponent } from './Component/Student_Pages/student-setting/student-setting.component';
+import { StudentAssesmentComponent } from './Component/Student_Pages/student-assesment/student-assesment.component';
+import { StudentCourseComponent } from './Component/Student_Pages/student-course/student-course.component';
+import { StudentMycoursesComponent } from './Component/Student_Pages/student-mycourses/student-mycourses.component';
+import { StudentCompletedcoursesComponent } from './Component/Student_Pages/student-completedcourses/student-completedcourses.component';
+import { StudentResultComponent } from './Component/Student_Pages/student-result/student-result.component';
 
 export const routes: Routes = [
 
@@ -46,7 +51,7 @@ export const routes: Routes = [
                 component:OtpAuthenticationComponent
             } 
         ],
-        // canActivate : [payAuthGuard]
+        canActivate : [payAuthGuard]
     },
    
 
@@ -71,7 +76,12 @@ export const routes: Routes = [
         path: 'student-dashboard', component: StudentDashboardComponent, children: [
             { path: '', component: DashContentComponent },
             { path: 'profile', component:StudentProfileComponent },
-            {path:'setting',component:StudentSettingComponent}
+            {path:'setting',component:StudentSettingComponent},
+            {path:'assesment',component:StudentAssesmentComponent},
+            {path:'courses',component:StudentCourseComponent},
+            {path:'mycourses',component:StudentMycoursesComponent},
+            {path:'completed-Courses',component:StudentCompletedcoursesComponent},
+            {path:'assesment-result',component:StudentResultComponent}
         ]
     },
     { path: '**', redirectTo: 'home', pathMatch: 'full' },

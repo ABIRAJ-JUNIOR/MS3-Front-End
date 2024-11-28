@@ -1,6 +1,6 @@
 <div class="wrapper">
   <aside id="sidebar" [ngClass]="{'collapsed': sidebarCollapsed}" class="text-light js-sidebar shadow-lg">
-    <div class="h-100" style="position: fixed; width: 400px;">
+    <div class="h-100" style="position: fixed; width: 250px;">
       <div class="sidebar-logo">
         <a href="#">Way Makers</a>
       </div>
@@ -33,29 +33,34 @@
           </a>
           <ul id="courses" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
             <li class="sidebar-item">
-              <a href="#" class="sidebar-link">Enrolled Courses</a>
+              <a [routerLink]="['/student-dashboard/mycourses']" class="sidebar-link">Enrolled Courses</a>
             </li>
             <li class="sidebar-item">
-              <a href="#" class="sidebar-link">Completed Courses</a>
+              <a [routerLink]="['/student-dashboard/completed-Courses']" class="sidebar-link">Completed Courses</a>
             </li>
           </ul>
         </li>
 
         <!-- Grades Section -->
+
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link">
-            <i class="fa-solid fa-graduation-cap pe-2"></i>
-            Grades
+          <a href="#" class="sidebar-link collapsed" data-bs-target="#assesment" data-bs-toggle="collapse"
+            aria-expanded="false">
+            <i class="bi bi-person-workspace pe-2"></i>
+            Assesments & Results
           </a>
+          <ul id="assesment" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+            <li class="sidebar-item">
+              <a [routerLink]="['/student-dashboard/assesment']" class="sidebar-link">Your asessesments</a>
+            </li>
+            <li class="sidebar-item">
+              <a  [routerLink]="['/student-dashboard/assesment-result']" class="sidebar-link">Assesment Results</a>
+            </li>
+           
+          </ul>
         </li>
 
-        <!-- Asignments -->
-        <li class="sidebar-item">
-          <a href="#" class="sidebar-link">
-            <i class="bi bi-person-workspace pe-2"></i>
-            Asignments
-          </a>
-        </li>
+       
 
          <!-- Calendar -->
          <li class="sidebar-item">
@@ -67,7 +72,7 @@
 
         <!-- Notifications Section -->
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link">
+          <a [routerLink]="['/student-dashboard/courses']" class="sidebar-link">
             <i class="fa-solid fa-book-open pe-2"></i>
             Courses
           </a>
@@ -105,7 +110,7 @@
   <!-- Main Content Area -->
   <div class="main">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand px-3 border-bottom shadow-lg">
+    <nav class="navbar navbar-expand px-3 border-bottom bg-light">
       <div class="navbar-collapse navbar">
         <div class="d-flex align-items-center">
           <button class="btn" id="sidebar-toggle" type="button" (click)="toggleSidebar()">

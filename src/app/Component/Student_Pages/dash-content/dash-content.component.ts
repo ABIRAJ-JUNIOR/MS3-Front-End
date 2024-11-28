@@ -1,16 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js';
+import { AssesmentService } from '../../../Service/assesment.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dash-content',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './dash-content.component.html',
   styleUrl: './dash-content.component.css'
 })
-export class DashContentComponent {
+export class DashContentComponent implements OnInit {
 
-  
+  constructor(private assementService: AssesmentService) {
+
+  }
+  paginatedAssesment: any[] = [];
+
+  ngOnInit() {
+    this.paginateAssesment()
+  }
+
+  paginateAssesment() {
+    this.assementService.getAllAssesment().subscribe((d: any) => {
+      this.paginatedAssesment = d
+      console.log(this.paginatedAssesment)
+    }, (error) => {
+      console.log(error)
+    }
+    )
+  }
+
   ngAfterViewInit() {
     this.createEnrollmentChart();
     this.createPaymentChart();
@@ -75,6 +95,6 @@ export class DashContentComponent {
       } as ChartConfiguration['options']
     });
   }
-  
+
 
 }

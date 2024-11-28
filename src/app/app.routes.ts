@@ -53,9 +53,6 @@ export const routes: Routes = [
         ],
         canActivate : [payAuthGuard]
     },
-   
-
-
     {
         path: 'admin-dashboard', component: AdminDashboardComponent, children: [
             { path: '', redirectTo: 'home' ,pathMatch:'full' },

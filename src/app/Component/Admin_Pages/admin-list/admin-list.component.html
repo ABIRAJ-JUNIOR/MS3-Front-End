@@ -152,7 +152,7 @@
               <label for="nic" class="form-label fw-bold text-dark">NIC</label>
               <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-card-text"></i></span>
-                <input type="text" formControlName="nic" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter NIC" required/>
+                <input type="text" formControlName="nic" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter NIC" required />
               </div>
               <div *ngIf="profileForm.get('nic')?.touched && profileForm.get('nic')?.invalid" class="text-danger small">
                 <span *ngIf="profileForm.get('nic')?.hasError('required')">NIC is required.</span>

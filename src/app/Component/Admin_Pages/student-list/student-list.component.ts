@@ -154,7 +154,6 @@ export class StudentListComponent implements OnInit {
     }
 
     form.gender = Number(form.gender);
-    console.log(form)
     return form;
   }
 
@@ -179,7 +178,6 @@ export class StudentListComponent implements OnInit {
 
   private updateStudent(formData: any): void {
     formData.dateOfBirth = new Date(formData.dateOfBirth);
-    console.log(formData)
     this.studentService.updateFullDetails(this.studentId, formData).subscribe({
       next: () => {
         this.toastr.success('Update Successful', '', {

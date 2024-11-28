@@ -11,7 +11,26 @@ import { Component } from "@angular/core";
   styleUrl: './test.component.css'
 })
 export class TestComponent {
+  textToType: string = "Your Sign-In Can Change the World";
+  displayedText: string = ""; 
+  typingSpeed: number = 100; 
 
+  ngOnInit(): void {
+    this.startTypingEffect();
+  }
+
+  startTypingEffect(): void {
+    let index = 0;
+
+    const typingInterval = setInterval(() => {
+      if (index < this.textToType.length) {
+        this.displayedText += this.textToType[index];
+        index++;
+      } else {
+        clearInterval(typingInterval);
+      }
+    }, this.typingSpeed);
+  }
 }
   
 

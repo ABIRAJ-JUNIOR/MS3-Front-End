@@ -200,7 +200,7 @@ export class AdminListComponent implements OnInit{
     if (!isEditMode){
       this.profileForm.get('nic')?.enable();
       this.profileForm.get('email')?.enable();
-      // this.resetForm();+
+      this.resetForm();
     }
   }
 
@@ -248,7 +248,9 @@ export class AdminListComponent implements OnInit{
   }
 
   private resetForm(): void {
-    this.profileForm.reset();
+    this.profileForm.reset({
+      role:''
+    });
     this.resetImage();
     this.isUpdate = false;
   }

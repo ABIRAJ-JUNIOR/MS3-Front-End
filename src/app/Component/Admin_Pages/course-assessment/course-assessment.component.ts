@@ -43,7 +43,7 @@ export class CourseAssessmentComponent {
       endDate: ['', Validators.required],
       totalMarks: ['', Validators.required],
       passMarks: ['', Validators.required],
-      assessmentLink: ['', Validators.required],
+      assessmentLink: [''],
       assessmentStatus:['']
     });
   }
@@ -92,7 +92,7 @@ export class CourseAssessmentComponent {
         totalMarks: formData.totalMarks,
         passMarks: formData.passMarks,
         assessmentLink:formData.assessmentLink,
-        assessmentStatus:formData.assessmentStatus
+        assessmentStatus:Number(formData.assessmentStatus)
       };
 
       if(this.isUpdate){
@@ -133,6 +133,8 @@ export class CourseAssessmentComponent {
   }
 
   private updateAssessment(assessment:AssessmentRequest):void{
+    assessment.startDate = new Date(assessment.startDate)
+    assessment.endDate = new Date(assessment.endDate)
     this.courseService.updateAssessment(this.assessmentId,assessment).subscribe({
       next: (response: any) => {
         this.toastr.success('Update successfull', '', {
@@ -185,8 +187,8 @@ export interface AssessmentRequest{
   courseId:string;
   assessmentTitle:string
   assessmentType:number;
-  startDate:string;
-  endDate:string;
+  startDate:Date;
+  endDate:Date;
   totalMarks:number;
   passMarks:number;
   assessmentLink:string;

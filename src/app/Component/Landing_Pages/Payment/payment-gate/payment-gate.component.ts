@@ -58,12 +58,62 @@ export class PaymentGateComponent {
   }
 
   DeivdeInstallment: number = 0;
+
+  SecondInstallment: any = ""
+  ThirdInstallment: any = ""
+
+  installmentTotal: number = 0
+  courseMaterials: string = ""
+
+
+
+  PaymentPlans: number = 0;
+
   loadItems(): void {
     this.recievedModalItems.push(JSON.parse(this.PaymentDataService.PurchaseDetailGetLocal()))
     console.log(this.recievedModalItems)
-    let TembFee = this.recievedModalItems[0].courseFee / 3
+    if (this.recievedModalItems[0].PaymentCheck) {
+      this.PaymentPlans = 1
+      this.courseMaterials = this.recievedModalItems[0].courseName
+      if (this.PaymentPlans == 1) {
+        this.DeivdeInstallment = this.recievedModalItems[0].courseFee
 
-    this.DeivdeInstallment = Math.round(TembFee * 100) / 100
+      } else if (this.PaymentPlans == 2) {
+        let TembFee = this.recievedModalItems[0].courseFee / 3
+
+        this.DeivdeInstallment = Math.round(TembFee * 100) / 100
+      }
+    } else {
+
+      this.PaymentPlans = 2;
+
+      this.courseMaterials = this.recievedModalItems[0].courseScheduleResponse.courseResponse.courseName
+
+      let array = this.recievedModalItems[0].paymentResponse
+      let arrayLength = this.recievedModalItems[0].paymentResponse.length
+
+
+      for (let i: number = 0; i < arrayLength; i++) {
+        const element = array[i];
+
+        this.installmentTotal += element.amountPaid
+      }
+      this.installmentTotal = this.recievedModalItems[0].courseScheduleResponse.courseResponse.courseFee - this.installmentTotal
+
+
+
+      let TembFee = this.recievedModalItems[0].courseScheduleResponse.courseResponse.courseFee / 3
+      this.DeivdeInstallment = Math.round(TembFee * 100) / 100
+
+      if (arrayLength == 1) {
+        this.SecondInstallment = Math.round(TembFee * 100) / 100
+        this.ThirdInstallment = Math.round(TembFee * 100) / 100
+      } else if (arrayLength == 2) {
+        this.SecondInstallment = "Completed"
+        this.ThirdInstallment = Math.round(TembFee * 100) / 100
+      }
+
+    }
 
   }
 
@@ -87,8 +137,6 @@ export class PaymentGateComponent {
 
 
 
-  PaymentPlans: number = 1;
-
 
   CancelPayment() {
     this.router.navigate(['/course']);
@@ -101,35 +149,61 @@ export class PaymentGateComponent {
     this.PaymentDataService.generateRandomNumber();
     const token = localStorage.getItem("token");
     const decode: any = token != null ? jwtDecode(token) : ""
-    let Payment:any;
+    let Payment: any;
+    if (this.recievedModalItems[0].PaymentCheck) {
+      if (this.PaymentPlans == 1) {
+        Payment = {
+          studentId: decode.Id,
+          courseScheduleId: this.recievedModalItems[0].id,
+          paymentRequest: {
+            paymentType: Number(this.PaymentPlans),
+            paymentMethod: 1,
+            amountPaid: Number(this.recievedModalItems[0].courseFee),
+            installmentNumber: 0
+          }
+        }
+      } else if (this.PaymentPlans == 2) {
+        Payment = {
+          studentId: decode.Id,
+          courseScheduleId: this.recievedModalItems[0].id,
+          paymentRequest: {
+            paymentType: Number(this.PaymentPlans),
+            paymentMethod: 1,
+            amountPaid: Number(this.DeivdeInstallment),
+            installmentNumber: 1
+          }
 
-    if (this.PaymentPlans == 1) {
+        }
+      } else {
+        Payment = {
+          studentId: decode.Id,
+          courseScheduleId: this.recievedModalItems[0].id,
+          paymentRequest: {
+            paymentType: Number(this.PaymentPlans),
+            paymentMethod: 1,
+            amountPaid: Number(this.DeivdeInstallment),
+            installmentNumber: 2
+          }
+
+        }
+
+      }
+
+    } else {
+
+      let payData = this.recievedModalItems[0]
       Payment = {
-        studentId: decode.Id,
-        courseScheduleId: this.recievedModalItems[0].id,
-        paymentRequest:{
         paymentType: Number(this.PaymentPlans),
         paymentMethod: 1,
-        amountPaid:Number(this.recievedModalItems[0].courseFee),
-        installmentNumber: 2
-        }
+        amountPaid: Number(this.DeivdeInstallment),
+        installmentNumber: payData.length + 1,
+        enrollmentId: payData.id
       }
-    } else if (this.PaymentPlans == 2) {
-      Payment = {
-        studentId: decode.Id,
-        courseScheduleId: this.recievedModalItems[0].id,
-        paymentRequest:{
-          paymentType: Number(this.PaymentPlans),
-          paymentMethod: 1,
-          amountPaid:  Number(this.DeivdeInstallment),
-          installmentNumber: 1
-        }
-       
-      }
+
     }
 
+
     console.log(Payment)
-    this.PaymentDataService.adddPendingpayment(Payment)
     this.router.navigate(['paymen-auth/otp-auth'])
   }
 

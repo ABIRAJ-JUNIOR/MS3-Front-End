@@ -4,6 +4,7 @@ import { Student } from '../../../Modals/modals';
 import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
 import { StudentService } from '../../../Service/Student/student.service';
 import { CommonModule } from '@angular/common';
+import { PaymentDataService } from '../../../Service/Payment/payment-data.service';
 
 @Component({
   selector: 'app-student-payments',
@@ -13,7 +14,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './student-payments.component.css'
 })
 export class StudentPaymentsComponent implements OnInit {
-  constructor(private StudentDashDataService: StudentDashDataServiceService, private StudentApiService: StudentService, private router: Router) {
+  constructor(private StudentDashDataService: StudentDashDataServiceService,
+    private StudentApiService: StudentService,
+    private router: Router,
+    private PaymentService: PaymentDataService
+  ) {
   }
 
   Enrollments: any;
@@ -41,11 +46,31 @@ export class StudentPaymentsComponent implements OnInit {
 
   calculateProgressColor(progress: number): string {
     if (progress < 40) {
-      return 'bg-danger'; 
-    } else if (progress < 60 ) {
-      return 'bg-warning';  
+      return 'bg-danger';
+    } else if (progress < 60) {
+      return 'bg-warning';
     } else {
-      return 'bg-success';  
+      return 'bg-success';
     }
+  }
+
+  InstallmentPayment: any;
+
+ 
+  payClick(data: any) {
+   
+    this.InstallmentPayment = data;
+    console.log()
+  }
+
+  ConfirmationPayment() {
+    let PurchaseDetails={
+      ...this.InstallmentPayment,
+      "PaymentCheck":false
+    }
+    this.PaymentService.PurchaseDetailsSetLocal(PurchaseDetails);
+  }
+  cancelPayment(){
+    this.InstallmentPayment=""
   }
 }

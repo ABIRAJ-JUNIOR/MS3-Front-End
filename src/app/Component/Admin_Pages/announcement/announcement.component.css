@@ -54,3 +54,15 @@ body {
   .pagination .page-link {
     font-size: 0.9rem; /* Default font size for pagination */
   }
+
+  @media (max-width: 1200px) {
+    h4, .card-header h4 {
+      font-size: 1.125rem; /* Slightly smaller on medium screens */
+    }
+    .form-group label {
+      font-size: 0.95rem; /* Slightly smaller font size for labels */
+    }
+    .table th, .table td {
+      font-size: 0.95rem; /* Slightly smaller font size for table */
+    }
+  }

@@ -51,7 +51,7 @@ export class StudentSettingComponent implements OnInit {
         this.toastr.error("Failed to load student details. Please try again later.", "Error", {
           positionClass: "toast-top-right", 
           progressBar: true,
-          timeOut: 3000,
+          timeOut: 4000,
           closeButton: true
        
         });
@@ -76,7 +76,7 @@ export class StudentSettingComponent implements OnInit {
       (data: any) => {
         this.toastr.success("User Update Successfull", "", {
           progressBar: true,
-          timeOut: 3000,
+          timeOut: 4000,
           positionClass: 'toast-bottom-right' 
         })
         this.studentForm.disable()
@@ -85,7 +85,7 @@ export class StudentSettingComponent implements OnInit {
       (error) => {
         this.toastr.error("User Update Failed try again later", "", {
           progressBar: true,
-          timeOut: 3000,
+          timeOut: 4000,
           positionClass: 'toast-bottom-right'
         })
 
@@ -123,14 +123,14 @@ export class StudentSettingComponent implements OnInit {
       this.studentForm.enable();
       this.toastr.success("Profile Edit Mode Activated", "", {
         progressBar: true,
-        timeOut: 3000,
+        timeOut: 4000,
         positionClass: 'toast-bottom-right'
       })
     } else {
       this.studentForm.disable();
       this.toastr.success("Your profile is now in view-only mode.", "", {
         progressBar: true,
-        timeOut: 3000,
+        timeOut: 4000,
         positionClass: 'toast-bottom-right'
       })
     }

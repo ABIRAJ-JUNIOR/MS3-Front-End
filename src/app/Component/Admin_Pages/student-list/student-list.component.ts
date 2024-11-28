@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../../../Service/Student/student.service';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Student } from '../../../Modals/modals';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -53,7 +53,6 @@ export class StudentListComponent implements OnInit {
     this.loadStudents();
   }
 
-  // Initialize the profile form with validation
   private initializeForm(): void {
     this.profileForm = this.fb.group({
       nic: ['',Validators.required,],
@@ -82,7 +81,6 @@ export class StudentListComponent implements OnInit {
     });
   }
 
-  // Load students with pagination
   loadStudents(): void {
     this.studentService.pagination(this.currentPage, this.pageSize).subscribe({
       next: (response: any) => {
@@ -103,7 +101,6 @@ export class StudentListComponent implements OnInit {
     }
   }
 
-  // Navigate to the student report page  
   GoToReport(id:string){
     this.router.navigate(['/admin-dashboard/student-report' , id])
   }
@@ -112,8 +109,6 @@ export class StudentListComponent implements OnInit {
     return this.profileForm.controls;
   }
 
-  
-  // Handle file selection and preview
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
     if (file) {
@@ -122,7 +117,6 @@ export class StudentListComponent implements OnInit {
     }
   }
 
-  // Preview the selected image
   private previewImage(file: File): void {
     const reader = new FileReader();
     reader.onload = (e: any) => {
@@ -131,8 +125,6 @@ export class StudentListComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-
-  // Submit the form for add or update
   onSubmit(): void {
     const formData = this.prepareFormData();
     if (!this.isUpdate) {
@@ -142,7 +134,6 @@ export class StudentListComponent implements OnInit {
     }
   }
 
-  // Prepare form data with null checks
   private prepareFormData(): any {
     const form = this.profileForm.value;
 
@@ -167,7 +158,6 @@ export class StudentListComponent implements OnInit {
     return form;
   }
 
-  // Add a new student
   private addStudent(formData: any): void {
     this.studentService.addStudent(formData).subscribe({
       next: (response: any) => {
@@ -175,7 +165,7 @@ export class StudentListComponent implements OnInit {
         this.toastr.success('Registration Successful', '', {
           positionClass: 'toast-top-right',
           progressBar: true,
-          timeOut: 3000,
+          timeOut: 4000,
         });
       },complete:()=>{
         this.uploadImage(this.studentId);
@@ -187,7 +177,6 @@ export class StudentListComponent implements OnInit {
     });
   }
 
-  // Update an existing student
   private updateStudent(formData: any): void {
     formData.dateOfBirth = new Date(formData.dateOfBirth);
     console.log(formData)
@@ -207,17 +196,18 @@ export class StudentListComponent implements OnInit {
     });
   }
 
-  // Upload profile image
   private uploadImage(studentId: string): void {
     if (this.profileImage) {
       const formData = new FormData();
       formData.append('image', this.profileImage);
-
       this.studentService.addImage(studentId, formData).subscribe({
-        next: (response:any) => {
-        },
-        complete:()=>{
+        next: () => {
           this.loadStudents()
+        },
+        error:(error:any) =>{
+          this.toastr.error('Image upload failed', '', {
+            positionClass: 'toast-top-right',
+          });
         }
       });
     }else{
@@ -225,7 +215,6 @@ export class StudentListComponent implements OnInit {
     }
   }
 
-  // Reset form and image data
   private resetForm(): void {
     this.profileForm.reset();
     this.profileImage = null;
@@ -239,7 +228,6 @@ export class StudentListComponent implements OnInit {
     this.profileForm.get('email')?.enable();
   }
 
-  // Patch data to the form for editing
   patchData(student: Student): void {
     this.profileImageUrl = student.imageUrl ?? '';
     this.profileForm.patchValue({
@@ -249,6 +237,7 @@ export class StudentListComponent implements OnInit {
       dateOfBirth: new Date(student.dateOfBirth).toLocaleString(),
       gender:student.gender === "Male" ? "1": student.gender === "Female" ? "2": "3",
       phone:student.phone,
+      email:student.email,
       address:{
         addressLine1:student.address != null ? student.address.addressLine1 : null,
         addressLine2:student.address != null ? student.address.addressLine2 : null,
@@ -263,39 +252,38 @@ export class StudentListComponent implements OnInit {
     this.profileForm.get('email')?.disable();
   }
 
-  // Open preview modal
   openPreviewModal(template: any, image: string): void {
     this.selectedImage = image;
     this.modalRef = this.modalService.show(template);
   }
 
-  // Open confirmation modal for delete
   openDeleteModal(template: any, studentId: string): void {
     this.modalRef = this.modalService.show(template);
     this.deleteStudentId = studentId;
   }
 
-  // Delete student by ID
   deleteStudent(): void {
     this.studentService.deleteStudent(this.deleteStudentId).subscribe({
       next: () => {
         this.toastr.success('Delete Successful', '', {
           positionClass: 'toast-top-right',
           progressBar: true,
-          timeOut: 3000,
+          timeOut: 4000,
         });
         this.loadStudents();
       },
+      error:(error:any)=>{
+        this.handleError(error);
+      }
     });
     this.modalRef?.hide();
   }
 
-  // Handle errors gracefully
   private handleError(error: any): void {
     this.toastr.warning(error.error, '', {
       positionClass: 'toast-top-right',
       progressBar: true,
-      timeOut: 3000,
+      timeOut: 4000,
     });
   }
 }

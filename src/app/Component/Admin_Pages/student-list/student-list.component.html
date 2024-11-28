@@ -46,10 +46,10 @@
                   <a class="text-primary me-3 pointer" aria-label="Report Student" (click)="GoToReport(student.id)">
                     <i class="bi bi-file-earmark-text"></i>
                   </a>
-                  <a class="text-primary me-3" aria-label="Edit Student" (click)=" patchData(student)" data-bs-toggle="modal" data-bs-target="#userForm" >
+                  <a class="text-primary me-3 pointer" aria-label="Edit Student" (click)=" patchData(student)" data-bs-toggle="modal" data-bs-target="#userForm" >
                     <i class="bi bi-pencil-square"></i>
                   </a>
-                  <a  class="text-danger" aria-label="Delete Student" (click)="openDeleteModal(deleteStudentModal , student.id)">
+                  <a  class="text-danger pointer" aria-label="Delete Student" (click)="openDeleteModal(deleteStudentModal , student.id)">
                     <i class="bi bi-trash3-fill"></i>
                   </a>
                 </td>
@@ -113,11 +113,9 @@
 
 
 <!-- Model -->
-
 <div class="modal fade" id="userForm" tabindex="-1" aria-labelledby="userFormLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content bg-light text-dark rounded-4 border-0 shadow-lg">
-
          <!-- Modal Header -->
         <div class="modal-header border-0" style="background-color: #2C2F3A; color: #E5E5E5; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);">
           <h4 class="modal-title fw-bold" id="userFormLabel">{{isUpdate ? 'Update Student Details' : 'Add Student Details'}}</h4>
@@ -125,207 +123,204 @@
         </div>
         <div class="modal-body">
           <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="row g-4">
-          <!-- Profile Picture Section -->
-          <div class="col-12 col-md-3 d-flex flex-column align-items-center text-center">
-            <div class="position-relative">
-              <img
-                [src]="profileImageUrl || 'https://via.placeholder.com/150'"
-                alt="Profile Picture"
-                class="rounded border border-white shadow-lg"
-                style="width: 120px; height: 120px; object-fit: cover"
-              />
-              <input
-                type="file"
-                id="imgInput"
-                #fileInput
-                class="d-none"
-                accept="image/*"
-                (change)="onFileSelected($event)"
-              />
-              <button
-                type="button"
-                class="btn btn-light btn-sm rounded-circle shadow position-absolute"
-                style="bottom: 0; right: -10px; border-radius: 4px"
-                data-bs-toggle="tooltip"
-                data-bs-placement="top"
-                title="Change Profile Picture"
-                (click)="fileInput.click()"
-              >
-                <i class="bi bi-pencil-fill"></i>
-              </button>
+            <!-- Profile Picture Section -->
+            <div class="col-12 col-md-3 d-flex flex-column align-items-center text-center">
+              <div class="position-relative">
+                <img
+                  [src]="profileImageUrl || 'https://via.placeholder.com/150'"
+                  alt="Profile Picture"
+                  class="rounded border border-white shadow-lg"
+                  style="width: 120px; height: 120px; object-fit: cover"
+                />
+                <input
+                  type="file"
+                  id="imgInput"
+                  #fileInput
+                  class="d-none"
+                  accept="image/*"
+                  (change)="onFileSelected($event)"
+                />
+                <button
+                  type="button"
+                  class="btn btn-light btn-sm rounded-circle shadow position-absolute"
+                  style="bottom: 0; right: -10px; border-radius: 4px"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  title="Change Profile Picture"
+                  (click)="fileInput.click()"
+                >
+                  <i class="bi bi-pencil-fill"></i>
+                </button>
+              </div>
+              <p class="mt-2 text-muted" style="font-size: 14px;">Upload a profile picture</p>
             </div>
-            <p class="mt-2 text-muted" style="font-size: 14px;">Upload a profile picture</p>
-          </div>
-           <!-- Input Fields -->
-           <div class="col-12 col-md-9 row g-3">
-            <div class="col-md-6">
-              <label for="nic" class="form-label fw-bold text-dark">NIC</label>
-              <div class="input-group">
-                <span class="input-group-text"><i class="bi bi-card-text"></i></span>
-                <input type="text" formControlName="nic" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter NIC" >
+            <!-- Input Fields -->
+            <div class="col-12 col-md-9 row g-3">
+              <div class="col-md-6">
+                <label for="nic" class="form-label fw-bold text-dark">NIC</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="bi bi-card-text"></i></span>
+                  <input type="text" formControlName="nic" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter NIC" >
+                </div>
+                <div *ngIf="profileForm.controls['nic'].invalid && profileForm.controls['nic'].touched" class="text-danger">
+                  NIC is required.
+                </div>
               </div>
-              <div *ngIf="profileForm.controls['nic'].invalid && profileForm.controls['nic'].touched" class="text-danger">
-                NIC is required.
+              <div class="col-12 col-md-6">
+                <label for="firstName" class="form-label fw-bold text-dark">First Name</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                  <input type="text" formControlName="firstName" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter first name">
+                </div>
+                <div *ngIf="profileForm.controls['firstName'].invalid && profileForm.controls['firstName'].touched" class="text-danger">
+                  First Name is required.
+                </div>
               </div>
-            </div>
-            <div class="col-12 col-md-6">
-              <label for="firstName" class="form-label fw-bold text-dark">First Name</label>
-              <div class="input-group">
-                <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-                <input type="text" formControlName="firstName" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter first name">
-              </div>
-              <div *ngIf="profileForm.controls['firstName'].invalid && profileForm.controls['firstName'].touched" class="text-danger">
-                First Name is required.
-              </div>
-            </div>
 
-            <div class="col-12 col-md-6">
-              <label for="lastName" class="form-label fw-bold text-dark">Last Name</label>
-              <div class="input-group">
-                <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-                <input type="text" formControlName="lastName" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter last name">
+              <div class="col-12 col-md-6">
+                <label for="lastName" class="form-label fw-bold text-dark">Last Name</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                  <input type="text" formControlName="lastName" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter last name">
+                </div>
+                <div *ngIf="profileForm.controls['lastName'].invalid && profileForm.controls['lastName'].touched" class="text-danger">
+                  Last Name is required.
+                </div>
               </div>
-              <div *ngIf="profileForm.controls['lastName'].invalid && profileForm.controls['lastName'].touched" class="text-danger">
-                Last Name is required.
-              </div>
-            </div>
 
-            <div class="col-12 col-md-6">
-              <label for="dateOfBirth" class="form-label fw-bold text-dark">Date of Birth</label>
-              <div class="input-group">
-                <span class="input-group-text"><i class="bi bi-calendar-fill"></i></span>
-                <input type="text" formControlName="dateOfBirth" class="form-control border rounded-end-3 shadow-sm" bsDatepicker [bsConfig]="{ isAnimated: true }">
+              <div class="col-12 col-md-6">
+                <label for="dateOfBirth" class="form-label fw-bold text-dark">Date of Birth</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="bi bi-calendar-fill"></i></span>
+                  <input type="text" formControlName="dateOfBirth" class="form-control border rounded-end-3 shadow-sm" bsDatepicker [bsConfig]="{ isAnimated: true }">
+                </div>
+                <div *ngIf="profileForm.controls['dateOfBirth'].invalid && profileForm.controls['dateOfBirth'].touched" class="text-danger">
+                  Date of Birth is required.
+                </div>
               </div>
-              <div *ngIf="profileForm.controls['dateOfBirth'].invalid && profileForm.controls['dateOfBirth'].touched" class="text-danger">
-                Date of Birth is required.
-              </div>
-            </div>
 
-              <!-- Gender Section -->
-              <div class="col-12">
-                <label class="form-label fw-bold text-dark">Gender</label>
-                <div class="d-flex gap-4">
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" formControlName="gender" value="1">
-                    <label class="form-check-label">Male</label>
+                <!-- Gender Section -->
+                <div class="col-12">
+                  <label class="form-label fw-bold text-dark">Gender</label>
+                  <div class="d-flex gap-4">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" formControlName="gender" value="1">
+                      <label class="form-check-label">Male</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" formControlName="gender" value="2">
+                      <label class="form-check-label">Female</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" formControlName="gender" value="3">
+                      <label class="form-check-label">Other</label>
+                    </div>
                   </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" formControlName="gender" value="2">
-                    <label class="form-check-label">Female</label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" formControlName="gender" value="3">
-                    <label class="form-check-label">Other</label>
+                  <div *ngIf="profileForm.controls['gender'].invalid && profileForm.controls['gender'].touched" class="text-danger">
+                    Gender is required.
                   </div>
                 </div>
-                <div *ngIf="profileForm.controls['gender'].invalid && profileForm.controls['gender'].touched" class="text-danger">
-                  Gender is required.
+
+                <div class="col-12 col-md-6">
+                  <label for="email" class="form-label fw-bold text-dark">Email</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+                    <input type="email" formControlName="email" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter email">
+                  </div>
+                  <div *ngIf="profileForm.controls['email'].invalid && profileForm.controls['email'].touched" class="text-danger">
+                    <div *ngIf="profileForm.controls['email'].errors?.['required']">Email is required.</div>
+                    <div *ngIf="profileForm.controls['email'].errors?.['email']">Invalid email format.</div>
+                  </div>
+                </div>
+
+                <!-- Phone Input -->
+                <div class="col-12 col-md-6">
+                  <label for="phone" class="form-label fw-bold text-dark">Phone</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-phone-fill"></i></span>
+                    <input type="text" formControlName="phone" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter phone number">
+                  </div>
+                  <div *ngIf="profileForm.controls['phone'].invalid && profileForm.controls['phone'].touched" class="text-danger">
+                    <div *ngIf="profileForm.controls['phone'].errors?.['required']">Phone number is required.</div>
+                    <div *ngIf="profileForm.controls['phone'].errors?.['pattern']">Invalid phone number format (10 digits).</div>
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label for="password" class="form-label fw-bold text-dark">Password</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                    <input type="password" formControlName="password" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter password" />
+                  </div>
+                  <div *ngIf="profileForm.controls['password'].invalid && profileForm.controls['password'].touched" class="text-danger">
+                    <div *ngIf="profileForm.controls['password'].hasError('required')">Password is required.</div>
+                    <div *ngIf="profileForm.controls['password'].hasError('minlength')">Password must be at least 8 characters long.</div>
+                    <div *ngIf="profileForm.controls['password'].hasError('pattern')">Password must contain at least one number and one special character.</div>
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label for="confirmPassword" class="form-label fw-bold text-dark">Confirm Password</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+                    <input type="password" formControlName="confirmPassword" class="form-control border rounded-end-3 shadow-sm" placeholder="Confirm password" />
+                  </div>
+                  <div *ngIf="profileForm.controls['confirmPassword'].invalid && profileForm.controls['confirmPassword'].touched" class="text-danger">
+                    <div *ngIf="profileForm.controls['confirmPassword'].hasError('required')">Confirm Password is required.</div>
+                  </div>
+                  <div *ngIf="profileForm.controls['confirmPassword'].value !== profileForm.controls['password'].value && profileForm.controls['confirmPassword'].touched" class="text-danger">
+                    Passwords do not match.
+                  </div>
+                </div>
+              </div>
+            <div class="col-12 row g-3 mt-4" formGroupName="address">
+              <h5 class="fw-bold text-dark">Address</h5>
+
+              <div class="col-12 col-md-6">
+                <div class="input-group">
+                  <span class="input-group-text"><i class="bi bi-house-door-fill"></i></span>
+                  <input type="text" formControlName="addressLine1" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter address line 1">
                 </div>
               </div>
 
               <div class="col-12 col-md-6">
-                <label for="email" class="form-label fw-bold text-dark">Email</label>
                 <div class="input-group">
-                  <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
-                  <input type="email" formControlName="email" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter email">
-                </div>
-                <div *ngIf="profileForm.controls['email'].invalid && profileForm.controls['email'].touched" class="text-danger">
-                  <div *ngIf="profileForm.controls['email'].errors?.['required']">Email is required.</div>
-                  <div *ngIf="profileForm.controls['email'].errors?.['email']">Invalid email format.</div>
+                  <span class="input-group-text"><i class="bi bi-house-door-fill"></i></span>
+                  <input type="text" formControlName="addressLine2" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter address line 2">
                 </div>
               </div>
 
-              <!-- Phone Input -->
+              
               <div class="col-12 col-md-6">
-                <label for="phone" class="form-label fw-bold text-dark">Phone</label>
                 <div class="input-group">
-                  <span class="input-group-text"><i class="bi bi-phone-fill"></i></span>
-                  <input type="text" formControlName="phone" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter phone number">
-                </div>
-                <div *ngIf="profileForm.controls['phone'].invalid && profileForm.controls['phone'].touched" class="text-danger">
-                  <div *ngIf="profileForm.controls['phone'].errors?.['required']">Phone number is required.</div>
-                  <div *ngIf="profileForm.controls['phone'].errors?.['pattern']">Invalid phone number format (10 digits).</div>
+                  <span class="input-group-text"><i class="bi bi-geo-alt-fill"></i></span>
+                  <input type="text" formControlName="city" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter city">
                 </div>
               </div>
 
               <div class="col-12 col-md-6">
-                <label for="password" class="form-label fw-bold text-dark">Password</label>
                 <div class="input-group">
-                  <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                  <input type="password" formControlName="password" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter password" />
-                </div>
-                <div *ngIf="profileForm.controls['password'].invalid && profileForm.controls['password'].touched" class="text-danger">
-                  <div *ngIf="profileForm.controls['password'].hasError('required')">Password is required.</div>
-                  <div *ngIf="profileForm.controls['password'].hasError('minlength')">Password must be at least 8 characters long.</div>
-                  <div *ngIf="profileForm.controls['password'].hasError('pattern')">Password must contain at least one number and one special character.</div>
+                  <span class="input-group-text"><i class="bi bi-postcard-fill"></i></span>
+                  <input type="text" formControlName="postalCode" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter postal code">
                 </div>
               </div>
 
               <div class="col-12 col-md-6">
-                <label for="confirmPassword" class="form-label fw-bold text-dark">Confirm Password</label>
                 <div class="input-group">
-                  <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                  <input type="password" formControlName="confirmPassword" class="form-control border rounded-end-3 shadow-sm" placeholder="Confirm password" />
-                </div>
-                <div *ngIf="profileForm.controls['confirmPassword'].invalid && profileForm.controls['confirmPassword'].touched" class="text-danger">
-                  <div *ngIf="profileForm.controls['confirmPassword'].hasError('required')">Confirm Password is required.</div>
-                </div>
-                <div *ngIf="profileForm.controls['confirmPassword'].value !== profileForm.controls['password'].value && profileForm.controls['confirmPassword'].touched" class="text-danger">
-                  Passwords do not match.
+                  <span class="input-group-text"><i class="bi bi-globe"></i></span>
+                  <input type="text" formControlName="country" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter country">
                 </div>
               </div>
+
             </div>
-          <div class="col-12 row g-3 mt-4" formGroupName="address">
-            <h5 class="fw-bold text-dark">Address</h5>
-
-            <div class="col-12 col-md-6">
-              <div class="input-group">
-                <span class="input-group-text"><i class="bi bi-house-door-fill"></i></span>
-                <input type="text" formControlName="addressLine1" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter address line 1">
-              </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer border-0 bg-light">
+              <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+              <button type="submit" [disabled]="!isUpdate && profileForm.invalid"  class="btn btn-dark px-4" data-bs-dismiss="modal">Submit</button>
             </div>
-
-            <div class="col-12 col-md-6">
-              <div class="input-group">
-                <span class="input-group-text"><i class="bi bi-house-door-fill"></i></span>
-                <input type="text" formControlName="addressLine2" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter address line 2">
-              </div>
-            </div>
-
-            
-            <div class="col-12 col-md-6">
-              <div class="input-group">
-                <span class="input-group-text"><i class="bi bi-geo-alt-fill"></i></span>
-                <input type="text" formControlName="city" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter city">
-              </div>
-            </div>
-
-            <div class="col-12 col-md-6">
-              <div class="input-group">
-                <span class="input-group-text"><i class="bi bi-postcard-fill"></i></span>
-                <input type="text" formControlName="postalCode" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter postal code">
-              </div>
-            </div>
-
-            <div class="col-12 col-md-6">
-              <div class="input-group">
-                <span class="input-group-text"><i class="bi bi-globe"></i></span>
-                <input type="text" formControlName="country" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter country">
-              </div>
-            </div>
-
-          </div>
-           <!-- Modal Footer -->
-           <div class="modal-footer border-0 bg-light">
-            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-            <button type="submit" [disabled]="!isUpdate && profileForm.invalid"  class="btn btn-dark px-4">Submit</button>
-          </div>
-
-
           </form>
 
         </div>
-
     </div>
   </div>
 </div>

@@ -23,7 +23,7 @@ export class AdminListComponent implements OnInit{
   totalItems: number = 0;
 
   // Form and update state
-  profileForm!: FormGroup;
+  profileForm: FormGroup;
   isUpdate: boolean = false;
 
   // Profile image variables
@@ -31,22 +31,17 @@ export class AdminListComponent implements OnInit{
   selectedFile: File | null = null;
 
   // Modal-related variables
-  selectedImage: string | null = null;
   modalRef?: BsModalRef;
 
   // Admin ID for update/delete operations
   private adminId: string = '';
-  private deleteAdminId: string = '';
 
   constructor(
     private adminService: AdminService,
     private fb: FormBuilder,
     private toastr: ToastrService,
     private modalService: BsModalService
-  ){}
-
-  // Initialize form with validators
-  ngOnInit(): void {
+  ){
     this.profileForm = this.fb.group(
       {
         nic: ['', [Validators.required, Validators.pattern(/^\d{9}[Vv]|\d{12}$/)]],
@@ -60,18 +55,18 @@ export class AdminListComponent implements OnInit{
       },
       { validators: this.passwordMatchValidator }
     );
+  }
 
+  ngOnInit(): void {
     this.loadItems();
   }
 
-  // Custom validator for password match
   passwordMatchValidator(control: AbstractControl) {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
     return password === confirmPassword ? null : { passwordMismatch: true };
   }
 
-  // Load paginated admin data
   loadItems(): void {
     this.adminService.pagination(this.currentPage, this.pageSize).subscribe({
       next: (response: any) => {
@@ -91,7 +86,6 @@ export class AdminListComponent implements OnInit{
     });
   }
 
-  // Navigate to a specific page
   goToPage(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
@@ -99,7 +93,6 @@ export class AdminListComponent implements OnInit{
     }
   }
 
-  // Handle file input selection
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input?.files && input.files[0]) {
@@ -115,7 +108,6 @@ export class AdminListComponent implements OnInit{
     }
   }
 
-  // Submit form data for create or update
   onSubmit(): void {
     const formData = this.profileForm.value;
     formData.role = Number(formData.role);
@@ -137,7 +129,6 @@ export class AdminListComponent implements OnInit{
     }
   }
 
-  // Add a new admin
   private addAdmin(adminData: AdminRequest): void {
     this.adminService.addAdmin(adminData).subscribe({
       next: (response: any) => {
@@ -145,6 +136,7 @@ export class AdminListComponent implements OnInit{
         this.toastr.success('Admin registered successfully!', '', {
           positionClass: 'toast-top-right',
           progressBar: true,
+          timeOut:3000
         });
         this.loadItems();
       },
@@ -156,30 +148,30 @@ export class AdminListComponent implements OnInit{
         this.toastr.error(error.error, '', {
           positionClass: 'toast-top-right',
           progressBar: true,
+          timeOut:4000
         });
       }
     });
   }
 
-  // Update an existing admin
   private updateAdmin(adminData: AdminRequest): void {
     this.adminService.updateFullDetails(this.adminId, adminData).subscribe({
       next: () => {
         this.toastr.success('Admin updated successfully!', '', {
           positionClass: 'toast-top-right',
           progressBar: true,
+          timeOut:3000
         });
-        this.resetForm();
         this.loadItems();
       },
       complete: () => {
         this.uploadImage()
-        this.resetForm();
       },
       error: (error:any) => {
         this.toastr.error(error.error, '', {
           positionClass: 'toast-top-right',
           progressBar: true,
+          timeOut:4000
         });
       }
     });
@@ -191,7 +183,9 @@ export class AdminListComponent implements OnInit{
       const formData = new FormData();
       formData.append('imageFile', this.selectedFile);
       this.adminService.addImage(this.adminId, formData).subscribe({
-        next: () => this.loadItems(),
+        complete:()=>{
+          this.loadItems();
+        },
         error: () => {
           this.toastr.error('Image upload failed', '', {
             positionClass: 'toast-top-right',
@@ -201,13 +195,15 @@ export class AdminListComponent implements OnInit{
     }
   }
 
-  // Edit admin mode toggle
   editAdmin(isEditMode: boolean): void {
     this.isUpdate = isEditMode;
-    if (!isEditMode) this.resetForm();
+    if (!isEditMode){
+      this.profileForm.get('nic')?.enable();
+      this.profileForm.get('email')?.enable();
+      // this.resetForm();+
+    }
   }
 
-  // Patch admin data to form for editing
   patchData(admin: Admin): void {
     this.profileImageUrl = admin.imageUrl
     this.profileForm.patchValue({
@@ -215,25 +211,26 @@ export class AdminListComponent implements OnInit{
       firstName: admin.firstName,
       lastName: admin.lastName,
       phone: admin.phone,
+      email:admin.email,
+      role:admin.roleName == "Administrator" ? "1" : "2"
     });
     this.adminId = admin.id;
+    this.profileForm.get('nic')?.disable();
+    this.profileForm.get('email')?.disable();
   }
 
-  // Open modal to preview image
   openPreviewModal(template: any, image: string): void {
-    this.selectedImage = image;
+    this.profileImageUrl = image;
     this.modalRef = this.modalService.show(template);
   }
 
-  // Open delete confirmation modal
   openDeleteModal(template: any, adminId: string): void {
     this.modalRef = this.modalService.show(template);
-    this.deleteAdminId = adminId;
+    this.adminId = adminId;
   }
 
-  // Delete an admin
   deleteAdmin(): void {
-    this.adminService.deleteAdmin(this.deleteAdminId).subscribe({
+    this.adminService.deleteAdmin(this.adminId).subscribe({
       next: () => {
         this.toastr.success('Admin deleted successfully!', '', {
           positionClass: 'toast-top-right',
@@ -241,16 +238,15 @@ export class AdminListComponent implements OnInit{
         });
         this.loadItems();
       },
+      complete: () => this.modalRef?.hide(),
       error: () => {
         this.toastr.error('Failed to delete admin', '', {
           positionClass: 'toast-top-right',
         });
       },
-      complete: () => this.modalRef?.hide(),
     });
   }
 
-  // Reset form and image
   private resetForm(): void {
     this.profileForm.reset();
     this.resetImage();

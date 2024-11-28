@@ -14,39 +14,55 @@ export class CourseService {
 
   private apiUrl = 'https://localhost:7044/api'
 
+  //Course
   getCourses(){
-    return this.http.get<Course[]>(this.apiUrl + '/Course/Course')
+    return this.http.get<Course[]>(this.apiUrl + '/Course/GetAll')
   }
-
   getCourseByID(Id:string){
-    return this.http.get<Course>(this.apiUrl + '/Course/CourseById/' + Id)
+    return this.http.get<Course>(this.apiUrl + '/Course/GetById/' + Id)
   }
-
   pagination(pageNumber:number , pageSize:number){
     return this.http.get<any>(this.apiUrl + `/Course/Pagination/${pageNumber}/${pageSize}`)
   }
+  AddCourse(Course:CourseRequest){
+    return this.http.post(this.apiUrl + '/Course/Add', Course)
+  }
+  updateCourse(id:string ,Course:CourseRequest){
+    return this.http.put(this.apiUrl + `/Course/Update/${id}`, Course)
+  }
+  Addimage(CourseID:string,image:any){
+    return this.http.post(this.apiUrl + '/Course/image/' + CourseID, image,{
+      responseType:'text'
+    })
+  }
+  deleteCourse(CourseId:string){
+    return this.http.delete(this.apiUrl + '/Course/Delete/' + CourseId,{
+      responseType:'text'
+    })
+  }
 
+
+  //Course Schedule
   schedulePagination(pageNumber:number , pageSize:number){
     return this.http.get<any>(this.apiUrl + `/CourseSchedule/Pagination/${pageNumber}/${pageSize}`)
   }
+  addCourseSchedule(CourseSchedule:CourseScheduleRequest){
+    return this.http.post(this.apiUrl + '/CourseSchedule', CourseSchedule)
+  }
+  updateCourseSchedule(id:string ,CourseSchedule:CourseScheduleRequest){
+    return this.http.put(this.apiUrl + `/CourseSchedule/Update/${id}`, CourseSchedule)
+  }
 
+  //Assessment
   assessmentPagination(pageNumber:number , pageSize:number){
     return this.http.get<any>(this.apiUrl + `/Assessment/Pagination/${pageNumber}/${pageSize}`)
-  }
-  addCourseSchedule(CourseSchedule:CourseScheduleRequest){
-    return this.http.post<Schedule>(this.apiUrl + '/CourseSchedule', CourseSchedule)
-  }
-  GetAllCategory(){
-    return this.http.get<CourseCategory[]>(this.apiUrl + '/CourseCategory/GetAllCategory')
-  }
-  AddCourse(Course:CourseRequest){
-    return this.http.post<Course>(this.apiUrl + '/Course/Course', Course)
-  }
-  Addimage(CourseID:string,image:any){
-    return this.http.post(this.apiUrl + '/Course/image/' + CourseID, image)
   }
   addAssessment(Assessment:AssessmentRequest){
     return this.http.post(this.apiUrl + '/Assessment/Assessment', Assessment)
   }
-  
+
+  //Course Category
+  GetAllCategory(){
+    return this.http.get<CourseCategory[]>(this.apiUrl + '/CourseCategory/GetAllCategory')
+  }
 }

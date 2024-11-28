@@ -6,6 +6,7 @@ export interface Student {
   dateOfBirth: Date;
   gender: string;
   phone: string;
+  email:string;
   address: Address;
   imageUrl?:string;
 
@@ -25,9 +26,11 @@ export interface Address {
 export interface Admin {
   id: string;
   nic: string;
+  roleName:string;
   firstName: string;
   lastName: string;
   phone: string;
+  email:string;
   imageUrl: string;
   auditLog: AuditLog[];
 }
@@ -99,11 +102,13 @@ export interface Payment{
 export interface Assessment {
     id:string;
     courseId:string;
+    assessmentTitle:string;
     assessmentType:string;
     startDate:Date;
     endDate:Date;
     totalMarks:number;
-    passMarks:number
+    passMarks:number;
+    assessmentLink:string;
     createdDate:Date;
     updateDate:Date;
     status:string;

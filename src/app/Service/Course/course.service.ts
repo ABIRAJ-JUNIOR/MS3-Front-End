@@ -58,7 +58,10 @@ export class CourseService {
     return this.http.get<any>(this.apiUrl + `/Assessment/Pagination/${pageNumber}/${pageSize}`)
   }
   addAssessment(Assessment:AssessmentRequest){
-    return this.http.post(this.apiUrl + '/Assessment/Assessment', Assessment)
+    return this.http.post(this.apiUrl + '/Assessment/Add', Assessment)
+  }
+  updateAssessment(id:string ,Assessment:AssessmentRequest){
+    return this.http.put(this.apiUrl + `/Assessment/Update/${id}`, Assessment)
   }
 
   //Course Category

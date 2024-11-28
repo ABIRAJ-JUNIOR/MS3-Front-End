@@ -1,26 +1,33 @@
 import { Component, afterNextRender } from '@angular/core';
 import { Assessment, Course} from '../../../Modals/modals';
 import { CourseService } from '../../../Service/Course/course.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatCurrency } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-course-assessment',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule,BsDatepickerModule],
+  providers: [BsModalService],
   templateUrl: './course-assessment.component.html',
   styleUrl: './course-assessment.component.css'
 })
 export class CourseAssessmentComponent {
   assessments: Assessment[] = []; 
   courses: Course[] = [];
+
+
   currentPage: number = 1; 
   pageSize: number = 13; 
   totalPages: number = 0; 
   totalItems: number = 0; 
   currentLength: number = 0;
 
+  isUpdate:boolean = false
+  private assessmentId:string = ""
   assessmentForm!: FormGroup;
 
   constructor(
@@ -37,6 +44,7 @@ export class CourseAssessmentComponent {
       totalMarks: ['', Validators.required],
       passMarks: ['', Validators.required],
       assessmentLink: ['', Validators.required],
+      assessmentStatus:['']
     });
   }
 
@@ -77,31 +85,22 @@ export class CourseAssessmentComponent {
 
       const assessment: AssessmentRequest = {
         courseId: formData.courseId,
+        assessmentTitle: formData.assessmentTitle,
         assessmentType: Number(formData.assessmentType), 
         startDate: formData.startDate,
         endDate: formData.endDate,
         totalMarks: formData.totalMarks,
-        passMarks: formData.passMarks
+        passMarks: formData.passMarks,
+        assessmentLink:formData.assessmentLink,
+        assessmentStatus:formData.assessmentStatus
       };
 
-      this.courseService.addAssessment(assessment).subscribe({
-        next: (response: any) => {
-          this.toastr.success('Assessment added successfully', '', {
-            positionClass: 'toast-top-right',
-            progressBar: true,
-            timeOut: 3000
-          });
-          this.assessmentForm.reset();
-          this.loadItems(); 
-        },
-        error: (err: any) => {
-          this.toastr.warning(err.error, '', {
-            positionClass: 'toast-top-right',
-            progressBar: true,
-            timeOut: 3000
-          });
-        }
-      });
+      if(this.isUpdate){
+        this.updateAssessment(assessment);
+      }else{
+        this.addAssessment(assessment);
+      }
+
     } else {
       this.toastr.warning('Please fill out all required fields correctly', '', {
         positionClass: 'toast-top-right',
@@ -111,14 +110,107 @@ export class CourseAssessmentComponent {
     }
   }
 
+
+  private addAssessment(assessment:AssessmentRequest):void{
+    this.courseService.addAssessment(assessment).subscribe({
+      next: (response: any) => {
+        this.toastr.success('Assessment Create successfull', '', {
+          positionClass: 'toast-top-right',
+          progressBar: true,
+          timeOut: 3000
+        });
+        this.assessmentForm.reset();
+        this.loadItems(); 
+      },
+      error: (err: any) => {
+        this.toastr.warning(err.error, '', {
+          positionClass: 'toast-top-right',
+          progressBar: true,
+          timeOut: 3000
+        });
+      }
+    });
+  }
+
+  private updateAssessment(assessment:AssessmentRequest):void{
+    this.courseService.updateAssessment(this.assessmentId,assessment).subscribe({
+      next: (response: any) => {
+        this.toastr.success('Update successfull', '', {
+          positionClass: 'toast-top-right',
+          progressBar: true,
+          timeOut: 3000
+        });
+        this.assessmentForm.reset();
+        this.loadItems(); 
+      },
+      error: (err: any) => {
+        this.toastr.warning(err.error, '', {
+          positionClass: 'toast-top-right',
+          progressBar: true,
+          timeOut: 3000
+        });
+      }
+    });
+  }
+
+  editAssessment(isEditmode:boolean):void{
+    this.isUpdate = isEditmode
+    if(!isEditmode){
+      this.assessmentForm.reset({
+        assessmentType:"",
+        courseId:""
+      })
+    }
+  }
+
+  patchData(assessment:Assessment):void{
+    this.assessmentId = assessment.id;
+    this.assessmentForm.patchValue({
+      assessmentTitle:assessment.assessmentTitle,
+      courseId:assessment.courseId,
+      assessmentType:AssessmentType[assessment.assessmentType as keyof typeof AssessmentType],
+      startDate:new Date(assessment.startDate).toLocaleString(),
+      endDate:new Date(assessment.endDate).toLocaleString(),
+      totalMarks:assessment.totalMarks,
+      passMarks:assessment.passMarks,
+      assessmentLink:assessment.assessmentLink,
+      assessmentStatus:AssessmentStatus[assessment.assessmentStatus as keyof typeof AssessmentStatus],
+    })
+    this.isUpdate = true
+  }
   
 }
 
 export interface AssessmentRequest{
   courseId:string;
-  assessmentType:Number;
+  assessmentTitle:string
+  assessmentType:number;
   startDate:string;
   endDate:string;
-  totalMarks:Number;
-  passMarks:Number;
+  totalMarks:number;
+  passMarks:number;
+  assessmentLink:string;
+  assessmentStatus:number
 } 
+
+enum AssessmentType
+{
+    Quiz = 1,
+    Exam = 2,
+    Presentation = 3,
+    Practical = 4,
+    OnlineTest = 5,
+    Midterm = 6,
+    FinalExam = 7,
+    MockTest = 8,
+    LabAssessment = 9,
+    OpenBookTest = 10,
+}
+
+enum AssessmentStatus
+{
+    NotStarted = 1,   
+    InProgress = 2,
+    Completed = 3,
+    Closed = 4
+}

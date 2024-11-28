@@ -111,7 +111,7 @@ export interface Assessment {
     assessmentLink:string;
     createdDate:Date;
     updateDate:Date;
-    status:string;
+    assessmentStatus:string;
 
     courseResponse:Course;
     studentAssessmentResponses:StudentAssessment[];

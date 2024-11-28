@@ -31,3 +31,15 @@ body {
     background-color: #b0bec5; /* Ash color button */
     color: #212121;
   }
+  .btn-reset:hover {
+    background-color: #90a4ae; /* Darker ash color on hover */
+  }
+
+  .table-wrapper {
+    margin-top: 20px;
+  }
+
+  /* Responsive Font Sizes */
+  h4, .card-header h4 {
+    font-size: 1.25rem;  /* Default for large screens */
+  }

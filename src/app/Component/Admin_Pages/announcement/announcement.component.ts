@@ -12,6 +12,8 @@ import { AnnouncementService } from '../../../Service/Announcement/announcement.
 })
 export class AnnouncementComponent {
   announcementForm!: FormGroup;
+  Announcements:any[]=[]
+
   constructor(private fb: FormBuilder,private Announcemenrservice:AnnouncementService) {}
   ngOnInit(): void {
     // Initialize the form with validation rules
@@ -20,6 +22,13 @@ export class AnnouncementComponent {
       expirationDate: ['', Validators.required],
       audienceType: ['', Validators.required]
     });
+    this.Announcemenrservice.GetAllAnouncement().subscribe({
+      next:(value:any)=> {
+        this.Announcements=value
+        console.log(value);
+        
+      }
+    })
   }
     // Method to handle form submission
     onSubmit(): void {

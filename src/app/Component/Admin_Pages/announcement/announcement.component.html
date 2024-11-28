@@ -74,14 +74,18 @@
                 </tr>
               </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>System Maintenance</td>
-                    <td>2024-11-01</td>
-                    <td>2024-11-30</td>
-                    <td class="text-danger">Admins</td>
+                <tr *ngFor="let announcement of Announcements;let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{announcement.title}}</td>
+                    <td>{{announcement.datePosted}}</td>
+                    <td>{{announcement.expirationDate}}</td>
+                    <td  [ngStyle]="{
+                      color: announcement.audienceType === 'Admins' ? 'darkred' :
+                      announcement.audienceType === 'Students' ? 'darkgreen' :
+                      announcement.audienceType === 'Everyone' ? 'darkblue' : 'black'
+                    }">{{announcement.audienceType}}</td>
                   </tr>
-                  <tr>
+                  <!-- <tr>
                     <td>2</td>
                     <td>New Course Added</td>
                     <td>2024-10-15</td>
@@ -94,7 +98,7 @@
                     <td>2024-10-20</td>
                     <td>2024-12-25</td>
                     <td class="text-primary">Everyone</td>
-                  </tr>
+                  </tr> -->
             </tbody>
 
           </table>

@@ -13,6 +13,6 @@ AddAnouncement(announcement:any){
   return this.http.post(`${this.apiUrl}/Announcement`, announcement);
 }
 GetAllAnouncement(){
-  return this.http.get(`${this.apiUrl}/Announcement`);
+  return this.http.get<any[]>(`${this.apiUrl}/Announcement`);
 }
 }

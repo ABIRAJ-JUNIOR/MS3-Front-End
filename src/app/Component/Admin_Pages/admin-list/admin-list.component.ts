@@ -35,7 +35,6 @@ export class AdminListComponent implements OnInit{
 
   // Admin ID for update/delete operations
   private adminId: string = '';
-  
 
   constructor(
     private adminService: AdminService,
@@ -60,6 +59,7 @@ export class AdminListComponent implements OnInit{
 
   ngOnInit(): void {
     this.loadItems();
+
   }
 
   passwordMatchValidator(control: AbstractControl) {
@@ -85,6 +85,7 @@ export class AdminListComponent implements OnInit{
         });
       }
     });
+    
   }
 
   goToPage(page: number): void {

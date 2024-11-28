@@ -4,6 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Student } from '../../../Modals/modals';
 import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
 import { StudentService } from '../../../Service/Student/student.service';
+import { saveAs } from 'file-saver'; // Import the FileSaver.js library
+
 
 @Component({
   selector: 'app-student-result',
@@ -44,4 +46,10 @@ export class StudentResultComponent {
 
   }
 
+
+   // Method to download assessment details as a JSON file
+   downloadAssessmentDetails(data:any) {
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    saveAs(blob, 'assessment-details.json');
+  }
 }

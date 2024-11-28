@@ -30,7 +30,7 @@
                     <td>{{ assessmentData.feedback || 'Update Later' }}</td>
                     <td>{{ assessmentData.studentAssessmentStatus }}</td>
                     <td class="text-center">
-                        <button class="btn btn-outline-primary btn-sm"><i class="bi bi-file-earmark-arrow-down-fill"></i></button>
+                        <button class="btn btn-outline-primary btn-sm" (click)="downloadAssessmentDetails(assessmentData)"><i class="bi bi-file-earmark-arrow-down-fill"></i></button>
                     </td>
                 </tr>
             </ng-container>

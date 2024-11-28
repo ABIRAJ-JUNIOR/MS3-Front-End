@@ -42,20 +42,25 @@
         </li>
 
         <!-- Grades Section -->
+
         <li class="sidebar-item">
-          <a [routerLink]="['/student-dashboard/assesment-result']" class="sidebar-link">
-            <i class="fa-solid fa-graduation-cap pe-2"></i>
-            Assesment Results
+          <a href="#" class="sidebar-link collapsed" data-bs-target="#assesment" data-bs-toggle="collapse"
+            aria-expanded="false">
+            <i class="bi bi-person-workspace pe-2"></i>
+            Assesments & Results
           </a>
+          <ul id="assesment" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+            <li class="sidebar-item">
+              <a [routerLink]="['/student-dashboard/assesment']" class="sidebar-link">Your asessesments</a>
+            </li>
+            <li class="sidebar-item">
+              <a  [routerLink]="['/student-dashboard/assesment-result']" class="sidebar-link">Assesment Results</a>
+            </li>
+           
+          </ul>
         </li>
 
-        <!-- Asignments -->
-        <li class="sidebar-item">
-          <a [routerLink]="['/student-dashboard/assesment']" class="sidebar-link">
-            <i class="bi bi-person-workspace pe-2"></i>
-            Asignments
-          </a>
-        </li>
+       
 
          <!-- Calendar -->
          <li class="sidebar-item">

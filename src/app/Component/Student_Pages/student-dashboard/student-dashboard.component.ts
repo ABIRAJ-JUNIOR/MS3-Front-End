@@ -28,4 +28,6 @@ export class StudentDashboardComponent implements OnInit {
     this.StudentDetails=this.StudentDashDataService.GetStudentDeatilByLocalStorage();
   }
 
+   
+
 }

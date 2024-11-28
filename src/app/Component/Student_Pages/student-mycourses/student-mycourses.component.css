@@ -86,4 +86,10 @@
         padding: 0.6rem 1.2rem;
     }
 }  
-
+.card {
+    transition: transform 0.6s ease-in-out, background-color 0.3s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.05);
+  }

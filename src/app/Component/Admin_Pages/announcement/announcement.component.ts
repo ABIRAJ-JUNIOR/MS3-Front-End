@@ -29,4 +29,8 @@ export class AnnouncementComponent {
         console.log('Form is invalid');
       }
     }
+     // Method to reset the form
+  onReset(): void {
+    this.announcementForm.reset();
+  }
 }

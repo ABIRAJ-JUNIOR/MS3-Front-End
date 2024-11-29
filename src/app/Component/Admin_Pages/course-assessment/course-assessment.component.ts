@@ -1,6 +1,6 @@
 import { Component, afterNextRender } from '@angular/core';
 import { Assessment, Course} from '../../../Modals/modals';
-import { CourseService } from '../../../Service/Course/course.service';
+import { CourseService } from '../../../Service/API/Course/course.service';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';

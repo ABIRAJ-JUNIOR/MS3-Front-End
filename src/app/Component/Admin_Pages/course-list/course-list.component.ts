@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {   CourseService } from '../../../Service/Course/course.service';
+import {   CourseService } from '../../../Service/API/Course/course.service';
 import { Course, CourseCategory, Schedule } from '../../../Modals/modals';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';

@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { StudentService} from '../../../Service/Student/student.service';
-import { CommonModule } from '@angular/common';
-import { SearchStudentsPipe } from '../../../Pipes/search-students.pipe';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { Chart, ChartConfiguration } from 'chart.js';
-import { Student } from '../../../Modals/modals';
+import { CommonModule } from "@angular/common"
+import { Component } from "@angular/core"
+import { FormsModule } from "@angular/forms"
+import { RouterModule } from "@angular/router"
+import { Chart, ChartConfiguration } from "chart.js"
+import { Student } from "../../../Modals/modals"
+import { SearchStudentsPipe } from "../../../Pipes/search-students.pipe"
+import { StudentService } from "../../../Service/API/Student/student.service"
+
 
 @Component({
   selector: 'app-admin-home',

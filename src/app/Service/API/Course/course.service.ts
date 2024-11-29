@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Course, CourseCategory, Schedule } from '../../Modals/modals';
-import { CourseRequest } from '../../Component/Admin_Pages/course-list/course-list.component';
-import { CourseScheduleRequest } from '../../Component/Admin_Pages/course-schedule/course-schedule.component';
-import { AssessmentRequest } from '../../Component/Admin_Pages/course-assessment/course-assessment.component';
+import { Course, CourseCategory, Schedule } from '../../../Modals/modals';
+import { CourseRequest } from '../../../Component/Admin_Pages/course-list/course-list.component';
+import { CourseScheduleRequest } from '../../../Component/Admin_Pages/course-schedule/course-schedule.component';
+import { AssessmentRequest } from '../../../Component/Admin_Pages/course-assessment/course-assessment.component';
 
 @Injectable({
   providedIn: 'root'

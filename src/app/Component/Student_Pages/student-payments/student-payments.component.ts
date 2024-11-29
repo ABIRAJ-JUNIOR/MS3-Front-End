@@ -1,11 +1,12 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { Student } from '../../../Modals/modals';
-import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
-import { StudentService } from '../../../Service/Student/student.service';
-import { CommonModule } from '@angular/common';
-import { PaymentDataService } from '../../../Service/Payment/payment-data.service';
-import html2canvas from 'html2canvas';
+import { CommonModule } from "@angular/common";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { Router } from "@angular/router";
+import html2canvas from "html2canvas";
+import { Student } from "../../../Modals/modals";
+import { StudentService } from "../../../Service/API/Student/student.service";
+import { PaymentDataService } from "../../../Service/Data/Payment_Data/payment-data.service";
+import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
+
 
 @Component({
   selector: 'app-student-payments',
@@ -15,7 +16,7 @@ import html2canvas from 'html2canvas';
   styleUrl: './student-payments.component.css'
 })
 export class StudentPaymentsComponent implements OnInit {
-  constructor(private StudentDashDataService: StudentDashDataServiceService,
+  constructor(private StudentDashDataService: StudentDashDataService,
     private StudentApiService: StudentService,
     private router: Router,
     private PaymentService: PaymentDataService

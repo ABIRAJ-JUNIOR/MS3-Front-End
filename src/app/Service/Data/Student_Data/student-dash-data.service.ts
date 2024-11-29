@@ -4,7 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
 })
-export class StudentDashDataServiceService {
+export class StudentDashDataService {
 
   constructor() { }
 
@@ -13,5 +13,4 @@ export class StudentDashDataServiceService {
     const decode: any = token != null ? jwtDecode(token) : ""
     return decode
   }
-
 }

@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { CourseService } from '../../../Service/Course/course.service';
+import { CourseService } from '../../../Service/API/Course/course.service';
 import { Course } from '../../../Modals/modals';
 import { FormsModule } from '@angular/forms';
 import { CourseFilterPipe } from '../../../Pipes/course-filter.pipe';
-import { PaymentDataService } from '../../../Service/Payment/payment-data.service';
+import { PaymentDataService } from '../../../Service/Data/Payment_Data/payment-data.service';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({

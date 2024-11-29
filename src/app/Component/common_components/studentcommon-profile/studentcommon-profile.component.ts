@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { Student } from '../../../Modals/modals';
-import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
-import { StudentService } from '../../../Service/Student/student.service';
-import { CommonModule } from '@angular/common';
-import { ToastrService } from 'ngx-toastr';
+import { CommonModule } from "@angular/common";
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
+import { Student } from "../../../Modals/modals";
+import { StudentService } from "../../../Service/API/Student/student.service";
+import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
 
 @Component({
   selector: 'app-studentcommon-profile',
@@ -15,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class StudentcommonProfileComponent {
 
-  constructor(private tostr:ToastrService, private StudentDashDataService: StudentDashDataServiceService, private StudentApiService: StudentService, private router: Router) {
+  constructor(private tostr:ToastrService, private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
 
 

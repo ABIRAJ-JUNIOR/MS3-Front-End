@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FooterComponent } from '../../common_components/footer/footer.component';
 import { Navebar01Component } from '../../common_components/navebar-01/navebar-01.component';
-import { AuthService } from '../../../Service/Auth/auth.service';
+import { AuthService } from '../../../Service/API/Auth/auth.service';
 import { Router, RouterModule } from '@angular/router';
 
 

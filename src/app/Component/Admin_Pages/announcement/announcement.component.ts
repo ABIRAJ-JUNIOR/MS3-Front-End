@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AnnouncementService } from '../../../Service/Announcement/announcement.service';
+import { AnnouncementService } from '../../../Service/API/Announcement/announcement.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

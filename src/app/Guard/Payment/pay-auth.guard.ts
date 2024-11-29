@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { AuthService } from '../../Service/Auth/auth.service';
+import { AuthService } from '../../Service/API/Auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
 export const payAuthGuard: CanActivateFn = (route, state) => {

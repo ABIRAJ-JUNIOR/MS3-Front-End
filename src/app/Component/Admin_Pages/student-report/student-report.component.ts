@@ -1,10 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import html2canvas from 'html2canvas';
-import { StudentService } from '../../../Service/Student/student.service';
-import { ActivatedRoute } from '@angular/router';
-import { Payment, Student } from '../../../Modals/modals';
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import html2canvas from "html2canvas";
+import { Student, Payment } from "../../../Modals/modals";
+import { StudentService } from "../../../Service/API/Student/student.service";
+
 
 @Component({
   selector: 'app-student-report',

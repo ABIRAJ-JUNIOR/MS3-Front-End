@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { Student } from '../../../Modals/modals';
-import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
-import { StudentService } from '../../../Service/Student/student.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule } from "@angular/common";
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { Student } from "../../../Modals/modals";
+import { StudentService } from "../../../Service/API/Student/student.service";
+import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
 
 @Component({
   selector: 'app-student-payments-history',
@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './student-payments-history.component.css'
 })
 export class StudentPaymentsHistoryComponent {
-  constructor(private StudentDashDataService: StudentDashDataServiceService, private StudentApiService: StudentService, private router: Router) {
+  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
 
   Enrollments: any;

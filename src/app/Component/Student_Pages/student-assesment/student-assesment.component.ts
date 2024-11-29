@@ -1,8 +1,7 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { AssesmentService } from '../../../Service/assesment.service';
-import { StudentService } from '../../../Service/Student/student.service';
-import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
+import { CommonModule } from "@angular/common";
+import { Component, OnInit } from "@angular/core";
+import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
+import { StudentService } from "../../../Service/API/Student/student.service";
 
 @Component({
   selector: 'app-student-assesment',
@@ -14,7 +13,7 @@ import { StudentDashDataServiceService } from '../../../Service/Student/student-
 export class StudentAssesmentComponent implements OnInit {
 
 
-  constructor(private StudentService:StudentService  , private studentDataService:StudentDashDataServiceService){
+  constructor(private StudentService:StudentService  , private studentDataService:StudentDashDataService){
 
   }
   pageSize: number = 12; // Courses per page

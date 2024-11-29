@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PaymentDataService } from '../../../../Service/Payment/payment-data.service';
+import { PaymentDataService } from '../../../../Service/Data/Payment_Data/payment-data.service';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';

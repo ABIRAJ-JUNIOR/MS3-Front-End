@@ -24,7 +24,7 @@
             </thead>
             <tbody>
 
-                <ng-container *ngFor="let item of NewEnrollment" >
+                <ng-container *ngFor="let item of NewEnrollment">
                     <!-- Installment Row -->
                     <tr *ngIf="item.paymentResponse.length < 3 && item.paymentStatus == payCheck ">
                         <td>Installment #{{item.paymentResponse[item.paymentResponse.length-1].installmentNumber}}</td>
@@ -48,7 +48,7 @@
                     </tr>
 
                     <!-- Progress Bar Row -->
-                    <tr  *ngIf="item.paymentResponse.length < 3 && item.paymentStatus == payCheck ">
+                    <tr *ngIf="item.paymentResponse.length < 3 && item.paymentStatus == payCheck ">
                         <td colspan="8">
                             <div class="progress mt-2">
                                 <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
@@ -82,15 +82,24 @@
         <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                   <h1 class="modal-title fs-5 text-danger" id="exampleModalLabel">Confirm Your Payment</h1>
                 </div>
                 <div class="modal-body">
-                    ...
+
+                    <img src="/payment/payConfirm.png" class="card-img-top" alt="Course Image">
+
+
+                    <div class="modal-body">
+                        <p class="" style="font-size: 18px;">Are you sure you want to proceed with the payment?</p>
+                        <p>To finalize the transaction,
+                            please verify your identity by entering the One-Time Password (OTP) sent to your phone</p>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cancelPayment()">Cancel</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="ConfirmationPayment()">Confirm</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)="cancelPayment()">Cancel</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                        (click)="ConfirmationPayment()">Confirm</button>
                 </div>
             </div>
         </div>

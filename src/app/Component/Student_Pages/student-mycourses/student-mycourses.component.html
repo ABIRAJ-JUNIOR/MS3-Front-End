@@ -1,38 +1,44 @@
 <div class="container-fluid my-5">
-    <h4>Enrollment Courses</h4>
-    <hr>
-    <div class="row">
-        <div class="col-12 col-sm-12 col-md-6 col-lg-4 my-4" *ngFor="let item of StudentDetails.enrollments let i = index" >
-            <div class="card shadow-sm border-0 rounded">
-                <img src="{{item.courseScheduleResponse.courseResponse.imageUrl}}" class="card-img-top" alt="Course image">
-                
-                <div class="card-header text-white text-center" [ngClass]="getProgressBarClass(item)">
-                  <h5><i class="bi bi-bookmark-check pe-2"></i>{{item.courseScheduleResponse.courseResponse.courseName}}</h5>
-                </div>
-              
-                <div class="card-body">
-                  <p><strong><i class="bi bi-calendar pe-2"></i>Start Date:</strong> {{item.courseScheduleResponse.startDate}}</p>
-                  <p><strong><i class="bi bi-clock pe-2"></i>Start Time:</strong> {{item.courseScheduleResponse.time}}</p>
-                  <p><strong><i class="bi bi-graph-up pe-2"></i>Progress:</strong> <span class="text-dark">In Process</span></p>
-              
-                  <div class="progress mb-3" style="height: 10px;">
-                    <div class="progress-bar bg-info progress-bar-animated" [style.width]="getProgress(item) + '%'" role="progressbar"
-                         [attr.aria-valuenow]="getProgress(item)" aria-valuemin="0" aria-valuemax="100">
-                      {{ getProgress(item) | number: '1.0-0' }}%
-                    </div>
-                  </div>
-                </div>
-              
-                <div class="card-footer text-center">
-                  <button class="btn btn-sm btn-outline-dark border-0 p-0 py-2 px-4">
-                    <i class="bi bi-eye "></i>View Details
-                  </button>
-                </div>
-              </div>
-              
-              
+  <h4>Enrollment Courses</h4>
+  <hr>
+  <div class="row">
+    <div class="col-4 mx-auto">
+      <input type="text" class="form-control" placeholder="Search your Courses" [(ngModel)]="SearchCourseData">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 my-4" *ngFor="let item of StudentDetails.enrollments | searchMycourse:SearchCourseData let i = index " >
+      <div class="card shadow-sm border-0 rounded">
+        <img src="{{item.courseScheduleResponse.courseResponse.imageUrl}}" class="card-img-top" alt="Course image">
+
+        <div class="card-header text-white text-center" [ngClass]="getProgressBarClass(item)">
+          <h5><i class="bi bi-bookmark-check pe-2"></i>{{item.courseScheduleResponse.courseResponse.courseName}}</h5>
         </div>
+
+        <div class="card-body">
+          <p><strong><i class="bi bi-calendar pe-2"></i>Start Date:</strong> {{item.courseScheduleResponse.startDate}}
+          </p>
+          <p><strong><i class="bi bi-clock pe-2"></i>Start Time:</strong> {{item.courseScheduleResponse.time}}</p>
+          <p><strong><i class="bi bi-graph-up pe-2"></i>Progress:</strong> <span class="text-dark">In Process</span></p>
+
+          <div class="progress mb-3" style="height: 10px;">
+            <div class="progress-bar bg-info progress-bar-animated" [style.width]="getProgress(item) + '%'"
+              role="progressbar" [attr.aria-valuenow]="getProgress(item)" aria-valuemin="0" aria-valuemax="100">
+              {{ getProgress(item) | number: '1.0-0' }}%
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer text-center">
+          <button class="btn btn-sm btn-outline-dark border-0 p-0 py-2 px-4">
+            <i class="bi bi-eye "></i>View Details
+          </button>
+        </div>
+      </div>
 
 
     </div>
+
+
+  </div>
 </div>

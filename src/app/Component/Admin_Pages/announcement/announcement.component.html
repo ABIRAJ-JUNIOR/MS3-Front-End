@@ -2,60 +2,59 @@
   <div class="row">
     <!-- Add Announcement Form -->
     <div class="col-lg-4 mb-4">
-      <div class="card">
-        <div class="card-header">
-            <h4 class="mb-0">Add New Announcement</h4>
-          </div>
-      </div>
-      <div class="card-body">
-        <form [formGroup]="announcementForm" (ngSubmit)="onSubmit()">
-               <!-- Title Field -->
-               <div class="form-group mb-3">
-                <label class="font-weight-bold">Title<span class="text-danger">*</span></label>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="bi bi-megaphone"></i></span>
-                  </div>
-                  <input formControlName="title" type="text" class="form-control" placeholder="Announcement Title">
+      <div class="card shadow-sm">
+        <div class="card-header bg-light text-dark border-0">
+          <h4 class="mb-0">Add New Announcement</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="announcementForm" (ngSubmit)="onSubmit()">
+            <!-- Title Field -->
+            <div class="form-group mb-4">
+              <label class="font-weight-bold">Title<span class="text-danger">*</span></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-white"><i class="bi bi-megaphone text-danger"></i></span>
                 </div>
+                <input formControlName="title" type="text" class="form-control border-start-0" placeholder="Announcement Title">
               </div>
-
-               <!-- Expiration Date Field -->
-            <div class="form-group mb-3">
-                <label class="font-weight-bold">Expiration Date<span class="text-danger">*</span></label>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="bi bi-calendar"></i></span>
-                  </div>
-                  <input formControlName="expirationDate" type="date" class="form-control">
+            </div>
+    
+            <!-- Expiration Date Field -->
+            <div class="form-group mb-4">
+              <label class="font-weight-bold">Expiration Date<span class="text-danger">*</span></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-white"><i class="bi bi-calendar text-danger"></i></span>
                 </div>
+                <input formControlName="expirationDate" type="date" class="form-control border-start-0">
               </div>
-
-               <!-- Audience Type Field -->
-            <div class="form-group mb-3">
-                <label class="font-weight-bold">Audience Type<span class="text-danger">*</span></label>
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="bi bi-people"></i></span>
-                  </div>
-                  <select formControlName="audienceType" class="form-control">
-                    <option value="1">Admins</option>
-                    <option value="2">Students</option>
-                    <option value="3">Everyone</option>
-                  </select>
+            </div>
+    
+            <!-- Audience Type Field -->
+            <div class="form-group mb-4">
+              <label class="font-weight-bold">Audience Type<span class="text-danger">*</span></label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-white"><i class="bi bi-people text-danger"></i></span>
                 </div>
+                <select formControlName="audienceType" class="form-control border-start-0">
+                  <option value="1">Admins</option>
+                  <option value="2">Students</option>
+                  <option value="3">Everyone</option>
+                </select>
               </div>
-               <!-- Submit and Reset Buttons -->
+            </div>
+    
+            <!-- Submit and Reset Buttons -->
             <div class="d-flex justify-content-between">
-                <button type="button" class="btn btn-reset" (click)="onReset()">Reset</button>
-                <button type="submit" class="btn btn-custom" [disabled]="announcementForm.invalid">Confirm</button>
-              </div>
-        </form>
-
+              <button type="button" class="btn btn-outline-secondary px-4" (click)="onReset()">Reset</button>
+              <button type="submit" class="btn btn-danger px-4" [disabled]="announcementForm.invalid">Confirm</button>
+            </div>
+          </form>
+        </div>
       </div>
-
-
     </div>
+    
     <!-- Announcements Table -->
     <div class="col-lg-8">
       <div class="table-wrapper">

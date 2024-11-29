@@ -2,13 +2,13 @@
     <!-- Payment Progress -->
     <div class="d-flex justify-content-between align-item-center mt-4">
         <h4 class="">Payment Progress</h4>
-        <button class="btn btn-outline-primary btn-sm p-0 py-2 px-3 ">
+        <button class="btn btn-outline-primary btn-sm p-0 py-2 px-3 " (click)="downloadTableAsImage()">
             <i class="bi bi-download"></i> All Payments
         </button>
     </div>
 
     <!-- Table View -->
-    <div class="table-responsive mt-4">
+    <div class="table-responsive mt-4" #table>
         <table class="table table-striped table-hover align-middle mb-0 table-md">
             <thead class="table-dark">
                 <tr>

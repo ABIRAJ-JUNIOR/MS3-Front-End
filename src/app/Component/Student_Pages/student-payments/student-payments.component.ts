@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Student } from '../../../Modals/modals';
 import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
 import { StudentService } from '../../../Service/Student/student.service';
 import { CommonModule } from '@angular/common';
 import { PaymentDataService } from '../../../Service/Payment/payment-data.service';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-student-payments',
@@ -101,5 +102,23 @@ export class StudentPaymentsComponent implements OnInit {
   }
   cancelPayment() {
     this.InstallmentPayment = ""
+  }
+
+
+  
+  @ViewChild('table', { static: false }) table!: ElementRef;
+
+  downloadTableAsImage() {
+    // Capture the table using html2canvas
+    html2canvas(this.table.nativeElement).then(canvas => {
+      // Convert the canvas to an image (PNG format)
+      const imageData = canvas.toDataURL('image/png');
+
+      // Create a link element to trigger the download
+      const link = document.createElement('a');
+      link.href = imageData;
+      link.download = 'table-image.png';  // Set the filename for the download
+      link.click();  // Trigger the download
+    });
   }
 }

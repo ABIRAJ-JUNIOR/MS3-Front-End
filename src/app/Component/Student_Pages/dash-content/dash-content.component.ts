@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js';
 import { AssesmentService } from '../../../Service/assesment.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { Student } from '../../../Modals/modals';
+import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
+import { StudentService } from '../../../Service/Student/student.service';
 
 @Component({
   selector: 'app-dash-content',
@@ -12,24 +16,45 @@ import { CommonModule } from '@angular/common';
 })
 export class DashContentComponent implements OnInit {
 
-  constructor(private assementService: AssesmentService) {
+  StudentDetails: any;
+  StudentTokenDetails: any;
 
+  TotalPayments:number=0
+  TotalCourse:number=0
+
+  constructor(private StudentDashDataService: StudentDashDataServiceService, private StudentApiService: StudentService, private router: Router) {
   }
-  paginatedAssesment: any[] = [];
+  
+  ngOnInit(): void {
 
-  ngOnInit() {
-    this.paginateAssesment()
-  }
+    this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
-  paginateAssesment() {
-    this.assementService.getAllAssesment().subscribe((d: any) => {
-      this.paginatedAssesment = d
-      console.log(this.paginatedAssesment)
-    }, (error) => {
-      console.log(error)
+    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
+      this.StudentDetails = student
+      console.log(this.StudentDetails)
+
+      this.totalPaymentCalculate()
     }
-    )
+      ,
+      (error) => {
+        this.router.navigate([''])
+      })
+
   }
+
+
+  totalPaymentCalculate(){
+    for (let i:number = 0; i <  this.StudentDetails.enrollments.length; i++) {
+      const element = this.StudentDetails.enrollments[i].paymentResponse.length;
+      console.log(element)
+      for (let p:number = 0; p < element; p++) {
+          this.TotalPayments+=1
+      }
+    }
+  
+  }
+
+
 
   ngAfterViewInit() {
     this.createEnrollmentChart();

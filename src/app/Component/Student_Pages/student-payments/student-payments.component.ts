@@ -73,7 +73,7 @@ export class StudentPaymentsComponent implements OnInit {
   calculateProgressColor(progress: number): string {
     if (progress < 40) {
       return 'bg-danger';
-    } else if (progress < 60) {
+    } else if (progress < 75) {
       return 'bg-warning';
     } else {
       return 'bg-success';

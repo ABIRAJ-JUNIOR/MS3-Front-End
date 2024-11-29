@@ -26,7 +26,7 @@
 
                 <ng-container *ngFor="let item of NewEnrollment">
                     <!-- Installment Row -->
-                    <tr *ngIf="item.paymentResponse.length < 3 && item.paymentStatus == payCheck ">
+                    <tr *ngIf="item.paymentStatus == payCheck ">
                         <td>Installment #{{item.paymentResponse[item.paymentResponse.length-1].installmentNumber}}</td>
                         <td>{{item.courseScheduleResponse.courseResponse.courseName}}</td>
                         <td>{{item.paidTotal | number:'1.2-2' }}</td>

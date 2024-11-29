@@ -22,7 +22,7 @@
 
             <ng-container *ngFor="let item of Enrollments" >
                 <!-- Installment Row -->
-                <tr *ngIf="item.paymentStatus == payCheck || item.paymentResponse.length >= 3">
+                <tr *ngIf="item.paymentStatus == payCheck">
                     <td>Installment #{{item.paymentResponse[item.paymentResponse.length-1].installmentNumber}}</td>
                     <td>{{item.courseScheduleResponse.courseResponse.courseName}}</td>
                     <td>{{item.courseScheduleResponse.courseResponse.courseFee}}</td>

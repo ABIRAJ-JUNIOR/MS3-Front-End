@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
-import { StudentService } from '../../../Service/Student/student.service';
+import { StudentDashDataService } from '../../../Service/Data/Student_Data/student-dash-data.service';
+import { StudentService } from '../../../Service/API/Student/student.service';
 import { Student } from '../../../Modals/modals';
 import { Router, RouterModule } from '@angular/router';
 
@@ -25,7 +25,7 @@ export class StudentProfileComponent {
 
   selectedQuote: string = '';
 
-  constructor(private StudentDashDataService: StudentDashDataServiceService, private StudentApiService: StudentService, private router: Router) {
+  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
     this.generateNewQuote();
   }
 

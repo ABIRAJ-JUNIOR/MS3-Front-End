@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../../../Service/Auth/auth.service';
+import { AuthService } from '../../../Service/API/Auth/auth.service';
 import { jwtDecode } from 'jwt-decode';
 
 @Component({

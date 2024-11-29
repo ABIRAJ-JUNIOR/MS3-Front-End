@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, ChartConfiguration } from 'chart.js';
-import { AssesmentService } from '../../../Service/assesment.service';
+import { AssesmentService } from '../../../Service/API/Assessment/assesment.service';
 import { CommonModule } from '@angular/common';
 
 @Component({

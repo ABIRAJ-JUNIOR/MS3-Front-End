@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Student } from '../../../Modals/modals';
-import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
-import { StudentService } from '../../../Service/Student/student.service';
+import { StudentDashDataService } from '../../../Service/Data/Student_Data/student-dash-data.service';
+import { StudentService } from '../../../Service/API/Student/student.service';
 
 @Component({
   selector: 'app-student-mycourses',
@@ -15,7 +15,7 @@ import { StudentService } from '../../../Service/Student/student.service';
 export class StudentMycoursesComponent implements OnInit{
 
 
-  constructor(private StudentDashDataService: StudentDashDataServiceService, private StudentApiService: StudentService, private router: Router) {
+  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
 
   StudentDetails: any;

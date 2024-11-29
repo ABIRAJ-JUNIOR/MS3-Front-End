@@ -1,11 +1,12 @@
-import { Component, afterNextRender } from '@angular/core';
 import { Assessment, Course} from '../../../Modals/modals';
-import { CourseService } from '../../../Service/Course/course.service';
-import { CommonModule, formatCurrency } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { CourseService } from '../../../Service/API/Course/course.service';
+import { AssesmentService } from '../../../Service/API/Assessment/assesment.service';
 
 @Component({
   selector: 'app-course-assessment',
@@ -32,6 +33,7 @@ export class CourseAssessmentComponent {
 
   constructor(
     private courseService: CourseService,
+    private assessmentService:AssesmentService,
     private fb: FormBuilder,
     private toastr: ToastrService
   ) {
@@ -54,7 +56,7 @@ export class CourseAssessmentComponent {
   }
 
   loadItems(): void {
-    this.courseService.assessmentPagination(this.currentPage, this.pageSize).subscribe({
+    this.assessmentService.assessmentPagination(this.currentPage, this.pageSize).subscribe({
       next: (response: any) => {
         this.assessments = response.items;
         this.totalPages = response.totalPages;
@@ -112,7 +114,7 @@ export class CourseAssessmentComponent {
 
 
   private addAssessment(assessment:AssessmentRequest):void{
-    this.courseService.addAssessment(assessment).subscribe({
+    this.assessmentService.addAssessment(assessment).subscribe({
       next: (response: any) => {
         this.toastr.success('Assessment Create successfull', '', {
           positionClass: 'toast-top-right',
@@ -135,7 +137,7 @@ export class CourseAssessmentComponent {
   private updateAssessment(assessment:AssessmentRequest):void{
     assessment.startDate = new Date(assessment.startDate)
     assessment.endDate = new Date(assessment.endDate)
-    this.courseService.updateAssessment(this.assessmentId,assessment).subscribe({
+    this.assessmentService.updateAssessment(this.assessmentId,assessment).subscribe({
       next: (response: any) => {
         this.toastr.success('Update successfull', '', {
           positionClass: 'toast-top-right',

@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Course, CourseCategory, Schedule } from '../../Modals/modals';
-import { CourseRequest } from '../../Component/Admin_Pages/course-list/course-list.component';
-import { CourseScheduleRequest } from '../../Component/Admin_Pages/course-schedule/course-schedule.component';
-import { AssessmentRequest } from '../../Component/Admin_Pages/course-assessment/course-assessment.component';
+import { CourseRequest } from '../../../Component/Admin_Pages/course-list/course-list.component';
+import { CourseScheduleRequest } from '../../../Component/Admin_Pages/course-schedule/course-schedule.component';
+import { Course, CourseCategory } from '../../../Modals/modals';
+
 
 @Injectable({
   providedIn: 'root'
@@ -41,7 +41,6 @@ export class CourseService {
     })
   }
 
-
   //Course Schedule
   schedulePagination(pageNumber:number , pageSize:number){
     return this.http.get<any>(this.apiUrl + `/CourseSchedule/Pagination/${pageNumber}/${pageSize}`)
@@ -51,17 +50,6 @@ export class CourseService {
   }
   updateCourseSchedule(id:string ,CourseSchedule:CourseScheduleRequest){
     return this.http.put(this.apiUrl + `/CourseSchedule/Update/${id}`, CourseSchedule)
-  }
-
-  //Assessment
-  assessmentPagination(pageNumber:number , pageSize:number){
-    return this.http.get<any>(this.apiUrl + `/Assessment/Pagination/${pageNumber}/${pageSize}`)
-  }
-  addAssessment(Assessment:AssessmentRequest){
-    return this.http.post(this.apiUrl + '/Assessment/Add', Assessment)
-  }
-  updateAssessment(id:string ,Assessment:AssessmentRequest){
-    return this.http.put(this.apiUrl + `/Assessment/Update/${id}`, Assessment)
   }
 
   //Course Category

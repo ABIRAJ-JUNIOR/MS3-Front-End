@@ -3,7 +3,7 @@ import { Router, RouterModule } from '@angular/router';
 import { TopinfoComponent } from '../topinfo/topinfo.component';
 import { jwtDecode } from 'jwt-decode';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../../Service/Auth/auth.service';
+import { AuthService } from '../../../Service/API/Auth/auth.service';
 
 @Component({
   selector: 'app-navebar-01',

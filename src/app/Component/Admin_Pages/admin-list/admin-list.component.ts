@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../../../Service/Admin/admin.service';
 import { Admin } from '../../../Modals/modals';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { AdminService } from '../../../Service/API/Admin/admin.service';
 
 @Component({
   selector: 'app-admin-list',

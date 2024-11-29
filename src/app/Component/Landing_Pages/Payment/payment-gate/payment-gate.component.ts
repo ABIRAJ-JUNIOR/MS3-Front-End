@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { PaymentDataService } from '../../../../Service/Payment/payment-data.service';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { jwtDecode } from "jwt-decode";
-import { Enrollment } from '../../../../Modals/modals';
+import { PaymentDataService } from '../../../../Service/Data/Payment_Data/payment-data.service';
 
 @Component({
   selector: 'app-payment-gate',
@@ -67,12 +66,6 @@ export class PaymentGateComponent {
 
   }
 
-
-
-
-
-
-
   AddCardDetails() {
     this.LocalCardDetails = JSON.parse(this.PaymentDataService.GetCardDetails())
   }
@@ -84,17 +77,12 @@ export class PaymentGateComponent {
 
   }
 
-
-
-
   PaymentPlans: number = 1;
-
 
   CancelPayment() {
     this.router.navigate(['/course']);
     localStorage.removeItem("PurchaseCourse")
   }
-
 
   ConfirmPayment() {
 

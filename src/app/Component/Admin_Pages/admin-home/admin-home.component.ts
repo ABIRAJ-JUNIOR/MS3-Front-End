@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StudentService} from '../../../Service/Student/student.service';
+import { StudentService} from '../../../Service/API/Student/student.service';
 import { CommonModule } from '@angular/common';
 import { SearchStudentsPipe } from '../../../Pipes/search-students.pipe';
 import { FormsModule } from '@angular/forms';

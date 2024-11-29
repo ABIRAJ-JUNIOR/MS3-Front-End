@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
 import { Student } from '../../../Modals/modals';
-import { StudentService } from '../../../Service/Student/student.service';
+import { StudentService } from '../../../Service/API/Student/student.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { StudentDashDataService } from '../../../Service/Data/Student_Data/student-dash-data.service';
 
 @Component({
   selector: 'app-student-setting',
@@ -22,7 +22,7 @@ export class StudentSettingComponent implements OnInit {
   
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
-  constructor(private StudentDashDataService: StudentDashDataServiceService, private StudentApiService: StudentService, private fb: FormBuilder, private toastr: ToastrService) {
+  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private fb: FormBuilder, private toastr: ToastrService) {
 
     this.studentForm = this.fb.group({
       firstName: [''],

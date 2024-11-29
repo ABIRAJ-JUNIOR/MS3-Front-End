@@ -1,13 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { StudentService } from '../../../Service/Student/student.service';
-import { Router } from '@angular/router';
-import { Course, Schedule, Student } from '../../../Modals/modals';
-import { CourseService } from '../../../Service/Course/course.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { Schedule } from '../../../Modals/modals';
+import { CourseService } from '../../../Service/API/Course/course.service';
 
 @Component({
   selector: 'app-course-schedule',

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
+import { StudentDashDataService } from '../../../Service/Data/Student_Data/student-dash-data.service';
 
 @Component({
   selector: 'app-student-dashboard',
@@ -17,7 +17,7 @@ export class StudentDashboardComponent implements OnInit {
     this.sidebarCollapsed = !this.sidebarCollapsed;
   }
 
-  constructor(private StudentDashDataService:StudentDashDataServiceService){
+  constructor(private StudentDashDataService:StudentDashDataService){
 
   }
 

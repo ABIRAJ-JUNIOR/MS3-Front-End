@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Student } from '../../../Modals/modals';
-import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
-import { StudentService } from '../../../Service/Student/student.service';
+import { StudentDashDataService } from '../../../Service/Data/Student_Data/student-dash-data.service';
+import { StudentService } from '../../../Service/API/Student/student.service';
 import html2canvas from 'html2canvas';
 
 
@@ -16,7 +16,7 @@ import html2canvas from 'html2canvas';
 })
 export class StudentResultComponent {
 
-  constructor(private StudentDashDataService: StudentDashDataServiceService, private StudentApiService: StudentService,  private toastr: ToastrService) {
+  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService,  private toastr: ToastrService) {
 
     
   }

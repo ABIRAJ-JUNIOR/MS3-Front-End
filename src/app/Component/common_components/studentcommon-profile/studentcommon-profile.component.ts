@@ -4,6 +4,7 @@ import { Student } from '../../../Modals/modals';
 import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
 import { StudentService } from '../../../Service/Student/student.service';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-studentcommon-profile',
@@ -14,26 +15,60 @@ import { CommonModule } from '@angular/common';
 })
 export class StudentcommonProfileComponent {
 
-  constructor(private StudentDashDataService: StudentDashDataServiceService, private StudentApiService: StudentService, private router: Router) {
+  constructor(private tostr:ToastrService, private StudentDashDataService: StudentDashDataServiceService, private StudentApiService: StudentService, private router: Router) {
   }
 
 
   StudentDetails: any;
   StudentTokenDetails: any;
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
-
+  previewUrl: string | null = null;
   ngOnInit(): void {
 
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
       this.StudentDetails = student
+      this.previewUrl=this.StudentDetails.imageUrl
       console.log(this.StudentDetails)
     }
       ,
       (error) => {
         this.router.navigate([''])
       })
+
+  }
+
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+
+      // Generate a preview URL for the image
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.previewUrl = e.target.result; // Update preview
+      };
+      reader.readAsDataURL(file);
+
+      this.uploadProfilePicture(file);
+    }
+  }
+
+  // Upload file to backend
+  private uploadProfilePicture(file: File): void {
+    const formData = new FormData();
+    formData.append('image', file); 
+    this.StudentApiService.addImage(this.StudentTokenDetails.Id,formData).subscribe((response:any)=>{
+
+        this.tostr.success(response.message);
+
+    },(error)=>{
+      this.tostr.error(error.message);
+    })
+
 
   }
 }

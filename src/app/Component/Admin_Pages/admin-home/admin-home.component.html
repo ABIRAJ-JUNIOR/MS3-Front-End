@@ -160,18 +160,19 @@
           <div class="card-body p-4">
             <h6 class="fw-semibold text-muted text-uppercase text-center">Course Popularity</h6>
             <div class="chart-container" style="height: 250px;">
-              <ngx-charts-bar-horizontal
-                [results]="coursePopularity"
-                [scheme]="'vivid'"
-                [xAxis]="true"
-                [yAxis]="true"
-                [showXAxisLabel]="true"
-                [showYAxisLabel]="true"
-                xAxisLabel="Popularity"
-                yAxisLabel="Courses"
-                [gradient]="false"
-                [animations]="true">
-              </ngx-charts-bar-horizontal>
+              <ngx-charts-gauge
+              [results]="groupedEnrollmentStats"
+              [scheme]="'cool'"
+              [animations]="true"
+              [angleSpan]="240"
+              [startAngle]="-120"
+              [legend]="true"
+              [units]="'Enrollments'"
+              [bigSegments]="20"
+              [min]="0"
+              [max]="100">
+            </ngx-charts-gauge>
+    
             </div>
           </div>
         </div>

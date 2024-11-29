@@ -142,9 +142,9 @@ export class AdminHomeComponent {
   paymentOverview = [];
 
   coursePopularity = [
-    { name: 'Python', value: 80 },
-    { name: 'JavaScript', value: 60 },
-    { name: 'Java', value: 40 },
+    { 'name': 'Python', 'value': 80 },
+    { 'name': 'JavaScript', 'value': 60 },
+    { 'name': 'Java', 'value': 40 },
   ];
 }
 

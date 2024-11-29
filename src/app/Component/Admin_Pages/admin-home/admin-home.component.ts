@@ -4,11 +4,10 @@ import { CommonModule } from '@angular/common';
 import { SearchStudentsPipe } from '../../../Pipes/search-students.pipe';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { Assessment, Course, Payment, Student } from '../../../Modals/modals';
 import { PaymentService } from '../../../Service/API/Payment/payment.service';
 import { CourseService } from '../../../Service/API/Course/course.service';
-import { AssessmentRequest } from '../course-assessment/course-assessment.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { AssesmentService } from '../../../Service/API/Assessment/assesment.service';
 
 @Component({
@@ -19,7 +18,7 @@ import { AssesmentService } from '../../../Service/API/Assessment/assesment.serv
     SearchStudentsPipe,
     FormsModule,
     RouterModule,
-    NgxChartsModule,
+    NgxChartsModule
   ],
   templateUrl: './admin-home.component.html',
   styleUrl: './admin-home.component.css',

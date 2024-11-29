@@ -15,9 +15,6 @@ import { PaymentDataService } from '../../../../Service/Data/Payment_Data/paymen
 export class PaymentGateComponent {
 
   recievedModalItems: any[] = []; // Array to hold the received data
-
-
-
   CardFormData: FormGroup;
 
   constructor(private PaymentDataService: PaymentDataService, private fb: FormBuilder, private router: Router) {

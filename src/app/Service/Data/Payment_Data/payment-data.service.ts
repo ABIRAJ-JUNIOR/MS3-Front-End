@@ -36,7 +36,7 @@ export class PaymentDataService {
 
   adddPendingpayment(data: any) {
     localStorage.setItem('pendingPayment', JSON.stringify(data))
-
+    localStorage.setItem('pendingPayment', JSON.stringify(data))
   }
 
   getPendingPayment():any{

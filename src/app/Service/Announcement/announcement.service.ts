@@ -16,6 +16,12 @@ GetAllAnouncement(){
   return this.http.get<any[]>(`${this.apiUrl}/Announcement`);
 }
 deleteAnnouncement(id:string){
-  return this.http.delete(`${this.apiUrl}/Announcement/${id}`);
+  return this.http.delete(`${this.apiUrl}/Announcement/${id}`,{
+    responseType:'text'
+  });
+}
+Pagination(pagenumber:Number,pagesize:Number){
+  return this.http.get(`${this.apiUrl}/Announcement/Pagination?pagenumber=${pagenumber}&pagesize=${pagesize}`);
+ 
 }
 }

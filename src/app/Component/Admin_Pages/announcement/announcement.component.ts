@@ -7,83 +7,119 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-announcement',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './announcement.component.html',
   styleUrl: './announcement.component.css'
 })
 export class AnnouncementComponent {
   announcementForm!: FormGroup;
-  Announcements:any[]=[]
+  Announcements: any[] = []
 
-  constructor(private fb: FormBuilder,private Announcemenrservice:AnnouncementService,private toastr:ToastrService) {}
+  // Pagination
+  currentPage: number = 1;
+  pageSize: number = 12;
+  totalPages: number = 0;
+  currentLength: number = 0;
+  totalItems: number = 0;
+
+  constructor(private fb: FormBuilder, private Announcemenrservice: AnnouncementService, private toastr: ToastrService) {
+    this.announcementForm = this.fb.group({
+      title: ['', [Validators.required]],
+      expirationDate: ['', Validators.required],
+      audienceType: ['', Validators.required]
+    });
+   }
+
   ngOnInit(): void {
-    // Initialize the form with validation rules
     this.loaditems()
   }
-    // Method to handle form submission
-    onSubmit(): void {
-      if (this.announcementForm.valid) {
-        // Log the form value to the console
-        var data=this.announcementForm.value
-        data.audienceType=Number(data.audienceType)
-        const Formdata:AnnoincemenrReqest={
-          title:data.title,
-          expirationDate:data.expirationDate,
-          audienceType:data.audienceType
-        }
-         this.Announcemenrservice.AddAnouncement(Formdata).subscribe({
-          next:(responce:any)=>{
 
-          },
-          complete:() =>{
-            this.loaditems()
-            this.toastr.success('Announcement added  Successful', '', {
-              positionClass: 'toast-top-right',
-              progressBar: true,
-              timeOut: 4000,
-            });
-          },
-          error:(err:any)=> {
-            this.toastr.error('Failed to load data', '', {
-              positionClass: 'toast-top-right',
-              progressBar: true,
-            });
-          },
-         })
-        console.log('Form Data:', this.announcementForm.value);
-        this.announcementForm.reset();
-      } else {
-        console.log('Form is invalid');
+  onSubmit(): void {
+    if (this.announcementForm.valid) {
+      var data = this.announcementForm.value
+      data.audienceType = Number(data.audienceType)
+      const Formdata: AnnoincemenrReqest = {
+        title: data.title,
+        expirationDate: data.expirationDate,
+        audienceType: data.audienceType
       }
+      this.Announcemenrservice.AddAnouncement(Formdata).subscribe({
+        next: (responce: any) => {
+
+        },
+        complete: () => {
+          this.loaditems()
+          this.toastr.success('Announcement added  Successful', '', {
+            positionClass: 'toast-top-right',
+            progressBar: true,
+            timeOut: 4000,
+          });
+        },
+        error: (err: any) => {
+          this.toastr.error('Failed to load data', '', {
+            positionClass: 'toast-top-right',
+            progressBar: true,
+          });
+        },
+      })
+      console.log('Form Data:', this.announcementForm.value);
+      this.announcementForm.reset();
+    } else {
+      console.log('Form is invalid');
     }
-     // Method to reset the form
+  }
+
   onReset(): void {
     this.announcementForm.reset();
   }
 
-  loaditems():void{
-
-    this.announcementForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(3)]],
-      expirationDate: ['', Validators.required],
-      audienceType: ['', Validators.required]
-    });
-    this.Announcemenrservice.GetAllAnouncement().subscribe({
-      next:(value:any)=> {
-        this.Announcements=value
+  loaditems(): void {
+    this.Announcemenrservice.Pagination(this.currentPage, this.pageSize).subscribe({
+      next: (value: any) => {
+        this.Announcements = value.items,
+        this.totalPages = value.totalPages;
+        this.totalItems = value.totalItem;
         console.log(value);
-        
-      }
+
+      },
+      complete: () => {
+        this.currentLength = this.Announcements.length
+      },
     })
   }
-  onDelete(id:string){
-    
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.loaditems();
+    }
+  }
+
+  onDelete(id: string) {
+    this.Announcemenrservice.deleteAnnouncement(id).subscribe({
+      next: (responce: any) => { }
+      ,
+      complete: () => {
+        this.toastr.success('Delete  Successful', '', {
+          positionClass: 'toast-top-right',
+          progressBar: true,
+          timeOut: 4000,
+        });
+        this.loaditems();
+      },
+      error: (err: any) => {
+        this.toastr.error('Failed to load data', '', {
+          positionClass: 'toast-top-right',
+          progressBar: true,
+        });
+      }
+    })
   }
 }
 
 
-export interface AnnoincemenrReqest{
-  title:string;
-  expirationDate:string;
-  audienceType:Number;
+export interface AnnoincemenrReqest {
+  title: string;
+  expirationDate: string;
+  audienceType: Number;
 }

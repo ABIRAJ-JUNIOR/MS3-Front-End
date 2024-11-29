@@ -47,7 +47,7 @@ export class StudentPaymentsComponent implements OnInit {
         })
         let payment = {
           ...element,
-          paidTotal: Number(amount)
+          paidTotal: Number(Math.round(amount * 100) / 100)
         }
         this.NewEnrollment.push(payment)
         console.log(this.NewEnrollment)

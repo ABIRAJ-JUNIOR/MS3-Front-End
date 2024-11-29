@@ -12,7 +12,6 @@
                 <th><i class="bi bi-hash"></i> Installment</th>
                 <th><i class="bi bi-book text-primary"></i> Course name</th>
                 <th><i class="bi bi-currency-dollar text-success"></i> Amount Paid</th>
-                <th><i class="bi bi-currency-dollar text-success"></i> Pending amount</th>
                 <th><i class="bi bi-calendar-event text-info"></i> Payment Date</th>
                 <th><i class="bi bi-credit-card text-warning"></i> Payment Method</th>
                 <th><i class="bi bi-arrow-repeat text-secondary"></i> Payment Type</th>
@@ -24,14 +23,12 @@
             <ng-container *ngFor="let item of Enrollments" >
                 <!-- Installment Row -->
                 <tr *ngIf="item.paymentStatus == payCheck || item.paymentResponse.length >= 3">
-                    <td>Installment #{{item.paymentResponse[0].installmentNumber}}</td>
+                    <td>Installment #{{item.paymentResponse[item.paymentResponse.length-1].installmentNumber}}</td>
                     <td>{{item.courseScheduleResponse.courseResponse.courseName}}</td>
-                    <td>{{item.paymentResponse[0].amountPaid}}</td>
-                    <td>{{item.courseScheduleResponse.courseResponse.courseFee - item.paymentResponse[0].amountPaid}}
-                    </td>
-                    <td>{{item.paymentResponse[0].paymentDate}}</td>
-                    <td>{{item.paymentResponse[0].paymentMethod}}</td>
-                    <td>{{item.paymentResponse[0].paymentType}}</td>
+                    <td>{{item.courseScheduleResponse.courseResponse.courseFee}}</td>
+                    <td>{{item.paymentResponse[item.paymentResponse.length-1].paymentDate}}</td>
+                    <td>{{item.paymentResponse[item.paymentResponse.length-1].paymentMethod}}</td>
+                    <td>{{item.paymentResponse[item.paymentResponse.length-1].paymentType}}</td>
                     <td>
                         <button class="btn btn-outline-primary btn-sm p-0 py-2 px-3 m-1">
                             <i class="bi bi-download"></i> Receipt

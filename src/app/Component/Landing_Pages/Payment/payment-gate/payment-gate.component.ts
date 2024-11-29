@@ -97,9 +97,9 @@ export class PaymentGateComponent {
       for (let i: number = 0; i < arrayLength; i++) {
         const element = array[i];
 
-        this.installmentTotal += element.amountPaid
+        this.installmentTotal +=   Math.round(element.amountPaid * 100) / 100
       }
-      this.installmentTotal = this.recievedModalItems[0].courseScheduleResponse.courseResponse.courseFee - this.installmentTotal
+      this.installmentTotal = Math.round( (this.recievedModalItems[0].courseScheduleResponse.courseResponse.courseFee - this.installmentTotal) * 100) / 100
 
 
 

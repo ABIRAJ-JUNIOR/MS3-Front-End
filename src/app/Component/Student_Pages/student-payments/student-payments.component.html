@@ -29,9 +29,9 @@
                     <tr *ngIf="item.paymentResponse.length < 3 && item.paymentStatus == payCheck ">
                         <td>Installment #{{item.paymentResponse[item.paymentResponse.length-1].installmentNumber}}</td>
                         <td>{{item.courseScheduleResponse.courseResponse.courseName}}</td>
-                        <td>{{item.paidTotal}}</td>
+                        <td>{{item.paidTotal | number:'1.2-2' }}</td>
                         <td>{{item.courseScheduleResponse.courseResponse.courseFee -
-                            item.paidTotal}}
+                            item.paidTotal | number:'1.2-2' }}
                         </td>
                         <td>{{item.paymentResponse[item.paymentResponse.length-1].paymentDate}}</td>
                         <td>{{item.paymentResponse[item.paymentResponse.length-1].paymentMethod}}</td>

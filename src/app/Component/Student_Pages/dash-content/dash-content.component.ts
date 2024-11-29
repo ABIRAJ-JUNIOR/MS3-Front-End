@@ -18,8 +18,9 @@ export class DashContentComponent implements OnInit {
   StudentDetails: any;
   StudentTokenDetails: any;
 
-  TotalPayments:number=0
-  TotalCourse:number=0
+  TotalPayments:number=0;
+  TotalCourse:number=0;
+  TotalAssignments:number=0;
 
   constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
@@ -45,10 +46,11 @@ export class DashContentComponent implements OnInit {
 
   totalPaymentCalculate(){
     for (let i:number = 0; i <  this.StudentDetails.enrollments.length; i++) {
-      const element = this.StudentDetails.enrollments[i].paymentResponse.length;
+      const element = this.StudentDetails.enrollments[i].paymentResponse;
+      this.TotalAssignments += this.StudentDetails.enrollments[i].courseScheduleResponse.courseResponse.assessmentResponse.length
       console.log(element)
-      for (let p:number = 0; p < element; p++) {
-          this.TotalPayments+=1
+      for (let p:number = 0; p < element.length; p++) {
+          this.TotalPayments+=Number(element[p].amountPaid)
       }
     }
   }

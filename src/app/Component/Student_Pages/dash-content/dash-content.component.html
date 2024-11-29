@@ -1,45 +1,71 @@
 <!-- Dashboard Overview Section -->
 <h2 class="mb-4 text-dark fw-bold">Dashboard Overview</h2>
-
 <div class="row mb-4">
+  <!-- Assessments Card -->
   <div class="col-md-3 mb-4">
-    <div class="card text-white bg-dark shadow-lg border-0 overview-card">
+    <div class="card text-white  shadow-lg border-0 overview-card" style="background-color: #0c0800;
+    background-image: linear-gradient(132deg, #0c0800 0%, #1ac0ff 100%);
+    ">
       <div class="card-body">
-        <h5 class="card-title text-primary"><i class="fas fa-users me-2"></i> Assesments</h5>
-        <p class="display-6 fw-bold">{{StudentDetails.enrollments.paym || 0}}</p>
+        <h5 class="card-title text-light fs-4 fw-bold"><i class="bi bi-pencil-square me-2" style="font-size: 1.5rem; "></i> Assessments</h5>
+        <p class="display-6 fw-bold text-light mb-0">{{TotalAssignments || 0}}</p>
+        <p class="text-light fs-6">Total number of assessments</p>
+      </div>
+      <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
+        <small class="text-light"><i class="bi bi-caret-up-fill" style="font-size: 1rem;"></i> Waymakers Assesment</small>
+        <i class="bi bi-pie-chart-fill text-light" style="font-size: 1.25rem;"></i>
       </div>
     </div>
   </div>
 
+  <!-- Payments Card -->
   <div class="col-md-3 mb-4">
-    <div class="card text-white bg-gradient-primary shadow-lg border-0 overview-card"
-      style="background: linear-gradient(135deg, #2c3e50, #34495e);">
+    <div class="card text-white bg-gradient-primary shadow-lg border-0 overview-card" style="background: linear-gradient(135deg, #2c3e50, #34495e); border-radius: 15px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
       <div class="card-body">
-        <h5 class="card-title text-light"><i class="fas fa-coins me-2"></i> Payments</h5>
-        <p class="display-6 fw-bold">{{TotalPayments}}</p>
+        <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-coins me-2" style="font-size: 1.5rem;"></i> Payments</h5>
+        <p class="display-6 fw-bold text-warning mb-0">{{TotalPayments | number:'1.2-2'}}</p>
+        <p class="text-white fs-6">Total payments made</p>
+      </div>
+      <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
+        <small class="text-light"><i class="bi bi-arrow-up-circle" style="font-size: 1rem;"></i> Waymakers Pay</small>
+        <i class="bi bi-pie-chart-fill text-light" style="font-size: 1.25rem;"></i>
       </div>
     </div>
   </div>
 
+  <!-- Courses Card -->
   <div class="col-md-3 mb-4">
-    <div class="card text-white bg-gradient-info shadow-lg border-0 overview-card"
-      style="background: linear-gradient(135deg, #1abc9c, #16a085);">
+    <div class="card text-white bg-gradient-info shadow-lg border-0 overview-card" style="background-color: #0c0800;
+    background-image: linear-gradient(132deg, #0c0800 0%, #b30003 100%);
+    ">
       <div class="card-body">
-        <h5 class="card-title text-light"><i class="fas fa-book me-2"></i> Courses</h5>
-        <p class="display-6 fw-bold">{{this.StudentDetails.enrollments.length || 0}}</p>
+        <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-book me-2" style="font-size: 1.5rem;"></i>Enrolled Courses</h5>
+        <p class="display-6 fw-bold text-light mb-0">{{StudentDetails.enrollments.length || 0}}</p>
+        <p class="text-light fs-6">Total number of courses</p>
+      </div>
+      <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
+        <small class="text-light"><i class="bi bi-arrow-up-circle" style="font-size: 1rem;"></i> Waymakers Enrolled</small>
+        <i class="bi bi-pie-chart-fill text-light" style="font-size: 1.25rem;"></i>
       </div>
     </div>
   </div>
 
+  <!-- Reports Card -->
   <div class="col-md-3 mb-4">
-    <div class="card text-white bg-gradient-danger shadow-lg border-0 overview-card"
-      style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+    <div class="card text-white bg-gradient-danger shadow-lg border-0 overview-card" style="background-color: #0c0800;
+    background-image: linear-gradient(132deg, #0c0800 0%, #16A085 100%);">
       <div class="card-body">
-        <h5 class="card-title text-light"><i class="fas fa-file-alt me-2"></i> Reports</h5>
-        <p class="display-6 fw-bold">20</p>
+        <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-file-alt me-2" style="font-size: 1.5rem;"></i> Total Courses</h5>
+        <p class="display-6 fw-bold text-light mb-0">20</p>
+        <p class="text-light fs-6">Total number of Courses</p>
+      </div>
+      <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
+        <small class=""><i class="bi bi-arrow-up-circle" style="font-size: 1rem;"></i> Waymakers Courses</small>
+        <i class="bi bi-pie-chart-fill text-light" style="font-size: 1.25rem;"></i>
       </div>
     </div>
   </div>
+  
 </div>
 
 

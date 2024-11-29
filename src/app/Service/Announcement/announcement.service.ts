@@ -15,4 +15,7 @@ AddAnouncement(announcement:any){
 GetAllAnouncement(){
   return this.http.get<any[]>(`${this.apiUrl}/Announcement`);
 }
+deleteAnnouncement(id:string){
+  return this.http.delete(`${this.apiUrl}/Announcement/${id}`);
+}
 }

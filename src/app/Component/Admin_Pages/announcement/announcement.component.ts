@@ -17,18 +17,7 @@ export class AnnouncementComponent {
   constructor(private fb: FormBuilder,private Announcemenrservice:AnnouncementService) {}
   ngOnInit(): void {
     // Initialize the form with validation rules
-    this.announcementForm = this.fb.group({
-      title: ['', [Validators.required, Validators.minLength(3)]],
-      expirationDate: ['', Validators.required],
-      audienceType: ['', Validators.required]
-    });
-    this.Announcemenrservice.GetAllAnouncement().subscribe({
-      next:(value:any)=> {
-        this.Announcements=value
-        console.log(value);
-        
-      }
-    })
+    this.loaditems()
   }
     // Method to handle form submission
     onSubmit(): void {
@@ -46,7 +35,7 @@ export class AnnouncementComponent {
 
           },
           complete:() =>{
-            
+            this.loaditems()
           },
           error:(err:any)=> {
             
@@ -61,7 +50,24 @@ export class AnnouncementComponent {
   onReset(): void {
     this.announcementForm.reset();
   }
+
+  loaditems():void{
+
+    this.announcementForm = this.fb.group({
+      title: ['', [Validators.required, Validators.minLength(3)]],
+      expirationDate: ['', Validators.required],
+      audienceType: ['', Validators.required]
+    });
+    this.Announcemenrservice.GetAllAnouncement().subscribe({
+      next:(value:any)=> {
+        this.Announcements=value
+        console.log(value);
+        
+      }
+    })
+  }
 }
+
 
 export interface AnnoincemenrReqest{
   title:string;

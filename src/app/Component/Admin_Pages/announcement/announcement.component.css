@@ -94,3 +94,64 @@ body {
       font-size: 0.75rem; /* Smaller font size for pagination */
     }
   }
+  /* General Card Styling */
+.card {
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Header */
+.card-header, .table-title {
+  background-color: #f8f9fa; /* Light background for both */
+  border-bottom: 1px solid #dee2e6;
+  border-radius: 12px 12px 0 0;
+  color: #343a40;
+  font-weight: 600;
+}
+
+/* Form Inputs and Table Consistency */
+.form-control, .table th, .table td {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Form Buttons */
+.btn-custom, .btn-reset {
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 500;
+}
+
+/* Table Styling */
+.table-wrapper {
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
+  overflow: hidden; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table thead {
+  background-color: #f8f9fa; /* Match the form header */
+  color: #343a40;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #e9ecef;
+}
+
+/* Pagination Styling */
+.pagination .page-item .page-link {
+  border-radius: 8px;
+  margin: 0 3px;
+  color: #495057;
+}
+.pagination .page-item.active .page-link {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+}

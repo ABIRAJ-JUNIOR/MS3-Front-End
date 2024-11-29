@@ -236,7 +236,10 @@ export class CourseListComponent implements OnInit {
   }
 
   private resetForm():void{
-    this.courseForm.reset()
+    this.courseForm.reset({
+      courseLevel:'',
+      courseCategoryId:''
+    })
     this.resetImage();
     this.isUpdate = false
   }

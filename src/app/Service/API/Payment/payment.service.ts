@@ -16,4 +16,7 @@ export class PaymentService {
   recentPayment(){
     return this.http.get<Payment[]>(this.apiUrl + '/Payment/Recent')
   }
+  getAllPayments(){
+    return this.http.get<Payment[]>(this.apiUrl + '/Payment/GetAll')
+  }
 }

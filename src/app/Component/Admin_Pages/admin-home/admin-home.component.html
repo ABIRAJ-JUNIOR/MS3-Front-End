@@ -26,7 +26,7 @@
           <i class="fas fa-coins me-2 text-warning"></i> Payments
         </h6>
         <div class="d-flex align-items-center justify-content-between">
-          <p class="display-6 fw-bold mb-0">120</p>
+          <p class="display-6 fw-bold mb-0">{{totalpayments}} Rs</p>
           <i class="fas fa-wallet fs-1 text-warning"></i>
         </div>
       </div>
@@ -44,11 +44,11 @@
         <div class="d-flex justify-content-between">
           <div>
             <p class="mb-1 text-light">Courses</p>
-            <p class="fw-bold fs-5 mb-0">15</p>
+            <p class="fw-bold fs-5 mb-0">{{numberOfCourses}}</p>
           </div>
           <div>
             <p class="mb-1 text-light">Schedules</p>
-            <p class="fw-bold fs-5 mb-0">8</p>
+            <p class="fw-bold fs-5 mb-0">{{numberOfSchedules}}</p>
           </div>
         </div>
       </div>
@@ -64,20 +64,17 @@
           <i class="fas fa-clipboard-list me-2 text-light"></i> Assessments
         </h6>
         <div class="d-flex align-items-center justify-content-between">
-          <p class="display-6 fw-bold mb-0">12</p>
+          <p class="display-6 fw-bold mb-0">{{numberOfAssessments}}</p>
           <i class="fas fa-file-alt fs-1 text-light"></i>
         </div>
       </div>
     </div>
   </div>
-  
-
-
 
   <div class="container-fluid py-4">
     <div class="card shadow p-4 border-0 animate__animated animate__fadeInUp" style="height: 430px;">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h5 class="fw-semibold text-dark">Student Activity</h5>
+            <h5 class="fw-semibold text-dark">Students</h5>
             <div class="d-flex gap-3 col-lg-2 col-md-5 col-sm-7">
                 <input type="text" class="form-control form-control-sm search-input" placeholder="Search by Name or NIC number" name="search" [(ngModel)]="SearchText">
             </div>
@@ -112,44 +109,76 @@
     </div>
   </div>
 
-<!-- Charts Section -->
-<div class="container-fluid py-4">
-  <div class="row justify-content-center">
-    <div class="col-lg-4 col-md-6 mb-4">
-      <div class="card shadow chart-card">
-        <div class="card-header text-white text-center" style="background: linear-gradient(135deg, #007bff, #5bc0de);">
-          <h5>Enrollment Stats</h5>
-        </div>
-        <div class="card-body d-flex align-items-center justify-content-center">
-          <canvas id="enrollmentChart"></canvas>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-4 col-md-6 mb-4">
-      <div class="card shadow chart-card">
-        <div class="card-header text-white text-center" style="background: linear-gradient(135deg, #28a745, #34d058);">
-          <h5>Payment Overview</h5>
-        </div>
-        <div class="card-body d-flex align-items-center justify-content-center">
-          <canvas id="paymentChart"></canvas>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-4 col-md-12 mb-4">
-      <div class="card shadow chart-card">
-        <div class="card-header text-white text-center" style="background: linear-gradient(135deg, #ffb700, #ffdf5b);">
-          <h5>Course Popularity</h5>
-        </div>
-        <div class="card-body d-flex align-items-center justify-content-center">
-          <canvas id="popularityChart"></canvas>
+  <div class="container-fluid py-4">
+    <div class="row g-4">
+      <!-- Enrollment Stats Chart -->
+      <div class="col-lg-4 col-md-6">
+        <div class="card shadow-sm h-100 border-0">
+          <div class="card-body p-4">
+            <h6 class="fw-semibold text-muted text-uppercase text-center">Enrollment Stats</h6>
+            <div class="chart-container" style="height: 250px;">
+              <ngx-charts-bar-vertical
+              [results]="groupedEnrollmentStats"
+              [scheme]="'vivid'"
+              [xAxis]="true"
+              [yAxis]="true"
+              [showXAxisLabel]="true"
+              [showYAxisLabel]="true"
+              xAxisLabel="Courses"
+              yAxisLabel="Enrollments"
+              [animations]="true"
+              [barPadding]="10">
+            </ngx-charts-bar-vertical>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    
+      <!-- Payment Overview Chart -->
+      <div class="col-lg-4 col-md-6">
+        <div class="card shadow-sm h-100 border-0">
+          <div class="card-body p-4">
+            <h6 class="fw-semibold text-muted text-uppercase text-center">Payment Overview</h6>
+            <div class="chart-container" style="height: 250px;">
+              <ngx-charts-pie-chart
+                [results]="paymentOverview"
+                [scheme]="'vivid'"
+                [legend]="true"
+                [labels]="true"
+                [explodeSlices]="false"
+                [doughnut]="true"
+                [animations]="true">
+              </ngx-charts-pie-chart>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Course Popularity Chart -->
+      <div class="col-lg-4 col-md-6">
+        <div class="card shadow-sm h-100 border-0">
+          <div class="card-body p-4">
+            <h6 class="fw-semibold text-muted text-uppercase text-center">Course Popularity</h6>
+            <div class="chart-container" style="height: 250px;">
+              <ngx-charts-bar-horizontal
+                [results]="coursePopularity"
+                [scheme]="'vivid'"
+                [xAxis]="true"
+                [yAxis]="true"
+                [showXAxisLabel]="true"
+                [showYAxisLabel]="true"
+                xAxisLabel="Popularity"
+                yAxisLabel="Courses"
+                [gradient]="false"
+                [animations]="true">
+              </ngx-charts-bar-horizontal>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    
   </div>
-</div>
-
+  
 <!-- Recent Notifications Panel -->
 <div class="container-fluid">
   <div class="row">
@@ -164,7 +193,7 @@
             <ng-container *ngFor="let payment of recentPayments">
               <li class="list-group-item d-flex justify-content-between align-items-center">
                 <div>
-                  <p class="mb-1 fw-bold text-secondary">Amount Paid: <span class="text-success">£{{ payment.amountPaid }}</span></p>
+                  <p class="mb-1 fw-bold text-secondary">Amount Paid: <span class="text-success">Rs {{ payment.amountPaid }}</span></p>
                   <p class="mb-0">
                     <span class="badge bg-info text-dark me-1">Type: {{ payment.paymentType }}</span>
                     <span class="badge bg-warning text-dark me-1">Method: {{ payment.paymentMethod }}</span>

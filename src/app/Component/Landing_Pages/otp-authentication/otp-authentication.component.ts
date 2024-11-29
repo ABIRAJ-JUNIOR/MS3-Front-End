@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { PaymentDataService } from '../../../Service/Data/Payment_Data/payment-data.service';
-import { PatmentService } from '../../../Service/API/Payment/patment.service';
+import { PaymentService } from '../../../Service/API/Payment/payment.service';
 
 @Component({
   selector: 'app-otp-authentication',
@@ -13,7 +13,7 @@ import { PatmentService } from '../../../Service/API/Payment/patment.service';
   styleUrl: './otp-authentication.component.css'
 })
 export class OtpAuthenticationComponent implements OnInit {
-  constructor(private router:Router,private paymentDataService: PaymentDataService, private toastr: ToastrService, private PaymentApiServices:PatmentService) {
+  constructor(private router:Router,private paymentDataService: PaymentDataService, private toastr: ToastrService, private PaymentApiServices:PaymentService) {
 
   }
   otp: string = "";

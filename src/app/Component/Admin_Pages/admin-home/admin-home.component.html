@@ -2,53 +2,71 @@
 <h2 class="mb-4 text-dark fw-bold">Dashboard Overview</h2>
 
 <div class="row mb-4">
-  <div class="col-md-3 mb-4">
-      <div class="card text-white bg-dark shadow-lg border-0 overview-card">
-          <div class="card-body">
-              <h5 class="card-title text-primary"><i class="fas fa-users me-2"></i> New Students</h5>
-              <p class="display-6 fw-bold">{{numberOfStudents}}</p>
-          </div>
-      </div>
-  </div>
-  
-  <div class="col-md-3 mb-4">
-      <div class="card text-white bg-gradient-primary shadow-lg border-0 overview-card" style="background: linear-gradient(135deg, #2c3e50, #34495e);">
-          <div class="card-body">
-              <h5 class="card-title text-light"><i class="fas fa-coins me-2"></i> Payments</h5>
-              <p class="display-6 fw-bold">120</p>
-          </div>
-      </div>
-  </div>
-  
-  <div class="col-md-3 mb-4">
-    <div class="card text-white shadow-lg border-0 overview-card"
-         style="background: linear-gradient(135deg, #1abc9c, #16a085);">
-      <div class="card-body d-flex justify-content-evenly gap-3">
-        
-        <div class="mb-4">
-          <h5 class="card-title text-light">
-            <i class="fas fa-book me-2"></i> Courses
-          </h5>
-          <p class="display-6 fw-bold mb-0">15</p>
+  <!-- New Students Card -->
+  <div class="col-md-3">
+    <div class="card shadow-sm border-0 overview-card" style="background-color: #2c3e50; border-radius: 8px;">
+      <div class="card-body text-white">
+        <h6 class="text-uppercase fw-bold mb-2">
+          <i class="fas fa-users me-2 text-primary"></i> New Students
+        </h6>
+        <div class="d-flex align-items-center justify-content-between">
+          <p class="display-6 fw-bold mb-0">{{ numberOfStudents }}</p>
+          <i class="fas fa-user-graduate fs-1 text-secondary"></i>
         </div>
-        
-        <div>
-          <h5 class="card-title text-light">
-            <i class="fas fa-calendar-alt me-2"></i> Schedules
-          </h5>
-          <p class="display-6 fw-bold mb-0">8</p>
-        </div>
-  
       </div>
     </div>
   </div>
-  
-  <div class="col-md-3 mb-4">
-    <div class="card text-white bg-gradient-info shadow-lg border-0 overview-card" 
-         style="background: linear-gradient(135deg, #3498db, #2980b9);">
-      <div class="card-body">
-        <h5 class="card-title text-light"><i class="fas fa-clipboard-list me-2"></i> Assessments</h5>
-        <p class="display-6 fw-bold">12</p>
+
+  <!-- Payments Card -->
+  <div class="col-md-3">
+    <div class="card shadow-sm border-0 overview-card" 
+         style="background: linear-gradient(135deg, #34495e, #2c3e50); border-radius: 8px;">
+      <div class="card-body text-white">
+        <h6 class="text-uppercase fw-bold mb-2">
+          <i class="fas fa-coins me-2 text-warning"></i> Payments
+        </h6>
+        <div class="d-flex align-items-center justify-content-between">
+          <p class="display-6 fw-bold mb-0">120</p>
+          <i class="fas fa-wallet fs-1 text-warning"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Courses and Schedules Card -->
+  <div class="col-md-3">
+    <div class="card shadow-sm border-0 overview-card" 
+         style="background: linear-gradient(135deg, #1abc9c, #16a085); border-radius: 8px;">
+      <div class="card-body text-white">
+        <h6 class="text-uppercase fw-bold mb-2">
+          <i class="fas fa-book me-2 text-info"></i> Courses & Schedules
+        </h6>
+        <div class="d-flex justify-content-between">
+          <div>
+            <p class="mb-1 text-light">Courses</p>
+            <p class="fw-bold fs-5 mb-0">15</p>
+          </div>
+          <div>
+            <p class="mb-1 text-light">Schedules</p>
+            <p class="fw-bold fs-5 mb-0">8</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Assessments Card -->
+  <div class="col-md-3">
+    <div class="card shadow-sm border-0 overview-card" 
+         style="background: linear-gradient(135deg, #3498db, #2980b9); border-radius: 8px;">
+      <div class="card-body text-white">
+        <h6 class="text-uppercase fw-bold mb-2">
+          <i class="fas fa-clipboard-list me-2 text-light"></i> Assessments
+        </h6>
+        <div class="d-flex align-items-center justify-content-between">
+          <p class="display-6 fw-bold mb-0">12</p>
+          <i class="fas fa-file-alt fs-1 text-light"></i>
+        </div>
       </div>
     </div>
   </div>
@@ -84,7 +102,7 @@
                   <td>{{student.nic}}</td>
                   <td>{{student.firstName}} {{student.lastName}}</td>
                   <td>{{student.gender}}</td>
-                  <td>{{student.dateOfBirth}}</td>
+                  <td>{{student.dateOfBirth | date}}</td>
                   <td>{{student.phone}}</td>
                   <td>{{ student.address ? student.address.addressLine1 + ", " + student.address.addressLine2 + ", " + student.address.city : "N/A" }}</td>
                 </tr>
@@ -136,18 +154,32 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-12 mb-4">
-      <div class="card shadow-sm">
-        <div class="card-header bg-secondary text-white">
+      <div class="card shadow-sm border-0">
+        <div class="card-header rounded-top  bg-dark text-white d-flex align-items-center justify-content-between">
           <h5 class="m-0">Recent Payments</h5>
+          <i class="bi bi-cash-coin fs-4"></i>
         </div>
         <div class="card-body">
           <ul class="list-group">
-            <li class="list-group-item">New enrollment in Course A</li>
-            <li class="list-group-item">Payment received from Student XYZ</li>
-            <li class="list-group-item">Upcoming course deadline reminder</li>
-            <li class="list-group-item">New course added: Course B</li>
-            <li class="list-group-item">Payment overdue for Student ABC</li>
+            <ng-container *ngFor="let payment of recentPayments">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <p class="mb-1 fw-bold text-secondary">Amount Paid: <span class="text-success">£{{ payment.amountPaid }}</span></p>
+                  <p class="mb-0">
+                    <span class="badge bg-info text-dark me-1">Type: {{ payment.paymentType }}</span>
+                    <span class="badge bg-warning text-dark me-1">Method: {{ payment.paymentMethod }}</span>
+                    <small class="text-muted">Date: {{ payment.paymentDate | date:'dd MMM yyyy' }}</small>
+                  </p>
+                </div>
+                <i class="bi bi-check-circle-fill text-success fs-4"></i>
+              </li>
+            </ng-container>
           </ul>
+          <!-- No Payments Message -->
+          <div *ngIf="recentPayments.length === 0" class="text-center py-3">
+            <i class="bi bi-exclamation-triangle-fill text-warning fs-3"></i>
+            <p class="mt-2 text-muted">No recent payments available.</p>
+          </div>
         </div>
       </div>
     </div>

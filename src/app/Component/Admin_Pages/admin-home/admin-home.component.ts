@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { StudentService} from '../../../Service/API/Student/student.service';
 import { CommonModule } from '@angular/common';
 import { SearchStudentsPipe } from '../../../Pipes/search-students.pipe';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Chart, ChartConfiguration } from 'chart.js';
-import { Student } from '../../../Modals/modals';
+import { Payment, Student } from '../../../Modals/modals';
+import { PaymentService } from '../../../Service/API/Payment/payment.service';
 
 @Component({
   selector: 'app-admin-home',
@@ -16,11 +17,17 @@ import { Student } from '../../../Modals/modals';
 })
 export class AdminHomeComponent{
   students:Student[] = []
+  recentPayments:Payment[] = []
   SearchText:string = ""
   numberOfStudents:number = 0
-  constructor(private studentService:StudentService){}
+  constructor(private studentService:StudentService , private paymentService:PaymentService){}
 
   ngOnInit(): void {
+    this.loadStudents();
+    this.loadRecentPayments();
+  }
+
+  loadStudents():void{
     this.studentService.getStudents().subscribe({
       next:(response:Student[]) => {
         this.students = response
@@ -30,6 +37,14 @@ export class AdminHomeComponent{
         })
       },error:(err:any)=>{
         console.log(err)
+      }
+    })
+
+  }
+  loadRecentPayments():void{
+    this.paymentService.recentPayment().subscribe({
+      next:(response:Payment[]) => {
+        this.recentPayments = response
       }
     })
   }

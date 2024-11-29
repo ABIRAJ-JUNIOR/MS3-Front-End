@@ -59,6 +59,7 @@ export class AdminListComponent implements OnInit{
 
   ngOnInit(): void {
     this.loadItems();
+
   }
 
   passwordMatchValidator(control: AbstractControl) {
@@ -84,6 +85,7 @@ export class AdminListComponent implements OnInit{
         });
       }
     });
+    
   }
 
   goToPage(page: number): void {

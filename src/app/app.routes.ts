@@ -31,6 +31,9 @@ import { StudentCompletedcoursesComponent } from './Component/Student_Pages/stud
 import { StudentResultComponent } from './Component/Student_Pages/student-result/student-result.component';
 import { StudentPaymentsComponent } from './Component/Student_Pages/student-payments/student-payments.component';
 import { StudentPaymentsHistoryComponent } from './Component/Student_Pages/student-payments-history/student-payments-history.component';
+import { TestComponent } from './test/test.component';
+import { AnnouncementComponent } from './Component/Admin_Pages/announcement/announcement.component';
+
 
 export const routes: Routes = [
 
@@ -70,6 +73,7 @@ export const routes: Routes = [
             { path: 'course-list', component: CourseListComponent },
             { path: 'schedule-list', component: CourseScheduleComponent },
             { path: 'assessment-list', component: CourseAssessmentComponent },
+            { path:'announcement',component:AnnouncementComponent},
             {path:'**' , redirectTo:'home',pathMatch:'full'}
         ],
         // canActivate: [adminAuthGuard]
@@ -88,5 +92,6 @@ export const routes: Routes = [
             {path:'enrollCourse-paymentHistory',component:StudentPaymentsHistoryComponent},
         ]
     },
+    {path:'test' , component:TestComponent},
     { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

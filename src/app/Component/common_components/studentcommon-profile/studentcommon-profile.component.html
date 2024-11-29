@@ -1,0 +1,24 @@
+ <!-- Profile Picture Section -->
+ <div class="row">
+    <div class=" col-12 col-md-12 col-lg-3  mx-auto ">
+        <div class="d-flex flex-column align-items-center text-center  py-3 rounded  ">
+            <img class="rounded-circle" width="150px" [src]="StudentDetails.imageUrl || NoImage"
+                alt="Student Picture" style="border: 2px solid #ffffff; padding: 5px;">
+    
+            <span class="font-weight-bold fs-5 mt-3 fw-bold" style="color: #000000;">{{StudentDetails.firstName}}
+                {{StudentDetails.lastName}}</span>
+    
+            <span class="text-dark d-block mb-2">{{StudentTokenDetails.Email}}</span>
+    
+            <span class="text-dark mb-1">Student ID: UT-{{StudentDetails.nic | slice: -4 }}</span>
+    
+            <div class="d-flex justify-content-center gap-3 flex-wrap  mt-1">
+                <button class="btn btn-outline-primary d-flex align-items-center gap-2 px-4  shadow-sm"
+                    type="button" style="border-radius: 4px; transition: all 0.3s ease;">
+                    <i class="bi bi-camera-fill"></i> Change Picture
+                </button>
+            </div>
+        </div>
+    </div>
+    
+</div>

@@ -7,15 +7,6 @@ body {
     border-color: #007BFF;
 }
 
-.profile-button {
-    background: #007BFF;
-    border: none;
-    box-shadow: none;
-}
-
-.profile-button:hover {
-    background: #0056b3;
-}
 
 .labels {
     font-size: 12px;

@@ -1,0 +1,10 @@
+
+.profile-button {
+    background: #007BFF;
+    border: none;
+    box-shadow: none;
+}
+
+.profile-button:hover {
+    background: #0056b3;
+}

@@ -5,11 +5,12 @@ import { Student } from '../../../Modals/modals';
 import { StudentService } from '../../../Service/Student/student.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { StudentcommonProfileComponent } from '../../common_components/studentcommon-profile/studentcommon-profile.component';
 
 @Component({
   selector: 'app-student-setting',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule , StudentcommonProfileComponent],
   templateUrl: './student-setting.component.html',
   styleUrl: './student-setting.component.css'
 })

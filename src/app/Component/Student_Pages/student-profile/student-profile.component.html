@@ -17,30 +17,10 @@
 
     <div class="row ">
         <!-- Profile Picture Section -->
-        <div class=" col-12 col-md-12 col-lg-3 my-5 py-2 mx-auto ">
-            <div class="d-flex flex-column align-items-center text-center  py-3 rounded  ">
-                <img class="rounded-circle mt-4" width="150px" [src]="StudentDetails.imageUrl || NoImage"
-                    alt="Student Picture" style="border: 2px solid #ffffff; padding: 5px;">
-
-                <span class="font-weight-bold fs-5 mt-3 fw-bold" style="color: #000000;">{{StudentDetails.firstName}}
-                    {{StudentDetails.lastName}}</span>
-
-                <span class="text-dark d-block mb-2">{{StudentTokenDetails.Email}}</span>
-
-                <span class="text-dark mb-3">Student ID: UT-{{StudentDetails.nic | slice: -4 }}</span>
-
-                <div class="d-flex justify-content-center gap-3 flex-wrap mb-4 mt-2">
-                    <button class="btn btn-outline-primary d-flex align-items-center gap-2 px-4 py-2 shadow-sm"
-                        type="button" style="border-radius: 4px; transition: all 0.3s ease;">
-                        <i class="bi bi-camera-fill"></i> Change Picture
-                    </button>
-                </div>
-            </div>
-        </div>
-
+        <app-studentcommon-profile></app-studentcommon-profile>
 
         <!-- Profile Information Section -->
-        <div class="col-11 col-md-12 col-lg-8 mx-auto py-5 ">
+        <div class="col-11 col-md-12 col-lg-11 mx-auto  ">
             <div class="card">
                 <!-- Card Header -->
                 <div class="card-header text-white bg-dark">

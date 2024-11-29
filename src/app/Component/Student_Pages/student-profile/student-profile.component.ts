@@ -5,11 +5,12 @@ import { StudentDashDataServiceService } from '../../../Service/Student/student-
 import { StudentService } from '../../../Service/Student/student.service';
 import { Student } from '../../../Modals/modals';
 import { Router, RouterModule } from '@angular/router';
+import { StudentcommonProfileComponent } from '../../common_components/studentcommon-profile/studentcommon-profile.component';
 
 @Component({
   selector: 'app-student-profile',
   standalone: true,
-  imports: [CommonModule, FormsModule ,RouterModule],
+  imports: [CommonModule, FormsModule ,RouterModule ,StudentcommonProfileComponent],
   templateUrl: './student-profile.component.html',
   styleUrl: './student-profile.component.css'
 })

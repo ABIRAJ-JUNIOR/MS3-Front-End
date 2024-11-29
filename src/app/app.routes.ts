@@ -29,8 +29,11 @@ import { StudentCourseComponent } from './Component/Student_Pages/student-course
 import { StudentMycoursesComponent } from './Component/Student_Pages/student-mycourses/student-mycourses.component';
 import { StudentCompletedcoursesComponent } from './Component/Student_Pages/student-completedcourses/student-completedcourses.component';
 import { StudentResultComponent } from './Component/Student_Pages/student-result/student-result.component';
+import { StudentPaymentsComponent } from './Component/Student_Pages/student-payments/student-payments.component';
+import { StudentPaymentsHistoryComponent } from './Component/Student_Pages/student-payments-history/student-payments-history.component';
 import { TestComponent } from './test/test.component';
 import { AnnouncementComponent } from './Component/Admin_Pages/announcement/announcement.component';
+
 
 export const routes: Routes = [
 
@@ -84,7 +87,9 @@ export const routes: Routes = [
             {path:'courses',component:StudentCourseComponent},
             {path:'mycourses',component:StudentMycoursesComponent},
             {path:'completed-Courses',component:StudentCompletedcoursesComponent},
-            {path:'assesment-result',component:StudentResultComponent}
+            {path:'assesment-result',component:StudentResultComponent},
+            {path:'enrollCourse-payment',component:StudentPaymentsComponent},
+            {path:'enrollCourse-paymentHistory',component:StudentPaymentsHistoryComponent},
         ]
     },
     {path:'test' , component:TestComponent},

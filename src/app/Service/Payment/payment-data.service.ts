@@ -11,6 +11,7 @@ export class PaymentDataService {
   }
 
   PurchaseDetailsSetLocal(data: any): void {
+    localStorage.removeItem('PurchaseCourse')
     localStorage.setItem('PurchaseCourse', JSON.stringify(data))
     this.route.navigate(['paymen-auth/paymentgate'])
   }
@@ -35,8 +36,8 @@ export class PaymentDataService {
 
 
   adddPendingpayment(data: any) {
+    localStorage.removeItem('pendingPayment')
     localStorage.setItem('pendingPayment', JSON.stringify(data))
-
   }
 
   getPendingPayment():any{

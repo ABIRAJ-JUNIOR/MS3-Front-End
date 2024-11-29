@@ -13,7 +13,7 @@ import { PaymentapiServiceService } from '../../../Service/Paymentapi/paymentapi
   styleUrl: './otp-authentication.component.css'
 })
 export class OtpAuthenticationComponent implements OnInit {
-  constructor(private router:Router,private paymentDataService: PaymentDataService, private toastr: ToastrService, private PaymentApiServices: PaymentapiServiceService) {
+  constructor(private router: Router, private paymentDataService: PaymentDataService, private toastr: ToastrService, private PaymentApiServices: PaymentapiServiceService) {
 
   }
   otp: string = "";
@@ -35,17 +35,48 @@ export class OtpAuthenticationComponent implements OnInit {
       this.toastr.clear();
       let data: any = JSON.parse(this.paymentDataService.getPendingPayment());
       console.log(data)
+      console.log(data.installmentNumber)
 
-      this.PaymentApiServices.AddEnrollment(data).subscribe(
-        (d: any) => {
-          this.toastr.success('Your Payment is successful');
-          this.paymentDataService.ClearAllPAymentData()
-          this.router.navigate(['/student-dashboard'])
-        },
-        (error) => {
-          this.toastr.error('There was an error processing your payment. Please try again later.');
+      if (data.PaymentCheck) {
+      let  Enrollment = {
+          studentId: data.studentId,
+          courseScheduleId: data.courseScheduleId,
+          paymentRequest: {
+            paymentType: Number(data.paymentRequest.paymentType),
+            paymentMethod:data.paymentRequest.paymentMethod,
+            amountPaid: Number(data.paymentRequest.amountPaid),
+            installmentNumber: data.paymentRequest.installmentNumber
+          }
         }
-      )
+        this.PaymentApiServices.AddEnrollment(Enrollment).subscribe(
+          (d: any) => {
+            this.toastr.success('Your Payment is successful');
+            this.paymentDataService.ClearAllPAymentData()
+            this.router.navigate(['/student-dashboard'])
+          },
+          (error) => {
+            this.toastr.error('There was an error processing your payment. Please try again later.');
+          }
+        )
+      } else {
+       let Payment:PayRequest= {
+          paymentType: Number(data.paymentType),
+          paymentMethod:Number( data.paymentMethod),
+          amountPaid: Number(data.amountPaid),
+          installmentNumber: Number(data.installmentNumber),
+          enrollmentId: data.enrollmentId
+        }
+        this.PaymentApiServices.addPayment(Payment).subscribe(
+          (d: any) => {
+            this.toastr.success('Your Installment Payment is successful');
+            this.paymentDataService.ClearAllPAymentData()
+            this.router.navigate(['/student-dashboard'])
+          },
+          (error) => {
+            this.toastr.error('There was an error processing your payment. Please try again later.');
+          }
+        )
+      }
 
     } else {
       this.toastr.clear();
@@ -57,4 +88,12 @@ export class OtpAuthenticationComponent implements OnInit {
 
 
 
+}
+
+export interface PayRequest {
+  paymentType: number;
+  paymentMethod: number;
+  amountPaid: number;
+  installmentNumber: number;
+  enrollmentId: string;
 }

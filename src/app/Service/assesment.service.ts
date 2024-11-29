@@ -17,4 +17,5 @@ export class AssesmentService {
   getAllAssesment(){
     return this.http.get(this.CommonUrl+"/Assessment/Assessments")
   }
+ 
 }

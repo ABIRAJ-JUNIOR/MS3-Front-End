@@ -416,7 +416,8 @@ export class CourseCardsComponent implements OnInit {
       "courseName":this.ModalProduct[0].courseName,
       "courseFee":this.ModalProduct[0].courseFee,
       "courseId":this.ModalProduct[0].id,
-      ...sechdule
+      ...sechdule,
+      "PaymentCheck":true
     }
     this.PaymentCourse.push(PurchaseDetails)
    

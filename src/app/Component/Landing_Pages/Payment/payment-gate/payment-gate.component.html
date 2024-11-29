@@ -8,13 +8,12 @@
                             <h5><img src="/logo.png" alt="" height="30px"><b>WayMaker</b> |</h5>
                             <span class="ps-2">Pay</span>
                         </div>
-                        <h4 class="text-success">Rs.{{recievedModalItems[0].courseFee}}</h4>
-                        <h4>{{recievedModalItems[0].courseName}} & Materials</h4>
+                        <h4 class="text-success" >Rs.{{DeivdeInstallment}}</h4>
+                        <h4>{{courseMaterials}} & Materials</h4>
                         <div class="d-flex  pt-2">
                             <div>
                                 <p>
-                                    <b>The institution covers <span
-                                            class="text-success">Rs.{{recievedModalItems[0].courseFee}}</span></b>
+                                    <b>The institution covers <span class="text-success" >Rs.{{DeivdeInstallment}}</span></b>
                                 </p>
                             </div>
 
@@ -23,15 +22,19 @@
                             Your Course fees will be processed and any necessary adjustments will be applied after the
                             review.
                         </p>
-                        <div class="mb-3">
+                        <div class="mb-3" *ngIf="recievedModalItems[0].PaymentCheck">
                             <label for="paymentPlans" class="form-label  text-dark">Select Payment Plan</label>
-                            <select class="form-select bg-light border-2 border-primary rounded-3 shadow-sm"
-                                [(ngModel)]="PaymentPlans">
-                                <option value="1">Installment Plan - Pay in manageable monthly installments </option>
-                                <option value="2">Full Payment - One-time payment with additional benefits.</option>
-                            </select>
-                            <small class="form-text text-muted">Choose the payment plan that best suits your financial
-                                preferences.</small>
+                            <div >
+                                <select class="form-select bg-light border-2 border-primary rounded-3 shadow-sm"
+                                    [(ngModel)]="PaymentPlans" (change)="loadItems()">
+                                    <option value="2">Installment Plan - Pay in manageable monthly installments
+                                    </option>
+                                    <option value="1">Full Payment - One-time payment with additional benefits.</option>
+                                </select>
+                                <small class="form-text text-muted">Choose the payment plan that best suits your
+                                    financial
+                                    preferences.</small>
+                            </div>
                         </div>
 
                         <hr />
@@ -42,7 +45,7 @@
                                         <b>Add your Payment Card</b>
                                     </p>
                                 </div>
-                                <button class="text-primary btn btn-md border-0" data-bs-toggle="modal" 
+                                <button class="text-primary btn btn-md border-0" data-bs-toggle="modal"
                                     data-bs-target="#AddCard" (click)="AddCardDetails()">
                                     <i class="fas fa-plus-circle text-primary pe-1"></i>Add payment card
                                 </button>
@@ -78,7 +81,9 @@
                                 </div> -->
                             </div>
                             <button class="btn btn-danger btn-md" data-bs-toggle="modal"
-                                data-bs-target="#PaymentComfirmation"  [disabled]="!LocalCardDetails || LocalCardDetails.length === -1">>Proceed to payment</button>
+                                data-bs-target="#PaymentComfirmation"
+                                [disabled]="!LocalCardDetails || LocalCardDetails.length === -1">>Proceed to
+                                payment</button>
                         </div>
                     </div>
 
@@ -94,42 +99,64 @@
                             </div>
 
                             <!-- Installment Plan Section -->
-                            <div class="p-2 border-bottom" *ngIf="PaymentPlans == 1">
+                            <div class="p-2 border-bottom" *ngIf="PaymentPlans == 2">
                                 <h5>Installment Plan</h5>
                                 <div class="p-2 d-flex">
-                                    <div class="col-8 text-success">First Installment Payment</div>
-                                    <div class="ms-auto text-success">Rs {{DeivdeInstallment}}</div>
+                                    <div class="col-8 ">First Installment Payment</div>
+                                    <div class="ms-auto text-success" *ngIf="recievedModalItems[0].PaymentCheck">
+                                        {{DeivdeInstallment}}</div>
+                                    <div class="ms-auto text-primary" *ngIf="!recievedModalItems[0].PaymentCheck">
+                                        Completed</div>
                                 </div>
                                 <div class="p-2 d-flex">
                                     <div class="col-8">Second Installment Payment</div>
-                                    <div class="ms-auto">Rs {{DeivdeInstallment}}</div>
+                                    <div class="ms-auto" *ngIf="recievedModalItems[0].PaymentCheck">Rs
+                                        {{DeivdeInstallment}}</div>
+                                    <div class="ms-auto text-primary" *ngIf="!recievedModalItems[0].PaymentCheck">
+                                        {{SecondInstallment}}</div>
                                 </div>
                                 <div class="p-2 d-flex">
                                     <div class="col-8">Final Installment Payment</div>
-                                    <div class="ms-auto">Rs {{DeivdeInstallment}}</div>
+                                    <div class="ms-auto" *ngIf="recievedModalItems[0].PaymentCheck">
+                                        {{DeivdeInstallment}}</div>
+                                    <div class="ms-auto text-primary" *ngIf="!recievedModalItems[0].PaymentCheck">
+                                        {{ThirdInstallment }}</div>
                                 </div>
                                 <div class="border-top px-2 mx-2"></div>
 
-                                <!-- Total Payment for Installments -->
-                                <div class="p-2 d-flex pt-3">
+                              
+
+                                <!-- Total Payment for Full Payment Option -->
+                                <div class="p-2 d-flex pt-3" *ngIf="!recievedModalItems[0].PaymentCheck">
+                                    <div class="col-8">Total Payment Due (Full Payment)</div>
+                                    <div class="ms-auto Rs " >Rs
+                                        {{installmentTotal}}</div>
+                                </div>
+
+                                  <div class="p-2 d-flex pt-3">
                                     <div class="col-8">Total Payment Due (Installment Plan)</div>
-                                    <div class="ms-auto">Rs {{recievedModalItems[0].courseFee}}</div>
+                                    <div class="ms-auto text-primary" *ngIf="recievedModalItems[0].PaymentCheck">
+                                        {{recievedModalItems[0].courseFee}}</div>
+                                    <div class="ms-auto text-danger" *ngIf="!recievedModalItems[0].PaymentCheck">Rs
+                                        {{DeivdeInstallment }}</div>
                                 </div>
                             </div>
 
                             <!-- Full Payment Section -->
-                            <div class="p-2 border-bottom" *ngIf="PaymentPlans == 2">
+                            <div class="p-2 border-bottom" *ngIf="PaymentPlans == 1">
                                 <h5>Full Payment</h5>
                                 <div class="p-2 d-flex text-success">
                                     <div class="col-8">Full Payment Option</div>
-                                    <div class="ms-auto">Rs {{recievedModalItems[0].courseFee}}</div>
+                                    <div class="ms-auto " *ngIf="recievedModalItems[0].PaymentCheck">Rs
+                                        {{recievedModalItems[0].courseFee}}</div>
                                 </div>
                                 <div class="border-top px-2 mx-2"></div>
 
                                 <!-- Total Payment for Full Payment Option -->
                                 <div class="p-2 d-flex pt-3">
                                     <div class="col-8">Total Payment Due (Full Payment)</div>
-                                    <div class="ms-auto">Rs {{recievedModalItems[0].courseFee}}</div>
+                                    <div class="ms-auto Rs" *ngIf="recievedModalItems[0].PaymentCheck">Rs
+                                        {{recievedModalItems[0].courseFee}}</div>
                                 </div>
                             </div>
 
@@ -138,9 +165,9 @@
                             <div class="border-top px-2 mx-2"></div>
 
                             <!-- Institution Responsibility Section -->
-                            <div class="p-2 d-flex pt-3">
-                                <div class="col-8"><b>Institution Responsibility</b></div>
-                                <div class="ms-auto"><b>Rs {{recievedModalItems[0].courseFee}}</b></div>
+                            <div class="p-2  pt-3">
+                                <div class="ms-auto text-center text-danger py-2"><b>Your Pathway to IT Excellence</b>
+                                </div>
                             </div>
 
 
@@ -148,11 +175,11 @@
                             <div class="border-top px-2 mx-2"></div>
 
                             <!-- Final Total Section -->
-                            <div class="p-2 d-flex pt-3">
+                            <div class="p-2 d-flex pt-3 " *ngIf="recievedModalItems[0].PaymentCheck">
                                 <div class="col-8"><b>Total</b></div>
-                                <div class="ms-auto"><b class="text-success" *ngIf="PaymentPlans == 1">Rs
-                                        {{DeivdeInstallment}}</b></div>
                                 <div class="ms-auto"><b class="text-success" *ngIf="PaymentPlans == 2">Rs
+                                        {{DeivdeInstallment}}</b></div>
+                                <div class="ms-auto"><b class="text-success" *ngIf="PaymentPlans == 1">Rs
                                         {{recievedModalItems[0].courseFee}}</b></div>
                             </div>
                         </div>
@@ -251,12 +278,12 @@
 <div class="modal fade" id="PaymentComfirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-           
+
             <div class="modal-header">
                 <h1 class="modal-title fs-5 text-danger" id="exampleModalLabel">Confirm Your Payment</h1>
             </div>
             <img src="/payment/payConfirm.png" class="card-img-top" alt="Course Image">
-           
+
 
             <div class="modal-body">
                 <p class="" style="font-size: 18px;">Are you sure you want to proceed with the payment?</p>
@@ -265,7 +292,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="ConfirmPayment()">Confirm</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                    (click)="ConfirmPayment()">Confirm</button>
             </div>
         </div>
     </div>

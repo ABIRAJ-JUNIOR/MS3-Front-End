@@ -4,11 +4,13 @@ import { Router } from '@angular/router';
 import { Student } from '../../../Modals/modals';
 import { StudentDashDataServiceService } from '../../../Service/Student/student-dash-data-service.service';
 import { StudentService } from '../../../Service/Student/student.service';
+import { FormsModule } from '@angular/forms';
+import { SearchMycoursePipe } from '../../../Pipes/search-mycourse.pipe';
 
 @Component({
   selector: 'app-student-mycourses',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule , FormsModule , SearchMycoursePipe],
   templateUrl: './student-mycourses.component.html',
   styleUrl: './student-mycourses.component.css'
 })
@@ -64,4 +66,11 @@ export class StudentMycoursesComponent implements OnInit{
       return 'high-progress';   // High progress (Green)
     }
   }
+
+
+  // Search Section
+
+  SearchCourseData:string=""
+
+  
 }

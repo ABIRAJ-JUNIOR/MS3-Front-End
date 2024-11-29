@@ -76,6 +76,9 @@ export class AnnouncementComponent {
       }
     })
   }
+  onDelete(id:string){
+    
+  }
 }
 
 

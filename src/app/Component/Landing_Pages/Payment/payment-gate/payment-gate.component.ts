@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { jwtDecode } from "jwt-decode";
+import { Location } from '@angular/common';
 import { Enrollment } from '../../../../Modals/modals';
 
 @Component({
@@ -21,7 +22,7 @@ export class PaymentGateComponent {
 
   CardFormData: FormGroup;
 
-  constructor(private PaymentDataService: PaymentDataService, private fb: FormBuilder, private router: Router) {
+  constructor(private PaymentDataService: PaymentDataService, private fb: FormBuilder, private router: Router ,private location: Location) {
 
     this.CardFormData = this.fb.group({
       name: ['', [Validators.required]],
@@ -139,7 +140,7 @@ export class PaymentGateComponent {
 
 
   CancelPayment() {
-    this.router.navigate(['/course']);
+    this.location.back();
     localStorage.removeItem("PurchaseCourse")
   }
 
@@ -160,7 +161,8 @@ export class PaymentGateComponent {
             paymentMethod: 1,
             amountPaid: Number(this.recievedModalItems[0].courseFee),
             installmentNumber: 0
-          }
+          },
+          PaymentCheck: true
         }
       } else if (this.PaymentPlans == 2) {
         Payment = {
@@ -171,24 +173,11 @@ export class PaymentGateComponent {
             paymentMethod: 1,
             amountPaid: Number(this.DeivdeInstallment),
             installmentNumber: 1
-          }
+          },
+          PaymentCheck: true
 
         }
-      } else {
-        Payment = {
-          studentId: decode.Id,
-          courseScheduleId: this.recievedModalItems[0].id,
-          paymentRequest: {
-            paymentType: Number(this.PaymentPlans),
-            paymentMethod: 1,
-            amountPaid: Number(this.DeivdeInstallment),
-            installmentNumber: 2
-          }
-
-        }
-
       }
-
     } else {
 
       let PayLength = this.recievedModalItems[0].paymentResponse
@@ -198,7 +187,8 @@ export class PaymentGateComponent {
         paymentMethod: 1,
         amountPaid: Number(this.DeivdeInstallment),
         installmentNumber: PayLength.length + 1,
-        enrollmentId: payData.id
+        enrollmentId: payData.id,
+        PaymentCheck: false
       }
 
     }

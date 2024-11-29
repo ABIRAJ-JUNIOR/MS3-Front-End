@@ -37,8 +37,18 @@ export class OtpAuthenticationComponent implements OnInit {
       console.log(data)
       console.log(data.installmentNumber)
 
-      if (data.installmentNumber <= 1) {
-        this.PaymentApiServices.AddEnrollment(data).subscribe(
+      if (data.PaymentCheck) {
+      let  Enrollment = {
+          studentId: data.studentId,
+          courseScheduleId: data.courseScheduleId,
+          paymentRequest: {
+            paymentType: Number(data.paymentRequest.paymentType),
+            paymentMethod:data.paymentRequest.paymentMethod,
+            amountPaid: Number(data.paymentRequest.amountPaid),
+            installmentNumber: data.paymentRequest.installmentNumber
+          }
+        }
+        this.PaymentApiServices.AddEnrollment(Enrollment).subscribe(
           (d: any) => {
             this.toastr.success('Your Payment is successful');
             this.paymentDataService.ClearAllPAymentData()
@@ -49,9 +59,16 @@ export class OtpAuthenticationComponent implements OnInit {
           }
         )
       } else {
-        this.PaymentApiServices.addPayment(data).subscribe(
+       let Payment:PayRequest= {
+          paymentType: Number(data.paymentType),
+          paymentMethod:Number( data.paymentMethod),
+          amountPaid: Number(data.amountPaid),
+          installmentNumber: Number(data.installmentNumber),
+          enrollmentId: data.enrollmentId
+        }
+        this.PaymentApiServices.addPayment(Payment).subscribe(
           (d: any) => {
-            this.toastr.success('Your Payment is successful');
+            this.toastr.success('Your Installment Payment is successful');
             this.paymentDataService.ClearAllPAymentData()
             this.router.navigate(['/student-dashboard'])
           },
@@ -71,4 +88,12 @@ export class OtpAuthenticationComponent implements OnInit {
 
 
 
+}
+
+export interface PayRequest {
+  paymentType: number;
+  paymentMethod: number;
+  amountPaid: number;
+  installmentNumber: number;
+  enrollmentId: string;
 }

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AnnouncementService } from '../../../Service/Announcement/announcement.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-announcement',
@@ -14,7 +15,7 @@ export class AnnouncementComponent {
   announcementForm!: FormGroup;
   Announcements:any[]=[]
 
-  constructor(private fb: FormBuilder,private Announcemenrservice:AnnouncementService) {}
+  constructor(private fb: FormBuilder,private Announcemenrservice:AnnouncementService,private toastr:ToastrService) {}
   ngOnInit(): void {
     // Initialize the form with validation rules
     this.loaditems()
@@ -36,12 +37,21 @@ export class AnnouncementComponent {
           },
           complete:() =>{
             this.loaditems()
+            this.toastr.success('Announcement added  Successful', '', {
+              positionClass: 'toast-top-right',
+              progressBar: true,
+              timeOut: 4000,
+            });
           },
           error:(err:any)=> {
-            
+            this.toastr.error('Failed to load data', '', {
+              positionClass: 'toast-top-right',
+              progressBar: true,
+            });
           },
          })
         console.log('Form Data:', this.announcementForm.value);
+        this.announcementForm.reset();
       } else {
         console.log('Form is invalid');
       }

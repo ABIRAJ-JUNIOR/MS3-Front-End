@@ -1,12 +1,12 @@
-import { CommonModule } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
-import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
-import { BsDatepickerModule } from "ngx-bootstrap/datepicker";
-import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
-import { ToastrService } from "ngx-toastr";
-import { Student } from "../../../Modals/modals";
-import { StudentService } from "../../../Service/API/Student/student.service";
+import { Component, OnInit } from '@angular/core';
+import { StudentService } from '../../../Service/API/Student/student.service';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Student } from '../../../Modals/modals';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ToastrService } from 'ngx-toastr';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-student-list',
@@ -154,7 +154,6 @@ export class StudentListComponent implements OnInit {
     }
 
     form.gender = Number(form.gender);
-    console.log(form)
     return form;
   }
 
@@ -179,7 +178,6 @@ export class StudentListComponent implements OnInit {
 
   private updateStudent(formData: any): void {
     formData.dateOfBirth = new Date(formData.dateOfBirth);
-    console.log(formData)
     this.studentService.updateFullDetails(this.studentId, formData).subscribe({
       next: () => {
         this.toastr.success('Update Successful', '', {

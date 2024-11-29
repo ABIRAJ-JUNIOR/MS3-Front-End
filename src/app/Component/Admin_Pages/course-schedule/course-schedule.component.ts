@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { Course, Schedule, Student } from '../../../Modals/modals';
-import { CourseService } from '../../../Service/API/Course/course.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { Schedule } from '../../../Modals/modals';
+import { CourseService } from '../../../Service/API/Course/course.service';
 
 @Component({
   selector: 'app-course-schedule',
@@ -18,6 +17,8 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 })
 export class CourseScheduleComponent {
   schedules: Schedule[] = []; 
+  courses: DropDown[] = [];   
+
   currentPage: number = 1;    
   pageSize: number = 12;      
   totalPages: number = 0;     
@@ -27,14 +28,12 @@ export class CourseScheduleComponent {
   isUpdate:boolean = false
   private scheduleId:string = ""
   scheduleForm: FormGroup;    
-  courses: DropDown[] = [];   
 
   constructor(
     private courseService: CourseService,
     private fb: FormBuilder,
     private toastr: ToastrService
   ) {
-    // Initialize the form with validators
     this.scheduleForm = this.fb.group({
       courseId: ['', Validators.required],
       startDate: ['', Validators.required],
@@ -51,7 +50,6 @@ export class CourseScheduleComponent {
     this.loadCourses(); 
   }
 
-  // Fetch paginated schedules
   loadItems(): void {
     this.courseService.schedulePagination(this.currentPage, this.pageSize).subscribe({
       next: (response: any) => {
@@ -65,7 +63,6 @@ export class CourseScheduleComponent {
     });
   }
 
-  // Fetch available courses for the dropdown
   loadCourses(): void {
     this.courseService.getCourses().subscribe({
       next: (data: any) => {
@@ -84,7 +81,6 @@ export class CourseScheduleComponent {
     }
   }
 
-  // Add or update a schedule
   onSubmit(): void {
     if (this.scheduleForm.valid) {
       const formData = this.scheduleForm.value;
@@ -110,7 +106,6 @@ export class CourseScheduleComponent {
     }
   }
 
-  // Add a new Schedule
   private addSchedule(scheduleData:CourseScheduleRequest):void{
     this.courseService.addCourseSchedule(scheduleData).subscribe({
       next: () => {
@@ -132,7 +127,6 @@ export class CourseScheduleComponent {
     });
   }
 
-  // Update an existing Schedule
   private updateSchedule(scheduleData:CourseScheduleRequest):void{
     this.courseService.updateCourseSchedule(this.scheduleId,scheduleData).subscribe({
       complete: () => {

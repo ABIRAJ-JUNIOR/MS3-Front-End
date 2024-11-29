@@ -1,0 +1,115 @@
+.form-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-container h2 {
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.form-container .btn-primary {
+    background: #f80429;
+    border: none;
+    padding: 0.8rem;
+    font-size: 1rem;
+}
+
+.form-container .btn-primary:hover {
+    background: #810505;
+}
+
+.form-container .form-check-label {
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        padding: 1.5rem;
+    }
+
+    .form-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .form-container .btn-primary {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .form-container {
+        padding: 1rem;
+    }
+
+    .form-container h2 {
+        font-size: 1.25rem;
+    }
+
+    .form-container .btn-primary {
+        font-size: 0.8rem;
+    }
+}
+
+
+#typing-text::after {
+    content: "|";
+    display: inline-block;
+    margin-left: 5px;
+    animation: blink 0.8s steps(2, start) infinite;
+}
+
+@keyframes blink {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+
+.form-group {
+    position: relative;
+    margin-top: 20px;
+}
+
+.form-group label {
+    position: absolute;
+    left: 10px;
+    top: 35%;
+    transform: translateY(-50%);
+    color: #999;
+    transition: 0.2s ease all;
+    pointer-events: none;
+}
+
+.form-group input:focus+label,
+.form-group input:not(:placeholder-shown)+label {
+    top: 0;
+    font-size: 12px;
+    color: #007bff;
+    background: white;
+    padding: 0 5px;
+}
+
+.form-control {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.text-danger {
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+@media (max-width: 1000px) {
+    .sign-width {
+        padding-left: 20px;
+        max-width: 100%;
+        width: 100%;
+    }
+}

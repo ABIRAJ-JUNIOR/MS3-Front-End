@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../../../Service/API/Admin/admin.service';
 import { Admin } from '../../../Modals/modals';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { AdminService } from '../../../Service/API/Admin/admin.service';
 
 @Component({
   selector: 'app-admin-list',
@@ -59,7 +59,6 @@ export class AdminListComponent implements OnInit{
 
   ngOnInit(): void {
     this.loadItems();
-
   }
 
   passwordMatchValidator(control: AbstractControl) {
@@ -85,7 +84,6 @@ export class AdminListComponent implements OnInit{
         });
       }
     });
-    
   }
 
   goToPage(page: number): void {
@@ -202,7 +200,7 @@ export class AdminListComponent implements OnInit{
     if (!isEditMode){
       this.profileForm.get('nic')?.enable();
       this.profileForm.get('email')?.enable();
-      // this.resetForm();+
+      this.resetForm();
     }
   }
 
@@ -250,7 +248,9 @@ export class AdminListComponent implements OnInit{
   }
 
   private resetForm(): void {
-    this.profileForm.reset();
+    this.profileForm.reset({
+      role:''
+    });
     this.resetImage();
     this.isUpdate = false;
   }

@@ -44,7 +44,11 @@
                 <td>{{ admin.firstName }} {{ admin.lastName }}</td>
                 <td>{{ admin.phone }}</td>
                 <td>{{ admin.email }}</td>
-                <td>{{ admin.roleName }}</td>
+                <td [ngStyle]="{
+                  color: admin.roleName === 'Administrator' ? 'red' :
+                 
+                  admin.roleName === 'Instructor' ? 'blue' : 'black'
+                }">{{ admin.roleName }}</td>
                 <td class="text-center">
                   <a  class="text-primary me-3 pointer" aria-label="Edit Admin" data-bs-toggle="modal" data-bs-target="#userForm1" (click)="editAdmin(true) ; patchData(admin)">
                     <i class="bi bi-pencil-square"></i>

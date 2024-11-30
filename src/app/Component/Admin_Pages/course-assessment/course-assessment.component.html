@@ -46,7 +46,12 @@
                                 <td>{{assessment.totalMarks}}</td>
                                 <td>{{assessment.passMarks}}</td>
                                 <td><a href="{{assessment.assessmentLink}}" *ngIf="assessment.assessmentLink"><strong>Link</strong></a></td>
-                                <td>{{assessment.assessmentStatus}}</td>
+                                <td [ngStyle]="{
+                                  color: assessment.assessmentStatus === 'NotStarted' ? 'blue' :
+                                  assessment.assessmentStatus === 'InProgress' ? 'green' :
+                                  assessment.assessmentStatus === 'Completed' ? 'darkblue' 
+                                  :assessment.assessmentStatus==='Closed'? 'red': 'black'
+                                }">{{assessment.assessmentStatus}}</td>
                                 <td class="text-center">
                                     <a  class="text-primary me-3 pointer" aria-label="Edit" (click)="patchData(assessment)" data-bs-toggle="modal" data-bs-target="#assessmentForm">
                                         <i class="bi bi-pencil-square"></i>

@@ -47,7 +47,11 @@
                 <td>{{schedule.location}}</td>
                 <td>{{schedule.maxStudents}}</td>
                 <td>{{schedule.enrollCount}}</td>
-                <td>{{schedule.scheduleStatus}}</td>
+                <td [ngStyle]="{
+                  color: schedule.scheduleStatus === 'Open' ? 'green' :
+                  schedule.scheduleStatus === 'Closed' ? 'red' :
+                  schedule.scheduleStatus === 'Completed' ? 'blue' : 'black'
+                }">{{schedule.scheduleStatus}}</td>
                 <td class="text-center">
                   <a  class="text-primary me-3" aria-label="Edit Student" (click)="patchData(schedule)" data-bs-toggle="modal" data-bs-target="#courseScheduleForm">
                     <i class="bi bi-pencil-square"></i>

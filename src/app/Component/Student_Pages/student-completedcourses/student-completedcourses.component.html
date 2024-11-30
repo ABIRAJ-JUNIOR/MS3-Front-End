@@ -1,9 +1,11 @@
 <div class="container my-5">
-    <h4>Completed Courses</h4>
+  <div *ngIf="!NoCourseBool">
+    <h4 >Completed Courses</h4>
     <hr>
+  </div>
     <div class="row">
         <div class="col-md-4 my-4" *ngFor="let item of StudentDetails.enrollments let i = index">
-            <div class="card shadow-sm border-0 rounded"  *ngIf="CompleteCourseCalculation(item)">
+            <div class="card shadow-sm border-0 rounded" *ngIf="CompleteCourseCalculation(item)">
                 <img src="/course/card{{i+1}}.jpg" class="card-img-top" alt="Course image">
 
                 <div class="card-header text-white text-center" [ngClass]="getProgressBarClass(item)">
@@ -34,12 +36,21 @@
                     </button>
                 </div>
             </div>
-          
+
 
         </div>
 
         <h4 *ngIf="NoCourseBool">
-            <p class="text-center text-danger fs-2">You have not completed any courses yet. Please check back later.</p>
+
+            <div id="notfound">
+                <div class="notfound">
+                    <div class="notfound-404">
+                        <h3>Oops! Page not found</h3>
+                        <h1><span>4</span><span>0</span><span>4</span></h1>
+                    </div>
+                    <h2>we are sorry, but the page you requested was not found</h2>
+                </div>
+            </div>
         </h4>
     </div>
 </div>

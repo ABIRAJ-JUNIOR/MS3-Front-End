@@ -51,12 +51,16 @@ export class StudentAssesmentComponent implements OnInit {
     }
   }
 
-  confirmRedirect(link: string): void {
-    if (confirm('Are you sure you want to view the exam?')) {
-      window.open(link, '_blank');
+  assesmentLink:string="";
+ 
+  examdataTransfer(assessmentLink:string){
+   this.assesmentLink = assessmentLink
+  }
+  GoExam(){
+    alert(this.assesmentLink)
+    if (this.assesmentLink) {
+      window.open(this.assesmentLink, '_blank');
     }
   }
-  
-
  
 }

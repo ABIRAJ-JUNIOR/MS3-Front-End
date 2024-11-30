@@ -29,62 +29,51 @@
                         <div class="col-md-12">
                             <div class="card-body">
                                 <div class="col-md-1">
-                                    <p class="mb-2 text-dark fs-5 bg-warning py-1 text-center rounded-2"><i
-                                            class="bi bi-bookmarks text-white"></i> {{
-                                        assesment.assessmentType }}
+                                    <p class="mb-2 text-dark fs-5 bg-warning py-1 text-center rounded-2">
+                                        <i class="bi bi-bookmarks text-white"></i> {{ assesment.assessmentType }}
                                     </p>
-
                                 </div>
-
-                                <div class="row ">
+                            
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="card-text fs-5 py-2 text-primary">{{ assesment.assessmentTitle }}</p>
+                                    </div>
                                     <div class="col-md-6">
                                         <p class="card-text">
-                                            <i class="bi bi-clock-history me-2"></i>Last Updated: {{
-                                            assesment.updateDate |
-                                            date:
-                                            'mediumDate' }}
+                                            <i class="bi bi-clock-history me-2 text-success"></i><strong>Last Updated :</strong> {{ assesment.updateDate | date:'mediumDate' }}
                                         </p>
                                     </div>
                                     <div class="col-md-6">
-
                                         <p class="card-text">
-                                            <i class="bi bi-calendar-event me-2"></i>{{ assesment.startDate | date:
-                                            'mediumDate'
-                                            }} - {{ assesment.endDate | date: 'mediumDate' }}
+                                            <i class="bi bi-calendar-event me-2 text-danger"></i> <strong>StartDate :</strong>{{ assesment.startDate | date: 'mediumDate' }} - {{ assesment.endDate | date: 'mediumDate' }}
                                         </p>
-
                                     </div>
                                 </div>
                                 <div class="row mt-1">
                                     <div class="col-md-6">
                                         <p class="card-text">
-                                            <i class="bi bi-award me-2"></i>Pass Marks: {{ assesment.passMarks }}
+                                            <i class="bi bi-award me-2 text-warning"></i> <strong>Pass Marks :</strong>{{ assesment.passMarks }}
                                         </p>
                                     </div>
                                     <div class="col-md-6 mt-1">
-
                                         <p class="card-text">
-                                            <i class="bi bi-star-fill me-2"></i>Total Marks: {{ assesment.totalMarks }}
+                                            <i class="bi bi-star me-2 text-primary"></i><strong>Total Marks :</strong> {{ assesment.totalMarks }}
                                         </p>
-
                                     </div>
                                 </div>
-
-
-
-                                <p class="card-text mt-1 ">
-                                    <i class="bi bi-info-circle me-2 "></i>Status: <span class="fw-bold text-success">{{
-                                        assesment.assessmentStatus}}</span>
+                            
+                                <p class="card-text mt-1">
+                                    <i class="bi bi-info-circle me-2 text-info"></i><strong>Status :</strong> <span class="fw-bold text-success">{{ assesment.assessmentStatus }}</span>
                                 </p>
-
+                            
                                 <div class="card-footer text-end">
-                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ExamModal"
-                                        [disabled]="assesment.assessmentStatus==NotStartCheck">
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ExamModal" (click)="examdataTransfer(assesment.assessmentLink)"
+                                            [disabled]="assesment.assessmentStatus == NotStartCheck">
                                         <i class="fas fa-eye"></i> View Exam
                                     </button>
-
                                 </div>
                             </div>
+                            
                             <hr class="m-0">
                         </div>
                     </div>
@@ -115,7 +104,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, Go Back</button>
-          <button type="button" class="btn btn-primary" onclick="startExam()">Yes, Start Exam</button>
+          <button type="button" class="btn btn-primary" (click)="GoExam()">Yes, Start Exam</button>
         </div>
       </div>
     </div>

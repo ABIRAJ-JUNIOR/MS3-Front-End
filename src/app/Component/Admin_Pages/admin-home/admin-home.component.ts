@@ -118,7 +118,7 @@ export class AdminHomeComponent {
         })
         this.paymentData.push({name:"FullPayment" , value:fullPayment})
         this.paymentData.push({name:"Installment" , value:installment})
-
+        this.paymentData.push({name:"Initial Amount" , value:this.students.length * 2500})
         this.paymentOverview = JSON.parse(JSON.stringify(this.paymentData))
       }
     })
@@ -142,10 +142,11 @@ export class AdminHomeComponent {
   paymentOverview = [];
 
   coursePopularity = [
-    { name: 'Python', value: 80 },
-    { name: 'JavaScript', value: 60 },
-    { name: 'Java', value: 40 },
+    { 'name': 'Python', 'value': 80 },
+    { 'name': 'JavaScript', 'value': 60 },
+    { 'name': 'Java', 'value': 40 },
   ];
+ 
 }
 
 interface ChartData {

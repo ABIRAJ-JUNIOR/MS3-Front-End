@@ -1,13 +1,16 @@
 import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
-import { RouterModule } from "@angular/router";
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
+import { Router, RouterModule } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
+import { AuthService } from "../Service/API/Auth/auth.service";
 
 
 
 @Component({
   selector: 'app-test',
   standalone: true,
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule,RouterModule,ReactiveFormsModule],
   templateUrl: './test.component.html',
   styleUrl: './test.component.css'
 })
@@ -16,6 +19,14 @@ export class TestComponent {
   displayedText: string = ""; 
   typingSpeed: number = 100; 
 
+  signinForm: FormGroup
+
+  constructor(private fb: FormBuilder , private auth:AuthService , private rout:Router , private toastr:ToastrService) {
+    this.signinForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
+    })
+  }
   ngOnInit(): void {
     this.startTypingEffect();
   }
@@ -31,6 +42,10 @@ export class TestComponent {
         clearInterval(typingInterval);
       }
     }, this.typingSpeed);
+  }
+
+  onSubmit(){
+    
   }
 }
   

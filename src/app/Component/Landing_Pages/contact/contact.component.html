@@ -21,22 +21,30 @@
     <div class="row d-flex align-items-center">
         <!-- Contact Form -->
         <div class="col-md-6">
-        <form class="contact p-4  shadow" id="contactUsForm" style="background-color: #1d232c; color: white;">
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact p-4 shadow" id="contactUsForm" style="background-color: #1d232c; color: white;">
             <h1 class="mb-4">Contact Us</h1>
+          
             <div class="mb-3">
-                <label for="name" class="form-label">Name:</label>
-                <input type="text" class="form-control rounded-0" id="name" placeholder="Enter your name">
+              <label for="name" class="form-label">Name:</label>
+              <input type="text" class="form-control rounded-0" id="name" placeholder="Enter your name"formControlName="name">
             </div>
+          
             <div class="mb-3">
-                <label for="email" class="form-label">Email:</label>
-                <input type="email" class="form-control rounded-0" id="email" placeholder="Enter your email">
+              <label for="email" class="form-label">Email:</label>
+              <input type="email" class="form-control rounded-0" id="email" placeholder="Enter your email"formControlName="email">
             </div>
+          
             <div class="mb-3">
-                <label for="message" class="form-label">Message:</label>
-                <textarea class="form-control rounded-0" id="message" rows="5" placeholder="Write your message"></textarea>
+              <label for="message" class="form-label">Message:</label>
+              <textarea class="form-control rounded-0" id="message" rows="5" placeholder="Write your message"formControlName="message">
+              </textarea>
             </div>
-            <button type="submit" class="btn btn-primary w-100 rounded-0" id="submit-btn">Submit</button>
-        </form>
+          
+            <button type="submit" class="btn btn-primary w-100 rounded-0" id="submit-btn"[disabled]="contactForm.invalid">
+              Submit
+            </button>
+          </form>
+          
         </div>
 
         <!-- Map -->

@@ -1,7 +1,7 @@
 .form-container {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 10px;
-    padding: 2rem;
+    padding: 10px 30px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -72,44 +72,8 @@
 }
 
 
-.form-group {
-    position: relative;
-    margin-top: 20px;
-}
-
-.form-group label {
-    position: absolute;
-    left: 10px;
-    top: 35%;
-    transform: translateY(-50%);
-    color: #999;
-    transition: 0.2s ease all;
-    pointer-events: none;
-}
-
-.form-group input:focus+label,
-.form-group input:not(:placeholder-shown)+label {
-    top: 0;
-    font-size: 12px;
-    color: #007bff;
-    background: white;
-    padding: 0 5px;
-}
-
-.form-control {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.text-danger {
-    margin-top: 5px;
-    font-size: 12px;
-}
-
-@media (max-width: 1000px) {
-    .sign-width {
-        padding-left: 20px;
-        max-width: 100%;
-        width: 100%;
-    }
+.btn-gradient:hover {
+    background: linear-gradient(to right, #388e3c, #2e7d32);
+    box-shadow: 0 6px 14px rgba(56, 142, 60, 0.4);
+    transform: scale(1.05);
 }

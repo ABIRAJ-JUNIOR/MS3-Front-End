@@ -1,17 +1,3 @@
-*,
-::after,
-::before {
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.875rem;
-    opacity: 1;
-    overflow-y: scroll;
-    margin: 0;
-}
-
 a {
     cursor: pointer;
     text-decoration: none;
@@ -20,12 +6,6 @@ a {
 
 li {
     list-style: none;
-}
-
-h4 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.275rem;
-    color: var(--bs-emphasis-color);
 }
 
 /* Layout for admin dashboard */
@@ -41,6 +21,7 @@ h4 {
     min-width: 264px;
     background: var(--bs-dark);
     transition: all 0.35s ease-in-out;
+    
 }
 
 .main {
@@ -51,6 +32,7 @@ h4 {
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     width: 100%;
+    
 }
 
 /* Sidebar Elements Style */
@@ -67,7 +49,7 @@ h4 {
 
 .sidebar-logo a {
     color: #e9ecef;
-    font-size: 1.15rem;
+    font-size: 1.6rem;
     font-weight: 600;
 }
 

@@ -35,7 +35,7 @@ export class HomeComponent {
     {
       title: 'Full-Stack Web Development',
       description: 'Learn to build modern websites and web apps using the latest technologies.',
-      image: 'https://res.cloudinary.com/dgpyq5til/image/upload/v1732463529/iryahxtpxm5qv1wmikco.jpg',
+      image: 'https://res.cloudinary.com/dgpyq5til/image/upload/v1732516829/card1_otzkkd.jpg',
       rating: 4.9,
       feedbackCount: 1200,
       link: '/courses/fullstack'
@@ -43,7 +43,7 @@ export class HomeComponent {
     {
       title: 'Data Science & AI',
       description: 'Dive into data analysis, machine learning, and artificial intelligence.',
-      image: 'https://res.cloudinary.com/dgpyq5til/image/upload/v1732463529/iryahxtpxm5qv1wmikco.jpg',
+      image: 'https://res.cloudinary.com/dgpyq5til/image/upload/v1732516829/card1_otzkkd.jpg',
       rating: 4.8,
       feedbackCount: 900,
       link: '/courses/datascience'
@@ -51,7 +51,7 @@ export class HomeComponent {
     {
       title: 'Cybersecurity Essentials',
       description: 'Master the art of protecting digital systems from cyber threats.',
-      image: 'https://res.cloudinary.com/dgpyq5til/image/upload/v1732463529/iryahxtpxm5qv1wmikco.jpg',
+      image: 'https://res.cloudinary.com/dgpyq5til/image/upload/v1732516829/card1_otzkkd.jpg',
       rating: 4.7,
       feedbackCount: 800,
       link: '/courses/cybersecurity'

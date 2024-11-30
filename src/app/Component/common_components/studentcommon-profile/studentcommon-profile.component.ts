@@ -63,7 +63,7 @@ export class StudentcommonProfileComponent {
     formData.append('image', file); 
     this.StudentApiService.addImage(this.StudentTokenDetails.Id,formData).subscribe((response:any)=>{
 
-        this.tostr.success(response.message);
+        this.tostr.success("Profile Image Update Successfully");
 
     },(error)=>{
       this.tostr.error(error.message);

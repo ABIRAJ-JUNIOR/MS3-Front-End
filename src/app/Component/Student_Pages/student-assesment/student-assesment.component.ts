@@ -23,6 +23,7 @@ export class StudentAssesmentComponent implements OnInit {
   paginatedAssesment: any[] = [];
 
   StatusCheck:string="Completed"
+  NotStartCheck:string="NotStarted"
 
   StudentDetails:any;
   ngOnInit() {

@@ -15,7 +15,7 @@
     </div>
 
     <div class="row  ">
-        <div class="col-12 col-sm-12 col-md-12 " *ngFor="let Sechdule of paginatedAssesment let i = index" >
+        <div class="col-12 col-sm-12 col-md-12 " *ngFor="let Sechdule of paginatedAssesment  let i = index">
             <div class="card my-4">
                 <h5 class="card-title fs-4   p-2 py-3 rounded-top-2 text-center text-white m-0 " style="background-color: #0c0800;
                 background-image: linear-gradient(132deg, #0c0800 0%, #004594 100%);
@@ -23,13 +23,14 @@
                 ">
                     <a>{{Sechdule.courseScheduleResponse.courseResponse.courseName}}</a>
                 </h5>
-                <div *ngFor="let assesment of Sechdule.courseScheduleResponse.courseResponse.assessmentResponse" >
-                    <div class="row">
+                <div *ngFor="let assesment of Sechdule.courseScheduleResponse.courseResponse.assessmentResponse " >
+                    <div class="row"  *ngIf="assesment.assessmentStatus!==StatusCheck">
 
                         <div class="col-md-12">
-                            <div class="card-body" >
+                            <div class="card-body">
                                 <div class="col-md-1">
-                                    <p class="mb-2 text-dark fs-5 bg-warning py-1 text-center rounded-2"><i class="bi bi-bookmarks text-white"></i> {{
+                                    <p class="mb-2 text-dark fs-5 bg-warning py-1 text-center rounded-2"><i
+                                            class="bi bi-bookmarks text-white"></i> {{
                                         assesment.assessmentType }}
                                     </p>
 
@@ -77,12 +78,11 @@
                                 </p>
 
                                 <div class="card-footer text-end">
-                                    <button class="btn btn-primary" (click)="confirmRedirect(assesment.assessmentLink)">
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ExamModal"
+                                        [disabled]="assesment.assessmentStatus==NotStartCheck">
                                         <i class="fas fa-eye"></i> View Exam
-                                      </button>
-                                      
-                                    <button class="btn btn-sm btn-success mx-2" [disabled]="assesment.assessmentStatus==StatusCheck"> <i
-                                            class="bi bi-cloud-arrow-up me-1" SumbitExam()></i>Submit Assignment</button>
+                                    </button>
+
                                 </div>
                             </div>
                             <hr class="m-0">
@@ -95,3 +95,28 @@
             </div>
         </div>
     </div>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="ExamModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Ready to Start the Exam?</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div id="exam-preview">
+                  <img src="/StudentDashboard/exam.jpg"  height="200px" alt="">
+                  <p>Your exam is about to begin! Are you sure you want to proceed?</p>
+              </div>
+              
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, Go Back</button>
+          <button type="button" class="btn btn-primary" onclick="startExam()">Yes, Start Exam</button>
+        </div>
+      </div>
+    </div>
+  </div>

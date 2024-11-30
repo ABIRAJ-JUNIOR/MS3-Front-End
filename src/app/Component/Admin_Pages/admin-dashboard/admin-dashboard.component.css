@@ -183,3 +183,7 @@ a.sidebar-link {
         width: 100vw;
     }
 }
+
+.active{
+    background-color: rgb(134, 129, 129);
+}

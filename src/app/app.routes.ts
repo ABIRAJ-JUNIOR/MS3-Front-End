@@ -35,6 +35,7 @@ import { TestComponent } from './test/test.component';
 import { AnnouncementComponent } from './Component/Admin_Pages/announcement/announcement.component';
 import { ContactUsComponent } from './Component/Admin_Pages/contact-us/contact-us.component';
 import { studentAuthGuard } from './Guard/Student/student-auth.guard';
+import { StudentAssessmentsComponent } from './Component/Admin_Pages/student-assessments/student-assessments.component';
 
 
 export const routes: Routes = [
@@ -77,6 +78,7 @@ export const routes: Routes = [
             { path: 'assessment-list', component: CourseAssessmentComponent },
             { path:'announcement',component:AnnouncementComponent},
             { path:'contact-us',component:ContactUsComponent},
+            { path:'student-assessments',component:StudentAssessmentsComponent},
             {path:'**' , redirectTo:'home',pathMatch:'full'}
         ],
         canActivate: [adminAuthGuard]

@@ -23,7 +23,12 @@ thead tr th{
 }
 
 
-
+.disabled {
+    background-color: #f4f4f4;
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
 
 
 .table-responsive {

@@ -50,5 +50,12 @@ export class StudentAssesmentComponent implements OnInit {
     }
   }
 
+  confirmRedirect(link: string): void {
+    if (confirm('Are you sure you want to view the exam?')) {
+      window.open(link, '_blank');
+    }
+  }
+  
+
  
 }

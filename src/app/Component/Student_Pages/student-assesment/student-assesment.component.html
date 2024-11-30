@@ -15,21 +15,21 @@
     </div>
 
     <div class="row  ">
-        <div class="col-12 col-sm-12 col-md-12 " *ngFor="let Sechdule of paginatedAssesment let i = index">
+        <div class="col-12 col-sm-12 col-md-12 " *ngFor="let Sechdule of paginatedAssesment let i = index" >
             <div class="card my-4">
                 <h5 class="card-title fs-4   p-2 py-3 rounded-top-2 text-center text-white m-0 " style="background-color: #0c0800;
-                background-image: linear-gradient(132deg, #0c0800 0%, #004c16 100%);
+                background-image: linear-gradient(132deg, #0c0800 0%, #004594 100%);
                 
                 ">
                     <a>{{Sechdule.courseScheduleResponse.courseResponse.courseName}}</a>
                 </h5>
-                <div *ngFor="let assesment of Sechdule.courseScheduleResponse.courseResponse.assessmentResponse">
+                <div *ngFor="let assesment of Sechdule.courseScheduleResponse.courseResponse.assessmentResponse" >
                     <div class="row">
 
                         <div class="col-md-12">
-                            <div class="card-body">
-                                <div class="col-md-2">
-                                    <p class="mb-2 text-white fs-4 bg-dark text-center rounded-2"><i class="bi bi-bookmarks text-white"></i> {{
+                            <div class="card-body" >
+                                <div class="col-md-1">
+                                    <p class="mb-2 text-dark fs-5 bg-warning py-1 text-center rounded-2"><i class="bi bi-bookmarks text-white"></i> {{
                                         assesment.assessmentType }}
                                     </p>
 
@@ -73,14 +73,16 @@
 
                                 <p class="card-text mt-1 ">
                                     <i class="bi bi-info-circle me-2 "></i>Status: <span class="fw-bold text-success">{{
-                                        assesment.status}}</span>
+                                        assesment.assessmentStatus}}</span>
                                 </p>
 
                                 <div class="card-footer text-end">
-                                    <button class="btn btn-sm btn-outline-primary"><i
-                                            class="bi bi-eye me-1"></i>View</button>
-                                    <button class="btn btn-sm btn-success mx-2"><i
-                                            class="bi bi-cloud-arrow-up me-1"></i>Submit Assignment</button>
+                                    <button class="btn btn-primary" (click)="confirmRedirect(assesment.assessmentLink)">
+                                        <i class="fas fa-eye"></i> View Exam
+                                      </button>
+                                      
+                                    <button class="btn btn-sm btn-success mx-2" [disabled]="assesment.assessmentStatus==StatusCheck"> <i
+                                            class="bi bi-cloud-arrow-up me-1" SumbitExam()></i>Submit Assignment</button>
                                 </div>
                             </div>
                             <hr class="m-0">

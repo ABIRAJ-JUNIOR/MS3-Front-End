@@ -33,6 +33,7 @@ import { StudentPaymentsComponent } from './Component/Student_Pages/student-paym
 import { StudentPaymentsHistoryComponent } from './Component/Student_Pages/student-payments-history/student-payments-history.component';
 import { TestComponent } from './test/test.component';
 import { AnnouncementComponent } from './Component/Admin_Pages/announcement/announcement.component';
+import { ContactUsComponent } from './Component/Admin_Pages/contact-us/contact-us.component';
 
 
 export const routes: Routes = [
@@ -74,6 +75,7 @@ export const routes: Routes = [
             { path: 'schedule-list', component: CourseScheduleComponent },
             { path: 'assessment-list', component: CourseAssessmentComponent },
             { path:'announcement',component:AnnouncementComponent},
+            { path:'contact-us',component:ContactUsComponent},
             {path:'**' , redirectTo:'home',pathMatch:'full'}
         ],
         // canActivate: [adminAuthGuard]

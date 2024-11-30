@@ -146,6 +146,8 @@ export class AdminHomeComponent {
     { 'name': 'JavaScript', 'value': 60 },
     { 'name': 'Java', 'value': 40 },
   ];
+
+ 
 }
 
 interface ChartData {

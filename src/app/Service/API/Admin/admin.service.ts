@@ -40,5 +40,8 @@ export class AdminService {
   pagination(pageNumber:number , pageSize:number){
     return this.http.get<any>(this.apiUrl + `/Admin/Pagination/${pageNumber}/${pageSize}`)
   }
+  getadminbyID(id:string){
+    return this.http.get<Admin>(this.apiUrl + `/Admin/Get/${id}`)
+  }
 }
 

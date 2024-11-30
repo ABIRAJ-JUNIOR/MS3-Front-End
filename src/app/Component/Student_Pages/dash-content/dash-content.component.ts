@@ -35,11 +35,7 @@ export class DashContentComponent implements OnInit {
 
       this.totalPaymentCalculate()
       this.PaymentChartCalculation()
-    }
-      ,
-      (error) => {
-        this.router.navigate([''])
-      })
+    })
 
   }
 

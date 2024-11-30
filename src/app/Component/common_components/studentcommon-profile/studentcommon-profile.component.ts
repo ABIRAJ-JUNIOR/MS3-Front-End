@@ -31,11 +31,7 @@ export class StudentcommonProfileComponent {
       this.StudentDetails = student
       this.previewUrl=this.StudentDetails.imageUrl
       console.log(this.StudentDetails)
-    }
-      ,
-      (error) => {
-        this.router.navigate([''])
-      })
+    })
 
   }
 

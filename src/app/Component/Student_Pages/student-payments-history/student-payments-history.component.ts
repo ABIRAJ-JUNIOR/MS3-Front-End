@@ -30,11 +30,7 @@ export class StudentPaymentsHistoryComponent {
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
       this.Enrollments = student.enrollments
       console.log(this.Enrollments)
-    }
-      ,
-      (error) => {
-        this.router.navigate([''])
-      })
+    })
 
   }
 }

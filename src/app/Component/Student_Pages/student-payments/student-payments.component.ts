@@ -58,11 +58,7 @@ export class StudentPaymentsComponent implements OnInit {
 
 
       console.log(this.Enrollments)
-    }
-      ,
-      (error) => {
-        this.router.navigate([''])
-      })
+    })
 
   }
 

@@ -27,11 +27,7 @@ export class StudentCompletedcoursesComponent {
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
       this.StudentDetails = student
       console.log(this.StudentDetails)
-    }
-      ,
-      (error) => {
-        this.router.navigate([''])
-      })
+    })
 
   }
 

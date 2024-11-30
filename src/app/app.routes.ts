@@ -34,6 +34,7 @@ import { StudentPaymentsHistoryComponent } from './Component/Student_Pages/stude
 import { TestComponent } from './test/test.component';
 import { AnnouncementComponent } from './Component/Admin_Pages/announcement/announcement.component';
 import { ContactUsComponent } from './Component/Admin_Pages/contact-us/contact-us.component';
+import { studentAuthGuard } from './Guard/Student/student-auth.guard';
 
 
 export const routes: Routes = [
@@ -78,12 +79,13 @@ export const routes: Routes = [
             { path:'contact-us',component:ContactUsComponent},
             {path:'**' , redirectTo:'home',pathMatch:'full'}
         ],
-        // canActivate: [adminAuthGuard]
+        canActivate: [adminAuthGuard]
     },
     {
         path: 'student-dashboard', component: StudentDashboardComponent, children: [
-            { path: '', component: DashContentComponent },
-            { path: 'profile', component:StudentProfileComponent },
+            {path:'', redirectTo: 'home' ,pathMatch:'full'},
+            {path:'home', component: DashContentComponent},
+            {path:'profile', component:StudentProfileComponent },
             {path:'setting',component:StudentSettingComponent},
             {path:'assesment',component:StudentAssesmentComponent},
             {path:'courses',component:StudentCourseComponent},
@@ -92,7 +94,9 @@ export const routes: Routes = [
             {path:'assesment-result',component:StudentResultComponent},
             {path:'enrollCourse-payment',component:StudentPaymentsComponent},
             {path:'enrollCourse-paymentHistory',component:StudentPaymentsHistoryComponent},
-        ]
+            {path:'**' , redirectTo:'home',pathMatch:'full'}
+        ],
+        canActivate: [studentAuthGuard]
     },
     {path:'test' , component:TestComponent},
     { path: '**', redirectTo: 'home', pathMatch: 'full' },

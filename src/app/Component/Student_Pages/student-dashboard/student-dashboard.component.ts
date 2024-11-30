@@ -1,13 +1,15 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { RouterOutlet, RouterModule } from "@angular/router";
+import { RouterOutlet, RouterModule, Router } from "@angular/router";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
+import { Student } from "../../../Modals/modals";
+import { StudentService } from "../../../Service/API/Student/student.service";
 
 @Component({
   selector: 'app-student-dashboard',
   standalone: true,
-  imports: [RouterOutlet,CommonModule,FormsModule,RouterModule],
+  imports: [RouterOutlet, CommonModule, FormsModule, RouterModule],
   templateUrl: './student-dashboard.component.html',
   styleUrl: './student-dashboard.component.css'
 })
@@ -17,17 +19,28 @@ export class StudentDashboardComponent implements OnInit {
     this.sidebarCollapsed = !this.sidebarCollapsed;
   }
 
-  constructor(private StudentDashDataService:StudentDashDataService){
+  StudentDetails: any;
+  StudentTokenDetails: any;
 
+
+
+  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
-
-  StudentDetails:any;
-
 
   ngOnInit(): void {
-    this.StudentDetails=this.StudentDashDataService.GetStudentDeatilByLocalStorage();
+
+    this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
+
+    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
+      this.StudentDetails = student
+      console.log(this.StudentDetails)
+    }
+      ,
+      (error) => {
+        this.router.navigate([''])
+      })
+
   }
 
-   
 
 }

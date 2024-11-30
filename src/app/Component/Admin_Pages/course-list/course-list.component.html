@@ -40,8 +40,12 @@
                               <td>
                                   <img src="{{course.imageUrl || 'https://via.placeholder.com/150'}}" alt="Course image" class="rounded pointer" width="45" height="45" (click)="openPreviewModal(template, course.imageUrl)"> 
                               </td>
-                              <td>{{course.level}}</td>
-                              <td>{{course.courseFee}} Rs</td>
+                              <td [ngStyle]="{
+                                color: course.level === 'Beginner' ? 'red' :
+                                course.level === 'Intermediate' ? 'green' :
+                                course.level === 'Advanced' ? 'blue' : 'black'
+                              }">{{course.level}}</td>
+                              <td >{{course.courseFee}} Rs</td>
                               <td>{{course.description}}</td>
                               <td>{{course.prerequisites}}</td>
                               <td>{{course.schedulesCount}}</td>

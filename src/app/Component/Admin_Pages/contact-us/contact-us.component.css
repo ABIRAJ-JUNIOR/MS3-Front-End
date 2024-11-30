@@ -1,61 +1,12 @@
-/* Dark Theme */
-.dark-theme {
-    background-color: #1d232c;
-    color: white;
-  }
-  
-  .dark-theme h2 {
-    color: #ff5f5f; /* Red touch for headings */
-  }
-  
-  .dark-theme .table {
-    color: white;
-    border-color: #444;
-  }
-  
-  .dark-theme .table-striped > tbody > tr:nth-of-type(odd) {
-    background-color: #2a2f38;
-  }
-  
-  .dark-theme .table-hover > tbody > tr:hover {
-    background-color: #333a45;
-  }
-  
-  /* Light Theme */
-  .light-theme {
-    background-color: #f8f9fa;
-    color: black;
-  }
-  
-  .light-theme h2 {
-    color: #dc3545; /* Red touch for headings */
-  }
-  
-  .light-theme .table {
-    color: black;
-    border-color: #ddd;
-  }
-  
-  .light-theme .table-striped > tbody > tr:nth-of-type(odd) {
-    background-color: #f2f2f2;
-  }
-  
-  .light-theme .table-hover > tbody > tr:hover {
-    background-color: #e9ecef;
-  }
-  
-  /* Shared Styles */
-  .badge {
-    font-size: 0.85rem;
-    padding: 5px 10px;
-  }
-  
-  .container {
-    max-width: 900px;
-    margin: auto;
-  }
-  
-  button {
-    cursor: pointer;
-  }
-  
+.badge {
+  font-size: 0.85rem;
+  padding: 5px 10px;
+}
+
+.table-container{
+  height: 625px;
+  overflow: auto;
+}
+
+
+

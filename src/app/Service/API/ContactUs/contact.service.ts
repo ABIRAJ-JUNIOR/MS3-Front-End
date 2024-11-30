@@ -17,4 +17,12 @@ export class ContactService {
   getAllContactMessages(){
     return this.http.get<ContactUs[]>(this.apiUrl + '/ContactUs')
   }
+
+  addResponse(Response:any){
+    return this.http.put(this.apiUrl + '/ContactUs' , Response)
+  }
+
+  deleteMessage(id:string){
+    return this.http.delete(this.apiUrl + '/ContactUs/Delete/' + id)
+  }
 }

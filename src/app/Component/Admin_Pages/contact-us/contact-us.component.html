@@ -46,20 +46,26 @@
             </td>
             <td>{{ message.dateSubmited | date: 'medium' }}</td>
             <td>
+              <!-- Response Icon -->
               <button 
                 class="btn btn-sm btn-primary me-2"
                 *ngIf="message.isRead == false"
                 (click)="response(message)"
                 data-bs-toggle="modal" 
-                data-bs-target="#messageResponseModal">
-                Response
+                data-bs-target="#messageResponseModal"
+                title="Respond to Message">
+                <i class="bi bi-reply-fill"></i>
               </button>
+              
+              <!-- Delete Icon -->
               <button 
                 class="btn btn-sm btn-danger"
-                (click)="openDeleteModal(deleteEmployeeModal , message.id)">
-                Delete
+                (click)="openDeleteModal(deleteEmployeeModal, message.id)"
+                title="Delete Message">
+                <i class="bi bi-trash-fill"></i>
               </button>
             </td>
+            
           </tr>
         </tbody>
       </table>

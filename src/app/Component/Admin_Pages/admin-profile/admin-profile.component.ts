@@ -48,5 +48,14 @@ export class AdminProfileComponent implements OnInit{
   onSubmit(){
 
   }
+  patchData(admin:any){
+    this.updateUserForm.patchValue({
+      firstName: admin.firstName,
+      lastName:admin.lastName,
+      email:admin.email,
+      phone:admin.phone
+
+    })
+  }
   
 }

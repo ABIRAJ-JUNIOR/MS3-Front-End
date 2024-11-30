@@ -23,6 +23,7 @@ export class StudentAssesmentComponent implements OnInit {
   paginatedAssesment: any[] = [];
 
   StatusCheck:string="Completed"
+  NotStartCheck:string="NotStarted"
 
   StudentDetails:any;
   ngOnInit() {
@@ -50,5 +51,16 @@ export class StudentAssesmentComponent implements OnInit {
     }
   }
 
+  assesmentLink:string="";
+ 
+  examdataTransfer(assessmentLink:string){
+   this.assesmentLink = assessmentLink
+  }
+  GoExam(){
+    alert(this.assesmentLink)
+    if (this.assesmentLink) {
+      window.open(this.assesmentLink, '_blank');
+    }
+  }
  
 }

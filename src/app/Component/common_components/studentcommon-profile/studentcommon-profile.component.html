@@ -1,27 +1,22 @@
-<!-- Profile Picture Section -->
-<div class="row">
-    <div class=" col-12 col-md-12 col-lg-3  mx-auto ">
-        <div class="d-flex flex-column align-items-center text-center  py-3 rounded  ">
-          
-            <div class="profile-picture-box">
-                <img *ngIf="previewUrl" [src]="previewUrl" alt="Profile Picture" class="profile-picture" />
+<div class="rounded-top text-white d-flex flex-row profile-section">
+    <div class="ms-4 mt-5 d-flex flex-column" style="width: 180px;">
+        <div class="profile-picture-box " style="margin-top: 180px;">
+            <img *ngIf="previewUrl" [src]="previewUrl" alt="Profile Picture" class="profile-picture" />
 
-                <!-- Upload Button -->
-                <label for="fileInput" class="upload-button">
-                    <i class="bi bi-pencil"></i> <!-- Bootstrap icon for edit -->
-                </label>
-                <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/*" hidden />
-            </div>
-
-            <span class="font-weight-bold fs-5 mt-3 fw-bold" style="color: #000000;">{{StudentDetails.firstName}}
-                {{StudentDetails.lastName}}</span>
-
-            <span class="text-dark d-block mb-2">{{StudentTokenDetails.Email}}</span>
-
-            <span class="text-dark mb-1">Student ID: UT-{{StudentDetails.nic | slice: -4 }}</span>
-
-           
+            <!-- Upload Button -->
+            <label for="fileInput" class="upload-button">
+                <i class="bi bi-pencil"></i> <!-- Bootstrap icon for edit -->
+            </label>
+            <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/*" hidden />
         </div>
-    </div>
 
+    </div>
+    <div class="ms-3 " style="margin-top:  260px;">
+        <span class="font-weight-bold fs-5 mt-3 fw-bold" style="color: #ffffff;">{{StudentDetails.firstName}}
+            {{StudentDetails.lastName}}</span>
+        <span class="text-light d-block mb-1">{{StudentTokenDetails.Email}}</span>
+
+        <span class="text-light mb-1">Student ID: UT-{{StudentDetails.nic | slice: -4
+            }}</span>
+    </div>
 </div>

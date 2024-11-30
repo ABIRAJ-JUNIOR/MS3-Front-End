@@ -1,6 +1,8 @@
 
 .low-progress {
-    background-color: #0082ba; /* Red color for low progress */
+    background-color: #0093E9;
+    background-image: linear-gradient(160deg,#000000 20%,  #004166 50%);
+     /* Red color for low progress */
   }
   
   .medium-progress {
@@ -86,10 +88,10 @@
         padding: 0.6rem 1.2rem;
     }
 }  
-.card {
+/* .card {
     transition: transform 0.6s ease-in-out, background-color 0.3s ease-in-out;
   }
   
   .card:hover {
     transform: scale(1.05);
-  }
+  } */

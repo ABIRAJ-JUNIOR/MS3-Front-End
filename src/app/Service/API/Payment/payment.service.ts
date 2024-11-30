@@ -15,7 +15,7 @@ export class PaymentService {
    return this.http.post(this.apiUrl + "/Enrollment", data)
   }
   addPayment(data:PayRequest){
-    return this.http.post(this.apiUrl,data)
+    return this.http.post(this.apiUrl+"/Payment",data)
   }
   recentPayment(){
     return this.http.get<Payment[]>(this.apiUrl + '/Payment/Recent')

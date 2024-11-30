@@ -1,6 +1,6 @@
 
 thead tr th{
-    background-color: gray;
+    background-color: rgb(0, 0, 0);
 }
 /* General Styles */
 .table-wrapper {
@@ -13,7 +13,7 @@ thead tr th{
   }
   
   .table-title {
-    background: #353b48;
+    background: #000000;
     color: #fff;
     padding: 15px;
     border-radius: 0;
@@ -36,7 +36,7 @@ thead tr th{
   .table th, .table td {
     border-color: #e0e0e0;
     padding: 12px 15px;
-    font-size: 14px;
+    font-size: 16px;
     text-align: left;
   }
   

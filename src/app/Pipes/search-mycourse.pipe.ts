@@ -13,9 +13,10 @@ export class SearchMycoursePipe implements PipeTransform {
     }
     console.log(SearchCourse)
 
-    value.filter((n: any) => {
-      return n.courseScheduleResponse?.courseResponse?.courseName.toLowerCase().includes(SearchCourse?.toLowerCase());
-    })
+    return value.filter((n: any) => {
+      const courseName = n.courseScheduleResponse?.courseResponse?.courseName?.toLowerCase();
+      return courseName && courseName.includes(SearchCourse?.toLowerCase());
+    });
   }
 
 }

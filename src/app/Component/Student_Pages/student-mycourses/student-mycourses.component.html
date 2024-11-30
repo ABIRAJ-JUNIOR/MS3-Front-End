@@ -1,38 +1,95 @@
 <div class="container-fluid my-5">
-  <h4>Enrollment Courses</h4>
+  <h4><i class="bi bi-book text-info fs-3"></i> Enrollment Courses</h4>
   <hr>
-  <div class="row">
-    <div class="col-4 mx-auto">
-      <input type="text" class="form-control" placeholder="Search your Courses" [(ngModel)]="SearchCourseData">
-    </div>
+  <div class="p-4 alert alert-primary">
+    <p class="fs-4 text-dark">
+      Here, you can view all the courses you're currently taking at <strong class="text-danger">IT Intute</strong>. This
+      section provides a detailed overview of your academic journey, helping you keep track of your progress and stay on
+      top of course requirements.
+    </p>
   </div>
-  <div class="row">
-    <div class="col-12 col-sm-12 col-md-6 col-lg-4 my-4" *ngFor="let item of StudentDetails.enrollments | searchMycourse:SearchCourseData let i = index " >
-      <div class="card shadow-sm border-0 rounded">
-        <img src="{{item.courseScheduleResponse.courseResponse.imageUrl}}" class="card-img-top" alt="Course image">
 
-        <div class="card-header text-white text-center" [ngClass]="getProgressBarClass(item)">
-          <h5><i class="bi bi-bookmark-check pe-2"></i>{{item.courseScheduleResponse.courseResponse.courseName}}</h5>
+  <div class="row my-5">
+    <div class="col-10 mx-auto">
+      <div class="input-group border">
+        <span class="input-group-text bg-primary text-white">
+          <i class="bi bi-search p-1"></i>
+        </span>
+        <input type="text" class="form-control rounded-3 border-0 shadow-sm" placeholder="Search your Courses"
+          [(ngModel)]="SearchCourseData" aria-label="Search Courses" />
+      </div>
+    </div>
+
+  </div>
+  <div class="row ">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 my-4 mx-auto "
+      *ngFor="let item of StudentDetails.enrollments | searchMycourse:SearchCourseData let i = index ">
+      <div class="card shadow border-0 rounded">
+
+        <div class="card-header text-white text-start" [ngClass]="getProgressBarClass(item)">
+          <h5 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><i
+              class="bi bi-bookmark-check fs-4 pe-2"></i>{{item.courseScheduleResponse.courseResponse.courseName}}
+          </h5>
         </div>
 
-        <div class="card-body">
-          <p><strong><i class="bi bi-calendar pe-2"></i>Start Date:</strong> {{item.courseScheduleResponse.startDate}}
-          </p>
-          <p><strong><i class="bi bi-clock pe-2"></i>Start Time:</strong> {{item.courseScheduleResponse.time}}</p>
-          <p><strong><i class="bi bi-graph-up pe-2"></i>Progress:</strong> <span class="text-dark">In Process</span></p>
+        <div class="card-body" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+          <div class="row">
+            <div class="col-md-3">
+              <img src="{{item.courseScheduleResponse.courseResponse.imageUrl}}" class="card-img-top"
+                alt="Course image">
 
-          <div class="progress mb-3" style="height: 10px;">
-            <div class="progress-bar bg-info progress-bar-animated" [style.width]="getProgress(item) + '%'"
-              role="progressbar" [attr.aria-valuenow]="getProgress(item)" aria-valuemin="0" aria-valuemax="100">
-              {{ getProgress(item) | number: '1.0-0' }}%
+            </div>
+            <div class="col-9">
+              <div class="row">
+                <div class="col-md-6 mb-2">
+                  <p><strong><i class="bi bi-calendar pe-2 text-primary"></i>Start Date:</strong>
+                    {{item.courseScheduleResponse.startDate}}</p>
+                </div>
+                <div class="col-md-6 mb-2">
+                  <p><strong><i class="bi bi-calendar pe-2 text-danger"></i>End Date:</strong>
+                    {{item.courseScheduleResponse.endDate}}</p>
+                </div>
+
+                <div class="col-md-6 mb-2">
+                  <p><strong><i class="bi bi-calendar-check pe-2 text-success"></i>Enrollment Date:</strong>
+                    {{item.enrollmentDate}}</p>
+                </div>
+                <div class="col-md-6 mb-2 d-flex">
+                  <p><strong><i class="bi bi-credit-card pe-2 text-warning"></i>Payment Status:</strong></p>
+                  <p class=" mx-1 px-2 bg-success text-white rounded">
+                    {{item.paymentStatus}}
+                  </p>
+                </div>
+
+                <div class="col-md-6 mb-2">
+                  <p><strong><i class="bi bi-geo-alt pe-2 text-info"></i>Location:</strong>
+                    {{item.courseScheduleResponse.location}}</p>
+                </div>
+                <div class="col-md-6 mb-2">
+                  <p><strong><i class="bi bi-clock pe-2 text-primary"></i>Start Time:</strong>
+                    {{item.courseScheduleResponse.time}}</p>
+                </div>
+
+
+                <div class="col-md-12 mb-2">
+                  <p><strong><i class="bi bi-graph-up pe-2 text-success"></i>Progress:</strong> <span
+                      class="text-dark">In Process</span></p>
+                  <div class="progress" style="height: 10px;">
+                    <div class="progress-bar bg-info progress-bar-animated" [style.width]="getProgress(item) + '%'"
+                      role="progressbar" [attr.aria-valuenow]="getProgress(item)" aria-valuemin="0" aria-valuemax="100">
+                      {{ getProgress(item) | number: '1.0-0' }}%
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
+
         </div>
 
         <div class="card-footer text-center">
-          <button class="btn btn-sm btn-outline-dark border-0 p-0 py-2 px-4">
-            <i class="bi bi-eye "></i>View Details
-          </button>
+
         </div>
       </div>
 

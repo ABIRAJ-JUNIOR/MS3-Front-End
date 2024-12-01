@@ -6,6 +6,7 @@ import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { PaymentDataService } from "../../../Service/Data/Payment_Data/payment-data.service";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
+import { LoadingService } from "../../../Service/Loading/loading.service";
 
 
 @Component({
@@ -16,7 +17,7 @@ import { StudentDashDataService } from "../../../Service/Data/Student_Data/stude
   styleUrl: './student-payments.component.css'
 })
 export class StudentPaymentsComponent implements OnInit {
-  constructor(private StudentDashDataService: StudentDashDataService,
+  constructor(private loding:LoadingService,private StudentDashDataService: StudentDashDataService,
     private StudentApiService: StudentService,
     private router: Router,
     private PaymentService: PaymentDataService
@@ -34,6 +35,7 @@ export class StudentPaymentsComponent implements OnInit {
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
   ngOnInit(): void {
+    this.loding.show()
 
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
@@ -58,6 +60,11 @@ export class StudentPaymentsComponent implements OnInit {
 
 
       console.log(this.Enrollments)
+    },(error)=>{
+      console.log(error)
+    },()=>{
+      this.loding.hide()
+
     })
 
   }

@@ -6,11 +6,12 @@ import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { StudentcommonProfileComponent } from "../../common_components/studentcommon-profile/studentcommon-profile.component";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
+import { LoadingService } from "../../../Service/Loading/loading.service";
 
 @Component({
   selector: 'app-student-profile',
   standalone: true,
-  imports: [CommonModule, FormsModule ,RouterModule ,StudentcommonProfileComponent],
+  imports: [CommonModule, FormsModule, RouterModule, StudentcommonProfileComponent],
   templateUrl: './student-profile.component.html',
   styleUrl: './student-profile.component.css'
 })
@@ -26,7 +27,7 @@ export class StudentProfileComponent {
 
   selectedQuote: string = '';
 
-  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
+  constructor(private loding: LoadingService, private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
     this.generateNewQuote();
   }
 
@@ -46,12 +47,16 @@ export class StudentProfileComponent {
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
   ngOnInit(): void {
-
+    this.loding.show()
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
       this.StudentDetails = student
       console.log(this.StudentDetails)
+    },(error)=>{
+      console.log(error)
+    },()=>{
+      this.loding.hide()
     })
 
   }

@@ -5,29 +5,7 @@
         <a href="#">Student Portal</a>
         <hr>
       </div>
-      <div style="display: flex;flex-direction: column; align-items: start;margin-left: 55px;">
-        <img src="{{StudentDetails.imageUrl || noImage }} " alt="" height="150px" width="150px" style="border-radius: 50%;">
-        <div class=" d-flex align-items-center justify-content-center"  data-bs-toggle="dropdown" style="flex-direction: column;" *ngIf="StudentDetails">
-          <span class="font-weight-bold fs-5 mt-3 fw-bold" style="color: #ffffff;">{{StudentDetails.firstName}}
-            {{StudentDetails.lastName}}</span>
-          <span class="text-light d-block mb-1">{{StudentTokenDetails.Email}}</span>
-
-          <span class="text-light mb-1">Student ID: UT-{{StudentDetails.nic | slice: -4
-            }}</span>
-          <ul class="navbar-nav pe-3">
-            <li class="nav-item dropdown">
-              <a data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-              </a>
-              <div class="dropdown-menu dropdown-menu-end">
-                <a class="dropdown-item">Profile</a>
-                <a class="dropdown-item">Setting</a>
-                <a class="dropdown-item">Logout</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-      </div>
+      
 
       <ul class="sidebar-nav ms-2">
         <!-- Sidebar Header -->
@@ -130,9 +108,32 @@
           </a>
         </li>
       </ul>
+      <div style="display: flex;flex-direction: column; align-items: start;margin-left: 55px; margin-top: 150px;">
+        <img src="{{StudentDetails.imageUrl || noImage }} " alt="" height="150px" width="150px" style="border-radius: 50%;">
+        <div class=" d-flex align-items-center justify-content-center"  data-bs-toggle="dropdown" style="flex-direction: column;" *ngIf="StudentDetails">
+          <span class="font-weight-bold fs-5 mt-3 fw-bold" style="color: #ffffff;">{{StudentDetails.firstName}}
+            {{StudentDetails.lastName}}</span>
+          <span class="text-light d-block mb-1">{{StudentTokenDetails.Email}}</span>
 
+          <span class="text-light mb-1">Student ID: UT-{{StudentDetails.nic | slice: -4
+            }}</span>
+          <ul class="navbar-nav pe-3">
+            <li class="nav-item dropdown">
+              <a data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+              </a>
+              <div class="dropdown-menu dropdown-menu-end">
+                <a class="dropdown-item">Profile</a>
+                <a class="dropdown-item">Setting</a>
+                <a class="dropdown-item">Logout</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
 
     </div>
+    
 
   </aside>
 
@@ -178,13 +179,9 @@
         </div>
       </div>
     </nav>
-    <div id="loading-screen">
-      <div class="spinner"></div>
-    </div>
+
     <!-- Main Content Area for Student Dashboard -->
     <main class="content px-3 py-2 " style="background-color: #ffffff;">
-     
-      
       <router-outlet></router-outlet>
     </main>
 

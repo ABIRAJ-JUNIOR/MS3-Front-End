@@ -5,6 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../Service/API/Auth/auth.service';
 import { jwtDecode } from 'jwt-decode';
+import { LoadingService } from '../../../Service/Loading/loading.service';
 
 @Component({
   selector: 'app-signin',
@@ -16,36 +17,39 @@ import { jwtDecode } from 'jwt-decode';
 export class SigninComponent {
   StudentLogin: FormGroup
 
-  constructor(private fb: FormBuilder , private auth:AuthService , private rout:Router , private toastr:ToastrService) {
+  constructor(private loading: LoadingService, private fb: FormBuilder, private auth: AuthService, private rout: Router, private toastr: ToastrService) {
     this.StudentLogin = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     })
   }
 
-  onSubmit(){
+  onSubmit() {
+    this.loading.show()
     this.auth.signIn(this.StudentLogin.value).subscribe({
-      next: (res:string) => {
-        this.toastr.success("Login Successfull" , "" , {
-          positionClass:"toast-top-right",
-          progressBar:true,
-          timeOut:3000
+      next: (res: string) => {
+        this.toastr.success("Login Successfull", "", {
+          positionClass: "toast-top-right",
+          progressBar: true,
+          timeOut: 3000
         })
-        localStorage.setItem('token',res)
-      },complete:()=>{
-        const token:string = localStorage.getItem("token")!;
-        const decode:any = jwtDecode(token)
-        if(decode.Role == "Administrator" || decode.Role == "Instructor"){
+        localStorage.setItem('token', res)
+      }, complete: () => {
+        const token: string = localStorage.getItem("token")!;
+        const decode: any = jwtDecode(token)
+        if (decode.Role == "Administrator" || decode.Role == "Instructor") {
           this.rout.navigate(['/admin-dashboard'])
-        }else if(decode.Role == "Student"){
+        } else if (decode.Role == "Student") {
           this.rout.navigate(['/home'])
         }
+        this.loading.hide()
+
       }
-      ,error:(error)=>{
-        this.toastr.warning(error.error, "" , {
-          positionClass:"toast-top-right",
-          progressBar:true,
-          timeOut:3000
+      , error: (error) => {
+        this.toastr.warning(error.error, "", {
+          positionClass: "toast-top-right",
+          progressBar: true,
+          timeOut: 3000
         })
       }
     })

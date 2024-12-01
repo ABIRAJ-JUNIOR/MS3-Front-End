@@ -7,6 +7,7 @@ import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { NotificationServiceService } from "../../../Service/API/Notification/notification-service.service";
 import { ToastrService } from "ngx-toastr";
+import { LoadingService } from "../../../Service/Loading/loading.service";
 
 @Component({
   selector: 'app-student-dashboard',
@@ -28,24 +29,22 @@ export class StudentDashboardComponent implements OnInit {
 
 
 
-  constructor(private tostr:ToastrService,private NotificationSerivice:NotificationServiceService ,private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router ) {
+  constructor(private loding:LoadingService,private tostr:ToastrService,private NotificationSerivice:NotificationServiceService ,private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router ) {
   }
 
   ngOnInit(): void {
-    (document.getElementById("loading-screen") as HTMLElement).style.display = "flex";
+    this.loding.show()
 
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
       this.StudentDetails = student
       console.log(this.StudentDetails)
-      
     },
       (error) => {
         this.router.navigate([''])
       },()=>{
-    (document.getElementById("loading-screen") as HTMLElement).style.display = "none";
-
+        this.loding.hide()
       })
 
 

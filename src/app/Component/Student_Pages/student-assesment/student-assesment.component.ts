@@ -2,6 +2,7 @@ import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
 import { StudentService } from "../../../Service/API/Student/student.service";
+import { LoadingService } from "../../../Service/Loading/loading.service";
 
 @Component({
   selector: 'app-student-assesment',
@@ -13,7 +14,7 @@ import { StudentService } from "../../../Service/API/Student/student.service";
 export class StudentAssesmentComponent implements OnInit {
 
 
-  constructor(private StudentService:StudentService  , private studentDataService:StudentDashDataService){
+  constructor(private loding: LoadingService, private StudentService: StudentService, private studentDataService: StudentDashDataService) {
 
   }
   pageSize: number = 12; // Courses per page
@@ -22,28 +23,32 @@ export class StudentAssesmentComponent implements OnInit {
   pageNumbers: number[] = []; // Array of page numbers to display
   paginatedAssesment: any[] = [];
 
-  StatusCheck:string="Completed"
-  NotStartCheck:string="NotStarted"
+  StatusCheck: string = "Completed"
+  NotStartCheck: string = "NotStarted"
 
-  StudentDetails:any;
+  StudentDetails: any;
   ngOnInit() {
+    this.loding.show()
+
     this.paginateAssesment()
   }
 
-  paginateAssesment(){
-    this.StudentDetails=this.studentDataService.GetStudentDeatilByLocalStorage()
-    this.StudentService.getStudent(this.StudentDetails.Id).subscribe((d:any)=>{
+  paginateAssesment() {
+    this.StudentDetails = this.studentDataService.GetStudentDeatilByLocalStorage()
+    this.StudentService.getStudent(this.StudentDetails.Id).subscribe((d: any) => {
       console.log(d)
 
       this.paginatedAssesment = d.enrollments
       console.log(this.paginatedAssesment)
-    },(error)=>{
+    }, (error) => {
       console.log(error)
+    }, () => {
+      this.loding.hide()
     }
-  )
+    )
   }
 
-  
+
   goToPage(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
@@ -51,16 +56,16 @@ export class StudentAssesmentComponent implements OnInit {
     }
   }
 
-  assesmentLink:string="";
- 
-  examdataTransfer(assessmentLink:string){
-   this.assesmentLink = assessmentLink
+  assesmentLink: string = "";
+
+  examdataTransfer(assessmentLink: string) {
+    this.assesmentLink = assessmentLink
   }
-  GoExam(){
+  GoExam() {
     alert(this.assesmentLink)
     if (this.assesmentLink) {
       window.open(this.assesmentLink, '_blank');
     }
   }
- 
+
 }

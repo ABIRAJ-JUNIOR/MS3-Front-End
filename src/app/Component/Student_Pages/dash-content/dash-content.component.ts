@@ -7,6 +7,7 @@ import { StudentService } from "../../../Service/API/Student/student.service";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { CourseService } from "../../../Service/API/Course/course.service";
+import { LoadingService } from "../../../Service/Loading/loading.service";
 
 @Component({
   selector: 'app-dash-content',
@@ -26,10 +27,11 @@ export class DashContentComponent implements OnInit {
   totalCourse: number = 0;
 
 
-  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router, private CourseService: CourseService) {
+  constructor(private loding:LoadingService,private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router, private CourseService: CourseService) {
   }
 
   ngOnInit(): void {
+    this.loding.show()
 
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
@@ -39,13 +41,16 @@ export class DashContentComponent implements OnInit {
 
       this.totalPaymentCalculate()
       this.ChartCalculation()
+    },(error)=>{
+      console.log(error)
     })
-
 
     this.CourseService.getCourses().subscribe((data: any) => {
       this.totalCourse = data.length
     }, (error) => {
       console.log(error)
+    },()=>{
+      this.loding.hide()
     })
 
   }

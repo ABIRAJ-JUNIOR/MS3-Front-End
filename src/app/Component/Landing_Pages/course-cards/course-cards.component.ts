@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { CourseFilterPipe } from '../../../Pipes/course-filter.pipe';
 import { PaymentDataService } from '../../../Service/Data/Payment_Data/payment-data.service';
 import { Router, RouterModule } from '@angular/router';
+import { LoadingService } from '../../../Service/Loading/loading.service';
 
 @Component({
   selector: 'app-course-cards',
@@ -17,7 +18,7 @@ import { Router, RouterModule } from '@angular/router';
 export class CourseCardsComponent implements OnInit {
 
 
-  constructor(private CourseService:CourseService,private PaymentService:PaymentDataService , private route:Router){
+  constructor(private loading:LoadingService, private CourseService:CourseService,private PaymentService:PaymentDataService , private route:Router){
     
   }
 
@@ -365,9 +366,12 @@ export class CourseCardsComponent implements OnInit {
 
   ngOnInit() {
     this.paginateCourses()
+
   }
 
   paginateCourses() {
+    this.loading.show()
+
     this.CourseService.pagination(this.currentPage,this.pageSize).subscribe({
       next:((courses:any)=>{
         this.paginatedCourses=courses.items
@@ -376,8 +380,14 @@ export class CourseCardsComponent implements OnInit {
         this.pageSize=courses.pageSize
         this.currentPage=courses.currentPage
         console.log(this.paginatedCourses)
-      })
+      }
+    ),complete() {
+    },error(err) {
+      console.error(err);
+    },
     })
+    this.loading.hide()
+
   }
 
   goToPage(page: number): void {

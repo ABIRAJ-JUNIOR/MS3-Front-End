@@ -4,6 +4,7 @@ import { RouterModule, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { PaymentDataService } from "../../../Service/Data/Payment_Data/payment-data.service";
 import { PaymentService } from "../../../Service/API/Payment/payment.service";
+import { LoadingService } from "../../../Service/Loading/loading.service";
 
 @Component({
   selector: 'app-otp-authentication',
@@ -13,13 +14,16 @@ import { PaymentService } from "../../../Service/API/Payment/payment.service";
   styleUrl: './otp-authentication.component.css'
 })
 export class OtpAuthenticationComponent implements OnInit {
-  constructor(private router: Router, private paymentDataService: PaymentDataService, private toastr: ToastrService, private PaymentApiServices: PaymentService) {
+  constructor(private loading: LoadingService, private router: Router, private paymentDataService: PaymentDataService, private toastr: ToastrService, private PaymentApiServices: PaymentService) {
 
   }
   otp: string = "";
 
   ngOnInit(): void {
+    this.loading.show()
     this.getOtp();
+    this.loading.hide()
+
 
   }
 
@@ -30,6 +34,7 @@ export class OtpAuthenticationComponent implements OnInit {
   }
 
   CheckOtp() {
+    this.loading.show()
     let enteredOtp = document.getElementById('otp') as HTMLInputElement
     if (enteredOtp.value == this.otp) {
       this.toastr.clear();
@@ -38,12 +43,12 @@ export class OtpAuthenticationComponent implements OnInit {
       console.log(data.installmentNumber)
 
       if (data.PaymentCheck) {
-      let  Enrollment = {
+        let Enrollment = {
           studentId: data.studentId,
           courseScheduleId: data.courseScheduleId,
           paymentRequest: {
             paymentType: Number(data.paymentRequest.paymentType),
-            paymentMethod:data.paymentRequest.paymentMethod,
+            paymentMethod: data.paymentRequest.paymentMethod,
             amountPaid: Number(data.paymentRequest.amountPaid),
             installmentNumber: data.paymentRequest.installmentNumber
           }
@@ -56,12 +61,15 @@ export class OtpAuthenticationComponent implements OnInit {
           },
           (error) => {
             this.toastr.error('There was an error processing your payment. Please try again later.');
+          }, () => {
+            this.loading.hide()
+
           }
         )
       } else {
-       let Payment:PayRequest= {
+        let Payment: PayRequest = {
           paymentType: Number(data.paymentType),
-          paymentMethod:Number( data.paymentMethod),
+          paymentMethod: Number(data.paymentMethod),
           amountPaid: Number(data.amountPaid),
           installmentNumber: Number(data.installmentNumber),
           enrollmentId: data.enrollmentId
@@ -74,12 +82,16 @@ export class OtpAuthenticationComponent implements OnInit {
           },
           (error) => {
             this.toastr.error('There was an error processing your payment. Please try again later.');
+          }, () => {
+            this.loading.hide()
+
           }
         )
       }
 
     } else {
       this.toastr.clear();
+      this.loading.hide()
       this.toastr.error("Invalid OTP. Ensure you're entering the correct code.")
     }
   }

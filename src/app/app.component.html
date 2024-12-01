@@ -1,1 +1,9 @@
-<router-outlet></router-outlet>
+<!-- Main Content Area -->
+<main class="content " >
+    <!-- Loading Screen -->
+    <div *ngIf="isLoading" id="loading-screen" class="loading-screen">
+        <div class="spinner"></div>
+    </div>
+    <router-outlet></router-outlet>
+
+</main>

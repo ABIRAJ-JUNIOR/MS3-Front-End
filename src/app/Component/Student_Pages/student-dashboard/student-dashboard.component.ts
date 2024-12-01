@@ -45,9 +45,11 @@ export class StudentDashboardComponent implements OnInit {
   }
 
   MarkAsRead(id:string){
+    console.log(id)
     this.NotificationSerivice.MarkAsReadNotication(id).subscribe((data:any)=>{
      this.tostr.success("Notification Read SuccessFully")
     },(error)=>{
+      console.log((error))
       this.tostr.error(error.message)
     })
   }

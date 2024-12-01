@@ -18,7 +18,7 @@
 
         <!-- Profile Section -->
         <li class="sidebar-item">
-          <a [routerLink]="['/student-dashboard/profile']" [routerLinkActive]="['active_Link']" class="sidebar-link">
+          <a [routerLink]="['/student-dashboard/profile']" [routerLinkActive]="['active_Link']" class="sidebar-link" >
             <i class="fa-regular fa-user pe-2"></i>
             Profile
           </a>
@@ -164,7 +164,7 @@
     </nav>
 
     <!-- Main Content Area for Student Dashboard -->
-    <main class="content px-3 py-2 " style="background-color: #ffffff;">
+    <main class="content px-3 py-2 " style="background-color: #F9F7F7;">
       <router-outlet></router-outlet>
     </main>
 
@@ -218,8 +218,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div class="notification" *ngFor="let item of StudentDetails.notifications">
-          <div class="notification-header">
+        <div  *ngFor="let item of StudentDetails.notification" >
+         <div class="notification" *ngIf="item.isRead===false">
+          <div class="notification-header" >
             <span class="notification-type">{{item.notificationType}}</span>
             <span class="notification-time">{{item.dateSent}}</span>
           </div>
@@ -229,6 +230,7 @@
           <div class="notification-footer">
             <button class="mark-read-btn" (click)="MarkAsRead(item.id)">Mark as Read</button>
           </div>
+         </div>
         </div>
         
       </div>

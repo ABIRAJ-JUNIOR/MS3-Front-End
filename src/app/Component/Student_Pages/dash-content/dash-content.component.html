@@ -1,106 +1,108 @@
 <!-- Dashboard Overview Section -->
-<h3 class="mb-4 text-dark fw-bold"> <i class="bi bi-house-dash-fill fs-2 text-info"></i> Dashboard Overview</h3>
+<h3 class="mb-4 text-dark fw-bold"> <i class="bi bi-house-dash-fill fs-2 text-secondary"></i> Dashboard Overview</h3>
 <div class="row mb-4">
   <!-- Assessments Card -->
   <div class="col-md-3 mb-4">
-    <div class="card text-white  shadow-lg border-0 overview-card" style="background-color: #0c0800;
-    background-image: linear-gradient(132deg, #0c0800 0%, #1ac0ff 100%);
-    ">
+    <div class="card text-white  shadow-lg border-0 overview-card bg-primary">
       <div class="card-body">
         <h5 class="card-title text-light fs-4 fw-bold"><i class="bi bi-pencil-square me-2"
             style="font-size: 1.5rem; "></i> Assessments</h5>
         <p class="display-6 fw-bold text-light mb-0">{{TotalAssignments || 0}}</p>
         <p class="text-light fs-6">Total number of assessments</p>
+        <div class="bg-transparent border-0 d-flex justify-content-between align-items-center">
+          <small class="text-light"><i class="bi bi-caret-up-fill" style="font-size: 1rem;"></i> Waymakers
+            Assesment</small>
+          <i class="bi bi-pie-chart-fill text-light" style="font-size: 1.25rem;"></i>
+        </div>
       </div>
-      <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
-        <small class="text-light"><i class="bi bi-caret-up-fill" style="font-size: 1rem;"></i> Waymakers
-          Assesment</small>
-        <i class="bi bi-pie-chart-fill text-light" style="font-size: 1.25rem;"></i>
-      </div>
+
     </div>
   </div>
 
   <!-- Payments Card -->
   <div class="col-md-3 mb-4">
-    <div class="card text-white bg-gradient-primary shadow-lg border-0 overview-card"
-      style="background: linear-gradient(135deg, #2c3e50, #34495e); border-radius: 15px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+    <div class="card text-white  shadow-lg border-0 overview-card"  style="background: linear-gradient(135deg, #34495e, #2c3e50); border-radius: 8px;">
       <div class="card-body">
-        <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-coins me-2" style="font-size: 1.5rem;"></i>
+        <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-coins me-2 text-warning" style="font-size: 1.5rem;"></i>
           Payments</h5>
-        <p class="display-6 fw-bold text-warning mb-0">{{TotalPayments | number:'1.2-2'}}</p>
+        <p class="display-6 fw-bold text-light mb-0 ">{{TotalPayments | number:'1.2-2'}}</p>
         <p class="text-white fs-6">Total payments made</p>
+        <div class=" bg-transparent border-0 d-flex justify-content-between align-items-center">
+          <small class="text-light"><i class="bi bi-arrow-up-circle" style="font-size: 1rem;"></i> Waymakers Pay</small>
+          <i class="bi bi-pie-chart-fill text-light" style="font-size: 1.25rem;"></i>
+        </div>
       </div>
-      <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
-        <small class="text-light"><i class="bi bi-arrow-up-circle" style="font-size: 1rem;"></i> Waymakers Pay</small>
-        <i class="bi bi-pie-chart-fill text-light" style="font-size: 1.25rem;"></i>
-      </div>
+
     </div>
   </div>
 
   <!-- Courses Card -->
   <div class="col-md-3 mb-4">
-    <div class="card text-white bg-gradient-info shadow-lg border-0 overview-card" style="background-color: #0c0800;
-    background-image: linear-gradient(132deg, #0c0800 0%, #b30003 100%);
-    ">
+    <div class="card text-white  shadow-lg border-0 overview-card " style=" background-color:#ff9f43;">
       <div class="card-body">
         <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-book me-2"
             style="font-size: 1.5rem;"></i>Enrolled Courses</h5>
         <p class="display-6 fw-bold text-light mb-0">{{StudentDetails.enrollments.length || 0}}</p>
         <p class="text-light fs-6">Total number of courses</p>
+        <div class=" bg-transparent border-0 d-flex justify-content-between align-items-center">
+          <small class="text-light"><i class="bi bi-arrow-up-circle" style="font-size: 1rem;"></i> Waymakers
+            Enrolled</small>
+          <i class="bi bi-pie-chart-fill text-light" style="font-size: 1.25rem;"></i>
+        </div>
       </div>
-      <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
-        <small class="text-light"><i class="bi bi-arrow-up-circle" style="font-size: 1rem;"></i> Waymakers
-          Enrolled</small>
-        <i class="bi bi-pie-chart-fill text-light" style="font-size: 1.25rem;"></i>
-      </div>
+
     </div>
   </div>
 
   <!-- Reports Card -->
   <div class="col-md-3 mb-4">
-    <div class="card text-white bg-gradient-danger shadow-lg border-0 overview-card" style="background-color: #0c0800;
-    background-image: linear-gradient(132deg, #0c0800 0%, #16A085 100%);">
+    <div class="card text-white  shadow-lg border-0 overview-card "   style="background: linear-gradient(135deg, #1abc9c, #16a085); border-radius: 8px;">
       <div class="card-body">
-        <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-file-alt me-2" style="font-size: 1.5rem;"></i>
+        <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-file-alt me-2 text-dark" style="font-size: 1.5rem;"></i>
           Total Courses</h5>
         <p class="display-6 fw-bold text-light mb-0">20</p>
         <p class="text-light fs-6">Total number of Courses</p>
+        <div class=" bg-transparent border-0 d-flex justify-content-between align-items-center">
+          <small class=""><i class="bi bi-arrow-up-circle" style="font-size: 1rem;"></i> Waymakers Courses</small>
+          <i class="bi bi-pie-chart-fill text-light" style="font-size: 1.25rem;"></i>
+        </div>
       </div>
-      <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
-        <small class=""><i class="bi bi-arrow-up-circle" style="font-size: 1rem;"></i> Waymakers Courses</small>
-        <i class="bi bi-pie-chart-fill text-light" style="font-size: 1.25rem;"></i>
-      </div>
+
     </div>
   </div>
 
 </div>
 
 <!-- Charts Section -->
-<div class="container-fluid py-4 ">
+<div class="container-fluid ">
   <div class="row justify-content-center">
-    
+
+
+    <div class="col-md-8">
+      <div class="card mb-3">
+        <div class="card-header  text-light p-3" style="background-color: #3F72AF;">
+          <h5>Tuition Fees and Payment Deadlines</h5>
+        </div>
+        <div class="card-body" style="min-height: 300px;">
+          <p>As a student at IT Intute, it's important to stay on top of your tuition fees and payment deadlines. You
+            can view your current outstanding balance, upcoming payment dates, and any additional fees associated with
+            your courses. Our flexible payment plans allow you to break down payments into manageable installments,
+            helping you stay focused on your studies without worrying about finances.</p>
+
+          <p>Make sure to check the upcoming payment deadlines regularly to avoid late fees. We recommend setting up
+            reminders for payment due dates to ensure that you never miss an important payment. If you need assistance
+            with payment options, feel free to reach out to our accounts team.</p>
+
+        </div>
+      </div>
+    </div>
     <div class="col-lg-4 col-md-6 mb-4">
       <div class="card shadow chart-card">
-        <div class="card-header text-white text-center" style="background: linear-gradient(135deg, #28a745, #34d058);">
+        <div class="card-header text-white text-center" style="background-color: #3F72AF;">
           <h5>Payment Overview</h5>
         </div>
         <div class="card-body d-flex align-items-center justify-content-center">
           <canvas id="paymentChart"></canvas>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card mb-3">
-        <div class="card-header bg-success text-light p-3">
-          <h5>Tuition Fees and Payment Deadlines</h5>
-        </div>
-        <div class="card-body" style="min-height: 300px;">
-          <p>As a student at IT Intute, it's important to stay on top of your tuition fees and payment deadlines. You can view your current outstanding balance, upcoming payment dates, and any additional fees associated with your courses. Our flexible payment plans allow you to break down payments into manageable installments, helping you stay focused on your studies without worrying about finances.</p>
-
-          <p>Make sure to check the upcoming payment deadlines regularly to avoid late fees. We recommend setting up reminders for payment due dates to ensure that you never miss an important payment. If you need assistance with payment options, feel free to reach out to our accounts team.</p>
-          
-  
-  
         </div>
       </div>
     </div>
@@ -145,10 +147,15 @@
         <h5> Course Enrollment & Progress</h5>
       </div>
       <div class="card-body" style="min-height: 350px;">
-        <p>Your enrollment at IT Intute is a significant step toward gaining the skills necessary to excel in the IT field. We offer a variety of courses to suit your interests and career goals, from foundational courses in programming and IT fundamentals to advanced certifications in network security and data science.</p>
+        <p>Your enrollment at IT Intute is a significant step toward gaining the skills necessary to excel in the IT
+          field. We offer a variety of courses to suit your interests and career goals, from foundational courses in
+          programming and IT fundamentals to advanced certifications in network security and data science.</p>
 
-        <p>As you progress through your courses, be sure to track your achievements, assignments, and grades. Our progress tracker will help you stay on top of your learning journey. Remember, completing your assignments and meeting deadlines are key to success, and we encourage you to make the most of the learning materials and support provided.</p>
-        
+        <p>As you progress through your courses, be sure to track your achievements, assignments, and grades. Our
+          progress tracker will help you stay on top of your learning journey. Remember, completing your assignments and
+          meeting deadlines are key to success, and we encourage you to make the most of the learning materials and
+          support provided.</p>
+
 
       </div>
     </div>
@@ -205,7 +212,7 @@
 
   <div class="col-12 col-md-5">
     <img src="/course/feedback3.jpg" class="img-fluid" alt="">
-   
+
   </div>
 </div>
 

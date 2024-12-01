@@ -12,6 +12,6 @@ export class NotificationServiceService {
   constructor(private http:HttpClient) { }
 
   MarkAsReadNotication(NotificationId:string){
-   return this.http.delete(this.CommonUrl+NotificationId)
+   return this.http.delete(this.CommonUrl +"/"+NotificationId)
   }
 }

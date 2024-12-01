@@ -44,7 +44,7 @@ h4 {
 #sidebar {
     max-width: 264px;
     min-width: 264px;
-    background: var(--bs-dark);
+    background-color: #112D4E;
     transition: all 0.35s ease-in-out;
 }
 

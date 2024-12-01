@@ -21,9 +21,11 @@
 
   <!-- Payments Card -->
   <div class="col-md-3 mb-4">
-    <div class="card text-white  shadow-lg border-0 overview-card"  style="background: linear-gradient(135deg, #34495e, #2c3e50); border-radius: 8px;">
+    <div class="card text-white  shadow-lg border-0 overview-card"
+      style="background: linear-gradient(135deg, #34495e, #2c3e50); border-radius: 8px;">
       <div class="card-body">
-        <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-coins me-2 text-warning" style="font-size: 1.5rem;"></i>
+        <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-coins me-2 text-warning"
+            style="font-size: 1.5rem;"></i>
           Payments</h5>
         <p class="display-6 fw-bold text-light mb-0 ">{{TotalPayments | number:'1.2-2'}}</p>
         <p class="text-white fs-6">Total payments made</p>
@@ -56,9 +58,11 @@
 
   <!-- Reports Card -->
   <div class="col-md-3 mb-4">
-    <div class="card text-white  shadow-lg border-0 overview-card "   style="background: linear-gradient(135deg, #1abc9c, #16a085); border-radius: 8px;">
+    <div class="card text-white  shadow-lg border-0 overview-card "
+      style="background: linear-gradient(135deg, #1abc9c, #16a085); border-radius: 8px;">
       <div class="card-body">
-        <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-file-alt me-2 text-dark" style="font-size: 1.5rem;"></i>
+        <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-file-alt me-2 text-dark"
+            style="font-size: 1.5rem;"></i>
           Total Courses</h5>
         <p class="display-6 fw-bold text-light mb-0">20</p>
         <p class="text-light fs-6">Total number of Courses</p>
@@ -76,9 +80,21 @@
 <!-- Charts Section -->
 <div class="container-fluid ">
   <div class="row ">
-
+    <div class="col-md-6">
+      <h3> Vertical Bar Chart</h3>
+      <ngx-charts-bar-vertical [view]="[1000,400]" [results]="surveyData" [xAxisLabel]="'Count'"
+        [legendTitle]="'Vehical Survey'" [yAxisLabel]="'Type of Vehicle'" [legend]="true" [showXAxisLabel]="true"
+        [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true" [gradient]="true">
+      </ngx-charts-bar-vertical>
+    </div>
+    <div class="col-md-6">
+      <h3>Advance Pie Chart</h3>
+      <ngx-charts-advanced-pie-chart [results]="surveyData" [gradient]="true">
+      </ngx-charts-advanced-pie-chart>
+    </div>
   </div>
 </div>
+
 
 
 

@@ -5,11 +5,12 @@ import { Chart, ChartConfiguration } from "chart.js";
 import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
 
 @Component({
   selector: 'app-dash-content',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,NgxChartsModule],
   templateUrl: './dash-content.component.html',
   styleUrl: './dash-content.component.css'
 })
@@ -88,6 +89,14 @@ export class DashContentComponent implements OnInit {
       } as ChartConfiguration['options']
     });
   }
+
+  surveyData = [
+    { name: 'Bikes', value: 105000 },
+    { name: 'Cars', value: 55000 },
+    { name: 'Trucks', value: 15000 },
+    { name: 'Scooter', value: 150000 },
+    { name: 'Bus', value: 20000 }
+  ];
 
  
 

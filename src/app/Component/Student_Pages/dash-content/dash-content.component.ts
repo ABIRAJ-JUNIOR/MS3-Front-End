@@ -78,7 +78,7 @@ export class DashContentComponent implements OnInit {
         labels: ['Paid', 'Pending'],
         datasets: [{
           data: [this.paidPayments, this.PendingPayments],
-          backgroundColor: ['#28a745', '#6cc76e', '#b8e0b9'],
+          backgroundColor: ['#808080', '#6cc76e', '#b8e0b9'],
           hoverBackgroundColor: ['#1e7d32', '#58a654', '#a4d0a5']
         }]
       },

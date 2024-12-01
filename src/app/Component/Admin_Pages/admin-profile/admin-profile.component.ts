@@ -16,7 +16,13 @@ import { ToastrService } from 'ngx-toastr';
 export class AdminProfileComponent implements OnInit{
   updateUserForm: FormGroup;
   adminid:string="";
-  admin:any=""
+  admin:any="";
+  profileImage:File | null = null;
+  CoverfileImage:File | null = null;
+  profileImageUrl: string | null = "";
+  CoverImageUrl: string | null = "";
+
+
   constructor(private fb: FormBuilder,private  adminService:AdminService,private toastr:ToastrService) {
     // Initialize form controls
     this.updateUserForm = this.fb.group({
@@ -27,6 +33,10 @@ export class AdminProfileComponent implements OnInit{
     });
   }
   ngOnInit(): void {
+    this.loaddata()
+    
+  }
+  loaddata(){
     const token:string = localStorage.getItem("token")!;
     const decode:any = jwtDecode(token)
     this.adminid= decode.Id
@@ -36,7 +46,6 @@ export class AdminProfileComponent implements OnInit{
       this.admin=response
       
     })
-    
   }
   
   onEditProfile() {
@@ -56,6 +65,7 @@ this.adminService.updateAdminProfile(this.adminid,data).subscribe({
       progressBar: true,
       timeOut:3000
     });
+    this.loaddata()
   }
   ,complete() {
     
@@ -80,6 +90,89 @@ this.adminService.updateAdminProfile(this.adminid,data).subscribe({
       phone:admin.phone
 
     })
+  }
+
+  onFileSelected(event: any, isCover:boolean): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      if(isCover){
+        this.CoverfileImage = file;
+        console.log(  this.CoverfileImage);
+        this.previewImage(file,true);
+      }else{
+        this.profileImage = file;
+        console.log(  this.profileImage);
+        this.previewImage(file,false);
+      }
+    }
+  }
+
+  private previewImage(file: File,isCover:boolean): void {
+    const reader = new FileReader();
+   if(isCover){
+
+    reader.onload = (e: any) => {
+      this.CoverImageUrl = e.target.result;
+    
+      const formData = new FormData();
+      formData.append('imageFile',  file);
+      
+      this.adminService.addImage(this.adminid,formData,true).subscribe({
+        next: () => {
+          this.toastr.success('Image updated successfully!', '', {
+            positionClass: 'toast-top-right',
+            progressBar: true,
+            timeOut:3000
+          });
+        
+        },
+        complete: () => {
+          this.loaddata()
+        },
+        error: (error:any) => {
+          this.toastr.error(error.error, '', {
+            positionClass: 'toast-top-right',
+            progressBar: true,
+            timeOut:4000
+          });
+          this.loaddata()
+        }
+      })
+    };
+    reader.readAsDataURL(file);
+    
+
+   }else{
+    reader.onload = (e: any) => {
+      this.admin.imageUrl = e.target.result;
+    
+      const formData = new FormData();
+      formData.append('imageFile',  file);
+      
+      this.adminService.addImage(this.adminid,formData,false).subscribe({
+        next: () => {
+          this.toastr.success('Image updated successfully!', '', {
+            positionClass: 'toast-top-right',
+            progressBar: true,
+            timeOut:3000
+          });
+        
+        },
+        complete: () => {
+          this.loaddata()
+        },
+        error: (error:any) => {
+          this.toastr.error(error.error, '', {
+            positionClass: 'toast-top-right',
+            progressBar: true,
+            timeOut:4000
+          });
+          this.loaddata()
+        }
+      })
+    };
+    reader.readAsDataURL(file);
+   }
   }
   
 }

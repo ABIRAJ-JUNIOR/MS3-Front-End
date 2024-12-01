@@ -9,12 +9,21 @@
         class="w-100 rounded-top"
         style="height: 250px; object-fit: cover"
       />
+      <input
+      type="file"
+      id="imgInput"
+      #fileInput1
+      class="d-none"
+      accept="image/*"
+      (change)="onFileSelected($event,true)"
+    />
       <button
         class="btn btn-dark btn-sm shadow-sm position-absolute"
         style="top: 10px; right: 10px; border-radius: 4px"
         data-bs-toggle="tooltip"
         data-bs-placement="left"
         title="Change Cover Photo"
+        (click)="fileInput1.click()"
       >
         <i class="bi bi-camera-fill"></i>
       </button>
@@ -26,17 +35,26 @@
       >
         <div class="position-relative">
           <img
-            src="https://via.placeholder.com/150"
+            src="{{admin.imageUrl}}"
             alt="Admin Profile"
             class="rounded-circle border border-white shadow-lg"
             style="width: 150px; height: 150px; object-fit: cover"
           />
+          <input
+          type="file"
+          id="imgInput"
+          #fileInput
+          class="d-none"
+          accept="image/*"
+          (change)="onFileSelected($event,false)"
+        />
           <button
             class="btn btn-dark btn-sm rounded-circle shadow position-absolute"
             style="bottom: 0; right: -10px; border-radius: 4px"
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             title="Change Profile Picture"
+            (click)="fileInput.click()"
           >
             <i class="bi bi-pencil-fill"></i>
           </button>
@@ -230,7 +248,7 @@
           <!-- Modal Footer -->
           <div class="modal-footer border-0 bg-light">
             <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
-            <button type="submit" [disabled]="updateUserForm.invalid" class="btn btn-dark px-4">Update</button>
+            <button type="submit" [disabled]="updateUserForm.invalid" class="btn btn-dark px-4"  data-bs-dismiss="modal">Update</button>
           </div>
 
         </form>

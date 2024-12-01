@@ -32,6 +32,7 @@ export class StudentDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    (document.getElementById("loading-screen") as HTMLElement).style.display = "flex";
 
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
@@ -42,6 +43,9 @@ export class StudentDashboardComponent implements OnInit {
     },
       (error) => {
         this.router.navigate([''])
+      },()=>{
+    (document.getElementById("loading-screen") as HTMLElement).style.display = "none";
+
       })
 
 

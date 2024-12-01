@@ -15,7 +15,7 @@ export class BusyService {
     this.spinnerService.show(undefined,{
       type: 'ball-atom',
       bdColor: 'rgba(0, 0, 0, 0.8)',
-      color:'#fff',
+      color:'#df1010',
       size:'medium'
     });
   }

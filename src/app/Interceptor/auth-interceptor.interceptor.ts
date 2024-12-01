@@ -1,7 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, finalize, throwError } from 'rxjs';
+import { catchError, delay, finalize, throwError } from 'rxjs';
 import { BusyService } from '../Service/Spinner/busy.service';
 
 export const authInterceptorInterceptor: HttpInterceptorFn = (req, next) => {
@@ -24,6 +24,7 @@ export const authInterceptorInterceptor: HttpInterceptorFn = (req, next) => {
       }
       return throwError(() => err);
     }),
+    delay(100),
     finalize(() => busyService.idle())
   );
   

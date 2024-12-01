@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { jwtDecode } from 'jwt-decode';
 import { AdminService } from '../../../Service/API/Admin/admin.service';
 import { Admin } from '../../../Modals/modals';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-admin-profile',
@@ -16,7 +17,7 @@ export class AdminProfileComponent implements OnInit{
   updateUserForm: FormGroup;
   adminid:string="";
   admin:any=""
-  constructor(private fb: FormBuilder,private  adminService:AdminService) {
+  constructor(private fb: FormBuilder,private  adminService:AdminService,private toastr:ToastrService) {
     // Initialize form controls
     this.updateUserForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(2)]],
@@ -46,6 +47,29 @@ export class AdminProfileComponent implements OnInit{
     console.log('Account Settings button clicked');
   }
   onSubmit(){
+console.log(this.updateUserForm.value);
+const data=this.updateUserForm.value
+this.adminService.updateAdminProfile(this.adminid,data).subscribe({
+  next:(response:any)=>{
+    this.toastr.success('Admin Updated successfully!', '', {
+      positionClass: 'toast-top-right',
+      progressBar: true,
+      timeOut:3000
+    });
+  }
+  ,complete() {
+    
+  },
+  error:(err:any)=> {
+    error: (error:any) => {
+      this.toastr.error(error.error, '', {
+        positionClass: 'toast-top-right',
+        progressBar: true,
+        timeOut:4000
+      });
+    }
+  },
+})
 
   }
   patchData(admin:any){

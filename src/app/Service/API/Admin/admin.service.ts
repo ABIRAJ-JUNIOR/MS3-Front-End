@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Admin, AuditLog } from '../../../Modals/modals';
 import { AdminRequest } from '../../../Component/Admin_Pages/admin-list/admin-list.component';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class AdminService {
 
   constructor(private http:HttpClient) { }
 
-  private apiUrl = 'https://localhost:7044/api'
+  private apiUrl = environment.apiUrl
 
   addAdmin(admin:AdminRequest){
     return this.http.post(`${this.apiUrl}/Admin`, admin);

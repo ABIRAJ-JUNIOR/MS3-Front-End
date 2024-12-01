@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ContactUs } from '../../../Modals/modals';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { ContactUs } from '../../../Modals/modals';
 export class ContactService {
   constructor(private http:HttpClient) { }
 
-  private apiUrl = 'https://localhost:7044/api'
+  private apiUrl = environment.apiUrl
 
   addContactDetails(contact:ContactUs){
     return this.http.post( this.apiUrl + '/ContactUs', contact)

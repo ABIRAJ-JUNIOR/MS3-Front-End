@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import { Injectable } from '@angular/core';
 export class NotificationServiceService {
 
 
-  CommonUrl:string="https://localhost:7044/api/Notification/"
+  CommonUrl:string=environment.apiUrl
   constructor(private http:HttpClient) { }
 
   MarkAsReadNotication(NotificationId:string){

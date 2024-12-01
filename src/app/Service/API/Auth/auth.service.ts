@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { jwtDecode } from "jwt-decode";
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class AuthService {
 
   constructor(private http:HttpClient) { }
 
-  private apiUrl = 'https://localhost:7044/api'
+  private apiUrl = environment.apiUrl
 
   signUp(student:SignUp){
     return this.http.post(`${this.apiUrl}/Auth/SignUp` , student,{

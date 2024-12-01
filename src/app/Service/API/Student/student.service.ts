@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { StudentReqest } from "../../../Component/Admin_Pages/student-list/student-list.component";
 import { StudenUpdateRequest } from "../../../Component/Student_Pages/student-setting/student-setting.component";
 import { Student } from "../../../Modals/modals";
+import { environment } from "../../environments/environment.development";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class StudentService {
 
   constructor(private http:HttpClient) { }
 
-  private apiUrl = 'https://localhost:7044/api'
+  private apiUrl = environment.apiUrl
 
   getStudents(){
     return this.http.get<Student[]>(this.apiUrl + '/Student/getall')

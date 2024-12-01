@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { PayRequest } from '../../../Component/Landing_Pages/otp-authentication/otp-authentication.component';
 import { Payment } from '../../../Modals/modals';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Payment } from '../../../Modals/modals';
 export class PaymentService {
   constructor(private http:HttpClient) { }
 
-  private apiUrl = 'https://localhost:7044/api'
+  private apiUrl = environment.apiUrl
 
   AddEnrollment(data:any){
    return this.http.post(this.apiUrl + "/Enrollment", data)

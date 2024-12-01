@@ -1,0 +1,39 @@
+
+<section style="background-color: #eee; height: 100vh; display: flex; justify-content: center;">
+<!-- OTP Verification Page -->
+<div class="container-fluid pt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6">
+            <div class="card">
+
+
+                <div class="card-body">
+                    <h4 class="">Enter <strong class="text-danger">OTP</strong> to complete payment</h4>
+                    <hr>
+                    <div class="form-group">
+                        <label for="otp">One-Time Password (OTP)</label>
+                        <div class="input-group my-3">
+                            <input type="number" class="form-control" id="otp" placeholder="Enter OTP" maxlength="6"
+                                required>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button" (click)="getOtp()">Re-Send
+                                    OTP</button>
+                            </div>
+                        </div>
+                        <small id="otpHelp" class="form-text text-muted">
+                            Please enter the 6-digit OTP sent to your phone/email.
+                        </small>
+
+                    </div>
+                    <div class="form-group my-2 ">
+                        <button type="submit" class="btn btn-success" (click)="CheckOtp()"> Verify OTP and
+                            Proceed</button>
+                    </div>
+                    <img src="/payment/otp.png" class="card-img-top" alt="Course Image">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</section>

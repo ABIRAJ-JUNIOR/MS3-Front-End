@@ -1,0 +1,241 @@
+<div class="container-fluid rounded bg-white " style="min-height: 100vh;">
+
+    <h4> <i class="bi bi-person-bounding-box fs-3 text-primary"></i> Profile</h4>
+    <!-- <div class="container">
+        <div class="card shadow-sm">
+            <div class="card-body text-center">
+                <img src="logo.png" alt="Logo" width="40" height="40" class="logo d-inline-block align-text-top me-2">
+                <h5 class="card-title text-dark">
+                    Way Makers' Insight
+                </h5>
+                <p class="card-text text-danger" *ngIf="selectedQuote">
+                    "{{ selectedQuote }}"
+                </p>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="row ">
+        <!-- Profile Picture Section -->
+
+        <section class="h-100 gradient-custom-2 ">
+            <div class="container-fluid py-1 h-100">
+                <div class="row d-flex justify-content-center">
+                    <div class="col col-lg-12 col-xl-12">
+                        <div class="card bg-light">
+                            <app-studentcommon-profile></app-studentcommon-profile>
+
+                            <div class="card-body p-4 mt-5 text-blac ">
+                                <!-- Card Header -->
+                                <p class="card-text text-center text-danger fs-5" *ngIf="selectedQuote">
+                                    "{{ selectedQuote }}"
+                                </p>
+                                <div class="col-12 col-md-12 col-lg-12 mx-auto  ">
+                                    <div class="">
+
+
+                                        <hr class="m-0">
+
+                                        <h4 class="text-muted mt-4"><i class="bi bi-fingerprint text-secondary"></i> Bio Graph</h4>
+                                        <!-- Card Body -->
+                                        <div class="card-body ">
+                                            <div class="row align-items-center">
+                                                <!-- Full Name -->
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-6 pt-md-4">
+                                                            <div class="d-flex align-items-start">
+                                                                <i class="bi bi-person-fill text-primary fs-5 me-3"></i>
+                                                                <div>
+                                                                    <h6 class="mb-1">Full Name</h6>
+                                                                    <p class="text-muted mb-0">
+                                                                        {{StudentDetails.firstName}}
+                                                                        {{StudentDetails.lastName}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Email -->
+                                                        <div class="col-md-6 pt-md-4">
+                                                            <div class="d-flex align-items-start">
+                                                                <i
+                                                                    class="bi bi-envelope-fill text-primary fs-5 me-3"></i>
+                                                                <div>
+                                                                    <h6 class="mb-1">Email</h6>
+                                                                    <p class="text-muted mb-0">
+                                                                        {{StudentTokenDetails.Email}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Phone -->
+                                                        <div class="col-md-6 pt-4">
+                                                            <div class="d-flex align-items-start">
+                                                                <i
+                                                                    class="bi bi-telephone-fill text-primary fs-5 me-3"></i>
+                                                                <div>
+                                                                    <h6 class="mb-1">Phone</h6>
+                                                                    <p class="text-muted mb-0">{{StudentDetails.phone}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Address -->
+                                                        <div class="col-md-6 pt-4">
+                                                            <div class="d-flex align-items-start">
+                                                                <i
+                                                                    class="bi bi-geo-alt-fill text-primary fs-5 me-3"></i>
+                                                                <div>
+                                                                    <h6 class="mb-1">Address</h6>
+                                                                    <p class="text-muted mb-0">
+                                                                        {{StudentDetails.address||"Weneed your address. Pleaseadd it for better service."}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- NIC -->
+                                                        <div class="col-md-6 pt-4">
+                                                            <div class="d-flex align-items-start">
+                                                                <i
+                                                                    class="bi bi-person-vcard-fill text-primary fs-5 me-3"></i>
+                                                                <div>
+                                                                    <h6 class="mb-1">NIC</h6>
+                                                                    <p class="text-muted mb-0">{{StudentDetails.nic}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Role -->
+                                                        <div class="col-md-6 pt-4">
+                                                            <div class="d-flex align-items-start">
+                                                                <i
+                                                                    class="bi bi-person-badge text-primary fs-5 me-3"></i>
+                                                                <div>
+                                                                    <h6 class="mb-1">Role</h6>
+                                                                    <p class="text-muted mb-0">
+                                                                        {{StudentTokenDetails.Role}}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Created Date -->
+                                                        <div class="col-md-6 pt-4">
+                                                            <div class="d-flex align-items-start">
+                                                                <i
+                                                                    class="bi bi-calendar-fill text-primary fs-5 me-3"></i>
+                                                                <div>
+                                                                    <h6 class="mb-1">Created Date</h6>
+                                                                    <p class="text-muted mb-0">
+                                                                        {{StudentDetails.cteatedDate}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                   
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <img src="/StudentDashboard/Nonbg.png"
+                                                        class="img-fluid" alt="">
+                                                </div>
+                                            </div>
+                                            <!-- Action Buttons -->
+                                            <div class="col-md-12 d-flex gap-3 ">
+                                                <button
+                                                    class="btn btn-outline-primary d-flex align-items-center gap-2 px-4 py-2 shadow-sm"
+                                                    [routerLink]="['/student-dashboard/setting']"
+                                                    style="border-radius: 4px;">
+                                                    <i class="bi bi-gear-fill"></i> Account Settings
+                                                </button>
+                                                <button
+                                                    class="btn btn-danger d-flex align-items-center gap-2 px-4 py-2 shadow-sm"
+                                                    style="border-radius: 4px;">
+                                                    <i class="bi bi-box-arrow-right"></i> Logout
+                                                </button>
+                                            </div>
+
+                                            <!-- Additional Information Section -->
+                                            <div class="col-md-12 mx-auto my-5">
+                                                <div class="py-5  rounded ">
+                                                    <h5 class="text-dark font-weight-bold">Performance Metrics</h5>
+
+                                                    <div class="col-md-12 mt-1">
+                                                        <select class="form-select" aria-label="Default select example"
+                                                            [(ngModel)]="SelectId" (change)="onCourseSelect()">
+                                                            <option value="" selected disabled>Select Course and
+                                                                View Course State</option>
+                                                            <option value="{{item.id}}"
+                                                                *ngFor="let item of StudentDetails?.enrollments">
+                                                                {{item.courseScheduleResponse.courseResponse.courseName}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div *ngIf="!SelectId"
+                                                        class="alert alert-info mt-3 d-flex align-items-center">
+                                                        <i class="bi bi-info-circle-fill me-2"></i>
+                                                        Please select a course to view its details.
+                                                    </div>
+
+                                                    <div *ngIf="SelectId">
+                                                        <div class="col-md-12 mt-3">
+                                                            <label class="labels">Grades</label>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Enter grades" value="{{selectedGrade}}"
+                                                                disabled>
+                                                        </div>
+
+                                                        <div class="col-md-12 mt-3">
+                                                            <label class="labels">Total Fees Paid</label>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Enter fees" value="{{paymentFee}}"
+                                                                disabled>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+
+
+                                        <section class="motivation mt-5">
+                                            <div
+                                                class="container text-center p-4 bg-gradient bg-dark text-white rounded shadow-lg">
+                                                <blockquote class="blockquote mb-3">
+                                                    <p class="fs-4 fst-italic">"Success is not the key to
+                                                        happiness.Happiness is the key to success."</p>
+                                                </blockquote>
+                                                <footer class="blockquote-footer text-white text-center fs-6 mt-3">
+                                                    Written by <cite title="Source Title"
+                                                        class="text-info">Anoján</cite>
+                                                </footer>
+                                            </div>
+                                        </section>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <!-- Profile Information Section -->
+
+
+
+
+
+</div>

@@ -1,0 +1,49 @@
+<div style="padding: 20px;" #table>
+    <div class="d-flex justify-content-between align-items-center">
+        <h4 class="mb-4 text-dark "><i class="bi bi-journals text-info fs-3"></i> Assessments Overview</h4>
+      
+        <button class="btn btn-outline-primary btn-sm" (click)="downloadTableAsImage()"><i
+                class="bi bi-file-earmark-arrow-down-fill"></i> Download Report</button>
+    </div>
+    <div class="alert alert-warning rounded">
+        <p class="fs-5 text-dark">
+            Welcome to your <strong>Assessment Overview</strong> section!  Here, <br> you can see all your upcoming assessments, including quizzes, exams, and assignments for your courses at IT Intute. Check the due dates and stay updated on your progress.
+          </p>
+    </div>
+    <div class="custom-scroll overflow-auto" style="max-height: 400px;">
+        <table class="table table-striped table-hover align-middle mb-0 table-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th><i class="bi bi-bookmark-fill text-danger"></i> Course Name</th>
+                    <th><i class="bi bi-card-checklist text-warning"></i> Assessment Type</th>
+                    <th><i class="bi bi-calendar-event text-light"></i> Start Date</th>
+                    <th><i class="bi bi-calendar-check text-light"></i> End Date</th>
+                    <th><i class="bi bi-calendar-day text-success"></i> Date Submitted</th>
+                    <th><i class="bi bi-pen text-info"></i> Marks Obtained</th>
+                    <th><i class="bi bi-award text-success"></i> Grade</th>
+                    <th><i class="bi bi-chat-left-text text-success"></i> Feedback</th>
+                    <th><i class="bi bi-file-earmark-check text-warning"></i> Status</th>
+                  </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let item of StudentDetails; let i = index">
+                    <tr *ngFor="let assessmentData of item.studentAssesmentResponse">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ item.courseScheduleResponse.courseResponse.courseName }}</td>
+                        <td>{{ assessmentData.assessmentResponse.assessmentType }}</td>
+                        <td>{{ assessmentData.assessmentResponse.startDate | date: 'shortDate' }}</td>
+                        <td>{{ assessmentData.assessmentResponse.endDate | date: 'shortDate' }}</td>
+                        <td>{{ assessmentData.dateSubmitted | date: 'short' }}</td>
+                        <td>{{ assessmentData.marksObtained || 'Update Later' }}</td>
+                        <td>{{ assessmentData.grade || 'Update Later' }}</td>
+                        <td>{{ assessmentData.feedback || 'Update Later' }}</td>
+                        <td>{{ assessmentData.studentAssessmentStatus }}</td>
+
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+
+</div>

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import html2canvas from 'html2canvas';
-import { StudentService } from '../../../Service/Student/student.service';
+import { StudentService } from '../../../Service/API/Student/student.service';
 import { ActivatedRoute } from '@angular/router';
 import { Payment, Student } from '../../../Modals/modals';
 import { FormsModule } from '@angular/forms';
@@ -30,7 +30,6 @@ export class StudentReportComponent implements OnInit{
     this.studentService.getStudent(this.studentID).subscribe({
       next:((response:Student) => {
         this.studentData = response
-        this.studentData.imageUrl = response.imageUrl  != null ? "https://localhost:7044/" + response.imageUrl : undefined;
       }),
       complete:() => {
         this.studentData.enrollments.forEach(e => {

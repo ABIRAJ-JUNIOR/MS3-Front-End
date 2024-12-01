@@ -1,0 +1,36 @@
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #007BFF;
+}
+
+
+.labels {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+
+.card {
+    border: none;
+    padding: 15px;
+}
+
+
+.btn-outline-secondary {
+    margin-top: 10px;
+    color: #343a40;
+    border-color: #343a40;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #343a40;
+    color: white;
+}
+
+.motivation {
+    background: linear-gradient(135deg, #343a40, #495057); /* Dark gradient */
+    border: 1px solid #6c757d; /* Subtle border */
+}
+

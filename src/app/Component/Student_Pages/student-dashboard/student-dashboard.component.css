@@ -19,6 +19,9 @@ a {
     text-decoration: none;
     font-family: 'Poppins', sans-serif;
 }
+a:active{
+    color: black;
+}
 
 li {
     list-style: none;
@@ -53,14 +56,6 @@ h4 {
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     width: 100%;
-}
-
-/* Sidebar Elements Style */
-#sidebar{
-    background-color: #004085;
-}
-#sidebar:hover{
-    background-color:#343A40;
 }
 
 .sidebar-logo {
@@ -203,3 +198,57 @@ a.sidebar-link {
         width: 100vw;
     }
 }
+
+.notification {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+    position: relative;
+  }
+  
+  .notification.unread {
+    background-color: #fff5e5;
+    border-left: 5px solid #ff9900; /* Highlight unread with color */
+  }
+  
+  .notification-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+  }
+  
+  .notification-time {
+    font-size: 0.8rem;
+    color: #777;
+  }
+  
+  .notification-type {
+    color: #0056b3;
+  }
+  
+  .notification-body {
+    margin-top: 10px;
+  }
+  
+  .notification-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+  
+  .mark-read-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .mark-read-btn:hover {
+    background-color: #0056b3;
+  }
+  

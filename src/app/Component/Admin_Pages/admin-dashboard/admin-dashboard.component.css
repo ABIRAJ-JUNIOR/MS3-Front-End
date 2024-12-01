@@ -1,19 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-
-*,
-::after,
-::before {
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.875rem;
-    opacity: 1;
-    overflow-y: scroll;
-    margin: 0;
-}
-
 a {
     cursor: pointer;
     text-decoration: none;
@@ -22,12 +6,6 @@ a {
 
 li {
     list-style: none;
-}
-
-h4 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.275rem;
-    color: var(--bs-emphasis-color);
 }
 
 /* Layout for admin dashboard */
@@ -43,6 +21,7 @@ h4 {
     min-width: 264px;
     background: var(--bs-dark);
     transition: all 0.35s ease-in-out;
+    
 }
 
 .main {
@@ -53,10 +32,16 @@ h4 {
     overflow: hidden;
     transition: all 0.35s ease-in-out;
     width: 100%;
-    background: var(--bs-dark-bg-subtle);
+    
 }
 
 /* Sidebar Elements Style */
+#sidebar{
+    background-color: #004085;
+}
+#sidebar:hover{
+    background-color:#343A40;
+}
 
 .sidebar-logo {
     padding: 1.15rem;
@@ -64,7 +49,7 @@ h4 {
 
 .sidebar-logo a {
     color: #e9ecef;
-    font-size: 1.15rem;
+    font-size: 1.6rem;
     font-weight: 600;
 }
 
@@ -150,6 +135,37 @@ a.sidebar-link {
     margin-left: -264px;
 }
 
+.form-control {
+    border-radius: 20px; /* Makes the input more rounded */
+    box-shadow: none; /* Removes the default shadow */
+  }
+  
+  .form-control:focus {
+    border-color: #007bff; /* Adds blue border on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Glow effect */
+  }
+  
+  .btn-primary {
+    border-radius: 20px; /* Matches the input's rounded style */
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+
+  .OverideBtn{
+    background: none; color: black;
+    border: none;
+    font-size: 16px;
+    background: none;
+  }
+
+  button .badge {
+    font-size: 14px;
+    padding: 5px 8px;
+    z-index: 10; 
+  }
+
 /* Footer and Nav */
 
 @media (max-width:767.98px) {
@@ -166,4 +182,8 @@ a.sidebar-link {
     footer {
         width: 100vw;
     }
+}
+
+.active{
+    background-color: rgb(134, 129, 129);
 }

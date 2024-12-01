@@ -1,75 +1,72 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {   CourseService } from '../../../Service/Course/course.service';
 import { Course, CourseCategory, Schedule } from '../../../Modals/modals';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { CourseService } from '../../../Service/API/Course/course.service';
 
 @Component({
   selector: 'app-course-list',
   standalone: true,
   imports: [CommonModule,ReactiveFormsModule],
+  providers: [BsModalService],
   templateUrl: './course-list.component.html',
   styleUrl: './course-list.component.css'
 })
-export class CourseListComponent {
+export class CourseListComponent implements OnInit {
   courses: Course[] = [];
+  CourseCategory:CourseCategory[]=[]
+
+  //Pagination fields
   currentPage: number = 1;
-  pageSize: number = 13;
+  pageSize: number = 8;
   totalPages: number = 0;
   currentLength:number = 0;
   totalItems:number = 0;
 
+  //Form and Update status
   courseForm: FormGroup;
-  courseImageUrl: string | null = null; // To display the course image preview
+  isUpdate:boolean = false
 
-  CourseCategory:CourseCategory[]=[]
+  // Course image variables
+  selectedFile: File | null = null;
+  courseImageUrl: string | null = null;
+  
+  // Modal-related variables
+  modalRef?: BsModalRef;
 
-  constructor(private courseService: CourseService,private fb: FormBuilder) {
+  //Course ID for Update/delete operation
+  private courseId:string=''
+  
 
+  constructor(
+    private courseService: CourseService,
+    private fb: FormBuilder,
+    private toastr: ToastrService,
+    private modalService: BsModalService
+  ) {
     this.courseForm = this.fb.group({
       courseName: ['', Validators.required],
-      courseCategory: ['', Validators.required],
+      courseCategoryId: ['', Validators.required],
       courseLevel: ['', Validators.required],
       courseFee: ['', [Validators.required, Validators.min(0)]],
       description: ['', [Validators.required, Validators.maxLength(500)]],
       prerequisites: ['', Validators.maxLength(300)],
-      courseImage: [null], // For storing the file object
     });
   }
 
-   // Handle course image selection
-   onCourseImageSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      const file = input.files[0];
-      this.courseForm.patchValue({ courseImage: file });
-
-      // Preview the selected image
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.courseImageUrl = reader.result as string;
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-
-
   ngOnInit(): void {
-    this.loadItems();
-    this.courseService.GetAllCategory().subscribe({
-      next: (data:CourseCategory[]) => {
-        console.log(data)
-        this.CourseCategory=data
-    }})
+    this.loadItems(); 
+    this.loadCategories();
   }
 
-  loadItems(): void {
+  private loadItems(): void {
     this.courseService.pagination(this.currentPage , this.pageSize).subscribe({
       next:((response:any) => {
         this.totalPages = response.totalPages
         this.totalItems = response.totalItem
         response.items.forEach((a:Course) => {
-          a.imageUrl = "https://localhost:7044/" + a.imageUrl
           let count = 0
           a.schedules.forEach((s:Schedule) => {
             count++
@@ -85,6 +82,13 @@ export class CourseListComponent {
     });
   }
 
+  private loadCategories():void{
+    this.courseService.GetAllCategory().subscribe({
+      next: (data:CourseCategory[]) => {
+        this.CourseCategory=data
+    }})
+  }
+
   goToPage(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
@@ -92,42 +96,173 @@ export class CourseListComponent {
     }
   }
 
-  onSubmit() {
-    if (this.courseForm.valid) {
-      const formData = new FormData();
-      formData.append('courseName', this.courseForm.get('courseName')?.value);
-      formData.append(
-        'courseCategory',
-        this.courseForm.get('courseCategory')?.value
-      );
-      formData.append('courseLevel', this.courseForm.get('courseLevel')?.value);
-      formData.append('courseFee', this.courseForm.get('courseFee')?.value);
-      formData.append(
-        'description',
-        this.courseForm.get('description')?.value
-      );
-      formData.append(
-        'prerequisites',
-        this.courseForm.get('prerequisites')?.value
-      );
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      const file = input.files[0];
+      this.selectedFile=file
+      const reader = new FileReader();
 
-      // Handle image upload if it exists
-      const courseImage = this.courseForm.get('courseImage')?.value;
-      if (courseImage) {
-        formData.append('courseImage', courseImage);
-      }
-
-      // Replace this console log with your API call to submit data
-      console.log('Form data ready for submission:', formData);
-      console.log(this.courseForm.value);
-      
-      alert('Course details submitted successfully!');
-
-      // Clear the form (optional)
-      this.courseForm.reset();
-      this.courseImageUrl = null;
-    } else {
-      alert('Please fill out all required fields.');
+      reader.onload = () => {
+        this.courseImageUrl = reader.result as string;
+      };
+      reader.readAsDataURL(file);
     }
   }
+
+  onSubmit() {
+    if (this.courseForm.valid) {
+      const form = this.courseForm.value
+      
+      form.courseLevel=Number(form.courseLevel)
+      const coursedata:CourseRequest={
+        courseCategoryId:form.courseCategoryId,
+        courseName:form.courseName,
+        level:form.courseLevel,
+        courseFee:form.courseFee,
+        description:form.description,
+        prerequisites:form.prerequisites
+      }
+
+      if(!this.isUpdate){
+        this.addCourse(coursedata);
+      }else{
+        this.updateCourse(coursedata);
+      }
+    }
+  }
+
+  private addCourse(courseData:CourseRequest):void{
+    this.courseService.AddCourse(courseData).subscribe({
+      next: (response: any) => {
+          this.courseId=response.id
+          this.toastr.success("Course added successfull" , "" , {
+            positionClass:"toast-top-right",
+            progressBar:true,
+            timeOut:3000
+          })
+        this.loadItems();
+      },
+      complete:()=> {
+        this.uploadImage();
+        this.resetForm()
+      },
+      error:(error) =>{
+        this.handleError(error);
+      },
+    })
+  }
+
+  private updateCourse(courseData:CourseRequest):void{
+    this.courseService.updateCourse(this.courseId , courseData).subscribe({
+      next:()=>{
+        this.toastr.success('Course updated successfull!', '', {
+          positionClass: 'toast-top-right',
+          progressBar: true,
+          timeOut:3000
+        });
+        this.loadItems();
+      },
+      complete:()=>{
+        this.uploadImage();
+      },
+      error:(error:any)=>{
+        this.handleError(error);
+      }
+    })
+  }
+
+  private uploadImage():void{
+    if(this.selectedFile){
+      const formdata= new FormData();
+      formdata.append('image',this.selectedFile!);
+      this.courseService.Addimage(this.courseId,formdata).subscribe({
+        next:()=>{
+          this.loadItems();
+        },
+        error:(error:any) =>{
+          this.toastr.error('Image upload failed', '', {
+            positionClass: 'toast-top-right',
+          });
+        }
+      })
+    }
+  }
+
+  editCourse(isEditMode:boolean):void{
+    this.isUpdate = isEditMode;
+    if(!isEditMode){
+      this.resetForm()
+    }
+  }
+
+  patchData(course:Course):void{
+    this.courseImageUrl = course.imageUrl
+    this.courseId = course.id
+    this.courseForm.patchValue({
+      courseName: course.courseName,
+      courseCategoryId: course.courseCategoryId,
+      courseLevel: course.level === "Beginner" ? "1": course.level === "Intermediate" ? "2": "3",
+      courseFee: course.courseFee,
+      description:course.description,
+      prerequisites:course.prerequisites,
+    })
+  }
+
+  openPreviewModal(template: any, image: string): void {
+    this.courseImageUrl = image;
+    this.modalRef = this.modalService.show(template);
+  }
+
+  openDeleteModal(template: any, courseId: string): void {
+    this.modalRef = this.modalService.show(template);
+    this.courseId = courseId;
+  }
+
+  deleteCourse():void{
+    this.courseService.deleteCourse(this.courseId).subscribe({
+      next: () => {
+        this.toastr.success('Deleted successfully!', '', {
+          positionClass: 'toast-top-right',
+          progressBar: true,
+        });
+        this.loadItems();
+      },
+      error: (error:any) => {
+        this.handleError(error);
+      },
+    })
+    this.modalRef?.hide()
+  }
+
+  private resetForm():void{
+    this.courseForm.reset({
+      courseLevel:'',
+      courseCategoryId:''
+    })
+    this.resetImage();
+    this.isUpdate = false
+  }
+
+  private resetImage():void{
+    this.courseImageUrl = null;
+    this.selectedFile = null;
+  }
+
+  private handleError(error: any): void {
+    this.toastr.warning(error.error, '', {
+      positionClass: 'toast-top-right',
+      progressBar: true,
+      timeOut: 4000,
+    });
+  }
+}
+
+export interface CourseRequest{
+  courseCategoryId:string;
+  courseName:string;
+  level:Number;
+  courseFee:Number;
+  description:string;
+  prerequisites:string;
 }

@@ -9,7 +9,7 @@
                             <h2 class="m-0 fw-bold">Assessments</h2>
                         </div>
                         <div class="col-lg-6 d-flex justify-content-lg-end justify-content-center">
-                            <a class="btn btn-success d-flex align-items-center">
+                            <a class="btn btn-success d-flex align-items-center"  data-bs-toggle="modal" data-bs-target="#assessmentForm" (click)="editAssessment(false)">
                                 <i class="bi bi-plus-circle me-2"></i>
                                 <span>Add New Assessment</span>
                             </a>
@@ -24,11 +24,13 @@
                             <tr>
                                 <th>#</th>
                                 <th>Course</th>
+                                <th>Assessment Name</th>
                                 <th>Type</th>
                                 <th>Start Date</th>
                                 <th>End date</th>
                                 <th>Total Marks</th>
                                 <th>Pass Marks</th>
+                                <th>Exam Link</th>
                                 <th>Status</th>
                                 <th class="text-center">Actions</th>
                             </tr>
@@ -37,19 +39,24 @@
                             <tr *ngFor="let assessment of assessments; let i = index" class="table-row">
                                 <td>{{i+1}}</td>
                                 <td>{{assessment.courseResponse.courseName}}</td>
+                                <td>{{assessment.assessmentTitle}}</td>
                                 <td>{{assessment.assessmentType}}</td>
-                                <td>{{assessment.startDate}}</td>
-                                <td>{{assessment.endDate}}</td>
+                                <td>{{assessment.startDate | date}}</td>
+                                <td>{{assessment.endDate | date}}</td>
                                 <td>{{assessment.totalMarks}}</td>
                                 <td>{{assessment.passMarks}}</td>
-                                <td>{{assessment.status}}</td>
+                                <td><a href="{{assessment.assessmentLink}}" *ngIf="assessment.assessmentLink"><strong>Link</strong></a></td>
+                                <td [ngStyle]="{
+                                  color: assessment.assessmentStatus === 'NotStarted' ? 'blue' :
+                                  assessment.assessmentStatus === 'InProgress' ? 'green' :
+                                  assessment.assessmentStatus === 'Completed' ? 'darkblue' 
+                                  :assessment.assessmentStatus==='Closed'? 'red': 'black'
+                                }">{{assessment.assessmentStatus}}</td>
                                 <td class="text-center">
-                                    <a href="#" class="text-primary me-3" aria-label="Edit">
+                                    <a  class="text-primary me-3 pointer" aria-label="Edit" (click)="patchData(assessment)" data-bs-toggle="modal" data-bs-target="#assessmentForm">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
-                                    <a href="#" class="text-danger" aria-label="Delete">
-                                        <i class="bi bi-trash3-fill"></i>
-                                    </a>
+
                                 </td>
                             </tr>
                         </tbody>
@@ -76,4 +83,167 @@
         </div>
     </div>
 </div>
+
+
+<!-- moduel -->
+<div class="modal fade" id="assessmentForm" tabindex="-1" aria-labelledby="assessmentFormLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content bg-light text-dark rounded-4 border-0 shadow-lg">
+  
+        <!-- Modal Header -->
+        <div class="modal-header border-0" style="
+              background-color: #2c2f3a;
+              color: #e5e5e5;
+              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            ">
+          <h4 class="modal-title fw-bold" id="assessmentFormLabel">{{isUpdate ? 'Update Assessment' : 'Add Assessment'}}</h4>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+  
+        <!-- Modal Body -->
+        <div class="modal-body">
+          <form [formGroup]="assessmentForm" (ngSubmit)="onSubmit()" class="row g-4">
+
+            <!-- Assessment Title -->
+            <div class="col-md-6">
+              <label for="assessmentTitle" class="form-label fw-bold text-dark">Assessment Title</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-pencil"></i></span>
+                <input type="text" formControlName="assessmentTitle" class="form-control border rounded-end shadow-sm" placeholder="Enter assessment title"
+                />
+              </div>
+              <!-- Error Message -->
+              <div *ngIf="assessmentForm.controls['assessmentTitle'].touched && assessmentForm.controls['assessmentTitle'].invalid" class="text-danger small mt-1">
+                Assessment Title is required.
+              </div>
+            </div>
+          
+            <!-- Course Selection -->
+            <div class="col-md-6">
+              <label for="course" class="form-label fw-bold text-dark">Course</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-book"></i></span>
+                <select formControlName="courseId" class="form-select border rounded-end shadow-sm" required>
+                  <option value="" selected disabled>Select a course</option>
+                  <ng-container *ngFor="let course of courses">
+                    <option value="{{ course.id }}">{{ course.courseName }}</option>
+                  </ng-container>
+                </select>
+              </div>
+              <div *ngIf="assessmentForm.controls['courseId'].invalid && assessmentForm.controls['courseId'].touched" class="text-danger small mt-1">
+                Course is required.
+              </div>
+            </div>
+          
+            <!-- Assessment Type -->
+            <div class="col-md-6">
+              <label for="assessmentType" class="form-label fw-bold text-dark">Assessment Type</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-list-task"></i></span>
+                <select formControlName="assessmentType" class="form-select border rounded-end shadow-sm" required>
+                  <option value="" selected disabled>Select an assessment type</option>
+                  <option value="1">Quiz</option>
+                  <option value="2">Exam</option>
+                  <option value="3">Presentation</option>
+                  <option value="4">Practical</option>
+                  <option value="5">Online Test</option>
+                  <option value="6">Midterm</option>
+                  <option value="7">Final Exam</option>
+                  <option value="8">Mock Test</option>
+                  <option value="9">Lab Assessment</option>
+                  <option value="10">Open Book Test</option>
+                </select>
+              </div>
+              <div *ngIf="assessmentForm.controls['assessmentType'].touched && assessmentForm.controls['assessmentType'].invalid" class="text-danger small mt-1">
+                Assessment Type is required.
+              </div>
+            </div>
+          
+            <!-- Assessment Link -->
+            <div class="col-md-6">
+              <label for="assessmentLink" class="form-label fw-bold text-dark">Assessment Link</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-link-45deg"></i></span>
+                <input type="text" formControlName="assessmentLink" class="form-control border rounded-end shadow-sm" placeholder="Enter Link"/>
+              </div>
+            </div>
+
+            <!-- Start Date -->
+            <div class="col-md-6">
+              <label for="startDate" class="form-label fw-bold text-dark">Start Date</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-calendar-event"></i></span>
+                <input type="text" formControlName="startDate" class="form-control border rounded-end shadow-sm" bsDatepicker [bsConfig]="{ isAnimated: true }" required/>
+              </div>
+              <div *ngIf="assessmentForm.controls['startDate'].touched && assessmentForm.controls['startDate'].invalid" class="text-danger small mt-1">
+                Start Date is required.
+              </div>
+            </div>
+          
+            <!-- End Date -->
+            <div class="col-md-6">
+              <label for="endDate" class="form-label fw-bold text-dark">End Date</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-calendar-check"></i></span>
+                <input type="text" formControlName="endDate" class="form-control border rounded-end shadow-sm" bsDatepicker [bsConfig]="{ isAnimated: true }" required/>
+              </div>
+              <div *ngIf="assessmentForm.controls['endDate'].touched && assessmentForm.controls['endDate'].invalid" class="text-danger small mt-1">
+                End Date is required.
+              </div>
+            </div>
+          
+            <!-- Total Marks -->
+            <div class="col-md-6">
+              <label for="totalMarks" class="form-label fw-bold text-dark">Total Marks</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-123"></i></span>
+                <input type="number" formControlName="totalMarks" class="form-control border rounded-end shadow-sm" placeholder="Enter total marks" required/>
+              </div>
+              <div *ngIf="assessmentForm.controls['totalMarks'].touched && assessmentForm.controls['totalMarks'].invalid" class="text-danger small mt-1">
+                Total Marks are required.
+              </div>
+            </div>
+          
+            <!-- Pass Marks -->
+            <div class="col-md-6">
+              <label for="passMarks" class="form-label fw-bold text-dark">Pass Marks</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-check-circle"></i></span>
+                <input type="number" formControlName="passMarks" class="form-control border rounded-end shadow-sm" placeholder="Enter pass marks" required/>
+              </div>
+              <div *ngIf="assessmentForm.controls['passMarks'].touched && assessmentForm.controls['passMarks'].invalid" class="text-danger small mt-1">
+                Pass Marks are required.
+              </div>
+            </div>
+
+            <!-- Assessment Status -->
+            <div class="col-md-6" *ngIf="isUpdate">
+              <label for="assessmentStatus" class="form-label fw-bold text-dark">Assessment Status</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-toggle-on"></i></span>
+                <select formControlName="assessmentStatus" class="form-select border rounded-end shadow-sm" required>
+                  <option value="" selected disabled>Select an assessment status</option>
+                  <option value="1">Not Started</option>
+                  <option value="2">In Progress</option>
+                  <option value="3">Completed</option>
+                  <option value="4">Closed</option>
+                </select>
+              </div>
+              <!-- <div *ngIf="assessmentForm.controls['assessmentStatus'].touched && assessmentForm.controls['assessmentStatus'].invalid" class="text-danger small mt-1">
+                Assessment Status is required.
+              </div> -->
+            </div>
+
+          
+            <!-- Modal Footer -->
+            <div class="modal-footer border-0 bg-light">
+              <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+              <button type="submit" [disabled]="assessmentForm.invalid" class="btn btn-dark px-4" data-bs-dismiss="modal">Submit</button>
+            </div>
+          
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
   

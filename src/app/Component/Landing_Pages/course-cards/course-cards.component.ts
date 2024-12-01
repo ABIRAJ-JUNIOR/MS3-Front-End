@@ -1,21 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { CourseService } from '../../../Service/Course/course.service';
+import { CourseService } from '../../../Service/API/Course/course.service';
 import { Course } from '../../../Modals/modals';
 import { FormsModule } from '@angular/forms';
 import { CourseFilterPipe } from '../../../Pipes/course-filter.pipe';
+import { PaymentDataService } from '../../../Service/Data/Payment_Data/payment-data.service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-course-cards',
   standalone: true,
-  imports: [CommonModule,FormsModule,CourseFilterPipe],
+  imports: [CommonModule,FormsModule,CourseFilterPipe,RouterModule],
   templateUrl: './course-cards.component.html',
   styleUrl: './course-cards.component.css'
 })
 export class CourseCardsComponent implements OnInit {
 
 
-  constructor(private CourseService:CourseService){
+  constructor(private CourseService:CourseService,private PaymentService:PaymentDataService , private route:Router){
     
   }
 
@@ -335,8 +337,11 @@ export class CourseCardsComponent implements OnInit {
   viewProduct(product: any) {
     this.ModalProduct = []
     this.ModalProduct.push(product)
-
+   console.log(this.ModalProduct)
   }
+
+
+
   ClearModal() {
     this.ModalProduct = []
   }
@@ -402,5 +407,26 @@ export class CourseCardsComponent implements OnInit {
     this.filterlevel=level.value
     this.filterPrice=price.value
     this.paginateCourses()
+  }
+
+  PaymentCourse:any[]=[]
+
+  sendPaymentData(sechdule:any) {
+    let PurchaseDetails={
+      "courseName":this.ModalProduct[0].courseName,
+      "courseFee":this.ModalProduct[0].courseFee,
+      "courseId":this.ModalProduct[0].id,
+      ...sechdule,
+      "PaymentCheck":true
+    }
+    this.PaymentCourse.push(PurchaseDetails)
+   
+  }
+  ConfirmationPayment(){
+    this.PaymentService.PurchaseDetailsSetLocal(this.PaymentCourse[0]);
+  }
+ 
+  CancelPurchase(){
+    this.PaymentCourse = []
   }
 }

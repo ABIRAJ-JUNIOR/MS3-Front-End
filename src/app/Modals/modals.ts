@@ -4,8 +4,9 @@ export interface Student {
   firstName: string;
   lastName: string;
   dateOfBirth: Date;
-  gender: number;
+  gender: string;
   phone: string;
+  email:string;
   address: Address;
   imageUrl?:string;
 
@@ -25,11 +26,12 @@ export interface Address {
 export interface Admin {
   id: string;
   nic: string;
+  roleName:string;
   firstName: string;
   lastName: string;
   phone: string;
+  email:string;
   imageUrl: string;
-  role:number
   auditLog: AuditLog[];
 }
 
@@ -94,21 +96,24 @@ export interface Payment{
     paymentMethod:string;
     amountPaid:number;
     paymentDate:Date;
-    imageUrl:string;
     installmentNumber:string;
 }
+
+
 
 export interface Assessment {
     id:string;
     courseId:string;
+    assessmentTitle:string;
     assessmentType:string;
     startDate:Date;
     endDate:Date;
     totalMarks:number;
-    passMarks:number
+    passMarks:number;
+    assessmentLink:string;
     createdDate:Date;
     updateDate:Date;
-    status:string;
+    assessmentStatus:string;
 
     courseResponse:Course;
     studentAssessmentResponses:StudentAssessment[];

@@ -1,0 +1,303 @@
+<section style="background-color: #eee; height: 100vh;">
+    <div class="container py-5">
+        <div class="card" *ngIf="recievedModalItems != null">
+            <div class="card-body">
+                <div class="row d-flex justify-content-center pb-5">
+                    <div class="col-md-7 col-xl-5 mb-4 mb-md-0">
+                        <div class="py-4 d-flex flex-row">
+                            <h5><img src="/logo.png" alt="" height="30px"><b>WayMaker</b> |</h5>
+                            <span class="ps-2">Pay</span>
+                        </div>
+                        <h4 class="text-success" >Rs.{{DeivdeInstallment}}</h4>
+                        <h4>{{courseMaterials}} & Materials</h4>
+                        <div class="d-flex  pt-2">
+                            <div>
+                                <p>
+                                    <b>The institution covers <span class="text-success" >Rs.{{DeivdeInstallment}}</span></b>
+                                </p>
+                            </div>
+
+                        </div>
+                        <p>
+                            Your Course fees will be processed and any necessary adjustments will be applied after the
+                            review.
+                        </p>
+                        <div class="mb-3" *ngIf="recievedModalItems[0].PaymentCheck">
+                            <label for="paymentPlans" class="form-label  text-dark">Select Payment Plan</label>
+                            <div >
+                                <select class="form-select bg-light border-2 border-primary rounded-3 shadow-sm"
+                                    [(ngModel)]="PaymentPlans" (change)="loadItems()">
+                                    <option value="2">Installment Plan - Pay in manageable monthly installments
+                                    </option>
+                                    <option value="1">Full Payment - One-time payment with additional benefits.</option>
+                                </select>
+                                <small class="form-text text-muted">Choose the payment plan that best suits your
+                                    financial
+                                    preferences.</small>
+                            </div>
+                        </div>
+
+                        <hr />
+                        <div class="pt-2">
+                            <div class="d-flex justify-content-between pb-2">
+                                <div>
+                                    <p>
+                                        <b>Add your Payment Card</b>
+                                    </p>
+                                </div>
+                                <button class="text-primary btn btn-md border-0" data-bs-toggle="modal"
+                                    data-bs-target="#AddCard" (click)="AddCardDetails()">
+                                    <i class="fas fa-plus-circle text-primary pe-1"></i>Add payment card
+                                </button>
+                            </div>
+                            <p>
+                                This is the amount due for your enrollment. Adjustments will be made once the payment is
+                                processed.
+                            </p>
+                            <div class="pb-3">
+                                <div class="d-flex flex-row pb-3" *ngIf="LocalCardDetails">
+                                    <div class="rounded border d-flex w-100 p-3 align-items-center">
+                                        <p class="mb-0">
+                                            <i class="fab fa-cc-visa fa-lg text-primary pe-2"></i>Visa Debit
+                                            Card
+                                        </p>
+                                        <div class="ms-auto">************{{ LocalCardDetails.number | slice:-4 }}</div>
+
+                                    </div>
+                                </div>
+
+                                <!-- <div class="d-flex flex-row">
+                                    <div class="d-flex align-items-center pe-2">
+                                        <input class="form-check-input" type="radio" name="radioNoLabel"
+                                            id="radioNoLabel2" value="" aria-label="..." />
+                                    </div>
+                                    <div class="rounded border d-flex w-100 p-3 align-items-center">
+                                        <p class="mb-0">
+                                            <i class="fab fa-cc-mastercard fa-lg text-body pe-2"></i>Mastercard
+                                            Office
+                                        </p>
+                                        <div class="ms-auto">************1038</div>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <button class="btn btn-danger btn-md" data-bs-toggle="modal"
+                                data-bs-target="#PaymentComfirmation"
+                                [disabled]="!LocalCardDetails || LocalCardDetails.length === -1">>Proceed to
+                                payment</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 col-xl-4 offset-xl-1">
+                        <div class="py-4 d-flex justify-content-end">
+                            <h6 style="cursor: pointer; color: rgb(0, 106, 255);" (click)="CancelPayment()">Cancel and
+                                return to website</h6>
+                        </div>
+                        <div class="rounded d-flex flex-column p-2 bg-body-tertiary">
+                            <!-- Payment Schedule Section -->
+                            <div class="p-2 me-3">
+                                <h4>Payment Schedule</h4>
+                            </div>
+
+                            <!-- Installment Plan Section -->
+                            <div class="p-2 border-bottom" *ngIf="PaymentPlans == 2">
+                                <h5>Installment Plan</h5>
+                                <div class="p-2 d-flex">
+                                    <div class="col-8 ">First Installment Payment</div>
+                                    <div class="ms-auto text-success" *ngIf="recievedModalItems[0].PaymentCheck">
+                                        {{DeivdeInstallment}}</div>
+                                    <div class="ms-auto text-primary" *ngIf="!recievedModalItems[0].PaymentCheck">
+                                        Completed</div>
+                                </div>
+                                <div class="p-2 d-flex">
+                                    <div class="col-8">Second Installment Payment</div>
+                                    <div class="ms-auto" *ngIf="recievedModalItems[0].PaymentCheck">Rs
+                                        {{DeivdeInstallment}}</div>
+                                    <div class="ms-auto text-primary" *ngIf="!recievedModalItems[0].PaymentCheck">
+                                        {{SecondInstallment}}</div>
+                                </div>
+                                <div class="p-2 d-flex">
+                                    <div class="col-8">Final Installment Payment</div>
+                                    <div class="ms-auto" *ngIf="recievedModalItems[0].PaymentCheck">
+                                        {{DeivdeInstallment}}</div>
+                                    <div class="ms-auto text-primary" *ngIf="!recievedModalItems[0].PaymentCheck">
+                                        {{ThirdInstallment }}</div>
+                                </div>
+                                <div class="border-top px-2 mx-2"></div>
+
+                              
+
+                                <!-- Total Payment for Full Payment Option -->
+                                <div class="p-2 d-flex pt-3" *ngIf="!recievedModalItems[0].PaymentCheck">
+                                    <div class="col-8">Total Payment Due (Full Payment)</div>
+                                    <div class="ms-auto Rs " >Rs
+                                        {{installmentTotal}}</div>
+                                </div>
+
+                                  <div class="p-2 d-flex pt-3">
+                                    <div class="col-8">Total Payment Due (Installment Plan)</div>
+                                    <div class="ms-auto text-primary" *ngIf="recievedModalItems[0].PaymentCheck">
+                                        {{recievedModalItems[0].courseFee}}</div>
+                                    <div class="ms-auto text-danger" *ngIf="!recievedModalItems[0].PaymentCheck">Rs
+                                        {{DeivdeInstallment }}</div>
+                                </div>
+                            </div>
+
+                            <!-- Full Payment Section -->
+                            <div class="p-2 border-bottom" *ngIf="PaymentPlans == 1">
+                                <h5>Full Payment</h5>
+                                <div class="p-2 d-flex text-success">
+                                    <div class="col-8">Full Payment Option</div>
+                                    <div class="ms-auto " *ngIf="recievedModalItems[0].PaymentCheck">Rs
+                                        {{recievedModalItems[0].courseFee}}</div>
+                                </div>
+                                <div class="border-top px-2 mx-2"></div>
+
+                                <!-- Total Payment for Full Payment Option -->
+                                <div class="p-2 d-flex pt-3">
+                                    <div class="col-8">Total Payment Due (Full Payment)</div>
+                                    <div class="ms-auto Rs" *ngIf="recievedModalItems[0].PaymentCheck">Rs
+                                        {{recievedModalItems[0].courseFee}}</div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="border-top px-2 mx-2"></div>
+
+                            <!-- Institution Responsibility Section -->
+                            <div class="p-2  pt-3">
+                                <div class="ms-auto text-center text-danger py-2"><b>Your Pathway to IT Excellence</b>
+                                </div>
+                            </div>
+
+
+
+                            <div class="border-top px-2 mx-2"></div>
+
+                            <!-- Final Total Section -->
+                            <div class="p-2 d-flex pt-3 " *ngIf="recievedModalItems[0].PaymentCheck">
+                                <div class="col-8"><b>Total</b></div>
+                                <div class="ms-auto"><b class="text-success" *ngIf="PaymentPlans == 2">Rs
+                                        {{DeivdeInstallment}}</b></div>
+                                <div class="ms-auto"><b class="text-success" *ngIf="PaymentPlans == 1">Rs
+                                        {{recievedModalItems[0].courseFee}}</b></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Modal -->
+<div class="modal fade" id="AddCard" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="d-flex pb-3">
+                    <img src="/payment/bankcard.jpg" alt="" height="40px">
+                    <h4>Payment</h4>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <form [formGroup]="CardFormData" (ngSubmit)="CardFormSubmited(CardFormData.value)">
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="pb-3">
+                                        <p>Card Name</p>
+                                        <div class="border p-2 d-flex align-item-center ">
+                                            <input type="text" class="w-100" placeholder="Way Maker"
+                                                style="outline: none; border: none;" formControlName="name">
+                                            <i class="fa fa-credit-card-alt pt-1" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <div class="pb-3">
+                                        <p>Card Number</p>
+                                        <div class="border p-2 d-flex align-item-center ">
+                                            <input type="text" class="w-100" placeholder="0000 0000 0000 0000"
+                                                style="outline: none; border: none;" formControlName="number">
+                                            <i class="fa fa-credit-card-alt pt-1" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row pb-3">
+                                        <div class="col-6">
+                                            <p>Expiration Date</p>
+                                            <input type="text" placeholder="MM/YY"
+                                                style="outline: none; border: none; border-bottom:solid 1px;"
+                                                formControlName="expiration">
+                                        </div>
+                                        <div class="col-6">
+                                            <p>CVV</p>
+                                            <input type="text" placeholder="XXX"
+                                                style="outline: none; border: none; border-bottom:solid 1px;"
+                                                formControlName="cvv">
+                                        </div>
+                                    </div>
+                                    <div class="d-flex pb-3 mb-2">
+                                        <input type="checkbox" name="saveCard" id="">
+                                        <p class="fs-6 text-secondary m-0 px-2">Save card details</p>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" [disabled]="CardFormData.invalid"
+                                            class="btn btn-sm fs-5 btn-success text-light pb-2  w-100 mb-3"
+                                            data-bs-dismiss="modal" aria-label="Close">Add
+                                            Payment</button>
+                                    </div>
+                                    <div>
+                                        <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing
+                                            elit.
+                                            Blanditiis
+                                            voluptatem error eligendi quasi quia hic
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!--payConfirm Modal -->
+<div class="modal fade" id="PaymentComfirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-danger" id="exampleModalLabel">Confirm Your Payment</h1>
+            </div>
+            <img src="/payment/payConfirm.png" class="card-img-top" alt="Course Image">
+
+
+            <div class="modal-body">
+                <p class="" style="font-size: 18px;">Are you sure you want to proceed with the payment?</p>
+                <p>To finalize the transaction,
+                    please verify your identity by entering the One-Time Password (OTP) sent to your phone</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                    (click)="ConfirmPayment()">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- otp modal  -->

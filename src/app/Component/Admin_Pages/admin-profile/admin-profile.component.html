@@ -51,7 +51,7 @@
       <span>Personal Information</span>
       <button
         class="btn btn-dark btn-sm shadow-sm d-flex align-items-center gap-2"
-        style="border-radius: 4px"
+        style="border-radius: 4px" data-bs-toggle="modal" data-bs-target="#updateUserModal" (click)="patchData(admin)" 
       >
         <i class="bi bi-pencil-fill"></i> Edit Profile
       </button>
@@ -63,7 +63,7 @@
             <i class="bi bi-person-fill text-dark fs-5 me-3"></i>
             <div>
               <h6 class="mb-1">Full Name</h6>
-              <p class="text-muted mb-0">John Doe</p>
+              <p class="text-muted mb-0">{{admin.firstName}} {{admin.lastName}}</p>
             </div>
           </div>
         </div>
@@ -72,7 +72,7 @@
             <i class="bi bi-envelope-fill text-dark fs-5 me-3"></i>
             <div>
               <h6 class="mb-1">Email</h6>
-              <p class="text-muted mb-0">adminaexample.com</p>
+              <p class="text-muted mb-0">{{admin.email}}</p>
             </div>
           </div>
         </div>
@@ -81,16 +81,7 @@
             <i class="bi bi-telephone-fill text-dark fs-5 me-3"></i>
             <div>
               <h6 class="mb-1">Phone</h6>
-              <p class="text-muted mb-0">+94 712345678</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="d-flex align-items-start">
-            <i class="bi bi-geo-alt-fill text-dark fs-5 me-3"></i>
-            <div>
-              <h6 class="mb-1">Address</h6>
-              <p class="text-muted mb-0">123 Street, City, Country</p>
+              <p class="text-muted mb-0">{{admin.phone}}</p>
             </div>
           </div>
         </div>
@@ -100,7 +91,7 @@
             <i class="bi bi-person-vcard-fill text-dark fs-5 me-3"></i>
             <div>
               <h6 class="mb-1">NIC</h6>
-              <p class="text-muted mb-0">123456789V</p>
+              <p class="text-muted mb-0">{{admin.nic}}</p>
             </div>
           </div>
         </div>
@@ -109,7 +100,7 @@
             <i class="bi bi-person-badge text-dark fs-5 me-3"></i>
             <div>
               <h6 class="mb-1">Role</h6>
-              <p class="text-muted mb-0">Administrator</p>
+              <p class="text-muted mb-0">{{admin.roleName}}</p>
             </div>
           </div>
         </div>
@@ -118,7 +109,7 @@
             <i class="bi bi-calendar-fill text-dark fs-5 me-3"></i>
             <div>
               <h6 class="mb-1">Created Date</h6>
-              <p class="text-muted mb-0">2024-01-01</p>
+              <p class="text-muted mb-0">{{admin.cteatedDate | date: 'yyyy-MM-dd'}}</p>
             </div>
           </div>
         </div>
@@ -144,7 +135,7 @@
     <div class="collapse show" id="bioCollapse">
       <div class="card-body">
         <p class="text-muted mb-0">
-          Hello, I’m <strong>John Doe</strong>, an experienced administrator
+          Hello, I’m <strong>{{admin.firstName}} {{admin.lastName}}</strong>, an experienced administrator
           passionate about managing IT institute operations effectively. I aim
           to streamline processes and foster a collaborative environment for
           success.
@@ -167,5 +158,84 @@
     >
       <i class="bi bi-box-arrow-right"></i> Logout
     </button>
+  </div>
+</div>
+
+
+<!-- model -->
+<!-- Update User Modal -->
+<div class="modal fade" id="updateUserModal" tabindex="-1" aria-labelledby="updateUserLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content bg-light text-dark rounded-4 border-0 shadow-lg">
+
+      <!-- Modal Header -->
+      <div class="modal-header border-0" style="background-color: #2c2f3a; color: #e5e5e5; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);">
+        <h4 class="modal-title fw-bold" id="updateUserLabel">Update User Details</h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <form [formGroup]="updateUserForm" (ngSubmit)="onSubmit()" class="row g-4">
+          
+
+          <!-- First Name -->
+          <div class="col-12">
+            <label for="firstName" class="form-label fw-bold text-dark">First Name</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+              <input type="text" formControlName="firstName" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter first name" required/>
+            </div>
+            <div *ngIf="updateUserForm.get('firstName')?.touched && updateUserForm.get('firstName')?.invalid" class="text-danger small">
+              <span *ngIf="updateUserForm.get('firstName')?.hasError('required')">First name is required.</span>
+            </div>
+          </div>
+
+          <!-- Last Name -->
+          <div class="col-12">
+            <label for="lastName" class="form-label fw-bold text-dark">Last Name</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+              <input type="text" formControlName="lastName" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter last name" required/>
+            </div>
+            <div *ngIf="updateUserForm.get('lastName')?.touched && updateUserForm.get('lastName')?.invalid" class="text-danger small">
+              <span *ngIf="updateUserForm.get('lastName')?.hasError('required')">Last name is required.</span>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="col-12">
+            <label for="email" class="form-label fw-bold text-dark">Email</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+              <input type="email" formControlName="email" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter email" required/>
+            </div>
+            <div *ngIf="updateUserForm.get('email')?.touched && updateUserForm.get('email')?.invalid" class="text-danger small">
+              <span *ngIf="updateUserForm.get('email')?.hasError('required')">Email is required.</span>
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div class="col-12">
+            <label for="phone" class="form-label fw-bold text-dark">Phone</label>
+            <div class="input-group">
+              <span class="input-group-text"><i class="bi bi-phone-fill"></i></span>
+              <input type="text" formControlName="phone" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter phone number" required/>
+            </div>
+            <div *ngIf="updateUserForm.get('phone')?.touched && updateUserForm.get('phone')?.invalid" class="text-danger small">
+              <span *ngIf="updateUserForm.get('phone')?.hasError('required')">Phone number is required.</span>
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="modal-footer border-0 bg-light">
+            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+            <button type="submit" [disabled]="updateUserForm.invalid" class="btn btn-dark px-4">Update</button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
   </div>
 </div>

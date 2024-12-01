@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../../Service/Auth/auth.service';
+import { AuthService } from '../../../Service/API/Auth/auth.service';
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [RouterOutlet,CommonModule,FormsModule,RouterLink],
+  imports: [RouterOutlet,CommonModule,FormsModule,RouterLink,RouterLinkActive],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.css'
 })

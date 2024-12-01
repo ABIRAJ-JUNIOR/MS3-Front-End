@@ -9,9 +9,9 @@
               <h2 class="m-0">Course Schedules</h2>
             </div>
             <div class="col-lg-6 d-flex justify-content-lg-end justify-content-center align-items-center">
-              <a class="btn btn-success d-flex align-items-center" data-bs-toggle="modal"
-                data-bs-target="#courseScheduleForm">
-                <i class="bi bi-plus-circle me-2"></i> <span>Add New Schedule</span>
+              <a class="btn btn-success d-flex align-items-center" data-bs-toggle="modal" 
+                data-bs-target="#courseScheduleForm" (click)="editSchedule(false)">
+                <i class="bi bi-plus-circle me-2"></i> <span>{{!isUpdate ? 'Add New Schedule' : 'Update Schedule'}}</span>
               </a>
             </div>
           </div>
@@ -47,13 +47,14 @@
                 <td>{{schedule.location}}</td>
                 <td>{{schedule.maxStudents}}</td>
                 <td>{{schedule.enrollCount}}</td>
-                <td>{{schedule.scheduleStatus}}</td>
+                <td [ngStyle]="{
+                  color: schedule.scheduleStatus === 'Open' ? 'green' :
+                  schedule.scheduleStatus === 'Closed' ? 'red' :
+                  schedule.scheduleStatus === 'Completed' ? 'blue' : 'black'
+                }">{{schedule.scheduleStatus}}</td>
                 <td class="text-center">
-                  <a href="#" class="text-primary me-3" aria-label="Edit Student">
+                  <a  class="text-primary me-3" aria-label="Edit Student" (click)="patchData(schedule)" data-bs-toggle="modal" data-bs-target="#courseScheduleForm">
                     <i class="bi bi-pencil-square"></i>
-                  </a>
-                  <a href="#" class="text-danger" aria-label="Delete Student">
-                    <i class="bi bi-trash3-fill"></i>
                   </a>
                 </td>
               </tr>
@@ -85,7 +86,6 @@
 
 
 <!-- MODEL -->
-
 <div class="modal fade" id="courseScheduleForm" tabindex="-1" aria-labelledby="courseScheduleFormLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -98,10 +98,9 @@
            color: #e5e5e5;
            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
          ">
-        <h4 class="modal-title fw-bold" id="courseScheduleFormLabel">Add Course Schedule</h4>
+        <h4 class="modal-title fw-bold" id="courseScheduleFormLabel">{{isUpdate? 'Update Schedule' : 'Add Schedule'}}</h4>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-
 
       <!-- Modal Body -->
       <div class="modal-body">
@@ -114,37 +113,15 @@
               <span class="input-group-text bg-light border-0">
                 <i class="bi bi-book"></i>
               </span>
-              <select formControlName="course" class="form-select border rounded-end-3">
-                <option value="">Select a course</option>
+              <select formControlName="courseId" class="form-select border rounded-end-3">
+                <option value="" selected disabled>Select a course</option>
                 <ng-container *ngFor="let course of courses">
                   <option [value]="course.id">{{ course.name }}</option>
                 </ng-container>
               </select>
             </div>
           </div>
-
-          <!-- Start Date -->
-          <div class="col-md-6">
-            <label for="startDate" class="form-label fw-bold text-dark">Start Date</label>
-            <div class="input-group shadow-sm">
-              <span class="input-group-text bg-light border-0">
-                <i class="bi bi-calendar"></i>
-              </span>
-              <input type="date" formControlName="startDate" class="form-control border rounded-end-3" />
-            </div>
-          </div>
-
-          <!-- End Date -->
-          <div class="col-md-6">
-            <label for="endDate" class="form-label fw-bold text-dark">End Date</label>
-            <div class="input-group shadow-sm">
-              <span class="input-group-text bg-light border-0">
-                <i class="bi bi-calendar-check"></i>
-              </span>
-              <input type="date" formControlName="endDate" class="form-control border rounded-end-3" />
-            </div>
-          </div>
-
+          
           <!-- Time -->
           <div class="col-md-6">
             <label for="duration" class="form-label fw-bold text-dark">Time</label>
@@ -156,6 +133,29 @@
                 placeholder="Enter duration" />
             </div>
           </div>
+          
+          <!-- Start Date -->
+          <div class="col-md-6">
+            <label for="startDate" class="form-label fw-bold text-dark">Start Date</label>
+            <div class="input-group shadow-sm">
+              <span class="input-group-text bg-light border-0">
+                <i class="bi bi-calendar"></i>
+              </span>
+              <input type="text" formControlName="startDate" class="form-control border rounded-end-3" bsDatepicker [bsConfig]="{ isAnimated: true }" />
+            </div>
+          </div>
+
+          <!-- End Date -->
+          <div class="col-md-6">
+            <label for="endDate" class="form-label fw-bold text-dark">End Date</label>
+            <div class="input-group shadow-sm">
+              <span class="input-group-text bg-light border-0">
+                <i class="bi bi-calendar-check"></i>
+              </span>
+              <input type="text" formControlName="endDate" class="form-control border rounded-end-3" bsDatepicker [bsConfig]="{ isAnimated: true }"/>
+            </div>
+          </div>
+
 
           <!-- Location -->
           <div class="col-md-6">
@@ -168,7 +168,6 @@
                 placeholder="Enter location" />
             </div>
           </div>
-
 
           <!-- Max Students -->
           <div class="col-md-6">
@@ -189,7 +188,7 @@
                 <i class="bi bi-info-circle"></i>
               </span>
               <select formControlName="scheduleStatus" class="form-select border rounded-end-3">
-                <option value="">Select status</option>
+                <option value="" selected disabled >Select status</option>
                 <option value="1">Open</option>
                 <option value="2">Closed</option>
                 <option value="3">Completed</option>
@@ -202,17 +201,13 @@
             <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">
               Close
             </button>
-            <button type="submit" [disabled]="scheduleForm.invalid" class="btn btn-dark px-4">
+            <button type="submit" [disabled]="scheduleForm.invalid" class="btn btn-dark px-4" data-bs-dismiss="modal">
               Submit
             </button>
           </div>
-
-
-
         </form>
 
       </div>
     </div>
   </div>
-
 </div>

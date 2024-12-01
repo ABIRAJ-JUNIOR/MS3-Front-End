@@ -1,73 +1,103 @@
 import { Component, OnInit } from '@angular/core';
-import { StudentService } from '../../../Service/Student/student.service';
+import { StudentService } from '../../../Service/API/Student/student.service';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Student } from '../../../Modals/modals';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ToastrService } from 'ngx-toastr';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-student-list',
   standalone: true,
   imports: [CommonModule,ReactiveFormsModule,BsDatepickerModule],
+  providers: [BsModalService],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css'
 })
 export class StudentListComponent implements OnInit {
+  
   students: Student[] = [];
+
+  private studentId: string = '';
+  private deleteStudentId:string = ''
+  selectedImage: string | null = null;
+  modalRef?: BsModalRef;
+
+  // Pagination
   currentPage: number = 1;
-  pageSize: number = 12;
+  pageSize: number = 8;
   totalPages: number = 0;
   currentLength:number = 0;
   totalItems:number = 0;
 
-  profileImage!:File;
+  // Update or Add
+  isUpdate:boolean = false;
+
+ // Form and File Handling
   profileForm!: FormGroup;
-  constructor(private paginationService: StudentService , private router:Router,private fb: FormBuilder) {}
+  profileImage:File | null = null;
+  profileImageUrl: string | null = "";
+
+  constructor(
+    private readonly studentService: StudentService,
+    private readonly router: Router,
+    private readonly toastr: ToastrService,
+    private readonly fb: FormBuilder,
+    private readonly modalService: BsModalService
+  ) {}
 
   ngOnInit(): void {
+    this.initializeForm()
+    this.loadStudents();
+  }
+
+  private initializeForm(): void {
     this.profileForm = this.fb.group({
-   
-      nic: ['', Validators.required],
+      nic: ['',Validators.required,],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
       gender: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['',[Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-      password: ['', [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.pattern(/(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])/)]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern(/(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])/),
+        ],
+      ],
       confirmPassword: ['', Validators.required],
-      addressLine1: [''], 
-      addressLine2: [''], 
-      city: [''],
-      postalCode: [''],
-      country: [''] 
+      address: this.fb.group({
+        addressLine1: [''],
+        addressLine2: [''],
+        city: [''],
+        postalCode: [''],
+        country: [''],
+      }),
     });
-    this.loadItems();
-
-    
   }
 
-  loadItems(): void {
-    this.paginationService.pagination(this.currentPage , this.pageSize).subscribe({
-      next:((response:any) => {
-        this.students = response.items
-        this.totalPages = response.totalPages
-        this.totalItems = response.totalItem
-      }),
+  loadStudents(): void {
+    this.studentService.pagination(this.currentPage, this.pageSize).subscribe({
+      next: (response: any) => {
+        this.students = response.items;
+        this.totalPages = response.totalPages;
+        this.totalItems = response.totalItem;
+      },
       complete:() => {
-        this.currentLength = this.students.length
-      }
+      this.currentLength = this.students.length
+    }
     });
   }
 
   goToPage(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
-      this.loadItems();
+      this.loadStudents();
     }
   }
 
@@ -75,54 +105,19 @@ export class StudentListComponent implements OnInit {
     this.router.navigate(['/admin-dashboard/student-report' , id])
   }
 
-  onSubmit(): void {
-    if (this.profileForm.valid) {
-      let form=this.profileForm.value
-      for (let key in form) {
-        if (form[key] === '') {
-          form[key] = null;
-        }
-      }
-      const gender:number = Number(form.gender)
-    const formdata:FormData = new FormData();
-    formdata.append('nic',form.nic),
-    formdata.append('firstName',form.firstName),
-    formdata.append('lastName',form.lastName),
-    formdata.append('dateOfBirth',form.dateOfBirth),
-    formdata.append('gender',form.gender),
-    formdata.append('email',form.email),
-    formdata.append('phone',form.phone),
-    formdata.append('password',form.password),
-    // formdata.append('address.addressLine1',form.nic),
-    // formdata.append('address.addressLine2',form.nic),
-    // formdata.append('address.city',form.nic),
-    // formdata.append('address.postalCode',form.nic),
-    // formdata.append('address.country',form.nic),
-    
-
-
-    this.paginationService.addStudent(formdata).subscribe(data=>{
-      console.log(data)
-    })
-
-      console.log('Form Submitted', this.profileForm.value);
-    }
-    this.profileForm.reset()
-  }
   get formControls() {
     return this.profileForm.controls;
   }
 
-  profileImageUrl: string | undefined;
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
-    this.profileImage = file
-    console.log(file)
     if (file) {
+      this.profileImage = file;
       this.previewImage(file);
     }
   }
-  previewImage(file: File): void {
+
+  private previewImage(file: File): void {
     const reader = new FileReader();
     reader.onload = (e: any) => {
       this.profileImageUrl = e.target.result;
@@ -130,4 +125,183 @@ export class StudentListComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
+  onSubmit(): void {
+    const formData = this.prepareFormData();
+    if (!this.isUpdate) {
+      this.addStudent(formData);
+    } else {
+      this.updateStudent(formData);
+    }
+  }
+
+  private prepareFormData(): any {
+    const form = this.profileForm.value;
+
+    if(!this.isUpdate){
+      for (const key in form) {
+        if (form[key] === '') form[key] = null;
+      }
+    }
+
+    if (
+      !form.address?.addressLine1 &&
+      !form.address?.addressLine2 &&
+      !form.address?.city &&
+      !form.address?.postalCode &&
+      !form.address?.country
+    ) {
+      form.address = null;
+    }
+
+    form.gender = Number(form.gender);
+    return form;
+  }
+
+  private addStudent(formData: any): void {
+    this.studentService.addStudent(formData).subscribe({
+      next: (response: any) => {
+        this.studentId = response.id;
+        this.toastr.success('Registration Successful', '', {
+          positionClass: 'toast-top-right',
+          progressBar: true,
+          timeOut: 4000,
+        });
+      },complete:()=>{
+        this.uploadImage(this.studentId);
+        this.resetForm();
+      },
+      error: (error: any) => {
+        this.handleError(error);
+      },
+    });
+  }
+
+  private updateStudent(formData: any): void {
+    formData.dateOfBirth = new Date(formData.dateOfBirth);
+    this.studentService.updateFullDetails(this.studentId, formData).subscribe({
+      next: () => {
+        this.toastr.success('Update Successful', '', {
+          positionClass: 'toast-top-right',
+          progressBar: true,
+          timeOut: 3000,
+        });
+      },complete:()=>{
+        this.uploadImage(this.studentId);
+      },
+      error: (error: any) => {
+        this.handleError(error);
+      },
+    });
+  }
+
+  private uploadImage(studentId: string): void {
+    if (this.profileImage) {
+      const formData = new FormData();
+      formData.append('image', this.profileImage);
+      this.studentService.addImage(studentId, formData).subscribe({
+        next: () => {
+          this.loadStudents()
+        },
+        error:(error:any) =>{
+          this.toastr.error('Image upload failed', '', {
+            positionClass: 'toast-top-right',
+          });
+        }
+      });
+    }else{
+      this.loadStudents()
+    }
+  }
+
+  private resetForm(): void {
+    this.profileForm.reset();
+    this.profileImage = null;
+    this.profileImageUrl = '';
+    this.isUpdate = false;
+  }
+
+  onAdd(){
+    this.resetForm();
+    this.profileForm.get('nic')?.enable();
+    this.profileForm.get('email')?.enable();
+  }
+
+  patchData(student: Student): void {
+    this.profileImageUrl = student.imageUrl ?? '';
+    this.profileForm.patchValue({
+      nic:student.nic,
+      firstName: student.firstName,
+      lastName:student.lastName,
+      dateOfBirth: new Date(student.dateOfBirth).toLocaleString(),
+      gender:student.gender === "Male" ? "1": student.gender === "Female" ? "2": "3",
+      phone:student.phone,
+      email:student.email,
+      address:{
+        addressLine1:student.address != null ? student.address.addressLine1 : null,
+        addressLine2:student.address != null ? student.address.addressLine2 : null,
+        city:student.address != null ? student.address.city : null,
+        postalCode:student.address != null ? student.address.postalCode : null,
+        country:student.address != null ? student.address.country : null,
+      }
+    });
+    this.studentId = student.id;
+    this.isUpdate = true;
+    this.profileForm.get('nic')?.disable();
+    this.profileForm.get('email')?.disable();
+  }
+
+  openPreviewModal(template: any, image: string): void {
+    this.selectedImage = image;
+    this.modalRef = this.modalService.show(template);
+  }
+
+  openDeleteModal(template: any, studentId: string): void {
+    this.modalRef = this.modalService.show(template);
+    this.deleteStudentId = studentId;
+  }
+
+  deleteStudent(): void {
+    this.studentService.deleteStudent(this.deleteStudentId).subscribe({
+      next: () => {
+        this.toastr.success('Delete Successful', '', {
+          positionClass: 'toast-top-right',
+          progressBar: true,
+          timeOut: 4000,
+        });
+        this.loadStudents();
+      },
+      error:(error:any)=>{
+        this.handleError(error);
+      }
+    });
+    this.modalRef?.hide();
+  }
+
+  private handleError(error: any): void {
+    this.toastr.warning(error.error, '', {
+      positionClass: 'toast-top-right',
+      progressBar: true,
+      timeOut: 4000,
+    });
+  }
+}
+
+export interface StudentReqest{
+  nic:string;
+  firstName:string;
+  lastName:string;
+  dateOfBirth:string;
+  gender:number;
+  phone:string;
+  email?:string;
+  password?:string;
+  address?:AddressRequest;
+}
+
+export interface AddressRequest {
+  addressLine1:string;
+  addressLine2:string;
+  city:string;
+  postalCode:string;
+  country:string;
 }

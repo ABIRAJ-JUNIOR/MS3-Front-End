@@ -1,0 +1,22 @@
+<div class="rounded-top text-white d-flex flex-row profile-section">
+    <div class="ms-4 mt-5 d-flex flex-column" style="width: 180px;">
+        <div class="profile-picture-box " style="margin-top: 180px;">
+            <img *ngIf="previewUrl" [src]="previewUrl" alt="Profile Picture" class="profile-picture" />
+
+            <!-- Upload Button -->
+            <label for="fileInput" class="upload-button">
+                <i class="bi bi-pencil"></i> <!-- Bootstrap icon for edit -->
+            </label>
+            <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/*" hidden />
+        </div>
+
+    </div>
+    <div class="ms-3 " style="margin-top:  260px;">
+        <span class="font-weight-bold fs-5 mt-3 fw-bold" style="color: #ffffff;">{{StudentDetails.firstName}}
+            {{StudentDetails.lastName}}</span>
+        <span class="text-light d-block mb-1">{{StudentTokenDetails.Email}}</span>
+
+        <span class="text-light mb-1">Student ID: UT-{{StudentDetails.nic | slice: -4
+            }}</span>
+    </div>
+</div>

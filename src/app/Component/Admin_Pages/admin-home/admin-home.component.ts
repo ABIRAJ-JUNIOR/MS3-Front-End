@@ -1,102 +1,150 @@
-import { Component, OnInit } from '@angular/core';
-import { StudentService} from '../../../Service/Student/student.service';
+import { Component } from '@angular/core';
+import { StudentService } from '../../../Service/API/Student/student.service';
 import { CommonModule } from '@angular/common';
 import { SearchStudentsPipe } from '../../../Pipes/search-students.pipe';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { Chart, ChartConfiguration } from 'chart.js';
-import { Student } from '../../../Modals/modals';
+import { Assessment, Course, Payment, Student } from '../../../Modals/modals';
+import { PaymentService } from '../../../Service/API/Payment/payment.service';
+import { CourseService } from '../../../Service/API/Course/course.service';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { AssesmentService } from '../../../Service/API/Assessment/assesment.service';
 
 @Component({
   selector: 'app-admin-home',
   standalone: true,
-  imports: [CommonModule, SearchStudentsPipe, FormsModule, RouterModule],
+  imports: [
+    CommonModule,
+    SearchStudentsPipe,
+    FormsModule,
+    RouterModule,
+    NgxChartsModule
+  ],
   templateUrl: './admin-home.component.html',
-  styleUrl: './admin-home.component.css'
+  styleUrl: './admin-home.component.css',
 })
-export class AdminHomeComponent{
-  students:Student[] = []
-  SearchText:string = ""
-  numberOfStudents:number = 0
-  constructor(private studentService:StudentService){}
+
+export class AdminHomeComponent {
+  students: Student[] = [];
+  courses: Course[] = [];
+  payments:Payment[] = [];
+  assessments:Assessment[] = [];
+
+  recentPayments: Payment[] = [];
+  SearchText: string = '';
+
+  totalpayments:number = 0;
+  numberOfStudents: number = 0;
+  numberOfCourses:number = 0;
+  numberOfSchedules:number = 0;
+  numberOfAssessments:number =0;
+
+  constructor(
+    private studentService: StudentService,
+    private paymentService: PaymentService,
+    private courseService: CourseService,
+    private assessmentService:AssesmentService,
+  ) {}
 
   ngOnInit(): void {
+    this.loadStudents();
+    this.loadRecentPayments();
+    this.loadCourses();
+    this.loadAllPayments();
+    this.loadAllAssessment();
+  }
+
+  loadStudents(): void {
     this.studentService.getStudents().subscribe({
-      next:(response:Student[]) => {
-        this.students = response
-      },complete:() =>{
-        this.students.forEach(s=>{
-          this.numberOfStudents ++ 
+      next: (response: Student[]) => {
+        this.students = response;
+      },
+      complete: () => {
+        this.numberOfStudents = this.students.length
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+    });
+  }
+
+  loadRecentPayments(): void {
+    this.paymentService.recentPayment().subscribe({
+      next: (response: Payment[]) => {
+        this.recentPayments = response;
+      },
+    });
+  }
+
+  loadCourses(): void {
+    this.courseService.getCourses().subscribe({
+      next: (response: Course[]) => {
+        this.courses = response;
+      },
+      complete: () => {
+        this.numberOfCourses = this.courses.length
+        this.courses.forEach((c) => {
+          let EnrollCount = 0;
+          c.schedules.forEach((s) => {
+            this.numberOfSchedules ++ 
+            EnrollCount += s.enrollCount;
+          });
+          this.enrollData.push({
+            name: c.courseName,
+            value: EnrollCount,
+          });
+        });
+        this.groupedEnrollmentStats = JSON.parse(JSON.stringify(this.enrollData))
+      },
+    });
+  }
+
+  
+  loadAllPayments():void{
+    this.paymentService.getAllPayments().subscribe({
+      next: (response: Payment[]) => {
+        this.payments = response
+      },
+      complete:()=>{
+        let fullPayment:number = 0;
+        let installment:number = 0;
+        this.payments.forEach(p => {
+          this.totalpayments += p.amountPaid
+          if(p.paymentType == "FullPayment"){
+            fullPayment += p.amountPaid
+          }else if(p.paymentType == "Installment"){
+            installment += p.amountPaid
+          }
         })
-      },error:(err:any)=>{
-        console.log(err)
+        this.totalpayments += this.students.length * 2500
+        this.paymentData.push({name:"FullPayment" , value:fullPayment})
+        this.paymentData.push({name:"Installment" , value:installment})
+        this.paymentData.push({name:"Initial Amount" , value:this.students.length * 2500})
+        this.paymentOverview = JSON.parse(JSON.stringify(this.paymentData))
       }
     })
   }
 
-  ngAfterViewInit() {
-    this.createEnrollmentChart();
-    this.createPaymentChart();
-    this.createPopularityChart();
+  loadAllAssessment(){
+    this.assessmentService.getAllAssesment().subscribe({
+      next: (response: Assessment[]) => {
+        this.assessments = response
+      },
+      complete:()=>{
+        this.numberOfAssessments = this.assessments.length
+      }
+    })
   }
 
-  createEnrollmentChart() {
-    new Chart('enrollmentChart', {
-      type: 'bar',
-      data: {
-        labels: ['Course A', 'Course B', 'Course C'],
-        datasets: [{
-          label: 'Enrollments',
-          data: [45, 25, 30],
-          backgroundColor: ['#4e73df', '#6a9afe', '#9bb8ff'],
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: true, position: 'top' } },
-        scales: { x: { beginAtZero: true }, y: { beginAtZero: true } }
-      } as ChartConfiguration['options']
-    });
-  }
+  enrollData:ChartData[] = [];
+  groupedEnrollmentStats: ChartData[] = [];
 
-  createPaymentChart() {
-    new Chart('paymentChart', {
-      type: 'doughnut',
-      data: {
-        labels: ['Paid', 'Pending', 'Overdue'],
-        datasets: [{
-          data: [55, 30, 15],
-          backgroundColor: ['#28a745', '#6cc76e', '#b8e0b9'],
-          hoverBackgroundColor: ['#1e7d32', '#58a654', '#a4d0a5']
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: true, position: 'top' } }
-      } as ChartConfiguration['options']
-    });
-  }
+  paymentData:ChartData[]=[];
+  paymentOverview = [];
+ 
+}
 
-  createPopularityChart() {
-    new Chart('popularityChart', {
-      type: 'line',
-      data: {
-        labels: ['January', 'February', 'March', 'April', 'May'],
-        datasets: [{
-          label: 'Popularity Trend',
-          data: [20, 40, 35, 50, 60],
-          borderColor: '#ffc107',
-          backgroundColor: 'rgba(255, 193, 7, 0.2)',
-          fill: true,
-          tension: 0.3 // Smooth the line curve
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: true, position: 'top' } },
-        scales: { x: { beginAtZero: true }, y: { beginAtZero: true } }
-      } as ChartConfiguration['options']
-    });
-  }
-  
+interface ChartData {
+  name: string;
+  value: number;
 }

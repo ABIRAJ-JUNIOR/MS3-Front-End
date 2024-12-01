@@ -16,7 +16,10 @@ import { ToastrService } from 'ngx-toastr';
 export class AdminProfileComponent implements OnInit{
   updateUserForm: FormGroup;
   adminid:string="";
-  admin:any=""
+  admin:any="";
+  profileImage:File | null = null;
+  profileImageUrl: string | null = "";
+
   constructor(private fb: FormBuilder,private  adminService:AdminService,private toastr:ToastrService) {
     // Initialize form controls
     this.updateUserForm = this.fb.group({
@@ -84,6 +87,49 @@ this.adminService.updateAdminProfile(this.adminid,data).subscribe({
       phone:admin.phone
 
     })
+  }
+
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.profileImage = file;
+      console.log(  this.profileImage);
+      
+      this.previewImage(file);
+    }
+  }
+
+  private previewImage(file: File): void {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.admin.imageUrl = e.target.result;
+    
+      const formData = new FormData();
+      formData.append('imageFile',  file);
+      
+      this.adminService.addImage(this.adminid,formData).subscribe({
+        next: () => {
+          this.toastr.success('Image updated successfully!', '', {
+            positionClass: 'toast-top-right',
+            progressBar: true,
+            timeOut:3000
+          });
+        
+        },
+        complete: () => {
+          this.loaddata()
+        },
+        error: (error:any) => {
+          this.toastr.error(error.error, '', {
+            positionClass: 'toast-top-right',
+            progressBar: true,
+            timeOut:4000
+          });
+          this.loaddata()
+        }
+      })
+    };
+    reader.readAsDataURL(file);
   }
   
 }

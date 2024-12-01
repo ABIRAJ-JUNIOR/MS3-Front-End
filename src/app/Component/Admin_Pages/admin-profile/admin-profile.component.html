@@ -26,17 +26,26 @@
       >
         <div class="position-relative">
           <img
-            src="https://via.placeholder.com/150"
+            src="{{admin.imageUrl}}"
             alt="Admin Profile"
             class="rounded-circle border border-white shadow-lg"
             style="width: 150px; height: 150px; object-fit: cover"
           />
+          <input
+          type="file"
+          id="imgInput"
+          #fileInput
+          class="d-none"
+          accept="image/*"
+          (change)="onFileSelected($event)"
+        />
           <button
             class="btn btn-dark btn-sm rounded-circle shadow position-absolute"
             style="bottom: 0; right: -10px; border-radius: 4px"
             data-bs-toggle="tooltip"
             data-bs-placement="top"
             title="Change Profile Picture"
+            (click)="fileInput.click()"
           >
             <i class="bi bi-pencil-fill"></i>
           </button>

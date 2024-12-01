@@ -6,6 +6,7 @@ import { StudentDashDataService } from "../../../Service/Data/Student_Data/stude
 import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { NotificationServiceService } from "../../../Service/API/Notification/notification-service.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-student-dashboard',
@@ -25,7 +26,7 @@ export class StudentDashboardComponent implements OnInit {
 
 
 
-  constructor(private NotificationSerivice:NotificationServiceService ,private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
+  constructor(private tostr:ToastrService,private NotificationSerivice:NotificationServiceService ,private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -45,7 +46,9 @@ export class StudentDashboardComponent implements OnInit {
 
   MarkAsRead(id:string){
     this.NotificationSerivice.MarkAsReadNotication(id).subscribe((data:any)=>{
-    
+     this.tostr.success("Notification Read SuccessFully")
+    },(error)=>{
+      this.tostr.error(error.message)
     })
   }
 

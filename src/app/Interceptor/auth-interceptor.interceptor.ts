@@ -1,10 +1,14 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, throwError } from 'rxjs';
+import { catchError, finalize, throwError } from 'rxjs';
+import { BusyService } from '../Service/Spinner/busy.service';
 
 export const authInterceptorInterceptor: HttpInterceptorFn = (req, next) => {
   
+  const busyService = inject(BusyService)
+  busyService.busy()
+
   const rout = inject(Router);
   const token = localStorage.getItem('token')
   const clonedReq = req.clone({
@@ -19,7 +23,8 @@ export const authInterceptorInterceptor: HttpInterceptorFn = (req, next) => {
         rout.navigate(['home']);
       }
       return throwError(() => err);
-    })
+    }),
+    finalize(() => busyService.idle())
   );
   
 };

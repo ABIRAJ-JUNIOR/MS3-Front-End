@@ -14,5 +14,4 @@ import { CourseCardsComponent } from '../course-cards/course-cards.component';
 })
 export class CourseComponent  {
 
-
 }

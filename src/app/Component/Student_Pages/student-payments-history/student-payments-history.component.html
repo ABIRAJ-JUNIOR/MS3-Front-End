@@ -16,7 +16,7 @@
     <table class="table table-striped table-hover align-middle mb-0 table-md">
         <thead class="table-dark">
             <tr>
-                <th><i class="bi bi-hash"></i> Installment</th>
+                <th><i class="bi bi-hash"></i> No</th>
                 <th><i class="bi bi-book text-primary"></i> Course name</th>
                 <th><i class="bi bi-currency-dollar text-success"></i> Amount Paid</th>
                 <th><i class="bi bi-calendar-event text-info"></i> Payment Date</th>
@@ -27,10 +27,10 @@
         </thead>
         <tbody>
 
-            <ng-container *ngFor="let item of Enrollments" >
+            <ng-container *ngFor="let item of Enrollments let i = index" >
                 <!-- Installment Row -->
                 <tr *ngIf="item.paymentStatus == payCheck">
-                    <td>Installment #{{item.paymentResponse[item.paymentResponse.length-1].installmentNumber}}</td>
+                    <td>#{{i+1}}</td>
                     <td>{{item.courseScheduleResponse.courseResponse.courseName}}</td>
                     <td>{{item.courseScheduleResponse.courseResponse.courseFee}}</td>
                     <td>{{item.paymentResponse[item.paymentResponse.length-1].paymentDate}}</td>

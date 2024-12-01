@@ -6,6 +6,7 @@ import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { CourseService } from "../../../Service/API/Course/course.service";
 
 @Component({
   selector: 'app-dash-content',
@@ -20,10 +21,12 @@ export class DashContentComponent implements OnInit {
   StudentTokenDetails: any;
 
   TotalPayments: number = 0;
-  TotalCourse: number = 0;
   TotalAssignments: number = 0;
 
-  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
+  totalCourse: number = 0;
+
+
+  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router, private CourseService: CourseService) {
   }
 
   ngOnInit(): void {
@@ -36,6 +39,13 @@ export class DashContentComponent implements OnInit {
 
       this.totalPaymentCalculate()
       this.ChartCalculation()
+    })
+
+
+    this.CourseService.getCourses().subscribe((data: any) => {
+      this.totalCourse = data.length
+    }, (error) => {
+      console.log(error)
     })
 
   }
@@ -56,7 +66,7 @@ export class DashContentComponent implements OnInit {
   paidPayments: number = 0;
   TotalPayment: number = 0;
 
-  EnrolledCourses:number =0;
+  EnrolledCourses: number = 0;
   PaymentData: any[] = []
   ChartCalculation() {
     for (let i: number = 0; i < this.StudentDetails.enrollments.length; i++) {
@@ -91,13 +101,13 @@ export class DashContentComponent implements OnInit {
 
 
 
-  courseData:any[]=[]
+  courseData: any[] = []
 
   createCourseChart() {
     this.courseData = [
       { name: 'Assignments', value: this.TotalAssignments },
-      { name: 'Enrolled Course', value: this.EnrolledCourses },
-      { name: 'TotalCourses', value: 6 },
+      { name: 'Enrolled Course', value: this.StudentDetails.enrollments.length },
+      { name: 'TotalCourses', value: this.totalCourse },
     ];
   }
 

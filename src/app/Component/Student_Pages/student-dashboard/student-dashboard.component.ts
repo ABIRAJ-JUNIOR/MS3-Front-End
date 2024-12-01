@@ -7,6 +7,7 @@ import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { NotificationServiceService } from "../../../Service/API/Notification/notification-service.service";
 import { ToastrService } from "ngx-toastr";
+import { CourseService } from "../../../Service/API/Course/course.service";
 
 @Component({
   selector: 'app-student-dashboard',
@@ -26,7 +27,8 @@ export class StudentDashboardComponent implements OnInit {
 
 
 
-  constructor(private tostr:ToastrService,private NotificationSerivice:NotificationServiceService ,private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
+
+  constructor(private tostr:ToastrService,private NotificationSerivice:NotificationServiceService ,private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router ) {
   }
 
   ngOnInit(): void {
@@ -36,11 +38,12 @@ export class StudentDashboardComponent implements OnInit {
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
       this.StudentDetails = student
       console.log(this.StudentDetails)
-    }
-      ,
+      
+    },
       (error) => {
         this.router.navigate([''])
       })
+
 
   }
 

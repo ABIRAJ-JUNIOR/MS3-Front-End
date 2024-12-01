@@ -1,6 +1,6 @@
 <div class="wrapper">
   <aside id="sidebar" [ngClass]="{'collapsed': sidebarCollapsed}" class="text-light js-sidebar shadow-lg">
-    <div class="h-100" style="position: fixed; width: 250px;">
+    <div class="h-100" style="position: fixed; min-width: 270px ">
       <div class="sidebar-logo">
         <a href="#">Way Makers</a>
       </div>
@@ -9,15 +9,15 @@
         <li class="sidebar-header">Student Dashboard</li>
 
         <!-- Dashboard Link -->
-        <li class="sidebar-item">
-          <a [routerLink]="['/student-dashboard']" [routerLinkActive]="['active_Link']" class="sidebar-link">
+        <li class="sidebar-item py-1">
+          <a [routerLink]="['/student-dashboard/home']" [routerLinkActive]="['active_Link']" class="sidebar-link">
             <i class="fa-solid fa-house pe-2"></i>
             Dashboard
           </a>
         </li>
 
         <!-- Profile Section -->
-        <li class="sidebar-item">
+        <li class="sidebar-item ">
           <a [routerLink]="['/student-dashboard/profile']" [routerLinkActive]="['active_Link']" class="sidebar-link" >
             <i class="fa-regular fa-user pe-2"></i>
             Profile
@@ -65,17 +65,17 @@
         <!-- Payment -->
          
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link collapsed" data-bs-target="#enrollpay" data-bs-toggle="collapse"
+          <a href="#" class="sidebar-link collapsed" data-bs-target="#enrollpay" data-bs-toggle="collapse" [routerLinkActive]="['active_Link']"
             aria-expanded="false">
             <i class="bi bi-calendar-date-fill pe-2"></i>
             Payment & History
           </a>
           <ul id="enrollpay" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
             <li class="sidebar-item">
-              <a [routerLink]="['/student-dashboard/enrollCourse-payment']" class="sidebar-link">Payments</a>
+              <a [routerLink]="['/student-dashboard/enrollCourse-payment']" [routerLinkActive]="['active_Link']" class="sidebar-link">Payments</a>
             </li>
             <li class="sidebar-item">
-              <a [routerLink]="['/student-dashboard/enrollCourse-paymentHistory']" class="sidebar-link">Payment History</a>
+              <a [routerLink]="['/student-dashboard/enrollCourse-paymentHistory']" [routerLinkActive]="['active_Link']" class="sidebar-link">Payment History</a>
             </li>
 
           </ul>
@@ -85,7 +85,7 @@
 
         <!-- Notifications Section -->
         <li class="sidebar-item">
-          <a [routerLink]="['/student-dashboard/courses']" class="sidebar-link">
+          <a [routerLink]="['/student-dashboard/courses']" class="sidebar-link" [routerLinkActive]="['active_Link']">
             <i class="fa-solid fa-book-open pe-2"></i>
             Courses
           </a>
@@ -93,7 +93,7 @@
 
         <!-- Support Section -->
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link">
+          <a href="#" class="sidebar-link" [routerLinkActive]="['active_Link']">
             <i class="fa-solid fa-life-ring pe-2"></i>
             Support
           </a>
@@ -164,7 +164,7 @@
     </nav>
 
     <!-- Main Content Area for Student Dashboard -->
-    <main class="content px-3 py-2 " style="background-color: #f0f0f0;">
+    <main class="content px-3 py-2 " style="background-color: #ffffff;">
       <router-outlet></router-outlet>
     </main>
 

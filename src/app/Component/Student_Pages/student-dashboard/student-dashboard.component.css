@@ -252,31 +252,3 @@ a.sidebar-link {
     background-color: #0056b3;
   }
   
-.sidebar-item {
-    transition: background-color 0.3s ease, color 0.3s ease;
-    border-radius: 10px; 
-    margin-bottom: 5px;  
-  }
-  
-  .sidebar-item:hover {
-    background-color: #fff;  
-    color: #007bff;  
-  }
-  
-  .sidebar-link {
-    color: #fff;  
-    text-decoration: none;
-    padding: 10px 15px; 
-    display: block; 
-  }
-  
-  .sidebar-item:hover .sidebar-link {
-    color: #007bff;  
-  }
-  
-  .active_Link {
-    background-color: #fff;  
-    padding: 10px 15px;
-    color: #000000; 
-  }
-  

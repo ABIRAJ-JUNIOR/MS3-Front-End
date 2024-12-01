@@ -26,17 +26,17 @@
 
         <!-- Courses Section -->
         <li class="sidebar-item">
-          <a href="#" class="sidebar-link collapsed" data-bs-target="#courses" data-bs-toggle="collapse"
+          <a href="#" class="sidebar-link collapsed" [routerLinkActive]="['active_Link']" data-bs-target="#courses" data-bs-toggle="collapse"
             aria-expanded="false">
             <i class="fa-solid fa-book-open pe-2"></i>
             My Courses
           </a>
           <ul id="courses" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
             <li class="sidebar-item">
-              <a [routerLink]="['/student-dashboard/mycourses']" class="sidebar-link">Enrolled Courses</a>
+              <a [routerLink]="['/student-dashboard/mycourses']" [routerLinkActive]="['active_Link']" class="sidebar-link">Enrolled Courses</a>
             </li>
             <li class="sidebar-item">
-              <a [routerLink]="['/student-dashboard/completed-Courses']" class="sidebar-link">Completed Courses</a>
+              <a [routerLink]="['/student-dashboard/completed-Courses']" [routerLinkActive]="['active_Link']" class="sidebar-link">Completed Courses</a>
             </li>
           </ul>
         </li>

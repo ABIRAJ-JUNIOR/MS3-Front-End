@@ -252,39 +252,31 @@ a.sidebar-link {
     background-color: #0056b3;
   }
   
-
-
-  /* Sidebar Item Styles */
 .sidebar-item {
     transition: background-color 0.3s ease, color 0.3s ease;
-    border-top-left-radius: -10px;  /* Outward curve on top-left */
-    border-bottom-left-radius: -10px; /* Outward curve on bottom-left */
-    margin-bottom: 5px;  /* Optional: add space between items */
-    background-color: #007bff;  /* Sidebar item background color */
+    border-radius: 10px; 
+    margin-bottom: 5px;  
   }
   
-  /* Hover effect for sidebar items */
   .sidebar-item:hover {
-    background-color: #fff;  /* White background on hover */
-    color: #007bff;  /* Blue text color on hover */
+    background-color: #fff;  
+    color: #007bff;  
   }
   
-  /* Sidebar link styles */
   .sidebar-link {
-    color: #fff;  /* Default text color */
+    color: #fff;  
     text-decoration: none;
-    padding: 10px 15px;  /* Add padding for better spacing */
-    display: block;  /* Ensure the link takes up the entire item */
+    padding: 10px 15px; 
+    display: block; 
   }
   
-  /* Hover effect on sidebar link */
   .sidebar-item:hover .sidebar-link {
-    color: #007bff;  /* Blue text on hover */
+    color: #007bff;  
   }
   
-  /* Active link styles */
   .active_Link {
-    background-color: #fff;  /* White background for active links */
-    color: #007bff;  /* Blue text for active links */
+    background-color: #fff;  
+    padding: 10px 15px;
+    color: #000000; 
   }
   

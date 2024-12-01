@@ -9,6 +9,32 @@
                             <h2 class="m-0 fw-bold">Student Assessments</h2>
                         </div>
                         <div class="col-lg-6 d-flex justify-content-lg-end justify-content-center">
+                          <!-- Filter By Evaluation -->
+                          <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle d-flex align-items-center px-4 py-2 shadow-sm rounded" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="bi bi-funnel-fill me-2"></i>
+                              <span>Filter By Evaluation</span>
+                            </button>
+                          
+                            <ul class="dropdown-menu shadow-lg rounded-3 border-0 p-2" aria-labelledby="filterDropdown" style="max-height: 300px; overflow-y: auto;">
+                              <li (click)="search('')" class="pointer dropdown-item d-flex align-items-center justify-content-between">
+                                <span class="pe-4">All</span>
+                                <i class="bi bi-check-circle-fill text-success" *ngIf="searchText === ''"></i>
+                              </li>
+                          
+                              <li (click)="search('Evaluated')" class="pointer dropdown-item d-flex align-items-center justify-content-between" [class.active]="searchText === 'Evaluated' ">
+                                <span class="pe-4">Evaluated</span>
+                                <i class="bi bi-check-circle-fill text-success" *ngIf="searchText === 'Evaluated' "></i>
+                              </li>
+
+                              <li (click)="search('NotEvaluate')" class="pointer dropdown-item d-flex align-items-center justify-content-between" [class.active]="searchText === 'NotEvaluate' ">
+                                <span class="pe-4">Not Evaluate</span>
+                                <i class="bi bi-check-circle-fill text-success" *ngIf="searchText === 'NotEvaluate' "></i>
+                              </li>
+                            </ul>
+                          </div>
+
+                          <!-- Filter By Courses -->
                           <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle d-flex align-items-center px-4 py-2 shadow-sm rounded" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                               <i class="bi bi-funnel-fill me-2"></i>
@@ -29,7 +55,6 @@
                               </ng-container>
                             </ul>
                           </div>
-                          
                         </div>
                     </div>
                 </div>

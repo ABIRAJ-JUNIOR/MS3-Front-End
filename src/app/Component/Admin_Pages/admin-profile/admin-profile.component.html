@@ -9,12 +9,21 @@
         class="w-100 rounded-top"
         style="height: 250px; object-fit: cover"
       />
+      <input
+      type="file"
+      id="imgInput"
+      #fileInput1
+      class="d-none"
+      accept="image/*"
+      (change)="onFileSelected($event,true)"
+    />
       <button
         class="btn btn-dark btn-sm shadow-sm position-absolute"
         style="top: 10px; right: 10px; border-radius: 4px"
         data-bs-toggle="tooltip"
         data-bs-placement="left"
         title="Change Cover Photo"
+        (click)="fileInput1.click()"
       >
         <i class="bi bi-camera-fill"></i>
       </button>
@@ -37,7 +46,7 @@
           #fileInput
           class="d-none"
           accept="image/*"
-          (change)="onFileSelected($event)"
+          (change)="onFileSelected($event,false)"
         />
           <button
             class="btn btn-dark btn-sm rounded-circle shadow position-absolute"

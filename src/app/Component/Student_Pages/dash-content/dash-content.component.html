@@ -3,7 +3,7 @@
 <div class="row mb-4">
   <!-- Assessments Card -->
   <div class="col-md-3 mb-4">
-    <div class="card text-white  shadow-lg border-0 overview-card bg-primary">
+    <div class="card text-white  shadow-lg border-0 overview-card " style="background-color: #3c6382;">
       <div class="card-body">
         <h5 class="card-title text-light fs-4 fw-bold"><i class="bi bi-pencil-square me-2"
             style="font-size: 1.5rem; "></i> Assessments</h5>
@@ -40,7 +40,7 @@
 
   <!-- Courses Card -->
   <div class="col-md-3 mb-4">
-    <div class="card text-white  shadow-lg border-0 overview-card " style=" background-color:#ff9f43;">
+    <div class="card text-white  shadow-lg border-0 overview-card " style=" background-color:#0a3d62;">
       <div class="card-body">
         <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-book me-2"
             style="font-size: 1.5rem;"></i>Enrolled Courses</h5>
@@ -59,7 +59,7 @@
   <!-- Reports Card -->
   <div class="col-md-3 mb-4">
     <div class="card text-white  shadow-lg border-0 overview-card "
-      style="background: linear-gradient(135deg, #1abc9c, #16a085); border-radius: 8px;">
+      style="background-color: #60a3bc; border-radius: 8px;">
       <div class="card-body">
         <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-file-alt me-2 text-dark"
             style="font-size: 1.5rem;"></i>
@@ -82,14 +82,14 @@
   <div class="row ">
     <div class="col-md-6">
       <h3> Vertical Bar Chart</h3>
-      <ngx-charts-bar-vertical [view]="[1000,400]" [results]="surveyData" [xAxisLabel]="'Count'"
-        [legendTitle]="'Payment Survey'" [yAxisLabel]="'Total Payments'" [legend]="true" [showXAxisLabel]="true"
-        [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true" [gradient]="true">
+      <ngx-charts-bar-vertical [results]="PaymentData"   [scheme]="'air'" [xAxis]="true" [yAxis]="true"
+        [showXAxisLabel]="true" [showYAxisLabel]="true" xAxisLabel="Courses" yAxisLabel="Total"
+        [animations]="true" [barPadding]="10">
       </ngx-charts-bar-vertical>
     </div>
     <div class="col-md-6">
       <h3>Advance Pie Chart</h3>
-      <ngx-charts-advanced-pie-chart [results]="surveyData" [gradient]="true">
+      <ngx-charts-advanced-pie-chart  [results]="PaymentData" [scheme]="'air'" [gradient]="true">
       </ngx-charts-advanced-pie-chart>
     </div>
   </div>
@@ -103,9 +103,9 @@
 <div class="row  my-5">
   <div class="col-12 col-md-7 mx-auto">
     <div class="card">
-      <div class="card-header text-center  text-light" style="background-color: #DBE2EF; ">
-        <h3 style="color: #3F72AF;">Course Feedback</h3>
-        <p class="lead" style="color: #3F72AF;">Please share your thoughts about the course.</p>
+      <div class="card-header text-center  text-light" style="background-color: #60a3bc; ">
+        <h3 style="color: #000000;">Course Feedback</h3>
+        <p class="lead" style="color: #ffffff;">Please share your thoughts about the course.</p>
       </div>
       <div class="card-body">
         <!-- Rating Section -->

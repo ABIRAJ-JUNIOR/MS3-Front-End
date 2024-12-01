@@ -35,7 +35,7 @@ export class DashContentComponent implements OnInit {
       console.log(this.StudentDetails)
 
       this.totalPaymentCalculate()
-      this.PaymentChartCalculation()
+      this.ChartCalculation()
     })
 
   }
@@ -55,8 +55,10 @@ export class DashContentComponent implements OnInit {
   PendingPayments: number = 0;
   paidPayments: number = 0;
   TotalPayment: number = 0;
-  surveyData: any[] = []
-  PaymentChartCalculation() {
+
+  EnrolledCourses:number =0;
+  PaymentData: any[] = []
+  ChartCalculation() {
     for (let i: number = 0; i < this.StudentDetails.enrollments.length; i++) {
       const element = this.StudentDetails.enrollments[i].paymentResponse;
       if (this.StudentDetails.enrollments[i].paymentStatus == "InProcess") {
@@ -73,39 +75,30 @@ export class DashContentComponent implements OnInit {
     }
     console.log(this.PendingPayments)
     console.log(this.paidPayments)
-    this.surveyData = [
-      { name: 'Paid', value: this.paidPayments },
+    this.PaymentData = [
+      { name: 'Completed', value: this.paidPayments },
       { name: 'Pending', value: this.PendingPayments },
       { name: 'TotalPayments', value: this.TotalPayment },
-      { name: 'Scooter', value: 23 },
-      { name: 'Bus', value: 2 }
     ];
-  }
-  
-
-
-
-  ngAfterViewInit() {
-    this.createPaymentChart();
+    this.createCourseChart()
   }
 
+  gradient: boolean = false;
+  animations: boolean = true;
 
-  createPaymentChart() {
-    new Chart('paymentChart', {
-      type: 'doughnut',
-      data: {
-        labels: ['Paid', 'Pending'],
-        datasets: [{
-          data: [this.paidPayments, this.PendingPayments],
-          backgroundColor: ['#808080', '#6cc76e', '#b8e0b9'],
-          hoverBackgroundColor: ['#1e7d32', '#58a654', '#a4d0a5']
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: true, position: 'top' } }
-      } as ChartConfiguration['options']
-    });
+
+
+
+
+
+  courseData:any[]=[]
+
+  createCourseChart() {
+    this.courseData = [
+      { name: 'Assignments', value: this.TotalAssignments },
+      { name: 'Enrolled Course', value: this.EnrolledCourses },
+      { name: 'TotalCourses', value: 6 },
+    ];
   }
 
 

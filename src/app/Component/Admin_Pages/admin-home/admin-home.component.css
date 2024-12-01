@@ -22,6 +22,10 @@
   border-radius: 12px;
 }
 
+.card1{
+  height: 110px;
+}
+
 .card h5 {
   margin-bottom: 0;
   font-weight: bold;

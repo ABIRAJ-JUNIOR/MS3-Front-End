@@ -9,7 +9,7 @@
           
           <!-- Home Link -->
           <li class="sidebar-item">
-            <a [routerLink]="['/admin-dashboard/home']" class="sidebar-link">
+            <a [routerLink]="['/admin-dashboard/home']" class="sidebar-link" routerLinkActive="active">
               <i class="fa-solid fa-home pe-2"></i>
               Home
             </a>
@@ -22,10 +22,10 @@
               Admin
             </a>
             <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-              <li class="sidebar-item" [routerLink]="['/admin-dashboard/admin-list']">
+              <li class="sidebar-item" [routerLink]="['/admin-dashboard/admin-list']" routerLinkActive="active">
                 <a class="sidebar-link">Admin List</a>
               </li>
-              <li class="sidebar-item" [routerLink]="['/admin-dashboard/audit-log']">
+              <li class="sidebar-item" [routerLink]="['/admin-dashboard/audit-log']" routerLinkActive="active">
                 <a class="sidebar-link">Audit Logs</a>
               </li>
             </ul>
@@ -38,8 +38,11 @@
               Student
             </a>
             <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-              <li class="sidebar-item" [routerLink]="['/admin-dashboard/student-list']" routerLinkActive="router-link-active">
+              <li class="sidebar-item" [routerLink]="['/admin-dashboard/student-list']" routerLinkActive="active">
                 <a class="sidebar-link">Student List</a>
+              </li>
+              <li class="sidebar-item" [routerLink]="['/admin-dashboard/student-assessments']" routerLinkActive="active">
+                <a class="sidebar-link">Student Assessments</a>
               </li>
             </ul>
           </li>
@@ -51,27 +54,27 @@
               Course
             </a>
             <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-              <li class="sidebar-item" [routerLink]="['/admin-dashboard/course-list']">
+              <li class="sidebar-item" [routerLink]="['/admin-dashboard/course-list']" routerLinkActive="active">
                 <a class="sidebar-link">Course List</a>
               </li>
-              <li class="sidebar-item" [routerLink]="['/admin-dashboard/schedule-list']">
+              <li class="sidebar-item" [routerLink]="['/admin-dashboard/schedule-list']" routerLinkActive="active">
                 <a class="sidebar-link">Schedule</a>
               </li>
-              <li class="sidebar-item" [routerLink]="['/admin-dashboard/assessment-list']">
+              <li class="sidebar-item" [routerLink]="['/admin-dashboard/assessment-list']" routerLinkActive="active">
                 <a class="sidebar-link">Assessment</a>
               </li>
             </ul>
           </li>
 
           <li class="sidebar-item">
-            <a [routerLink]="['/admin-dashboard/announcement']" class="sidebar-link">
+            <a [routerLink]="['/admin-dashboard/announcement']" class="sidebar-link" routerLinkActive="active">
               <i class="fa-solid fa-bullhorn pe-2"></i>
               Announcements
             </a>
           </li>
 
           <li class="sidebar-item">
-            <a [routerLink]="['/admin-dashboard/contact-us']" class="sidebar-link">
+            <a [routerLink]="['/admin-dashboard/contact-us']" class="sidebar-link" routerLinkActive="active">
               <i class="fa-solid fa-envelope pe-2"></i>
               Contact Us Messages
             </a>

@@ -8,6 +8,7 @@ export const studentAuthGuard: CanActivateFn = (route, state) => {
   if(authService.isLoggedInStudent()){
     return true
   }else{
+    router.navigate(['home'])
     return false
   }
 };

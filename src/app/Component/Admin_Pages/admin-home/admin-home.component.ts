@@ -116,6 +116,7 @@ export class AdminHomeComponent {
             installment += p.amountPaid
           }
         })
+        this.totalpayments += this.students.length * 2500
         this.paymentData.push({name:"FullPayment" , value:fullPayment})
         this.paymentData.push({name:"Installment" , value:installment})
         this.paymentData.push({name:"Initial Amount" , value:this.students.length * 2500})
@@ -135,17 +136,11 @@ export class AdminHomeComponent {
     })
   }
 
-  enrollData:ChartData[] = []
+  enrollData:ChartData[] = [];
   groupedEnrollmentStats: ChartData[] = [];
 
-  paymentData:ChartData[]=[]
+  paymentData:ChartData[]=[];
   paymentOverview = [];
-
-  coursePopularity = [
-    { 'name': 'Python', 'value': 80 },
-    { 'name': 'JavaScript', 'value': 60 },
-    { 'name': 'Java', 'value': 40 },
-  ];
  
 }
 

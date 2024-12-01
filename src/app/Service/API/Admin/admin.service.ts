@@ -34,9 +34,6 @@ export class AdminService {
   getAdmins(){
     return this.http.get<Admin[]>(this.apiUrl + '/Admin/GetAll')
   }
-  getAuditLogs(){
-    return this.http.get<AuditLog[]>(this.apiUrl + '/AuditLog/GetAll')
-  }
 
   pagination(pageNumber:number , pageSize:number){
     return this.http.get<any>(this.apiUrl + `/Admin/Pagination/${pageNumber}/${pageSize}`)

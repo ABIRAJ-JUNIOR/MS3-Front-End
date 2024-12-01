@@ -27,21 +27,16 @@
                   </tr>
             </thead>
             <tbody>
-                <ng-container *ngFor="let item of StudentDetails; let i = index">
-                    <tr *ngFor="let assessmentData of item.studentAssesmentResponse">
-                        <td>{{ i + 1 }}</td>
-                        <td>{{ item.courseScheduleResponse.courseResponse.courseName }}</td>
-                        <td>{{ assessmentData.assessmentResponse.assessmentType }}</td>
-                        <td>{{ assessmentData.assessmentResponse.startDate | date: 'shortDate' }}</td>
+                    <tr *ngFor="let assessmentData of StudentDetails.studentAssessments">
+                        <td>{{ assessmentData.assessmentType }}</td>
+                        <td>{{ assessmentData.startDate | date: 'shortDate' }}</td>
                         <td>{{ assessmentData.assessmentResponse.endDate | date: 'shortDate' }}</td>
                         <td>{{ assessmentData.dateSubmitted | date: 'short' }}</td>
-                        <td>{{ assessmentData.marksObtained || 'Update Later' }}</td>
+                        <td>{{ assessmentData.marksObtaines || 'Update Later' }}</td>
                         <td>{{ assessmentData.grade || 'Update Later' }}</td>
-                        <td>{{ assessmentData.feedback || 'Update Later' }}</td>
                         <td>{{ assessmentData.studentAssessmentStatus }}</td>
 
                     </tr>
-                </ng-container>
             </tbody>
         </table>
     </div>

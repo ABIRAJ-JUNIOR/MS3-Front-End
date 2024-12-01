@@ -59,7 +59,7 @@ export const routes: Routes = [
                 component:OtpAuthenticationComponent
             } 
         ],
-        canActivate : [payAuthGuard]
+        // canActivate : [payAuthGuard]
     },
    
 
@@ -81,7 +81,7 @@ export const routes: Routes = [
             { path:'student-assessments',component:StudentAssessmentsComponent},
             {path:'**' , redirectTo:'home',pathMatch:'full'}
         ],
-        canActivate: [adminAuthGuard]
+        // canActivate: [adminAuthGuard]
     },
     {
         path: 'student-dashboard', component: StudentDashboardComponent, children: [

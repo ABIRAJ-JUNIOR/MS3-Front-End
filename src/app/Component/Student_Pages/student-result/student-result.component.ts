@@ -30,8 +30,8 @@ export class StudentResultComponent {
     console.log(this.StudentTokenDetails)
 
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
-      this.StudentDetails = student.enrollments
-      console.log(this.StudentDetails)
+      this.StudentDetails = student
+      console.log(student )
     },
       (error) => {
         this.toastr.error("Failed to load student details. Please try again later.", "Error", {

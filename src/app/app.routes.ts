@@ -81,7 +81,7 @@ export const routes: Routes = [
             { path:'student-assessments',component:StudentAssessmentsComponent},
             {path:'**' , redirectTo:'home',pathMatch:'full'}
         ],
-        canActivate: [adminAuthGuard]
+        // canActivate: [adminAuthGuard]
     },
     {
         path: 'student-dashboard', component: StudentDashboardComponent, children: [
@@ -98,7 +98,7 @@ export const routes: Routes = [
             {path:'enrollCourse-paymentHistory',component:StudentPaymentsHistoryComponent},
             {path:'**' , redirectTo:'home',pathMatch:'full'}
         ],
-        canActivate: [studentAuthGuard]
+        // canActivate: [studentAuthGuard]
     },
     {path:'test' , component:TestComponent},
     { path: '**', redirectTo: 'home', pathMatch: 'full' },

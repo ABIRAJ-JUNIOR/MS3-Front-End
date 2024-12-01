@@ -27,6 +27,10 @@ export class AdminProfileComponent implements OnInit{
     });
   }
   ngOnInit(): void {
+    this.loaddata()
+    
+  }
+  loaddata(){
     const token:string = localStorage.getItem("token")!;
     const decode:any = jwtDecode(token)
     this.adminid= decode.Id
@@ -36,7 +40,6 @@ export class AdminProfileComponent implements OnInit{
       this.admin=response
       
     })
-    
   }
   
   onEditProfile() {
@@ -56,6 +59,7 @@ this.adminService.updateAdminProfile(this.adminid,data).subscribe({
       progressBar: true,
       timeOut:3000
     });
+    this.loaddata()
   }
   ,complete() {
     

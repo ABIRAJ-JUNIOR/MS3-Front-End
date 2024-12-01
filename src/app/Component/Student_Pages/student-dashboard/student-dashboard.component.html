@@ -113,7 +113,7 @@
             </div>
           </li>
         </ul>
-        <h5 data-bs-toggle="dropdown">{{StudentDetails.Name}}</h5>
+        <h5 data-bs-toggle="dropdown">{{StudentTokenDetails.Name}}</h5>
       </div>
 
     </div>
@@ -214,14 +214,23 @@
   <div class="modal-dialog customModal">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="topLeftModalLabel">Top-Left Modal</h5>
+        <h5 class="modal-title" id="topLeftModalLabel">Notifications</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        This modal appears in the top-left corner of the page.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <div class="notification" *ngFor="let item of StudentDetails.notifications">
+          <div class="notification-header">
+            <span class="notification-type">{{item.notificationType}}</span>
+            <span class="notification-time">{{item.dateSent}}</span>
+          </div>
+          <div class="notification-body">
+            <p class="message">{{item.message}}</p>
+          </div>
+          <div class="notification-footer">
+            <button class="mark-read-btn" (click)="MarkAsRead(item.id)">Mark as Read</button>
+          </div>
+        </div>
+        
       </div>
     </div>
   </div>

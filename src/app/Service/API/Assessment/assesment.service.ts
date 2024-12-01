@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AssessmentRequest } from '../../../Component/Admin_Pages/course-assessment/course-assessment.component';
 import { Assessment } from '../../../Modals/modals';
+import { environment } from '../../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class AssesmentService {
   
   constructor(private http:HttpClient) { }
 
-  CommonUrl:string="https://localhost:7044/api";
+  CommonUrl:string=environment.apiUrl;
 
   getPagination(pagenumber:number , pageSize:number){
     return this.http.get(this.CommonUrl + `/Assessment/Pagination/${pagenumber}/${pageSize}`)

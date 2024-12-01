@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +8,7 @@ import { Injectable } from '@angular/core';
 export class AnnouncementService {
   constructor(private http: HttpClient) {}
 
-  private apiUrl = 'https://localhost:7044/api';
+  private apiUrl = environment.apiUrl;
 
   AddAnouncement(announcement: any) {
     return this.http.post(`${this.apiUrl}/Announcement`, announcement);

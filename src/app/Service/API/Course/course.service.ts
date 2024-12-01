@@ -4,6 +4,7 @@ import { Course, CourseCategory, Schedule } from '../../../Modals/modals';
 import { CourseRequest } from '../../../Component/Admin_Pages/course-list/course-list.component';
 import { CourseScheduleRequest } from '../../../Component/Admin_Pages/course-schedule/course-schedule.component';
 import { AssessmentRequest } from '../../../Component/Admin_Pages/course-assessment/course-assessment.component';
+import { environment } from '../../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class CourseService {
 
   constructor(private http:HttpClient) { }
 
-  private apiUrl = 'https://localhost:7044/api'
+  private apiUrl = environment.apiUrl
 
   //Course
   getCourses(){

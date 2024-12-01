@@ -131,6 +131,7 @@ export interface StudentAssessment{
     studentAssessmentStatus:string;
 
     assessmentResponse:Assessment;
+    studentResponse:Student
 }
 
 export interface Notification{

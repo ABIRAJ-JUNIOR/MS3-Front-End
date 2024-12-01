@@ -2,7 +2,7 @@
   <aside id="sidebar" [ngClass]="{'collapsed': sidebarCollapsed}" class="text-light js-sidebar shadow-lg">
     <div class="h-100" style="position: fixed; min-width: 265px ">
       <div class="sidebar-logo text-center">
-        <a href="#">Way Makers</a>
+        <a href="#">Student Portal</a>
         <hr>
       </div>
       <div style="display: flex;flex-direction: column; align-items: start;margin-left: 55px;">
@@ -29,59 +29,61 @@
 
       </div>
 
-      <ul class="sidebar-nav">
+      <ul class="sidebar-nav ms-2">
         <!-- Sidebar Header -->
-        <li class="sidebar-header">Student Dashboard</li>
+        <li class="sidebar-header">Way Makers Dashboard</li>
 
         <!-- Dashboard Link -->
-        <li class="sidebar-item py-1">
+        <li class="sidebar-item mt-1">
           <a [routerLink]="['/student-dashboard/home']" [routerLinkActive]="['active_Link']" class="sidebar-link">
             <i class="fa-solid fa-house pe-2"></i>
-            Dashboard
+            Student Hub
           </a>
         </li>
 
         <!-- Profile Section -->
-        <li class="sidebar-item ">
+        <li class="sidebar-item mt-1">
           <a [routerLink]="['/student-dashboard/profile']" [routerLinkActive]="['active_Link']" class="sidebar-link">
             <i class="fa-regular fa-user pe-2"></i>
-            Profile
+            Academic Gateway
           </a>
         </li>
 
         <!-- Courses Section -->
-        <li class="sidebar-item">
+        <li class="sidebar-item mt-1">
           <a href="#" class="sidebar-link collapsed" [routerLinkActive]="['active_Link']" data-bs-target="#courses"
             data-bs-toggle="collapse" aria-expanded="false">
             <i class="fa-solid fa-book-open pe-2"></i>
-            My Courses
+            Learning Dashboard
           </a>
-          <ul id="courses" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+          <ul id="courses" class="sidebar-dropdown list-unstyled collapse m-1" data-bs-parent="#sidebar">
             <li class="sidebar-item">
               <a [routerLink]="['/student-dashboard/mycourses']" [routerLinkActive]="['active_Link']"
-                class="sidebar-link">Enrolled Courses</a>
+                class="sidebar-link">My Student Hub</a>
             </li>
             <li class="sidebar-item">
               <a [routerLink]="['/student-dashboard/completed-Courses']" [routerLinkActive]="['active_Link']"
-                class="sidebar-link">Completed Courses</a>
+                class="sidebar-link">Campus Connect</a>
             </li>
           </ul>
         </li>
 
         <!-- Grades Section -->
 
-        <li class="sidebar-item">
-          <a href="#" class="sidebar-link collapsed" data-bs-target="#assesment" data-bs-toggle="collapse"
+        <li class="sidebar-item mt-1">
+          <a href="#" class="sidebar-link collapsed " data-bs-target="#assesment" data-bs-toggle="collapse"
             aria-expanded="false">
             <i class="bi bi-person-workspace pe-2"></i>
-            Assesments & Results
+            Student Workspace
           </a>
           <ul id="assesment" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
             <li class="sidebar-item">
-              <a [routerLink]="['/student-dashboard/assesment']" class="sidebar-link">Your asessesments</a>
+              <a [routerLink]="['/student-dashboard/assesment']" class="sidebar-link"> Assessment Overview
+              </a>
             </li>
             <li class="sidebar-item">
-              <a [routerLink]="['/student-dashboard/assesment-result']" class="sidebar-link">Assesment Results</a>
+              <a [routerLink]="['/student-dashboard/assesment-result']" class="sidebar-link">Assessment Results & Feedback
+              </a>
             </li>
 
           </ul>
@@ -91,11 +93,11 @@
 
         <!-- Payment -->
 
-        <li class="sidebar-item">
-          <a href="#" class="sidebar-link collapsed" data-bs-target="#enrollpay" data-bs-toggle="collapse"
+        <li class="sidebar-item mt-1">
+          <a href="#" class="sidebar-link collapsed " data-bs-target="#enrollpay" data-bs-toggle="collapse"
             [routerLinkActive]="['active_Link']" aria-expanded="false">
             <i class="bi bi-calendar-date-fill pe-2"></i>
-            Payment & History
+            Payment Management
           </a>
           <ul id="enrollpay" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
             <li class="sidebar-item">
@@ -113,7 +115,7 @@
 
 
         <!-- Notifications Section -->
-        <li class="sidebar-item">
+        <li class="sidebar-item mt-2">
           <a [routerLink]="['/student-dashboard/courses']" class="sidebar-link" [routerLinkActive]="['active_Link']">
             <i class="fa-solid fa-book-open pe-2"></i>
             Courses
@@ -121,7 +123,7 @@
         </li>
 
         <!-- Support Section -->
-        <li class="sidebar-item">
+        <li class="sidebar-item mt-1">
           <a href="#" class="sidebar-link" [routerLinkActive]="['active_Link']">
             <i class="fa-solid fa-life-ring pe-2"></i>
             Support

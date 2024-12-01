@@ -42,9 +42,9 @@ h4 {
 }
 
 #sidebar {
-    max-width: 264px;
-    min-width: 264px;
-    background-color: #112D4E;
+    max-width: 270px;
+    min-width: 270px;
+    background-color: #3c6382;
     transition: all 0.35s ease-in-out;
 }
 

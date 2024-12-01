@@ -58,6 +58,8 @@ export interface Course {
   schedulesCount: number;
 
   schedules: Schedule[];
+  feedbacks:FeedBack[];
+  assessmentResponse:Assessment[];
 }
 
 export interface Schedule {
@@ -131,6 +133,7 @@ export interface StudentAssessment{
     studentAssessmentStatus:string;
 
     assessmentResponse:Assessment;
+    studentResponse:Student
 }
 
 export interface Notification{

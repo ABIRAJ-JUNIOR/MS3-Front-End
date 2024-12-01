@@ -184,7 +184,7 @@ export class AdminListComponent implements OnInit{
       console.log(this.selectedFile);
       
       formData.append('imageFile', this.selectedFile);
-      this.adminService.addImage(this.adminId, formData,false).subscribe({
+      this.adminService.addImage(this.adminId, formData , false).subscribe({
         complete:()=>{
           this.loadItems();
         },

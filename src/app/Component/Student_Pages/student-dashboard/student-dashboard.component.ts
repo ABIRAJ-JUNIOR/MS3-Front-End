@@ -5,6 +5,7 @@ import { RouterOutlet, RouterModule, Router } from "@angular/router";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
 import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
+import { NotificationServiceService } from "../../../Service/API/Notification/notification-service.service";
 
 @Component({
   selector: 'app-student-dashboard',
@@ -24,7 +25,7 @@ export class StudentDashboardComponent implements OnInit {
 
 
 
-  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
+  constructor(private NotificationSerivice:NotificationServiceService ,private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -40,6 +41,12 @@ export class StudentDashboardComponent implements OnInit {
         this.router.navigate([''])
       })
 
+  }
+
+  MarkAsRead(id:string){
+    this.NotificationSerivice.MarkAsReadNotication(id).subscribe((data:any)=>{
+    
+    })
   }
 
 

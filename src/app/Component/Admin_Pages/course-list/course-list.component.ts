@@ -77,7 +77,6 @@ export class CourseListComponent implements OnInit {
       }),
       complete:() => {
         this.currentLength = this.courses.length
-
       }
     });
   }

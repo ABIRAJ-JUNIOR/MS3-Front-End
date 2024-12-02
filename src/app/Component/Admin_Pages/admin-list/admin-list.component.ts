@@ -26,7 +26,7 @@ export class AdminListComponent implements OnInit{
   totalItems: number = 0;
 
   // Form and update state
-  profileForm: FormGroup;
+  profileForm!: FormGroup;
   isUpdate: boolean = false;
 
   // Profile image variables
@@ -48,6 +48,21 @@ export class AdminListComponent implements OnInit{
     private modalService: BsModalService,
     private readonly auditLogService:AuditlogService
   ){
+    this.initializeForm();
+  
+    const token = localStorage.getItem("token");
+    if(token != null){
+      const decode:any =jwtDecode(token)
+      this.loginData = decode
+      console.log(this.loginData)
+    }
+  }
+
+  ngOnInit(): void {
+    this.loadItems();
+  }
+
+  private initializeForm(): void {
     this.profileForm = this.fb.group(
       {
         nic: ['', [Validators.required, Validators.pattern(/^\d{9}[Vv]|\d{12}$/)]],
@@ -61,18 +76,6 @@ export class AdminListComponent implements OnInit{
       },
       { validators: this.passwordMatchValidator }
     );
-
-    
-    const token = localStorage.getItem("token");
-    if(token != null){
-      const decode:any =jwtDecode(token)
-      this.loginData = decode
-      console.log(this.loginData)
-    }
-  }
-
-  ngOnInit(): void {
-    this.loadItems();
   }
 
   passwordMatchValidator(control: AbstractControl) {
@@ -155,7 +158,7 @@ export class AdminListComponent implements OnInit{
         this.loadItems();
 
         const auditLog:AuditLogRequest = {
-          action: 'Add Admin',
+          action: 'Add New Admin',
           details: `Added a new Admin with ID (${response.id})`,
           adminId: this.loginData.Id,
         }

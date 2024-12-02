@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ToastrService } from 'ngx-toastr';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CourseService } from '../../../Service/API/Course/course.service';
+import { jwtDecode } from 'jwt-decode';
+import { AuditlogService } from '../../../Service/API/AuditLog/auditlog.service';
+import { AuditLogRequest } from '../student-list/student-list.component';
 
 @Component({
   selector: 'app-course-list',
@@ -26,7 +29,7 @@ export class CourseListComponent implements OnInit {
   totalItems:number = 0;
 
   //Form and Update status
-  courseForm: FormGroup;
+  courseForm!: FormGroup;
   isUpdate:boolean = false
 
   // Course image variables
@@ -39,13 +42,31 @@ export class CourseListComponent implements OnInit {
   //Course ID for Update/delete operation
   private courseId:string=''
   
+  loginData!:any
 
   constructor(
     private courseService: CourseService,
     private fb: FormBuilder,
     private toastr: ToastrService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private readonly auditLogService:AuditlogService
   ) {
+    this.initializeForm();
+
+    const token = localStorage.getItem("token");
+    if(token != null){
+      const decode:any =jwtDecode(token)
+      this.loginData = decode
+      console.log(this.loginData)
+    }
+  }
+
+  ngOnInit(): void {
+    this.loadItems(); 
+    this.loadCategories();
+  }
+
+  private initializeForm(): void {
     this.courseForm = this.fb.group({
       courseName: ['', Validators.required],
       courseCategoryId: ['', Validators.required],
@@ -54,11 +75,6 @@ export class CourseListComponent implements OnInit {
       description: ['', [Validators.required, Validators.maxLength(500)]],
       prerequisites: ['', Validators.maxLength(300)],
     });
-  }
-
-  ngOnInit(): void {
-    this.loadItems(); 
-    this.loadCategories();
   }
 
   private loadItems(): void {
@@ -133,7 +149,7 @@ export class CourseListComponent implements OnInit {
 
   private addCourse(courseData:CourseRequest):void{
     this.courseService.AddCourse(courseData).subscribe({
-      next: (response: any) => {
+      next: (response: Course) => {
           this.courseId=response.id
           this.toastr.success("Course added successfull" , "" , {
             positionClass:"toast-top-right",
@@ -141,6 +157,18 @@ export class CourseListComponent implements OnInit {
             timeOut:3000
           })
         this.loadItems();
+
+        const auditLog:AuditLogRequest = {
+          action: 'Add New Course',
+          details: `Added a new Course with ID (${response.id})`,
+          adminId: this.loginData.Id,
+        }
+        this.auditLogService.addAuditLog(auditLog).subscribe({
+          next:()=>{},
+          error: (error: any) => {
+            console.error('Error adding audit log:', error.error);
+          }
+        })
       },
       complete:()=> {
         this.uploadImage();
@@ -154,13 +182,25 @@ export class CourseListComponent implements OnInit {
 
   private updateCourse(courseData:CourseRequest):void{
     this.courseService.updateCourse(this.courseId , courseData).subscribe({
-      next:()=>{
+      next:(response:Course)=>{
         this.toastr.success('Course updated successfull!', '', {
           positionClass: 'toast-top-right',
           progressBar: true,
           timeOut:3000
         });
         this.loadItems();
+
+        const auditLog:AuditLogRequest = {
+          action: 'Update Course',
+          details: `Updated course details for Course ID (${response.id})`,
+          adminId: this.loginData.Id,
+        }
+        this.auditLogService.addAuditLog(auditLog).subscribe({
+          next:()=>{},
+          error: (error: any) => {
+            console.error('Error adding audit log:', error.error);
+          }
+        })
       },
       complete:()=>{
         this.uploadImage();

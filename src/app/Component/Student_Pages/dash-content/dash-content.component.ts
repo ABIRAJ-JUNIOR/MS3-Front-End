@@ -8,6 +8,8 @@ import { StudentDashDataService } from "../../../Service/Data/Student_Data/stude
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { CourseService } from "../../../Service/API/Course/course.service";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { FeedbackServiceService } from "../../../Service/API/Feedback/feedback-service.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-dash-content',
@@ -32,7 +34,9 @@ export class DashContentComponent implements OnInit {
     private StudentApiService: StudentService,
     private router: Router,
     private CourseService: CourseService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private feedbackService:FeedbackServiceService,
+    private tostr:ToastrService
 
   ) { 
     this.feedBackForm=this.fb.group({
@@ -134,7 +138,13 @@ export class DashContentComponent implements OnInit {
   onSubmit(): void {
     if (this.feedBackForm.valid) {
       this.feedBackForm.get('studentId')?.setValue(this.StudentTokenDetails.Id)
-      
+    this.feedbackService.SendFeedback(this.feedBackForm.value).subscribe((data:any)=>{
+      this.tostr.success("Feedback Send Succesfully")
+    },(error)=>{
+      this.tostr.error("Feedback Send Failed")
+     
+   console.log(error)
+    })
       console.log(this.feedBackForm.value);
     }
   }

@@ -17,7 +17,7 @@ import { Router, RouterModule } from '@angular/router';
 export class CourseCardsComponent implements OnInit {
 
 
-  constructor(private CourseService:CourseService,private PaymentService:PaymentDataService , private route:Router){
+  constructor( private CourseService:CourseService,private PaymentService:PaymentDataService , private route:Router){
     
   }
 
@@ -54,17 +54,21 @@ export class CourseCardsComponent implements OnInit {
 
   ngOnInit() {
     this.paginateCourses()
+
   }
 
   paginateCourses() {
+
     this.CourseService.pagination(this.currentPage,this.pageSize).subscribe({
       next:((courses:any)=>{
         this.paginatedCourses=courses.items
         this.totalPages=courses.totalPages
         this.pageSize=courses.pageSize
         this.currentPage=courses.currentPage
+
       })
     })
+
   }
 
   goToPage(page: number): void {

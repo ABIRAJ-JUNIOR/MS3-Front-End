@@ -58,6 +58,10 @@ export class StudentPaymentsComponent implements OnInit {
 
 
       console.log(this.Enrollments)
+    },(error)=>{
+      console.log(error)
+    },()=>{
+
     })
 
   }

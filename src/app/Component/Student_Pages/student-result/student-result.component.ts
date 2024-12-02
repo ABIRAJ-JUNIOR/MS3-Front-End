@@ -5,6 +5,7 @@ import { ToastrService } from "ngx-toastr";
 import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
+import { StudentAssessmentService } from "../../../Service/API/Student-Assessment/student-assessment.service";
 
 
 @Component({
@@ -16,22 +17,22 @@ import { StudentDashDataService } from "../../../Service/Data/Student_Data/stude
 })
 export class StudentResultComponent {
 
-  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService,  private toastr: ToastrService) {
+  constructor(private StudentAssesmentService:StudentAssessmentService, private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService,  private toastr: ToastrService) {
 
     
   }
 
 
-  StudentDetails: any;
+  StudentAssesmentDetails: any;
   StudentTokenDetails: any;
 
   ngOnInit(): void {
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
     console.log(this.StudentTokenDetails)
 
-    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
-      this.StudentDetails = student
-      console.log(student )
+    this.StudentAssesmentService.getAllAssesmentByStudentid(this.StudentTokenDetails.Id).subscribe((assesment: any) => {
+      this.StudentAssesmentDetails = assesment
+      console.log(assesment )
     },
       (error) => {
         this.toastr.error("Failed to load student details. Please try again later.", "Error", {

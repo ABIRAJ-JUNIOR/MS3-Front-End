@@ -22,7 +22,7 @@ export class PaymentGateComponent {
 
   CardFormData: FormGroup;
 
-  constructor(private PaymentDataService: PaymentDataService, private fb: FormBuilder, private router: Router ,private location: Location) {
+  constructor( private PaymentDataService: PaymentDataService, private fb: FormBuilder, private router: Router ,private location: Location) {
 
     this.CardFormData = this.fb.group({
       name: ['', [Validators.required]],
@@ -56,6 +56,7 @@ export class PaymentGateComponent {
       history.pushState(null, '', location.href);
     };
     console.log(this.LocalCardDetails)
+
   }
 
   DeivdeInstallment: number = 0;

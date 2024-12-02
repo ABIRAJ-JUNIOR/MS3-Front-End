@@ -56,6 +56,7 @@ export class StudentSettingComponent implements OnInit {
           closeButton: true
        
         });
+      },()=>{
       })
 
 
@@ -63,6 +64,7 @@ export class StudentSettingComponent implements OnInit {
 
 
   onSubmit() {
+
     const studentData = this.studentForm.value;
     const student: StudenUpdateRequest = {
       firstName: studentData.firstName,
@@ -89,6 +91,8 @@ export class StudentSettingComponent implements OnInit {
           timeOut: 4000,
           positionClass: 'toast-bottom-right'
         })
+
+      },()=>{
 
       }
     )

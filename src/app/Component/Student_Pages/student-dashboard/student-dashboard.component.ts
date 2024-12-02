@@ -11,12 +11,13 @@ import { ToastrService } from "ngx-toastr";
 @Component({
   selector: 'app-student-dashboard',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, FormsModule, RouterModule],
+  imports: [RouterOutlet, CommonModule, FormsModule, RouterModule,],
   templateUrl: './student-dashboard.component.html',
   styleUrl: './student-dashboard.component.css'
 })
 export class StudentDashboardComponent implements OnInit {
   sidebarCollapsed = false;
+  noImage: string='https://www.bing.com/ck/a?!&&p=7648fe0c3dc6be6b2188d54e324d5d9352d68f37b129c4ddaaaadf8174ec11a4JmltdHM9MTczMzAxMTIwMA&ptn=3&ver=2&hsh=4&fclid=1a548757-8fff-66c7-3ffe-93498efe67cc&u=a1L2ltYWdlcy9zZWFyY2g_cT1wcm9maWxlJTIwbm8lMjBpbWFnZSZGT1JNPUlRRlJCQSZpZD05MzAzNEM1QTRDQjMyOTE2NzIxNzM3Q0Y2NzE0NDI3NDU1MDRDRTMx&ntb=1';
   toggleSidebar() {
     this.sidebarCollapsed = !this.sidebarCollapsed;
   }
@@ -26,7 +27,8 @@ export class StudentDashboardComponent implements OnInit {
 
 
 
-  constructor(private tostr:ToastrService,private NotificationSerivice:NotificationServiceService ,private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
+
+  constructor(private tostr:ToastrService,private NotificationSerivice:NotificationServiceService ,private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router ) {
   }
 
   ngOnInit(): void {
@@ -36,11 +38,12 @@ export class StudentDashboardComponent implements OnInit {
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
       this.StudentDetails = student
       console.log(this.StudentDetails)
-    }
-      ,
+    },
       (error) => {
         this.router.navigate([''])
+      },()=>{
       })
+
 
   }
 

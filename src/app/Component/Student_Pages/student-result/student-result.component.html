@@ -15,8 +15,8 @@
             <thead class="table-dark">
                 <tr>
                     <th>#</th>
-                    <th><i class="bi bi-bookmark-fill text-danger"></i> Course Name</th>
-                    <th><i class="bi bi-card-checklist text-warning"></i> Assessment Type</th>
+                    <th><i class="bi bi-bookmark-fill text-danger"></i> Assessment Type</th>
+                    <th><i class="bi bi-card-checklist text-warning"></i> Assessment Title</th>
                     <th><i class="bi bi-calendar-event text-light"></i> Start Date</th>
                     <th><i class="bi bi-calendar-check text-light"></i> End Date</th>
                     <th><i class="bi bi-calendar-day text-success"></i> Date Submitted</th>
@@ -26,15 +26,18 @@
                     <th><i class="bi bi-file-earmark-check text-warning"></i> Status</th>
                   </tr>
             </thead>
-            <tbody>
-                    <tr *ngFor="let assessmentData of StudentDetails.studentAssessments">
-                        <td>{{ assessmentData.assessmentType }}</td>
-                        <td>{{ assessmentData.startDate | date: 'shortDate' }}</td>
-                        <td>{{ assessmentData.assessmentResponse.endDate | date: 'shortDate' }}</td>
+            <tbody *ngIf="StudentAssesmentDetails">
+                    <tr *ngFor="let assessmentData of StudentAssesmentDetails let i = index">
+                        <td>{{ i+1 }}</td>
+                        <td>{{ assessmentData.assessmentResponse.assessmentType }}</td>
+                        <td>{{ assessmentData.assessmentResponse.assessmentTitle }}</td>
+                        <td>{{ assessmentData.assessmentResponse.startDate | date: 'shortDate' }}</td>
+                        <td>{{ assessmentData.dateSubmitted | date: 'shortDate' }}</td>
                         <td>{{ assessmentData.dateSubmitted | date: 'short' }}</td>
                         <td>{{ assessmentData.marksObtaines || 'Update Later' }}</td>
                         <td>{{ assessmentData.grade || 'Update Later' }}</td>
-                        <td>{{ assessmentData.studentAssessmentStatus }}</td>
+                        <td>{{ assessmentData.feedBack || 'Update Later' }}</td>
+                        <td>{{ assessmentData.assessmentResponse.assessmentStatus }}</td>
 
                     </tr>
             </tbody>

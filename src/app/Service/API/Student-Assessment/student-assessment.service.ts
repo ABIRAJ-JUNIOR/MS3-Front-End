@@ -19,6 +19,10 @@ export class StudentAssessmentService {
     return this.http.get<StudentAssessment[]>(this.CommonUrl + '/StudentAssessment/GetAll');
   }
 
+  getAllAssesmentByStudentid(id:string){
+    return this.http.get<StudentAssessment[]>(this.CommonUrl + `/StudentAssessment/studentAssesment/${id}`);
+  }
+
   evaluateAssessment(id:string,data:any){
     return this.http.put<StudentAssessment>(this.CommonUrl + `/StudentAssessment/Evaluate-Assessment/${id}` , data);
   }

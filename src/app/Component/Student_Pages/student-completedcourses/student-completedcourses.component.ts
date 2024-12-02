@@ -13,7 +13,7 @@ import { StudentDashDataService } from "../../../Service/Data/Student_Data/stude
   styleUrl: './student-completedcourses.component.css'
 })
 export class StudentCompletedcoursesComponent {
-  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
+  constructor( private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
 
   StudentDetails: any;
@@ -21,31 +21,37 @@ export class StudentCompletedcoursesComponent {
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
   ngOnInit(): void {
-
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
       this.StudentDetails = student
       console.log(this.StudentDetails)
+    }, (error) => {
+      console.log(error)
+    }, () => {
+
     })
 
   }
 
 
-  NoCourseBool:boolean=true;
-  CompleteCourseCalculation(item:any):boolean{
+  NoCourseBool: boolean = true;
+  CompleteCourseCalculation(item: any): boolean {
+
     const currentDate = new Date();
     const endDate = new Date(item.courseScheduleResponse.endDate);
     if (currentDate > endDate) {
       return true;
-      this.NoCourseBool=false
-    }else{
-   
-     
+      this.NoCourseBool = false
+    } else {
+
+
       return false;
     }
+
   }
   getProgress(item: any): number {
+
     const startDate = new Date(item.courseScheduleResponse.startDate);
     const endDate = new Date(item.courseScheduleResponse.endDate);
     const currentDate = new Date();
@@ -58,8 +64,10 @@ export class StudentCompletedcoursesComponent {
       // Calculate progress based on the current date
       const totalDuration = endDate.getTime() - startDate.getTime();
       const elapsedTime = currentDate.getTime() - startDate.getTime();
+
       return (elapsedTime / totalDuration) * 100;
     }
+
   }
 
   getProgressBarClass(item: any): string {

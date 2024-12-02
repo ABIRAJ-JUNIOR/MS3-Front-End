@@ -1,9 +1,10 @@
-<!-- Dashboard Overview Section -->
+<div  *ngIf="StudentDetails">
+  <!-- Dashboard Overview Section -->
 <h3 class="mb-4 text-dark fw-bold"> <i class="bi bi-house-dash-fill fs-2 text-secondary"></i> Dashboard Overview</h3>
 <div class="row mb-4">
   <!-- Assessments Card -->
   <div class="col-md-3 mb-4">
-    <div class="card text-white  shadow-lg border-0 overview-card bg-primary">
+    <div class="card text-white  shadow-lg border-0 overview-card " style="background-color: #3c6382;">
       <div class="card-body">
         <h5 class="card-title text-light fs-4 fw-bold"><i class="bi bi-pencil-square me-2"
             style="font-size: 1.5rem; "></i> Assessments</h5>
@@ -21,9 +22,11 @@
 
   <!-- Payments Card -->
   <div class="col-md-3 mb-4">
-    <div class="card text-white  shadow-lg border-0 overview-card"  style="background: linear-gradient(135deg, #34495e, #2c3e50); border-radius: 8px;">
+    <div class="card text-white  shadow-lg border-0 overview-card"
+      style="background: linear-gradient(135deg, #34495e, #2c3e50); border-radius: 8px;">
       <div class="card-body">
-        <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-coins me-2 text-warning" style="font-size: 1.5rem;"></i>
+        <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-coins me-2 text-warning"
+            style="font-size: 1.5rem;"></i>
           Payments</h5>
         <p class="display-6 fw-bold text-light mb-0 ">{{TotalPayments | number:'1.2-2'}}</p>
         <p class="text-white fs-6">Total payments made</p>
@@ -38,7 +41,7 @@
 
   <!-- Courses Card -->
   <div class="col-md-3 mb-4">
-    <div class="card text-white  shadow-lg border-0 overview-card " style=" background-color:#ff9f43;">
+    <div class="card text-white  shadow-lg border-0 overview-card " style=" background-color:#0a3d62;">
       <div class="card-body">
         <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-book me-2"
             style="font-size: 1.5rem;"></i>Enrolled Courses</h5>
@@ -56,11 +59,13 @@
 
   <!-- Reports Card -->
   <div class="col-md-3 mb-4">
-    <div class="card text-white  shadow-lg border-0 overview-card "   style="background: linear-gradient(135deg, #1abc9c, #16a085); border-radius: 8px;">
+    <div class="card text-white  shadow-lg border-0 overview-card "
+      style="background-color: #60a3bc; border-radius: 8px;">
       <div class="card-body">
-        <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-file-alt me-2 text-dark" style="font-size: 1.5rem;"></i>
+        <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-file-alt me-2 text-dark"
+            style="font-size: 1.5rem;"></i>
           Total Courses</h5>
-        <p class="display-6 fw-bold text-light mb-0">20</p>
+        <p class="display-6 fw-bold text-light mb-0">{{totalCourse}}</p>
         <p class="text-light fs-6">Total number of Courses</p>
         <div class=" bg-transparent border-0 d-flex justify-content-between align-items-center">
           <small class=""><i class="bi bi-arrow-up-circle" style="font-size: 1rem;"></i> Waymakers Courses</small>
@@ -74,11 +79,50 @@
 </div>
 
 <!-- Charts Section -->
-<div class="container-fluid ">
-  <div class="row ">
+<div class="container-fluid">
+  <div class="row">
+    <!-- Card for Course Details -->
+    <div class="col-lg-6 col-md-12">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header  border-0">
+          <h3>Course Details</h3>
+        </div>
+        <div class="card-body">
+          <ngx-charts-bar-vertical
+            [results]="courseData"
+            [scheme]="'air'"
+            [xAxis]="true"
+            [yAxis]="true"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            xAxisLabel="Courses"
+            yAxisLabel="Total"
+            [animations]="true"
+            [barPadding]="10">
+          </ngx-charts-bar-vertical>
+        </div>
+      </div>
+    </div>
 
+    <!-- Card for Payment Details -->
+    <div class="col-lg-6 col-md-12">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header border-0">
+          <h3>Payment Details</h3>
+        </div>
+        <div class="card-body">
+          <ngx-charts-advanced-pie-chart
+            [results]="PaymentData"
+            [scheme]="'air'"
+            [gradient]="true">
+          </ngx-charts-advanced-pie-chart>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+
 
 
 
@@ -87,9 +131,9 @@
 <div class="row  my-5">
   <div class="col-12 col-md-7 mx-auto">
     <div class="card">
-      <div class="card-header text-center  text-light" style="background-color: #DBE2EF; ">
-        <h3 style="color: #3F72AF;">Course Feedback</h3>
-        <p class="lead" style="color: #3F72AF;">Please share your thoughts about the course.</p>
+      <div class="card-header text-center  text-light" style="background-color: #60a3bc; ">
+        <h3 style="color: #000000;">Course Feedback</h3>
+        <p class="lead" style="color: #ffffff;">Please share your thoughts about the course.</p>
       </div>
       <div class="card-body">
         <!-- Rating Section -->
@@ -150,4 +194,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

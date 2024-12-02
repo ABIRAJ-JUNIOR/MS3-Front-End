@@ -4,7 +4,7 @@
     <div class="card-body p-0 position-relative">
       <!-- Cover Photo -->
       <img
-        src="https://via.placeholder.com/1200x300"
+        src="{{admin.coverImageUrl||'https://via.placeholder.com/1200x300'}}"
         alt="Cover Photo"
         class="w-100 rounded-top"
         style="height: 250px; object-fit: cover"
@@ -35,7 +35,7 @@
       >
         <div class="position-relative">
           <img
-            src="{{admin.imageUrl}}"
+            src="{{admin.imageUrl||'https://via.placeholder.com/150'}}"
             alt="Admin Profile"
             class="rounded-circle border border-white shadow-lg"
             style="width: 150px; height: 150px; object-fit: cover"

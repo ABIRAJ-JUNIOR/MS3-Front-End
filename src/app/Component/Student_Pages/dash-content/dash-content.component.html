@@ -127,42 +127,45 @@
         </div>
         <div class="card-body">
           <!-- Rating Section -->
-          <form action="">
+          <form [formGroup]="feedBackForm" (ngSubmit)="onSubmit()">
             <div>
-              <label for="">Course Name</label>
-              <select name="" id="" class="form-control">
+              <label for="course">Course Name</label>
+              <select formControlName="courseId" class="form-control">
                 <option value="">Select Course</option>
-                <option value="{{item.courseScheduleResponse.courseResponse.id}}"
-                  *ngFor="let item of StudentDetails.enrollments">
-                  {{item.courseScheduleResponse.courseResponse.courseName}}</option>
+                <option *ngFor="let item of StudentDetails.enrollments"
+                  [value]="item.courseScheduleResponse.courseResponse.id">
+                  {{ item.courseScheduleResponse.courseResponse.courseName }}
+                </option>
               </select>
             </div>
+
+            <!-- Rating Section -->
             <div class="align-item-center">
               <label for="rating">How would you rate the course?</label>
               <div class="radio-wrapper-17">
-                <input id="rating-17-5" type="radio" name="radio-examples">
+                <input id="rating-17-5" type="radio" formControlName="rating" [value]="5">
                 <label class="rating-5" for="rating-17-5"></label>
-                <input id="rating-17-4" type="radio" name="radio-examples">
+                <input id="rating-17-4" type="radio" formControlName="rating" [value]="4">
                 <label class="rating-4" for="rating-17-4"></label>
-                <input id="rating-17-3" type="radio" name="radio-examples">
+                <input id="rating-17-3" type="radio" formControlName="rating" [value]="3">
                 <label class="rating-3" for="rating-17-3"></label>
-                <input id="rating-17-2" type="radio" name="radio-examples">
+                <input id="rating-17-2" type="radio" formControlName="rating" [value]="2">
                 <label class="rating-2" for="rating-17-2"></label>
-                <input id="rating-17-1" type="radio" name="radio-examples">
+                <input id="rating-17-1" type="radio" formControlName="rating" [value]="1">
                 <label class="rating-1" for="rating-17-1"></label>
               </div>
             </div>
-  
+
             <!-- Text Feedback Section -->
             <div class="form-group">
               <label for="feedbackText">Your Feedback:</label>
-              <textarea class="form-control" id="feedbackText" rows="4"
+              <textarea formControlName="feedBackText" class="form-control" rows="4"
                 placeholder="Please write your feedback here..."></textarea>
             </div>
-  
+
             <!-- Submit Button -->
             <div class="form-group text-end p-3">
-              <button type="submit" class="btn btn-primary">Submit Feedback</button>
+              <button type="submit" class="btn btn-primary" [disabled]="feedBackForm.invalid">Submit Feedback</button>
             </div>
           </form>
         </div>

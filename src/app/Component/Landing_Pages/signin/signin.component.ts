@@ -14,24 +14,53 @@ import { jwtDecode } from 'jwt-decode';
   styleUrl: './signin.component.css'
 })
 export class SigninComponent {
-  StudentLogin: FormGroup
+  textToType: string = "Your Sign-In Can Change the World";
+  displayedText: string = ""; 
+  typingSpeed: number = 100; 
 
+  signinForm: FormGroup
   constructor( private fb: FormBuilder, private auth: AuthService, private rout: Router, private toastr: ToastrService) {
-    this.StudentLogin = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
-    })
+    this.signinForm = this.fb.group({
+      email: [localStorage.getItem('rememberedEmail') || '', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+      rememberMe: [localStorage.getItem('rememberedEmail') ? true : false]
+    });
   }
 
+  ngOnInit(): void {
+    this.startTypingEffect();
+  }
+
+  startTypingEffect(): void {
+    let index = 0;
+
+    const typingInterval = setInterval(() => {
+      if (index < this.textToType.length) {
+        this.displayedText += this.textToType[index];
+        index++;
+      } else {
+        clearInterval(typingInterval);
+      }
+    }, this.typingSpeed);
+  }
+
+
   onSubmit() {
-    this.auth.signIn(this.StudentLogin.value).subscribe({
+    const { email, password, rememberMe } = this.signinForm.value;
+    this.auth.signIn(this.signinForm.value).subscribe({
       next: (res: string) => {
         this.toastr.success("Login Successfull", "", {
           positionClass: "toast-top-right",
           progressBar: true,
-          timeOut: 3000
+          timeOut: 2000
         })
         localStorage.setItem('token', res)
+
+        if (rememberMe) {
+          localStorage.setItem('rememberedEmail', email);
+        } else {
+          localStorage.removeItem('rememberedEmail');
+        }
       }, complete: () => {
         const token: string = localStorage.getItem("token")!;
         const decode: any = jwtDecode(token)

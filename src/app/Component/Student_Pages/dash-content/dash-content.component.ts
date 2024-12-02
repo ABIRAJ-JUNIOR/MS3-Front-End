@@ -27,7 +27,7 @@ export class DashContentComponent implements OnInit {
   totalCourse: number = 0;
 
 
-  constructor(private loding:LoadingService,private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router, private CourseService: CourseService) {
+  constructor(private loding: LoadingService, private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router, private CourseService: CourseService) {
   }
 
   ngOnInit(): void {
@@ -41,7 +41,7 @@ export class DashContentComponent implements OnInit {
 
       this.totalPaymentCalculate()
       this.ChartCalculation()
-    },(error)=>{
+    }, (error) => {
       console.log(error)
     })
 
@@ -49,7 +49,7 @@ export class DashContentComponent implements OnInit {
       this.totalCourse = data.length
     }, (error) => {
       console.log(error)
-    },()=>{
+    }, () => {
       this.loding.hide()
     })
 
@@ -74,6 +74,8 @@ export class DashContentComponent implements OnInit {
   EnrolledCourses: number = 0;
   PaymentData: any[] = []
   ChartCalculation() {
+    this.loding.show()
+
     for (let i: number = 0; i < this.StudentDetails.enrollments.length; i++) {
       const element = this.StudentDetails.enrollments[i].paymentResponse;
       if (this.StudentDetails.enrollments[i].paymentStatus == "InProcess") {
@@ -96,6 +98,8 @@ export class DashContentComponent implements OnInit {
       { name: 'TotalPayments', value: this.TotalPayment },
     ];
     this.createCourseChart()
+    this.loding.hide()
+
   }
 
   gradient: boolean = false;

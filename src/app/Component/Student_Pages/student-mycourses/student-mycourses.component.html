@@ -21,7 +21,7 @@
     </div>
 
   </div>
-  <div class="row ">
+  <div class="row " *ngIf="StudentDetails">
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 my-4 mx-auto "
       *ngFor="let item of StudentDetails.enrollments | searchMycourse:SearchCourseData let i = index ">
       <div class="card shadow border-0 rounded">

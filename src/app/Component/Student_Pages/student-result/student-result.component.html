@@ -26,7 +26,7 @@
                     <th><i class="bi bi-file-earmark-check text-warning"></i> Status</th>
                   </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="StudentAssesmentDetails">
                     <tr *ngFor="let assessmentData of StudentAssesmentDetails let i = index">
                         <td>{{ i+1 }}</td>
                         <td>{{ assessmentData.assessmentResponse.assessmentType }}</td>

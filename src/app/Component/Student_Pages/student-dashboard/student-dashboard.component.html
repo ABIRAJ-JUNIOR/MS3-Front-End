@@ -109,8 +109,8 @@
           </a>
         </li>
       </ul>
-      <div style="display: flex;flex-direction: column; align-items: center;margin-top: 100px;">
-        <img src="{{StudentDetails.imageUrl}} " *ngIf="StudentDetails" alt="" height="140px" width="140px"
+      <div style="display: flex;flex-direction: column; align-items: center;margin-top: 100px;" *ngIf="StudentDetails">
+        <img src="{{StudentDetails.imageUrl}} "  alt="" height="140px" width="140px"
           style="border-radius: 50%;">
         <div class=" d-flex align-items-center justify-content-center" data-bs-toggle="dropdown"
           style="flex-direction: column;" *ngIf="StudentDetails">

@@ -3,7 +3,7 @@
     <h4 >Completed Courses</h4>
     <hr>
   </div>
-    <div class="row">
+    <div class="row" *ngIf="StudentDetails">
         <div class="col-md-4 my-4" *ngFor="let item of StudentDetails.enrollments let i = index">
             <div class="card shadow-sm border-0 rounded" *ngIf="CompleteCourseCalculation(item)">
                 <img src="/course/card{{i+1}}.jpg" class="card-img-top" alt="Course image">

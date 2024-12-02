@@ -7,6 +7,7 @@ import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { NotificationServiceService } from "../../../Service/API/Notification/notification-service.service";
 import { ToastrService } from "ngx-toastr";
+import { AnnouncementService } from "../../../Service/API/Announcement/announcement.service";
 
 @Component({
   selector: 'app-student-dashboard',
@@ -28,11 +29,16 @@ export class StudentDashboardComponent implements OnInit {
 
 
 
-  constructor(private tostr:ToastrService,private NotificationSerivice:NotificationServiceService ,private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router ) {
+  constructor(private anouncementService:AnnouncementService, private tostr:ToastrService,private NotificationSerivice:NotificationServiceService ,private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router ) {
   }
 
   ngOnInit(): void {
 
+    this.NotficationLoad();
+    this.AnnouncementLoad();
+
+  }
+  NotficationLoad(){
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
@@ -44,13 +50,20 @@ export class StudentDashboardComponent implements OnInit {
       },()=>{
       })
 
+  }
 
+  Announcements:any[]=[]
+  AnnouncementLoad(){
+    this.anouncementService.GetAllAnouncement().subscribe((data:any)=>{
+      this.Announcements = data
+    })
   }
 
   MarkAsRead(id:string){
     console.log(id)
     this.NotificationSerivice.MarkAsReadNotication(id).subscribe((data:any)=>{
      this.tostr.success("Notification Read SuccessFully")
+     this.NotficationLoad()
     },(error)=>{
       console.log((error))
       this.tostr.error(error.message)

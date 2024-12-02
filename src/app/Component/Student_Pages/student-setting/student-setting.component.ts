@@ -80,7 +80,14 @@ export class StudentSettingComponent implements OnInit {
       dateOfBirth: studentData.dateOfBirth,
       gender: Number(studentData.gender),
       phone: studentData.phone,
-      id: this.StudentTokenDetails.Id
+      id: this.StudentTokenDetails.Id,
+      address: {
+        addressLine1: studentData.address.addressLine1,
+        addressLine2: studentData.address.addressLine2 || 'AddressLine2 Not included',  
+        city: studentData.address.city,
+        postalCode: studentData.address.postalCode,
+        country: studentData.address.country
+      }
     }
     console.log(student)
     this.StudentApiService.updateStudent(student).subscribe(
@@ -158,6 +165,14 @@ export interface StudenUpdateRequest {
   dateOfBirth: string;
   gender: number;
   phone: string;
-  address?: string;
   id: string;
+  address:Address
+}
+
+interface Address {
+  addressLine1: string;
+  addressLine2?: string;  
+  city: string;
+  postalCode: string;
+  country: string;
 }

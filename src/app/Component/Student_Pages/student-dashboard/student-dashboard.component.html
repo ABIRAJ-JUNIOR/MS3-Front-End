@@ -122,7 +122,8 @@
 
           <span class="text-light mb-1">Student ID: UT-{{StudentDetails.nic | slice: -4
             }}</span>
-          <button class="btn btn-md btn-outline-secondary w-100 my-1">Logout</button>
+          <button class="btn btn-danger d-flex align-items-center gap-2 px-4 py-2 shadow-sm"   style="border-radius: 4px;" data-bs-toggle="modal" data-bs-target="#logoutModal"> <i class="bi bi-box-arrow-right"></i> Logout</button>
+         
         </div>
 
       </div>
@@ -257,6 +258,31 @@
           </div>
         </div>
 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background: linear-gradient(135deg, #FF6F61, #D61C4E); color: white;">
+        <h5 class="modal-title d-flex align-items-center" id="logoutModalLabel">
+          <i class="bi bi-box-arrow-right me-2"></i> Log Out Confirmation
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body">
+        <p class="fs-5">Are you sure you want to log out? Any unsaved progress will be lost.</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-md btn-danger " (click)="logoutDash()">Yes, Log Out</button>
+        <button type="button" class="btn btn-md btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
       </div>
     </div>
   </div>

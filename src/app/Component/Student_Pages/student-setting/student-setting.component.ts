@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { ReactiveFormsModule, FormGroup, FormBuilder } from "@angular/forms";
+import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
@@ -25,14 +25,22 @@ export class StudentSettingComponent implements OnInit {
 
   constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private fb: FormBuilder, private toastr: ToastrService) {
 
+
     this.studentForm = this.fb.group({
-      firstName: [''],
-      lastName: [''],
-      phone: [''],
-      address: [''],
-      dateOfBirth: [''],
-      gender: [0]
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]], 
+      dateOfBirth: ['', Validators.required],
+      gender: [], 
+      address: this.fb.group({
+        addressLine1: ['', Validators.required],
+        addressLine2: [''],
+        city: ['', Validators.required],
+        postalCode: ['', Validators.required],
+        country: ['', Validators.required]
+      })
     });
+    
   }
 
 

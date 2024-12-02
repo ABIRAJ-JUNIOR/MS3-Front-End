@@ -23,10 +23,10 @@ export class AssesmentService {
     return this.http.get<any>(this.CommonUrl + `/Assessment/Pagination/${pageNumber}/${pageSize}`)
   }
   addAssessment(Assessment:AssessmentRequest){
-    return this.http.post(this.CommonUrl + '/Assessment/Add', Assessment)
+    return this.http.post<Assessment>(this.CommonUrl + '/Assessment/Add', Assessment)
   }
   updateAssessment(id:string ,Assessment:AssessmentRequest){
-    return this.http.put(this.CommonUrl + `/Assessment/Update/${id}`, Assessment)
+    return this.http.put<Assessment>(this.CommonUrl + `/Assessment/Update/${id}`, Assessment)
   }
 
 }

@@ -91,7 +91,10 @@ export class StudentDashboardComponent implements OnInit {
 
   logoutDash(){
     this.LogoutService.LogoutStudent()
+    this.refreshPage();
+  }
+  refreshPage(): void {
+    window.location.reload();
   }
   
-
 }

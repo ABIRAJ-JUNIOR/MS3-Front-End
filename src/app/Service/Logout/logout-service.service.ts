@@ -12,8 +12,6 @@ export class LogoutServiceService {
 
   LogoutStudent(){
     localStorage.removeItem('token');
-    this.router.navigate(['']);
-
   }
 
 }

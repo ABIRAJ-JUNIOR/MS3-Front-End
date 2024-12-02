@@ -140,9 +140,12 @@ export class DashContentComponent implements OnInit {
       this.feedBackForm.get('studentId')?.setValue(this.StudentTokenDetails.Id)
     this.feedbackService.SendFeedback(this.feedBackForm.value).subscribe((data:any)=>{
       this.tostr.success("Feedback Send Succesfully")
+      this.feedBackForm.reset();
+
     },(error)=>{
       this.tostr.error("Feedback Send Failed")
-     
+      this.feedBackForm.reset();
+
    console.log(error)
     })
       console.log(this.feedBackForm.value);

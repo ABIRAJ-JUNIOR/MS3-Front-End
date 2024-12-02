@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { CourseFilterPipe } from '../../../Pipes/course-filter.pipe';
 import { PaymentDataService } from '../../../Service/Data/Payment_Data/payment-data.service';
 import { Router, RouterModule } from '@angular/router';
-import { LoadingService } from '../../../Service/Loading/loading.service';
 
 @Component({
   selector: 'app-course-cards',
@@ -18,7 +17,7 @@ import { LoadingService } from '../../../Service/Loading/loading.service';
 export class CourseCardsComponent implements OnInit {
 
 
-  constructor(private loading:LoadingService, private CourseService:CourseService,private PaymentService:PaymentDataService , private route:Router){
+  constructor( private CourseService:CourseService,private PaymentService:PaymentDataService , private route:Router){
     
   }
 
@@ -370,7 +369,6 @@ export class CourseCardsComponent implements OnInit {
   }
 
   paginateCourses() {
-    this.loading.show()
 
     this.CourseService.pagination(this.currentPage,this.pageSize).subscribe({
       next:((courses:any)=>{
@@ -386,7 +384,6 @@ export class CourseCardsComponent implements OnInit {
       console.error(err);
     },
     })
-    this.loading.hide()
 
   }
 

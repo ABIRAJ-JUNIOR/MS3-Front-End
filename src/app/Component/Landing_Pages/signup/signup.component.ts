@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { AuthService, SignUp } from '../../../Service/API/Auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { LoadingService } from '../../../Service/Loading/loading.service';
 
 @Component({
   selector: 'app-signup',
@@ -18,7 +17,7 @@ export class SignupComponent {
 
   StudentRegistration: FormGroup;
 
-  constructor(private loading: LoadingService, private fb: FormBuilder, private authService: AuthService, private toastr: ToastrService, private rout: Router) {
+  constructor( private fb: FormBuilder, private authService: AuthService, private toastr: ToastrService, private rout: Router) {
     this.StudentRegistration = this.fb.group({
       nic: ['', [Validators.required, Validators.pattern('^[0-9]{9}[Vv]$|^[0-9]{12}$')]],
       firstName: ['', Validators.required],
@@ -33,7 +32,6 @@ export class SignupComponent {
   }
 
   onSubmit() {
-    this.loading.show()
     const form = this.StudentRegistration.value;
     const student: SignUp = {
       nic: form.nic,
@@ -57,7 +55,6 @@ export class SignupComponent {
         this.StudentRegistration.reset()
       }, complete: () => {
         this.rout.navigate(['/signin'])
-        this.loading.hide()
 
       }, error: (error) => {
         this.toastr.warning(error.error, "", {

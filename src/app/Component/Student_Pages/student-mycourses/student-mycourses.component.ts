@@ -6,7 +6,6 @@ import { Student } from "../../../Modals/modals";
 import { SearchMycoursePipe } from "../../../Pipes/search-mycourse.pipe";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
-import { LoadingService } from "../../../Service/Loading/loading.service";
 
 
 @Component({
@@ -19,7 +18,7 @@ import { LoadingService } from "../../../Service/Loading/loading.service";
 export class StudentMycoursesComponent implements OnInit{
 
 
-  constructor(private loding:LoadingService, private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
+  constructor( private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
 
   StudentDetails: any;
@@ -28,7 +27,6 @@ export class StudentMycoursesComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.loding.show()
 
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
@@ -38,7 +36,6 @@ export class StudentMycoursesComponent implements OnInit{
     },(error)=>{
       console.log(error)
     },()=>{
-      this.loding.hide()
     })
 
   }

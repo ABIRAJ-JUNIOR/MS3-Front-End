@@ -4,7 +4,6 @@ import { Router } from "@angular/router";
 import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
-import { LoadingService } from "../../../Service/Loading/loading.service";
 
 @Component({
   selector: 'app-student-payments-history',
@@ -14,7 +13,7 @@ import { LoadingService } from "../../../Service/Loading/loading.service";
   styleUrl: './student-payments-history.component.css'
 })
 export class StudentPaymentsHistoryComponent {
-  constructor(private loding:LoadingService,private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
+  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
 
   Enrollments: any;
@@ -25,7 +24,6 @@ export class StudentPaymentsHistoryComponent {
 
 
   ngOnInit(): void {
-    this.loding.show()
 
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
@@ -35,7 +33,6 @@ export class StudentPaymentsHistoryComponent {
     },(error)=>{
       console.log(error)
     },()=>{
-      this.loding.hide()
     })
 
   }

@@ -2,7 +2,6 @@ import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
 import { StudentService } from "../../../Service/API/Student/student.service";
-import { LoadingService } from "../../../Service/Loading/loading.service";
 
 @Component({
   selector: 'app-student-assesment',
@@ -14,7 +13,7 @@ import { LoadingService } from "../../../Service/Loading/loading.service";
 export class StudentAssesmentComponent implements OnInit {
 
 
-  constructor(private loding: LoadingService, private StudentService: StudentService, private studentDataService: StudentDashDataService) {
+  constructor( private StudentService: StudentService, private studentDataService: StudentDashDataService) {
 
   }
   pageSize: number = 12; // Courses per page
@@ -28,7 +27,6 @@ export class StudentAssesmentComponent implements OnInit {
 
   StudentDetails: any;
   ngOnInit() {
-    this.loding.show()
 
     this.paginateAssesment()
   }
@@ -43,7 +41,6 @@ export class StudentAssesmentComponent implements OnInit {
     }, (error) => {
       console.log(error)
     }, () => {
-      this.loding.hide()
     }
     )
   }

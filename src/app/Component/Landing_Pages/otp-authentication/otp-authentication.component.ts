@@ -4,7 +4,6 @@ import { RouterModule, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { PaymentDataService } from "../../../Service/Data/Payment_Data/payment-data.service";
 import { PaymentService } from "../../../Service/API/Payment/payment.service";
-import { LoadingService } from "../../../Service/Loading/loading.service";
 
 @Component({
   selector: 'app-otp-authentication',
@@ -14,15 +13,13 @@ import { LoadingService } from "../../../Service/Loading/loading.service";
   styleUrl: './otp-authentication.component.css'
 })
 export class OtpAuthenticationComponent implements OnInit {
-  constructor(private loading: LoadingService, private router: Router, private paymentDataService: PaymentDataService, private toastr: ToastrService, private PaymentApiServices: PaymentService) {
+  constructor( private router: Router, private paymentDataService: PaymentDataService, private toastr: ToastrService, private PaymentApiServices: PaymentService) {
 
   }
   otp: string = "";
 
   ngOnInit(): void {
-    this.loading.show()
     this.getOtp();
-    this.loading.hide()
 
 
   }
@@ -34,7 +31,6 @@ export class OtpAuthenticationComponent implements OnInit {
   }
 
   CheckOtp() {
-    this.loading.show()
     let enteredOtp = document.getElementById('otp') as HTMLInputElement
     if (enteredOtp.value == this.otp) {
       this.toastr.clear();
@@ -62,7 +58,6 @@ export class OtpAuthenticationComponent implements OnInit {
           (error) => {
             this.toastr.error('There was an error processing your payment. Please try again later.');
           }, () => {
-            this.loading.hide()
 
           }
         )
@@ -83,7 +78,6 @@ export class OtpAuthenticationComponent implements OnInit {
           (error) => {
             this.toastr.error('There was an error processing your payment. Please try again later.');
           }, () => {
-            this.loading.hide()
 
           }
         )
@@ -91,7 +85,6 @@ export class OtpAuthenticationComponent implements OnInit {
 
     } else {
       this.toastr.clear();
-      this.loading.hide()
       this.toastr.error("Invalid OTP. Ensure you're entering the correct code.")
     }
   }

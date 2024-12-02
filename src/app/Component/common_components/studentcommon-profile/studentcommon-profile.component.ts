@@ -5,7 +5,6 @@ import { ToastrService } from "ngx-toastr";
 import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
-import { LoadingService } from "../../../Service/Loading/loading.service";
 
 @Component({
   selector: 'app-studentcommon-profile',
@@ -16,7 +15,7 @@ import { LoadingService } from "../../../Service/Loading/loading.service";
 })
 export class StudentcommonProfileComponent {
 
-  constructor(private loding:LoadingService,private tostr:ToastrService, private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
+  constructor(private tostr:ToastrService, private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
 
 
@@ -25,7 +24,6 @@ export class StudentcommonProfileComponent {
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
   previewUrl: string | null = null;
   ngOnInit(): void {
-    this.loding.show()
 
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
@@ -36,14 +34,12 @@ export class StudentcommonProfileComponent {
     },(error)=>{
      console.log(error) 
     },()=>{
-      this.loding.hide
     })
 
   }
 
 
   onFileSelected(event: Event): void {
-    this.loding.show()
 
     const input = event.target as HTMLInputElement;
 
@@ -72,7 +68,6 @@ export class StudentcommonProfileComponent {
     },(error)=>{
       this.tostr.error(error.message);
     },()=>{
-      this.loding.hide()
     })
 
 

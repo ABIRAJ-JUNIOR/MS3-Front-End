@@ -6,7 +6,6 @@ import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
 import { StudentcommonProfileComponent } from "../../common_components/studentcommon-profile/studentcommon-profile.component";
-import { LoadingService } from "../../../Service/Loading/loading.service";
 
 @Component({
   selector: 'app-student-setting',
@@ -24,7 +23,7 @@ export class StudentSettingComponent implements OnInit {
   
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
-  constructor(private loding:LoadingService,private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private fb: FormBuilder, private toastr: ToastrService) {
+  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private fb: FormBuilder, private toastr: ToastrService) {
 
     this.studentForm = this.fb.group({
       firstName: [''],
@@ -40,7 +39,6 @@ export class StudentSettingComponent implements OnInit {
   StudentDetails: any;
 
   ngOnInit(): void {
-    this.loding.show()
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
     console.log(this.StudentTokenDetails)
 
@@ -59,7 +57,6 @@ export class StudentSettingComponent implements OnInit {
        
         });
       },()=>{
-        this.loding.hide()
       })
 
 
@@ -67,7 +64,6 @@ export class StudentSettingComponent implements OnInit {
 
 
   onSubmit() {
-    this.loding.show()
 
     const studentData = this.studentForm.value;
     const student: StudenUpdateRequest = {
@@ -97,7 +93,6 @@ export class StudentSettingComponent implements OnInit {
         })
 
       },()=>{
-        this.loding.hide()
 
       }
     )

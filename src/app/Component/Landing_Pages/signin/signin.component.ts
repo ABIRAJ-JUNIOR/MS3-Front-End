@@ -5,7 +5,6 @@ import { Router, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../Service/API/Auth/auth.service';
 import { jwtDecode } from 'jwt-decode';
-import { LoadingService } from '../../../Service/Loading/loading.service';
 
 @Component({
   selector: 'app-signin',
@@ -17,7 +16,7 @@ import { LoadingService } from '../../../Service/Loading/loading.service';
 export class SigninComponent {
   StudentLogin: FormGroup
 
-  constructor(private loading: LoadingService, private fb: FormBuilder, private auth: AuthService, private rout: Router, private toastr: ToastrService) {
+  constructor( private fb: FormBuilder, private auth: AuthService, private rout: Router, private toastr: ToastrService) {
     this.StudentLogin = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
@@ -25,7 +24,6 @@ export class SigninComponent {
   }
 
   onSubmit() {
-    this.loading.show()
     this.auth.signIn(this.StudentLogin.value).subscribe({
       next: (res: string) => {
         this.toastr.success("Login Successfull", "", {
@@ -42,7 +40,6 @@ export class SigninComponent {
         } else if (decode.Role == "Student") {
           this.rout.navigate(['/home'])
         }
-        this.loading.hide()
 
       }
       , error: (error) => {

@@ -4,7 +4,6 @@ import { Router } from "@angular/router";
 import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
-import { LoadingService } from "../../../Service/Loading/loading.service";
 
 @Component({
   selector: 'app-student-completedcourses',
@@ -14,7 +13,7 @@ import { LoadingService } from "../../../Service/Loading/loading.service";
   styleUrl: './student-completedcourses.component.css'
 })
 export class StudentCompletedcoursesComponent {
-  constructor(private loding: LoadingService, private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
+  constructor( private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
 
   StudentDetails: any;
@@ -22,7 +21,6 @@ export class StudentCompletedcoursesComponent {
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
   ngOnInit(): void {
-    this.loding.show()
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
@@ -31,7 +29,6 @@ export class StudentCompletedcoursesComponent {
     }, (error) => {
       console.log(error)
     }, () => {
-      this.loding.hide()
 
     })
 

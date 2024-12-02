@@ -7,7 +7,6 @@ import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { NotificationServiceService } from "../../../Service/API/Notification/notification-service.service";
 import { ToastrService } from "ngx-toastr";
-import { LoadingService } from "../../../Service/Loading/loading.service";
 
 @Component({
   selector: 'app-student-dashboard',
@@ -29,11 +28,10 @@ export class StudentDashboardComponent implements OnInit {
 
 
 
-  constructor(private loding:LoadingService,private tostr:ToastrService,private NotificationSerivice:NotificationServiceService ,private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router ) {
+  constructor(private tostr:ToastrService,private NotificationSerivice:NotificationServiceService ,private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router ) {
   }
 
   ngOnInit(): void {
-    this.loding.show()
 
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
@@ -44,7 +42,6 @@ export class StudentDashboardComponent implements OnInit {
       (error) => {
         this.router.navigate([''])
       },()=>{
-        this.loding.hide()
       })
 
 

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SearchStudentsPipe } from './Pipes/search-students.pipe';
 import { CommonModule } from '@angular/common';
-import { LoadingService } from './Service/Loading/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -16,12 +15,6 @@ export class AppComponent {
 
   isLoading = false;
 
-  constructor(private loadingService: LoadingService) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    // Subscribe to the loading observable to show or hide the loading screen
-    this.loadingService.loading$.subscribe((loading: boolean) => {
-      this.isLoading = loading;
-    });
-  }
 }

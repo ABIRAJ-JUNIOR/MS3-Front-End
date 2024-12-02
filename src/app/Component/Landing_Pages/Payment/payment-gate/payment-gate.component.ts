@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { jwtDecode } from "jwt-decode";
 import { Location } from '@angular/common';
 import { Enrollment } from '../../../../Modals/modals';
-import { LoadingService } from '../../../../Service/Loading/loading.service';
 
 @Component({
   selector: 'app-payment-gate',
@@ -23,7 +22,7 @@ export class PaymentGateComponent {
 
   CardFormData: FormGroup;
 
-  constructor(private loading :LoadingService, private PaymentDataService: PaymentDataService, private fb: FormBuilder, private router: Router ,private location: Location) {
+  constructor( private PaymentDataService: PaymentDataService, private fb: FormBuilder, private router: Router ,private location: Location) {
 
     this.CardFormData = this.fb.group({
       name: ['', [Validators.required]],
@@ -51,14 +50,12 @@ export class PaymentGateComponent {
   LocalCardDetails: any;
 
   ngOnInit(): void {
-    this.loading.show()
     this.loadItems();
     this.AddCardDetails()
     window.onpopstate = function () {
       history.pushState(null, '', location.href);
     };
     console.log(this.LocalCardDetails)
-    this.loading.hide()
 
   }
 

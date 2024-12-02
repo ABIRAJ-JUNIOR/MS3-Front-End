@@ -86,19 +86,17 @@ a.sidebar-link {
     color: #e9ecef; 
     position: relative;
     display: block;
-    border-radius: 10px; 
     font-size: 0.875rem;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a.sidebar-link.active_Link {
-    background-color: #007bff; 
+    background-color:#227093; 
     color: #fff;  
-    border-radius: 10px; 
 }
 
 a.sidebar-link:hover {
-    background-color: #0056b3; 
+    background-color: #226f93c5; 
     color: #fff; 
 }
 

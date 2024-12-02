@@ -7,15 +7,19 @@ import { StudentService } from "../../../Service/API/Student/student.service";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { CourseService } from "../../../Service/API/Course/course.service";
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { FeedbackServiceService } from "../../../Service/API/Feedback/feedback-service.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-dash-content',
   standalone: true,
-  imports: [CommonModule, NgxChartsModule],
+  imports: [CommonModule, NgxChartsModule,ReactiveFormsModule],
   templateUrl: './dash-content.component.html',
   styleUrl: './dash-content.component.css'
 })
 export class DashContentComponent implements OnInit {
+
 
   StudentDetails: any;
   StudentTokenDetails: any;
@@ -24,9 +28,23 @@ export class DashContentComponent implements OnInit {
   TotalAssignments: number = 0;
 
   totalCourse: number = 0;
+  feedBackForm: FormGroup;
 
+  constructor(private StudentDashDataService: StudentDashDataService,
+    private StudentApiService: StudentService,
+    private router: Router,
+    private CourseService: CourseService,
+    private fb: FormBuilder,
+    private feedbackService:FeedbackServiceService,
+    private tostr:ToastrService
 
-  constructor( private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router, private CourseService: CourseService) {
+  ) { 
+    this.feedBackForm=this.fb.group({
+      courseId: ['', Validators.required],
+      rating: ['', Validators.required],
+      feedBackText: ['', Validators.required],
+      studentId:[''],
+    })
   }
 
   ngOnInit(): void {
@@ -117,7 +135,22 @@ export class DashContentComponent implements OnInit {
 
 
 
+  onSubmit(): void {
+    if (this.feedBackForm.valid) {
+      this.feedBackForm.get('studentId')?.setValue(this.StudentTokenDetails.Id)
+    this.feedbackService.SendFeedback(this.feedBackForm.value).subscribe((data:any)=>{
+      this.tostr.success("Feedback Send Succesfully")
+      this.feedBackForm.reset();
 
+    },(error)=>{
+      this.tostr.error("Feedback Send Failed")
+      this.feedBackForm.reset();
+
+   console.log(error)
+    })
+      console.log(this.feedBackForm.value);
+    }
+  }
 
 
 

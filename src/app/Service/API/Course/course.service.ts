@@ -41,6 +41,9 @@ export class CourseService {
       responseType:'text'
     })
   }
+  getTop3Courses(){
+    return this.http.get<Course[]>(this.apiUrl + '/Course/Top3')
+  }
 
 
   //Course Schedule

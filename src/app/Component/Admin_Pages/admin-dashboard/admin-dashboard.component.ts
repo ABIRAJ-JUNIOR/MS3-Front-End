@@ -15,7 +15,11 @@ import { AdminService } from '../../../Service/API/Admin/admin.service';
   styleUrl: './admin-dashboard.component.css'
 })
 export class AdminDashboardComponent implements OnInit {
+  announcements: { title: string; date: string }[] = [];
 
+  deleteAnnouncement(index: number): void {
+    this.announcements.splice(index, 1);
+  }
   loginData!:any
   adminData!:Admin;
 
@@ -32,6 +36,11 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.announcements = [
+      { title: 'New Course Added!', date: '2024-12-02' },
+      { title: 'Holiday Notification', date: '2024-12-01' },
+      { title: 'Fee Payment Reminder', date: '2024-11-30' }
+    ];
     this.adminService.getadminbyID(this.loginData.Id).subscribe({
       next:(res:Admin)=>{
         this.adminData = res

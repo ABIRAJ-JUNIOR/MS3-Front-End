@@ -1,6 +1,6 @@
 <div class="wrapper">
   <aside id="sidebar" [ngClass]="{'collapsed': sidebarCollapsed}" class="text-light js-sidebar shadow-lg">
-    <div class="h-100" style="position: fixed; min-width: 260px ">
+    <div class="h-100" style="position: fixed; min-width: 270px ">
       <div class="sidebar-logo ">
         <img src="/logo.png" alt="" height="50px">
         <a href="#">Student Portal</a>
@@ -33,16 +33,16 @@
           <a href="#" class="sidebar-link collapsed" [routerLinkActive]="['active_Link']" data-bs-target="#courses"
             data-bs-toggle="collapse" aria-expanded="false">
             <i class="fa-solid fa-book-open pe-2"></i>
-            Learning Dashboard
+            Learning Dashboard  <i class="bi bi-arrow-down-short"></i>
           </a>
           <ul id="courses" class="sidebar-dropdown list-unstyled collapse m-1" data-bs-parent="#sidebar">
             <li class="sidebar-item">
               <a [routerLink]="['/student-dashboard/mycourses']" [routerLinkActive]="['active_Link']"
-                class="sidebar-link">My Student Hub</a>
+                class="sidebar-link ms-4">My Student Hub</a>
             </li>
             <li class="sidebar-item">
               <a [routerLink]="['/student-dashboard/completed-Courses']" [routerLinkActive]="['active_Link']"
-                class="sidebar-link">Campus Connect</a>
+                class="sidebar-link ms-4">Campus Connect</a>
             </li>
           </ul>
         </li>
@@ -53,15 +53,15 @@
           <a href="#" class="sidebar-link collapsed " data-bs-target="#assesment" data-bs-toggle="collapse"
             aria-expanded="false">
             <i class="bi bi-person-workspace pe-2"></i>
-            Student Workspace
+            Student Workspace <i class="bi bi-arrow-down-short"></i>
           </a>
           <ul id="assesment" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
             <li class="sidebar-item">
-              <a [routerLink]="['/student-dashboard/assesment']" class="sidebar-link"> Assessment Overview
+              <a [routerLink]="['/student-dashboard/assesment']" class="sidebar-link ms-4" [routerLinkActive]="['active_Link']"> Assessment Overview
               </a>
             </li>
             <li class="sidebar-item">
-              <a [routerLink]="['/student-dashboard/assesment-result']" class="sidebar-link">Assessment Results</a>
+              <a [routerLink]="['/student-dashboard/assesment-result']" class="sidebar-link ms-4" [routerLinkActive]="['active_Link']">Assessment Results</a>
             </li>
 
           </ul>
@@ -109,8 +109,11 @@
         </li>
       </ul>
       <div style="display: flex;flex-direction: column; align-items: start;margin-top: 50px; margin-left: 50px;" *ngIf="StudentDetails">
-        <img src="{{StudentDetails.imageUrl}} " *ngIf="StudentDetails.imageUrl" alt="" height="140px" width="140px" style="border-radius: 50%;">
-        <img src="/customer-support.jpg" alt="" *ngIf="!StudentDetails.imageUrl" height="140px" width="140px" style="border-radius: 50%;">
+        <div style="height: 140px; width: 140px; overflow: hidden; position: relative;">
+          <img src="{{StudentDetails.imageUrl}}" *ngIf="StudentDetails.imageUrl" alt="" style="height: 100%; width: 100%; object-fit: cover; border-radius: 50%;">
+          <img src="/customer-support.jpg" alt="" *ngIf="!StudentDetails.imageUrl" style="height: 100%; width: 100%; object-fit: cover; border-radius: 50%;">
+        </div>
+        
         <div class=" d-flex align-items-center justify-content-center" data-bs-toggle="dropdown"
           style="flex-direction: column;" *ngIf="StudentDetails">
           <span class="font-weight-bold fs-5 mt-3 fw-bold" style="color: #ffffff;">{{StudentDetails.firstName}}
@@ -119,18 +122,8 @@
 
           <span class="text-light mb-1">Student ID: UT-{{StudentDetails.nic | slice: -4
             }}</span>
-          <ul class="navbar-nav pe-3">
-            <li class="nav-item dropdown">
-              <a data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-              </a>
-              <div class="dropdown-menu dropdown-menu-end">
-                <a class="dropdown-item">Profile</a>
-                <a class="dropdown-item">Setting</a>
-                <a class="dropdown-item">Logout</a>
-              </div>
-            </li>
-          </ul>
-          <button class="btn btn-md btn-outline-secondary w-100 my-1">Logout</button>
+          <button class="btn btn-danger d-flex align-items-center gap-2 px-4 py-2 shadow-sm"   style="border-radius: 4px;" data-bs-toggle="modal" data-bs-target="#logoutModal"> <i class="bi bi-box-arrow-right"></i> Logout</button>
+         
         </div>
 
       </div>
@@ -165,7 +158,7 @@
             data-bs-toggle="modal" data-bs-target="#topLeftModal">
             <i class="bi bi-bell-fill"></i>
             <span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger">
-              0
+              {{NotificationLength}}
             </span>
           </button>
 
@@ -174,7 +167,8 @@
             data-bs-target="#Anouncement">
             <i class="bi bi-envelope"></i>
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              0
+              {{AnnouncementLength}}
+
             </span>
           </button>
 
@@ -213,14 +207,25 @@
 <!-- Anouncement -->
 <div class="modal fade" id="Anouncement" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog customModal">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <h5 class="modal-title" id="staticBackdropLabel"><i class="bi bi-megaphone"></i> Announcements</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        ...
+      <div class="modal-body" *ngIf="Announcements">
+        <div *ngFor="let item of Announcements">
+          <div class="notification" *ngIf="item.isActive===true && item.audienceType==typeCheck">
+            <div class="notification-header">
+              <span class="notification-type">{{item.datePosted}}</span>
+              <span class="notification-time">{{item.expirationDate}}</span>
+            </div>
+            <div class="notification-body">
+              <p class="message">{{item.title}}</p>
+            </div>
+          </div>
+        </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -231,7 +236,7 @@
 
 <!-- Modal Structure -->
 <div class="modal fade" id="topLeftModal" tabindex="-1" aria-labelledby="topLeftModalLabel" aria-hidden="true">
-  <div class="modal-dialog customModal">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="topLeftModalLabel">Notifications</h5>
@@ -253,6 +258,31 @@
           </div>
         </div>
 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background: linear-gradient(135deg, #FF6F61, #D61C4E); color: white;">
+        <h5 class="modal-title d-flex align-items-center" id="logoutModalLabel">
+          <i class="bi bi-box-arrow-right me-2"></i> Log Out Confirmation
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body">
+        <p class="fs-5">Are you sure you want to log out? Any unsaved progress will be lost.</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-md btn-danger " (click)="logoutDash()">Yes, Log Out</button>
+        <button type="button" class="btn btn-md btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
       </div>
     </div>
   </div>

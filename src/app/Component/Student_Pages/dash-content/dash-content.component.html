@@ -1,198 +1,198 @@
-<div  *ngIf="StudentDetails">
+<div *ngIf="StudentDetails">
   <!-- Dashboard Overview Section -->
-<h3 class="mb-4 text-dark fw-bold"> <i class="bi bi-house-dash-fill fs-2 text-secondary"></i> Dashboard Overview</h3>
-<div class="row mb-4">
-  <!-- Assessments Card -->
-  <div class="col-md-3 mb-4">
-    <div class="card text-white  shadow-lg border-0 overview-card " style="background-color: #3c6382;">
-      <div class="card-body">
-        <h5 class="card-title text-light fs-4 fw-bold"><i class="bi bi-pencil-square me-2"
-            style="font-size: 1.5rem; "></i> Assessments</h5>
-        <p class="display-6 fw-bold text-light mb-0">{{TotalAssignments || 0}}</p>
-        <p class="text-light fs-6">Total number of assessments</p>
-        <div class="bg-transparent border-0 d-flex justify-content-between align-items-center">
-          <small class="text-light"><i class="bi bi-caret-up-fill" style="font-size: 1rem;"></i> Waymakers
-            Assesment</small>
-          <i class="bi bi-pie-chart-fill text-light" style="font-size: 1.25rem;"></i>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Payments Card -->
-  <div class="col-md-3 mb-4">
-    <div class="card text-white  shadow-lg border-0 overview-card"
-      style="background: linear-gradient(135deg, #34495e, #2c3e50); border-radius: 8px;">
-      <div class="card-body">
-        <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-coins me-2 text-warning"
-            style="font-size: 1.5rem;"></i>
-          Payments</h5>
-        <p class="display-6 fw-bold text-light mb-0 ">{{TotalPayments | number:'1.2-2'}}</p>
-        <p class="text-white fs-6">Total payments made</p>
-        <div class=" bg-transparent border-0 d-flex justify-content-between align-items-center">
-          <small class="text-light"><i class="bi bi-arrow-up-circle" style="font-size: 1rem;"></i> Waymakers Pay</small>
-          <i class="bi bi-pie-chart-fill text-light" style="font-size: 1.25rem;"></i>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Courses Card -->
-  <div class="col-md-3 mb-4">
-    <div class="card text-white  shadow-lg border-0 overview-card " style=" background-color:#0a3d62;">
-      <div class="card-body">
-        <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-book me-2"
-            style="font-size: 1.5rem;"></i>Enrolled Courses</h5>
-        <p class="display-6 fw-bold text-light mb-0">{{StudentDetails.enrollments.length || 0}}</p>
-        <p class="text-light fs-6">Total number of courses</p>
-        <div class=" bg-transparent border-0 d-flex justify-content-between align-items-center">
-          <small class="text-light"><i class="bi bi-arrow-up-circle" style="font-size: 1rem;"></i> Waymakers
-            Enrolled</small>
-          <i class="bi bi-pie-chart-fill text-light" style="font-size: 1.25rem;"></i>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Reports Card -->
-  <div class="col-md-3 mb-4">
-    <div class="card text-white  shadow-lg border-0 overview-card "
-      style="background-color: #60a3bc; border-radius: 8px;">
-      <div class="card-body">
-        <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-file-alt me-2 text-dark"
-            style="font-size: 1.5rem;"></i>
-          Total Courses</h5>
-        <p class="display-6 fw-bold text-light mb-0">{{totalCourse}}</p>
-        <p class="text-light fs-6">Total number of Courses</p>
-        <div class=" bg-transparent border-0 d-flex justify-content-between align-items-center">
-          <small class=""><i class="bi bi-arrow-up-circle" style="font-size: 1rem;"></i> Waymakers Courses</small>
-          <i class="bi bi-pie-chart-fill text-light" style="font-size: 1.25rem;"></i>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-</div>
-
-<!-- Charts Section -->
-<div class="container-fluid">
-  <div class="row">
-    <!-- Card for Course Details -->
-    <div class="col-lg-6 col-md-12">
-      <div class="card border-0 shadow-sm">
-        <div class="card-header  border-0">
-          <h3>Course Details</h3>
-        </div>
+  <h3 class="mb-4 text-dark fw-bold"> <i class="bi bi-house-dash-fill fs-2 text-secondary"></i> Dashboard Overview</h3>
+  <div class="row mb-4">
+    <!-- Assessments Card -->
+    <div class="col-md-3 mb-4">
+      <div class="card text-white  shadow-lg border-0 overview-card " style="background-color: #3c6382;">
         <div class="card-body">
-          <ngx-charts-bar-vertical
-            [results]="courseData"
-            [scheme]="'air'"
-            [xAxis]="true"
-            [yAxis]="true"
-            [showXAxisLabel]="true"
-            [showYAxisLabel]="true"
-            xAxisLabel="Courses"
-            yAxisLabel="Total"
-            [animations]="true"
-            [barPadding]="10">
-          </ngx-charts-bar-vertical>
-        </div>
-      </div>
-    </div>
-
-    <!-- Card for Payment Details -->
-    <div class="col-lg-6 col-md-12">
-      <div class="card border-0 shadow-sm">
-        <div class="card-header border-0">
-          <h3>Payment Details</h3>
-        </div>
-        <div class="card-body">
-          <ngx-charts-advanced-pie-chart
-            [results]="PaymentData"
-            [scheme]="'air'"
-            [gradient]="true">
-          </ngx-charts-advanced-pie-chart>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
-<!-- Recent Notifications Panel -->
-<div class="row  my-5">
-  <div class="col-12 col-md-7 mx-auto">
-    <div class="card">
-      <div class="card-header text-center  text-light" style="background-color: #60a3bc; ">
-        <h3 style="color: #000000;">Course Feedback</h3>
-        <p class="lead" style="color: #ffffff;">Please share your thoughts about the course.</p>
-      </div>
-      <div class="card-body">
-        <!-- Rating Section -->
-        <div>
-          <label for="">Course Name</label>
-          <input type="text" class="form-control">
-        </div>
-        <div class="align-item-center">
-          <label for="rating">How would you rate the course?</label>
-          <div class="radio-wrapper-17">
-            <input id="rating-17-5" type="radio" name="radio-examples">
-            <label class="rating-5" for="rating-17-5"></label>
-            <input id="rating-17-4" type="radio" name="radio-examples">
-            <label class="rating-4" for="rating-17-4"></label>
-            <input id="rating-17-3" type="radio" name="radio-examples">
-            <label class="rating-3" for="rating-17-3"></label>
-            <input id="rating-17-2" type="radio" name="radio-examples">
-            <label class="rating-2" for="rating-17-2"></label>
-            <input id="rating-17-1" type="radio" name="radio-examples">
-            <label class="rating-1" for="rating-17-1"></label>
+          <h5 class="card-title text-light fs-4 fw-bold"><i class="bi bi-pencil-square me-2"
+              style="font-size: 1.5rem; "></i> Assessments</h5>
+          <p class="display-6 fw-bold text-light mb-0">{{TotalAssignments || 0}}</p>
+          <p class="text-light fs-6">Total number of assessments</p>
+          <div class="bg-transparent border-0 d-flex justify-content-between align-items-center">
+            <small class="text-light"><i class="bi bi-caret-up-fill" style="font-size: 1rem;"></i> Waymakers
+              Assesment</small>
+            <i class="bi bi-pie-chart-fill text-light" style="font-size: 1.25rem;"></i>
           </div>
         </div>
 
-        <!-- Text Feedback Section -->
-        <div class="form-group">
-          <label for="feedbackText">Your Feedback:</label>
-          <textarea class="form-control" id="feedbackText" rows="4"
-            placeholder="Please write your feedback here..."></textarea>
+      </div>
+    </div>
+
+    <!-- Payments Card -->
+    <div class="col-md-3 mb-4">
+      <div class="card text-white  shadow-lg border-0 overview-card"
+        style="background: linear-gradient(135deg, #34495e, #2c3e50); border-radius: 8px;">
+        <div class="card-body">
+          <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-coins me-2 text-warning"
+              style="font-size: 1.5rem;"></i>
+            Payments</h5>
+          <p class="display-6 fw-bold text-light mb-0 ">{{TotalPayments | number:'1.2-2'}}</p>
+          <p class="text-white fs-6">Total payments made</p>
+          <div class=" bg-transparent border-0 d-flex justify-content-between align-items-center">
+            <small class="text-light"><i class="bi bi-arrow-up-circle" style="font-size: 1rem;"></i> Waymakers
+              Pay</small>
+            <i class="bi bi-pie-chart-fill text-light" style="font-size: 1.25rem;"></i>
+          </div>
         </div>
 
-        <!-- Submit Button -->
-        <div class="form-group text-end p-3">
-          <button type="submit" class="btn btn-primary">Submit Feedback</button>
+      </div>
+    </div>
+
+    <!-- Courses Card -->
+    <div class="col-md-3 mb-4">
+      <div class="card text-white  shadow-lg border-0 overview-card " style=" background-color:#0a3d62;">
+        <div class="card-body">
+          <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-book me-2"
+              style="font-size: 1.5rem;"></i>Enrolled Courses</h5>
+          <p class="display-6 fw-bold text-light mb-0">{{StudentDetails.enrollments.length || 0}}</p>
+          <p class="text-light fs-6">Total number of courses</p>
+          <div class=" bg-transparent border-0 d-flex justify-content-between align-items-center">
+            <small class="text-light"><i class="bi bi-arrow-up-circle" style="font-size: 1rem;"></i> Waymakers
+              Enrolled</small>
+            <i class="bi bi-pie-chart-fill text-light" style="font-size: 1.25rem;"></i>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Reports Card -->
+    <div class="col-md-3 mb-4">
+      <div class="card text-white  shadow-lg border-0 overview-card "
+        style="background-color: #60a3bc; border-radius: 8px;">
+        <div class="card-body">
+          <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-file-alt me-2 text-dark"
+              style="font-size: 1.5rem;"></i>
+            Total Courses</h5>
+          <p class="display-6 fw-bold text-light mb-0">{{totalCourse}}</p>
+          <p class="text-light fs-6">Total number of Courses</p>
+          <div class=" bg-transparent border-0 d-flex justify-content-between align-items-center">
+            <small class=""><i class="bi bi-arrow-up-circle" style="font-size: 1rem;"></i> Waymakers Courses</small>
+            <i class="bi bi-pie-chart-fill text-light" style="font-size: 1.25rem;"></i>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Charts Section -->
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Card for Course Details -->
+      <div class="col-lg-6 col-md-12">
+        <div class="card border-0 shadow-sm">
+          <div class="card-header  border-0">
+            <h3>Course Details</h3>
+          </div>
+          <div class="card-body">
+            <ngx-charts-bar-vertical [results]="courseData" [scheme]="'air'" [xAxis]="true" [yAxis]="true"
+              [showXAxisLabel]="true" [showYAxisLabel]="true" xAxisLabel="Courses" yAxisLabel="Total"
+              [animations]="true" [barPadding]="10">
+            </ngx-charts-bar-vertical>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card for Payment Details -->
+      <div class="col-lg-6 col-md-12">
+        <div class="card border-0 shadow-sm">
+          <div class="card-header border-0">
+            <h3>Payment Details</h3>
+          </div>
+          <div class="card-body">
+            <ngx-charts-advanced-pie-chart [results]="PaymentData" [scheme]="'air'" [gradient]="true">
+            </ngx-charts-advanced-pie-chart>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="col-12 col-md-5">
-    <img src="/course/feedback3.jpg" class="img-fluid" alt="">
 
-  </div>
-</div>
 
-<div class="row">
-  <div class="col-lg-12 mb-4">
-    <div class="card shadow-sm">
-      <div class="card-header bg-secondary text-white">
-        <h5 class="m-0">Recent Payments</h5>
+
+
+
+  <!-- Recent Notifications Panel -->
+  <div class="row  my-5">
+    <div class="col-12 col-md-7 mx-auto">
+      <div class="card">
+        <div class="card-header text-center  text-light" style="background-color: #60a3bc; ">
+          <h3 style="color: #000000;">Course Feedback</h3>
+          <p class="lead" style="color: #ffffff;">Please share your thoughts about the course.</p>
+        </div>
+        <div class="card-body">
+          <!-- Rating Section -->
+          <form [formGroup]="feedBackForm" (ngSubmit)="onSubmit()">
+            <div>
+              <label for="course">Course Name</label>
+              <select formControlName="courseId" class="form-control">
+                <option value="">Select Course</option>
+                <option *ngFor="let item of StudentDetails.enrollments"
+                  [value]="item.courseScheduleResponse.courseResponse.id">
+                  {{ item.courseScheduleResponse.courseResponse.courseName }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Rating Section -->
+            <div class="align-item-center">
+              <label for="rating">How would you rate the course?</label>
+              <div class="radio-wrapper-17">
+                <input id="rating-17-5" type="radio" formControlName="rating" [value]="5">
+                <label class="rating-5" for="rating-17-5"></label>
+                <input id="rating-17-4" type="radio" formControlName="rating" [value]="4">
+                <label class="rating-4" for="rating-17-4"></label>
+                <input id="rating-17-3" type="radio" formControlName="rating" [value]="3">
+                <label class="rating-3" for="rating-17-3"></label>
+                <input id="rating-17-2" type="radio" formControlName="rating" [value]="2">
+                <label class="rating-2" for="rating-17-2"></label>
+                <input id="rating-17-1" type="radio" formControlName="rating" [value]="1">
+                <label class="rating-1" for="rating-17-1"></label>
+              </div>
+            </div>
+
+            <!-- Text Feedback Section -->
+            <div class="form-group">
+              <label for="feedbackText">Your Feedback:</label>
+              <textarea formControlName="feedBackText" class="form-control" rows="4"
+                placeholder="Please write your feedback here..."></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group text-end p-3">
+              <button type="submit" class="btn btn-primary" [disabled]="feedBackForm.invalid">Submit Feedback</button>
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="card-body">
-        <ul class="list-group">
-          <li class="list-group-item">Upcoming assesment remider</li>
-          <li class="list-group-item">Upcoming course reminder</li>
-          <li class="list-group-item">New course added: Course B</li>
-          <li class="list-group-item">Payment overdue for Student ABC</li>
-        </ul>
+    </div>
+
+    <div class="col-12 col-md-5">
+      <img src="/course/feedback3.jpg" class="img-fluid" alt="">
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-secondary text-white">
+          <h5 class="m-0">Recent Payments</h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item">Upcoming assesment remider</li>
+            <li class="list-group-item">Upcoming course reminder</li>
+            <li class="list-group-item">New course added: Course B</li>
+            <li class="list-group-item">Payment overdue for Student ABC</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>

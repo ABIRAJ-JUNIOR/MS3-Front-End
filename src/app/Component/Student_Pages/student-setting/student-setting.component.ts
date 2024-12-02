@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { ReactiveFormsModule, FormGroup, FormBuilder } from "@angular/forms";
+import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
@@ -25,27 +25,36 @@ export class StudentSettingComponent implements OnInit {
 
   constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private fb: FormBuilder, private toastr: ToastrService) {
 
+
     this.studentForm = this.fb.group({
-      firstName: [''],
-      lastName: [''],
-      phone: [''],
-      address: [''],
-      dateOfBirth: [''],
-      gender: [0]
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]], 
+      dateOfBirth: ['', Validators.required],
+      gender: [0], 
+      address: this.fb.group({
+        addressLine1: ['', Validators.required],
+        addressLine2: ['Kindly provide your address for our records.'],
+        city: ['', Validators.required],
+        postalCode: ['', Validators.required],
+        country: ['', Validators.required]
+      })
     });
+    
   }
 
 
   StudentDetails: any;
 
   ngOnInit(): void {
+    this.studentForm.disable();
+
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
     console.log(this.StudentTokenDetails)
 
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
       this.StudentDetails = student
       this.assignStudentData();
-      this.studentForm.disable();
 
     },
       (error) => {
@@ -72,10 +81,16 @@ export class StudentSettingComponent implements OnInit {
       dateOfBirth: studentData.dateOfBirth,
       gender: Number(studentData.gender),
       phone: studentData.phone,
-      id: this.StudentTokenDetails.Id
+      address: {
+        addressLine1: studentData.address.addressLine1,
+        addressLine2: studentData.address.addressLine2 || 'AddressLine2 Not included',  
+        city: studentData.address.city,
+        postalCode: studentData.address.postalCode,
+        country: studentData.address.country
+      }
     }
     console.log(student)
-    this.StudentApiService.updateStudent(student).subscribe(
+    this.StudentApiService.updateStudent(this.StudentTokenDetails.Id,student).subscribe(
       (data: any) => {
         this.toastr.success("User Update Successfull", "", {
           progressBar: true,
@@ -99,23 +114,24 @@ export class StudentSettingComponent implements OnInit {
   }
 
   assignStudentData() {
-    let gender = 3;
+    let Gender = 3;
+    const genderValue = this.StudentDetails?.gender.toLowerCase();
+    const dateOfBirth = new Date(this.StudentDetails?.dateOfBirth).toISOString().split('T')[0];
 
-    const genderValue = this.StudentDetails.gender.toLowerCase();
 
-    if (genderValue === "male") {
-      gender = 1;
-    } else if (genderValue === "female") {
-      gender = 2;
+    if (genderValue == "male") {
+      Gender = 1;
+    } else if (genderValue == "female") {
+      Gender = 2;
     }
-
     this.studentForm.setValue({
       firstName: this.StudentDetails.firstName,
       lastName: this.StudentDetails.lastName,
       phone: this.StudentDetails.phone,
-      address: this.StudentDetails.address || "Address Field Is Soon",
-      dateOfBirth: this.StudentDetails.dateOfBirth,
-      gender: gender
+      dateOfBirth: dateOfBirth,
+      gender: Gender,
+      address: this.StudentDetails.address || "Kindly provide your address for our records.",
+    
 
     });
   }
@@ -150,6 +166,13 @@ export interface StudenUpdateRequest {
   dateOfBirth: string;
   gender: number;
   phone: string;
-  address?: string;
-  id: string;
+  address:Address
+}
+
+interface Address {
+  addressLine1: string;
+  addressLine2?: string;  
+  city: string;
+  postalCode: string;
+  country: string;
 }

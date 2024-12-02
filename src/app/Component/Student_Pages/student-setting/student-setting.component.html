@@ -1,4 +1,4 @@
-<div class="container-fluid bg-light" >
+<div class="container-fluid bg-light">
     <div class="row justify-content-center pt-5">
         <div class="col-12 col-lg-10 col-xl-11 mx-auto">
             <h2 class="h3 mb-4 page-title"><i class="bi bi-gear"></i> Settings</h2>
@@ -201,7 +201,7 @@
 
                                         <div class="my-2">
                                             <!-- Profile Section -->
-                                            <div class="row" *ngIf="StudentDetails" >
+                                            <div class="row" *ngIf="StudentDetails">
 
 
                                                 <app-studentcommon-profile></app-studentcommon-profile>
@@ -295,18 +295,90 @@
                                                                                     formControlName="phone">
                                                                             </div>
                                                                         </div>
-
-                                                                        <!-- Address -->
-                                                                        <div class="col-12 col-md-6">
-                                                                            <label
-                                                                                class="font-weight-normal">Address</label>
-                                                                            <div class="input-group">
-                                                                                <div class="input-group-prepend">
-                                                                                    <span class="input-group-text"><i
-                                                                                            class="bi bi-house-door"></i></span>
+                                                                        <hr class="my-2">
+                                                                        <p class="text-secondary">Address</p>
+                                                                        <div formGroupName="address" class="col-12">
+                                                                            <div class="row">
+                                                                                <!-- Address -->
+                                                                                <div class="col-12 col-md-6">
+                                                                                    <label
+                                                                                        class="font-weight-normal">AddressLine1</label>
+                                                                                    <div class="input-group">
+                                                                                        <div
+                                                                                            class="input-group-prepend">
+                                                                                            <span
+                                                                                                class="input-group-text"><i
+                                                                                                    class="bi bi-house-door"></i></span>
+                                                                                        </div>
+                                                                                        <input
+                                                                                            class="form-control text-muted"
+                                                                                            formControlName="addressLine1">
+                                                                                    </div>
                                                                                 </div>
-                                                                                <input class="form-control text-muted"
-                                                                                    formControlName="address">
+                                                                                <!-- Address -->
+                                                                                <div class="col-12 col-md-6">
+                                                                                    <label
+                                                                                        class="font-weight-normal">AddressLine2</label>
+                                                                                    <div class="input-group">
+                                                                                        <div
+                                                                                            class="input-group-prepend">
+                                                                                            <span
+                                                                                                class="input-group-text"><i
+                                                                                                    class="bi bi-house-door"></i></span>
+                                                                                        </div>
+                                                                                        <input
+                                                                                            class="form-control text-muted"
+                                                                                            formControlName="addressLine2">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!-- Address -->
+                                                                                <div class="col-12 col-md-6">
+                                                                                    <label
+                                                                                        class="font-weight-normal">city</label>
+                                                                                    <div class="input-group">
+                                                                                        <div
+                                                                                            class="input-group-prepend">
+                                                                                            <span
+                                                                                                class="input-group-text"><i
+                                                                                                    class="bi bi-house-door"></i></span>
+                                                                                        </div>
+                                                                                        <input
+                                                                                            class="form-control text-muted"
+                                                                                            formControlName="city">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!-- Address -->
+                                                                                <div class="col-12 col-md-6">
+                                                                                    <label
+                                                                                        class="font-weight-normal">PostalCode</label>
+                                                                                    <div class="input-group">
+                                                                                        <div
+                                                                                            class="input-group-prepend">
+                                                                                            <span
+                                                                                                class="input-group-text"><i
+                                                                                                    class="bi bi-house-door"></i></span>
+                                                                                        </div>
+                                                                                        <input
+                                                                                            class="form-control text-muted"
+                                                                                            formControlName="postalCode">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!-- Address -->
+                                                                                <div class="col-12 col-md-6">
+                                                                                    <label
+                                                                                        class="font-weight-normal">Country</label>
+                                                                                    <div class="input-group">
+                                                                                        <div
+                                                                                            class="input-group-prepend">
+                                                                                            <span
+                                                                                                class="input-group-text"><i
+                                                                                                    class="bi bi-house-door"></i></span>
+                                                                                        </div>
+                                                                                        <input
+                                                                                            class="form-control text-muted"
+                                                                                            formControlName="country">
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>

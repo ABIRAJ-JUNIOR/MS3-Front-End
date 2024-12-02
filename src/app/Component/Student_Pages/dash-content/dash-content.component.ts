@@ -7,6 +7,7 @@ import { StudentService } from "../../../Service/API/Student/student.service";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { CourseService } from "../../../Service/API/Course/course.service";
+import { FormBuilder } from "@angular/forms";
 
 @Component({
   selector: 'app-dash-content',
@@ -25,9 +26,13 @@ export class DashContentComponent implements OnInit {
 
   totalCourse: number = 0;
 
+  constructor( private StudentDashDataService: StudentDashDataService,
+     private StudentApiService: StudentService,
+      private router: Router, 
+      private CourseService: CourseService,
+      private fb:FormBuilder
 
-  constructor( private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router, private CourseService: CourseService) {
-  }
+    ) {}
 
   ngOnInit(): void {
 

@@ -41,8 +41,8 @@ export class StudentService {
     return this.http.get(this.apiUrl + `/Student/Pagination/${pageNumber}/${pageSize}`)
   }
 
-  updateStudent(student:StudenUpdateRequest){
-    return this.http.put(this.apiUrl +"/Student/Update-Full-Details/"+student.id ,student)
+  updateStudent(studentId:string,student:StudenUpdateRequest){
+    return this.http.put(this.apiUrl +"/Student/Update-Full-Details/"+studentId,student)
   }
 }
 

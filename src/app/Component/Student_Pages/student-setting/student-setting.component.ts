@@ -90,7 +90,7 @@ export class StudentSettingComponent implements OnInit {
       }
     }
     console.log(student)
-    this.StudentApiService.updateStudent(student).subscribe(
+    this.StudentApiService.updateStudent(this.StudentTokenDetails.Id,student).subscribe(
       (data: any) => {
         this.toastr.success("User Update Successfull", "", {
           progressBar: true,

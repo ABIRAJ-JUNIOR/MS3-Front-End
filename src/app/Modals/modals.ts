@@ -167,6 +167,7 @@ export interface ContactUs{
 export interface Announcement{
     id:string;
     title:string;
+    description:string;
     datePosted:Date;
     expirationDate:Date;
     audienceType:string;

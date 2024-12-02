@@ -4,8 +4,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../Service/API/Auth/auth.service';
 import { jwtDecode } from 'jwt-decode';
-import { Admin } from '../../../Modals/modals';
+import { Admin, Announcement } from '../../../Modals/modals';
 import { AdminService } from '../../../Service/API/Admin/admin.service';
+import { AnnouncementService } from '../../../Service/API/Announcement/announcement.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -15,8 +16,8 @@ import { AdminService } from '../../../Service/API/Admin/admin.service';
   styleUrl: './admin-dashboard.component.css'
 })
 export class AdminDashboardComponent implements OnInit {
-  announcements: { title: string; date: string }[] = [];
-
+  announcements:Announcement[] = [];
+  totalAnnouncements:number = 0
   deleteAnnouncement(index: number): void {
     this.announcements.splice(index, 1);
   }
@@ -25,7 +26,8 @@ export class AdminDashboardComponent implements OnInit {
 
   constructor(
     private authService:AuthService,
-    private adminService:AdminService
+    private adminService:AdminService,
+    private announcement:AnnouncementService
   ){
     const token = localStorage.getItem("token");
     if(token != null){
@@ -36,19 +38,37 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.announcements = [
-      { title: 'New Course Added!', date: '2024-12-02' },
-      { title: 'Holiday Notification', date: '2024-12-01' },
-      { title: 'Fee Payment Reminder', date: '2024-11-30' }
-    ];
+    this.loadAdminData();
+    this.loadRecentAnnouncement();
+    this.TotalNumberOfAnnouncement();
+  }
+
+  private loadAdminData():void{
     this.adminService.getadminbyID(this.loginData.Id).subscribe({
       next:(res:Admin)=>{
         this.adminData = res
-      },complete:()=>{
-        console.log(this.adminData)
-      }
-      ,error:(error:any)=>{
+      },error:(error:any)=>{
         console.log(error.error)
+      }
+    })
+  }
+
+  private TotalNumberOfAnnouncement():void{
+    this.announcement.GetAllAnouncement().subscribe({
+      next:(res:Announcement[])=>{
+        res.forEach(a => {
+          if(a.audienceType != "Students"){
+            this.totalAnnouncements ++
+          }
+        })
+      }
+    })
+  }
+
+  private loadRecentAnnouncement():void{
+    this.announcement.GetRecentAnnouncements().subscribe({
+      next:(res:Announcement[])=>{
+        this.announcements = res
       }
     })
   }
@@ -66,6 +86,4 @@ export class AdminDashboardComponent implements OnInit {
   toggleSidebar() {
     this.sidebarCollapsed = !this.sidebarCollapsed;
   }
-
-
 }

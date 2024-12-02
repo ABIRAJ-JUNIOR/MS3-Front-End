@@ -13,3 +13,7 @@ html{
 body{
     overscroll-behavior: none;
 }
+
+input{
+    box-shadow: none !important;
+}

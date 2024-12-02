@@ -82,17 +82,19 @@ h4 {
 }
 a.sidebar-link {
     padding: 0.675rem 1.625rem;
+    margin-top: 7px;
     color: #e9ecef; 
     position: relative;
     display: block;
+    border-radius: 10px; 
     font-size: 0.875rem;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 a.sidebar-link.active_Link {
-    background-color: #007bff;  
+    background-color: #007bff; 
     color: #fff;  
-    border-radius: 5px; 
+    border-radius: 10px; 
 }
 
 a.sidebar-link:hover {

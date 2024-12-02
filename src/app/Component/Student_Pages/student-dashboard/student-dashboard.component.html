@@ -7,7 +7,7 @@
       </div>
 
 
-      <ul class="sidebar-nav ms-2">
+      <ul class="sidebar-nav">
         <!-- Sidebar Header -->
         <li class="sidebar-header">Way Makers Dashboard</li>
 
@@ -60,9 +60,7 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a [routerLink]="['/student-dashboard/assesment-result']" class="sidebar-link">Assessment Results &
-                Feedback
-              </a>
+              <a [routerLink]="['/student-dashboard/assesment-result']" class="sidebar-link">Assessment Results</a>
             </li>
 
           </ul>
@@ -109,9 +107,9 @@
           </a>
         </li>
       </ul>
-      <div style="display: flex;flex-direction: column; align-items: center;margin-top: 100px;" *ngIf="StudentDetails">
-        <img src="{{StudentDetails.imageUrl}} "  alt="" height="140px" width="140px"
-          style="border-radius: 50%;">
+      <div style="display: flex;flex-direction: column; align-items: start;margin-top: 50px; margin-left: 50px;" *ngIf="StudentDetails">
+        <img src="{{StudentDetails.imageUrl}} " *ngIf="StudentDetails.imageUrl" alt="" height="140px" width="140px" style="border-radius: 50%;">
+        <img src="/customer-support.jpg" alt="" *ngIf="!StudentDetails.imageUrl" height="140px" width="140px" style="border-radius: 50%;">
         <div class=" d-flex align-items-center justify-content-center" data-bs-toggle="dropdown"
           style="flex-direction: column;" *ngIf="StudentDetails">
           <span class="font-weight-bold fs-5 mt-3 fw-bold" style="color: #ffffff;">{{StudentDetails.firstName}}
@@ -131,7 +129,7 @@
               </div>
             </li>
           </ul>
-        <button class="btn btn-md btn-outline-secondary w-100 my-1">Logout</button>
+          <button class="btn btn-md btn-outline-secondary w-100 my-1">Logout</button>
         </div>
 
       </div>

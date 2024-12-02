@@ -119,7 +119,7 @@ this.adminService.updateAdminProfile(this.adminid,data).subscribe({
       
       this.adminService.addImage(this.adminid,formData,true).subscribe({
         next: () => {
-          this.toastr.success('Image updated successfully!', '', {
+          this.toastr.success('CoverImage updated successfully!', '', {
             positionClass: 'toast-top-right',
             progressBar: true,
             timeOut:3000
@@ -150,7 +150,9 @@ this.adminService.updateAdminProfile(this.adminid,data).subscribe({
       formData.append('imageFile',  file);
       
       this.adminService.addImage(this.adminid,formData,false).subscribe({
-        next: () => {
+        next: (res:any) => {
+          console.log(res);
+          
           this.toastr.success('Image updated successfully!', '', {
             positionClass: 'toast-top-right',
             progressBar: true,

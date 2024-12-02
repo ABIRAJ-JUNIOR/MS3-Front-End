@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuditLog } from '../../../Modals/modals';
-import { AdminService } from '../../../Service/API/Admin/admin.service';
+import { AuditlogService } from '../../../Service/API/AuditLog/auditlog.service';
 
 @Component({
   selector: 'app-audit-log',
@@ -14,13 +14,13 @@ import { AdminService } from '../../../Service/API/Admin/admin.service';
 export class AuditLogComponent implements OnInit {
 
   auditLog:AuditLog[] = []
-  constructor(private adminService:AdminService){}
+  constructor(private auditLogService:AuditlogService){}
   ngOnInit(): void {
     this.loadItems();
   }
 
   loadItems(): void {
-    this.adminService.getAuditLogs().subscribe({
+    this.auditLogService.getAuditLogs().subscribe({
       next:((response:AuditLog[]) => {
         this.auditLog = response
       }),

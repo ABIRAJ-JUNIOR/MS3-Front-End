@@ -1,138 +1,100 @@
-body {
-    background-color: #f0f2f5;
-    color: #333;
-  }
-  .card {
-    background-color: #ffffff;
-    border: 1px solid #dcdcdc;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  .card-header {
-    background-color: #343a40;
-    color: #ffffff;
-  }
-  .btn-custom, .btn-reset {
-    padding: 12px 20px;  /* Increased padding for larger buttons */
-    font-size: 1rem;  /* Consistent font size */
-    border-radius: 4px;  /* Rounded corners for both buttons */
-    border: none;
-    width: 48%;  /* Buttons take up equal width */
-    transition: background-color 0.3s ease;
-  }
-  .btn-custom {
-    background-color: #212121; /* Black button */
-    color: #ffffff;
-  }
-  .btn-custom:hover {
-    background-color: #000000; /* Slightly darker black on hover */
-  }
-  .btn-reset {
-    background-color: #b0bec5; /* Ash color button */
-    color: #212121;
-  }
-  .btn-reset:hover {
-    background-color: #90a4ae; /* Darker ash color on hover */
+@media (max-width: 1200px) {
+
+  h4,
+  .card-header h4 {
+    font-size: 1.125rem;
   }
 
-  .table-wrapper {
-    margin-top: 20px;
-  }
-
-  /* Responsive Font Sizes */
-  h4, .card-header h4 {
-    font-size: 1.25rem;  /* Default for large screens */
-  }
   .form-group label {
-    font-size: 1rem; /* Default font size for form labels */
+    font-size: 0.95rem;
   }
 
-  .table th, .table td {
-    font-size: 1rem; /* Default font size for table content */
+  .table th,
+  .table td {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 992px) and (min-width: 768px) {
+
+  h4,
+  .card-header h4 {
+    font-size: 1rem;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .table th,
+  .table td {
+    font-size: 0.9rem;
   }
 
   .pagination .page-link {
-    font-size: 0.9rem; /* Default font size for pagination */
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+
+  h4,
+  .card-header h4 {
+    font-size: 1rem;
   }
 
-  @media (max-width: 1200px) {
-    h4, .card-header h4 {
-      font-size: 1.125rem; /* Slightly smaller on medium screens */
-    }
-    .form-group label {
-      font-size: 0.95rem; /* Slightly smaller font size for labels */
-    }
-    .table th, .table td {
-      font-size: 0.95rem; /* Slightly smaller font size for table */
-    }
+  .form-group label {
+    font-size: 0.85rem;
   }
-  @media (max-width: 992px) and (min-width: 768px) {
-    h4, .card-header h4 {
-      font-size: 1rem; /* Smaller on tablets */
-    }
-    .form-group label {
-      font-size: 0.9rem; /* Smaller font size for labels */
-    }
-    .table th, .table td {
-      font-size: 0.9rem; /* Smaller font size for table */
-    }
-    .pagination .page-link {
-      font-size: 0.8rem; /* Smaller font size for pagination */
-    }
+
+  .table th,
+  .table td {
+    font-size: 0.85rem;
   }
-  @media (max-width: 576px) {
-    h4, .card-header h4 {
-      font-size: 1rem; /* Smaller on very small screens */
-    }
-    .form-group label {
-      font-size: 0.85rem; /* Smaller font size for labels */
-    }
-    .table th, .table td {
-      font-size: 0.85rem; /* Smaller font size for table */
-    }
-    .pagination .page-link {
-      font-size: 0.75rem; /* Smaller font size for pagination */
-    }
+
+  .pagination .page-link {
+    font-size: 0.75rem;
   }
-  /* General Card Styling */
+}
+
 .card {
   border: 1px solid #dee2e6;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Card Header */
-.card-header, .table-title {
-  background-color: #f8f9fa; /* Light background for both */
+.card-header,
+.table-title {
+  background-color: #f8f9fa;
   border-bottom: 1px solid #dee2e6;
   border-radius: 12px 12px 0 0;
   color: #343a40;
   font-weight: 600;
 }
 
-/* Form Inputs and Table Consistency */
-.form-control, .table th, .table td {
+.form-control,
+.table th,
+.table td {
   border-radius: 8px;
   border: 1px solid #ccc;
 }
 
-/* Form Buttons */
-.btn-custom, .btn-reset {
+.btn-custom,
+.btn-reset {
   border-radius: 8px;
   padding: 10px 20px;
   font-weight: 500;
 }
 
-/* Table Styling */
 .table-wrapper {
   border: 1px solid #dee2e6;
   border-radius: 12px;
-  overflow: hidden; /* Rounded corners */
+  overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .table thead {
-  background-color: #f8f9fa; /* Match the form header */
+  background-color: #f8f9fa;
   color: #343a40;
 }
 
@@ -144,12 +106,12 @@ body {
   background-color: #e9ecef;
 }
 
-/* Pagination Styling */
 .pagination .page-item .page-link {
   border-radius: 8px;
   margin: 0 3px;
   color: #495057;
 }
+
 .pagination .page-item.active .page-link {
   background-color: #dc3545;
   border-color: #dc3545;
@@ -163,7 +125,6 @@ body {
 
 
 
-/* Card and Header */
 .card {
   border-radius: 12px;
   border: none;
@@ -175,7 +136,6 @@ body {
   background: #f8f9fa;
 }
 
-/* Input Group Enhancements */
 .input-group-text {
   border-radius: 8px 0 0 8px;
   border-right: 0;
@@ -188,7 +148,6 @@ body {
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
 }
 
-/* Buttons */
 .btn-danger {
   background-color: #dc3545;
   border: none;
@@ -207,4 +166,3 @@ body {
   background-color: #6c757d;
   color: #fff;
 }
-

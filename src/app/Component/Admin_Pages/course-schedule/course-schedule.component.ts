@@ -6,6 +6,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Schedule } from '../../../Modals/modals';
 import { CourseService } from '../../../Service/API/Course/course.service';
+import { jwtDecode } from 'jwt-decode';
+import { AuditlogService } from '../../../Service/API/AuditLog/auditlog.service';
+import { AuditLogRequest } from '../student-list/student-list.component';
 
 @Component({
   selector: 'app-course-schedule',
@@ -27,13 +30,32 @@ export class CourseScheduleComponent {
 
   isUpdate:boolean = false
   private scheduleId:string = ""
-  scheduleForm: FormGroup;    
+  scheduleForm!: FormGroup;    
+
+  loginData!:any
 
   constructor(
     private courseService: CourseService,
     private fb: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private readonly auditLogService:AuditlogService
   ) {
+    this.initializeForm();
+
+    const token = localStorage.getItem("token");
+    if(token != null){
+      const decode:any =jwtDecode(token)
+      this.loginData = decode
+      console.log(this.loginData)
+    }
+  }
+
+  ngOnInit(): void {
+    this.loadItems(); 
+    this.loadCourses(); 
+  }
+
+  private initializeForm(): void {
     this.scheduleForm = this.fb.group({
       courseId: ['', Validators.required],
       startDate: ['', Validators.required],
@@ -43,11 +65,6 @@ export class CourseScheduleComponent {
       maxStudents: ['', [Validators.required, Validators.min(1)]],
       scheduleStatus: ['', Validators.required],
     });
-  }
-
-  ngOnInit(): void {
-    this.loadItems(); 
-    this.loadCourses(); 
   }
 
   loadItems(): void {
@@ -108,7 +125,7 @@ export class CourseScheduleComponent {
 
   private addSchedule(scheduleData:CourseScheduleRequest):void{
     this.courseService.addCourseSchedule(scheduleData).subscribe({
-      next: () => {
+      next: (response:Schedule) => {
         this.toastr.success('Schedule added successfull', '', {
           positionClass: 'toast-top-right',
           progressBar: true,
@@ -116,6 +133,18 @@ export class CourseScheduleComponent {
         });
         this.scheduleForm.reset();
         this.loadItems();
+        
+        const auditLog:AuditLogRequest = {
+          action: 'Add Schedule',
+          details: `Added a new schedule for Course ID (${response.id}). The schedule starts on ${new Date(response.startDate).toDateString()} and ends on ${new Date(response.endDate).toDateString()}.`,
+          adminId: this.loginData.Id,
+        }
+        this.auditLogService.addAuditLog(auditLog).subscribe({
+          next:()=>{},
+          error: (error: any) => {
+            console.error('Error adding audit log:', error.error);
+          }
+        })
       },
       error: (err: any) => {
         this.toastr.warning(err.error, '', {
@@ -129,13 +158,26 @@ export class CourseScheduleComponent {
 
   private updateSchedule(scheduleData:CourseScheduleRequest):void{
     this.courseService.updateCourseSchedule(this.scheduleId,scheduleData).subscribe({
-      complete: () => {
+      next:(response:Schedule)=>{
         this.toastr.success('Updated successfull', '', {
           positionClass: 'toast-top-right',
           progressBar: true,
           timeOut: 3000
         });
+
         this.loadItems();
+
+        const auditLog:AuditLogRequest = {
+          action: 'Update Schedule',
+          details: `Updated schedule for Course ID (${response.id})`,
+          adminId: this.loginData.Id,
+        }
+        this.auditLogService.addAuditLog(auditLog).subscribe({
+          next:()=>{},
+          error: (error: any) => {
+            console.error('Error adding audit log:', error.error);
+          }
+        })
       },
       error: (err:any) => {
         this.toastr.warning(err.error,'',{

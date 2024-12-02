@@ -19,20 +19,11 @@ export class StudentAssessmentService {
     return this.http.get<StudentAssessment[]>(this.CommonUrl + '/StudentAssessment/GetAll');
   }
 
-  getAllEvaluvatedAssessments(){
-    return this.http.get<StudentAssessment[]>(this.CommonUrl + '/StudentAssessment/Evaluated');
-  }
-
-  getAllNonEvaluateAssessments(){
-    return this.http.get<StudentAssessment[]>(this.CommonUrl + '/StudentAssessment/Non-Evaluate');
-  }
   getAllAssesmentByStudentid(id:string){
     return this.http.get<StudentAssessment[]>(this.CommonUrl + `/StudentAssessment/studentAssesment/${id}`);
   }
 
   evaluateAssessment(id:string,data:any){
-    return this.http.put(this.CommonUrl + `/StudentAssessment/Evaluate-Assessment/${id}` , data,{
-      responseType:'text'
-    });
+    return this.http.put<StudentAssessment>(this.CommonUrl + `/StudentAssessment/Evaluate-Assessment/${id}` , data);
   }
 }

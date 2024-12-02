@@ -18,13 +18,13 @@ export class AdminService {
   }
 
   addImage(adminId:string ,image:any,isCover:boolean){
-    return this.http.post(`${this.apiUrl}/Admin/image/${adminId}/${isCover}`, image,{
+    return this.http.post(`${this.apiUrl}/Admin/image/${adminId}/$${isCover}`, image,{
       responseType:'text'
     });
   }
 
   updateFullDetails(adminId:string , admin:AdminRequest){
-    return this.http.put(`${this.apiUrl}/Admin/Update-Full-Details/${adminId}`,admin)
+    return this.http.put<Admin>(`${this.apiUrl}/Admin/Update-Full-Details/${adminId}`,admin)
   }
 
   deleteAdmin(adminId:string){
@@ -33,9 +33,6 @@ export class AdminService {
 
   getAdmins(){
     return this.http.get<Admin[]>(this.apiUrl + '/Admin/GetAll')
-  }
-  getAuditLogs(){
-    return this.http.get<AuditLog[]>(this.apiUrl + '/AuditLog/GetAll')
   }
 
   pagination(pageNumber:number , pageSize:number){

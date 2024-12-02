@@ -6,6 +6,9 @@ import { FormsModule, FormBuilder, FormGroup, Validators, ReactiveFormsModule } 
 import { Course, StudentAssessment } from '../../../Modals/modals';
 import { CourseService } from '../../../Service/API/Course/course.service';
 import { SearchStudentAssessmentPipe } from '../../../Pipes/search-student-assessment.pipe';
+import { jwtDecode } from 'jwt-decode';
+import { AuditLogRequest } from '../student-list/student-list.component';
+import { AuditlogService } from '../../../Service/API/AuditLog/auditlog.service';
 
 @Component({
   selector: 'app-student-assessments',
@@ -22,16 +25,26 @@ export class StudentAssessmentsComponent implements OnInit {
   searchText:string =''
   studentAssessmentId!:string;
 
+  loginData!:any
+
   constructor(
-    private studentAssessmentService: StudentAssessmentService,
-    private fb: FormBuilder,
-    private toastr: ToastrService,
-    private courseService:CourseService
+    private readonly studentAssessmentService: StudentAssessmentService,
+    private readonly fb: FormBuilder,
+    private readonly toastr: ToastrService,
+    private readonly courseService:CourseService,
+    private readonly auditLogService:AuditlogService
   ) {
     this.evaluationForm = this.fb.group({
       marksObtaines: ['', [Validators.required, Validators.min(0)]],
       feedback: ['', Validators.required],
     });
+
+    const token = localStorage.getItem("token");
+    if(token != null){
+      const decode:any =jwtDecode(token)
+      this.loginData = decode
+      console.log(this.loginData)
+    }
   }
 
   ngOnInit(): void {
@@ -87,11 +100,23 @@ export class StudentAssessmentsComponent implements OnInit {
   onSubmit() {
     if (this.evaluationForm.valid) {
       this.studentAssessmentService.evaluateAssessment(this.studentAssessmentId , this.evaluationForm.value).subscribe({
-        next: () => {
+        next: (response:StudentAssessment) => {
           this.toastr.success("Evaluate successfull" , "" , {
             positionClass:"toast-top-right",
             progressBar:true,
             timeOut:3000
+          })
+
+          const auditLog:AuditLogRequest = {
+            action: 'Evaluate Student Assessment',
+            details: `Evaluated assessment for student ID (${response.studentId}). Marks awarded: ${response.marksObtaines}.`,
+            adminId: this.loginData.Id,
+          }
+          this.auditLogService.addAuditLog(auditLog).subscribe({
+            next:()=>{},
+            error: (error: any) => {
+              console.error('Error adding audit log:', error.error);
+            }
           })
         },
         complete:()=>{

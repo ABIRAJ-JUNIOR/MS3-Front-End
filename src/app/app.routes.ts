@@ -36,6 +36,7 @@ import { AnnouncementComponent } from './Component/Admin_Pages/announcement/anno
 import { ContactUsComponent } from './Component/Admin_Pages/contact-us/contact-us.component';
 import { studentAuthGuard } from './Guard/Student/student-auth.guard';
 import { StudentAssessmentsComponent } from './Component/Admin_Pages/student-assessments/student-assessments.component';
+import { PaymentsOverviewComponent } from './Component/Admin_Pages/payments-overview/payments-overview.component';
 
 
 export const routes: Routes = [
@@ -59,7 +60,7 @@ export const routes: Routes = [
                 component:OtpAuthenticationComponent
             } 
         ],
-        // canActivate : [payAuthGuard]
+        canActivate : [payAuthGuard]
     },
    
 
@@ -79,9 +80,10 @@ export const routes: Routes = [
             { path:'announcement',component:AnnouncementComponent},
             { path:'contact-us',component:ContactUsComponent},
             { path:'student-assessments',component:StudentAssessmentsComponent},
+            {path:'payment-overview',component:PaymentsOverviewComponent},
             {path:'**' , redirectTo:'home',pathMatch:'full'}
         ],
-        // canActivate: [adminAuthGuard]
+        canActivate: [adminAuthGuard]
     },
     {
         path: 'student-dashboard', component: StudentDashboardComponent, children: [
@@ -98,7 +100,7 @@ export const routes: Routes = [
             {path:'enrollCourse-paymentHistory',component:StudentPaymentsHistoryComponent},
             {path:'**' , redirectTo:'home',pathMatch:'full'}
         ],
-        // canActivate: [studentAuthGuard]
+        canActivate: [studentAuthGuard]
     },
     {path:'test' , component:TestComponent},
     { path: '**', redirectTo: 'home', pathMatch: 'full' },

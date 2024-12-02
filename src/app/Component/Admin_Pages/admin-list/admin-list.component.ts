@@ -5,6 +5,9 @@ import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validator
 import { ToastrService } from 'ngx-toastr';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AdminService } from '../../../Service/API/Admin/admin.service';
+import { jwtDecode } from 'jwt-decode';
+import { AuditlogService } from '../../../Service/API/AuditLog/auditlog.service';
+import { AuditLogRequest } from '../student-list/student-list.component';
 
 @Component({
   selector: 'app-admin-list',
@@ -23,7 +26,7 @@ export class AdminListComponent implements OnInit{
   totalItems: number = 0;
 
   // Form and update state
-  profileForm: FormGroup;
+  profileForm!: FormGroup;
   isUpdate: boolean = false;
 
   // Profile image variables
@@ -36,12 +39,30 @@ export class AdminListComponent implements OnInit{
   // Admin ID for update/delete operations
   private adminId: string = '';
 
+  loginData!:any
+
   constructor(
     private adminService: AdminService,
     private fb: FormBuilder,
     private toastr: ToastrService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private readonly auditLogService:AuditlogService
   ){
+    this.initializeForm();
+  
+    const token = localStorage.getItem("token");
+    if(token != null){
+      const decode:any =jwtDecode(token)
+      this.loginData = decode
+      console.log(this.loginData)
+    }
+  }
+
+  ngOnInit(): void {
+    this.loadItems();
+  }
+
+  private initializeForm(): void {
     this.profileForm = this.fb.group(
       {
         nic: ['', [Validators.required, Validators.pattern(/^\d{9}[Vv]|\d{12}$/)]],
@@ -55,10 +76,6 @@ export class AdminListComponent implements OnInit{
       },
       { validators: this.passwordMatchValidator }
     );
-  }
-
-  ngOnInit(): void {
-    this.loadItems();
   }
 
   passwordMatchValidator(control: AbstractControl) {
@@ -139,6 +156,18 @@ export class AdminListComponent implements OnInit{
           timeOut:3000
         });
         this.loadItems();
+
+        const auditLog:AuditLogRequest = {
+          action: 'Add New Admin',
+          details: `Added a new Admin with ID (${response.id})`,
+          adminId: this.loginData.Id,
+        }
+        this.auditLogService.addAuditLog(auditLog).subscribe({
+          next:()=>{},
+          error: (error: any) => {
+            console.error('Error adding audit log:', error.error);
+          }
+        })
       },
       complete: () => {
         this.uploadImage()
@@ -156,13 +185,25 @@ export class AdminListComponent implements OnInit{
 
   private updateAdmin(adminData: AdminRequest): void {
     this.adminService.updateFullDetails(this.adminId, adminData).subscribe({
-      next: () => {
+      next: (response:Admin) => {
         this.toastr.success('Admin updated successfully!', '', {
           positionClass: 'toast-top-right',
           progressBar: true,
           timeOut:3000
         });
         this.loadItems();
+
+        const auditLog:AuditLogRequest = {
+          action: 'Update Admin',
+          details: `Update a Admin with ID (${response.id})`,
+          adminId: this.loginData.Id,
+        }
+        this.auditLogService.addAuditLog(auditLog).subscribe({
+          next:()=>{},
+          error: (error: any) => {
+            console.error('Error adding audit log:', error.error);
+          }
+        })
       },
       complete: () => {
         this.uploadImage()
@@ -184,7 +225,7 @@ export class AdminListComponent implements OnInit{
       console.log(this.selectedFile);
       
       formData.append('imageFile', this.selectedFile);
-      this.adminService.addImage(this.adminId, formData,false).subscribe({
+      this.adminService.addImage(this.adminId, formData , false).subscribe({
         complete:()=>{
           this.loadItems();
         },
@@ -239,6 +280,18 @@ export class AdminListComponent implements OnInit{
           progressBar: true,
         });
         this.loadItems();
+
+        const auditLog:AuditLogRequest = {
+          action: 'Delete Admin',
+          details: `Delete Admin with ID (${this.adminId})`,
+          adminId: this.loginData.Id,
+        }
+        this.auditLogService.addAuditLog(auditLog).subscribe({
+          next:()=>{},
+          error: (error: any) => {
+            console.error('Error adding audit log:', error.error);
+          }
+        })
       },
       complete: () => this.modalRef?.hide(),
       error: () => {

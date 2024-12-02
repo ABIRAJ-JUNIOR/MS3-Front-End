@@ -8,7 +8,7 @@ import { StudentService } from "../../../Service/API/Student/student.service";
 import { NotificationServiceService } from "../../../Service/API/Notification/notification-service.service";
 import { ToastrService } from "ngx-toastr";
 import { AnnouncementService } from "../../../Service/API/Announcement/announcement.service";
-import { LogoutServiceService } from "../../../Service/Logout/logout-service.service";
+import { AuthService } from "../../../Service/API/Auth/auth.service";
 
 @Component({
   selector: 'app-student-dashboard',
@@ -30,7 +30,7 @@ export class StudentDashboardComponent implements OnInit {
 
 
 
-  constructor(private LogoutService:LogoutServiceService, private anouncementService: AnnouncementService, private tostr: ToastrService, private NotificationSerivice: NotificationServiceService, private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
+  constructor(private LogoutService:AuthService, private anouncementService: AnnouncementService, private tostr: ToastrService, private NotificationSerivice: NotificationServiceService, private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -90,11 +90,10 @@ export class StudentDashboardComponent implements OnInit {
 
 
   logoutDash(){
-    this.LogoutService.LogoutStudent()
+    this.LogoutService.logout()
     this.refreshPage();
   }
   refreshPage(): void {
     window.location.reload();
   }
-  
 }

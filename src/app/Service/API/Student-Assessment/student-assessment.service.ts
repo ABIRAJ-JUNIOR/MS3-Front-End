@@ -26,6 +26,9 @@ export class StudentAssessmentService {
   getAllNonEvaluateAssessments(){
     return this.http.get<StudentAssessment[]>(this.CommonUrl + '/StudentAssessment/Non-Evaluate');
   }
+  getAllAssesmentByStudentid(id:string){
+    return this.http.get<StudentAssessment[]>(this.CommonUrl + `/StudentAssessment/studentAssesment/${id}`);
+  }
 
   evaluateAssessment(id:string,data:any){
     return this.http.put(this.CommonUrl + `/StudentAssessment/Evaluate-Assessment/${id}` , data,{

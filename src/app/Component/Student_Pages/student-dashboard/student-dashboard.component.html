@@ -5,7 +5,7 @@
         <a href="#">Student Portal</a>
         <hr>
       </div>
-      
+
 
       <ul class="sidebar-nav ms-2">
         <!-- Sidebar Header -->
@@ -60,7 +60,8 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a [routerLink]="['/student-dashboard/assesment-result']" class="sidebar-link">Assessment Results & Feedback
+              <a [routerLink]="['/student-dashboard/assesment-result']" class="sidebar-link">Assessment Results &
+                Feedback
               </a>
             </li>
 
@@ -108,9 +109,11 @@
           </a>
         </li>
       </ul>
-      <div style="display: flex;flex-direction: column; align-items: start;margin-left: 55px; margin-top: 150px;">
-        <img src="{{StudentDetails.imageUrl || noImage }} " alt="" height="150px" width="150px" style="border-radius: 50%;">
-        <div class=" d-flex align-items-center justify-content-center"  data-bs-toggle="dropdown" style="flex-direction: column;" *ngIf="StudentDetails">
+      <div style="display: flex;flex-direction: column; align-items: center;margin-top: 100px;">
+        <img src="{{StudentDetails.imageUrl}} " *ngIf="StudentDetails" alt="" height="140px" width="140px"
+          style="border-radius: 50%;">
+        <div class=" d-flex align-items-center justify-content-center" data-bs-toggle="dropdown"
+          style="flex-direction: column;" *ngIf="StudentDetails">
           <span class="font-weight-bold fs-5 mt-3 fw-bold" style="color: #ffffff;">{{StudentDetails.firstName}}
             {{StudentDetails.lastName}}</span>
           <span class="text-light d-block mb-1">{{StudentTokenDetails.Email}}</span>
@@ -128,12 +131,13 @@
               </div>
             </li>
           </ul>
+        <button class="btn btn-md btn-outline-secondary w-100 my-1">Logout</button>
         </div>
 
       </div>
 
     </div>
-    
+
 
   </aside>
 
@@ -234,7 +238,7 @@
         <h5 class="modal-title" id="topLeftModalLabel">Notifications</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" *ngIf="StudentDetails">
         <div *ngFor="let item of StudentDetails.notification">
           <div class="notification" *ngIf="item.isRead===false">
             <div class="notification-header">

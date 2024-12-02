@@ -18,18 +18,18 @@ import { AnnouncementService } from "../../../Service/API/Announcement/announcem
 })
 export class StudentDashboardComponent implements OnInit {
   sidebarCollapsed = false;
-  noImage: string='https://www.bing.com/ck/a?!&&p=7648fe0c3dc6be6b2188d54e324d5d9352d68f37b129c4ddaaaadf8174ec11a4JmltdHM9MTczMzAxMTIwMA&ptn=3&ver=2&hsh=4&fclid=1a548757-8fff-66c7-3ffe-93498efe67cc&u=a1L2ltYWdlcy9zZWFyY2g_cT1wcm9maWxlJTIwbm8lMjBpbWFnZSZGT1JNPUlRRlJCQSZpZD05MzAzNEM1QTRDQjMyOTE2NzIxNzM3Q0Y2NzE0NDI3NDU1MDRDRTMx&ntb=1';
+  noImage: string = 'https://www.bing.com/ck/a?!&&p=7648fe0c3dc6be6b2188d54e324d5d9352d68f37b129c4ddaaaadf8174ec11a4JmltdHM9MTczMzAxMTIwMA&ptn=3&ver=2&hsh=4&fclid=1a548757-8fff-66c7-3ffe-93498efe67cc&u=a1L2ltYWdlcy9zZWFyY2g_cT1wcm9maWxlJTIwbm8lMjBpbWFnZSZGT1JNPUlRRlJCQSZpZD05MzAzNEM1QTRDQjMyOTE2NzIxNzM3Q0Y2NzE0NDI3NDU1MDRDRTMx&ntb=1';
   toggleSidebar() {
     this.sidebarCollapsed = !this.sidebarCollapsed;
   }
 
   StudentDetails: any;
   StudentTokenDetails: any;
+  typeCheck:string="Students"
 
 
 
-
-  constructor(private anouncementService:AnnouncementService, private tostr:ToastrService,private NotificationSerivice:NotificationServiceService ,private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router ) {
+  constructor(private anouncementService: AnnouncementService, private tostr: ToastrService, private NotificationSerivice: NotificationServiceService, private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -38,33 +38,50 @@ export class StudentDashboardComponent implements OnInit {
     this.AnnouncementLoad();
 
   }
-  NotficationLoad(){
+  NotificationLength:number=0;
+  NotficationLoad() {
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
       this.StudentDetails = student
+      for (let i: any = 0; i < this.StudentDetails.notification.length; i++) {
+        const element = this.StudentDetails.notification[i];
+        if (element.isActive === false) {
+         this.NotificationLength++;
+        }
+
+      }
       console.log(this.StudentDetails)
     },
       (error) => {
         this.router.navigate([''])
-      },()=>{
+      }, () => {
       })
 
   }
-
-  Announcements:any[]=[]
-  AnnouncementLoad(){
-    this.anouncementService.GetAllAnouncement().subscribe((data:any)=>{
+  AnnouncementLength: number = 0;
+  Announcements: any[] = []
+  AnnouncementLoad() {
+    this.anouncementService.GetAllAnouncement().subscribe((data: any) => {
       this.Announcements = data
+      for (let i: any = 0; i < this.Announcements.length; i++) {
+        const element = this.Announcements[i];
+        if (element.isActive === true) {
+          if (element.audienceType == "Students"){
+            this.AnnouncementLength++;
+          }
+        }
+
+      }
     })
   }
 
-  MarkAsRead(id:string){
+  MarkAsRead(id: string) {
     console.log(id)
-    this.NotificationSerivice.MarkAsReadNotication(id).subscribe((data:any)=>{
-     this.tostr.success("Notification Read SuccessFully")
-     this.NotficationLoad()
-    },(error)=>{
+    this.NotificationSerivice.MarkAsReadNotication(id).subscribe((data: any) => {
+      this.tostr.success("Notification Read SuccessFully")
+      this.NotficationLoad()
+    }, (error) => {
       console.log((error))
       this.tostr.error(error.message)
     })

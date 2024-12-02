@@ -157,7 +157,7 @@
             data-bs-toggle="modal" data-bs-target="#topLeftModal">
             <i class="bi bi-bell-fill"></i>
             <span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger">
-              0
+              {{NotificationLength}}
             </span>
           </button>
 
@@ -166,7 +166,8 @@
             data-bs-target="#Anouncement">
             <i class="bi bi-envelope"></i>
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              0
+              {{AnnouncementLength}}
+
             </span>
           </button>
 
@@ -205,14 +206,25 @@
 <!-- Anouncement -->
 <div class="modal fade" id="Anouncement" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog customModal">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <h5 class="modal-title" id="staticBackdropLabel"><i class="bi bi-megaphone"></i> Announcements</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        ...
+      <div class="modal-body" *ngIf="Announcements">
+        <div *ngFor="let item of Announcements">
+          <div class="notification" *ngIf="item.isActive===true && item.audienceType==typeCheck">
+            <div class="notification-header">
+              <span class="notification-type">{{item.datePosted}}</span>
+              <span class="notification-time">{{item.expirationDate}}</span>
+            </div>
+            <div class="notification-body">
+              <p class="message">{{item.title}}</p>
+            </div>
+          </div>
+        </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -223,7 +235,7 @@
 
 <!-- Modal Structure -->
 <div class="modal fade" id="topLeftModal" tabindex="-1" aria-labelledby="topLeftModalLabel" aria-hidden="true">
-  <div class="modal-dialog customModal">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="topLeftModalLabel">Notifications</h5>

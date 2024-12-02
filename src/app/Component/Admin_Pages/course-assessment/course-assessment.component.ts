@@ -178,7 +178,7 @@ export class CourseAssessmentComponent {
 
         const auditLog:AuditLogRequest = {
           action: 'Update Assessment',
-          details: `Updated assessment details for Course ID ${response.id}.`,
+          details: `Updated assessment details for Course ID (${response.id}).`,
           adminId: this.loginData.Id,
         }
         this.auditLogService.addAuditLog(auditLog).subscribe({

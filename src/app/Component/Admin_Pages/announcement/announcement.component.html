@@ -77,8 +77,8 @@
                 <tr *ngFor="let announcement of Announcements;let i=index">
                     <td>{{i+1}}</td>
                     <td>{{announcement.title}}</td>
-                    <td>{{announcement.datePosted}}</td>
-                    <td>{{announcement.expirationDate}}</td>
+                    <td>{{announcement.datePosted | date}}</td>
+                    <td>{{announcement.expirationDate | date}}</td>
                     <td  [ngStyle]="{
                       color: announcement.audienceType === 'Admins' ? 'darkred' :
                       announcement.audienceType === 'Students' ? 'darkgreen' :

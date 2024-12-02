@@ -3,6 +3,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AnnouncementService } from '../../../Service/API/Announcement/announcement.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuditlogService } from '../../../Service/API/AuditLog/auditlog.service';
+import { jwtDecode } from 'jwt-decode';
+import { AuditLogRequest } from '../student-list/student-list.component';
 
 @Component({
   selector: 'app-announcement',
@@ -22,16 +25,49 @@ export class AnnouncementComponent {
   currentLength: number = 0;
   totalItems: number = 0;
 
-  constructor(private fb: FormBuilder, private Announcemenrservice: AnnouncementService, private toastr: ToastrService) {
+  loginData!:any
+
+  constructor(
+    private fb: FormBuilder, 
+    private Announcemenrservice: AnnouncementService, 
+    private toastr: ToastrService,
+    private readonly auditLogService:AuditlogService
+  ) {
+    this.initializeForm()
+
+    const token = localStorage.getItem("token");
+    if(token != null){
+      const decode:any =jwtDecode(token)
+      this.loginData = decode
+      console.log(this.loginData)
+    }
+   }
+
+  ngOnInit(): void {
+    this.loaditems()
+  }
+
+  private initializeForm(): void {
     this.announcementForm = this.fb.group({
       title: ['', [Validators.required]],
       expirationDate: ['', Validators.required],
       audienceType: ['', Validators.required]
     });
-   }
+  }
 
-  ngOnInit(): void {
-    this.loaditems()
+  loaditems(): void {
+    this.Announcemenrservice.Pagination(this.currentPage, this.pageSize).subscribe({
+      next: (value: any) => {
+        this.Announcements = value.items,
+        this.totalPages = value.totalPages;
+        this.totalItems = value.totalItem;
+        console.log(value);
+
+      },
+      complete: () => {
+        this.currentLength = this.Announcements.length
+      },
+    })
   }
 
   onSubmit(): void {
@@ -44,16 +80,25 @@ export class AnnouncementComponent {
         audienceType: data.audienceType
       }
       this.Announcemenrservice.AddAnouncement(Formdata).subscribe({
-        next: (responce: any) => {
-
-        },
-        complete: () => {
-          this.loaditems()
+        next: (response: any) => {
           this.toastr.success('Announcement added  Successful', '', {
             positionClass: 'toast-top-right',
             progressBar: true,
             timeOut: 4000,
           });
+          this.loaditems()
+
+          const auditLog:AuditLogRequest = {
+            action: 'Add Announcement',
+            details: `Added a new Announcement with ID (${response.id})`,
+            adminId: this.loginData.Id,
+          }
+          this.auditLogService.addAuditLog(auditLog).subscribe({
+            next:()=>{},
+            error: (error: any) => {
+              console.error('Error adding audit log:', error.error);
+            }
+          })
         },
         error: (err: any) => {
           this.toastr.error('Failed to load data', '', {
@@ -73,20 +118,7 @@ export class AnnouncementComponent {
     this.announcementForm.reset();
   }
 
-  loaditems(): void {
-    this.Announcemenrservice.Pagination(this.currentPage, this.pageSize).subscribe({
-      next: (value: any) => {
-        this.Announcements = value.items,
-        this.totalPages = value.totalPages;
-        this.totalItems = value.totalItem;
-        console.log(value);
-
-      },
-      complete: () => {
-        this.currentLength = this.Announcements.length
-      },
-    })
-  }
+  
 
   goToPage(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
@@ -97,22 +129,34 @@ export class AnnouncementComponent {
 
   onDelete(id: string) {
     this.Announcemenrservice.deleteAnnouncement(id).subscribe({
-      next: (responce: any) => { }
-      ,
-      complete: () => {
-        this.toastr.success('Delete  Successful', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 4000,
-        });
-        this.loaditems();
-      },
-      error: (err: any) => {
-        this.toastr.error('Failed to load data', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-        });
-      }
+      next: (response: any) => {
+        const auditLog:AuditLogRequest = {
+          action: 'Delete Announcement',
+          details: `Delete Announcement with ID (${id})`,
+          adminId: this.loginData.Id,
+        }
+        this.auditLogService.addAuditLog(auditLog).subscribe({
+          next:()=>{},
+          error: (error: any) => {
+            console.error('Error adding audit log:', error.error);
+          }
+        })
+       },
+       complete: () => {
+         this.toastr.success('Delete  Successful', '', {
+           positionClass: 'toast-top-right',
+           progressBar: true,
+           timeOut: 4000,
+         });
+         this.loaditems();
+       },
+       error: (err: any) => {
+         this.toastr.error('Failed to load data', '', {
+           positionClass: 'toast-top-right',
+           progressBar: true,
+         });
+       }
+      
     })
   }
 }

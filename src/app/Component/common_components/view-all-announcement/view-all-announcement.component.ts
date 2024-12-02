@@ -4,11 +4,12 @@ import { Announcement } from '../../../Modals/modals';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AnnouncementService } from '../../../Service/API/Announcement/announcement.service';
+import { SearchAnnouncmentPipe } from '../../../Pipes/search-announcment.pipe';
 
 @Component({
   selector: 'app-view-all-announcement',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule,CommonModule,SearchAnnouncmentPipe],
   templateUrl: './view-all-announcement.component.html',
   styleUrl: './view-all-announcement.component.css'
 })

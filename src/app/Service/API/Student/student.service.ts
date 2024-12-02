@@ -42,7 +42,7 @@ export class StudentService {
   }
 
   updateStudent(student:StudenUpdateRequest){
-    return this.http.put(this.apiUrl +"/Student/Update-Personal-Details" ,student)
+    return this.http.put(this.apiUrl +"/Student/Update-Full-Details/"+student.id ,student)
   }
 }
 

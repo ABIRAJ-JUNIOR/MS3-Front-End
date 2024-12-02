@@ -25,7 +25,7 @@
                 <th><i class="bi bi-download"></i> Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="Enrollments">
 
             <ng-container *ngFor="let item of Enrollments let i = index" >
                 <!-- Installment Row -->

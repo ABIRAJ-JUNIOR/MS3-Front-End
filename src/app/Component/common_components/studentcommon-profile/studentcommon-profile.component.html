@@ -11,7 +11,7 @@
         </div>
 
     </div>
-    <div class="ms-3 " style="margin-top:  260px;">
+    <div class="ms-3 " style="margin-top:  260px;" *ngIf="StudentDetails">
         <span class="font-weight-bold fs-5 mt-3 fw-bold" style="color: #ffffff;">{{StudentDetails.firstName}}
             {{StudentDetails.lastName}}</span>
         <span class="text-light d-block mb-1">{{StudentTokenDetails.Email}}</span>

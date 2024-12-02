@@ -10,7 +10,7 @@ import { StudentDashDataService } from "../../../Service/Data/Student_Data/stude
 @Component({
   selector: 'app-student-profile',
   standalone: true,
-  imports: [CommonModule, FormsModule ,RouterModule ,StudentcommonProfileComponent],
+  imports: [CommonModule, FormsModule, RouterModule, StudentcommonProfileComponent],
   templateUrl: './student-profile.component.html',
   styleUrl: './student-profile.component.css'
 })
@@ -26,7 +26,7 @@ export class StudentProfileComponent {
 
   selectedQuote: string = '';
 
-  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
+  constructor( private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
     this.generateNewQuote();
   }
 
@@ -46,12 +46,14 @@ export class StudentProfileComponent {
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
   ngOnInit(): void {
-
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
       this.StudentDetails = student
       console.log(this.StudentDetails)
+    },(error)=>{
+      console.log(error)
+    },()=>{
     })
 
   }

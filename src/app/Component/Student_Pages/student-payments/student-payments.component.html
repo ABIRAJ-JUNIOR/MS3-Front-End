@@ -26,9 +26,9 @@
                     <th><i class="bi bi-download"></i> Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="NewEnrollment">
 
-                <ng-container *ngFor="let item of NewEnrollment">
+                <ng-container *ngFor="let item of NewEnrollment" >
                     <!-- Installment Row -->
                     <tr *ngIf="item.paymentStatus == payCheck ">
                         <td>Installment #{{item.paymentResponse[item.paymentResponse.length-1].installmentNumber}}</td>

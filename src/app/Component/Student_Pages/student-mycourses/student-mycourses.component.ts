@@ -18,7 +18,7 @@ import { StudentDashDataService } from "../../../Service/Data/Student_Data/stude
 export class StudentMycoursesComponent implements OnInit{
 
 
-  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
+  constructor( private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
 
   StudentDetails: any;
@@ -27,11 +27,15 @@ export class StudentMycoursesComponent implements OnInit{
 
   ngOnInit(): void {
 
+
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
       this.StudentDetails = student
       console.log(this.StudentDetails)
+    },(error)=>{
+      console.log(error)
+    },()=>{
     })
 
   }

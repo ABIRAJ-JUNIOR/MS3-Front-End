@@ -14,7 +14,7 @@
         </p>
     </div>
 
-    <div class="row  ">
+    <div class="row  " *ngIf="paginatedAssesment">
         <div class="col-12 col-sm-12 col-md-12 " *ngFor="let Sechdule of paginatedAssesment  let i = index">
             <div class="card my-4">
                 <h5 class="card-title fs-4   p-2 py-3 rounded-top-2 text-center text-white m-0 " style="background-color: #0c0800;

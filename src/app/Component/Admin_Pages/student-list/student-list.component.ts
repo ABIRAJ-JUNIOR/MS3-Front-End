@@ -304,6 +304,18 @@ export class StudentListComponent implements OnInit {
           timeOut: 4000,
         });
         this.loadStudents();
+
+        const auditLog:AuditLogRequest = {
+          action: 'Delete Student',
+          details: `Delete student with ID (${this.deleteStudentId})`,
+          adminId: this.loginData.Id,
+        }
+        this.auditLogService.addAuditLog(auditLog).subscribe({
+          next:()=>{},
+          error: (error: any) => {
+            console.error('Error adding audit log:', error.error);
+          }
+        })
       },
       error:(error:any)=>{
         this.handleError(error);

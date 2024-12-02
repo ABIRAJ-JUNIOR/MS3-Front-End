@@ -280,6 +280,18 @@ export class AdminListComponent implements OnInit{
           progressBar: true,
         });
         this.loadItems();
+
+        const auditLog:AuditLogRequest = {
+          action: 'Delete Admin',
+          details: `Delete Admin with ID (${this.adminId})`,
+          adminId: this.loginData.Id,
+        }
+        this.auditLogService.addAuditLog(auditLog).subscribe({
+          next:()=>{},
+          error: (error: any) => {
+            console.error('Error adding audit log:', error.error);
+          }
+        })
       },
       complete: () => this.modalRef?.hide(),
       error: () => {

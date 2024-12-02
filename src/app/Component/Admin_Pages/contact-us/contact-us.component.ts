@@ -6,6 +6,9 @@ import { ContactService } from '../../../Service/API/ContactUs/contact.service';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { SearchContactUsPipe } from '../../../Pipes/search-contact-us.pipe';
+import { AuditlogService } from '../../../Service/API/AuditLog/auditlog.service';
+import { jwtDecode } from 'jwt-decode';
+import { AuditLogRequest } from '../student-list/student-list.component';
 
 @Component({
   selector: 'app-contact-us',
@@ -21,21 +24,38 @@ export class ContactUsComponent implements OnInit {
   messageId:string = '';
   modalRef?: BsModalRef;
   responseForm!:FormGroup
+
+  filterStatus: string = ""; 
+
+  loginData!:any
+
   constructor(
     private contactUsService:ContactService,
     private fb:FormBuilder,
     private toastr:ToastrService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private readonly auditLogService:AuditlogService
     ,
   ){
-    this.responseForm = fb.group({
-      messagePreview:[''],
-      response:['']
-    })
+    this.initializeForm();
+
+    const token = localStorage.getItem("token");
+    if(token != null){
+      const decode:any =jwtDecode(token)
+      this.loginData = decode
+      console.log(this.loginData)
+    }
   }
 
   ngOnInit(): void {
     this.loadMessages();
+  }
+
+  private initializeForm(): void {
+    this.responseForm = this.fb.group({
+      messagePreview:[''],
+      response:['']
+    })
   }
   
   loadMessages():void{
@@ -46,8 +66,6 @@ export class ContactUsComponent implements OnInit {
     })
   }
   
-  filterStatus: string = ""; 
-
   response(Message: ContactUs){
     this.responseForm.patchValue({
       messagePreview:Message.message
@@ -68,8 +86,20 @@ export class ContactUsComponent implements OnInit {
           progressBar: true,
           timeOut: 3000,
         });
-      },complete:() => {
+        
         this.loadMessages();
+
+        const auditLog:AuditLogRequest = {
+          action: 'Message Response',
+          details: `Response a new Message with ID (${response.id})`,
+          adminId: this.loginData.Id,
+        }
+        this.auditLogService.addAuditLog(auditLog).subscribe({
+          next:()=>{},
+          error: (error: any) => {
+            console.error('Error adding audit log:', error.error);
+          }
+        })
       },error:(error:any)=>{
         this.toastr.warning(error.error, '', {
           positionClass: 'toast-top-right',
@@ -88,8 +118,20 @@ export class ContactUsComponent implements OnInit {
           progressBar: true,
           timeOut: 3000,
         })
-      },complete:()=>{
+
         this.loadMessages();
+
+        const auditLog:AuditLogRequest = {
+          action: 'Delete Message',
+          details: `Delete Message with ID (${this.messageId})`,
+          adminId: this.loginData.Id,
+        }
+        this.auditLogService.addAuditLog(auditLog).subscribe({
+          next:()=>{},
+          error: (error: any) => {
+            console.error('Error adding audit log:', error.error);
+          }
+        })
       },error:(error:any)=>{
         this.toastr.warning(error.error, '', {
           positionClass: 'toast-top-right',

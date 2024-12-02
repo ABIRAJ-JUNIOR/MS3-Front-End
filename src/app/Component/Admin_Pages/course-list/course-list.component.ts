@@ -266,6 +266,18 @@ export class CourseListComponent implements OnInit {
           progressBar: true,
         });
         this.loadItems();
+
+        const auditLog:AuditLogRequest = {
+          action: 'Delete Course',
+          details: `Delete Course with ID (${this.courseId})`,
+          adminId: this.loginData.Id,
+        }
+        this.auditLogService.addAuditLog(auditLog).subscribe({
+          next:()=>{},
+          error: (error: any) => {
+            console.error('Error adding audit log:', error.error);
+          }
+        })
       },
       error: (error:any) => {
         this.handleError(error);

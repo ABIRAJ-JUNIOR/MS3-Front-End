@@ -42,6 +42,7 @@ export class StudentcommonProfileComponent {
   onFileSelected(event: Event): void {
 
     const input = event.target as HTMLInputElement;
+    console.log(this.StudentTokenDetails.Id)
 
     if (input.files && input.files.length > 0) {
       const file = input.files[0];

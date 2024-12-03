@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuditlogService } from '../../../Service/API/AuditLog/auditlog.service';
 import { jwtDecode } from 'jwt-decode';
 import { AuditLogRequest } from '../student-list/student-list.component';
+import { Announcement } from '../../../Modals/modals';
 
 @Component({
   selector: 'app-announcement',
@@ -16,7 +17,7 @@ import { AuditLogRequest } from '../student-list/student-list.component';
 })
 export class AnnouncementComponent {
   announcementForm!: FormGroup;
-  Announcements: any[] = []
+  Announcements: Announcement[] = []
 
   // Pagination
   currentPage: number = 1;
@@ -50,6 +51,7 @@ export class AnnouncementComponent {
   private initializeForm(): void {
     this.announcementForm = this.fb.group({
       title: ['', [Validators.required]],
+      description: ['', [Validators.required]],
       expirationDate: ['', Validators.required],
       audienceType: ['', Validators.required]
     });
@@ -76,6 +78,7 @@ export class AnnouncementComponent {
       data.audienceType = Number(data.audienceType)
       const Formdata: AnnoincemenrReqest = {
         title: data.title,
+        description: data.description,
         expirationDate: data.expirationDate,
         audienceType: data.audienceType
       }
@@ -164,6 +167,7 @@ export class AnnouncementComponent {
 
 export interface AnnoincemenrReqest {
   title: string;
+  description: string;
   expirationDate: string;
   audienceType: Number;
 }

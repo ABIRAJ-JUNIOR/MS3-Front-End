@@ -1,0 +1,35 @@
+h2 {
+  color: #333;
+}
+
+.input-group-text {
+  background-color: #f8f9fa;
+}
+
+.list-group-item {
+  border: none;
+  padding: 12px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.list-group-item:last-child {
+  border-bottom: none;
+}
+
+.list-group-item:hover {
+  background-color: #f8f9fa;
+}
+
+.pagination .page-link {
+  color: #3175bd;
+}
+
+.pagination .page-link:hover {
+  background-color: #f8f9fa;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #222425;
+  border-color: #3a3b3b;
+  color: white;
+}

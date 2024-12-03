@@ -47,7 +47,7 @@ export class StudentDashboardComponent implements OnInit {
       this.StudentDetails = student
       for (let i: any = 0; i < this.StudentDetails.notification.length; i++) {
         const element = this.StudentDetails.notification[i];
-        if (element.isActive === false) {
+        if (element.isRead == false) {
          this.NotificationLength++;
         }
 

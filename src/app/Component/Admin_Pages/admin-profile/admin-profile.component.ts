@@ -14,7 +14,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './admin-profile.component.css'
 })
 export class AdminProfileComponent implements OnInit{
-  updateUserForm: FormGroup;
   adminid:string="";
   admin:any="";
   profileImage:File | null = null;
@@ -22,20 +21,12 @@ export class AdminProfileComponent implements OnInit{
   profileImageUrl: string | null = "";
   CoverImageUrl: string | null = "";
 
-
   constructor(private fb: FormBuilder,private  adminService:AdminService,private toastr:ToastrService) {
-    // Initialize form controls
-    this.updateUserForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(2)]],
-      lastName: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]], // Example pattern for 10-digit phone
-    });
   }
   ngOnInit(): void {
     this.loaddata()
-    
   }
+
   loaddata(){
     const token:string = localStorage.getItem("token")!;
     const decode:any = jwtDecode(token)
@@ -47,50 +38,7 @@ export class AdminProfileComponent implements OnInit{
       
     })
   }
-  
-  onEditProfile() {
-    console.log('Edit Profile button clicked');
-  }
 
-  onAccountSettings() {
-    console.log('Account Settings button clicked');
-  }
-  onSubmit(){
-console.log(this.updateUserForm.value);
-const data=this.updateUserForm.value
-this.adminService.updateAdminProfile(this.adminid,data).subscribe({
-  next:(response:any)=>{
-    this.toastr.success('Admin Updated successfully!', '', {
-      positionClass: 'toast-top-right',
-      progressBar: true,
-      timeOut:3000
-    });
-    this.loaddata()
-  }
-  ,complete() {
-    
-  },
-  error:(err:any)=> {
-    error: (error:any) => {
-      this.toastr.error(error.error, '', {
-        positionClass: 'toast-top-right',
-        progressBar: true,
-        timeOut:4000
-      });
-    }
-  },
-})
-
-  }
-  patchData(admin:any){
-    this.updateUserForm.patchValue({
-      firstName: admin.firstName,
-      lastName:admin.lastName,
-      email:admin.email,
-      phone:admin.phone
-
-    })
-  }
 
   onFileSelected(event: any, isCover:boolean): void {
     const file: File = event.target.files[0];

@@ -14,7 +14,7 @@
             <!-- Profile Picture -->
             <div class="col-md-4 text-center">
               <div class="mb-3">
-                <img src="https://via.placeholder.com/150" alt="Profile Picture" class="img-fluid rounded" width="260">
+                <img src="{{profilePicture}}" alt="Profile Picture" class="img-fluid rounded" width="260">
                 <input type="file" class="form-control mt-2" (change)="onProfilePictureChange($event)">
               </div>
             </div>
@@ -28,6 +28,10 @@
               <div class="mb-3">
                 <label for="lastName" class="form-label">Last Name</label>
                 <input type="text" class="form-control" id="lastName" [(ngModel)]="lastName" name="lastName" required>
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" id="phone" [(ngModel)]="phone" name="phone" required>
               </div>
               <div class="mb-3">
                 <label for="email" class="form-label">Email Address</label>
@@ -59,10 +63,6 @@
           <div class="row mb-5">
             <div class="col-12">
               <h5>Account Preferences</h5>
-              <div class="form-check mb-3">
-                <input type="checkbox" class="form-check-input" [(ngModel)]="emailNotifications" name="emailNotifications">
-                <label class="form-check-label" for="emailNotifications">Enable Email Notifications</label>
-              </div>
               <div class="mb-3">
                 <label for="language" class="form-label">Language</label>
                 <select class="form-control" id="language" [(ngModel)]="language" name="language">
@@ -76,7 +76,7 @@
   
           <!-- Save Changes Button -->
           <div class="text-center">
-            <button type="submit" class="btn btn-primary btn-lg" >Save Changes</button>
+            <button type="submit" class="button-31" >Save Changes</button>
           </div>
         </form>
       </div>

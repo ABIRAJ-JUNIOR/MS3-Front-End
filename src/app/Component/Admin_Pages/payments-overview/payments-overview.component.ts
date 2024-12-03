@@ -13,13 +13,13 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 export class PaymentsOverviewComponent {
  firstName = 'John';
  lastName = 'Doe';
+ phone = '0702274212'
  email = 'john.doe@example.com';
  currentPassword = '';
  newPassword = '';
  confirmPassword = '';
- emailNotifications = true;
  language = 'English';
- profilePicture = 'assets/images/default-profile.jpg'; 
+ profilePicture = 'https://via.placeholder.com/150'; 
 
  onProfilePictureChange(event: any) {
    const file = event.target.files[0];
@@ -44,7 +44,6 @@ export class PaymentsOverviewComponent {
      email: this.email,
      currentPassword: this.currentPassword,
      newPassword: this.newPassword,
-     emailNotifications: this.emailNotifications,
      language: this.language
    });
 

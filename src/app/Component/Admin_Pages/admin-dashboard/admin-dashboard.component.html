@@ -121,33 +121,22 @@
             <!-- Announcement Button with Dropdown -->
             <div class="dropdown">
               <!-- Button Trigger -->
-              <button 
-                class="btn btn-sm btn-outline-dark position-relative OverideBtn dropdown-toggle" 
-                type="button" 
-                id="announcementDropdown" 
-                data-bs-toggle="dropdown" 
-                aria-expanded="false">
+              <button class="btn btn-sm btn-outline-dark position-relative OverideBtn dropdown-toggle" type="button" id="announcementDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="bi bi-envelope"></i>
-                <span 
-                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                   {{ totalAnnouncements }}
                 </span>
               </button>
 
               <!-- Dropdown Menu -->
-              <ul 
-                class="dropdown-menu dropdown-menu-end shadow-sm" 
-                aria-labelledby="announcementDropdown" 
-                style="min-width: 300px;">
+              <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="announcementDropdown" style="min-width: 300px;">
                 <!-- No Announcements -->
                 <li *ngIf="announcements.length === 0" class="dropdown-item text-muted text-center">
                   No new announcements.
                 </li>
 
                 <!-- Announcement Items -->
-                <li 
-                  *ngFor="let announcement of announcements; let i = index" 
-                  class="dropdown-item d-flex align-items-start">
+                <li *ngFor="let announcement of announcements; let i = index" class="dropdown-item d-flex align-items-start">
                   <div>
                     <p class="mb-1 fw-bold">{{ announcement.title }}</p>
                     <p class="mb-0 text-muted small">{{ announcement.datePosted |date }}</p>
@@ -160,7 +149,7 @@
                 </li>
                 <li *ngIf="announcements.length > 0">
                   <a 
-                    [routerLink]="['/admin-dashboard/all-announcement']" 
+                    [routerLink]="['/admin-dashboard/all-announcement','Admin']" 
                     class="dropdown-item text-center text-primary fw-semibold">
                     View All Announcements
                   </a>

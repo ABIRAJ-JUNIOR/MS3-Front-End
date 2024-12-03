@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Announcement } from '../../../Modals/modals';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -15,7 +15,7 @@ import { SearchAnnouncmentPipe } from '../../../Pipes/search-announcment.pipe';
 })
 export class ViewAllAnnouncementComponent {
   announcements:Announcement[] = [];
-
+  Role:string = ''
   searchQuery: string = '';
 
   currentPage: number = 1;
@@ -26,8 +26,11 @@ export class ViewAllAnnouncementComponent {
 
   constructor(
     private router: Router,
-    private announcementService:AnnouncementService
-  ) {}
+    private announcementService:AnnouncementService,
+    private rout:ActivatedRoute
+  ) {
+    this.Role = this.rout.snapshot.params['Role'];
+  }
 
   ngOnInit(): void {
     this.loadAnnouncement();
@@ -35,7 +38,7 @@ export class ViewAllAnnouncementComponent {
   }
 
   loadAnnouncement():void{
-    this.announcementService.Pagination(this.currentPage,this.pageSize,"Admin").subscribe({
+    this.announcementService.Pagination(this.currentPage,this.pageSize,this.Role).subscribe({
       next:(response:any)=>{
         this.announcements = response.items;
         this.totalPages = response.totalPages;

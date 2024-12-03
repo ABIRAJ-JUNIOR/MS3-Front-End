@@ -82,7 +82,7 @@ export const routes: Routes = [
             { path:'contact-us',component:ContactUsComponent},
             { path:'student-assessments',component:StudentAssessmentsComponent},
             {path:'payment-overview',component:PaymentsOverviewComponent},
-            {path:'all-announcement',component:ViewAllAnnouncementComponent},
+            {path:'all-announcement/:Role',component:ViewAllAnnouncementComponent},
             {path:'**' , redirectTo:'home',pathMatch:'full'}
         ],
         canActivate: [adminAuthGuard]

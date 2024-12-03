@@ -33,7 +33,6 @@ export class AdminDashboardComponent implements OnInit {
     if(token != null){
       const decode:any =jwtDecode(token)
       this.loginData = decode
-      console.log(this.loginData)
     }
   }
 

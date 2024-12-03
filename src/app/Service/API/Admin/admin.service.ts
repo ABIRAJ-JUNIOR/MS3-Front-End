@@ -42,8 +42,9 @@ export class AdminService {
     return this.http.get<Admin>(this.apiUrl + `/Admin/Get/${id}`)
   }
   updateAdminProfile(id:string,Admindata:any){
-    return this.http.put<any>(this.apiUrl+`/Admin/AdminProfile${id}`,Admindata)
-
+    return this.http.put(this.apiUrl+`/Admin/AdminProfile/${id}`,Admindata,{
+      responseType:'text'
+    })
   }
 }
 

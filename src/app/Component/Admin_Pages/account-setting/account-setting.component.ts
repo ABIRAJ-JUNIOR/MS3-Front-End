@@ -19,6 +19,8 @@ export class AccountSettingComponent {
   confirmPassword = '';
   language = 'English';
   profilePicture = 'https://via.placeholder.com/150'; 
+
+  passwordNotMatch:boolean = false 
  
   onProfilePictureChange(event: any) {
     const file = event.target.files[0];
@@ -33,7 +35,7 @@ export class AccountSettingComponent {
  
   onSubmit() {
     if (this.newPassword !== this.confirmPassword) {
-      alert('');
+      this.passwordNotMatch = true
       return;
     }
  

@@ -83,7 +83,11 @@ export class AccountSettingComponent implements OnInit {
       next: (response) => {
         this.toastr.success('Changes saved successfully!', '');
       },error:(error:any)=>{
-        this.toastr.warning(error.error, '');
+        this.toastr.warning(error.error, '', {
+          positionClass: 'toast-top-right',
+          progressBar: true,
+          timeOut:3000
+        });
       }
     })
 

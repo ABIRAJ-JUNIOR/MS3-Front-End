@@ -12,9 +12,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), 
     provideAnimations(), 
     provideToastr({
-      positionClass: 'toast', 
+      positionClass: 'toast-top-right', 
       preventDuplicates: true,         
-      timeOut: 3000,
+      timeOut: 2600,
     }), 
     provideHttpClient(withInterceptors([authInterceptorInterceptor])),
     importProvidersFrom([BrowserAnimationsModule])

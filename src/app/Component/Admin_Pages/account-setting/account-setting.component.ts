@@ -33,7 +33,7 @@ export class AccountSettingComponent {
  
   onSubmit() {
     if (this.newPassword !== this.confirmPassword) {
-      alert('Passwords do not match!');
+      alert('');
       return;
     }
  

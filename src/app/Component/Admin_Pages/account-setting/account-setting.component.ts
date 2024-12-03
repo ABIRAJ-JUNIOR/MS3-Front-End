@@ -48,6 +48,7 @@ export class AccountSettingComponent implements OnInit {
         this.lastName = response.lastName
         this.phone = response.phone
         this.email = response.email
+        this.profilePicture = response.imageUrl
       }
     })
   }
@@ -80,17 +81,9 @@ export class AccountSettingComponent implements OnInit {
  
     this.adminService.updateAdminProfile(this.loginData.Id,accountDetails).subscribe({
       next: (response) => {
-        this.toastr.success('Changes saved successfully!', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut:3000
-        });
+        this.toastr.success('Changes saved successfully!', '');
       },error:(error:any)=>{
-        this.toastr.warning(error.error, '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut:3000
-        });
+        this.toastr.warning(error.error, '');
       }
     })
 

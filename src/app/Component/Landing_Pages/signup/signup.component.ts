@@ -46,22 +46,13 @@ export class SignupComponent {
 
     this.authService.signUp(student).subscribe({
       next: (response) => {
-        this.toastr.success("User SignUp Successfull", "", {
-          positionClass: "toast-top-right",
-          progressBar: true,
-          timeOut: 3000
-        })
-
+        this.toastr.success("User SignUp Successfull", "")
         this.StudentRegistration.reset()
       }, complete: () => {
         this.rout.navigate(['/signin'])
 
       }, error: (error) => {
-        this.toastr.warning(error.error, "", {
-          positionClass: "toast-top-right",
-          progressBar: true,
-          timeOut: 3000
-        })
+        this.toastr.warning(error.error, "")
       }
     })
 

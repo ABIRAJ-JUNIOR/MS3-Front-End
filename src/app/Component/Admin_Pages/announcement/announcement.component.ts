@@ -84,11 +84,7 @@ export class AnnouncementComponent {
       }
       this.Announcemenrservice.AddAnouncement(Formdata).subscribe({
         next: (response: any) => {
-          this.toastr.success('Announcement added  Successful', '', {
-            positionClass: 'toast-top-right',
-            progressBar: true,
-            timeOut: 4000,
-          });
+          this.toastr.success('Announcement added  Successful', '');
           this.loaditems()
 
           const auditLog:AuditLogRequest = {
@@ -104,10 +100,7 @@ export class AnnouncementComponent {
           })
         },
         error: (err: any) => {
-          this.toastr.error('Failed to load data', '', {
-            positionClass: 'toast-top-right',
-            progressBar: true,
-          });
+          this.toastr.error('Failed to load data', '');
         },
       })
       console.log('Form Data:', this.announcementForm.value);
@@ -146,18 +139,11 @@ export class AnnouncementComponent {
         })
        },
        complete: () => {
-         this.toastr.success('Delete  Successful', '', {
-           positionClass: 'toast-top-right',
-           progressBar: true,
-           timeOut: 4000,
-         });
+         this.toastr.success('Delete  Successful', '');
          this.loaditems();
        },
        error: (err: any) => {
-         this.toastr.error('Failed to load data', '', {
-           positionClass: 'toast-top-right',
-           progressBar: true,
-         });
+         this.toastr.error('Failed to load data', '');
        }
       
     })

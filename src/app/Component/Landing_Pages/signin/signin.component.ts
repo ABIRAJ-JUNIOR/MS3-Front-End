@@ -49,11 +49,7 @@ export class SigninComponent {
     const { email, password, rememberMe } = this.signinForm.value;
     this.auth.signIn(this.signinForm.value).subscribe({
       next: (res: string) => {
-        this.toastr.success("Login Successfull", "", {
-          positionClass: "toast-top-right",
-          progressBar: true,
-          timeOut: 2000
-        })
+        this.toastr.success("Login Successfull", "")
         localStorage.setItem('token', res)
 
         if (rememberMe) {
@@ -72,11 +68,7 @@ export class SigninComponent {
 
       }
       , error: (error) => {
-        this.toastr.warning(error.error, "", {
-          positionClass: "toast-top-right",
-          progressBar: true,
-          timeOut: 3000
-        })
+        this.toastr.warning(error.error, "")
       }
     })
   }

@@ -81,11 +81,7 @@ export class ContactUsComponent implements OnInit {
     }
     this.contactUsService.addResponse(response).subscribe({
       next: () => {
-        this.toastr.success('Response Sent Successfull', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 3000,
-        });
+        this.toastr.success('Response Sent Successfull', '');
         
         this.loadMessages();
 
@@ -101,11 +97,7 @@ export class ContactUsComponent implements OnInit {
           }
         })
       },error:(error:any)=>{
-        this.toastr.warning(error.error, '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 4000,
-        }); 
+        this.toastr.warning(error.error, ''); 
       }
     })
   }
@@ -113,11 +105,7 @@ export class ContactUsComponent implements OnInit {
   deleteMessage() {
     this.contactUsService.deleteMessage(this.messageId).subscribe({
       next: () => {
-        this.toastr.success('Message Deleted Successfull', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 3000,
-        })
+        this.toastr.success('Message Deleted Successfull', '')
 
         this.loadMessages();
 
@@ -133,11 +121,7 @@ export class ContactUsComponent implements OnInit {
           }
         })
       },error:(error:any)=>{
-        this.toastr.warning(error.error, '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 4000,
-        })
+        this.toastr.warning(error.error, '')
       }
     })
     this.modalRef?.hide()

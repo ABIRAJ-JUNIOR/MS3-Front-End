@@ -35,13 +35,7 @@ export class StudentResultComponent {
       console.log(assesment )
     },
       (error) => {
-        this.toastr.error("Failed to load student details. Please try again later.", "Error", {
-          positionClass: "toast-top-right", 
-          progressBar: true,
-          timeOut: 3000,
-          closeButton: true
-       
-        });
+        this.toastr.error("Failed to load student details. Please try again later.", "Error");
       })
 
 

@@ -121,11 +121,7 @@ export class CourseAssessmentComponent {
       }
 
     } else {
-      this.toastr.warning('Please fill out all required fields correctly', '', {
-        positionClass: 'toast-top-right',
-        progressBar: true,
-        timeOut: 3000
-      });
+      this.toastr.warning('Please fill out all required fields correctly', '');
     }
   }
 
@@ -133,11 +129,7 @@ export class CourseAssessmentComponent {
   private addAssessment(assessment:AssessmentRequest):void{
     this.assessmentService.addAssessment(assessment).subscribe({
       next: (response: Assessment) => {
-        this.toastr.success('Assessment Create successfull', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 3000
-        });
+        this.toastr.success('Assessment Create successfull', '');
         this.assessmentForm.reset();
         this.loadItems(); 
 
@@ -154,11 +146,7 @@ export class CourseAssessmentComponent {
         })
       },
       error: (err: any) => {
-        this.toastr.warning(err.error, '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 3000
-        });
+        this.toastr.warning(err.error, '');
       }
     });
   }
@@ -168,11 +156,7 @@ export class CourseAssessmentComponent {
     assessment.endDate = new Date(assessment.endDate)
     this.assessmentService.updateAssessment(this.assessmentId,assessment).subscribe({
       next: (response:Assessment) => {
-        this.toastr.success('Update successfull', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 3000
-        });
+        this.toastr.success('Update successfull', '');
         this.assessmentForm.reset();
         this.loadItems(); 
 
@@ -189,11 +173,7 @@ export class CourseAssessmentComponent {
         })
       },
       error: (err: any) => {
-        this.toastr.warning(err.error, '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 3000
-        });
+        this.toastr.warning(err.error, '');
       }
     });
   }

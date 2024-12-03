@@ -173,11 +173,7 @@ export class StudentListComponent implements OnInit {
     this.studentService.addStudent(formData).subscribe({
       next: (response: any) => {
         this.studentId = response.id;
-        this.toastr.success('Registration Successful', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 4000,
-        });
+        this.toastr.success('Registration Successful', '');
 
         const auditLog:AuditLogRequest = {
           action: 'Add Student',
@@ -204,11 +200,7 @@ export class StudentListComponent implements OnInit {
     formData.dateOfBirth = new Date(formData.dateOfBirth);
     this.studentService.updateFullDetails(this.studentId, formData).subscribe({
       next: (response:any) => {
-        this.toastr.success('Update Successful', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 3000,
-        });
+        this.toastr.success('Update Successful', '');
         const auditLog:AuditLogRequest = {
           action: 'Update Student',
           details: `Update a student with ID (${response.id})`,
@@ -238,9 +230,7 @@ export class StudentListComponent implements OnInit {
           this.loadStudents()
         },
         error:(error:any) =>{
-          this.toastr.error('Image upload failed', '', {
-            positionClass: 'toast-top-right',
-          });
+          this.toastr.error('Image upload failed', '');
         }
       });
     }else{
@@ -298,11 +288,7 @@ export class StudentListComponent implements OnInit {
   deleteStudent(): void {
     this.studentService.deleteStudent(this.deleteStudentId).subscribe({
       next: () => {
-        this.toastr.success('Delete Successful', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 4000,
-        });
+        this.toastr.success('Delete Successful', '');
         this.loadStudents();
 
         const auditLog:AuditLogRequest = {
@@ -325,11 +311,7 @@ export class StudentListComponent implements OnInit {
   }
 
   private handleError(error: any): void {
-    this.toastr.warning(error.error, '', {
-      positionClass: 'toast-top-right',
-      progressBar: true,
-      timeOut: 4000,
-    });
+    this.toastr.warning(error.error, '');
   }
 }
 

@@ -17,3 +17,8 @@ body{
 input{
     box-shadow: none !important;
 }
+
+.toast-container{
+  position: fixed !important; 
+  z-index: 1050;             
+}

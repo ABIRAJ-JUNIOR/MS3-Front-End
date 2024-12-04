@@ -26,11 +26,11 @@ export class StudentDashboardComponent implements OnInit {
 
   StudentDetails: any;
   StudentTokenDetails: any;
-  typeCheck:string="Students"
+  typeCheck: string = "Students"
 
 
 
-  constructor(private LogoutService:AuthService, private anouncementService: AnnouncementService, private tostr: ToastrService, private NotificationSerivice: NotificationServiceService, private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
+  constructor(private LogoutService: AuthService, private anouncementService: AnnouncementService, private tostr: ToastrService, private NotificationSerivice: NotificationServiceService, private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -39,60 +39,70 @@ export class StudentDashboardComponent implements OnInit {
     this.AnnouncementLoad();
 
   }
-  NotificationLength:number=0;
+  NotificationLength: number = 0;
   NotficationLoad() {
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
-    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
-      this.StudentDetails = student
-      for (let i: any = 0; i < this.StudentDetails.notification.length; i++) {
-        const element = this.StudentDetails.notification[i];
-        if (element.isRead == false) {
-         this.NotificationLength++;
-        }
+    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
+      next: (student: Student) => {
+        this.StudentDetails = student
 
+      }, error: (error) => {
+        console.log(error.message)
+      }, complete: () => {
+        for (let i: any = 0; i < this.StudentDetails.notification.length; i++) {
+          const element = this.StudentDetails.notification[i];
+          if (element.isRead == false) {
+            this.NotificationLength++;
+          }
+
+        }
       }
-      console.log(this.StudentDetails)
-    },
-      (error) => {
-        this.router.navigate([''])
-      }, () => {
-      })
+    })
 
   }
+
+
   AnnouncementLength: number = 0;
   Announcements: any[] = []
-  AnnouncementLoad() {
-    this.anouncementService.GetAllAnouncement().subscribe((data: any) => {
-      this.Announcements = data
-      console.log(data)
-      for (let i: any = 0; i < this.Announcements.length; i++) {
-        const element = this.Announcements[i];
-        if (element.isActive === true) {
-          if (element.audienceType == "Students"){
-            this.AnnouncementLength++;
-          }
-        }
 
+  AnnouncementLoad() {
+    this.anouncementService.GetAllAnouncement().subscribe({
+      next: (data: any) => {
+        this.Announcements = data
+      }, error: (error) => {
+        console.log(error.message)
+      }, complete: () => {
+        for (let i: any = 0; i < this.Announcements.length; i++) {
+          const element = this.Announcements[i];
+          if (element.isActive === true) {
+            if (element.audienceType == "Students") {
+              this.AnnouncementLength++;
+            }
+          }
+
+        }
       }
     })
   }
 
   MarkAsRead(id: string) {
-    console.log(id)
-    this.NotificationSerivice.MarkAsReadNotication(id).subscribe((data: any) => {
-      this.tostr.success("Notification Read SuccessFully")
-      this.NotficationLoad()
-    }, (error) => {
-      console.log((error))
-      this.tostr.error(error.message)
+    this.NotificationSerivice.MarkAsReadNotication(id).subscribe({
+      next: (data: any) => {
+        this.tostr.success("Notification Read SuccessFully")
+      }, error: (error) => {
+        this.tostr.error("Notification read Failed try again Later")
+      },complete:()=>{
+        this.NotficationLoad()
+      }
     })
-  }
+
+}
 
 
-  logoutDash(){
-    this.LogoutService.logout()
-    this.router.navigate([''])
-  }
- 
+logoutDash() {
+  this.LogoutService.logout()
+  this.router.navigate([''])
+}
+
 }

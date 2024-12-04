@@ -37,16 +37,14 @@ export class StudentAssesmentComponent implements OnInit {
 
   paginateAssesment() {
     this.StudentDetails = this.studentDataService.GetStudentDeatilByLocalStorage()
-    this.StudentService.getStudent(this.StudentDetails.Id).subscribe((d: any) => {
-      console.log(d)
-
-      this.paginatedAssesment = d.enrollments
-      console.log(this.paginatedAssesment)
-    }, (error) => {
-      console.log(error)
-    }, () => {
-    }
-    )
+    
+    this.StudentService.getStudent(this.StudentDetails.Id).subscribe({
+      next: (d: any) => {
+        this.paginatedAssesment = d.enrollments
+      },error:(error)=>{
+        console.log(error)
+      }
+    })
   }
 
 

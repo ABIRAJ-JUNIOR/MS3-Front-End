@@ -17,7 +17,7 @@ import { Router, RouterModule } from '@angular/router';
 export class CourseCardsComponent implements OnInit {
 
 
-  constructor( private CourseService:CourseService,private PaymentService:PaymentDataService , private route:Router){
+  constructor( private courseService:CourseService,private paymentService:PaymentDataService , private route:Router){
     
   }
 
@@ -35,6 +35,9 @@ export class CourseCardsComponent implements OnInit {
     this.ModalProduct = []
   }
 
+
+  // Btn Change Name Event Function
+
   EnrollBtnName: string = "Enroll now"
 
   changeNameMouseleave($event: MouseEvent) {
@@ -45,6 +48,8 @@ export class CourseCardsComponent implements OnInit {
     const buttonElement = event?.target as HTMLButtonElement;
     buttonElement.innerText = "Click To Buy"
   }
+
+  //pagination Courses
 
   pageSize: number = 6; // Courses per page
   currentPage: number = 1; // Current page index
@@ -59,7 +64,7 @@ export class CourseCardsComponent implements OnInit {
 
   paginateCourses() {
 
-    this.CourseService.pagination(this.currentPage,this.pageSize).subscribe({
+    this.courseService.pagination(this.currentPage,this.pageSize).subscribe({
       next:((courses:any)=>{
         this.paginatedCourses=courses.items
         this.totalPages=courses.totalPages
@@ -114,7 +119,7 @@ export class CourseCardsComponent implements OnInit {
    
   }
   ConfirmationPayment(){
-    this.PaymentService.PurchaseDetailsSetLocal(this.PaymentCourse[0]);
+    this.paymentService.PurchaseDetailsSetLocal(this.PaymentCourse[0]);
   }
  
   CancelPurchase(){

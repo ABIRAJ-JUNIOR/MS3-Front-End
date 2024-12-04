@@ -23,13 +23,15 @@ export class StudentCompletedcoursesComponent {
   ngOnInit(): void {
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
-    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
-      this.StudentDetails = student
-      console.log(this.StudentDetails)
-    }, (error) => {
-      console.log(error)
-    }, () => {
+    
 
+    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
+      next: (student: Student) => {
+        this.StudentDetails = student
+
+      },error:(error)=>{
+        console.log(error)
+      }
     })
 
   }
@@ -41,11 +43,9 @@ export class StudentCompletedcoursesComponent {
     const currentDate = new Date();
     const endDate = new Date(item.courseScheduleResponse.endDate);
     if (currentDate > endDate) {
-      return true;
       this.NoCourseBool = false
+      return true;
     } else {
-
-
       return false;
     }
 

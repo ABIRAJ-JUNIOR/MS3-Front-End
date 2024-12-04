@@ -1,10 +1,7 @@
-thead tr th {
+thead tr th{
     background-color: #272829;
     color: white;
-    padding: 10px;
 }
-
-/* General Styles */
 .table-wrapper {
     background-color: #fff;
     margin: 15px 0 40px;
@@ -23,8 +20,27 @@ thead tr th {
     font-weight: 600;
 }
 
+.table-title h2 {
+    margin: 0;
+    font-size: 20px;
+}
 
+.table-title .btn {
+    color: #fff;
+    font-size: 14px;
+    border: none;
+    min-width: 50px;
+    height: 35px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.table-title .btn i {
+    font-size: 18px;
+    margin-right: 6px;
+}
 
 .table-responsive {
     padding: 10px;
@@ -34,8 +50,7 @@ thead tr th {
     margin-bottom: 0;
 }
 
-.table th,
-.table td {
+.table th, .table td {
     border-color: #e0e0e0;
     padding: 12px 15px;
     font-size: 14px;
@@ -48,13 +63,14 @@ thead tr th {
 }
 
 .table td img {
-    border-radius: 5px;
+    border-radius: 50%;
     object-fit: cover;
 }
 
 .table td a {
     font-size: 16px;
 }
+
 
 /* Responsive Styles */
 @media (max-width: 768px) {

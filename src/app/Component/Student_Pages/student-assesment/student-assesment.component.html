@@ -129,25 +129,29 @@
                         <tbody>
                             <ng-container *ngFor="let Sechdule of paginatedAssesment  let i = index">
                                 <tr
-                                    *ngFor="let assesment of Sechdule.courseScheduleResponse.courseResponse.assessmentResponse">
-                                    <td>{{ assesment.assessmentType }}</td>
-                                    <td>{{ assesment.assessmentTitle }}</td>
-                                    <td>{{ assesment.updateDate | date:'mediumDate' }}</td>
-                                    <td>{{ assesment.startDate | date: 'mediumDate' }} - {{ assesment.endDate | date:
-                                        'mediumDate' }}</td>
-                                    <td>{{ assesment.passMarks }}</td>
-                                    <td>{{ assesment.totalMarks }}</td>
-                                    <td>
-                                        <span class="fw-bold text-success">{{ assesment.assessmentStatus }}</span>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#ExamModal"
-                                            (click)="examdataTransfer(assesment.assessmentLink)"
-                                            [disabled]="assesment.assessmentStatus == NotStartCheck">
-                                            <i class="fas fa-eye"></i> View Exam
-                                        </button>
-                                    </td>
+                                    *ngFor="let assesment of Sechdule.courseScheduleResponse.courseResponse.assessmentResponse ">
+                                    <ng-container *ngIf="assesment.assessmentStatus!==StatusCheck">
+                                        <td>{{ assesment.assessmentType }}</td>
+                                        <td>{{ assesment.assessmentTitle }}</td>
+                                        <td>{{ assesment.updateDate | date:'mediumDate' }}</td>
+                                        <td>{{ assesment.startDate | date: 'mediumDate' }} - {{ assesment.endDate |
+                                            date:
+                                            'mediumDate' }}</td>
+                                        <td>{{ assesment.passMarks }}</td>
+                                        <td>{{ assesment.totalMarks }}</td>
+                                        <td>
+                                            <span class="fw-bold text-success">{{ assesment.assessmentStatus }}</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#ExamModal"
+                                                (click)="examdataTransfer(assesment.assessmentLink)"
+                                                [disabled]="assesment.assessmentStatus == NotStartCheck">
+                                                <i class="fas fa-eye"></i> View Exam
+                                            </button>
+                                        </td>
+                                    </ng-container>
+
                                 </tr>
                             </ng-container>
 

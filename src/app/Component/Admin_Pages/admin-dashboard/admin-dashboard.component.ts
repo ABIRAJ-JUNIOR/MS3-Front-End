@@ -21,6 +21,7 @@ export class AdminDashboardComponent implements OnInit {
   deleteAnnouncement(index: number): void {
     this.announcements.splice(index, 1);
   }
+  
   loginData!:any
   adminData!:Admin;
 

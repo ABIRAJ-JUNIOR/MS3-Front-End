@@ -20,10 +20,10 @@ export class StudentAssesmentComponent implements OnInit {
   constructor(private StudentService: StudentService, private studentDataService: StudentDashDataService) {
 
   }
-  pageSize: number = 12; // Courses per page
-  currentPage: number = 1; // Current page index
-  totalPages: number = 4; // Total number of pages
-  pageNumbers: number[] = []; // Array of page numbers to display
+  paginateBeforeData: any[] = []; // Your full array of data
+  currentPage: number = 1; // Current page number
+  pageSize: number = 5; // Number of items per page
+  totalPages: number = 0;
   paginatedAssesment: any[] = [];
 
   StatusCheck: string = "Completed"
@@ -33,6 +33,21 @@ export class StudentAssesmentComponent implements OnInit {
   ngOnInit() {
 
     this.paginateAssesment()
+  }
+  // Update paginatedData based on currentPage and pageSize
+  updatePagination(): void {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedAssesment = this.paginateBeforeData.slice(startIndex, endIndex);
+    this.totalPages = Math.ceil(this.paginateBeforeData.length / this.pageSize);
+  }
+
+  // Navigate to a specific page
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.updatePagination();
+    }
   }
 
   paginateAssesment() {
@@ -48,12 +63,6 @@ export class StudentAssesmentComponent implements OnInit {
   }
 
 
-  goToPage(page: number): void {
-    if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page;
-      this.paginateAssesment();
-    }
-  }
 
   assesmentLink: string = "";
 
@@ -67,4 +76,5 @@ export class StudentAssesmentComponent implements OnInit {
     }
   }
 
+  
 }

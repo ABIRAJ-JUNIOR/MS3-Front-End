@@ -28,5 +28,8 @@ export class AssesmentService {
   updateAssessment(id:string ,Assessment:AssessmentRequest){
     return this.http.put<Assessment>(this.CommonUrl + `/Assessment/Update/${id}`, Assessment)
   }
+  getAllAssesmentByStudentId(studentId:string,pageNumber:number,pageSize:number){
+    return this.http.get<Assessment>(this.CommonUrl+`/StudentAssessment/getByPagination/${studentId}?PageNumber=${pageNumber}&PageSize=${pageSize}`)
+  }
 
 }

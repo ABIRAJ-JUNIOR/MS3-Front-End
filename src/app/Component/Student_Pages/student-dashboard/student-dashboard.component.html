@@ -35,14 +35,14 @@
             <i class="fa-solid fa-book-open pe-2"></i>
             Learning Dashboard  <i class="bi bi-arrow-down-short"></i>
           </a>
-          <ul id="courses" class="sidebar-dropdown list-unstyled collapse m-1" data-bs-parent="#sidebar">
+          <ul id="courses" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
             <li class="sidebar-item">
               <a [routerLink]="['/student-dashboard/mycourses']" [routerLinkActive]="['active_Link']"
-                class="sidebar-link ms-4">My Student Hub</a>
+                class="sidebar-link ">My Student Hub</a>
             </li>
             <li class="sidebar-item">
               <a [routerLink]="['/student-dashboard/completed-Courses']" [routerLinkActive]="['active_Link']"
-                class="sidebar-link ms-4">Campus Connect</a>
+                class="sidebar-link ">Campus Connect</a>
             </li>
           </ul>
         </li>
@@ -57,11 +57,11 @@
           </a>
           <ul id="assesment" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
             <li class="sidebar-item">
-              <a [routerLink]="['/student-dashboard/assesment']" class="sidebar-link ms-4" [routerLinkActive]="['active_Link']"> Assessment Overview
+              <a [routerLink]="['/student-dashboard/assesment']" class="sidebar-link " [routerLinkActive]="['active_Link']"> Assessment Overview
               </a>
             </li>
             <li class="sidebar-item">
-              <a [routerLink]="['/student-dashboard/assesment-result']" class="sidebar-link ms-4" [routerLinkActive]="['active_Link']">Assessment Results</a>
+              <a [routerLink]="['/student-dashboard/assesment-result']" class="sidebar-link" [routerLinkActive]="['active_Link']">Assessment Results</a>
             </li>
 
           </ul>

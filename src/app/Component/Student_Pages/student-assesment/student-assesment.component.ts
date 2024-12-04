@@ -2,18 +2,22 @@ import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
 import { StudentService } from "../../../Service/API/Student/student.service";
+import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: 'app-student-assesment',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './student-assesment.component.html',
   styleUrl: './student-assesment.component.css'
 })
 export class StudentAssesmentComponent implements OnInit {
 
+  TableView: number = 2;
 
-  constructor( private StudentService: StudentService, private studentDataService: StudentDashDataService) {
+
+
+  constructor(private StudentService: StudentService, private studentDataService: StudentDashDataService) {
 
   }
   pageSize: number = 12; // Courses per page

@@ -26,7 +26,7 @@
       *ngFor="let item of StudentDetails.enrollments | searchMycourse:SearchCourseData let i = index ">
       <div class="card shadow border-0 rounded">
 
-        <div class="card-header text-white text-start" [ngClass]="getProgressBarClass(item)">
+        <div class="card-header text-white text-start" style="background-color: #272829;">
           <h5 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><i
               class="bi bi-bookmark-check fs-4 pe-2"></i>{{item.courseScheduleResponse.courseResponse.courseName}}
           </h5>

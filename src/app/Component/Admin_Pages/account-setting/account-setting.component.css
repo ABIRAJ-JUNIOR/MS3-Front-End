@@ -89,5 +89,27 @@
     opacity: .75;
   }
   
+
+  .avatar {
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
   
+  .avatar:hover {
+    transform: scale(1.1); /* Slight zoom effect */
+  }
+  
+  .dropdown-item {
+    transition: background-color 0.2s, color 0.2s;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f8f9fa; /* Light gray */
+    color: #000;
+  }
+  
+  .dropdown-item.text-danger:hover {
+    background-color: #fddede; /* Light red */
+    color: #dc3545;
+  }
   

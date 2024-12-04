@@ -82,14 +82,13 @@ export class StudentSettingComponent implements OnInit {
       gender: Number(studentData.gender),
       phone: studentData.phone,
       address: {
-        addressLine1: studentData.address.addressLine1,
+        addressLine1: studentData.address.addressLine1  || 'AddressLine1 Not included',
         addressLine2: studentData.address.addressLine2 || 'AddressLine2 Not included',  
         city: studentData.address.city,
         postalCode: studentData.address.postalCode,
         country: studentData.address.country
       }
     }
-    console.log(student)
     this.StudentApiService.updateStudent(this.StudentTokenDetails.Id,student).subscribe(
       (data: any) => {
         this.toastr.success("User Update Successfull", "", {
@@ -124,16 +123,17 @@ export class StudentSettingComponent implements OnInit {
     } else if (genderValue == "female") {
       Gender = 2;
     }
+   if (this.StudentDetails) {
     this.studentForm.setValue({
       firstName: this.StudentDetails.firstName,
       lastName: this.StudentDetails.lastName,
       phone: this.StudentDetails.phone,
       dateOfBirth: dateOfBirth,
       gender: Gender,
-      address: this.StudentDetails.address || "Kindly provide your address for our records.",
-    
-
+      address: this.StudentDetails.address || "Kindly provide your address for our records."
     });
+    
+   }
   }
 
 

@@ -33,6 +33,7 @@ export class StudentResultComponent {
 
   }
   getStudentDetails() {
+    
     this.StudentAssesmentService.getAllAssesmentByStudentid(this.StudentTokenDetails.Id).subscribe({
       next: (assesment: any) => {
         this.StudentAssesmentDetails = assesment;
@@ -48,6 +49,10 @@ export class StudentResultComponent {
       }
     });
 
+  }
+
+  getAssesments(){
+    this.StudentAssesmentService.getAllAssesmentByStudentid(this.StudentTokenDetails.Id,1,2).
   }
 
   @ViewChild('table', { static: false }) table!: ElementRef;

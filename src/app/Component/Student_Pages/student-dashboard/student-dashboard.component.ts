@@ -94,6 +94,7 @@ export class StudentDashboardComponent implements OnInit {
         this.tostr.error("Notification read Failed try again Later")
       },complete:()=>{
         this.NotficationLoad()
+        this.NotificationLength = 0;
       }
     })
 

@@ -17,9 +17,9 @@ import { StudentAssessmentService } from "../../../Service/API/Student-Assessmen
 })
 export class StudentResultComponent {
 
-  constructor(private StudentAssesmentService:StudentAssessmentService, private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService,  private toastr: ToastrService) {
+  constructor(private StudentAssesmentService: StudentAssessmentService, private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private toastr: ToastrService) {
 
-    
+
   }
 
 
@@ -28,22 +28,25 @@ export class StudentResultComponent {
 
   ngOnInit(): void {
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
-    console.log(this.StudentTokenDetails)
+    this.getStudentDetails()
 
-    this.StudentAssesmentService.getAllAssesmentByStudentid(this.StudentTokenDetails.Id).subscribe((assesment: any) => {
-      this.StudentAssesmentDetails = assesment
-      console.log(assesment )
-    },
-      (error) => {
+
+  }
+  getStudentDetails() {
+    this.StudentAssesmentService.getAllAssesmentByStudentid(this.StudentTokenDetails.Id).subscribe({
+      next: (assesment: any) => {
+        this.StudentAssesmentDetails = assesment;
+        console.log(assesment);
+      },
+      error: () => {
         this.toastr.error("Failed to load student details. Please try again later.", "Error", {
-          positionClass: "toast-top-right", 
+          positionClass: "toast-top-right",
           progressBar: true,
           timeOut: 3000,
           closeButton: true
-       
         });
-      })
-
+      }
+    });
 
   }
 

@@ -130,7 +130,7 @@
           <form [formGroup]="feedBackForm" (ngSubmit)="onSubmit()">
             <div>
               <label for="course">Course Name</label>
-              <select formControlName="courseId" class="form-control">
+              <select formControlName="courseId" class="form-control" *ngIf="StudentDetails">
                 <option value="">Select Course</option>
                 <option *ngFor="let item of StudentDetails.enrollments"
                   [value]="item.courseScheduleResponse.courseResponse.id">

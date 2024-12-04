@@ -82,6 +82,7 @@ export class DashContentComponent implements OnInit {
   }
 
   totalPaymentCalculate(): void {
+   if(this.StudentDetails != null){
     for (let i = 0; i < this.StudentDetails.enrollments.length; i++) {
       const element = this.StudentDetails.enrollments[i].paymentResponse;
       this.TotalAssignments += this.StudentDetails.enrollments[i].courseScheduleResponse.courseResponse.assessmentResponse.length;
@@ -89,34 +90,41 @@ export class DashContentComponent implements OnInit {
         this.TotalPayments += Number(element[p].amountPaid);
       }
     }
+   }
   }
 
   ChartCalculation(): void {
-    for (let i = 0; i < this.StudentDetails.enrollments.length; i++) {
-      const element = this.StudentDetails.enrollments[i].paymentResponse;
-      if (this.StudentDetails.enrollments[i].paymentStatus === "InProcess") {
-        this.PendingPayments++;
-        for (let installment = 0; installment < element.length; installment++) {
-          this.TotalPayment++;
+    if (this.StudentDetails) {
+      for (let i = 0; i < this.StudentDetails.enrollments.length; i++) {
+        const element = this.StudentDetails.enrollments[i].paymentResponse;
+        if (this.StudentDetails.enrollments[i].paymentStatus === "InProcess") {
+          this.PendingPayments++;
+          for (let installment = 0; installment < element.length; installment++) {
+            this.TotalPayment++;
+          }
+        } else if (this.StudentDetails.enrollments[i].paymentStatus === "Paid") {
+          this.paidPayments++;
         }
-      } else if (this.StudentDetails.enrollments[i].paymentStatus === "Paid") {
-        this.paidPayments++;
       }
+
+      this.PaymentData = [
+        { name: 'Completed', value: this.paidPayments },
+        { name: 'Pending', value: this.PendingPayments },
+        { name: 'TotalPayments', value: this.TotalPayment },
+      ];
     }
-    this.PaymentData = [
-      { name: 'Completed', value: this.paidPayments },
-      { name: 'Pending', value: this.PendingPayments },
-      { name: 'TotalPayments', value: this.TotalPayment },
-    ];
+  
     this.createCourseChart();
   }
 
   createCourseChart(): void {
+   if (this.StudentDetails) {
     this.courseData = [
       { name: 'Assignments', value: this.TotalAssignments },
       { name: 'Enrolled Course', value: this.StudentDetails.enrollments.length },
       { name: 'TotalCourses', value: this.totalCourse },
     ];
+   }
   }
 
   onSubmit(): void {

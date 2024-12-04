@@ -26,19 +26,20 @@ export class StudentMycoursesComponent implements OnInit{
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
   ngOnInit(): void {
-
-
-    this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
-
-    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
-      this.StudentDetails = student
-      console.log(this.StudentDetails)
-    },(error)=>{
-      console.log(error)
-    },()=>{
-    })
-
+   this.getStudentDetails()
   }
+
+  getStudentDetails(){
+    this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
+    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
+      next: (student: Student) => {
+        this.StudentDetails = student
+      },error:(error)=>{
+        console.log(error)
+      }
+    })
+  }
+
   getProgress(item: any): number {
     const startDate = new Date(item.courseScheduleResponse.startDate);
     const endDate = new Date(item.courseScheduleResponse.endDate);

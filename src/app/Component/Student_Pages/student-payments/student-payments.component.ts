@@ -35,35 +35,33 @@ export class StudentPaymentsComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.getStudentDetails()
+
+  }
+
+  getStudentDetails() {
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
-    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
-      this.Enrollments = student.enrollments
-
-
-
-      this.Enrollments.forEach((element: any) => {
-        let amount: number = 0
-        element.paymentResponse.forEach((data: any) => {
-          amount += Number(data.amountPaid)
-        })
-        let payment = {
-          ...element,
-          paidTotal: Number(Math.round(amount * 100) / 100)
-        }
-        this.NewEnrollment.push(payment)
-        console.log(this.NewEnrollment)
-      });
-
-
-
-      console.log(this.Enrollments)
-    },(error)=>{
-      console.log(error)
-    },()=>{
-
+    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
+      next: (student: Student) => {
+        this.Enrollments = student.enrollments
+      }, error: (error) => {
+        console.log(error)
+      }, complete: () => {
+        this.Enrollments.forEach((element: any) => {
+          let amount: number = 0
+          element.paymentResponse.forEach((data: any) => {
+            amount += Number(data.amountPaid)
+          })
+          let payment = {
+            ...element,
+            paidTotal: Number(Math.round(amount * 100) / 100)
+          }
+          this.NewEnrollment.push(payment)
+          console.log(this.NewEnrollment)
+        });
+      }
     })
-
   }
 
   calculatePaymentProgress(amountPaid: number, courseFee: number): number {
@@ -106,7 +104,7 @@ export class StudentPaymentsComponent implements OnInit {
   }
 
 
-  
+
   @ViewChild('table', { static: false }) table!: ElementRef;
 
   downloadTableAsImage() {

@@ -25,15 +25,20 @@ export class StudentPaymentsHistoryComponent {
 
   ngOnInit(): void {
 
-    this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
+   this.getStudentDetails()
 
-    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
-      this.Enrollments = student.enrollments
-      console.log(this.Enrollments)
-    },(error)=>{
-      console.log(error)
-    },()=>{
-    })
+
 
   }
+
+ getStudentDetails(){
+  this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
+  this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
+    next: (student: Student) => {
+      this.Enrollments = student.enrollments
+    }, error: (error) => {
+      console.log(error)
+    }
+  })
+ }
 }

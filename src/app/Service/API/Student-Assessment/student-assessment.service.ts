@@ -27,7 +27,7 @@ export class StudentAssessmentService {
     return this.http.put<StudentAssessment>(this.CommonUrl + `/StudentAssessment/Evaluate-Assessment/${id}` , data);
   }
 
-  getAllAssesmentByStudentId(studentId:string,pageNumber:number,pageSize:number){
+  getPaginationByStudentId(studentId:string,pageNumber:number,pageSize:number){
     return this.http.get<StudentAssessment>(this.CommonUrl+`/StudentAssessment/getByPagination/${studentId}?PageNumber=${pageNumber}&PageSize=${pageSize}`)
   }
 

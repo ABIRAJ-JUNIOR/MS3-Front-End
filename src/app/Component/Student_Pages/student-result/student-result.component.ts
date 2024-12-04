@@ -29,11 +29,12 @@ export class StudentResultComponent {
   ngOnInit(): void {
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
     this.getStudentDetails()
+    this.getAssesments()
 
 
   }
   getStudentDetails() {
-    
+
     this.StudentAssesmentService.getAllAssesmentByStudentid(this.StudentTokenDetails.Id).subscribe({
       next: (assesment: any) => {
         this.StudentAssesmentDetails = assesment;
@@ -50,9 +51,25 @@ export class StudentResultComponent {
     });
 
   }
+  pageSize: number = 6; // Courses per page
+  currentPage: number = 1; // Current page index
+  totalPages: number = 0; // Total number of pages
+  pageNumbers: number[] = []; // Array of page numbers to display
+  paginatedAssesments: any[] = [];
 
-  getAssesments(){
-    this.StudentAssesmentService.getAllAssesmentByStudentid(this.StudentTokenDetails.Id,1,2).
+
+  getAssesments() {
+    this.StudentAssesmentService.getPaginationByStudentId(this.StudentTokenDetails.Id, this.currentPage, this.pageSize).subscribe({
+      next: (assesment: any) => {
+        this.paginatedAssesments=assesment.items;
+        this.totalPages = assesment.totalPages;
+        this.pageNumbers=assesment.totalPages;
+      }, error: (error) => {
+
+      }, complete: () => {
+
+      },
+    })
   }
 
   @ViewChild('table', { static: false }) table!: ElementRef;

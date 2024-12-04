@@ -91,12 +91,12 @@ a.sidebar-link {
 }
 
 a.sidebar-link.active_Link {
-    background-color:#ca4f4f; 
+    background-color:gray; 
     color: #fff;  
 }
 
 a.sidebar-link:hover {
-    background-color: #bbb6b6; 
+    background-color:none; 
     color: #fff; 
 }
 

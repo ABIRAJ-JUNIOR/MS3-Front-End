@@ -65,6 +65,7 @@ export class StudentDashboardComponent implements OnInit {
   AnnouncementLoad() {
     this.anouncementService.GetAllAnouncement().subscribe((data: any) => {
       this.Announcements = data
+      console.log(data)
       for (let i: any = 0; i < this.Announcements.length; i++) {
         const element = this.Announcements[i];
         if (element.isActive === true) {
@@ -91,9 +92,7 @@ export class StudentDashboardComponent implements OnInit {
 
   logoutDash(){
     this.LogoutService.logout()
-    this.refreshPage();
+    this.router.navigate([''])
   }
-  refreshPage(): void {
-    window.location.reload();
-  }
+ 
 }

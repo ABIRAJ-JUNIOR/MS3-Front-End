@@ -162,38 +162,53 @@
             </span>
           </button>
 
-          <!-- Announcement Button -->
-           <!-- Dropdown Menu -->
-           <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="announcementDropdown"
-           style="min-width: 300px;">
-           <!-- No Announcements -->
-           <li *ngIf="AnnouncementLength === 0" class="dropdown-item text-muted text-center">
-             No new announcements.
-           </li>
+         
+          <div class="d-flex gap-5 align-items-center">
+            <!-- Announcement Button with Dropdown -->
+            <div class="dropdown">
+              <!-- Button Trigger -->
+              <button class="btn btn-sm btn-outline-dark position-relative OverideBtn dropdown-toggle" type="button"
+                id="announcementDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-envelope"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {{ AnnouncementLength }}
+                </span>
+              </button>
 
-           <!-- Announcement Items -->
-           <li *ngFor="let announcement of Announcements; let i = index"
-             class="dropdown-item d-flex align-items-start">
-             <div *ngIf="announcement.audienceType==typeCheck">
-               <p class="mb-1 fw-bold">{{ announcement.title }}</p>
-               <p class="mb-0 text-muted small">{{ announcement.datePosted |date }}</p>
-             </div>
-           </li>
+              <!-- Dropdown Menu -->
+              <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="announcementDropdown"
+                style="min-width: 300px;">
+                <!-- No Announcements -->
+                <li *ngIf="AnnouncementLength === 0" class="dropdown-item text-muted text-center">
+                  No new announcements.
+                </li>
 
-           <!-- View All Link -->
-           <li *ngIf="AnnouncementLength > 0">
-             <hr class="dropdown-divider">
-           </li>
-           <li *ngIf="AnnouncementLength > 0">
-             <a [routerLink]="['/admin-dashboard/all-announcement','Student']"
-               class="dropdown-item text-center text-primary fw-semibold">
-               View All Announcements
-             </a>
-           </li>
-         </ul>
+                <!-- Announcement Items -->
+                <li *ngFor="let announcement of Announcements; let i = index"
+                  class="dropdown-item d-flex align-items-start">
+                  <div *ngIf="announcement.audienceType==typeCheck">
+                    <p class="mb-1 fw-bold">{{ announcement.title }}</p>
+                    <p class="mb-0 text-muted small">{{ announcement.datePosted |date }}</p>
+                  </div>
+                </li>
 
+                <!-- View All Link -->
+                <li *ngIf="AnnouncementLength > 0">
+                  <hr class="dropdown-divider">
+                </li>
+                <li *ngIf="AnnouncementLength > 0">
+                  <a [routerLink]="['/student-dashboard/all-announcement','Student']"
+                    class="dropdown-item text-center text-primary fw-semibold">
+                    View All Announcements
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
 
         </div>
+
       </div>
     </nav>
 

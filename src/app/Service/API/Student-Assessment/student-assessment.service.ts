@@ -28,7 +28,7 @@ export class StudentAssessmentService {
   }
 
   getPaginationByStudentId(studentId:string,pageNumber:number,pageSize:number){
-    return this.http.get<StudentAssessment>(this.CommonUrl+`/StudentAssessment/getByPagination/${studentId}?PageNumber=${pageNumber}&PageSize=${pageSize}`)
+    return this.http.get<StudentAssessment>(this.CommonUrl+`/StudentAssessment/getByPagination${studentId}?PageNumber=${pageNumber}&PageSize=${pageSize}`)
   }
 
 }

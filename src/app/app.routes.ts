@@ -85,6 +85,8 @@ export const routes: Routes = [
             {path:'all-announcement/:Role',component:ViewAllAnnouncementComponent},
             {path:'**' , redirectTo:'home',pathMatch:'full'}
         ],
+        canActivate: [adminAuthGuard]
+
     },
     {
         path: 'student-dashboard', component: StudentDashboardComponent, children: [

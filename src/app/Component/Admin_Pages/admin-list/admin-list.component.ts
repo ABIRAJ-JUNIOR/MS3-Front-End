@@ -95,10 +95,7 @@ export class AdminListComponent implements OnInit{
         this.currentLength = this.admins.length;
       },
       error: () => {
-        this.toastr.error('Failed to load data', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-        });
+        this.toastr.error('Failed to load data', '');
       }
     });
   }
@@ -150,11 +147,7 @@ export class AdminListComponent implements OnInit{
     this.adminService.addAdmin(adminData).subscribe({
       next: (response: any) => {
         this.adminId = response.id;
-        this.toastr.success('Admin registered successfully!', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut:3000
-        });
+        this.toastr.success('Admin registered successfully!', '');
         this.loadItems();
 
         const auditLog:AuditLogRequest = {
@@ -174,11 +167,7 @@ export class AdminListComponent implements OnInit{
         this.resetForm();
       },
       error: (error:any) => {
-        this.toastr.error(error.error, '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut:4000
-        });
+        this.toastr.error(error.error, '');
       }
     });
   }
@@ -186,11 +175,7 @@ export class AdminListComponent implements OnInit{
   private updateAdmin(adminData: AdminRequest): void {
     this.adminService.updateFullDetails(this.adminId, adminData).subscribe({
       next: (response:Admin) => {
-        this.toastr.success('Admin updated successfully!', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut:3000
-        });
+        this.toastr.success('Admin updated successfully!', '');
         this.loadItems();
 
         const auditLog:AuditLogRequest = {
@@ -209,11 +194,7 @@ export class AdminListComponent implements OnInit{
         this.uploadImage()
       },
       error: (error:any) => {
-        this.toastr.error(error.error, '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut:4000
-        });
+        this.toastr.error(error.error, '');
       }
     });
   }
@@ -230,9 +211,7 @@ export class AdminListComponent implements OnInit{
           this.loadItems();
         },
         error: () => {
-          this.toastr.error('Image upload failed', '', {
-            positionClass: 'toast-top-right',
-          });
+          this.toastr.error('Image upload failed', '');
         }
       });
     }
@@ -275,10 +254,7 @@ export class AdminListComponent implements OnInit{
   deleteAdmin(): void {
     this.adminService.deleteAdmin(this.adminId).subscribe({
       next: () => {
-        this.toastr.success('Admin deleted successfully!', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-        });
+        this.toastr.success('Admin deleted successfully!', '');
         this.loadItems();
 
         const auditLog:AuditLogRequest = {
@@ -295,9 +271,7 @@ export class AdminListComponent implements OnInit{
       },
       complete: () => this.modalRef?.hide(),
       error: () => {
-        this.toastr.error('Failed to delete admin', '', {
-          positionClass: 'toast-top-right',
-        });
+        this.toastr.error('Failed to delete admin', '');
       },
     });
   }

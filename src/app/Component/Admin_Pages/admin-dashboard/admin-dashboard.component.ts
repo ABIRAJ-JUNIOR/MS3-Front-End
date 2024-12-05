@@ -21,6 +21,7 @@ export class AdminDashboardComponent implements OnInit {
   deleteAnnouncement(index: number): void {
     this.announcements.splice(index, 1);
   }
+  
   loginData!:any
   adminData!:Admin;
 
@@ -33,7 +34,6 @@ export class AdminDashboardComponent implements OnInit {
     if(token != null){
       const decode:any =jwtDecode(token)
       this.loginData = decode
-      console.log(this.loginData)
     }
   }
 

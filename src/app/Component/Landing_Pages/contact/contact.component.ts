@@ -32,11 +32,7 @@ export class ContactComponent {
     if (this.contactForm.valid) {
       this.contactService.addContactDetails(this.contactForm.value).subscribe({
         next: () => {
-          this.toastr.success("Message Sent Successfull" , "" , {
-            positionClass:"toast-top-right",
-            progressBar:true,
-            timeOut:3000
-          })
+          this.toastr.success("Message Sent Successfull" , "" , )
         }
       })
       this.contactForm.reset();

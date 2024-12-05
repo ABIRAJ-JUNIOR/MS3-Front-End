@@ -49,7 +49,6 @@ export class StudentResultComponent {
           closeButton: true
         });
       }, complete: () => {
-
       },
     })
   }

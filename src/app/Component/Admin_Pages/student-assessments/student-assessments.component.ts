@@ -101,11 +101,7 @@ export class StudentAssessmentsComponent implements OnInit {
     if (this.evaluationForm.valid) {
       this.studentAssessmentService.evaluateAssessment(this.studentAssessmentId , this.evaluationForm.value).subscribe({
         next: (response:StudentAssessment) => {
-          this.toastr.success("Evaluate successfull" , "" , {
-            positionClass:"toast-top-right",
-            progressBar:true,
-            timeOut:3000
-          })
+          this.toastr.success("Evaluate successfull" , "" , )
 
           const auditLog:AuditLogRequest = {
             action: 'Evaluate Student Assessment',
@@ -123,11 +119,7 @@ export class StudentAssessmentsComponent implements OnInit {
           this.loadStudentAssessments();
         },
         error:(error:any)=>{
-          this.toastr.warning(error.error , "" , {
-            positionClass:"toast-top-right",
-            progressBar:true,
-            timeOut:3000
-          })
+          this.toastr.warning(error.error , "" , )
         }
       })
     }

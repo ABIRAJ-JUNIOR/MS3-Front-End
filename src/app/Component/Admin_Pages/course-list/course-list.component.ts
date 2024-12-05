@@ -151,11 +151,7 @@ export class CourseListComponent implements OnInit {
     this.courseService.AddCourse(courseData).subscribe({
       next: (response: Course) => {
           this.courseId=response.id
-          this.toastr.success("Course added successfull" , "" , {
-            positionClass:"toast-top-right",
-            progressBar:true,
-            timeOut:3000
-          })
+          this.toastr.success("Course added successfull" , "" , )
         this.loadItems();
 
         const auditLog:AuditLogRequest = {
@@ -183,11 +179,7 @@ export class CourseListComponent implements OnInit {
   private updateCourse(courseData:CourseRequest):void{
     this.courseService.updateCourse(this.courseId , courseData).subscribe({
       next:(response:Course)=>{
-        this.toastr.success('Course updated successfull!', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut:3000
-        });
+        this.toastr.success('Course updated successfull!', '', );
         this.loadItems();
 
         const auditLog:AuditLogRequest = {
@@ -220,9 +212,7 @@ export class CourseListComponent implements OnInit {
           this.loadItems();
         },
         error:(error:any) =>{
-          this.toastr.error('Image upload failed', '', {
-            positionClass: 'toast-top-right',
-          });
+          this.toastr.error('Image upload failed', '');
         }
       })
     }
@@ -261,10 +251,7 @@ export class CourseListComponent implements OnInit {
   deleteCourse():void{
     this.courseService.deleteCourse(this.courseId).subscribe({
       next: () => {
-        this.toastr.success('Deleted successfully!', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-        });
+        this.toastr.success('Deleted successfully!', '');
         this.loadItems();
 
         const auditLog:AuditLogRequest = {
@@ -301,11 +288,7 @@ export class CourseListComponent implements OnInit {
   }
 
   private handleError(error: any): void {
-    this.toastr.warning(error.error, '', {
-      positionClass: 'toast-top-right',
-      progressBar: true,
-      timeOut: 4000,
-    });
+    this.toastr.warning(error.error, '');
   }
 }
 

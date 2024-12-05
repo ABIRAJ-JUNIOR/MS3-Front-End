@@ -11,7 +11,11 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes), 
     provideAnimations(), 
-    provideToastr(), 
+    provideToastr({
+      positionClass: 'toast-top-right', 
+      preventDuplicates: true,         
+      timeOut: 2600,
+    }), 
     provideHttpClient(withInterceptors([authInterceptorInterceptor])),
     importProvidersFrom([BrowserAnimationsModule])
   ]

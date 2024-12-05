@@ -5,6 +5,8 @@ import { Router, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../Service/API/Auth/auth.service';
 import { jwtDecode } from 'jwt-decode';
+import { AuditlogService } from '../../../Service/API/AuditLog/auditlog.service';
+import { AuditLogRequest } from '../../Admin_Pages/student-list/student-list.component';
 
 @Component({
   selector: 'app-signin',
@@ -18,17 +20,29 @@ export class SigninComponent {
   displayedText: string = ""; 
   typingSpeed: number = 100; 
 
-  signinForm: FormGroup
-  constructor( private fb: FormBuilder, private auth: AuthService, private rout: Router, private toastr: ToastrService) {
+  signinForm!: FormGroup
+
+  constructor( 
+    private fb: FormBuilder, 
+    private auth: AuthService, 
+    private rout: Router, 
+    private toastr: ToastrService,
+    private readonly auditLogService:AuditlogService
+  ) {
+    this.initializeForm();
+  }
+
+  ngOnInit(): void {
+    this.startTypingEffect();
+  }
+
+
+  private initializeForm(): void {
     this.signinForm = this.fb.group({
       email: [localStorage.getItem('rememberedEmail') || '', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       rememberMe: [localStorage.getItem('rememberedEmail') ? true : false]
     });
-  }
-
-  ngOnInit(): void {
-    this.startTypingEffect();
   }
 
   startTypingEffect(): void {
@@ -49,11 +63,7 @@ export class SigninComponent {
     const { email, password, rememberMe } = this.signinForm.value;
     this.auth.signIn(this.signinForm.value).subscribe({
       next: (res: string) => {
-        this.toastr.success("Login Successfull", "", {
-          positionClass: "toast-top-right",
-          progressBar: true,
-          timeOut: 2000
-        })
+        this.toastr.success("Login Successfull", "")
         localStorage.setItem('token', res)
 
         if (rememberMe) {
@@ -65,6 +75,17 @@ export class SigninComponent {
         const token: string = localStorage.getItem("token")!;
         const decode: any = jwtDecode(token)
         if (decode.Role == "Administrator" || decode.Role == "Instructor") {
+          const auditLog:AuditLogRequest = {
+            action: 'Login',
+            details: `Admin logged in to the system`,
+            adminId:decode.Id,
+          }
+          this.auditLogService.addAuditLog(auditLog).subscribe({
+            next:()=>{},
+            error: (error: any) => {
+              console.error('Error adding audit log:', error.error);
+            }
+          })
           this.rout.navigate(['/admin-dashboard'])
         } else if (decode.Role == "Student") {
           this.rout.navigate(['/home'])
@@ -72,11 +93,7 @@ export class SigninComponent {
 
       }
       , error: (error) => {
-        this.toastr.warning(error.error, "", {
-          positionClass: "toast-top-right",
-          progressBar: true,
-          timeOut: 3000
-        })
+        this.toastr.warning(error.error, "")
       }
     })
   }

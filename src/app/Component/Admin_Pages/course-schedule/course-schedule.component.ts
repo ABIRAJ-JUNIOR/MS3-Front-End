@@ -126,11 +126,7 @@ export class CourseScheduleComponent {
   private addSchedule(scheduleData:CourseScheduleRequest):void{
     this.courseService.addCourseSchedule(scheduleData).subscribe({
       next: (response:Schedule) => {
-        this.toastr.success('Schedule added successfull', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 3000
-        });
+        this.toastr.success('Schedule added successfull', '');
         this.scheduleForm.reset();
         this.loadItems();
         
@@ -147,11 +143,7 @@ export class CourseScheduleComponent {
         })
       },
       error: (err: any) => {
-        this.toastr.warning(err.error, '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 4000
-        });
+        this.toastr.warning(err.error, '');
       }
     });
   }
@@ -159,11 +151,7 @@ export class CourseScheduleComponent {
   private updateSchedule(scheduleData:CourseScheduleRequest):void{
     this.courseService.updateCourseSchedule(this.scheduleId,scheduleData).subscribe({
       next:(response:Schedule)=>{
-        this.toastr.success('Updated successfull', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 3000
-        });
+        this.toastr.success('Updated successfull', '');
 
         this.loadItems();
 
@@ -180,11 +168,7 @@ export class CourseScheduleComponent {
         })
       },
       error: (err:any) => {
-        this.toastr.warning(err.error,'',{
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 4000
-        })
+        this.toastr.warning(err.error,'')
       }
     })
   }

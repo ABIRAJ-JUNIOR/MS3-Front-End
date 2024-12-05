@@ -67,22 +67,14 @@ export class AdminProfileComponent implements OnInit{
       
       this.adminService.addImage(this.adminid,formData,true).subscribe({
         next: () => {
-          this.toastr.success('CoverImage updated successfully!', '', {
-            positionClass: 'toast-top-right',
-            progressBar: true,
-            timeOut:3000
-          });
+          this.toastr.success('CoverImage updated successfully!', '');
         
         },
         complete: () => {
           this.loaddata()
         },
         error: (error:any) => {
-          this.toastr.error(error.error, '', {
-            positionClass: 'toast-top-right',
-            progressBar: true,
-            timeOut:4000
-          });
+          this.toastr.error(error.error, '');
           this.loaddata()
         }
       })
@@ -101,22 +93,14 @@ export class AdminProfileComponent implements OnInit{
         next: (res:any) => {
           console.log(res);
           
-          this.toastr.success('Image updated successfully!', '', {
-            positionClass: 'toast-top-right',
-            progressBar: true,
-            timeOut:3000
-          });
+          this.toastr.success('Image updated successfully!', '');
         
         },
         complete: () => {
           this.loaddata()
         },
         error: (error:any) => {
-          this.toastr.error(error.error, '', {
-            positionClass: 'toast-top-right',
-            progressBar: true,
-            timeOut:4000
-          });
+          this.toastr.error(error.error, '');
           this.loaddata()
         }
       })

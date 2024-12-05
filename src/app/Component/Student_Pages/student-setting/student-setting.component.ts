@@ -53,7 +53,6 @@ export class StudentSettingComponent implements OnInit {
     console.log(this.StudentTokenDetails)
 this.getStudentDetails()
 
-
   }
 
   getStudentDetails(){
@@ -71,8 +70,8 @@ this.getStudentDetails()
         });
       }
     });
-    
   }
+  
   onSubmit() {
 
     const studentData = this.studentForm.value;
@@ -90,6 +89,7 @@ this.getStudentDetails()
         country: studentData.address.country
       }
     }
+    
     this.StudentApiService.updateStudent(this.StudentTokenDetails.Id, student).subscribe({
       next: (data: any) => {
         this.toastr.success("User Update Successful", "", {
@@ -144,18 +144,10 @@ this.getStudentDetails()
 
     if (this.IsEditMode) {
       this.studentForm.enable();
-      this.toastr.success("Profile Edit Mode Activated", "", {
-        progressBar: true,
-        timeOut: 4000,
-        positionClass: 'toast-bottom-right'
-      })
+      this.toastr.success("Profile Edit Mode Activated", "")
     } else {
       this.studentForm.disable();
-      this.toastr.success("Your profile is now in view-only mode.", "", {
-        progressBar: true,
-        timeOut: 4000,
-        positionClass: 'toast-bottom-right'
-      })
+      this.toastr.success("Your profile is now in view-only mode.", "")
     }
   }
 

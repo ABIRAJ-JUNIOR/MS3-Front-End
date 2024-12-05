@@ -59,6 +59,7 @@ export class PaymentGateComponent {
 
   }
 
+  
   DeivdeInstallment: number = 0;
 
   SecondInstallment: any = ""

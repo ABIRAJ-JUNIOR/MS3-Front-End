@@ -2,7 +2,7 @@
 <h4 class="mt-4"><i class="bi bi-credit-card-2-front fs-3 text-warning"></i> Payment Progress</h4>
 
 
-<div class="p-4 alert alert-info">
+<div class="p-4 alert alert-secondary">
     <p class="fs-5 text-muted">
         Welcome to your <strong>Payment History</strong> section!  </p>
      
@@ -14,15 +14,15 @@
 <!-- Table View -->
 <div class="table-responsive mt-4">
     <table class="table table-striped table-hover align-middle mb-0 table-md">
-        <thead class="table-dark">
+        <thead >
             <tr>
                 <th><i class="bi bi-hash"></i> No</th>
-                <th><i class="bi bi-book text-primary"></i> Course name</th>
-                <th><i class="bi bi-currency-dollar text-success"></i> Amount Paid</th>
-                <th><i class="bi bi-calendar-event text-info"></i> Payment Date</th>
-                <th><i class="bi bi-credit-card text-warning"></i> Payment Method</th>
-                <th><i class="bi bi-arrow-repeat text-secondary"></i> Payment Type</th>
-                <th><i class="bi bi-download"></i> Action</th>
+                <th> Course name</th>
+                <th> Amount Paid</th>
+                <th> Payment Date</th>
+                <th> Payment Method</th>
+                <th> Payment Type</th>
+                <th> Action</th>
             </tr>
         </thead>
         <tbody *ngIf="Enrollments">

@@ -63,6 +63,6 @@ export class ViewAllAnnouncementComponent {
   }
 
   goBack(){
-    this.router.navigate(['/admin-dashboard/home'])
+    window.history.back()
   }
 }

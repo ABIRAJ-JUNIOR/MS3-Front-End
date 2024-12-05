@@ -2,10 +2,10 @@
     <div class="d-flex justify-content-between align-items-center">
         <h4 class="mb-4 text-dark "><i class="bi bi-journals text-info fs-3"></i> Assessments Overview</h4>
       
-        <button class="btn btn-outline-primary btn-sm" (click)="downloadTableAsImage()"><i
+        <button class="btn btn-outline-danger btn-sm" (click)="downloadTableAsImage()"><i
                 class="bi bi-file-earmark-arrow-down-fill"></i> Download Report</button>
     </div>
-    <div class="alert alert-warning rounded">
+    <div class="alert alert-secondary rounded">
         <p class="fs-5 text-dark">
             Welcome to your <strong>Assessment Overview</strong> section!  Here, <br> you can see all your upcoming assessments, including quizzes, exams, and assignments for your courses at IT Intute. Check the due dates and stay updated on your progress.
           </p>
@@ -15,15 +15,15 @@
             <thead class="table-dark">
                 <tr>
                     <th>#</th>
-                    <th><i class="bi bi-bookmark-fill text-danger"></i> Assessment Type</th>
-                    <th><i class="bi bi-card-checklist text-warning"></i> Assessment Title</th>
-                    <th><i class="bi bi-calendar-event text-light"></i> Start Date</th>
-                    <th><i class="bi bi-calendar-check text-light"></i> End Date</th>
-                    <th><i class="bi bi-calendar-day text-success"></i> Date Submitted</th>
-                    <th><i class="bi bi-pen text-info"></i> Marks Obtained</th>
-                    <th><i class="bi bi-award text-success"></i> Grade</th>
-                    <th><i class="bi bi-chat-left-text text-success"></i> Feedback</th>
-                    <th><i class="bi bi-file-earmark-check text-warning"></i> Status</th>
+                    <th> Assessment Type</th>
+                    <th> Assessment Title</th>
+                    <th> Start Date</th>
+                    <th>End Date</th>
+                    <th> Date Submitted</th>
+                    <th>Marks Obtained</th>
+                    <th> Grade</th>
+                    <th> Feedback</th>
+                    <th>Status</th>
                   </tr>
             </thead>
             <tbody *ngIf="StudentAssesmentDetails">
@@ -42,6 +42,21 @@
                     </tr>
             </tbody>
         </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end  my-4">
+                <li class="page-item pointer" [class.disabled]="currentPage === 1">
+                    <a class="page-link" (click)="goToPage(currentPage - 1)">Previous</a>
+                </li>
+                <li class="page-item pointer" *ngFor="let page of [].constructor(totalPages); let i = index"
+                    [class.active]="currentPage === i + 1">
+                    <a class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</a>
+                </li>
+                <li class="page-item pointer" [class.disabled]="currentPage === totalPages">
+                    <a class="page-link" (click)="goToPage(currentPage + 1)">Next</a>
+                </li>
+            </ul>
+        </nav>
+    
     </div>
 
 </div>

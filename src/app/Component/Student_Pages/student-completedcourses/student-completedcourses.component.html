@@ -1,16 +1,15 @@
 <div class="container my-5">
-  <div *ngIf="!NoCourseBool">
+  <div *ngIf="StudentDetails.length > 0">
     <h4 >Completed Courses</h4>
     <hr>
   </div>
     <div class="row" *ngIf="StudentDetails">
-        <div class="col-md-4 my-4" *ngFor="let item of StudentDetails.enrollments let i = index">
-            <div class="card shadow-sm border-0 rounded" *ngIf="CompleteCourseCalculation(item)">
-                <img src="/course/card{{i+1}}.jpg" class="card-img-top" alt="Course image">
+        <div class="col-md-4 my-4" *ngFor="let item of StudentDetails let i = index">
+            <div class="card shadow-sm border-0 rounded">
+                <img src="{{item.courseScheduleResponse.courseResponse.imageUrl}}" class="card-img-top" alt="Course image">
 
-                <div class="card-header text-white text-center" [ngClass]="getProgressBarClass(item)">
-                    <h5><i
-                            class="bi bi-bookmark-check pe-2"></i>{{item.courseScheduleResponse.courseResponse.courseName}}
+                <div class="card-header bg-dark  text-light text-center" [ngClass]="getProgressBarClass(item)">
+                    <h5><i class="bi bi-bookmark-check pe-2"></i>{{item.courseScheduleResponse.courseResponse.courseName}}
                     </h5>
                 </div>
 
@@ -31,8 +30,8 @@
                 </div>
 
                 <div class="card-footer text-center">
-                    <button class="btn btn-sm btn-outline-dark border-0 p-0 py-2 px-4">
-                        <i class="bi bi-eye "></i>View Details
+                    <button class="btn btn-sm btn-success border-0 p-0 py-2 px-4">
+                        Download Certficate
                     </button>
                 </div>
             </div>
@@ -40,9 +39,9 @@
 
         </div>
 
-        <h4 *ngIf="NoCourseBool">
+        <h4>
 
-            <div id="notfound">
+            <div id="notfound" *ngIf="StudentDetails.length == 0">
                 <div class="notfound">
                     <div class="notfound-404">
                         <h3>Oops! Page not found</h3>

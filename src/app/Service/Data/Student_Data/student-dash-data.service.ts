@@ -8,8 +8,8 @@ export class StudentDashDataService {
 
   constructor() { }
 
-  GetStudentDeatilByLocalStorage():any{
-        const token = localStorage.getItem("token");
+  GetStudentDeatilByLocalStorage(): any {
+    const token = localStorage.getItem("token");
     const decode: any = token != null ? jwtDecode(token) : ""
     return decode
   }

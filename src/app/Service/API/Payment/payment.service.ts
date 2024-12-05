@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { PayRequest } from '../../../Component/Landing_Pages/otp-authentication/otp-authentication.component';
-import { Payment } from '../../../Modals/modals';
+import { Enrollment, Payment } from '../../../Modals/modals';
 import { environment } from '../../../../environments/environment.development';
 
 @Injectable({

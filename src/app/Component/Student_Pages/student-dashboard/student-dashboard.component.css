@@ -44,7 +44,7 @@ h4 {
 #sidebar {
     max-width: 300px;
     min-width: 270px;
-    background-color: #2C3A47;
+    background-color:#272829;
     transition: all 0.35s ease-in-out;
 }
 
@@ -91,12 +91,12 @@ a.sidebar-link {
 }
 
 a.sidebar-link.active_Link {
-    background-color:#227093; 
+    background-color:gray; 
     color: #fff;  
 }
 
 a.sidebar-link:hover {
-    background-color: #226f93c5; 
+    background-color:none; 
     color: #fff; 
 }
 

@@ -1,8 +1,8 @@
 <div class="wrapper">
   <aside id="sidebar" [ngClass]="{'collapsed': sidebarCollapsed}" class="text-light js-sidebar shadow-lg">
     <div class="h-100" style="position: fixed; min-width: 270px ">
-      <div class="sidebar-logo ">
-        <img src="/logo.png" alt="" height="50px">
+      <div class="sidebar-logo " style="display: flex; flex-direction: column;align-items: center;justify-content: center;">
+        <img src="/logo.png" alt="" height="80px">
         <a href="#">Student Portal</a>
         <hr>
       </div>
@@ -35,14 +35,14 @@
             <i class="fa-solid fa-book-open pe-2"></i>
             Learning Dashboard  <i class="bi bi-arrow-down-short"></i>
           </a>
-          <ul id="courses" class="sidebar-dropdown list-unstyled collapse m-1" data-bs-parent="#sidebar">
+          <ul id="courses" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
             <li class="sidebar-item">
               <a [routerLink]="['/student-dashboard/mycourses']" [routerLinkActive]="['active_Link']"
-                class="sidebar-link ms-4">My Student Hub</a>
+                class="sidebar-link ">My Student Hub</a>
             </li>
             <li class="sidebar-item">
               <a [routerLink]="['/student-dashboard/completed-Courses']" [routerLinkActive]="['active_Link']"
-                class="sidebar-link ms-4">Campus Connect</a>
+                class="sidebar-link ">Campus Connect</a>
             </li>
           </ul>
         </li>
@@ -57,11 +57,11 @@
           </a>
           <ul id="assesment" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
             <li class="sidebar-item">
-              <a [routerLink]="['/student-dashboard/assesment']" class="sidebar-link ms-4" [routerLinkActive]="['active_Link']"> Assessment Overview
+              <a [routerLink]="['/student-dashboard/assesment']" class="sidebar-link " [routerLinkActive]="['active_Link']"> Assessment Overview
               </a>
             </li>
             <li class="sidebar-item">
-              <a [routerLink]="['/student-dashboard/assesment-result']" class="sidebar-link ms-4" [routerLinkActive]="['active_Link']">Assessment Results</a>
+              <a [routerLink]="['/student-dashboard/assesment-result']" class="sidebar-link" [routerLinkActive]="['active_Link']">Assessment Results</a>
             </li>
 
           </ul>
@@ -108,12 +108,8 @@
           </a>
         </li>
       </ul>
-      <div style="display: flex;flex-direction: column; align-items: start;margin-top: 50px; margin-left: 50px;" *ngIf="StudentDetails">
-        <div style="height: 140px; width: 140px; overflow: hidden; position: relative;">
-          <img src="{{StudentDetails.imageUrl}}" *ngIf="StudentDetails.imageUrl" alt="" style="height: 100%; width: 100%; object-fit: cover; border-radius: 50%;">
-          <img src="/customer-support.jpg" alt="" *ngIf="!StudentDetails.imageUrl" style="height: 100%; width: 100%; object-fit: cover; border-radius: 50%;">
-        </div>
-        
+      <div style="display: flex;flex-direction: column; align-items: start;margin-top: 40px; margin-left: 30px;" *ngIf="StudentDetails">
+      
         <div class=" d-flex align-items-center justify-content-center" data-bs-toggle="dropdown"
           style="flex-direction: column;" *ngIf="StudentDetails">
           <span class="font-weight-bold fs-5 mt-3 fw-bold" style="color: #ffffff;">{{StudentDetails.firstName}}
@@ -122,7 +118,7 @@
 
           <span class="text-light mb-1">Student ID: UT-{{StudentDetails.nic | slice: -4
             }}</span>
-          <button class="btn btn-danger d-flex align-items-center gap-2 px-4 py-2 shadow-sm"   style="border-radius: 4px;" data-bs-toggle="modal" data-bs-target="#logoutModal"> <i class="bi bi-box-arrow-right"></i> Logout</button>
+          <button class="btn btn-outline-danger d-flex align-items-center gap-2 px-4 py-2 my-2 shadow-sm"   style="border-radius: 4px;" data-bs-toggle="modal" data-bs-target="#logoutModal"> <i class="bi bi-box-arrow-right"></i> Logout</button>
          
         </div>
 
@@ -162,18 +158,53 @@
             </span>
           </button>
 
-          <!-- Announcement Button -->
-          <button class="btn btn-sm btn-outline-dark position-relative OverideBtn" type="button" data-bs-toggle="modal"
-            data-bs-target="#Anouncement">
-            <i class="bi bi-envelope"></i>
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              {{AnnouncementLength}}
+         
+          <div class="d-flex gap-5 align-items-center">
+            <!-- Announcement Button with Dropdown -->
+            <div class="dropdown">
+              <!-- Button Trigger -->
+              <button class="btn btn-sm btn-outline-dark position-relative OverideBtn dropdown-toggle" type="button"
+                id="announcementDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-envelope"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {{ AnnouncementLength }}
+                </span>
+              </button>
 
-            </span>
-          </button>
+              <!-- Dropdown Menu -->
+              <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="announcementDropdown"
+                style="min-width: 300px;">
+                <!-- No Announcements -->
+                <li *ngIf="AnnouncementLength === 0" class="dropdown-item text-muted text-center">
+                  No new announcements.
+                </li>
 
+                <!-- Announcement Items -->
+                <li *ngFor="let announcement of Announcements; let i = index"
+                  class="dropdown-item d-flex align-items-start">
+                  <div *ngIf="announcement.audienceType==typeCheck">
+                    <p class="mb-1 fw-bold">{{ announcement.title }}</p>
+                    <p class="mb-0 text-muted small">{{ announcement.datePosted |date }}</p>
+                  </div>
+                </li>
+
+                <!-- View All Link -->
+                <li *ngIf="AnnouncementLength > 0">
+                  <hr class="dropdown-divider">
+                </li>
+                <li *ngIf="AnnouncementLength > 0">
+                  <a [routerLink]="['/student-dashboard/all-announcement','Student']"
+                    class="dropdown-item text-center text-primary fw-semibold">
+                    View All Announcements
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
 
         </div>
+
       </div>
     </nav>
 

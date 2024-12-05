@@ -88,6 +88,7 @@ export const routes: Routes = [
             {path:'**' , redirectTo:'home',pathMatch:'full'}
         ],
         canActivate: [adminAuthGuard]
+
     },
     {
         path: 'student-dashboard', component: StudentDashboardComponent, children: [
@@ -102,6 +103,7 @@ export const routes: Routes = [
             {path:'assesment-result',component:StudentResultComponent},
             {path:'enrollCourse-payment',component:StudentPaymentsComponent},
             {path:'enrollCourse-paymentHistory',component:StudentPaymentsHistoryComponent},
+            {path:'all-announcement/:Role',component:ViewAllAnnouncementComponent},
             {path:'**' , redirectTo:'home',pathMatch:'full'}
         ],
         canActivate: [studentAuthGuard]

@@ -13,23 +13,36 @@ import { StudentDashDataService } from "../../../Service/Data/Student_Data/stude
   styleUrl: './student-completedcourses.component.css'
 })
 export class StudentCompletedcoursesComponent {
-  constructor( private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
+  StatusCheck: string = "Completed";
+  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
 
-  StudentDetails: any;
+  StudentDetails: any[]=[];
+
+  studentFilterBefore:any;
   StudentTokenDetails: any;
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
   ngOnInit(): void {
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
-    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
-      this.StudentDetails = student
-      console.log(this.StudentDetails)
-    }, (error) => {
-      console.log(error)
-    }, () => {
+    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
+      next: (student: Student) => {
+        this.studentFilterBefore = student.enrollments
 
+
+      }, error: (error) => {
+        console.log(error)
+      }, complete: () => {
+        for (let i:number = 0; i < this.studentFilterBefore.length; i++) {
+          console.log("work")
+          const element = this.studentFilterBefore[i];
+          if (element.courseScheduleResponse.scheduleStatus == this.StatusCheck) {
+                  this.StudentDetails.push(element)
+          }
+        }
+
+      }
     })
 
   }
@@ -41,11 +54,9 @@ export class StudentCompletedcoursesComponent {
     const currentDate = new Date();
     const endDate = new Date(item.courseScheduleResponse.endDate);
     if (currentDate > endDate) {
+      this.NoCourseBool = true
       return true;
-      this.NoCourseBool = false
     } else {
-
-
       return false;
     }
 

@@ -26,7 +26,7 @@ export class StudentProfileComponent {
 
   selectedQuote: string = '';
 
-  constructor( private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
+  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
     this.generateNewQuote();
   }
 
@@ -46,18 +46,24 @@ export class StudentProfileComponent {
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
   ngOnInit(): void {
-    this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
-    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
-      this.StudentDetails = student
-      console.log(this.StudentDetails)
-    },(error)=>{
-      console.log(error)
-    },()=>{
-    })
+    this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
+    this.getStudentDetails()
 
   }
 
+  getStudentDetails() {
+    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
+      next: (student: Student) => {
+        this.StudentDetails = student;
+        console.log(this.StudentDetails);
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+
+  }
 
   selectedGrade: string = 'Update Soon';  // Default grade
   Enrollments: any;

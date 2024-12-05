@@ -51,19 +51,27 @@ export class StudentSettingComponent implements OnInit {
 
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
     console.log(this.StudentTokenDetails)
+this.getStudentDetails()
 
-    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
-      this.StudentDetails = student
-      this.assignStudentData();
-
-    },
-      (error) => {
-        this.toastr.error("Failed to load student details. Please try again later.", "Error");
-      },()=>{
-      })
   }
 
-
+  getStudentDetails(){
+    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
+      next: (student: Student) => {
+        this.StudentDetails = student;
+        this.assignStudentData();
+      },
+      error: () => {
+        this.toastr.error("Failed to load student details. Please try again later.", "Error", {
+          positionClass: "toast-top-right",
+          progressBar: true,
+          timeOut: 4000,
+          closeButton: true
+        });
+      }
+    });
+  }
+  
   onSubmit() {
 
     const studentData = this.studentForm.value;
@@ -74,26 +82,36 @@ export class StudentSettingComponent implements OnInit {
       gender: Number(studentData.gender),
       phone: studentData.phone,
       address: {
-        addressLine1: studentData.address.addressLine1,
+        addressLine1: studentData.address.addressLine1  || 'AddressLine1 Not included',
         addressLine2: studentData.address.addressLine2 || 'AddressLine2 Not included',  
         city: studentData.address.city,
         postalCode: studentData.address.postalCode,
         country: studentData.address.country
       }
     }
-    console.log(student)
-    this.StudentApiService.updateStudent(this.StudentTokenDetails.Id,student).subscribe(
-      (data: any) => {
-        this.toastr.success("User Update Successfull", "")
-        this.studentForm.disable()
-        this.IsEditMode = !this.IsEditMode
+    
+    this.StudentApiService.updateStudent(this.StudentTokenDetails.Id, student).subscribe({
+      next: (data: any) => {
+        this.toastr.success("User Update Successful", "", {
+          progressBar: true,
+          timeOut: 4000,
+          positionClass: 'toast-bottom-right'
+        });
+        this.studentForm.disable();
+        this.IsEditMode = !this.IsEditMode;
       },
-      (error) => {
-        this.toastr.error("User Update Failed try again later", "")
-      },()=>{
-
+      error: () => {
+        this.toastr.error("User Update Failed. Try again later.", "", {
+          progressBar: true,
+          timeOut: 4000,
+          positionClass: 'toast-bottom-right'
+        });
+      },
+      complete: () => {
+        console.log("Student update operation completed.");
       }
-    )
+    });
+    
   }
 
   assignStudentData() {
@@ -107,16 +125,17 @@ export class StudentSettingComponent implements OnInit {
     } else if (genderValue == "female") {
       Gender = 2;
     }
+   if (this.StudentDetails) {
     this.studentForm.setValue({
       firstName: this.StudentDetails.firstName,
       lastName: this.StudentDetails.lastName,
       phone: this.StudentDetails.phone,
       dateOfBirth: dateOfBirth,
       gender: Gender,
-      address: this.StudentDetails.address || "Kindly provide your address for our records.",
-    
-
+      address: this.StudentDetails.address || "Kindly provide your address for our records."
     });
+    
+   }
   }
 
 

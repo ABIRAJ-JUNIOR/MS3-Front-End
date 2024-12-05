@@ -48,27 +48,33 @@ export class StudentSettingComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
-    console.log(this.StudentTokenDetails)
     this.getStudentDetails()
 
   }
 
   getStudentDetails() {
-    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
-      next: (student: Student) => {
-        this.StudentDetails = student;
-        this.assignStudentData();
-      },
-      error: () => {
-        this.toastr.error("Failed to load student details. Please try again later.", "Error", {
-          positionClass: "toast-top-right",
-          progressBar: true,
-          timeOut: 4000,
-          closeButton: true
-        });
-      }
-    });
+    this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
+    if (this.StudentTokenDetails != null) {
+
+
+      this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
+        next: (student: Student) => {
+          this.StudentDetails = student;
+        },
+        error: () => {
+          this.toastr.error("Failed to load student details. Please try again later.", "Error", {
+            positionClass: "toast-top-right",
+            progressBar: true,
+            timeOut: 4000,
+            closeButton: true
+          });
+        },complete:()=>{
+          this.assignStudentData();
+
+        }
+      });
+  
+    }
   }
 
   onSubmit() {
@@ -96,8 +102,7 @@ export class StudentSettingComponent implements OnInit {
           timeOut: 4000,
           positionClass: 'toast-bottom-right'
         });
-        this.studentForm.disable();
-        this.IsEditMode = !this.IsEditMode;
+        this.changeEditMode()
       },
       error: () => {
         this.toastr.error("User Update Failed. Try again later.", "", {
@@ -114,6 +119,7 @@ export class StudentSettingComponent implements OnInit {
   }
 
   assignStudentData() {
+    console.log(this.studentForm.value); // Check the form group object in the console
     let Gender = 3;
     const genderValue = this.StudentDetails?.gender.toLowerCase();
     const dateOfBirth = new Date(this.StudentDetails?.dateOfBirth).toISOString().split('T')[0];
@@ -133,7 +139,7 @@ export class StudentSettingComponent implements OnInit {
         country: 'Country Not included',
       };
 
-      this.studentForm.setValue({
+      this.studentForm.patchValue({
         firstName: this.StudentDetails.firstName,
         lastName: this.StudentDetails.lastName,
         phone: this.StudentDetails.phone,
@@ -141,7 +147,10 @@ export class StudentSettingComponent implements OnInit {
         gender: Gender,
         address: address,
       });
+
     }
+
+
   }
 
 

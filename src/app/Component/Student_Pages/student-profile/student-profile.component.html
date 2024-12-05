@@ -38,14 +38,14 @@
 
                                         <h4 class="text-muted mt-4"><i class="bi bi-fingerprint text-secondary"></i> Bio Graph</h4>
                                         <!-- Card Body -->
-                                        <div class="card-body ">
+                                        <div class="card-body " *ngIf="StudentDetails">
                                             <div class="row align-items-center">
                                                 <!-- Full Name -->
                                                 <div class="col-md-6">
                                                     <div class="row">
                                                         <div class="col-md-6 pt-md-4">
                                                             <div class="d-flex align-items-start">
-                                                                <i class="bi bi-person-fill text-primary fs-5 me-3"></i>
+                                                                <i class="bi bi-person-fill text-dark fs-5 me-3"></i>
                                                                 <div>
                                                                     <h6 class="mb-1">Full Name</h6>
                                                                     <p class="text-muted mb-0">
@@ -59,7 +59,7 @@
                                                         <div class="col-md-6 pt-md-4">
                                                             <div class="d-flex align-items-start">
                                                                 <i
-                                                                    class="bi bi-envelope-fill text-primary fs-5 me-3"></i>
+                                                                    class="bi bi-envelope-fill text-dark fs-5 me-3"></i>
                                                                 <div>
                                                                     <h6 class="mb-1">Email</h6>
                                                                     <p class="text-muted mb-0">
@@ -72,7 +72,7 @@
                                                         <div class="col-md-6 pt-4">
                                                             <div class="d-flex align-items-start">
                                                                 <i
-                                                                    class="bi bi-telephone-fill text-primary fs-5 me-3"></i>
+                                                                    class="bi bi-telephone-fill text-dark fs-5 me-3"></i>
                                                                 <div>
                                                                     <h6 class="mb-1">Phone</h6>
                                                                     <p class="text-muted mb-0">{{StudentDetails.phone}}
@@ -85,11 +85,11 @@
                                                         <div class="col-md-6 pt-4">
                                                             <div class="d-flex align-items-start">
                                                                 <i
-                                                                    class="bi bi-geo-alt-fill text-primary fs-5 me-3"></i>
+                                                                    class="bi bi-geo-alt-fill text-dark fs-5 me-3"></i>
                                                                 <div>
                                                                     <h6 class="mb-1">Address</h6>
-                                                                    <p class="text-muted mb-0">
-                                                                        {{StudentDetails.address||"Weneed your address. Pleaseadd it for better service."}}
+                                                                    <p class="text-muted mb-0" *ngIf="StudentDetails.address != null">
+                                                                        {{StudentDetails.address.addressLine1 ||"Weneed your address. Pleaseadd it for better service."}},{{StudentDetails.address.city}}
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -99,7 +99,7 @@
                                                         <div class="col-md-6 pt-4">
                                                             <div class="d-flex align-items-start">
                                                                 <i
-                                                                    class="bi bi-person-vcard-fill text-primary fs-5 me-3"></i>
+                                                                    class="bi bi-person-vcard-fill text-dark fs-5 me-3"></i>
                                                                 <div>
                                                                     <h6 class="mb-1">NIC</h6>
                                                                     <p class="text-muted mb-0">{{StudentDetails.nic}}
@@ -112,7 +112,7 @@
                                                         <div class="col-md-6 pt-4">
                                                             <div class="d-flex align-items-start">
                                                                 <i
-                                                                    class="bi bi-person-badge text-primary fs-5 me-3"></i>
+                                                                    class="bi bi-person-badge text-dark fs-5 me-3"></i>
                                                                 <div>
                                                                     <h6 class="mb-1">Role</h6>
                                                                     <p class="text-muted mb-0">
@@ -125,7 +125,7 @@
                                                         <div class="col-md-6 pt-4">
                                                             <div class="d-flex align-items-start">
                                                                 <i
-                                                                    class="bi bi-calendar-fill text-primary fs-5 me-3"></i>
+                                                                    class="bi bi-calendar-fill text-dark fs-5 me-3"></i>
                                                                 <div>
                                                                     <h6 class="mb-1">Created Date</h6>
                                                                     <p class="text-muted mb-0">
@@ -146,16 +146,12 @@
                                             <!-- Action Buttons -->
                                             <div class="col-md-12 d-flex gap-3 ">
                                                 <button
-                                                    class="btn btn-outline-primary d-flex align-items-center gap-2 px-4 py-2 shadow-sm"
+                                                    class="btn btn-outline-dark btn-md d-flex align-items-center gap-2 px-4 py-2 shadow-sm"
                                                     [routerLink]="['/student-dashboard/setting']"
                                                     style="border-radius: 4px;">
                                                     <i class="bi bi-gear-fill"></i> Account Settings
                                                 </button>
-                                                <button
-                                                    class="btn btn-danger d-flex align-items-center gap-2 px-4 py-2 shadow-sm"
-                                                    style="border-radius: 4px;">
-                                                    <i class="bi bi-box-arrow-right"></i> Logout
-                                                </button>
+                                             
                                             </div>
 
                                             <!-- Additional Information Section -->

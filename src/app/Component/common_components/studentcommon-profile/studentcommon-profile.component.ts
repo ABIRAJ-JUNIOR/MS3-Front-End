@@ -31,13 +31,18 @@ export class StudentcommonProfileComponent {
       this.StudentDetails = student
       this.previewUrl=this.StudentDetails.imageUrl
       console.log(this.StudentDetails)
+    },(error)=>{
+     console.log(error) 
+    },()=>{
     })
 
   }
 
 
   onFileSelected(event: Event): void {
+
     const input = event.target as HTMLInputElement;
+    console.log(this.StudentTokenDetails.Id)
 
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
@@ -63,6 +68,7 @@ export class StudentcommonProfileComponent {
 
     },(error)=>{
       this.tostr.error(error.message);
+    },()=>{
     })
 
 

@@ -136,21 +136,21 @@ a.sidebar-link {
 }
 
 .form-control {
-    border-radius: 20px; /* Makes the input more rounded */
-    box-shadow: none; /* Removes the default shadow */
+    border-radius: 20px;
+    box-shadow: none; 
   }
   
   .form-control:focus {
-    border-color: #007bff; /* Adds blue border on focus */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Glow effect */
+    border-color: #007bff; 
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
   }
   
   .btn-primary {
-    border-radius: 20px; /* Matches the input's rounded style */
+    border-radius: 20px; 
   }
   
   .btn-primary:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3; 
   }
 
   .OverideBtn{
@@ -187,3 +187,4 @@ a.sidebar-link {
 .active{
     background-color: rgb(134, 129, 129);
 }
+

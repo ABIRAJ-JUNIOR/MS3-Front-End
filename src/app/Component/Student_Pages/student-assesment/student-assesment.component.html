@@ -4,7 +4,7 @@
 
     <hr>
 
-    <div class="p-4 border  alert alert-primary">
+    <div class="p-4 border  alert alert-secondary">
         <p class="fs-5 text-dark">
             Once you've completed an assignment, you can submit it directly through this section. Ensure that you review
             your work thoroughly before submitting it, as late submissions may be subject to penalties, depending on
@@ -14,98 +14,175 @@
         </p>
     </div>
 
-    <div class="row  ">
-        <div class="col-12 col-sm-12 col-md-12 " *ngFor="let Sechdule of paginatedAssesment  let i = index">
-            <div class="card my-4">
-                <h5 class="card-title fs-4   p-2 py-3 rounded-top-2 text-center text-white m-0 " style="background-color: #0c0800;
-                background-image: linear-gradient(132deg, #0c0800 0%, #004594 100%);
-                
-                ">
-                    <a>{{Sechdule.courseScheduleResponse.courseResponse.courseName}}</a>
-                </h5>
-                <div *ngFor="let assesment of Sechdule.courseScheduleResponse.courseResponse.assessmentResponse " >
-                    <div class="row"  *ngIf="assesment.assessmentStatus!==StatusCheck">
+    <div class="py-3">
+        <div class="radio-wrapper-20">
+            <label for="example-29-1">
+                <input id="example-29-1" type="radio" name="radio-examples" [(ngModel)]="TableView" value="2">
+                <span class="name"><i class="bi bi-eye"></i> Table</span>
+            </label>
+            <label for="example-29-2">
+                <input id="example-29-2" type="radio" name="radio-examples" [(ngModel)]="TableView" value="1">
+                <span class="name"><i class="bi bi-eye"></i> Card</span>
+            </label>
+        </div>
+    </div>
 
-                        <div class="col-md-12">
-                            <div class="card-body">
-                                <div class="col-md-1">
-                                    <p class="mb-2 text-dark fs-5 bg-warning py-1 text-center rounded-2">
-                                        <i class="bi bi-bookmarks text-white"></i> {{ assesment.assessmentType }}
+    <div *ngIf="TableView==1">
+        <div class="row" *ngIf="paginatedAssesment">
+            <div class="col-12 col-sm-12 col-md-12 " *ngFor="let Sechdule of paginatedAssesment  let i = index">
+                <div class="card my-4">
+                    <h5 class="card-title fs-4   p-2 rounded-top-2 text-white m-0" style="background-color: #272829;">
+                        <a>{{Sechdule.courseScheduleResponse.courseResponse.courseName}}</a>
+                    </h5>
+                    <div *ngFor="let assesment of Sechdule.courseScheduleResponse.courseResponse.assessmentResponse ">
+                        <div class="row" *ngIf="assesment.assessmentStatus!==StatusCheck">
+
+                            <div class="col-md-12">
+                                <div class="card-body">
+                                    <div class="col-md-1">
+                                        <p class="mb-2 text-dark fs-5 bg-warning py-1 text-center rounded-2">
+                                            <i class="bi bi-bookmarks text-white"></i> {{ assesment.assessmentType }}
+                                        </p>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p class="card-text fs-5 py-2 text-primary">{{ assesment.assessmentTitle }}
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="card-text">
+                                                <i class="bi bi-clock-history me-2 text-success"></i><strong>Last
+                                                    Updated
+                                                    :</strong> {{ assesment.updateDate | date:'mediumDate' }}
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="card-text">
+                                                <i class="bi bi-calendar-event me-2 text-danger"></i> <strong>StartDate
+                                                    :</strong>{{ assesment.startDate | date: 'mediumDate' }} - {{
+                                                assesment.endDate | date: 'mediumDate' }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-1">
+                                        <div class="col-md-6">
+                                            <p class="card-text">
+                                                <i class="bi bi-award me-2 text-warning"></i> <strong>Pass Marks
+                                                    :</strong>{{ assesment.passMarks }}
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6 mt-1">
+                                            <p class="card-text">
+                                                <i class="bi bi-star me-2 text-primary"></i><strong>Total Marks
+                                                    :</strong>
+                                                {{ assesment.totalMarks }}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <p class="card-text mt-1">
+                                        <i class="bi bi-info-circle me-2 text-info"></i><strong>Status :</strong> <span
+                                            class="fw-bold text-success">{{ assesment.assessmentStatus }}</span>
                                     </p>
-                                </div>
-                            
-                                <div class="row">
-                                    <div class="col-12">
-                                        <p class="card-text fs-5 py-2 text-primary">{{ assesment.assessmentTitle }}</p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p class="card-text">
-                                            <i class="bi bi-clock-history me-2 text-success"></i><strong>Last Updated :</strong> {{ assesment.updateDate | date:'mediumDate' }}
-                                        </p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p class="card-text">
-                                            <i class="bi bi-calendar-event me-2 text-danger"></i> <strong>StartDate :</strong>{{ assesment.startDate | date: 'mediumDate' }} - {{ assesment.endDate | date: 'mediumDate' }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row mt-1">
-                                    <div class="col-md-6">
-                                        <p class="card-text">
-                                            <i class="bi bi-award me-2 text-warning"></i> <strong>Pass Marks :</strong>{{ assesment.passMarks }}
-                                        </p>
-                                    </div>
-                                    <div class="col-md-6 mt-1">
-                                        <p class="card-text">
-                                            <i class="bi bi-star me-2 text-primary"></i><strong>Total Marks :</strong> {{ assesment.totalMarks }}
-                                        </p>
-                                    </div>
-                                </div>
-                            
-                                <p class="card-text mt-1">
-                                    <i class="bi bi-info-circle me-2 text-info"></i><strong>Status :</strong> <span class="fw-bold text-success">{{ assesment.assessmentStatus }}</span>
-                                </p>
-                            
-                                <div class="card-footer text-end">
-                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ExamModal" (click)="examdataTransfer(assesment.assessmentLink)"
+
+                                    <div class="card-footer text-end">
+                                        <button class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#ExamModal"
+                                            (click)="examdataTransfer(assesment.assessmentLink)"
                                             [disabled]="assesment.assessmentStatus == NotStartCheck">
-                                        <i class="fas fa-eye"></i> View Exam
-                                    </button>
+                                            <i class="fas fa-eye"></i> View Exam
+                                        </button>
+                                    </div>
                                 </div>
+
+                                <hr class="m-0">
                             </div>
-                            
-                            <hr class="m-0">
                         </div>
+
                     </div>
 
+
                 </div>
-
-
             </div>
         </div>
     </div>
 
+    <div *ngIf="TableView==2">
 
+        <div class="row" *ngIf="paginatedAssesment">
+            <div class="col-12 col-sm-12 col-md-12">
+                <div class="card my-4">
+                    <table class="table table-striped">
+                        <thead style="background-color: #272829;">
+                            <tr>
+                                <th scope="col">Assessment Type</th>
+                                <th scope="col">Assessment Title</th>
+                                <th scope="col">Last Updated</th>
+                                <th scope="col">Start/End Date</th>
+                                <th scope="col">Pass Marks</th>
+                                <th scope="col">Total Marks</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let Sechdule of paginatedAssesment  let i = index">
+                                <tr
+                                    *ngFor="let assesment of Sechdule.courseScheduleResponse.courseResponse.assessmentResponse ">
+                                    <ng-container *ngIf="assesment.assessmentStatus!==StatusCheck">
+                                        <td>{{ assesment.assessmentType }}</td>
+                                        <td>{{ assesment.assessmentTitle }}</td>
+                                        <td>{{ assesment.updateDate | date:'mediumDate' }}</td>
+                                        <td>{{ assesment.startDate | date: 'mediumDate' }} - {{ assesment.endDate |
+                                            date:
+                                            'mediumDate' }}</td>
+                                        <td>{{ assesment.passMarks }}</td>
+                                        <td>{{ assesment.totalMarks }}</td>
+                                        <td>
+                                            <span class="fw-bold text-success">{{ assesment.assessmentStatus }}</span>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#ExamModal"
+                                                (click)="examdataTransfer(assesment.assessmentLink)"
+                                                [disabled]="assesment.assessmentStatus == NotStartCheck">
+                                                <i class="fas fa-eye"></i> View Exam
+                                            </button>
+                                        </td>
+                                    </ng-container>
 
-  <!-- Modal -->
-  <div class="modal fade" id="ExamModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Ready to Start the Exam?</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </tr>
+                            </ng-container>
+
+                        </tbody>
+                    </table>
+                    <!-- Table ends here -->
+
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-            <div id="exam-preview">
-                  <img src="/StudentDashboard/exam.jpg"  height="200px" alt="">
-                  <p>Your exam is about to begin! Are you sure you want to proceed?</p>
-              </div>
-              
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, Go Back</button>
-          <button type="button" class="btn btn-primary" (click)="GoExam()">Yes, Start Exam</button>
-        </div>
-      </div>
     </div>
-  </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="ExamModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Ready to Start the Exam?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="exam-preview">
+                        <img src="/StudentDashboard/exam.jpg" height="200px" alt="">
+                        <p>Your exam is about to begin! Are you sure you want to proceed?</p>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, Go Back</button>
+                    <button type="button" class="btn btn-primary" (click)="GoExam()">Yes, Start Exam</button>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -3,10 +3,12 @@ import { StudentService } from '../../../Service/API/Student/student.service';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Student } from '../../../Modals/modals';
+import { AuditLog, Student } from '../../../Modals/modals';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { AuditlogService } from '../../../Service/API/AuditLog/auditlog.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-student-list',
@@ -40,13 +42,23 @@ export class StudentListComponent implements OnInit {
   profileImage:File | null = null;
   profileImageUrl: string | null = "";
 
+  loginData!:any
+
   constructor(
     private readonly studentService: StudentService,
     private readonly router: Router,
     private readonly toastr: ToastrService,
     private readonly fb: FormBuilder,
-    private readonly modalService: BsModalService
-  ) {}
+    private readonly modalService: BsModalService,
+    private readonly auditLogService:AuditlogService
+  ) {
+    const token = localStorage.getItem("token");
+    if(token != null){
+      const decode:any =jwtDecode(token)
+      this.loginData = decode
+      console.log(this.loginData)
+    }
+  }
 
   ngOnInit(): void {
     this.initializeForm()
@@ -161,11 +173,19 @@ export class StudentListComponent implements OnInit {
     this.studentService.addStudent(formData).subscribe({
       next: (response: any) => {
         this.studentId = response.id;
-        this.toastr.success('Registration Successful', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 4000,
-        });
+        this.toastr.success('Registration Successful', '');
+
+        const auditLog:AuditLogRequest = {
+          action: 'Add Student',
+          details: `Added a new student with ID (${response.id})`,
+          adminId: this.loginData.Id,
+        }
+        this.auditLogService.addAuditLog(auditLog).subscribe({
+          next:()=>{},
+          error: (error: any) => {
+            console.error('Error adding audit log:', error.error);
+          }
+        })
       },complete:()=>{
         this.uploadImage(this.studentId);
         this.resetForm();
@@ -179,12 +199,19 @@ export class StudentListComponent implements OnInit {
   private updateStudent(formData: any): void {
     formData.dateOfBirth = new Date(formData.dateOfBirth);
     this.studentService.updateFullDetails(this.studentId, formData).subscribe({
-      next: () => {
-        this.toastr.success('Update Successful', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 3000,
-        });
+      next: (response:any) => {
+        this.toastr.success('Update Successful', '');
+        const auditLog:AuditLogRequest = {
+          action: 'Update Student',
+          details: `Update a student with ID (${response.id})`,
+          adminId: this.loginData.Id,
+        }
+        this.auditLogService.addAuditLog(auditLog).subscribe({
+          next:()=>{},
+          error: (error: any) => {
+            console.error('Error adding audit log:', error.error);
+          }
+        })
       },complete:()=>{
         this.uploadImage(this.studentId);
       },
@@ -203,9 +230,7 @@ export class StudentListComponent implements OnInit {
           this.loadStudents()
         },
         error:(error:any) =>{
-          this.toastr.error('Image upload failed', '', {
-            positionClass: 'toast-top-right',
-          });
+          this.toastr.error('Image upload failed', '');
         }
       });
     }else{
@@ -263,12 +288,20 @@ export class StudentListComponent implements OnInit {
   deleteStudent(): void {
     this.studentService.deleteStudent(this.deleteStudentId).subscribe({
       next: () => {
-        this.toastr.success('Delete Successful', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 4000,
-        });
+        this.toastr.success('Delete Successful', '');
         this.loadStudents();
+
+        const auditLog:AuditLogRequest = {
+          action: 'Delete Student',
+          details: `Delete student with ID (${this.deleteStudentId})`,
+          adminId: this.loginData.Id,
+        }
+        this.auditLogService.addAuditLog(auditLog).subscribe({
+          next:()=>{},
+          error: (error: any) => {
+            console.error('Error adding audit log:', error.error);
+          }
+        })
       },
       error:(error:any)=>{
         this.handleError(error);
@@ -278,11 +311,7 @@ export class StudentListComponent implements OnInit {
   }
 
   private handleError(error: any): void {
-    this.toastr.warning(error.error, '', {
-      positionClass: 'toast-top-right',
-      progressBar: true,
-      timeOut: 4000,
-    });
+    this.toastr.warning(error.error, '');
   }
 }
 
@@ -304,4 +333,10 @@ export interface AddressRequest {
   city:string;
   postalCode:string;
   country:string;
+}
+
+export interface AuditLogRequest{
+  action: string;
+  details: string;
+  adminId: string;
 }

@@ -9,7 +9,7 @@
           
           <!-- Home Link -->
           <li class="sidebar-item">
-            <a [routerLink]="['/admin-dashboard/home']" class="sidebar-link" routerLinkActive="active">
+            <a [routerLink]="['/admin-dashboard/home']" class="sidebar-link" routerLinkActive="active" class="sidebar-link" >
               <i class="fa-solid fa-home pe-2"></i>
               Home
             </a>
@@ -66,6 +66,13 @@
             </ul>
           </li>
 
+          <li class="sidebar-item" >
+            <a [routerLink]="['/admin-dashboard/payment-overview']" class="sidebar-link"  routerLinkActive="active">
+              <i class="fa-solid fa-wallet pe-2"></i>
+              Payment Overview
+            </a>
+          </li>          
+
           <li class="sidebar-item">
             <a [routerLink]="['/admin-dashboard/announcement']" class="sidebar-link" routerLinkActive="active">
               <i class="fa-solid fa-bullhorn pe-2"></i>
@@ -82,15 +89,15 @@
           
         </ul>
         <hr>
-        <div class="mt-3 ms-3 d-flex align-items-center">
+        <div class="mt-3 ms-3 d-flex align-items-center" *ngIf="adminData">
           <ul class="navbar-nav pe-3">
             <li class="pe-md-0">
-                <img src="profile.jpg" class="avatar img-fluid rounded-5" alt="Profile Pic" style="width:50px; height: 50px;">
+                <img [src]="adminData.imageUrl != null ? adminData.imageUrl : 'profile.jpg'" class="avatar img-fluid rounded-5" alt="Profile Pic" style="width:50px; height: 50px; background-position: center; background-size: cover; object-fit: cover;">
             </li>
           </ul>
           <div>
-            <h5 class="p-0 m-0">Abiraj</h5>
-            <p class="p-0 m-0">abirajjrgmail.com</p>
+            <h5 class="p-0 m-0">{{adminData.firstName}} {{adminData.lastName}}</h5>
+            <p class="p-0 m-0">{{adminData.email}}</p>
           </div>
         </div>
         <div class="sidebar-footer text-center text-light mt-5 float-bottom">
@@ -110,19 +117,62 @@
             <span class="navbar-toggler-icon"></span>
           </button>
   
-          <!-- Profile Dropdown -->
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item dropdown">
-              <a data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-                <img src="profile.jpg" class="avatar img-fluid rounded" alt="User Profile">
-              </a>
-              <div class="dropdown-menu dropdown-menu-end">
-                <a class="dropdown-item" [routerLink]="['/admin-dashboard/admin-profile']">Profile</a>
-                <a class="dropdown-item">Settings</a>
-                <a class="dropdown-item" (click)="logout()">Logout</a>
-              </div>
-            </li>
-          </ul>
+          <div class="d-flex gap-5 align-items-center">
+            <!-- Announcement Button with Dropdown -->
+            <div class="dropdown">
+              <!-- Button Trigger -->
+              <button class="btn btn-sm btn-outline-dark position-relative OverideBtn dropdown-toggle" type="button" id="announcementDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-envelope nav-icon"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {{ totalAnnouncements }}
+                </span>
+              </button>
+
+              <!-- Dropdown Menu -->
+              <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="announcementDropdown" style="min-width: 300px;">
+                <!-- No Announcements -->
+                <li *ngIf="announcements.length === 0" class="dropdown-item text-muted text-center">
+                  No new announcements.
+                </li>
+
+                <!-- Announcement Items -->
+                <li *ngFor="let announcement of announcements; let i = index" class="dropdown-item d-flex align-items-start">
+                  <div>
+                    <p class="mb-1 fw-bold">{{ announcement.title }}</p>
+                    <p class="mb-0 text-muted small">{{ announcement.datePosted |date }}</p>
+                  </div>
+                </li>
+
+                <!-- View All Link -->
+                <li *ngIf="announcements.length > 0">
+                  <hr class="dropdown-divider">
+                </li>
+                <li *ngIf="announcements.length > 0">
+                  <a 
+                    [routerLink]="['/admin-dashboard/all-announcement','Admin']" 
+                    class="dropdown-item text-center text-primary fw-semibold">
+                    View All Announcements
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+
+            <!-- Profile Dropdown -->
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item dropdown">
+                <a data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                  <img src="profile.jpg" class="avatar img-fluid rounded" alt="User Profile">
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                  <a class="dropdown-item" [routerLink]="['/admin-dashboard/admin-profile']">Profile</a>
+                  <a class="dropdown-item" [routerLink]="['/admin-dashboard/account-settings']">Settings</a>
+                  <a class="dropdown-item" (click)="logout()">Logout</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+          
         </div>
       </nav>
   

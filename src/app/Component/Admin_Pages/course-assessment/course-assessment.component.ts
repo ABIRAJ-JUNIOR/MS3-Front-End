@@ -7,6 +7,9 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { CourseService } from '../../../Service/API/Course/course.service';
 import { AssesmentService } from '../../../Service/API/Assessment/assesment.service';
+import { AuditlogService } from '../../../Service/API/AuditLog/auditlog.service';
+import { jwtDecode } from 'jwt-decode';
+import { AuditLogRequest } from '../student-list/student-list.component';
 
 @Component({
   selector: 'app-course-assessment',
@@ -31,12 +34,31 @@ export class CourseAssessmentComponent {
   private assessmentId:string = ""
   assessmentForm!: FormGroup;
 
+  loginData!:any
+
   constructor(
     private courseService: CourseService,
     private assessmentService:AssesmentService,
     private fb: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private readonly auditLogService:AuditlogService
   ) {
+    this.initializeForm();
+
+    const token = localStorage.getItem("token");
+    if(token != null){
+      const decode:any =jwtDecode(token)
+      this.loginData = decode
+      console.log(this.loginData)
+    }
+  }
+
+  ngOnInit(): void {
+    this.loadItems(); 
+    this.loadCourses();
+  }
+
+  private initializeForm(): void {
     this.assessmentForm = this.fb.group({
       assessmentTitle: ['', Validators.required],
       courseId: ['', Validators.required],
@@ -48,11 +70,6 @@ export class CourseAssessmentComponent {
       assessmentLink: [''],
       assessmentStatus:['']
     });
-  }
-
-  ngOnInit(): void {
-    this.loadItems(); 
-    this.loadCourses();
   }
 
   loadItems(): void {
@@ -104,32 +121,32 @@ export class CourseAssessmentComponent {
       }
 
     } else {
-      this.toastr.warning('Please fill out all required fields correctly', '', {
-        positionClass: 'toast-top-right',
-        progressBar: true,
-        timeOut: 3000
-      });
+      this.toastr.warning('Please fill out all required fields correctly', '');
     }
   }
 
 
   private addAssessment(assessment:AssessmentRequest):void{
     this.assessmentService.addAssessment(assessment).subscribe({
-      next: (response: any) => {
-        this.toastr.success('Assessment Create successfull', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 3000
-        });
+      next: (response: Assessment) => {
+        this.toastr.success('Assessment Create successfull', '');
         this.assessmentForm.reset();
         this.loadItems(); 
+
+        const auditLog:AuditLogRequest = {
+          action: 'Add Assessment',
+          details: `Added a new assessment for Course ID (${response.id}). Assessment Type: "${response.assessmentType}", Scheduled Date: ${new Date(response.startDate).toDateString()}.`,
+          adminId: this.loginData.Id,
+        }
+        this.auditLogService.addAuditLog(auditLog).subscribe({
+          next:()=>{},
+          error: (error: any) => {
+            console.error('Error adding audit log:', error.error);
+          }
+        })
       },
       error: (err: any) => {
-        this.toastr.warning(err.error, '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 3000
-        });
+        this.toastr.warning(err.error, '');
       }
     });
   }
@@ -138,21 +155,25 @@ export class CourseAssessmentComponent {
     assessment.startDate = new Date(assessment.startDate)
     assessment.endDate = new Date(assessment.endDate)
     this.assessmentService.updateAssessment(this.assessmentId,assessment).subscribe({
-      next: (response: any) => {
-        this.toastr.success('Update successfull', '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 3000
-        });
+      next: (response:Assessment) => {
+        this.toastr.success('Update successfull', '');
         this.assessmentForm.reset();
         this.loadItems(); 
+
+        const auditLog:AuditLogRequest = {
+          action: 'Update Assessment',
+          details: `Updated assessment details for Course ID (${response.id}).`,
+          adminId: this.loginData.Id,
+        }
+        this.auditLogService.addAuditLog(auditLog).subscribe({
+          next:()=>{},
+          error: (error: any) => {
+            console.error('Error adding audit log:', error.error);
+          }
+        })
       },
       error: (err: any) => {
-        this.toastr.warning(err.error, '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut: 3000
-        });
+        this.toastr.warning(err.error, '');
       }
     });
   }

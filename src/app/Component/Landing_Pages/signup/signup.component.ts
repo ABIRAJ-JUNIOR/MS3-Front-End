@@ -8,59 +8,51 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [RouterModule,ReactiveFormsModule,CommonModule],
+  imports: [RouterModule, ReactiveFormsModule, CommonModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
 export class SignupComponent {
- 
 
-  StudentRegistration:FormGroup;
 
-  constructor(private fb:FormBuilder , private authService:AuthService ,private toastr:ToastrService , private rout:Router){
-    this.StudentRegistration=this.fb.group({
-      nic:['' , [Validators.required , Validators.pattern('^[0-9]{9}[Vv]$|^[0-9]{12}$')]],
-      firstName :['',Validators.required],
-      lastName :[''],
-      email:['',[Validators.required,Validators.email]],
-      password:['',[Validators.required,Validators.minLength(4)]],
-      confirmPassword:['',Validators.required],
-      dateOfBirth:['',Validators.required],
-      gender:['',Validators.required],
-      phone:['',Validators.required],
+  StudentRegistration: FormGroup;
+
+  constructor( private fb: FormBuilder, private authService: AuthService, private toastr: ToastrService, private rout: Router) {
+    this.StudentRegistration = this.fb.group({
+      nic: ['', [Validators.required, Validators.pattern('^[0-9]{9}[Vv]$|^[0-9]{12}$')]],
+      firstName: ['', Validators.required],
+      lastName: [''],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(4)]],
+      confirmPassword: ['', Validators.required],
+      dateOfBirth: ['', Validators.required],
+      gender: ['', Validators.required],
+      phone: ['', Validators.required],
     })
   }
 
-  onSubmit(){
+  onSubmit() {
     const form = this.StudentRegistration.value;
-    const student:SignUp = {
+    const student: SignUp = {
       nic: form.nic,
-      firstName:form.firstName,
-      lastName:form.lastName,
-      dateOfBirth:form.dateOfBirth,
-      gender:Number(form.gender),
-      email:form.email,
-      phone:form.phone,
-      password:form.password
+      firstName: form.firstName,
+      lastName: form.lastName,
+      dateOfBirth: form.dateOfBirth,
+      gender: Number(form.gender),
+      email: form.email,
+      phone: form.phone,
+      password: form.password
     }
 
     this.authService.signUp(student).subscribe({
-      next:(response) =>{
-        this.toastr.success("User SignUp Successfull" , "" , {
-          positionClass:"toast-top-right",
-          progressBar:true,
-          timeOut:3000
-        })
-        
+      next: (response) => {
+        this.toastr.success("User SignUp Successfull", "")
         this.StudentRegistration.reset()
-      },complete:()=>{
+      }, complete: () => {
         this.rout.navigate(['/signin'])
-      },error:(error)=>{
-        this.toastr.warning(error.error, "" , {
-          positionClass:"toast-top-right",
-          progressBar:true,
-          timeOut:3000
-        })
+
+      }, error: (error) => {
+        this.toastr.warning(error.error, "")
       }
     })
 

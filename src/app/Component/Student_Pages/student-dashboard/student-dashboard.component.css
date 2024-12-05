@@ -42,9 +42,9 @@ h4 {
 }
 
 #sidebar {
-    max-width: 264px;
-    min-width: 264px;
-    background: var(--bs-dark);
+    max-width: 300px;
+    min-width: 270px;
+    background-color:#272829;
     transition: all 0.35s ease-in-out;
 }
 
@@ -59,7 +59,7 @@ h4 {
 }
 
 .sidebar-logo {
-    padding: 1.15rem;
+    padding: 1rem;
 }
 
 .sidebar-logo a {
@@ -80,32 +80,26 @@ h4 {
     font-size: .75rem;
     padding: 1.5rem 1.5rem .375rem;
 }
-
 a.sidebar-link {
-    padding: .625rem 1.625rem;
-    color: #e9ecef;
+    padding: 0.675rem 1.625rem;
+    margin-top: 7px;
+    color: #e9ecef; 
     position: relative;
     display: block;
     font-size: 0.875rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.sidebar-link[data-bs-toggle="collapse"]::after {
-    border: solid;
-    border-width: 0 .075rem .075rem 0;
-    content: "";
-    display: inline-block;
-    padding: 2px;
-    position: absolute;
-    right: 1.5rem;
-    top: 1.4rem;
-    transform: rotate(-135deg);
-    transition: all .2s ease-out;
+a.sidebar-link.active_Link {
+    background-color:gray; 
+    color: #fff;  
 }
 
-.sidebar-link[data-bs-toggle="collapse"].collapsed::after {
-    transform: rotate(45deg);
-    transition: all .2s ease-out;
+a.sidebar-link:hover {
+    background-color:none; 
+    color: #fff; 
 }
+
 
 .avatar {
     height: 40px;
@@ -156,7 +150,7 @@ a.sidebar-link {
   }
   
   .form-control:focus {
-    border-color: #007bff; /* Adds blue border on focus */
+    border-color: #CAD3C8; /* Adds blue border on focus */
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Glow effect */
   }
   

@@ -36,6 +36,9 @@ import { AnnouncementComponent } from './Component/Admin_Pages/announcement/anno
 import { ContactUsComponent } from './Component/Admin_Pages/contact-us/contact-us.component';
 import { studentAuthGuard } from './Guard/Student/student-auth.guard';
 import { StudentAssessmentsComponent } from './Component/Admin_Pages/student-assessments/student-assessments.component';
+import { PaymentsOverviewComponent } from './Component/Admin_Pages/payments-overview/payments-overview.component';
+import { ViewAllAnnouncementComponent } from './Component/common_components/view-all-announcement/view-all-announcement.component';
+import { AccountSettingComponent } from './Component/Admin_Pages/account-setting/account-setting.component';
 
 
 export const routes: Routes = [
@@ -79,9 +82,13 @@ export const routes: Routes = [
             { path:'announcement',component:AnnouncementComponent},
             { path:'contact-us',component:ContactUsComponent},
             { path:'student-assessments',component:StudentAssessmentsComponent},
+            {path:'payment-overview',component:PaymentsOverviewComponent},
+            {path:'all-announcement/:Role',component:ViewAllAnnouncementComponent},
+            {path:'account-settings',component:AccountSettingComponent},
             {path:'**' , redirectTo:'home',pathMatch:'full'}
         ],
         canActivate: [adminAuthGuard]
+
     },
     {
         path: 'student-dashboard', component: StudentDashboardComponent, children: [
@@ -96,6 +103,7 @@ export const routes: Routes = [
             {path:'assesment-result',component:StudentResultComponent},
             {path:'enrollCourse-payment',component:StudentPaymentsComponent},
             {path:'enrollCourse-paymentHistory',component:StudentPaymentsHistoryComponent},
+            {path:'all-announcement/:Role',component:ViewAllAnnouncementComponent},
             {path:'**' , redirectTo:'home',pathMatch:'full'}
         ],
         canActivate: [studentAuthGuard]

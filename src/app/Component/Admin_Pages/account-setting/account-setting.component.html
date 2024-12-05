@@ -1,0 +1,91 @@
+<div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-9 col-md-10 col-12">
+        <div class="row mb-4">
+          <div class="col-12 text-center">
+            <h2>Account Settings</h2>
+            <p class="text-muted">Update your profile and account preferences.</p>
+          </div>
+        </div>
+  
+        <form (ngSubmit)="onSubmit()">
+          <div class="row mb-5">
+            <!-- Profile Picture -->
+            <div class="col-md-4 text-center">
+              <div class="mb-3">
+                <img src="{{profilePicture}}" alt="Profile Picture" class="img-fluid rounded" width="270" style="background-position: center; background-size: cover; object-fit: cover;">
+                <input type="file" class="form-control mt-2" (change)="onProfilePictureChange($event)">
+              </div>
+            </div>
+            
+            <!-- Personal Information -->
+            <div class="col-md-8">
+              <div class="mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="firstName" [(ngModel)]="firstName" name="firstName" required>
+              </div>
+              <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="lastName" [(ngModel)]="lastName" name="lastName" required>
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" id="phone" [(ngModel)]="phone" name="phone" required>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" required>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Change Password Section -->
+          <div class="row mb-5">
+            <div class="col-12">
+              <h5>Change Password</h5>
+              <div class="mb-3">
+                <label for="currentPassword" class="form-label">Current Password</label>
+                <input type="password" class="form-control" id="currentPassword" [(ngModel)]="currentPassword" name="currentPassword" required>
+              </div>
+              <div class="mb-3">
+                <label for="newPassword" class="form-label">New Password</label>
+                <input type="password" class="form-control" id="newPassword" [(ngModel)]="newPassword" name="newPassword" required>
+              </div>
+              <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" required>
+              </div>
+            </div>
+          </div>
+          <div class="alert alert-warning d-flex align-items-center gap-2" role="alert" *ngIf="passwordNotMatch">
+            <i class="bi bi-exclamation-triangle"></i>
+            <div>
+              Passwords do not match! Please try again.
+            </div>
+          </div>
+          
+  
+          <!-- Account Preferences Section -->
+          <div class="row mb-5">
+            <div class="col-12">
+              <h5>Account Preferences</h5>
+              <div class="mb-3">
+                <label for="language" class="form-label">Language</label>
+                <select class="form-control" id="language" [(ngModel)]="language" name="language">
+                  <option value="English">English</option>
+                  <option value="Spanish">Spanish</option>
+                  <option value="French">French</option>
+                </select>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Save Changes Button -->
+          <div class="text-center">
+            <button type="submit" class="button-31" >Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

@@ -1,60 +1,67 @@
 <div class="wrapper">
   <aside id="sidebar" [ngClass]="{'collapsed': sidebarCollapsed}" class="text-light js-sidebar shadow-lg">
-    <div class="h-100" style="position: fixed; width: 250px;">
-      <div class="sidebar-logo">
-        <a href="#">Way Makers</a>
+    <div class="h-100" style="position: fixed; min-width: 270px ">
+      <div class="sidebar-logo " style="display: flex; flex-direction: column;align-items: center;justify-content: center;">
+        <img src="/logo.png" alt="" height="80px">
+        <a href="#">Student Portal</a>
+        <hr>
       </div>
+
+
       <ul class="sidebar-nav">
         <!-- Sidebar Header -->
-        <li class="sidebar-header">Student Dashboard</li>
+        <li class="sidebar-header">Way Makers Dashboard</li>
 
         <!-- Dashboard Link -->
-        <li class="sidebar-item">
-          <a [routerLink]="['/student-dashboard']" [routerLinkActive]="['active_Link']" class="sidebar-link">
+        <li class="sidebar-item mt-1">
+          <a [routerLink]="['/student-dashboard/home']" [routerLinkActive]="['active_Link']" class="sidebar-link">
             <i class="fa-solid fa-house pe-2"></i>
-            Dashboard
+            Student Hub
           </a>
         </li>
 
         <!-- Profile Section -->
-        <li class="sidebar-item">
+        <li class="sidebar-item mt-1">
           <a [routerLink]="['/student-dashboard/profile']" [routerLinkActive]="['active_Link']" class="sidebar-link">
             <i class="fa-regular fa-user pe-2"></i>
-            Profile
+            Academic Gateway
           </a>
         </li>
 
         <!-- Courses Section -->
-        <li class="sidebar-item">
-          <a href="#" class="sidebar-link collapsed" data-bs-target="#courses" data-bs-toggle="collapse"
-            aria-expanded="false">
+        <li class="sidebar-item mt-1">
+          <a href="#" class="sidebar-link collapsed" [routerLinkActive]="['active_Link']" data-bs-target="#courses"
+            data-bs-toggle="collapse" aria-expanded="false">
             <i class="fa-solid fa-book-open pe-2"></i>
-            My Courses
+            Learning Dashboard  <i class="bi bi-arrow-down-short"></i>
           </a>
           <ul id="courses" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
             <li class="sidebar-item">
-              <a [routerLink]="['/student-dashboard/mycourses']" class="sidebar-link">Enrolled Courses</a>
+              <a [routerLink]="['/student-dashboard/mycourses']" [routerLinkActive]="['active_Link']"
+                class="sidebar-link ">My Student Hub</a>
             </li>
             <li class="sidebar-item">
-              <a [routerLink]="['/student-dashboard/completed-Courses']" class="sidebar-link">Completed Courses</a>
+              <a [routerLink]="['/student-dashboard/completed-Courses']" [routerLinkActive]="['active_Link']"
+                class="sidebar-link ">Campus Connect</a>
             </li>
           </ul>
         </li>
 
         <!-- Grades Section -->
 
-        <li class="sidebar-item">
-          <a href="#" class="sidebar-link collapsed" data-bs-target="#assesment" data-bs-toggle="collapse"
+        <li class="sidebar-item mt-1">
+          <a href="#" class="sidebar-link collapsed " data-bs-target="#assesment" data-bs-toggle="collapse"
             aria-expanded="false">
             <i class="bi bi-person-workspace pe-2"></i>
-            Assesments & Results
+            Student Workspace <i class="bi bi-arrow-down-short"></i>
           </a>
           <ul id="assesment" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
             <li class="sidebar-item">
-              <a [routerLink]="['/student-dashboard/assesment']" class="sidebar-link">Your asessesments</a>
+              <a [routerLink]="['/student-dashboard/assesment']" class="sidebar-link " [routerLinkActive]="['active_Link']"> Assessment Overview
+              </a>
             </li>
             <li class="sidebar-item">
-              <a [routerLink]="['/student-dashboard/assesment-result']" class="sidebar-link">Assesment Results</a>
+              <a [routerLink]="['/student-dashboard/assesment-result']" class="sidebar-link" [routerLinkActive]="['active_Link']">Assessment Results</a>
             </li>
 
           </ul>
@@ -63,60 +70,62 @@
 
 
         <!-- Payment -->
-         
-        <li class="sidebar-item">
-          <a href="#" class="sidebar-link collapsed" data-bs-target="#enrollpay" data-bs-toggle="collapse"
-            aria-expanded="false">
+
+        <li class="sidebar-item mt-1">
+          <a href="#" class="sidebar-link collapsed " data-bs-target="#enrollpay" data-bs-toggle="collapse"
+            [routerLinkActive]="['active_Link']" aria-expanded="false">
             <i class="bi bi-calendar-date-fill pe-2"></i>
-            Payment & History
+            Payment Management
           </a>
           <ul id="enrollpay" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
             <li class="sidebar-item">
-              <a [routerLink]="['/student-dashboard/enrollCourse-payment']" class="sidebar-link">Payments</a>
+              <a [routerLink]="['/student-dashboard/enrollCourse-payment']" [routerLinkActive]="['active_Link']"
+                class="sidebar-link">Payments</a>
             </li>
             <li class="sidebar-item">
-              <a [routerLink]="['/student-dashboard/enrollCourse-paymentHistory']" class="sidebar-link">Payment History</a>
+              <a [routerLink]="['/student-dashboard/enrollCourse-paymentHistory']" [routerLinkActive]="['active_Link']"
+                class="sidebar-link">Payment History</a>
             </li>
 
           </ul>
         </li>
 
-     
+
 
         <!-- Notifications Section -->
-        <li class="sidebar-item">
-          <a [routerLink]="['/student-dashboard/courses']" class="sidebar-link">
+        <li class="sidebar-item mt-2">
+          <a [routerLink]="['/student-dashboard/courses']" class="sidebar-link" [routerLinkActive]="['active_Link']">
             <i class="fa-solid fa-book-open pe-2"></i>
             Courses
           </a>
         </li>
 
         <!-- Support Section -->
-        <li class="sidebar-item">
-          <a href="#" class="sidebar-link">
+        <li class="sidebar-item mt-1">
+          <a href="#" class="sidebar-link" [routerLinkActive]="['active_Link']">
             <i class="fa-solid fa-life-ring pe-2"></i>
             Support
           </a>
         </li>
       </ul>
-      <hr>
-      <div class="mt-3 ms-3 d-flex align-items-center" *ngIf="StudentDetails">
-        <ul class="navbar-nav pe-3">
-          <li class="nav-item dropdown">
-            <a data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-              <img src="profile.jpg" class="avatar img-fluid rounded-5" alt="">
-            </a>
-            <div class="dropdown-menu dropdown-menu-end">
-              <a class="dropdown-item">Profile</a>
-              <a class="dropdown-item">Setting</a>
-              <a class="dropdown-item">Logout</a>
-            </div>
-          </li>
-        </ul>
-        <h5 data-bs-toggle="dropdown">{{StudentTokenDetails.Name}}</h5>
+      <div style="display: flex;flex-direction: column; align-items: start;margin-top: 40px; margin-left: 30px;" *ngIf="StudentDetails">
+      
+        <div class=" d-flex align-items-center justify-content-center" data-bs-toggle="dropdown"
+          style="flex-direction: column;" *ngIf="StudentDetails">
+          <span class="font-weight-bold fs-5 mt-3 fw-bold" style="color: #ffffff;">{{StudentDetails.firstName}}
+            {{StudentDetails.lastName}}</span>
+          <span class="text-light d-block mb-1">{{StudentTokenDetails.Email}}</span>
+
+          <span class="text-light mb-1">Student ID: UT-{{StudentDetails.nic | slice: -4
+            }}</span>
+          <button class="btn btn-outline-danger d-flex align-items-center gap-2 px-4 py-2 my-2 shadow-sm"   style="border-radius: 4px;" data-bs-toggle="modal" data-bs-target="#logoutModal"> <i class="bi bi-box-arrow-right"></i> Logout</button>
+         
+        </div>
+
       </div>
 
     </div>
+
 
   </aside>
 
@@ -145,21 +154,57 @@
             data-bs-toggle="modal" data-bs-target="#topLeftModal">
             <i class="bi bi-bell-fill"></i>
             <span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger">
-              0
+              {{NotificationLength}}
             </span>
           </button>
 
-          <!-- Announcement Button -->
-          <button class="btn btn-sm btn-outline-dark position-relative OverideBtn" type="button" data-bs-toggle="modal"
-            data-bs-target="#Anouncement">
-            <i class="bi bi-envelope"></i>
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              0
-            </span>
-          </button>
+         
+          <div class="d-flex gap-5 align-items-center">
+            <!-- Announcement Button with Dropdown -->
+            <div class="dropdown">
+              <!-- Button Trigger -->
+              <button class="btn btn-sm btn-outline-dark position-relative OverideBtn dropdown-toggle" type="button"
+                id="announcementDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-envelope"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  {{ AnnouncementLength }}
+                </span>
+              </button>
 
+              <!-- Dropdown Menu -->
+              <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="announcementDropdown"
+                style="min-width: 300px;">
+                <!-- No Announcements -->
+                <li *ngIf="AnnouncementLength === 0" class="dropdown-item text-muted text-center">
+                  No new announcements.
+                </li>
+
+                <!-- Announcement Items -->
+                <li *ngFor="let announcement of Announcements; let i = index"
+                  class="dropdown-item d-flex align-items-start">
+                  <div *ngIf="announcement.audienceType==typeCheck">
+                    <p class="mb-1 fw-bold">{{ announcement.title }}</p>
+                    <p class="mb-0 text-muted small">{{ announcement.datePosted |date }}</p>
+                  </div>
+                </li>
+
+                <!-- View All Link -->
+                <li *ngIf="AnnouncementLength > 0">
+                  <hr class="dropdown-divider">
+                </li>
+                <li *ngIf="AnnouncementLength > 0">
+                  <a [routerLink]="['/student-dashboard/all-announcement','Student']"
+                    class="dropdown-item text-center text-primary fw-semibold">
+                    View All Announcements
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
 
         </div>
+
       </div>
     </nav>
 
@@ -193,14 +238,25 @@
 <!-- Anouncement -->
 <div class="modal fade" id="Anouncement" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog customModal">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <h5 class="modal-title" id="staticBackdropLabel"><i class="bi bi-megaphone"></i> Announcements</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        ...
+      <div class="modal-body" *ngIf="Announcements">
+        <div *ngFor="let item of Announcements">
+          <div class="notification" *ngIf="item.isActive===true && item.audienceType==typeCheck">
+            <div class="notification-header">
+              <span class="notification-type">{{item.datePosted}}</span>
+              <span class="notification-time">{{item.expirationDate}}</span>
+            </div>
+            <div class="notification-body">
+              <p class="message">{{item.title}}</p>
+            </div>
+          </div>
+        </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -211,26 +267,53 @@
 
 <!-- Modal Structure -->
 <div class="modal fade" id="topLeftModal" tabindex="-1" aria-labelledby="topLeftModalLabel" aria-hidden="true">
-  <div class="modal-dialog customModal">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="topLeftModalLabel">Notifications</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <div class="notification" *ngFor="let item of StudentDetails.notifications">
-          <div class="notification-header">
-            <span class="notification-type">{{item.notificationType}}</span>
-            <span class="notification-time">{{item.dateSent}}</span>
-          </div>
-          <div class="notification-body">
-            <p class="message">{{item.message}}</p>
-          </div>
-          <div class="notification-footer">
-            <button class="mark-read-btn" (click)="MarkAsRead(item.id)">Mark as Read</button>
+      <div class="modal-body" *ngIf="StudentDetails">
+        <div *ngFor="let item of StudentDetails.notification">
+          <div class="notification" *ngIf="item.isRead===false">
+            <div class="notification-header">
+              <span class="notification-type">{{item.notificationType}}</span>
+              <span class="notification-time">{{item.dateSent}}</span>
+            </div>
+            <div class="notification-body">
+              <p class="message" [innerHTML]="item.message"></p>
+            </div>
+            <div class="notification-footer">
+              <button class="mark-read-btn" (click)="MarkAsRead(item.id)">Mark as Read</button>
+            </div>
           </div>
         </div>
-        
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="background: linear-gradient(135deg, #FF6F61, #D61C4E); color: white;">
+        <h5 class="modal-title d-flex align-items-center" id="logoutModalLabel">
+          <i class="bi bi-box-arrow-right me-2"></i> Log Out Confirmation
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body">
+        <p class="fs-5">Are you sure you want to log out? Any unsaved progress will be lost.</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-md btn-danger " (click)="logoutDash()"  data-bs-dismiss="modal">Yes, Log Out</button>
+        <button type="button" class="btn btn-md btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
       </div>
     </div>
   </div>

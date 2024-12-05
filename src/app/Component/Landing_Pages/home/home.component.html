@@ -18,16 +18,18 @@
         Sign in Here
       </button>
     </div>
-    <div class="bounce" style="position: absolute; left:43%; top: 88%; font-size: 2rem; margin-top: 25px;">
-      <a href="#down" style="text-decoration: none; color: white;">
-        <div class="swipe-down">
-          <div class="arrows">
-            <span>&#x25BC; </span>
-            <span>SWIPE DOWN</span>
-            <span> &#x25BC;</span>
-          </div>
+    <div style="position: absolute; top: 97%; left: 50%; transform: translate(-50%,-50%);">
+      <div class="bounce">
+        <a href="#down" style="text-decoration: none; color: white; font-size: 1.6rem;">
+          <div class="swipe-down">
+            <div class="arrows">
+              <span>&#x25BC; </span>
+              <span>SWIPE DOWN</span>
+              <span> &#x25BC;</span>
+            </div>
+        </div>
+        </a>
       </div>
-      </a>
     </div>
   </section>
 
@@ -47,13 +49,13 @@
       >
         <div class="card shadow-sm h-100">
           <img
-            [src]="course.image"
+            [src]="course.imageUrl"
             class="card-img-top"
-            alt="{{ course.title }}"
+            alt="{{ course.courseName }}"
             style="height: 200px; object-fit: cover;"
           />
           <div class="card-body">
-            <h5 class="card-title">{{ course.title }}</h5>
+            <h5 class="card-title">{{ course.courseName }}</h5>
             <p class="card-text text-muted">
               {{ course.description }}
             </p>
@@ -61,19 +63,16 @@
               <div>
                 <span
                   class="badge bg-primary me-2 px-3 py-2"
-                  >{{ course.rating }}<i class="bi bi-star-fill ms-1"></i></span
+                  >{{ course.feedBackRate }}<i class="bi bi-star-fill ms-1"></i></span
                 >
               </div>
               <small class="text-muted">
-                ({{ course.feedbackCount }} reviews)
+                ({{ course.feedBackCount }} reviews)
               </small>
             </div>
           </div>
           <div class="card-footer text-center bg-white">
-            <a
-              [href]="course.link"
-              class="btn btn-outline-primary w-100"
-            >
+            <a class="btn btn-outline-primary w-100" [routerLink]="['/course']" >
               Learn More
             </a>
           </div>

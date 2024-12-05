@@ -9,31 +9,52 @@
                             <h2 class="m-0 fw-bold">Student Assessments</h2>
                         </div>
                         <div class="col-lg-6 d-flex justify-content-lg-end justify-content-center">
-                            <div class="dropdown">
-                                <!-- Dropdown Toggle -->
-                                <button 
-                                  class="btn btn-primary dropdown-toggle d-flex align-items-center" 
-                                  type="button" 
-                                  id="filterDropdown" 
-                                  data-bs-toggle="dropdown" 
-                                  aria-expanded="false">
-                                  <i class="bi bi-funnel-fill me-2"></i>
-                                  <span>Filter</span>
-                                </button>
-                              
-                                <!-- Dropdown Menu -->
-                                <ul class="dropdown-menu" aria-labelledby="filterDropdown">
-                                  <li>
-                                    <a class="dropdown-item" >By Date</a>
-                                  </li>
-                                  <li>
-                                    <a class="dropdown-item" >By Category</a>
-                                  </li>
-                                  <li>
-                                    <a class="dropdown-item" >By Status</a>
-                                  </li>
-                                </ul>
-                              </div>
+                          <!-- Filter By Evaluation -->
+                          <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle d-flex align-items-center px-4 py-2 shadow-sm rounded" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="bi bi-funnel-fill me-2"></i>
+                              <span>Filter By Evaluation</span>
+                            </button>
+                          
+                            <ul class="dropdown-menu shadow-lg rounded-3 border-0 p-2" aria-labelledby="filterDropdown" style="max-height: 300px; overflow-y: auto;">
+                              <li (click)="search('')" class="pointer dropdown-item d-flex align-items-center justify-content-between">
+                                <span class="pe-4">All</span>
+                                <i class="bi bi-check-circle-fill text-success" *ngIf="searchText === ''"></i>
+                              </li>
+                          
+                              <li (click)="search('Evaluated')" class="pointer dropdown-item d-flex align-items-center justify-content-between" [class.active]="searchText === 'Evaluated' ">
+                                <span class="pe-4">Evaluated</span>
+                                <i class="bi bi-check-circle-fill text-success" *ngIf="searchText === 'Evaluated' "></i>
+                              </li>
+
+                              <li (click)="search('NotEvaluate')" class="pointer dropdown-item d-flex align-items-center justify-content-between" [class.active]="searchText === 'NotEvaluate' ">
+                                <span class="pe-4">Not Evaluate</span>
+                                <i class="bi bi-check-circle-fill text-success" *ngIf="searchText === 'NotEvaluate' "></i>
+                              </li>
+                            </ul>
+                          </div>
+
+                          <!-- Filter By Courses -->
+                          <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle d-flex align-items-center px-4 py-2 shadow-sm rounded" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                              <i class="bi bi-funnel-fill me-2"></i>
+                              <span>Filter By Course</span>
+                            </button>
+                          
+                            <ul class="dropdown-menu shadow-lg rounded-3 border-0 p-2" aria-labelledby="filterDropdown" style="max-height: 300px; overflow-y: auto;">
+                              <li (click)="search('')" class="pointer dropdown-item d-flex align-items-center justify-content-between">
+                                <span class="pe-4">All</span>
+                                <i class="bi bi-check-circle-fill text-success" *ngIf="searchText === ''"></i>
+                              </li>
+                          
+                              <ng-container *ngFor="let course of courses">
+                                <li (click)="search(course.courseName)" class="pointer dropdown-item d-flex align-items-center justify-content-between" [class.active]="searchText === course.courseName">
+                                  <span class="pe-4">{{ course.courseName }}</span>
+                                  <i class="bi bi-check-circle-fill text-success" *ngIf="searchText === course.courseName"></i>
+                                </li>
+                              </ng-container>
+                            </ul>
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -44,19 +65,31 @@
                         <thead class="table-dark">
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>Image</th>
-                                <th>Level</th>
-                                <th>Fee</th>
-                                <th>Description</th>
-                                <th>Prerequisites</th>
-                                <th>Schedules Count</th>
-                                <th class="text-center">Actions</th>
+                                <th>Course Name</th>
+                                <th>Assessment Title</th>
+                                <th>Type</th>
+                                <th>Student Name</th>
+                                <th>Date Submitted</th>
+                                <th>Mark Obtaines</th>
+                                <th>Grade</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-      
+                            <tr *ngFor="let studentAssessment of studentAssessments | searchStudentAssessment:searchText; let i = index"  class="table-row">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{studentAssessment.assessmentResponse.courseResponse.courseName}}</td>
+                                <td>{{studentAssessment.assessmentResponse.assessmentTitle}}</td>
+                                <td>{{studentAssessment.assessmentResponse.assessmentType}}</td>
+                                <td>{{studentAssessment.studentResponse.firstName}} {{studentAssessment.studentResponse.lastName}}</td>
+                                <td>{{studentAssessment.dateSubmitted | date}}</td>
+                                <td>{{studentAssessment.marksObtaines != null ? studentAssessment.marksObtaines : 'Not Evaluate'}}</td>
+                                <td>{{studentAssessment.grade != null ? studentAssessment.grade : 'Not Evaluate'}}</td>
+                                <td class="text-center">
+                                    <a class="text-primary me-3 pointer" aria-label="Evaluate Assessment" data-bs-toggle="modal" data-bs-target="#evaluateAssessmentModal" (click)="patchData(studentAssessment)">
+                                        <i class="bi bi-clipboard-check"></i>
+                                    </a>                                       
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -71,5 +104,111 @@
         </div>
     </div>
   </div>
-  
-  
+
+
+
+  <!-- Evaluation Modal -->
+<div class="modal fade" id="evaluateAssessmentModal" tabindex="-1" aria-labelledby="evaluateAssessmentFormLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-light text-dark rounded-4 border-0 shadow-lg">
+
+      <!-- Modal Header -->
+      <div class="modal-header border-0" style="
+           background-color: #2c2f3a;
+           color: #e5e5e5;
+           box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+         ">
+        <h4 class="modal-title fw-bold" id="evaluateAssessmentFormLabel">
+          Evaluate Assessment
+        </h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        
+        <!-- Enhanced Assessment Details Section -->
+        <div class="mb-4 p-4 rounded-3 shadow-sm bg-light">
+          <h5 class="fw-bold text-dark">
+            <i class="bi bi-file-text-fill text-primary me-2"></i> Assessment Details
+          </h5>
+          <hr>
+          <div class="row g-3 mt-3">
+
+            <!-- Assessment Title -->
+            <div class="col-md-6 d-flex align-items-center">
+              <i class="bi bi-bookmark-fill text-success fs-5 me-2"></i>
+              <div>
+                <p class="mb-1 text-muted fw-semibold">Assessment Title</p>
+                <p class="text-dark fw-bold">{{ assessmentDetails.title }}</p>
+              </div>
+            </div>
+
+            <!-- Student Name -->
+            <div class="col-md-6 d-flex align-items-center">
+              <i class="bi bi-person-fill text-info fs-5 me-2"></i>
+              <div>
+                <p class="mb-1 text-muted fw-semibold">Student Name</p>
+                <p class="text-dark fw-bold">{{ assessmentDetails.studentName }}</p>
+              </div>
+            </div>
+
+            <!-- Submission Date -->
+            <div class="col-md-6 d-flex align-items-center">
+              <i class="bi bi-calendar-event-fill text-warning fs-5 me-2"></i>
+              <div>
+                <p class="mb-1 text-muted fw-semibold">Submission Date</p>
+                <p class="text-dark fw-bold">{{ assessmentDetails.submissionDate | date }}</p>
+              </div>
+            </div>
+
+            <!-- Maximum Marks -->
+            <div class="col-md-6 d-flex align-items-center">
+              <i class="bi bi-award-fill text-danger fs-5 me-2"></i>
+              <div>
+                <p class="mb-1 text-muted fw-semibold">Maximum Marks</p>
+                <p class="text-dark fw-bold">{{ assessmentDetails.maxMarks }}</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <!-- Evaluation Form -->
+        <form [formGroup]="evaluationForm" (ngSubmit)="onSubmit()" class="row g-4">
+
+          <!-- Marks -->
+          <div class="col-md-6">
+            <label for="marksObtaines" class="form-label fw-bold text-dark">Marks</label>
+            <div class="input-group shadow-sm">
+              <span class="input-group-text bg-light border-0">
+                <i class="bi bi-award"></i>
+              </span>
+              <input type="number" formControlName="marksObtaines" class="form-control border rounded-end-3" placeholder="Enter marks" />
+            </div>
+          </div>
+
+          <!-- Feedback -->
+          <div class="col-12">
+            <label for="feedback" class="form-label fw-bold text-dark">Feedback</label>
+            <div class="input-group shadow-sm">
+              <span class="input-group-text bg-light border-0">
+                <i class="bi bi-chat-dots"></i>
+              </span>
+              <textarea formControlName="feedback" class="form-control border rounded-end-3" rows="3" placeholder="Enter feedback"></textarea>
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="modal-footer border-0 bg-light">
+            <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal">Close</button>
+            <button type="submit" [disabled]="evaluationForm.invalid" class="btn btn-dark px-4" data-bs-dismiss="modal">Submit</button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

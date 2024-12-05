@@ -10,7 +10,7 @@ import { StudentDashDataService } from "../../../Service/Data/Student_Data/stude
 @Component({
   selector: 'app-student-profile',
   standalone: true,
-  imports: [CommonModule, FormsModule ,RouterModule ,StudentcommonProfileComponent],
+  imports: [CommonModule, FormsModule, RouterModule, StudentcommonProfileComponent],
   templateUrl: './student-profile.component.html',
   styleUrl: './student-profile.component.css'
 })
@@ -48,14 +48,22 @@ export class StudentProfileComponent {
   ngOnInit(): void {
 
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
-
-    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
-      this.StudentDetails = student
-      console.log(this.StudentDetails)
-    })
+    this.getStudentDetails()
 
   }
 
+  getStudentDetails() {
+    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
+      next: (student: Student) => {
+        this.StudentDetails = student;
+        console.log(this.StudentDetails);
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+
+  }
 
   selectedGrade: string = 'Update Soon';  // Default grade
   Enrollments: any;

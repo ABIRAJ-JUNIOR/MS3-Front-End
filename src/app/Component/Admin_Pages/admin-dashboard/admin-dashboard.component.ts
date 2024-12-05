@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../Service/API/Auth/auth.service';
+import { jwtDecode } from 'jwt-decode';
+import { Admin, Announcement } from '../../../Modals/modals';
+import { AdminService } from '../../../Service/API/Admin/admin.service';
+import { AnnouncementService } from '../../../Service/API/Announcement/announcement.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -11,9 +15,63 @@ import { AuthService } from '../../../Service/API/Auth/auth.service';
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.css'
 })
-export class AdminDashboardComponent {
+export class AdminDashboardComponent implements OnInit {
+  announcements:Announcement[] = [];
+  totalAnnouncements:number = 0
+  deleteAnnouncement(index: number): void {
+    this.announcements.splice(index, 1);
+  }
+  
+  loginData!:any
+  adminData!:Admin;
 
-  constructor(private authService:AuthService){}
+  constructor(
+    private authService:AuthService,
+    private adminService:AdminService,
+    private announcement:AnnouncementService
+  ){
+    const token = localStorage.getItem("token");
+    if(token != null){
+      const decode:any =jwtDecode(token)
+      this.loginData = decode
+    }
+  }
+
+  ngOnInit(): void {
+    this.loadAdminData();
+    this.loadRecentAnnouncement();
+    this.TotalNumberOfAnnouncement();
+  }
+
+  private loadAdminData():void{
+    this.adminService.getadminbyID(this.loginData.Id).subscribe({
+      next:(res:Admin)=>{
+        this.adminData = res
+      },error:(error:any)=>{
+        console.log(error.error)
+      }
+    })
+  }
+
+  private TotalNumberOfAnnouncement():void{
+    this.announcement.GetAllAnouncement().subscribe({
+      next:(res:Announcement[])=>{
+        res.forEach(a => {
+          if(a.audienceType != "Students"){
+            this.totalAnnouncements ++
+          }
+        })
+      }
+    })
+  }
+
+  private loadRecentAnnouncement():void{
+    this.announcement.GetRecentAnnouncements().subscribe({
+      next:(res:Announcement[])=>{
+        this.announcements = res
+      }
+    })
+  }
 
   logout(){
     this.authService.logout();
@@ -23,6 +81,7 @@ export class AdminDashboardComponent {
   refreshPage(): void {
     window.location.reload();
   }
+
   sidebarCollapsed = false;
   toggleSidebar() {
     this.sidebarCollapsed = !this.sidebarCollapsed;

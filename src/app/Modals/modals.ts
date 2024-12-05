@@ -58,6 +58,8 @@ export interface Course {
   schedulesCount: number;
 
   schedules: Schedule[];
+  feedbacks:FeedBack[];
+  assessmentResponse:Assessment[];
 }
 
 export interface Schedule {
@@ -88,6 +90,8 @@ export interface Enrollment {
     courseScheduleResponse:Schedule;
     paymentResponse:Payment[];
 }
+
+
 
 export interface Payment{
     id:string;
@@ -131,6 +135,7 @@ export interface StudentAssessment{
     studentAssessmentStatus:string;
 
     assessmentResponse:Assessment;
+    studentResponse:Student
 }
 
 export interface Notification{
@@ -164,6 +169,7 @@ export interface ContactUs{
 export interface Announcement{
     id:string;
     title:string;
+    description:string;
     datePosted:Date;
     expirationDate:Date;
     audienceType:string;

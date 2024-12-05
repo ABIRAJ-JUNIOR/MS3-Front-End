@@ -26,10 +26,10 @@ export class CourseService {
     return this.http.get<any>(this.apiUrl + `/Course/Pagination/${pageNumber}/${pageSize}`)
   }
   AddCourse(Course:CourseRequest){
-    return this.http.post(this.apiUrl + '/Course/Add', Course)
+    return this.http.post<Course>(this.apiUrl + '/Course/Add', Course)
   }
   updateCourse(id:string ,Course:CourseRequest){
-    return this.http.put(this.apiUrl + `/Course/Update/${id}`, Course)
+    return this.http.put<Course>(this.apiUrl + `/Course/Update/${id}`, Course)
   }
   Addimage(CourseID:string,image:any){
     return this.http.post(this.apiUrl + '/Course/image/' + CourseID, image,{
@@ -41,6 +41,9 @@ export class CourseService {
       responseType:'text'
     })
   }
+  getTop3Courses(){
+    return this.http.get<Course[]>(this.apiUrl + '/Course/Top3')
+  }
 
 
   //Course Schedule
@@ -48,10 +51,10 @@ export class CourseService {
     return this.http.get<any>(this.apiUrl + `/CourseSchedule/Pagination/${pageNumber}/${pageSize}`)
   }
   addCourseSchedule(CourseSchedule:CourseScheduleRequest){
-    return this.http.post(this.apiUrl + '/CourseSchedule', CourseSchedule)
+    return this.http.post<Schedule>(this.apiUrl + '/CourseSchedule', CourseSchedule)
   }
   updateCourseSchedule(id:string ,CourseSchedule:CourseScheduleRequest){
-    return this.http.put(this.apiUrl + `/CourseSchedule/Update/${id}`, CourseSchedule)
+    return this.http.put<Schedule>(this.apiUrl + `/CourseSchedule/Update/${id}`, CourseSchedule)
   }
 
   //Assessment

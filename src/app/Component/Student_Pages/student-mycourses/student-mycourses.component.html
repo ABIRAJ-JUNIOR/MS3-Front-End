@@ -1,7 +1,7 @@
 <div class="container-fluid my-5">
   <h4><i class="bi bi-book text-info fs-3"></i> Enrollment Courses</h4>
   <hr>
-  <div class="p-4 alert alert-primary">
+  <div class="p-4 alert alert-secondary">
     <p class="fs-4 text-dark">
       Here, you can view all the courses you're currently taking at <strong class="text-danger">IT Intute</strong>. This
       section provides a detailed overview of your academic journey, helping you keep track of your progress and stay on
@@ -12,7 +12,7 @@
   <div class="row my-5">
     <div class="col-10 mx-auto">
       <div class="input-group border">
-        <span class="input-group-text bg-primary text-white">
+        <span class="input-group-text bg-dark text-white">
           <i class="bi bi-search p-1"></i>
         </span>
         <input type="text" class="form-control rounded-3 border-0 shadow-sm" placeholder="Search your Courses"
@@ -21,12 +21,12 @@
     </div>
 
   </div>
-  <div class="row ">
+  <div class="row " *ngIf="StudentDetails">
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 my-4 mx-auto "
       *ngFor="let item of StudentDetails.enrollments | searchMycourse:SearchCourseData let i = index ">
       <div class="card shadow border-0 rounded">
 
-        <div class="card-header text-white text-start" [ngClass]="getProgressBarClass(item)">
+        <div class="card-header text-white text-start" style="background-color: #272829;">
           <h5 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;"><i
               class="bi bi-bookmark-check fs-4 pe-2"></i>{{item.courseScheduleResponse.courseResponse.courseName}}
           </h5>

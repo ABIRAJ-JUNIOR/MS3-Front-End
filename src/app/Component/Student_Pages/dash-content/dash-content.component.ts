@@ -1,95 +1,145 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { Chart, ChartConfiguration } from "chart.js";
 import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { CourseService } from "../../../Service/API/Course/course.service";
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { FeedbackServiceService } from "../../../Service/API/Feedback/feedback-service.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-dash-content',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgxChartsModule, ReactiveFormsModule],
   templateUrl: './dash-content.component.html',
   styleUrl: './dash-content.component.css'
 })
 export class DashContentComponent implements OnInit {
-
   StudentDetails: any;
   StudentTokenDetails: any;
+  TotalPayments: number = 0;
+  TotalAssignments: number = 0;
+  totalCourse: number = 0;
+  feedBackForm: FormGroup;
 
-  TotalPayments:number=0;
-  TotalCourse:number=0;
-  TotalAssignments:number=0;
+  PendingPayments: number = 0;
+  paidPayments: number = 0;
+  TotalPayment: number = 0;
+  EnrolledCourses: number = 0;
+  PaymentData: any[] = [];
+  gradient: boolean = false;
+  animations: boolean = true;
+  courseData: any[] = [];
 
-  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
-  }
-  
-  ngOnInit(): void {
-
-    this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
-
-    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
-      this.StudentDetails = student
-      console.log(this.StudentDetails)
-
-      this.totalPaymentCalculate()
-      this.PaymentChartCalculation()
-    })
-
-  }
-
-
-  totalPaymentCalculate(){
-    for (let i:number = 0; i <  this.StudentDetails.enrollments.length; i++) {
-      const element = this.StudentDetails.enrollments[i].paymentResponse;
-      this.TotalAssignments += this.StudentDetails.enrollments[i].courseScheduleResponse.courseResponse.assessmentResponse.length
-      console.log(element)
-      for (let p:number = 0; p < element.length; p++) {
-          this.TotalPayments+=Number(element[p].amountPaid)
-      }
-    }
-  }
-
-  PendingPayments:number=0;
-  paidPayments:number=0
-  PaymentChartCalculation(){
-    for (let i:number = 0; i <  this.StudentDetails.enrollments.length; i++) {
-      const element = this.StudentDetails.enrollments[i].paymentResponse;
-      if (this.StudentDetails.enrollments[i].paymentStatus == "InProcess") {
-        this.PendingPayments+=1
-      }else if (this.StudentDetails.enrollments[i].paymentStatus) {
-        this.paidPayments+=1
-      }
-    }
-  }
-
-
-
-  ngAfterViewInit() {
-    this.createPaymentChart();
-  }
-
- 
-  createPaymentChart() {
-    new Chart('paymentChart', {
-      type: 'doughnut',
-      data: {
-        labels: ['Paid', 'Pending'],
-        datasets: [{
-          data: [this.paidPayments, this.PendingPayments],
-          backgroundColor: ['#28a745', '#6cc76e', '#b8e0b9'],
-          hoverBackgroundColor: ['#1e7d32', '#58a654', '#a4d0a5']
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: true, position: 'top' } }
-      } as ChartConfiguration['options']
+  constructor(
+    private StudentDashDataService: StudentDashDataService,
+    private StudentApiService: StudentService,
+    private router: Router,
+    private CourseService: CourseService,
+    private fb: FormBuilder,
+    private feedbackService: FeedbackServiceService,
+    private tostr: ToastrService
+  ) {
+    this.feedBackForm = this.fb.group({
+      courseId: ['', Validators.required],
+      rating: ['', Validators.required],
+      feedBackText: ['', Validators.required],
+      studentId: [''],
     });
   }
 
- 
+  ngOnInit(): void {
+    this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
+    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
+      next: (StudentResponse: Student) => {
+        this.StudentDetails = StudentResponse;
+      },
+      error: (error) => {
+        this.tostr.error(error.message);
+      },
+      complete: () => {
+        this.totalPaymentCalculate();
+        this.ChartCalculation();
+      }
+    });
 
+    this.CourseService.getCourses().subscribe({
+      next: (CourseResponse: any) => {
+        this.totalCourse = CourseResponse.length;
+      },
+      error: (error) => {
+        this.tostr.error(error.message);
+      },
+      complete: () => {
+        this.totalPaymentCalculate();
+        this.ChartCalculation();
+      }
+    });
+  }
+
+  totalPaymentCalculate(): void {
+   if(this.StudentDetails != null){
+    for (let i = 0; i < this.StudentDetails.enrollments.length; i++) {
+      const element = this.StudentDetails.enrollments[i].paymentResponse;
+      this.TotalAssignments += this.StudentDetails.enrollments[i].courseScheduleResponse.courseResponse.assessmentResponse.length;
+      for (let p = 0; p < element.length; p++) {
+        this.TotalPayments += Number(element[p].amountPaid);
+      }
+    }
+   }
+  }
+
+  ChartCalculation(): void {
+    if (this.StudentDetails) {
+      for (let i = 0; i < this.StudentDetails.enrollments.length; i++) {
+        const element = this.StudentDetails.enrollments[i].paymentResponse;
+        if (this.StudentDetails.enrollments[i].paymentStatus === "InProcess") {
+          this.PendingPayments++;
+          for (let installment = 0; installment < element.length; installment++) {
+            this.TotalPayment++;
+          }
+        } else if (this.StudentDetails.enrollments[i].paymentStatus === "Paid") {
+          this.paidPayments++;
+        }
+      }
+
+      this.PaymentData = [
+        { name: 'Completed', value: this.paidPayments },
+        { name: 'Pending', value: this.PendingPayments },
+        { name: 'TotalPayments', value: this.TotalPayment },
+      ];
+    }
+  
+    this.createCourseChart();
+  }
+
+  createCourseChart(): void {
+   if (this.StudentDetails) {
+    this.courseData = [
+      { name: 'Assignments', value: this.TotalAssignments },
+      { name: 'Enrolled Course', value: this.StudentDetails.enrollments.length },
+      { name: 'TotalCourses', value: this.totalCourse },
+    ];
+   }
+  }
+
+  onSubmit(): void {
+    if (this.feedBackForm.valid) {
+      this.feedBackForm.get('studentId')?.setValue(this.StudentTokenDetails.Id);
+      this.feedbackService.SendFeedback(this.feedBackForm.value).subscribe({
+        next: () => {
+          this.tostr.success("Feedback Send Successfully");
+          this.feedBackForm.reset();
+        },
+        error: () => {
+          this.tostr.error("Feedback Send Failed");
+          this.feedBackForm.reset();
+        }
+      });
+    }
+  }
 }

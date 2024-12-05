@@ -13,39 +13,56 @@ import { StudentDashDataService } from "../../../Service/Data/Student_Data/stude
   styleUrl: './student-completedcourses.component.css'
 })
 export class StudentCompletedcoursesComponent {
+  StatusCheck: string = "Completed";
   constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
 
-  StudentDetails: any;
+  StudentDetails: any[]=[];
+
+  studentFilterBefore:any;
   StudentTokenDetails: any;
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
   ngOnInit(): void {
-
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
-    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe((student: Student) => {
-      this.StudentDetails = student
-      console.log(this.StudentDetails)
+    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
+      next: (student: Student) => {
+        this.studentFilterBefore = student.enrollments
+
+
+      }, error: (error) => {
+        console.log(error)
+      }, complete: () => {
+        for (let i:number = 0; i < this.studentFilterBefore.length; i++) {
+          console.log("work")
+          const element = this.studentFilterBefore[i];
+          if (element.courseScheduleResponse.scheduleStatus == this.StatusCheck) {
+                  this.StudentDetails.push(element)
+          }
+        }
+
+      }
     })
 
   }
 
 
-  NoCourseBool:boolean=true;
-  CompleteCourseCalculation(item:any):boolean{
+  NoCourseBool: boolean = true;
+  CompleteCourseCalculation(item: any): boolean {
+
     const currentDate = new Date();
     const endDate = new Date(item.courseScheduleResponse.endDate);
     if (currentDate > endDate) {
+      this.NoCourseBool = true
       return true;
-      this.NoCourseBool=false
-    }else{
-   
-     
+    } else {
       return false;
     }
+
   }
   getProgress(item: any): number {
+
     const startDate = new Date(item.courseScheduleResponse.startDate);
     const endDate = new Date(item.courseScheduleResponse.endDate);
     const currentDate = new Date();
@@ -58,8 +75,10 @@ export class StudentCompletedcoursesComponent {
       // Calculate progress based on the current date
       const totalDuration = endDate.getTime() - startDate.getTime();
       const elapsedTime = currentDate.getTime() - startDate.getTime();
+
       return (elapsedTime / totalDuration) * 100;
     }
+
   }
 
   getProgressBarClass(item: any): string {

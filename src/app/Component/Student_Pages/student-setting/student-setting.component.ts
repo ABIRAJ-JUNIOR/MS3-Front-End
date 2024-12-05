@@ -10,7 +10,7 @@ import { StudentcommonProfileComponent } from "../../common_components/studentco
 @Component({
   selector: 'app-student-setting',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule , StudentcommonProfileComponent],
+  imports: [CommonModule, ReactiveFormsModule, StudentcommonProfileComponent],
   templateUrl: './student-setting.component.html',
   styleUrl: './student-setting.component.css'
 })
@@ -20,7 +20,7 @@ export class StudentSettingComponent implements OnInit {
   IsEditMode: boolean = false;
   StudentTokenDetails: any;
   studentForm: FormGroup;
-  
+
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
   constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private fb: FormBuilder, private toastr: ToastrService) {
@@ -29,9 +29,9 @@ export class StudentSettingComponent implements OnInit {
     this.studentForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]], 
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       dateOfBirth: ['', Validators.required],
-      gender: [0], 
+      gender: [0],
       address: this.fb.group({
         addressLine1: ['', Validators.required],
         addressLine2: ['Kindly provide your address for our records.'],
@@ -40,22 +40,21 @@ export class StudentSettingComponent implements OnInit {
         country: ['', Validators.required]
       })
     });
-    
+
   }
 
 
   StudentDetails: any;
 
   ngOnInit(): void {
-    this.studentForm.disable();
 
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
     console.log(this.StudentTokenDetails)
-this.getStudentDetails()
+    this.getStudentDetails()
 
   }
 
-  getStudentDetails(){
+  getStudentDetails() {
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
       next: (student: Student) => {
         this.StudentDetails = student;
@@ -71,7 +70,7 @@ this.getStudentDetails()
       }
     });
   }
-  
+
   onSubmit() {
 
     const studentData = this.studentForm.value;
@@ -82,14 +81,14 @@ this.getStudentDetails()
       gender: Number(studentData.gender),
       phone: studentData.phone,
       address: {
-        addressLine1: studentData.address.addressLine1  || 'AddressLine1 Not included',
-        addressLine2: studentData.address.addressLine2 || 'AddressLine2 Not included',  
+        addressLine1: studentData.address.addressLine1 || 'AddressLine1 Not included',
+        addressLine2: studentData.address.addressLine2 || 'AddressLine2 Not included',
         city: studentData.address.city,
         postalCode: studentData.address.postalCode,
         country: studentData.address.country
       }
     }
-    
+
     this.StudentApiService.updateStudent(this.StudentTokenDetails.Id, student).subscribe({
       next: (data: any) => {
         this.toastr.success("User Update Successful", "", {
@@ -111,7 +110,7 @@ this.getStudentDetails()
         console.log("Student update operation completed.");
       }
     });
-    
+
   }
 
   assignStudentData() {
@@ -125,17 +124,24 @@ this.getStudentDetails()
     } else if (genderValue == "female") {
       Gender = 2;
     }
-   if (this.StudentDetails) {
-    this.studentForm.setValue({
-      firstName: this.StudentDetails.firstName,
-      lastName: this.StudentDetails.lastName,
-      phone: this.StudentDetails.phone,
-      dateOfBirth: dateOfBirth,
-      gender: Gender,
-      address: this.StudentDetails.address || "Kindly provide your address for our records."
-    });
-    
-   }
+    if (this.StudentDetails) {
+      const address = this.StudentDetails.address || {
+        addressLine1: 'AddressLine1 Not included',
+        addressLine2: 'AddressLine2 Not included',
+        city: 'City Not included',
+        postalCode: 'Postalcode is Not Included',
+        country: 'Country Not included',
+      };
+
+      this.studentForm.setValue({
+        firstName: this.StudentDetails.firstName,
+        lastName: this.StudentDetails.lastName,
+        phone: this.StudentDetails.phone,
+        dateOfBirth: dateOfBirth,
+        gender: Gender,
+        address: address,
+      });
+    }
   }
 
 
@@ -160,12 +166,12 @@ export interface StudenUpdateRequest {
   dateOfBirth: string;
   gender: number;
   phone: string;
-  address:Address
+  address: Address
 }
 
 interface Address {
   addressLine1: string;
-  addressLine2?: string;  
+  addressLine2?: string;
   city: string;
   postalCode: string;
   country: string;

@@ -50,7 +50,7 @@ export class StudentService {
   }
 
   ChangePassword( StudentId:string,auth:any){
-    return this.http.put(this.apiUrl + `/Student/changeStudentPassword/${StudentId}`, auth)
+    return this.http.put(this.apiUrl + `/Student/changeStudentPassword/${StudentId}`, auth , {responseType:'text'})
   }
 }
 

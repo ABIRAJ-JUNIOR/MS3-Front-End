@@ -48,6 +48,10 @@ export class StudentService {
   UpdateStudentPersonalInfo(studentId:string , student:StudenUpdateRequest){
     return this.http.put(this.apiUrl + `/Student/Update-info-Details/${studentId}` , student)
   }
+
+  ChangePassword( StudentId:string,auth:any){
+    return this.http.put(this.apiUrl + `/Student/changeStudentPassword/${StudentId}`, auth)
+  }
 }
 
 

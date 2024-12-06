@@ -555,23 +555,23 @@
                                             <div class="col-lg-4 ms-lg-4">
                                                 <div class="card border-0">
                                                     <div class="card-body py-5 px-md-5">
-                                                        <form>
+                                                        <form [formGroup]="changePass" (ngSubmit)="changeStudentPassword()">
                                                             <!-- Old Password -->
                                                             <div class="form-outline mb-4">
                                                                 <label class="form-label" for="oldPassword">Old Password</label>
-                                                                <input type="password" id="oldPassword" class="form-control" />
+                                                                <input type="password" id="oldPassword" class="form-control" formControlName="oldPassword"/>
                                                             </div>
                     
                                                             <!-- New Password -->
                                                             <div class="form-outline mb-4">
                                                                 <label class="form-label" for="newPassword">New Password</label>
-                                                                <input type="password" id="newPassword" class="form-control" />
+                                                                <input type="password" id="newPassword" class="form-control" formControlName="newPassword"/>
                                                             </div>
                     
                                                             <!-- Confirm Password -->
                                                             <div class="form-outline mb-4">
                                                                 <label class="form-label" for="confirmPassword">Confirm Password</label>
-                                                                <input type="password" id="confirmPassword" class="form-control" />
+                                                                <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword"/>
                                                             </div>
                     
                                                             <!-- Submit Button -->

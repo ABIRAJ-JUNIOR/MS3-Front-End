@@ -6,54 +6,55 @@
             <p class="text-muted">View the details of payments made by students</p>
         </div>
 
-        <!-- Overview Summary Section -->
+        <!-- Payment Overview Summary Section -->
         <div class="col-12 mb-4" *ngIf="paymentOverview">
             <div class="row">
                 <!-- Total Payments Card -->
-                <div class="col-md-3 mb-3">
-                    <div class="card border-primary shadow-sm">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-3">
+                    <div class="card border-primary shadow-sm h-100">
                         <div class="card-body text-center">
-                            <h5 class="card-title text-primary">Total Payments</h5>
-                            <p class="display-4 text-success">{{paymentOverview.totalPayment | currency:"Rs"}}</p>
-                            <small class="text-muted">Total payments made</small>
+                            <h5 class="card-title text-primary fs-6 fs-sm-5 fs-lg-4">Total Payments</h5>
+                            <p class="display-6 display-sm-5 text-success">{{paymentOverview.totalPayment | currency:"Rs"}}</p>
+                            <small class="text-muted d-block">Total payments made</small>
                         </div>
                     </div>
                 </div>
-        
+
                 <!-- Full Payments Card -->
-                <div class="col-md-3 mb-3">
-                    <div class="card border-info shadow-sm">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-3">
+                    <div class="card border-info shadow-sm h-100">
                         <div class="card-body text-center">
-                            <h5 class="card-title text-info">Full Payments</h5>
-                            <p class="display-4 text-primary">{{paymentOverview.fullPayment | currency:"Rs"}}</p>
-                            <small class="text-muted">Total full payments</small>
+                            <h5 class="card-title text-info fs-6 fs-sm-5 fs-lg-4">Full Payments</h5>
+                            <p class="display-6 display-sm-5 text-primary">{{paymentOverview.fullPayment | currency:"Rs"}}</p>
+                            <small class="text-muted d-block">Total full payments</small>
                         </div>
                     </div>
                 </div>
-        
+
                 <!-- Installments Card -->
-                <div class="col-md-3 mb-3">
-                    <div class="card border-success shadow-sm">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-3">
+                    <div class="card border-success shadow-sm h-100">
                         <div class="card-body text-center">
-                            <h5 class="card-title text-success">Installments</h5>
-                            <p class="display-4 text-warning">{{paymentOverview.installment | currency:"Rs"}}</p>
-                            <small class="text-muted">Total installment payments</small>
+                            <h5 class="card-title text-success fs-6 fs-sm-5 fs-lg-4">Installments</h5>
+                            <p class="display-6 display-sm-5 text-warning">{{paymentOverview.installment | currency:"Rs"}}</p>
+                            <small class="text-muted d-block">Total installment payments</small>
                         </div>
                     </div>
                 </div>
-        
+
                 <!-- Pending Payments Card -->
-                <div class="col-md-3 mb-3">
-                    <div class="card border-warning shadow-sm">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-3">
+                    <div class="card border-warning shadow-sm h-100">
                         <div class="card-body text-center">
-                            <h5 class="card-title text-warning">Pending Payments</h5>
-                            <p class="display-4 text-danger">{{paymentOverview.overDue | currency:"Rs"}}</p>
-                            <small class="text-muted">Payments awaiting completion</small>
+                            <h5 class="card-title text-warning fs-6 fs-sm-5 fs-lg-4">Pending Payments</h5>
+                            <p class="display-6 display-sm-5 text-danger">{{paymentOverview.overDue | currency:"Rs"}}</p>
+                            <small class="text-muted d-block">Payments awaiting completion</small>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         
 
         <!-- Recent Transactions Section -->

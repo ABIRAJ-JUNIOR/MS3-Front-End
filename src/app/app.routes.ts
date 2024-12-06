@@ -39,6 +39,7 @@ import { StudentAssessmentsComponent } from './Component/Admin_Pages/student-ass
 import { PaymentsOverviewComponent } from './Component/Admin_Pages/payments-overview/payments-overview.component';
 import { ViewAllAnnouncementComponent } from './Component/common_components/view-all-announcement/view-all-announcement.component';
 import { AccountSettingComponent } from './Component/Admin_Pages/account-setting/account-setting.component';
+import { InvoiceComponent } from './Component/common_components/invoice/invoice.component';
 
 
 export const routes: Routes = [
@@ -85,6 +86,7 @@ export const routes: Routes = [
             {path:'payment-overview',component:PaymentsOverviewComponent},
             {path:'all-announcement/:Role',component:ViewAllAnnouncementComponent},
             {path:'account-settings',component:AccountSettingComponent},
+            {path:'invoice',component:InvoiceComponent},
             {path:'**' , redirectTo:'home',pathMatch:'full'}
         ],
         canActivate: [adminAuthGuard]

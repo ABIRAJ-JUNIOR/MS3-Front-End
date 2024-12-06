@@ -175,16 +175,22 @@ export class StudentSettingComponent implements OnInit {
     }
   }
   changeStudentPassword() {
-    let obj:passwordRequest = {
+    let obj: passwordRequest = {
       oldPassword: this.changePass.get('oldPassword')?.value,
       confirmPassword: this.changePass.get('confirmPassword')?.value
     }
+    
 
-    this.StudentApiService.ChangePassword(this.StudentTokenDetails.Id , obj)
+    this.StudentApiService.ChangePassword(this.StudentTokenDetails.Id, obj).subscribe({
+      next: (response: any) => {
+        this.toastr.success(response);
+        this.changePass.reset();
+      }, error: (error) => {
+        console.log(error.message);
+        this.toastr.error(error.message);
+      }
+    })
   }
-
-
-
 
 }
 

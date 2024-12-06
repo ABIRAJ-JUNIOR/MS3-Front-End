@@ -104,7 +104,7 @@ export class AdminHomeComponent {
     this.paymentService.getPaymentOverview().subscribe({
       next:(response:PaymentOverView)=>{
         this.paymentOverview = response
-        this.paymentData.push({name:"Total Amounts" , value:response.totalAmount})
+        this.paymentData.push({name:"Total Amounts" , value:response.totalPayment})
         this.paymentData.push({name:"FullPayment" , value:response.fullPayment})
         this.paymentData.push({name:"Installment" , value:response.installment})
         this.paymentData.push({name:"Pending Amounts" , value:response.overDue})

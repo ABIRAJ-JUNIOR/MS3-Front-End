@@ -104,7 +104,7 @@ export interface Payment{
 }
 
 export interface PaymentOverView{
-  totalAmount:number;
+  totalPayment:number;
   fullPayment:number;
   installment:number;
   overDue:number;

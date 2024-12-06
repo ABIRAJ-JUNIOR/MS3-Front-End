@@ -24,8 +24,11 @@ export class PaymentService {
   getAllPayments(){
     return this.http.get<Payment[]>(this.apiUrl + '/Payment/GetAll')
   }
-
   getPaymentOverview(){
     return this.http.get<PaymentOverView>(this.apiUrl + '/Payment/PaymentOverView')
   }
+  getPaginatedPayments(pageNumber:number, pageSize:number){
+    return this.http.get(this.apiUrl + `/Payment/Pagination/${pageNumber}/${pageSize}`)
+  }
+
 }

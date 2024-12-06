@@ -10,39 +10,51 @@
         <div class="col-12 mb-4">
             <div class="row">
                 <!-- Total Payments Card -->
-                <div class="col-md-4 mb-3">
+                <div class="col-md-3 mb-3">
                     <div class="card border-primary shadow-sm">
                         <div class="card-body text-center">
                             <h5 class="card-title text-primary">Total Payments</h5>
-                            <p class="display-4 text-success">$15,200</p>
+                            <p class="display-4 text-success">{{paymentOverview.totalAmount | currency:"Rs"}}</p>
                             <small class="text-muted">Total payments made</small>
                         </div>
                     </div>
                 </div>
-
-                <!-- Pending Payments Card -->
-                <div class="col-md-4 mb-3">
-                    <div class="card border-warning shadow-sm">
+        
+                <!-- Full Payments Card -->
+                <div class="col-md-3 mb-3">
+                    <div class="card border-info shadow-sm">
                         <div class="card-body text-center">
-                            <h5 class="card-title text-warning">Pending Payments</h5>
-                            <p class="display-4 text-danger">$2,500</p>
-                            <small class="text-muted">Payments awaiting completion</small>
+                            <h5 class="card-title text-info">Full Payments</h5>
+                            <p class="display-4 text-primary">{{paymentOverview.fullPayment | currency:"Rs"}}</p>
+                            <small class="text-muted">Total full payments</small>
                         </div>
                     </div>
                 </div>
-
-                <!-- Completed Payments Card -->
-                <div class="col-md-4 mb-3">
+        
+                <!-- Installments Card -->
+                <div class="col-md-3 mb-3">
                     <div class="card border-success shadow-sm">
                         <div class="card-body text-center">
-                            <h5 class="card-title text-success">Completed Payments</h5>
-                            <p class="display-4 text-success">$12,700</p>
-                            <small class="text-muted">Total completed payments</small>
+                            <h5 class="card-title text-success">Installments</h5>
+                            <p class="display-4 text-warning">{{paymentOverview.installment | currency:"Rs"}}</p>
+                            <small class="text-muted">Total installment payments</small>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Pending Payments Card -->
+                <div class="col-md-3 mb-3">
+                    <div class="card border-warning shadow-sm">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-warning">Pending Payments</h5>
+                            <p class="display-4 text-danger">{{paymentOverview.overDue | currency:"Rs"}}</p>
+                            <small class="text-muted">Payments awaiting completion</small>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
 
         <!-- Recent Transactions Section -->
         <div class="col-12">

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SearchStudentsPipe } from '../../../Pipes/search-students.pipe';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { Assessment, Course, Payment, Student } from '../../../Modals/modals';
+import { Assessment, Course, Payment, PaymentOverView, Student } from '../../../Modals/modals';
 import { PaymentService } from '../../../Service/API/Payment/payment.service';
 import { CourseService } from '../../../Service/API/Course/course.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -27,7 +27,6 @@ import { AssesmentService } from '../../../Service/API/Assessment/assesment.serv
 export class AdminHomeComponent {
   students: Student[] = [];
   courses: Course[] = [];
-  payments:Payment[] = [];
   assessments:Assessment[] = [];
 
   recentPayments: Payment[] = [];
@@ -38,6 +37,8 @@ export class AdminHomeComponent {
   numberOfCourses:number = 0;
   numberOfSchedules:number = 0;
   numberOfAssessments:number =0;
+
+  paymentOverview!:PaymentOverView
 
   constructor(
     private studentService: StudentService,
@@ -50,7 +51,7 @@ export class AdminHomeComponent {
     this.loadStudents();
     this.loadRecentPayments();
     this.loadCourses();
-    this.loadAllPayments();
+    this.loadPaymentOverview()
     this.loadAllAssessment();
   }
 
@@ -99,26 +100,17 @@ export class AdminHomeComponent {
     });
   }
 
-  
-  loadAllPayments():void{
-    this.paymentService.getAllPayments().subscribe({
-      next: (response: Payment[]) => {
-        this.payments = response
-      },
-      complete:()=>{
-        let fullPayment:number = 0;
-        let installment:number = 0;
-        this.payments.forEach(p => {
-          this.totalpayments += p.amountPaid
-          if(p.paymentType == "FullPayment"){
-            fullPayment += p.amountPaid
-          }else if(p.paymentType == "Installment"){
-            installment += p.amountPaid
-          }
-        })
-        this.paymentData.push({name:"FullPayment" , value:fullPayment})
-        this.paymentData.push({name:"Installment" , value:installment})
-        this.paymentOverview = JSON.parse(JSON.stringify(this.paymentData))
+  private loadPaymentOverview():void{
+    this.paymentService.getPaymentOverview().subscribe({
+      next:(response:PaymentOverView)=>{
+        this.paymentOverview = response
+        this.paymentData.push({name:"Total Amounts" , value:response.totalAmount})
+        this.paymentData.push({name:"FullPayment" , value:response.fullPayment})
+        this.paymentData.push({name:"Installment" , value:response.installment})
+        this.paymentData.push({name:"Pending Amounts" , value:response.overDue})
+        this.paymentChart = JSON.parse(JSON.stringify(this.paymentData))
+      },error:(error:any)=>{
+        console.log(error.error)
       }
     })
   }
@@ -138,7 +130,7 @@ export class AdminHomeComponent {
   groupedEnrollmentStats: ChartData[] = [];
 
   paymentData:ChartData[]=[];
-  paymentOverview = [];
+  paymentChart = [];
  
 }
 

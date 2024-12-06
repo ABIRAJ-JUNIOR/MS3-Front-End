@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { PaymentService } from '../../../Service/API/Payment/payment.service';
+import { PaymentOverView } from '../../../Modals/modals';
 
 @Component({
   selector: 'app-payments-overview',
@@ -30,8 +32,26 @@ export class PaymentsOverviewComponent {
   paginatedTransactions = [];
   pages = [];
 
+  paymentOverview!:PaymentOverView
+  constructor(
+    private readonly paymentService:PaymentService
+  ){
+
+  }
+
+
   ngOnInit() {
-    this.totalPages = Math.ceil(this.transactions.length / this.pageSize);
+    this.loadPaymentOverview();
+  }
+
+  private loadPaymentOverview():void{
+    this.paymentService.getPaymentOverview().subscribe({
+      next:(response:PaymentOverView)=>{
+        this.paymentOverview = response
+      },error:(error:any)=>{
+        console.log(error.error)
+      }
+    })
   }
 
   changePage(page: number) {

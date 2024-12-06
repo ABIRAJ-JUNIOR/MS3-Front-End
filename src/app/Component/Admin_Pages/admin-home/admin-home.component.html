@@ -26,7 +26,7 @@
           <i class="fas fa-coins me-2 text-warning"></i> Payments
         </h6>
         <div class="d-flex align-items-center justify-content-between">
-          <p class="display-6 fw-bold mb-0">{{totalpayments}} Rs</p>
+          <p class="display-6 fw-bold mb-0">{{paymentOverview.totalAmount}} Rs</p>
           <i class="fas fa-wallet fs-1 text-warning"></i>
         </div>
       </div>
@@ -97,7 +97,7 @@
             <h6 class="fw-semibold text-muted text-uppercase text-center">Payment Overview</h6>
             <div class="chart-container" style="height: 250px;">
               <ngx-charts-bar-vertical
-              [results]="paymentOverview"
+              [results]="paymentChart"
               [scheme]="'vivid'"
               [xAxis]="true"
               [yAxis]="true"

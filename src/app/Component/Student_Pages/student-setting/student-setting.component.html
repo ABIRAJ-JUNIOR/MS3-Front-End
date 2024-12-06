@@ -528,16 +528,71 @@
 
 
 
-                        <!-- Email Notifications -->
-                        <div class="tab-pane fade" id="notifications" role="tabpanel"
-                            aria-labelledby="notifications-tab">
-                            <h5 class="mb-0 mt-5">Email Notifications</h5>
-                            <p>Enable or disable email notifications for various updates.</p>
-                            <div class="list-group mb-5 shadow">
-                                <!-- Add your email notifications settings here -->
-                            </div>
+
+                    </div>
+                    <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="notifications-tab">
+                        <h5 class="mb-0 mt-5">Account Settings</h5>
+                        <p>Update your password and manage account preferences below.</p>
+                        <div class="list-group mb-5 ">
+                            <!-- Section: Password Reset Block -->
+                            <section>
+                                <!-- Jumbotron -->
+                                <div class="px-4 py-5 text-center text-lg-start" style="background-color: #f8f9fa;">
+                                    <div class="container">
+                                        <div class="row align-items-center">
+                                            <!-- Info Section -->
+                                            <div class="col-lg-6 mb-5">
+                                                <h1 class="my-5 display-5 fw-bold">
+                                                    Update Your Password<br />
+                                                    <span class="text-danger">Ensure your account's security</span>
+                                                </h1>
+                                                <p style="color: #6c757d;">
+                                                    Regularly updating your password ensures your account remains safe. Please provide your old password, a new one, and confirm it below.
+                                                </p>
+                                            </div>
+                    
+                                            <!-- Password Update Form -->
+                                            <div class="col-lg-4 ms-lg-4">
+                                                <div class="card border-0">
+                                                    <div class="card-body py-5 px-md-5">
+                                                        <form>
+                                                            <!-- Old Password -->
+                                                            <div class="form-outline mb-4">
+                                                                <label class="form-label" for="oldPassword">Old Password</label>
+                                                                <input type="password" id="oldPassword" class="form-control" />
+                                                            </div>
+                    
+                                                            <!-- New Password -->
+                                                            <div class="form-outline mb-4">
+                                                                <label class="form-label" for="newPassword">New Password</label>
+                                                                <input type="password" id="newPassword" class="form-control" />
+                                                            </div>
+                    
+                                                            <!-- Confirm Password -->
+                                                            <div class="form-outline mb-4">
+                                                                <label class="form-label" for="confirmPassword">Confirm Password</label>
+                                                                <input type="password" id="confirmPassword" class="form-control" />
+                                                            </div>
+                    
+                                                            <!-- Submit Button -->
+                                                            <div class="text-center">
+                                                                <button type="submit" class="btn btn-secondary btn-block w-100">
+                                                                    Update Password
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Jumbotron -->
+                            </section>
+                            <!-- Section: Password Reset Block -->
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { PayRequest } from '../../../Component/Landing_Pages/otp-authentication/otp-authentication.component';
-import { Enrollment, Payment } from '../../../Modals/modals';
+import { Payment, PaymentOverView } from '../../../Modals/modals';
 import { environment } from '../../../../environments/environment.development';
 
 @Injectable({
@@ -23,5 +23,9 @@ export class PaymentService {
   }
   getAllPayments(){
     return this.http.get<Payment[]>(this.apiUrl + '/Payment/GetAll')
+  }
+
+  getPaymentOverview(){
+    return this.http.get<PaymentOverView>(this.apiUrl + '/Payment/PaymentOverView')
   }
 }

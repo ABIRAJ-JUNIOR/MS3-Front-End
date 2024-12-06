@@ -103,6 +103,12 @@ export interface Payment{
     installmentNumber:string;
 }
 
+export interface PaymentOverView{
+  totalAmount:number;
+  fullPayment:number;
+  installment:number;
+  overDue:number;
+}
 
 
 export interface Assessment {

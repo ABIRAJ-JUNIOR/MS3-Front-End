@@ -185,7 +185,7 @@ export class StudentSettingComponent implements OnInit {
         this.toastr.success(response);
         this.changePass.reset();
       }, error: (error) => {
-        this.toastr.error(error.message);
+        this.toastr.error("password Change invalid try again Later");
       }
     })
   }

@@ -72,10 +72,11 @@ export class CourseSechdulesComponent {
   calculateAverageRating() {
     if (this.courses.feedbacks) {
       let Stars = 0;
-      this.courses.feedbacks.forEach((feedback: any) => {
-        Stars += feedback.rating;
-      });
-      this.CourseRating = Stars / this.courses.feedbacks.length;
+      for (let i = 0; i < this.courses.feedbacks.length; i++) {
+        const element = this.courses.feedbacks[i];
+        Stars += element.rating;
+      }
+      this.CourseRating = Math.round(Stars / this.courses.feedbacks.length);
     } else {
       this.CourseRating = 0;
     }

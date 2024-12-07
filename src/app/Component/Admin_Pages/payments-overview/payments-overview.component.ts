@@ -3,7 +3,9 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { PaymentService } from '../../../Service/API/Payment/payment.service';
-import { PaymentOverView } from '../../../Modals/modals';
+import { Payment, PaymentOverView } from '../../../Modals/modals';
+import { DataTransferService } from '../../../Service/Data/Data_Transfer/data-transfer.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-payments-overview',
@@ -13,7 +15,7 @@ import { PaymentOverView } from '../../../Modals/modals';
   styleUrl: './payments-overview.component.css',
 })
 export class PaymentsOverviewComponent {
-  transactions:any = [];
+  transactions:Transaction[] = [];
 
   currentPage: number = 1;
   pageSize: number = 8;
@@ -24,7 +26,9 @@ export class PaymentsOverviewComponent {
   paymentOverview!:PaymentOverView
   
   constructor(
-    private readonly paymentService:PaymentService
+    private readonly paymentService:PaymentService,
+    private readonly dataTransferService:DataTransferService,
+    private readonly rout:Router
   ){
 
   }
@@ -65,4 +69,22 @@ export class PaymentsOverviewComponent {
       this.loadPaginatedPayments();
     }
   }
+
+  GoToInvoice(transaction:Transaction){
+    this.dataTransferService.updateData(transaction)
+    this.rout.navigate(['/admin-dashboard/invoice'])
+  }
+}
+
+
+export interface Transaction{
+  id:string;
+  studentId:string;
+  studentName:string;
+  courseName:string;  
+  amountPaid:number;
+  paymentType:string;
+  paymentMethod:string;
+  transactionDate:Date;
+  dueDate:Date;
 }

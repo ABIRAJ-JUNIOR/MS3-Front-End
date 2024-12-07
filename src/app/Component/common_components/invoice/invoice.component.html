@@ -1,15 +1,33 @@
-<section id="invoice">
+<section id="invoice" *ngIf="data && studentData">
+    <nav class="navbar navbar-dark bg-dark mb-4">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+          <!-- Back Button -->
+          <button class="btn btn-outline-light btn-sm" (click)="goBack()">
+            <i class="bi bi-arrow-left"></i> Back to Previous Page
+          </button>
+          <div>
+            <!-- Download Invoice -->
+            <button class="btn btn-outline-light btn-sm me-2" (click)="downloadInvoice()">
+              <i class="bi bi-download"></i> Download Invoice
+            </button>
+            <!-- Send Email -->
+            <button class="btn btn-outline-light btn-sm" (click)="sendEmail()">
+              <i class="bi bi-envelope"></i> Send Email
+            </button>
+          </div>
+        </div>
+      </nav>
     <div class="container">
         <!-- Invoice Header -->
         <div class="d-md-flex justify-content-between align-items-center px-5 my-5">
             <div>
                 <h2 class="display-6 fw-bold">Course Fee Invoice</h2>
-                <p class="m-0"><span class="fw-semibold">Invoice No:</span> INV12345</p>
+                <p class="m-0"><span class="fw-semibold">Invoice No:</span> {{data.id}}</p>
             </div>
-            <div class="mt-5 mt-md-0">
+            <div class="mt-4 mt-md-0">
                 <ul class="list-unstyled">
-                    <li><span class="fw-semibold">Invoice Date:</span> 20 May, 2024</li>
-                    <li><span class="fw-semibold">Due Date:</span> 20 June, 2024</li>
+                    <li><span class="fw-semibold">Invoice Date:</span> {{data.transactionDate | date}}</li>
+                    <li><span class="fw-semibold">Due Date:</span> {{data.dueDate | date}}</li>
                 </ul>
             </div>
         </div>
@@ -18,14 +36,14 @@
         <div class="d-md-flex justify-content-between px-5">
             <div>
                 <p class="fw-bold fs-5">Invoice To</p>
-                <h6>John Doe</h6>
+                <h6>{{studentData.firstName}} {{studentData.lastName}}</h6>
                 <ul class="list-unstyled">
-                    <li>Student ID: STU123456</li>
-                    <li>Email: johndoeaexample.com</li>
-                    <li>Address: 456 Elm Street, London, UK</li>
+                    <li>Student ID: {{studentData.id}}</li>
+                    <li>Email: {{studentData.email}}</li>
+                    <li>Address: {{studentData.address.addressLine1}} {{studentData.address.addressLine2}} {{studentData.address.city}} {{studentData.address.country}}</li>
                 </ul>
             </div>
-            <div class="mt-5 mt-md-0">
+            <div class="mt-4 mt-md-0">
                 <p class="fw-bold fs-5">Issued By</p>
                 <h6>IT Institute</h6>
                 <ul class="list-unstyled">
@@ -38,7 +56,7 @@
 
         <!-- Payment Details -->
         <div class="px-5">
-            <table class="table table-striped border my-5">
+            <table class="table table-striped border my-4">
                 <thead>
                     <tr>
                         <th scope="col">S.No.</th>
@@ -51,9 +69,9 @@
                 <tbody>
                     <tr>
                         <th>1</th>
-                        <td>Full-Stack Web Development</td>
-                        <td>£1,000.00</td>
-                        <td>Full Payment</td>
+                        <td>{{data.courseName}}</td>
+                        <td>{{data.amountPaid | currency:"Rs"}}</td>
+                        <td>{{data.paymentType}}</td>
                         <td>Paid</td>
                     </tr>
                 </tbody>
@@ -62,9 +80,9 @@
 
         <!-- Additional Info -->
         <div class="px-5">
-            <div class="row mt-4 mb-5">
+            <div class="row mt-1 mb-5">
                 <div class="col-md-6">
-                    <h5 class="fw-bold mb-4">Payment Info</h5>
+                    <h5 class="fw-bold">Payment Info</h5>
                     <ul class="list-unstyled">
                         <li><span class="fw-semibold">Account No: </span> 102334556938</li>
                         <li><span class="fw-semibold">Account Name: </span> IT Institute</li>
@@ -72,14 +90,14 @@
                     </ul>
                 </div>
 
-                <div class="col-md-6 mt-5 mt-md-0">
-                    <h5 class="fw-bold mb-4">Terms & Conditions</h5>
+                <div class="col-md-6 mt-2 mt-md-0">
+                    <h5 class="fw-bold">Terms & Conditions</h5>
                     <p>All course fees must be paid before the due date. Please note that payments made are non-refundable under any circumstances.</p>
                 </div>                
             </div>
         </div>
 
-        <div class="text-center mt-5">
+        <div class="text-center mt-1">
             <p class="text-muted"><span class="fw-semibold">NOTICE: </span> Late payments may result in enrollment suspension or restricted access to course materials.</p>
         </div>        
 
@@ -87,9 +105,9 @@
         <div class="px-5"
             style="background-image:url(images/bg3.jpg); background-repeat: no-repeat; background-position: center center;">
             <div class="container mt-5 border-top">
-                <div class="row mt-4">
+                <div class="row mt-3">
                     <div class="col-md-6 copyright">
-                        <p>© 2024 IT Institute. All Rights Reserved.</p>
+                        <p>© 2024 Way Makers. All Rights Reserved.</p>
                     </div>
                     <div class="col-md-6 text-md-end">
                         <p>Powered by: <a href="https://yourwebsite.com/" target="_blank" class="text-decoration-none text-black-50">

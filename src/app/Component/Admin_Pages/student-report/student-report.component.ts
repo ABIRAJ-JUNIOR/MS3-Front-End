@@ -23,7 +23,7 @@ export class StudentReportComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.loadItems()
+    // this.loadItems()
   }
 
   loadItems(): void {

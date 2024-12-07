@@ -16,7 +16,7 @@
           </li>
   
           <!-- Admin Section -->
-          <li class="sidebar-item">
+          <li class="sidebar-item" *appHasRole="'Administrator'">
             <a class="sidebar-link collapsed" data-bs-target="#pages" data-bs-toggle="collapse" aria-expanded="false">
               <i class="fa-regular fa-circle-user pe-2"></i>
               Admin
@@ -66,21 +66,21 @@
             </ul>
           </li>
 
-          <li class="sidebar-item" >
+          <li class="sidebar-item" *appHasRole="'Administrator'">
             <a [routerLink]="['/admin-dashboard/payment-overview']" class="sidebar-link"  routerLinkActive="active">
               <i class="fa-solid fa-wallet pe-2"></i>
               Payment Overview
             </a>
           </li>          
 
-          <li class="sidebar-item">
+          <li class="sidebar-item" *appHasRole="'Administrator'">
             <a [routerLink]="['/admin-dashboard/announcement']" class="sidebar-link" routerLinkActive="active">
               <i class="fa-solid fa-bullhorn pe-2"></i>
               Announcements
             </a>
           </li>
 
-          <li class="sidebar-item">
+          <li class="sidebar-item" *appHasRole="'Administrator'">
             <a [routerLink]="['/admin-dashboard/contact-us']" class="sidebar-link" routerLinkActive="active">
               <i class="fa-solid fa-envelope pe-2"></i>
               Contact Us Messages

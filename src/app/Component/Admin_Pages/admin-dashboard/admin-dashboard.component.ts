@@ -7,11 +7,12 @@ import { jwtDecode } from 'jwt-decode';
 import { Admin, Announcement } from '../../../Modals/modals';
 import { AdminService } from '../../../Service/API/Admin/admin.service';
 import { AnnouncementService } from '../../../Service/API/Announcement/announcement.service';
+import { HasRoleDirective } from '../../../Directives/has-role.directive';
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [RouterOutlet,CommonModule,FormsModule,RouterLink,RouterLinkActive],
+  imports: [RouterOutlet,CommonModule,FormsModule,RouterLink,RouterLinkActive,HasRoleDirective],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.css'
 })
@@ -24,7 +25,6 @@ export class AdminDashboardComponent implements OnInit {
   
   loginData!:any
   adminData!:Admin;
-
   constructor(
     private authService:AuthService,
     private adminService:AdminService,

@@ -38,9 +38,27 @@ export class CourseSechdulesComponent {
       next: (response: Course) => {
         this.courses = response
         console.log(this.courses)
+      },error:()=>{
+          window.history.back()
+      },complete:()=>{
+      this.calculateAverageRating
       }
     })
   }
+
+  CourseRating:number=0;
+
+
+calculateAverageRating() {
+  if (this.courses.feedbacks.length === 0) return 0; // No ratings to average
+   let Stars=0
+  const totalRatings = this.courses.feedbacks.forEach((s:any)=>{
+    Stars+=s.rating
+  });
+  this.CourseRating = Stars / this.courses.feedbacks.length;
+}
+
+
 
   PaymentCourse: any[] = []
 

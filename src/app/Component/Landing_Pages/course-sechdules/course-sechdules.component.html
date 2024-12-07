@@ -18,7 +18,7 @@
                                 <!-- Content -->
                                 <div class="p-4">
                                     <div class="mb-1">
-                                        <p >
+                                        <p>
                                             <span class="badge bg-success me-1">{{item.scheduleStatus}}</span>
                                         </p>
                                         <strong>
@@ -30,13 +30,14 @@
                                         <span>Rs.{{courses.courseFee}}</span>
                                     </p>
 
-                                  
+
 
                                     <p>
                                         {{courses.description}}
                                     </p>
                                     <div class="preRequests">
-                                        <p class="fs-5 m-0 mt-1"> <i class="bi bi-box-arrow-right"></i> Prerequisites</p>
+                                        <p class="fs-5 m-0 mt-1"> <i class="bi bi-box-arrow-right"></i> Prerequisites
+                                        </p>
                                         <p class="fs-6 text-muted">{{courses.prerequisites}}</p>
                                     </div>
 
@@ -66,9 +67,10 @@
                                             </p>
                                         </div>
                                     </div>
-                                  
-                                    <button class="btn btn-danger btn-md mt-3" type="submit" (click)="sendPaymentData(item)"    data-bs-toggle="modal" 
-                                    data-bs-target="#PaymmentConfirmation" >
+
+                                    <button class="btn btn-danger btn-md mt-3" type="submit"
+                                        (click)="sendPaymentData(item)" data-bs-toggle="modal"
+                                        data-bs-target="#PaymmentConfirmation">
                                         PURCHASE SECHDULE
                                         <i class="bi bi-bag-heart-fill"></i>
                                     </button>
@@ -85,15 +87,69 @@
             </div>
         </ng-container>
     </div>
-    <button class="carousel-control-prev custom-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+    <button class="carousel-control-prev custom-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+        data-bs-slide="prev">
         <i class="bi bi-arrow-left-circle-fill text-dark fs-1"></i>
         <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next custom-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+    <button class="carousel-control-next custom-control-next" type="button" data-bs-target="#carouselExampleInterval"
+        data-bs-slide="next">
         <i class="bi bi-arrow-right-circle-fill text-dark fs-1"></i>
         <span class="visually-hidden">Next</span>
     </button>
 </div>
+<!--Grid row-->
+<div class="row d-flex justify-content-center my-3">
+    <!--Grid column-->
+    <div class="col-md-6 text-center">
+        <h4 class="card-title">Expert Faculty</h4>
+        <p class="card-text">
+          Learn from industry professionals with years of experience in their respective fields. Our instructors are dedicated to your success.
+        </p>
+    </div>
+</div>
+
+<div class="row text-center">
+    <!-- First Course -->
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card">
+            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/11.jpg" class="card-img-top"
+                alt="Course Image">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Course Title 1</h5>
+                <p class="card-text">This course offers a deep dive into programming fundamentals and more.</p>
+                <a href="#" class="btn btn-outline-primary btn-sm">Learn More</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Second Course -->
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card">
+            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/12.jpg" class="card-img-top"
+                alt="Course Image">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Course Title 2</h5>
+                <p class="card-text">Explore advanced techniques in data science and analytics.</p>
+                <a href="#" class="btn btn-outline-primary btn-sm">Learn More</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Third Course -->
+    <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card">
+            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" class="card-img-top"
+                alt="Course Image">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Course Title 3</h5>
+                <p class="card-text">Learn soft skills and leadership strategies for career growth.</p>
+                <a href="#" class="btn btn-outline-primary btn-sm">Learn More</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <app-footer></app-footer>
 
@@ -106,7 +162,7 @@
                 <h4 class="text-danger">Course Schedule Confirmation</h4>
 
             </div>
-            <img src="/course/finalSechdule.webp" class="card-img-top"  alt="Course Image">
+            <img src="/course/finalSechdule.webp" class="card-img-top" alt="Course Image">
             <div class="modal-body" *ngIf="PaymentCourse.length >0">
 
                 <p class="text-dark">You have successfully selected your course schedule. Please review the details

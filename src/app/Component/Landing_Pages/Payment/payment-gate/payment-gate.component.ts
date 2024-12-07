@@ -198,10 +198,8 @@ export class PaymentGateComponent {
       }
 
     }
-
-    console.log(Payment)
     this.PaymentDataService.adddPendingpayment(Payment)
-    this.router.navigate(['paymen-auth/otp-auth'])
+    this.sendOtpMail();
   }
 
 
@@ -217,8 +215,8 @@ export class PaymentGateComponent {
     this.mailService.sendMail(mail).subscribe({
       next: () => {
         this.router.navigate(['paymen-auth/otp-auth'])
-
       }, error: () => {
+         this.tostr.error("Otp Send Failed")
       }
     })
 

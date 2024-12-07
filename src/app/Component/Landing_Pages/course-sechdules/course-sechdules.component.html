@@ -26,10 +26,14 @@
                                         </strong>
                                     </div>
 
-                                    <p class="lead">
+                                    <p class="lead m-0">
                                         <span>Rs.{{courses.courseFee}}</span>
                                     </p>
-
+                                    <div class="m-0 " *ngIf="CourseRating >0">
+                                        <i *ngFor="let star of [].constructor(CourseRating)"
+                                            class="fas fa-star text-warning">
+                                        </i>
+                                    </div>
 
 
                                     <p>
@@ -68,7 +72,7 @@
                                         </div>
                                     </div>
 
-                                    <button class="btn btn-danger btn-md mt-3" type="submit"
+                                    <button class="btn btn-danger btn-md mt-2" type="submit"
                                         (click)="sendPaymentData(item)" data-bs-toggle="modal"
                                         data-bs-target="#PaymmentConfirmation">
                                         PURCHASE SECHDULE
@@ -104,7 +108,8 @@
     <div class="col-md-6 text-center">
         <h4 class="card-title">Expert Faculty</h4>
         <p class="card-text">
-          Learn from industry professionals with years of experience in their respective fields. Our instructors are dedicated to your success.
+            Learn from industry professionals with years of experience in their respective fields. Our instructors are
+            dedicated to your success.
         </p>
     </div>
 </div>

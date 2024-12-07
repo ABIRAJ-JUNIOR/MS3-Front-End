@@ -1,5 +1,5 @@
 <app-topinfo></app-topinfo>
-<div class="container">
+<div class="container-fluid">
     <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner" *ngIf="courses">
             <ng-container *ngFor="let item of courses.schedules; let i = index">
@@ -9,13 +9,13 @@
                             <!-- Grid row -->
                             <div class="row">
                                 <!-- Grid column -->
-                                <div class="col-md-6 mb-4">
+                                <div class="col-md-12 col-lg-6 col-12 mb-4">
                                     <img src="{{courses.imageUrl}}" class="img-fluid" alt="" />
                                 </div>
                                 <!-- Grid column -->
 
                                 <!-- Grid column -->
-                                <div class="col-md-6 mb-4">
+                                <div class="col-md-12 col-lg-6 col-12 mb-4">
                                     <!-- Content -->
                                     <div class="p-4">
                                         <div class="mb-1">
@@ -30,7 +30,7 @@
                                         <p class="lead m-0">
                                             <span>Rs.{{courses.courseFee}}</span>
                                         </p>
-                                        <div class="m-0 " *ngIf="CourseRating >0">
+                                        <div class="m-0 " *ngIf="CourseRating !==0">
                                             <i *ngFor="let star of [].constructor(CourseRating)"
                                                 class="fas fa-star text-warning">
                                             </i>
@@ -51,23 +51,23 @@
                                             <h5 class="card-title text-primary my-2">
                                                 Course-Schedule {{i+1}}
                                             </h5>
-                                            <div class="d-flex">
+                                            <div class="d-sm-flex">
                                                 <p>
                                                     <i class="fas fa-map-marker-alt me-2 text-dark"></i>
                                                     Location - {{ item.location }}
                                                 </p>
-                                                <p class="mx-3">
-                                                    <i class="fas fa-clock me-2 text-dark"></i>
+                                                <p class="mx-md-3">
+                                                    <i class="fas fa-clock me-md-2 text-dark"></i>
                                                     Time - {{ item.time }}
                                                 </p>
                                             </div>
-                                            <div class="d-flex">
+                                            <div class="d-sm-flex">
                                                 <p>
-                                                    <i class="fas fa-users me-2 text-dark"></i>
+                                                    <i class="fas fa-users me-md-2 text-dark"></i>
                                                     Available-Seats - {{ item.enrollCount }}/{{ item.maxStudents }}
                                                 </p>
-                                                <p class="mx-3">
-                                                    <i class="fas fa-calendar me-2 text-dark"></i>
+                                                <p class="mx-md-3">
+                                                    <i class="fas fa-calendar me-md-2 text-dark"></i>
                                                     Date - {{ item.startDate | date: 'longDate' }} - {{ item.endDate |
                                                     date:
                                                     'longDate' }}
@@ -96,7 +96,7 @@
         </div>
         <button class="carousel-control-prev custom-control-prev" type="button"
             data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-            <i class="bi bi-arrow-left-circle-fill text-dark fs-1"></i>
+            <i class="bi bi-arrow-left-circle-fill text-dark fs-1 d-none d-sm-none d-md-block d-sm-block"></i>
             <span class="visually-hidden">Previous</span>
         </button>
         <button class="carousel-control-next custom-control-next" type="button"
@@ -119,7 +119,7 @@
     </div>
 
     <!-- Top 3 Courses Section -->
-    <div class="row text-center" *ngIf="topCourses && topCourses.length > 0">
+    <div class="row text-center" *ngIf="topCourses">
         <div class="col-lg-4 col-md-6 mb-4" *ngFor="let item of topCourses">
             <div class="card shadow border-0">
                 <img [src]="item.imageUrl" class="card-img-top" alt="{{item.courseName}}" />

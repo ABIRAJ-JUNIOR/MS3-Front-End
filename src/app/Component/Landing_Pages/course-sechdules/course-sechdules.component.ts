@@ -31,6 +31,7 @@ export class CourseSechdulesComponent {
       this.courseGetById()
     });
     this.getAllCourses();
+    window.scrollTo(0, 0);
   }
 
   courses: any;
@@ -69,7 +70,7 @@ export class CourseSechdulesComponent {
 
 
   calculateAverageRating() {
-    if (this.courses.feedbacks.length > 0) {
+    if (this.courses.feedbacks) {
       let Stars = 0;
       this.courses.feedbacks.forEach((feedback: any) => {
         Stars += feedback.rating;
@@ -105,6 +106,7 @@ export class CourseSechdulesComponent {
 
   ViewCourseSechdules(id:any){
   this.router.navigate(['/course-sechdule/' + id])
+  
   }
 
 

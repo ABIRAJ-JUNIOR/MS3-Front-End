@@ -9,8 +9,7 @@
                         <div class="row">
                             <!-- Grid column -->
                             <div class="col-md-6 mb-4">
-                                <img src="{{courses.imageUrl}}"
-                                    class="img-fluid" alt="" />
+                                <img src="{{courses.imageUrl}}" class="img-fluid" alt="" />
                             </div>
                             <!-- Grid column -->
 
@@ -32,27 +31,44 @@
                                     </p>
 
                                     <strong>
-                                        <p style="font-size: 20px;">{{courses.description}}</p>
+                                        <p style="font-size: 20px;">{{courses.courseName}}</p>
                                     </strong>
 
                                     <p>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dolor suscipit
-                                        libero eos atque quia
-                                        ipsa sint voluptatibus! Beatae sit assumenda asperiores iure at maxime atque
-                                        repellendus maiores
-                                        quia sapiente.
+                                        {{courses.description}}
                                     </p>
-
-                                    <form class="d-flex justify-content-left">
-                                        <!-- Default input -->
-                                        <div class="form-outline me-1" style="width: 100px;">
-                                            <input type="number" value="1" class="form-control" />
+                                    <div class="sechdule">
+                                        <h5 class="card-title text-primary my-2">
+                                            Course Schedule
+                                        </h5>
+                                        <div class="d-flex">
+                                            <p>
+                                                <i class="fas fa-map-marker-alt me-2 text-dark"></i>
+                                                Location - {{ item.location }}
+                                            </p>
+                                            <p class="mx-3">
+                                                <i class="fas fa-clock me-2 text-dark"></i>
+                                                Time - {{ item.time }}
+                                            </p>
                                         </div>
-                                        <button class="btn btn-primary ms-1" type="submit">
-                                            Add to cart
-                                            <i class="fas fa-shopping-cart ms-1"></i>
-                                        </button>
-                                    </form>
+                                        <div class="d-flex">
+                                            <p>
+                                                <i class="fas fa-users me-2 text-dark"></i>
+                                                MaxStudents - {{ item.enrollCount }}/{{ item.maxStudents }}
+                                            </p>
+                                            <p class="mx-3">
+                                                <i class="fas fa-calendar me-2 text-dark"></i>
+                                                Date - {{ item.startDate | date: 'longDate' }} - {{ item.endDate | date:
+                                                'longDate' }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                  
+
+                                    <button class="btn btn-primary btn-md" type="submit">
+                                        Add to cart
+                                        <i class="fas fa-shopping-cart ms-1"></i>
+                                    </button>
                                 </div>
                                 <!-- Content -->
                             </div>

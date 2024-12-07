@@ -9,11 +9,12 @@ import { ToastrService } from 'ngx-toastr';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AuditlogService } from '../../../Service/API/AuditLog/auditlog.service';
 import { jwtDecode } from 'jwt-decode';
+import { HasRoleDirective } from '../../../Directives/has-role.directive';
 
 @Component({
   selector: 'app-student-list',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,BsDatepickerModule],
+  imports: [CommonModule,ReactiveFormsModule,BsDatepickerModule,HasRoleDirective],
   providers: [BsModalService],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css'

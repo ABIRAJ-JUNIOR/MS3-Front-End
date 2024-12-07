@@ -43,7 +43,7 @@ export class DashContentComponent implements OnInit {
     private fb: FormBuilder,
     private feedbackService: FeedbackServiceService,
     private tostr: ToastrService,
-    private EnrollmentService:EnrollmentService
+    private EnrollmentService: EnrollmentService
   ) {
     this.feedBackForm = this.fb.group({
       courseId: ['', Validators.required],
@@ -56,32 +56,31 @@ export class DashContentComponent implements OnInit {
   ngOnInit(): void {
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
-   this.studentServiceLoad();
-
-   
+    this.studentServiceLoad();
     this.enrollmentServiceLoad()
+    this.courseServiceLoad();
   }
 
-  Enrollments:any;
+  Enrollments: any;
 
 
-  enrollmentServiceLoad(){
-    console.log("Your Enrollments id"+this.StudentTokenDetails.Id)
+  enrollmentServiceLoad() {
+    console.log("Your Enrollments id" + this.StudentTokenDetails.Id)
 
     this.EnrollmentService.getAllEnrollmentsByStudentId(this.StudentTokenDetails.Id).subscribe({
-      next:(response)=>{
-           this.Enrollments=response
-           console.log(this.Enrollments[0])
-      },error:()=>{
+      next: (response) => {
+        this.Enrollments = response
+        console.log(this.Enrollments[0])
+      }, error: () => {
 
-      },complete:()=>{
+      }, complete: () => {
         this.totalPaymentCalculate();
         this.ChartCalculation();
       }
     })
   }
 
-  studentServiceLoad(){
+  studentServiceLoad() {
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
       next: (StudentResponse: Student) => {
         this.StudentDetails = StudentResponse;
@@ -91,28 +90,28 @@ export class DashContentComponent implements OnInit {
       }
     });
   }
- courseServiceLoad(){
-  this.CourseService.getCourses().subscribe({
-    next: (CourseResponse: any) => {
-      this.totalCourse = CourseResponse.length;
-    },
-    error: (error) => {
-      this.tostr.error(error.message);
-    }
-  });
+  courseServiceLoad() {
+    this.CourseService.getCourses().subscribe({
+      next: (CourseResponse: any) => {
+        this.totalCourse = CourseResponse.length;
+      },
+      error: (error) => {
+        this.tostr.error(error.message);
+      }
+    });
 
- }
+  }
 
   totalPaymentCalculate(): void {
-   if(this.Enrollments != null){
-    for (let i = 0; i < this.Enrollments.length; i++) {
-      const element = this.Enrollments[i].paymentResponse;
-      this.TotalAssignments += this.Enrollments[i].courseScheduleResponse.courseResponse.assessmentResponse.length;
-      for (let p = 0; p < element.length; p++) {
-        this.TotalPayments += Number(element[p].amountPaid);
+    if (this.Enrollments != null) {
+      for (let i = 0; i < this.Enrollments.length; i++) {
+        const element = this.Enrollments[i].paymentResponse;
+        this.TotalAssignments += this.Enrollments[i].courseScheduleResponse.courseResponse.assessmentResponse.length;
+        for (let p = 0; p < element.length; p++) {
+          this.TotalPayments += Number(element[p].amountPaid);
+        }
       }
     }
-   }
   }
 
   ChartCalculation(): void {
@@ -135,18 +134,18 @@ export class DashContentComponent implements OnInit {
         { name: 'TotalPayments', value: this.TotalPayment },
       ];
     }
-  
+
     this.createCourseChart();
   }
 
   createCourseChart(): void {
-   if (this.StudentDetails) {
-    this.courseData = [
-      { name: 'Assignments', value: this.TotalAssignments },
-      { name: 'Enrolled Course', value: this.Enrollments.length },
-      { name: 'TotalCourses', value: this.totalCourse },
-    ];
-   }
+    if (this.StudentDetails) {
+      this.courseData = [
+        { name: 'Assignments', value: this.TotalAssignments },
+        { name: 'Enrolled Course', value: this.Enrollments.length },
+        { name: 'TotalCourses', value: this.totalCourse },
+      ];
+    }
   }
 
   onSubmit(): void {

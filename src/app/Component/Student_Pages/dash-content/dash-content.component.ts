@@ -91,7 +91,17 @@ export class DashContentComponent implements OnInit {
       }
     });
   }
+ courseServiceLoad(){
+  this.CourseService.getCourses().subscribe({
+    next: (CourseResponse: any) => {
+      this.totalCourse = CourseResponse.length;
+    },
+    error: (error) => {
+      this.tostr.error(error.message);
+    }
+  });
 
+ }
 
   totalPaymentCalculate(): void {
    if(this.Enrollments != null){

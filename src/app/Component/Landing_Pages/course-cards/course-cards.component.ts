@@ -122,5 +122,11 @@ export class CourseCardsComponent implements OnInit {
     this.PaymentCourse.push(PurchaseDetails)
    
   }
-
+  ConfirmationPayment(){
+    this.paymentService.PurchaseDetailsSetLocal(this.PaymentCourse[0]);
+  }
+ 
+  CancelPurchase(){
+    this.PaymentCourse = []
+  }
 }

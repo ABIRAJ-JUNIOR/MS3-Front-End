@@ -174,16 +174,18 @@
                                 <p class="">{{ModalProduct[0].description}}</p>
                                 <!-- Schedule Cards -->
                                 <div class="row my-4 justify-content-center">
-                                    <div *ngFor="let schedule of ModalProduct[0].schedules"
-                                        class="col-lg-6 col-md-6 col-sm-12">
-                                        <div class="card border-0 shadow h-100 pointer"
-                                            (click)="sendPaymentData(schedule)" data-bs-toggle="modal"
+                                    <div *ngFor="let schedule of ModalProduct[0].schedules" class="col-lg-6 col-md-6 col-sm-12">
+                                        <div class="card border-0 shadow h-100 pointer" 
+                                            (click)="sendPaymentData(schedule)" 
+                                            data-bs-toggle="modal" 
                                             data-bs-target="#PaymmentConfirmation">
+                                            
                                             <div class="card-body p-4 d-flex flex-column justify-content-between">
                                                 <!-- Course Title -->
-                                                <h5 class="text-primary fw-normal mb-3">
+                                                <h5 class="text-primary fw-normal mb-3 text-truncate">
                                                     {{ ModalProduct[0].courseName }}
                                                 </h5>
+                                
                                                 <!-- Schedule Details -->
                                                 <div class="mb-3">
                                                     <!-- Time -->
@@ -191,38 +193,41 @@
                                                         <i class="bi bi-clock text-danger me-2 fs-5"></i>
                                                         <p class="mb-0 text-secondary fw-bold">{{ schedule.time }}</p>
                                                     </div>
-
+                                
                                                     <!-- Location -->
                                                     <div class="d-flex align-items-center mb-2">
                                                         <i class="bi bi-geo-alt-fill text-success me-2 fs-5"></i>
                                                         <p class="mb-0 text-secondary fw-bold">{{ schedule.location }}</p>
                                                     </div>
-
+                                
                                                     <!-- Date -->
                                                     <div class="d-flex align-items-center mb-2">
                                                         <i class="bi bi-calendar3 text-warning me-2 fs-5"></i>
                                                         <p class="mb-0 text-secondary fw-bold">
-                                                            {{ schedule.startDate }} <span class="px-2">-</span> {{
-                                                            schedule.endDate }}
+                                                            {{ schedule.startDate }} <span class="px-2">-</span> {{ schedule.endDate }}
                                                         </p>
                                                     </div>
-
+                                
                                                     <!-- Duration -->
                                                     <div class="d-flex align-items-center">
                                                         <i class="bi bi-hourglass-split text-info me-2 fs-5"></i>
                                                         <p class="mb-0 text-secondary fw-bold">{{ schedule.duration }} Days</p>
                                                     </div>
                                                 </div>
-
+                                
+                                                <!-- Divider -->
                                                 <hr class="my-1 text-muted" />
+                                
                                                 <!-- Academy Info -->
                                                 <div class="d-flex align-items-center">
-                                                    <img src="{{ ModalProduct[0].imageUrl }}"
-                                                        class="rounded-circle shadow-sm" width="50px" height="50px"
+                                                    <img 
+                                                        src="{{ ModalProduct[0].imageUrl }}" 
+                                                        class="rounded-circle shadow-sm me-3" 
+                                                        width="50" height="50" 
                                                         alt="Academy Logo" />
-                                                    <p class="fs-5 fw-bolder px-3 mb-0">
-                                                        <span class="text-danger fs-4">W</span>ay
-                                                        <span class="text-danger fs-4">M</span>akers
+                                                    <p class="fs-5 fw-bolder mb-0">
+                                                        <span class="text-danger fs-4">W</span>ay 
+                                                        <span class="text-danger fs-4">M</span>akers 
                                                         <span class="text-danger fs-4">A</span>cademy
                                                     </p>
                                                 </div>
@@ -230,6 +235,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                             </div>
                         </div>
                     </div>

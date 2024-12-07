@@ -3,7 +3,7 @@
 
 <div class="row mb-4">
   <!-- New Students Card -->
-  <div class="col-md-3">
+  <div class="col-6 col-sm-6 col-md-6 col-lg-3 mb-3">
     <div class="card card1 shadow-sm border-0 overview-card" style="background-color: #2c3e50; border-radius: 8px;">
       <div class="card-body text-white">
         <h6 class="text-uppercase fw-bold mb-2">
@@ -18,7 +18,7 @@
   </div>
 
   <!-- Payments Card -->
-  <div class="col-md-3">
+  <div class="col-6 col-sm-6 col-md-6 col-lg-3 mb-3" *ngIf="paymentOverview">
     <div class="card card1 shadow-sm border-0 overview-card" 
          style="background: linear-gradient(135deg, #34495e, #2c3e50); border-radius: 8px;">
       <div class="card-body text-white">
@@ -26,7 +26,7 @@
           <i class="fas fa-coins me-2 text-warning"></i> Payments
         </h6>
         <div class="d-flex align-items-center justify-content-between">
-          <p class="display-6 fw-bold mb-0">{{totalpayments}} Rs</p>
+          <p class="display-6 fw-bold mb-0">{{paymentOverview.totalPayment | currency:"Rs"}}</p>
           <i class="fas fa-wallet fs-1 text-warning"></i>
         </div>
       </div>
@@ -34,7 +34,7 @@
   </div>
 
   <!-- Courses and Schedules Card -->
-  <div class="col-md-3">
+  <div class="col-6 col-sm-6 col-md-6 col-lg-3 mb-3">
     <div class="card card1 shadow-sm border-0 overview-card" 
          style="background: linear-gradient(135deg, #1abc9c, #16a085); border-radius: 8px;">
       <div class="card-body text-white">
@@ -56,7 +56,7 @@
   </div>
 
   <!-- Assessments Card -->
-  <div class="col-md-3">
+  <div class="col-6 col-sm-6 col-md-6 col-lg-3 ">
     <div class="card card1 shadow-sm border-0 overview-card" 
          style="background: linear-gradient(135deg, #3498db, #2980b9); border-radius: 8px;">
       <div class="card-body text-white">
@@ -97,7 +97,7 @@
             <h6 class="fw-semibold text-muted text-uppercase text-center">Payment Overview</h6>
             <div class="chart-container" style="height: 250px;">
               <ngx-charts-bar-vertical
-              [results]="paymentOverview"
+              [results]="paymentChart"
               [scheme]="'vivid'"
               [xAxis]="true"
               [yAxis]="true"

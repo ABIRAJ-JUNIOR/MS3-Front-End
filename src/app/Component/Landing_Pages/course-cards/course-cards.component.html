@@ -80,8 +80,8 @@
                     <!-- Enroll & View More -->
                     <div class="d-flex justify-content-between align-items-center mt-3">
                         <button class="btn btn-primary btn-enroll" data-bs-toggle="modal" data-bs-target="#ScheduleView"
-                            (mouseenter)="changeNameEnter($event)" (mouseleave)="changeNameMouseleave($event)"
-                            (click)="viewProduct(course)">{{EnrollBtnName}}</button>
+                            (mouseenter)="changeNameEnter($event)" 
+                            (click)="ViewSechduleRouting(course.id)">{{EnrollBtnName}}</button>
                         <a href="#" class="text-decoration-none view-more" data-bs-toggle="modal"
                             data-bs-target="#CourseView" (mouseenter)="viewProduct(course)">View More</a>
                     </div>

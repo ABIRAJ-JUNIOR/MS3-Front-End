@@ -48,7 +48,7 @@ export const routes: Routes = [
     { path: '', redirectTo: 'home' , pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'course', component: CourseComponent },
-    { path: 'course-sechdule',component:CourseSechdulesComponent},
+    { path: 'course-sechdule/:courseId',component:CourseSechdulesComponent},
     { path: 'contact', component: ContactComponent },
     { path: 'about', component: AboutComponent },
     { path: 'signin', component: SigninComponent },

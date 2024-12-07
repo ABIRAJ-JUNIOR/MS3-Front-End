@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
+import { Enrollment } from '../../../Modals/modals';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class EnrollmentService {
   private apiUrl = environment.apiUrl
 
   getAllEnrollmentsByStudentId(studentId:string){
-    return this.http.get(`${this.apiUrl}/Enrollment/Enrollments/${studentId}`)
+    return this.http.get<Enrollment[]>(`${this.apiUrl}/Enrollment/Enrollments/${studentId}`)
   }
   
 }

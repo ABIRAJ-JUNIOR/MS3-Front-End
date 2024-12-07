@@ -56,21 +56,9 @@ export class DashContentComponent implements OnInit {
   ngOnInit(): void {
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
+   this.studentServiceLoad();
+
    
-
-    this.CourseService.getCourses().subscribe({
-      next: (CourseResponse: any) => {
-        this.totalCourse = CourseResponse.length;
-      },
-      error: (error) => {
-        this.tostr.error(error.message);
-      },
-      complete: () => {
-        this.totalPaymentCalculate();
-        this.ChartCalculation();
-      }
-    });
-
     this.enrollmentServiceLoad()
   }
 
@@ -91,6 +79,17 @@ export class DashContentComponent implements OnInit {
         this.ChartCalculation();
       }
     })
+  }
+
+  studentServiceLoad(){
+    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
+      next: (StudentResponse: Student) => {
+        this.StudentDetails = StudentResponse;
+      },
+      error: (error) => {
+        this.tostr.error(error.message);
+      }
+    });
   }
 
 

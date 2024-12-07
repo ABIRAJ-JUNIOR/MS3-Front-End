@@ -34,29 +34,37 @@ export class StudentDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
-    this.NotficationLoad();
+    this.StudentsLoad();
+    this.notificationLoadItems()
     this.AnnouncementLoad();
 
   }
-  NotificationLength: number = 0;
-  NotficationLoad() {
-    this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
+  Notifications: any;
+  NotificationLength:number=0;
+  notificationLoadItems() {
+
+    this.NotificationSerivice.getAllNotificationsByStudentId(this.StudentTokenDetails.Id).subscribe({
+      next: (response: any) => {
+        this.Notifications = response
+        this.NotificationLength=this.Notifications.length
+        console.log(this.Notifications)
+      }, error: (error) => {
+ console.log(error.message)
+      }
+    })
+  }
+
+
+  StudentsLoad() {
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
       next: (student: Student) => {
         this.StudentDetails = student
 
       }, error: (error) => {
         console.log(error.message)
-      }, complete: () => {
-        for (let i: any = 0; i < this.StudentDetails.notification.length; i++) {
-          const element = this.StudentDetails.notification[i];
-          if (element.isRead == false) {
-            this.NotificationLength++;
-          }
-
-        }
       }
     })
 
@@ -92,18 +100,18 @@ export class StudentDashboardComponent implements OnInit {
         this.tostr.success("Notification Read SuccessFully")
       }, error: (error) => {
         this.tostr.error("Notification read Failed try again Later")
-      },complete:()=>{
-        this.NotficationLoad()
-        this.NotificationLength = 0;
+      }, complete: () => {
+        this.notificationLoadItems()
       }
     })
 
-}
+  }
 
 
-logoutDash() {
-  this.LogoutService.logout()
-  this.router.navigate([''])
-}
+  logoutDash() {
+    this.LogoutService.logout()
+    this.router.navigate([''])
+  }
+
 
 }

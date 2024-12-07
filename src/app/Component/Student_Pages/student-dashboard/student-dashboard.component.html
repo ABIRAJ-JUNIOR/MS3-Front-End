@@ -273,8 +273,8 @@
         <h5 class="modal-title" id="topLeftModalLabel">Notifications</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body" *ngIf="StudentDetails">
-        <div *ngFor="let item of StudentDetails.notification">
+      <div class="modal-body" *ngIf="Notifications">
+        <div *ngFor="let item of Notifications">
           <div class="notification" *ngIf="item.isRead===false">
             <div class="notification-header">
               <span class="notification-type">{{item.notificationType}}</span>

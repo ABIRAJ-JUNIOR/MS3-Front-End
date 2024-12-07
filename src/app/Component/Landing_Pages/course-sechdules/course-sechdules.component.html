@@ -35,9 +35,14 @@
                                     <p>
                                         {{courses.description}}
                                     </p>
+                                    <div class="preRequests">
+                                        <p class="fs-5 m-0 mt-1"> <i class="bi bi-box-arrow-right"></i> Prerequisites</p>
+                                        <p class="fs-6 text-muted">{{courses.prerequisites}}</p>
+                                    </div>
+
                                     <div class="sechdule">
                                         <h5 class="card-title text-primary my-2">
-                                            Course Schedule {{i+1}}
+                                            Course-Schedule {{i+1}}
                                         </h5>
                                         <div class="d-flex">
                                             <p>
@@ -52,7 +57,7 @@
                                         <div class="d-flex">
                                             <p>
                                                 <i class="fas fa-users me-2 text-dark"></i>
-                                                MaxStudents - {{ item.enrollCount }}/{{ item.maxStudents }}
+                                                Available-Seats - {{ item.enrollCount }}/{{ item.maxStudents }}
                                             </p>
                                             <p class="mx-3">
                                                 <i class="fas fa-calendar me-2 text-dark"></i>
@@ -61,12 +66,8 @@
                                             </p>
                                         </div>
                                     </div>
-                                    <div class="preRequests">
-                                        <p class="fs-5 m-0 mt-1"> <i class="bi bi-box-arrow-right"></i> Prerequisites</p>
-                                        <p class="fs-6 text-muted">{{courses.prerequisites}}</p>
-                                    </div>
-
-                                    <button class="btn btn-danger btn-md" type="submit">
+                                  
+                                    <button class="btn btn-danger btn-md mt-3" type="submit" (click)="sendPaymentData(item)">
                                         PURCHASE SECHDULE
                                         <i class="bi bi-bag-heart-fill"></i>
                                     </button>

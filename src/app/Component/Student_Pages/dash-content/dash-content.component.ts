@@ -55,10 +55,7 @@ export class DashContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
-
-    this.studentServiceLoad();
     this.enrollmentServiceLoad()
-    this.courseServiceLoad();
   }
 
   Enrollments: any;
@@ -75,7 +72,8 @@ export class DashContentComponent implements OnInit {
 
       }, complete: () => {
         this.totalPaymentCalculate();
-        this.ChartCalculation();
+
+        this.studentServiceLoad();
       }
     })
   }
@@ -87,6 +85,8 @@ export class DashContentComponent implements OnInit {
       },
       error: (error) => {
         this.tostr.error(error.message);
+      }, complete: () => {
+        this.courseServiceLoad();
       }
     });
   }
@@ -97,6 +97,9 @@ export class DashContentComponent implements OnInit {
       },
       error: (error) => {
         this.tostr.error(error.message);
+      }, complete: () => {
+        this.ChartCalculation();
+
       }
     });
 
@@ -111,6 +114,7 @@ export class DashContentComponent implements OnInit {
           this.TotalPayments += Number(element[p].amountPaid);
         }
       }
+
     }
   }
 

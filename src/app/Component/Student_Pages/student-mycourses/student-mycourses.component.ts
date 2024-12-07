@@ -27,7 +27,10 @@ export class StudentMycoursesComponent implements OnInit{
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
   ngOnInit(): void {
-   this.getStudentDetails()
+    this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
+
+   this.getStudentDetails();
+   this.enrollmentServiceLoad();
   }
   Enrollments: any;
 
@@ -48,7 +51,6 @@ export class StudentMycoursesComponent implements OnInit{
 
   
   getStudentDetails(){
-    this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
       next: (student: Student) => {
         this.StudentDetails = student

@@ -46,7 +46,7 @@
         <div class="card-body">
           <h5 class="card-title text-light fs-4 fw-bold"><i class="fas fa-book me-2"
               style="font-size: 1.5rem;"></i>Enrolled Courses</h5>
-          <p class="display-6 fw-bold text-light mb-0">{{Enrollments.length || 0}}</p>
+          <p class="display-6 fw-bold text-light mb-0" *ngIf="Enrollments">{{Enrollments.length || 0}}</p>
           <p class="text-light fs-6">Total number of courses</p>
           <div class=" bg-transparent border-0 d-flex justify-content-between align-items-center">
             <small class="text-light"><i class="bi bi-arrow-up-circle" style="font-size: 1rem;"></i> Waymakers

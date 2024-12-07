@@ -94,17 +94,17 @@ export class DashContentComponent implements OnInit {
     this.EnrollmentService.getAllEnrollmentsByStudentId(this.StudentTokenDetails.Id).subscribe({
       next:(response)=>{
            this.Enrollments=response
-           console.log("Your Enrollments"+this.Enrollments[0])
+           console.log(this.Enrollments[0])
       }
     })
   }
 
 
   totalPaymentCalculate(): void {
-   if(this.StudentDetails != null){
-    for (let i = 0; i < this.StudentDetails.enrollments.length; i++) {
-      const element = this.StudentDetails.enrollments[i].paymentResponse;
-      this.TotalAssignments += this.StudentDetails.enrollments[i].courseScheduleResponse.courseResponse.assessmentResponse.length;
+   if(this.Enrollments != null){
+    for (let i = 0; i < this.Enrollments.length; i++) {
+      const element = this.Enrollments[i].paymentResponse;
+      this.TotalAssignments += this.Enrollments[i].courseScheduleResponse.courseResponse.assessmentResponse.length;
       for (let p = 0; p < element.length; p++) {
         this.TotalPayments += Number(element[p].amountPaid);
       }

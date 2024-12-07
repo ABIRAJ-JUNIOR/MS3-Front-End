@@ -25,7 +25,7 @@ export class PaymentGateComponent {
 
   CardFormData: FormGroup;
 
-  constructor(private tostr:ToastrService,private mailService: MailServiceService, private studentDataService: StudentDashDataService, private PaymentDataService: PaymentDataService, private fb: FormBuilder, private router: Router, private location: Location) {
+  constructor(private tostr: ToastrService, private mailService: MailServiceService, private studentDataService: StudentDashDataService, private PaymentDataService: PaymentDataService, private fb: FormBuilder, private router: Router, private location: Location) {
 
     this.CardFormData = this.fb.group({
       name: ['', [Validators.required]],
@@ -205,20 +205,23 @@ export class PaymentGateComponent {
 
   sendOtpMail() {
     const studentToken = this.studentDataService.GetStudentDeatilByLocalStorage()
-    const otp = this.PaymentDataService.GetOtp()
-    let mail: any = {
-      name: studentToken.Name,
-      otp: otp,
-      email: studentToken.Email,
-      emailType: 1
-    }
-    this.mailService.sendMail(mail).subscribe({
-      next: () => {
-        this.router.navigate(['paymen-auth/otp-auth'])
-      }, error: () => {
-         this.tostr.error("Otp Send Failed")
+    if (this.PaymentDataService.generateRandomNumber()) {
+      const otp = this.PaymentDataService.GetOtp()
+      let mail: any = {
+        name: studentToken.Name,
+        otp: otp,
+        email: studentToken.Email,
+        emailType: 1
       }
-    })
+      this.mailService.sendMail(mail).subscribe({
+        next: () => {
+          this.router.navigate(['paymen-auth/otp-auth'])
+        }, error: () => {
+          this.tostr.error("Otp Send Failed")
+        }
+      })
+    }
+
 
   }
 

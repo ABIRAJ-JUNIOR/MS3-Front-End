@@ -6,6 +6,7 @@ import { Student } from "../../../Modals/modals";
 import { SearchMycoursePipe } from "../../../Pipes/search-mycourse.pipe";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
+import { EnrollmentService } from "../../../Service/API/Enrollment/enrollment.service";
 
 
 @Component({
@@ -18,7 +19,7 @@ import { StudentDashDataService } from "../../../Service/Data/Student_Data/stude
 export class StudentMycoursesComponent implements OnInit{
 
 
-  constructor( private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
+  constructor(private EnrollmentService:EnrollmentService, private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
 
   StudentDetails: any;
@@ -28,7 +29,24 @@ export class StudentMycoursesComponent implements OnInit{
   ngOnInit(): void {
    this.getStudentDetails()
   }
+  Enrollments: any;
 
+
+  enrollmentServiceLoad() {
+    console.log("Your Enrollments id" + this.StudentTokenDetails.Id)
+
+    this.EnrollmentService.getAllEnrollmentsByStudentId(this.StudentTokenDetails.Id).subscribe({
+      next: (response) => {
+        this.Enrollments = response
+        console.log(this.Enrollments[0])
+      }, error: () => {
+
+      }, complete: () => {
+      }
+    })
+  }
+
+  
   getStudentDetails(){
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({

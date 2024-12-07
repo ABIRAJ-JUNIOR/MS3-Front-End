@@ -11,7 +11,7 @@ import { TopinfoComponent } from "../../common_components/topinfo/topinfo.compon
 @Component({
   selector: 'app-course-sechdules',
   standalone: true,
-  imports: [TopinfoComponent, FooterComponent, CommonModule, TopinfoComponent , RouterModule],
+  imports: [TopinfoComponent, FooterComponent, CommonModule, TopinfoComponent, RouterModule],
   templateUrl: './course-sechdules.component.html',
   styleUrl: './course-sechdules.component.css'
 })
@@ -20,7 +20,7 @@ export class CourseSechdulesComponent {
   constructor(private route: ActivatedRoute,
     private courseService: CourseService,
     private paymentService: PaymentDataService,
-    private router:Router
+    private router: Router
   ) { }
 
   courseId: any;
@@ -31,7 +31,6 @@ export class CourseSechdulesComponent {
       this.courseGetById()
     });
     this.getAllCourses();
-    window.scrollTo(0, 0);
   }
 
   courses: any;
@@ -105,9 +104,11 @@ export class CourseSechdulesComponent {
     this.PaymentCourse = []
   }
 
-  ViewCourseSechdules(id:any){
-  this.router.navigate(['/course-sechdule/' + id])
-  
+  ViewCourseSechdules(id: any) {
+    this.router.navigate(['/course-sechdule/' + id])
+    window.scrollTo(0, 0);
+
+
   }
 
 

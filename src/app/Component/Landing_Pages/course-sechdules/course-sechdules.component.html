@@ -1,4 +1,11 @@
 <app-topinfo></app-topinfo>
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-end mt-3">
+        <a [routerLink]="['/course']" class="text-primary fs-5 " style="text-decoration: none;">Cancel & Return Wepsite</a>
+        </div>
+    </div>
+</div>
 <div class="container-fluid">
     <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner" *ngIf="courses">
@@ -108,12 +115,13 @@
     <!--Grid row-->
     <div class="row d-flex justify-content-center my-3">
         <!-- Introduction Section -->
-        <div class="col-md-6 text-center">
-            <h4 class="card-title">Expert Faculty</h4>
-            <p class="card-text">
-                Learn from industry professionals with years of experience in their respective fields. Our instructors
-                are
-                committed to helping you achieve excellence in your learning journey.
+        <div class="col-md-8 text-center">
+            <h4 class="card-title fw-bold"> Top 3 Courses</h4>
+            <p class="card-text my-3">
+                 Our top courses are
+                designed to equip you with practical skills and knowledge, helping you excel in your career journey.
+                Each course is crafted to offer in-depth insights, hands-on learning experiences, and access to expert
+                guidance.
             </p>
         </div>
     </div>
@@ -154,7 +162,6 @@
                 <h4 class="text-danger">Course Schedule Confirmation</h4>
 
             </div>
-            <img src="/course/finalSechdule.webp" class="card-img-top" alt="Course Image">
             <div class="modal-body" *ngIf="PaymentCourse.length >0">
 
                 <p class="text-dark">You have successfully selected your course schedule. Please review the details

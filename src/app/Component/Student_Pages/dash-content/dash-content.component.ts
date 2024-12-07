@@ -9,6 +9,7 @@ import { CourseService } from "../../../Service/API/Course/course.service";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { FeedbackServiceService } from "../../../Service/API/Feedback/feedback-service.service";
 import { ToastrService } from "ngx-toastr";
+import { EnrollmentService } from "../../../Service/API/Enrollment/enrollment.service";
 
 @Component({
   selector: 'app-dash-content',
@@ -41,7 +42,8 @@ export class DashContentComponent implements OnInit {
     private CourseService: CourseService,
     private fb: FormBuilder,
     private feedbackService: FeedbackServiceService,
-    private tostr: ToastrService
+    private tostr: ToastrService,
+    private EnrollmentService:EnrollmentService
   ) {
     this.feedBackForm = this.fb.group({
       courseId: ['', Validators.required],
@@ -79,7 +81,24 @@ export class DashContentComponent implements OnInit {
         this.ChartCalculation();
       }
     });
+
+    this.enrollmentServiceLoad()
   }
+
+  Enrollments:any;
+
+
+  enrollmentServiceLoad(){
+    console.log("Your Enrollments id"+this.StudentTokenDetails.Id)
+
+    this.EnrollmentService.getAllEnrollmentsByStudentId(this.StudentTokenDetails.Id).subscribe({
+      next:(response)=>{
+           this.Enrollments=response
+           console.log("Your Enrollments"+this.Enrollments[0])
+      }
+    })
+  }
+
 
   totalPaymentCalculate(): void {
    if(this.StudentDetails != null){

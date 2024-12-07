@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Navebar01Component } from '../../common_components/navebar-01/navebar-01.component';
 import { FooterComponent } from '../../common_components/footer/footer.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CourseService } from '../../../Service/API/Course/course.service';
 import { Course } from '../../../Modals/modals';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { TopinfoComponent } from "../../common_components/topinfo/topinfo.compon
 @Component({
   selector: 'app-course-sechdules',
   standalone: true,
-  imports: [TopinfoComponent, FooterComponent, CommonModule, TopinfoComponent],
+  imports: [TopinfoComponent, FooterComponent, CommonModule, TopinfoComponent , RouterModule],
   templateUrl: './course-sechdules.component.html',
   styleUrl: './course-sechdules.component.css'
 })
@@ -29,6 +29,7 @@ export class CourseSechdulesComponent {
       this.courseId = params.get('courseId');
       this.courseGetById()
     });
+    this.getAllCourses();
   }
 
   courses: any;
@@ -45,8 +46,24 @@ export class CourseSechdulesComponent {
       }
     })
   }
- 
-  
+
+  topCourses: any;
+
+  getAllCourses() {
+    this.courseService.getTop3Courses().subscribe({
+      next: (response: Course[]) => {
+        this.topCourses = response;
+      },
+      error: (err) => {
+        console.error('Failed to fetch ', err);
+      },
+      complete: () => {
+        console.log('Fetched top 3 courses successfully.');
+      }
+    });
+  }
+
+
   CourseRating: number = 0;
 
 
@@ -58,7 +75,7 @@ export class CourseSechdulesComponent {
       });
       this.CourseRating = Stars / this.courses.feedbacks.length;
     } else {
-      this.CourseRating = 0; 
+      this.CourseRating = 0;
     }
   }
 

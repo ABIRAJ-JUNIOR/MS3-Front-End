@@ -104,56 +104,37 @@
 </div>
 <!--Grid row-->
 <div class="row d-flex justify-content-center my-3">
-    <!--Grid column-->
+    <!-- Introduction Section -->
     <div class="col-md-6 text-center">
         <h4 class="card-title">Expert Faculty</h4>
         <p class="card-text">
             Learn from industry professionals with years of experience in their respective fields. Our instructors are
-            dedicated to your success.
+            committed to helping you achieve excellence in your learning journey.
         </p>
     </div>
 </div>
 
-<div class="row text-center">
-    <!-- First Course -->
-    <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/11.jpg" class="card-img-top"
-                alt="Course Image">
+<!-- Top 3 Courses Section -->
+<div class="row text-center" *ngIf="topCourses && topCourses.length > 0">
+    <div class="col-lg-4 col-md-6 mb-4" *ngFor="let item of topCourses">
+        <div class="card shadow-sm">
+            <img [src]="item.imageUrl" class="card-img-top" alt="{{item.courseName}}" />
             <div class="card-body">
-                <h5 class="card-title text-primary">Course Title 1</h5>
-                <p class="card-text">This course offers a deep dive into programming fundamentals and more.</p>
-                <a href="#" class="btn btn-outline-primary btn-sm">Learn More</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Second Course -->
-    <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/12.jpg" class="card-img-top"
-                alt="Course Image">
-            <div class="card-body">
-                <h5 class="card-title text-primary">Course Title 2</h5>
-                <p class="card-text">Explore advanced techniques in data science and analytics.</p>
-                <a href="#" class="btn btn-outline-primary btn-sm">Learn More</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Third Course -->
-    <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" class="card-img-top"
-                alt="Course Image">
-            <div class="card-body">
-                <h5 class="card-title text-primary">Course Title 3</h5>
-                <p class="card-text">Learn soft skills and leadership strategies for career growth.</p>
-                <a href="#" class="btn btn-outline-primary btn-sm">Learn More</a>
+                <h5 class="card-title text-primary">{{ item.courseName }}</h5>
+                <p class="card-text text-muted">
+                    {{ item.description || 'This course provides an excellent foundation for your career goals.' }}
+                </p>
+                <a [routerLink]="'/courses/' + item.id" class="btn btn-outline-primary btn-sm">Buy Now</a>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Message for No Courses Available -->
+<div class="text-center text-muted" *ngIf="!topCourses || topCourses.length === 0">
+    <p>No top courses are available at the moment. Please check back later!</p>
+</div>
+
 
 
 <app-footer></app-footer>

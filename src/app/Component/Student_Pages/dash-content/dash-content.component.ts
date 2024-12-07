@@ -56,18 +56,7 @@ export class DashContentComponent implements OnInit {
   ngOnInit(): void {
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
-    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
-      next: (StudentResponse: Student) => {
-        this.StudentDetails = StudentResponse;
-      },
-      error: (error) => {
-        this.tostr.error(error.message);
-      },
-      complete: () => {
-        this.totalPaymentCalculate();
-        this.ChartCalculation();
-      }
-    });
+   
 
     this.CourseService.getCourses().subscribe({
       next: (CourseResponse: any) => {
@@ -95,6 +84,11 @@ export class DashContentComponent implements OnInit {
       next:(response)=>{
            this.Enrollments=response
            console.log(this.Enrollments[0])
+      },error:()=>{
+
+      },complete:()=>{
+        this.totalPaymentCalculate();
+        this.ChartCalculation();
       }
     })
   }
@@ -114,14 +108,14 @@ export class DashContentComponent implements OnInit {
 
   ChartCalculation(): void {
     if (this.StudentDetails) {
-      for (let i = 0; i < this.StudentDetails.enrollments.length; i++) {
-        const element = this.StudentDetails.enrollments[i].paymentResponse;
-        if (this.StudentDetails.enrollments[i].paymentStatus === "InProcess") {
+      for (let i = 0; i < this.Enrollments.length; i++) {
+        const element = this.Enrollments[i].paymentResponse;
+        if (this.Enrollments[i].paymentStatus === "InProcess") {
           this.PendingPayments++;
           for (let installment = 0; installment < element.length; installment++) {
             this.TotalPayment++;
           }
-        } else if (this.StudentDetails.enrollments[i].paymentStatus === "Paid") {
+        } else if (this.Enrollments[i].paymentStatus === "Paid") {
           this.paidPayments++;
         }
       }
@@ -140,7 +134,7 @@ export class DashContentComponent implements OnInit {
    if (this.StudentDetails) {
     this.courseData = [
       { name: 'Assignments', value: this.TotalAssignments },
-      { name: 'Enrolled Course', value: this.StudentDetails.enrollments.length },
+      { name: 'Enrolled Course', value: this.Enrollments.length },
       { name: 'TotalCourses', value: this.totalCourse },
     ];
    }

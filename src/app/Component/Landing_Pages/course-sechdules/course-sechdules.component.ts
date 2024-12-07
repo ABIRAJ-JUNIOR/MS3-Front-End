@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Navebar01Component } from '../../common_components/navebar-01/navebar-01.component';
 import { FooterComponent } from '../../common_components/footer/footer.component';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { CourseService } from '../../../Service/API/Course/course.service';
 import { Course } from '../../../Modals/modals';
 import { CommonModule } from '@angular/common';
@@ -19,7 +19,8 @@ export class CourseSechdulesComponent {
 
   constructor(private route: ActivatedRoute,
     private courseService: CourseService,
-    private paymentService: PaymentDataService
+    private paymentService: PaymentDataService,
+    private router:Router
   ) { }
 
   courseId: any;
@@ -102,6 +103,9 @@ export class CourseSechdulesComponent {
     this.PaymentCourse = []
   }
 
+  ViewCourseSechdules(id:any){
+  this.router.navigate(['/course-sechdule/' + id])
+  }
 
 
 

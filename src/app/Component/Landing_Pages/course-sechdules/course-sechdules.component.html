@@ -1,141 +1,147 @@
 <app-topinfo></app-topinfo>
-<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner" *ngIf="courses">
-        <ng-container *ngFor="let item of courses.schedules; let i = index">
-            <div class="carousel-item" [class.active]="i === 0" data-bs-interval="10000">
-                <main class="mt-5 pt-4">
-                    <div class="container mt-5">
-                        <!-- Grid row -->
-                        <div class="row">
-                            <!-- Grid column -->
-                            <div class="col-md-6 mb-4">
-                                <img src="{{courses.imageUrl}}" class="img-fluid" alt="" />
-                            </div>
-                            <!-- Grid column -->
-
-                            <!-- Grid column -->
-                            <div class="col-md-6 mb-4">
-                                <!-- Content -->
-                                <div class="p-4">
-                                    <div class="mb-1">
-                                        <p>
-                                            <span class="badge bg-success me-1">{{item.scheduleStatus}}</span>
-                                        </p>
-                                        <strong>
-                                            <p style="font-size: 20px; margin: 0%;">{{courses.courseName}}</p>
-                                        </strong>
-                                    </div>
-
-                                    <p class="lead m-0">
-                                        <span>Rs.{{courses.courseFee}}</span>
-                                    </p>
-                                    <div class="m-0 " *ngIf="CourseRating >0">
-                                        <i *ngFor="let star of [].constructor(CourseRating)"
-                                            class="fas fa-star text-warning">
-                                        </i>
-                                    </div>
-
-
-                                    <p>
-                                        {{courses.description}}
-                                    </p>
-                                    <div class="preRequests">
-                                        <p class="fs-5 m-0 mt-1"> <i class="bi bi-box-arrow-right"></i> Prerequisites
-                                        </p>
-                                        <p class="fs-6 text-muted">{{courses.prerequisites}}</p>
-                                    </div>
-
-                                    <div class="sechdule">
-                                        <h5 class="card-title text-primary my-2">
-                                            Course-Schedule {{i+1}}
-                                        </h5>
-                                        <div class="d-flex">
-                                            <p>
-                                                <i class="fas fa-map-marker-alt me-2 text-dark"></i>
-                                                Location - {{ item.location }}
-                                            </p>
-                                            <p class="mx-3">
-                                                <i class="fas fa-clock me-2 text-dark"></i>
-                                                Time - {{ item.time }}
-                                            </p>
-                                        </div>
-                                        <div class="d-flex">
-                                            <p>
-                                                <i class="fas fa-users me-2 text-dark"></i>
-                                                Available-Seats - {{ item.enrollCount }}/{{ item.maxStudents }}
-                                            </p>
-                                            <p class="mx-3">
-                                                <i class="fas fa-calendar me-2 text-dark"></i>
-                                                Date - {{ item.startDate | date: 'longDate' }} - {{ item.endDate | date:
-                                                'longDate' }}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <button class="btn btn-danger btn-md mt-2" type="submit"
-                                        (click)="sendPaymentData(item)" data-bs-toggle="modal"
-                                        data-bs-target="#PaymmentConfirmation">
-                                        PURCHASE SECHDULE
-                                        <i class="bi bi-bag-heart-fill"></i>
-                                    </button>
+<div class="container">
+    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner" *ngIf="courses">
+            <ng-container *ngFor="let item of courses.schedules; let i = index">
+                <div class="carousel-item" [class.active]="i === 0" data-bs-interval="10000">
+                    <main class="mt-5 pt-4">
+                        <div class="container mt-5">
+                            <!-- Grid row -->
+                            <div class="row">
+                                <!-- Grid column -->
+                                <div class="col-md-6 mb-4">
+                                    <img src="{{courses.imageUrl}}" class="img-fluid" alt="" />
                                 </div>
-                                <!-- Content -->
+                                <!-- Grid column -->
+
+                                <!-- Grid column -->
+                                <div class="col-md-6 mb-4">
+                                    <!-- Content -->
+                                    <div class="p-4">
+                                        <div class="mb-1">
+                                            <p>
+                                                <span class="badge bg-success me-1">{{item.scheduleStatus}}</span>
+                                            </p>
+                                            <strong>
+                                                <p style="font-size: 20px; margin: 0%;">{{courses.courseName}}</p>
+                                            </strong>
+                                        </div>
+
+                                        <p class="lead m-0">
+                                            <span>Rs.{{courses.courseFee}}</span>
+                                        </p>
+                                        <div class="m-0 " *ngIf="CourseRating >0">
+                                            <i *ngFor="let star of [].constructor(CourseRating)"
+                                                class="fas fa-star text-warning">
+                                            </i>
+                                        </div>
+
+
+                                        <p>
+                                            {{courses.description}}
+                                        </p>
+                                        <div class="preRequests">
+                                            <p class="fs-5 m-0 mt-1"> <i class="bi bi-box-arrow-right"></i>
+                                                Prerequisites
+                                            </p>
+                                            <p class="fs-6 text-muted">{{courses.prerequisites}}</p>
+                                        </div>
+
+                                        <div class="sechdule">
+                                            <h5 class="card-title text-primary my-2">
+                                                Course-Schedule {{i+1}}
+                                            </h5>
+                                            <div class="d-flex">
+                                                <p>
+                                                    <i class="fas fa-map-marker-alt me-2 text-dark"></i>
+                                                    Location - {{ item.location }}
+                                                </p>
+                                                <p class="mx-3">
+                                                    <i class="fas fa-clock me-2 text-dark"></i>
+                                                    Time - {{ item.time }}
+                                                </p>
+                                            </div>
+                                            <div class="d-flex">
+                                                <p>
+                                                    <i class="fas fa-users me-2 text-dark"></i>
+                                                    Available-Seats - {{ item.enrollCount }}/{{ item.maxStudents }}
+                                                </p>
+                                                <p class="mx-3">
+                                                    <i class="fas fa-calendar me-2 text-dark"></i>
+                                                    Date - {{ item.startDate | date: 'longDate' }} - {{ item.endDate |
+                                                    date:
+                                                    'longDate' }}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <button class="btn btn-danger btn-md mt-2" type="submit"
+                                            (click)="sendPaymentData(item)" data-bs-toggle="modal"
+                                            data-bs-target="#PaymmentConfirmation">
+                                            PURCHASE SECHDULE
+                                            <i class="bi bi-bag-heart-fill"></i>
+                                        </button>
+                                    </div>
+                                    <!-- Content -->
+                                </div>
+                                <!-- Grid column -->
                             </div>
-                            <!-- Grid column -->
+                            <!-- Grid row -->
+
+                            <hr />
                         </div>
-                        <!-- Grid row -->
-
-                        <hr />
-                    </div>
-                </main>
-            </div>
-        </ng-container>
+                    </main>
+                </div>
+            </ng-container>
+        </div>
+        <button class="carousel-control-prev custom-control-prev" type="button"
+            data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+            <i class="bi bi-arrow-left-circle-fill text-dark fs-1"></i>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next custom-control-next" type="button"
+            data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+            <i class="bi bi-arrow-right-circle-fill text-dark fs-1"></i>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
-    <button class="carousel-control-prev custom-control-prev" type="button" data-bs-target="#carouselExampleInterval"
-        data-bs-slide="prev">
-        <i class="bi bi-arrow-left-circle-fill text-dark fs-1"></i>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next custom-control-next" type="button" data-bs-target="#carouselExampleInterval"
-        data-bs-slide="next">
-        <i class="bi bi-arrow-right-circle-fill text-dark fs-1"></i>
-        <span class="visually-hidden">Next</span>
-    </button>
-</div>
-<!--Grid row-->
-<div class="row d-flex justify-content-center my-3">
-    <!-- Introduction Section -->
-    <div class="col-md-6 text-center">
-        <h4 class="card-title">Expert Faculty</h4>
-        <p class="card-text">
-            Learn from industry professionals with years of experience in their respective fields. Our instructors are
-            committed to helping you achieve excellence in your learning journey.
-        </p>
+    <!--Grid row-->
+    <div class="row d-flex justify-content-center my-3">
+        <!-- Introduction Section -->
+        <div class="col-md-6 text-center">
+            <h4 class="card-title">Expert Faculty</h4>
+            <p class="card-text">
+                Learn from industry professionals with years of experience in their respective fields. Our instructors
+                are
+                committed to helping you achieve excellence in your learning journey.
+            </p>
+        </div>
     </div>
-</div>
 
-<!-- Top 3 Courses Section -->
-<div class="row text-center" *ngIf="topCourses && topCourses.length > 0">
-    <div class="col-lg-4 col-md-6 mb-4" *ngFor="let item of topCourses">
-        <div class="card shadow-sm">
-            <img [src]="item.imageUrl" class="card-img-top" alt="{{item.courseName}}" />
-            <div class="card-body">
-                <h5 class="card-title text-primary">{{ item.courseName }}</h5>
-                <p class="card-text text-muted">
-                    {{ item.description || 'This course provides an excellent foundation for your career goals.' }}
-                </p>
-                <a [routerLink]="'/courses/' + item.id" class="btn btn-outline-primary btn-sm">Buy Now</a>
+    <!-- Top 3 Courses Section -->
+    <div class="row text-center" *ngIf="topCourses && topCourses.length > 0">
+        <div class="col-lg-4 col-md-6 mb-4" *ngFor="let item of topCourses">
+            <div class="card shadow border-0">
+                <img [src]="item.imageUrl" class="card-img-top" alt="{{item.courseName}}" />
+                <div class="card-body">
+                    <h5 class="card-title text-primary">{{ item.courseName }}</h5>
+                    <p class="card-text text-muted">
+                        {{ item.description || 'This course provides an excellent foundation for your career goals.' }}
+                    </p>
+                    <button (click)="ViewCourseSechdules(item.id)" class="btn btn-outline-primary btn-sm w-100">Buy
+                        Now</button>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Message for No Courses Available -->
+    <div class="text-center text-muted" *ngIf="!topCourses || topCourses.length === 0">
+        <p>No top courses are available at the moment. Please check back later!</p>
+    </div>
+
+
 </div>
-
-<!-- Message for No Courses Available -->
-<div class="text-center text-muted" *ngIf="!topCourses || topCourses.length === 0">
-    <p>No top courses are available at the moment. Please check back later!</p>
-</div>
-
-
 
 <app-footer></app-footer>
 

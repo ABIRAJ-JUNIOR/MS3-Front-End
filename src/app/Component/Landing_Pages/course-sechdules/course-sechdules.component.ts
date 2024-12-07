@@ -6,11 +6,12 @@ import { CourseService } from '../../../Service/API/Course/course.service';
 import { Course } from '../../../Modals/modals';
 import { CommonModule } from '@angular/common';
 import { PaymentDataService } from '../../../Service/Data/Payment_Data/payment-data.service';
+import { TopinfoComponent } from "../../common_components/topinfo/topinfo.component";
 
 @Component({
   selector: 'app-course-sechdules',
   standalone: true,
-  imports: [Navebar01Component, FooterComponent, CommonModule],
+  imports: [TopinfoComponent, FooterComponent, CommonModule, TopinfoComponent],
   templateUrl: './course-sechdules.component.html',
   styleUrl: './course-sechdules.component.css'
 })
@@ -45,9 +46,9 @@ export class CourseSechdulesComponent {
 
   sendPaymentData(sechdule: any) {
     let PurchaseDetails = {
-      "courseName": this.courses[0].courseName,
-      "courseFee": this.courses[0].courseFee,
-      "courseId": this.courses[0].id,
+      "courseName": this.courses.courseName,
+      "courseFee": this.courses.courseFee,
+      "courseId": this.courses.id,
       ...sechdule,
       "PaymentCheck": true
     }

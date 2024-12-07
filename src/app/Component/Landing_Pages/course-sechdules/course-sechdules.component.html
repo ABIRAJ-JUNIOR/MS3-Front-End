@@ -17,29 +17,27 @@
                             <div class="col-md-6 mb-4">
                                 <!-- Content -->
                                 <div class="p-4">
-                                    <div class="mb-3">
-                                        <!-- <p class="m-0">
-                                            <span class="badge bg-dark me-1">{{courses.level}}</span>
-                                        </p> -->
-                                        <p class="m-0">
+                                    <div class="mb-1">
+                                        <p >
                                             <span class="badge bg-success me-1">{{item.scheduleStatus}}</span>
                                         </p>
+                                        <strong>
+                                            <p style="font-size: 20px; margin: 0%;">{{courses.courseName}}</p>
+                                        </strong>
                                     </div>
 
                                     <p class="lead">
                                         <span>Rs.{{courses.courseFee}}</span>
                                     </p>
 
-                                    <strong>
-                                        <p style="font-size: 20px;">{{courses.courseName}}</p>
-                                    </strong>
+                                  
 
                                     <p>
                                         {{courses.description}}
                                     </p>
                                     <div class="sechdule">
                                         <h5 class="card-title text-primary my-2">
-                                            Course Schedule
+                                            Course Schedule {{i+1}}
                                         </h5>
                                         <div class="d-flex">
                                             <p>
@@ -63,11 +61,14 @@
                                             </p>
                                         </div>
                                     </div>
-                                  
+                                    <div class="preRequests">
+                                        <p class="fs-5 m-0 mt-1"> <i class="bi bi-box-arrow-right"></i> Prerequisites</p>
+                                        <p class="fs-6 text-muted">{{courses.prerequisites}}</p>
+                                    </div>
 
-                                    <button class="btn btn-primary btn-md" type="submit">
-                                        Add to cart
-                                        <i class="fas fa-shopping-cart ms-1"></i>
+                                    <button class="btn btn-danger btn-md" type="submit">
+                                        PURCHASE SECHDULE
+                                        <i class="bi bi-bag-heart-fill"></i>
                                     </button>
                                 </div>
                                 <!-- Content -->
@@ -82,12 +83,12 @@
             </div>
         </ng-container>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <button class="carousel-control-prev custom-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+        <i class="bi bi-arrow-left-circle-fill text-dark fs-1"></i>
         <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <button class="carousel-control-next custom-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+        <i class="bi bi-arrow-right-circle-fill text-dark fs-1"></i>
         <span class="visually-hidden">Next</span>
     </button>
 </div>

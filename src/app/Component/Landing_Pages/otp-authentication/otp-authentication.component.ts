@@ -33,6 +33,7 @@ export class OtpAuthenticationComponent implements OnInit {
 
   getOtp() {
     this.otp = this.paymentDataService.GetOtp()
+    alert(this.otp)
   }
 
   CheckOtp() {
@@ -96,10 +97,10 @@ export class OtpAuthenticationComponent implements OnInit {
     const studentToken = this.studentDataService.GetStudentDeatilByLocalStorage()
     this.otp = this.paymentDataService.GetOtp()
     let mail: any = {
-      "name": studentToken.Name,
-      "otp": this.otp,
-      "email": studentToken.Email,
-      "emailType": 1
+      name: studentToken.Name,
+      otp: this.otp,
+      email: studentToken.Email,
+      emailType: 1
     }
     this.mailService.sendMail(mail).subscribe({
       next: () => {

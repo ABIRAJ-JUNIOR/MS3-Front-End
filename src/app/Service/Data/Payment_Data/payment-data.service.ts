@@ -25,7 +25,6 @@ export class PaymentDataService {
   }
 
   GetOtp(): any {
-    this.generateRandomNumber()
     return sessionStorage.getItem('paymentOtp')
   }
 

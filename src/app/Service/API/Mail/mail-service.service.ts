@@ -11,6 +11,6 @@ export class MailServiceService {
   constructor(private http:HttpClient) { }
 
   sendMail(otpDetails:any){
-    return this.http.post(this.commonUrl+"/SendMail/OTP",otpDetails)
+    return this.http.post(this.commonUrl+"/SendMail/OTP",otpDetails , {responseType:'text'})
   }
 }

@@ -207,10 +207,10 @@ export class PaymentGateComponent {
     const studentToken = this.studentDataService.GetStudentDeatilByLocalStorage()
     const otp = this.PaymentDataService.GetOtp()
     let mail: any = {
-      "name": studentToken.Name,
-      "otp": otp,
-      "email": studentToken.Email,
-      "emailType": 1
+      name: studentToken.Name,
+      otp: otp,
+      email: studentToken.Email,
+      emailType: 1
     }
     this.mailService.sendMail(mail).subscribe({
       next: () => {

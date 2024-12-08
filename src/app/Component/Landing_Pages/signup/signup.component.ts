@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { AuthService, SignUp } from '../../../Service/API/Auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { WindowDataService } from '../../../Service/Biomatrics/window-data.service';
 
 @Component({
   selector: 'app-signup',
@@ -18,7 +17,7 @@ export class SignupComponent {
 
   StudentRegistration: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private toastr: ToastrService, private rout: Router, private windowDataService: WindowDataService) {
+  constructor( private fb: FormBuilder, private authService: AuthService, private toastr: ToastrService, private rout: Router) {
     this.StudentRegistration = this.fb.group({
       nic: ['', [Validators.required, Validators.pattern('^[0-9]{9}[Vv]$|^[0-9]{12}$')]],
       firstName: ['', Validators.required],
@@ -50,24 +49,12 @@ export class SignupComponent {
         this.toastr.success("User SignUp Successfull", "")
         this.StudentRegistration.reset()
       }, complete: () => {
-        (async () => {
-          const authCheck = await this.windowDataService.register();
-          if (authCheck) {
-            this.toastr.success("Window Authentication Register Succesfully.")
-            this.rout.navigate(['/login']);
-          }else{
-            this.rout.navigate(['/login'])
-            this.toastr.success("Registration failed. Please Enable In your Setting")
+        this.rout.navigate(['/signin'])
 
-
-          }
-        })();
       }, error: (error) => {
         this.toastr.warning(error.error, "")
       }
     })
-
-
 
   }
 

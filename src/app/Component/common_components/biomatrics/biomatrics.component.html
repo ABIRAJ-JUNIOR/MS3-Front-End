@@ -2,7 +2,7 @@
     style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/biomatrics/bio3.png); min-height: 100vh; background-repeat: no-repeat; background-size: cover;">
     <!-- Header Section -->
     <div class="text-center mb-4">
-        <h1 class="display-5  text-secondary pt-4" style="font-weight: 500;">Secure Your Account with Windows Hello</h1>
+        <h1 class="display-5  text-white pt-4" style="font-weight: 450;">Secure Your Account with Windows Hello</h1>
         <p class="text-light">Enable facial recognition, fingerprint, or PIN for faster and secure access.</p>
     </div>
 
@@ -13,13 +13,13 @@
             <p class="card-text ">Windows Hello is not set up yet.</p>
             <div class="d-flex justify-content-center mt-4">
                 <p class="text-start" style="line-height: 1.8;">
-                    <span class="text-primary fs-4"> Follow the steps below to enable Windows Hello:</span> <br>
+                    <span class="text-light fs-4 fw-bold"> Follow the steps below to enable Windows Hello:</span> <br>
                     1. Go to Windows settings and select "Sign-in options". <br>
                     2. Set up a PIN or biometric login (fingerprint or facial recognition). <br>
                     3. Return here and confirm your setup.
                 </p>
             </div>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" routerLinkActive="router-link-active" >
                 Set Up Windows Hello
             </button>
         </div>
@@ -60,21 +60,18 @@
     <!-- Fallback Options -->
     <div class="text-center mt-4">
         <p class="text-light">Having trouble setting up biometrics?</p>
-        <a href="#" class="btn btn-link text-light">Sign in with your password</a>
+        <a [routerLink]="['/signin']" class="btn btn-link text-light">Sign in with your password</a>
     </div>
 </div>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Sign In
-</button>
+
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Sign In</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">biomatrics Setting</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -92,7 +89,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"  (click)="register()">Sign In</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close" (click)="register()">Sign In</button>
             </div>
         </div>
     </div>

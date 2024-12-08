@@ -18,7 +18,9 @@ export class BiomatricsComponent {
 
 
   register() {
-    console.log(this.windowDataService.register())
+    const password = document.getElementById('password') as HTMLInputElement
+    const email = document.getElementById('email') as HTMLInputElement
+    console.log(this.windowDataService.register(email.value,password.value))
   }
   login() {
     console.log(this.windowDataService.login())

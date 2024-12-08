@@ -12,9 +12,9 @@ export class WindowDataService {
 
   constructor(private webAuthnService: WindowAuthService, private tostre: ToastrService) { }
 
-  async register() {
+  async register(email:any,password:any) {
     try {
-      await this.webAuthnService.register("a@gmail.com","Anojan32");
+      await this.webAuthnService.register(email,password);
       return true
     } catch (err) {
       return false

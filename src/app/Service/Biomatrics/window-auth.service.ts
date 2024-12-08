@@ -44,7 +44,7 @@ export class WindowAuthService {
 
     try {
       const credential = await navigator.credentials.create({ publicKey }) as PublicKeyCredential;
-      this.storeCredential(credential, challenge, password);
+      this.storeCredential(credential, challenge, password, email);
       console.log("Registration successful!", credential);
       return credential;
     } catch (err) {
@@ -71,17 +71,23 @@ export class WindowAuthService {
     };
 
     try {
+
+      const credential = await navigator.credentials.get({ publicKey }) as PublicKeyCredential;
+      console.log("Authentication successful!", credential);
       let auth = {
         email: storedCredential.email,
         password: storedCredential.password
       }
+      console.log(auth)
       this.authService.signIn(auth).subscribe({
         next: (res: string) => {
           localStorage.setItem('token', res)
-        },
+        }, error: () => {
+
+        }, complete: () => {
+            console.log("User Login Successfull")
+        }
       })
-      const credential = await navigator.credentials.get({ publicKey }) as PublicKeyCredential;
-      console.log("Authentication successful!", credential);
       return credential;
     } catch (err) {
       console.error("Authentication failed:", err);
@@ -89,11 +95,11 @@ export class WindowAuthService {
     }
   }
 
-  private storeCredential(credential: PublicKeyCredential, challenge: Uint8Array, password: string) {
+  private storeCredential(credential: PublicKeyCredential, challenge: Uint8Array, password: string, email: string) {
     const credentialData = {
       rawId: Array.from(new Uint8Array(credential.rawId)),
       challenge: Array.from(challenge),
-      email: credential.id,
+      email: email,
       password
     };
     localStorage.setItem('webauthn_credential', JSON.stringify(credentialData));

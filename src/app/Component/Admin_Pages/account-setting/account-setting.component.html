@@ -10,13 +10,17 @@
   
         <form (ngSubmit)="onSubmit()">
           <div class="row mb-5">
-            <!-- Profile Picture -->
-            <div class="col-md-4 text-center">
-              <div class="mb-3">
-                <img src="{{profilePicture}}" alt="Profile Picture" class="img-fluid rounded" width="270" style="background-position: center; background-size: cover; object-fit: cover;">
-                <input type="file" class="form-control mt-2" (change)="onProfilePictureChange($event)">
+              <div class="col-md-4 text-center" style="background-color: rgb(230, 226, 226);">
+                <div class="d-flex justify-content-center align-items-center" style="height: 100%;" >
+                  <div>
+                    <h5>Welcome Back, {{firstName}}!</h5>
+                    <blockquote class="blockquote">
+                      <p>"The only way to achieve great work is to love what you do."</p>
+                      <footer class="blockquote-footer">Steve Jobs</footer>
+                    </blockquote>
+                  </div>
+                </div>
               </div>
-            </div>
             
             <!-- Personal Information -->
             <div class="col-md-8">

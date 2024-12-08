@@ -102,7 +102,7 @@ export class OtpAuthenticationComponent implements OnInit {
         email: studentToken.Email,
         emailType: 1
       }
-      this.mailService.sendMail(mail).subscribe({
+      this.mailService.sendOtpMail(mail).subscribe({
         next: () => {
           this.toastr.success("Mail Recieved Succesfully")
         }, error: () => {

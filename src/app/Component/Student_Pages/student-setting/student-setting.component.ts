@@ -58,6 +58,7 @@ export class StudentSettingComponent implements OnInit {
   ngOnInit(): void {
 
     this.getStudentDetails()
+    this.studentForm.disable()
 
   }
 

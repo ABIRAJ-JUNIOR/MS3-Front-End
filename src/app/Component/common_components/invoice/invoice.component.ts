@@ -6,6 +6,8 @@ import { StudentService } from '../../../Service/API/Student/student.service';
 import { ResolveEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import html2canvas from 'html2canvas';
+import { MailServiceService } from '../../../Service/API/Mail/mail-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-invoice',
@@ -20,7 +22,9 @@ export class InvoiceComponent implements OnInit{
 
   constructor(
     private readonly dataTransferService:DataTransferService,
-    private readonly studentService:StudentService
+    private readonly studentService:StudentService,
+    private readonly mailService:MailServiceService,
+    private readonly toastr:ToastrService
   ){
 
   }
@@ -68,5 +72,38 @@ export class InvoiceComponent implements OnInit{
   }
 
   sendEmail() {
+    const invoice:Invoice = {
+      invoiceId: this.data.id,
+      studentId: this.data.studentId,
+      studentName:this.data.studentName,
+      email:this.studentData.email,
+      address:`${this.studentData.address.addressLine1}, ${this.studentData.address.addressLine2}, ${this.studentData.address.city}, ${this.studentData.address.country}`,
+      courseName:this.data.courseName,
+      amountPaid:this.data.amountPaid,
+      paymentType:this.data.paymentType,
+      emailType:2
+    }
+
+    this.mailService.sendInvoiceMail(invoice).subscribe({
+      next:(response:any)=>{
+        this.toastr.success("Mail Send Successfully" ,'');
+      },
+      error:(error:any)=>{
+        console.log(error.error);
+        
+      }
+    })
   }
+}
+
+export interface Invoice{
+  invoiceId:string;
+  studentId:string;
+  studentName:string;
+  email:string;
+  address:string;
+  courseName:string;  
+  amountPaid:number;
+  paymentType:string;
+  emailType:number;
 }

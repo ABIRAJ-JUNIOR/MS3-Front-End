@@ -7,6 +7,7 @@ import { Course } from '../../../Modals/modals';
 import { CommonModule } from '@angular/common';
 import { PaymentDataService } from '../../../Service/Data/Payment_Data/payment-data.service';
 import { TopinfoComponent } from "../../common_components/topinfo/topinfo.component";
+import { StudentService } from '../../../Service/API/Student/student.service';
 
 @Component({
   selector: 'app-course-sechdules',
@@ -20,7 +21,8 @@ export class CourseSechdulesComponent {
   constructor(private route: ActivatedRoute,
     private courseService: CourseService,
     private paymentService: PaymentDataService,
-    private router: Router
+    private router: Router,
+    private studentService: StudentService,
   ) { }
 
   courseId: any;
@@ -31,6 +33,7 @@ export class CourseSechdulesComponent {
       this.courseGetById()
     });
     this.getAllCourses();
+    this.allstudentLoad();
   }
 
   courses: any;
@@ -79,6 +82,16 @@ export class CourseSechdulesComponent {
     } else {
       this.CourseRating = 0;
     }
+  }
+  AllStudents: any;
+  allstudentLoad() {
+    this.studentService.getStudents().subscribe({
+      next: (response: any) => {
+        this.AllStudents = response
+      }, error: (error) => {
+        console.log(error.message)
+      }
+    })
   }
 
   PaymentCourse: any[] = []

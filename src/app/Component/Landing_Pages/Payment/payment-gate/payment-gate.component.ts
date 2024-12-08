@@ -213,7 +213,7 @@ export class PaymentGateComponent {
         email: studentToken.Email,
         emailType: 1
       }
-      this.mailService.sendMail(mail).subscribe({
+      this.mailService.sendOtpMail(mail).subscribe({
         next: () => {
           this.router.navigate(['paymen-auth/otp-auth'])
         }, error: () => {

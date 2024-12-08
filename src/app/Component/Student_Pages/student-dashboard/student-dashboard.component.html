@@ -108,16 +108,15 @@
           </a>
         </li>
       </ul>
-      <div style="display: flex;flex-direction: column; align-items: start;margin-top: 40px; margin-left: 30px;" *ngIf="StudentDetails">
+      <div style="margin-top: 50px;" *ngIf="StudentDetails">
       
         <div class=" d-flex align-items-center justify-content-center" data-bs-toggle="dropdown"
-          style="flex-direction: column;" *ngIf="StudentDetails">
+          style="flex-direction: column; max-width: 270px;" *ngIf="StudentDetails">
           <span class="font-weight-bold fs-5 mt-3 fw-bold" style="color: #ffffff;">{{StudentDetails.firstName}}
             {{StudentDetails.lastName}}</span>
           <span class="text-light d-block mb-1">{{StudentTokenDetails.Email}}</span>
 
-          <span class="text-light mb-1">Student ID: UT-{{StudentDetails.nic | slice: -4
-            }}</span>
+          <span class="text-light mb-1">Student ID: UT-{{StudentDetails.nic | slice: -4}}</span>
           <button class="btn btn-outline-danger d-flex align-items-center gap-2 px-4 py-2 my-2 shadow-sm"   style="border-radius: 4px;" data-bs-toggle="modal" data-bs-target="#logoutModal"> <i class="bi bi-box-arrow-right"></i> Logout</button>
          
         </div>
@@ -293,8 +292,6 @@
     </div>
   </div>
 </div>
-
-
 
 
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">

@@ -40,6 +40,7 @@ import { PaymentsOverviewComponent } from './Component/Admin_Pages/payments-over
 import { ViewAllAnnouncementComponent } from './Component/common_components/view-all-announcement/view-all-announcement.component';
 import { AccountSettingComponent } from './Component/Admin_Pages/account-setting/account-setting.component';
 import { InvoiceComponent } from './Component/common_components/invoice/invoice.component';
+import { CourseSechdulesComponent } from './Component/Landing_Pages/course-sechdules/course-sechdules.component';
 
 
 export const routes: Routes = [
@@ -47,6 +48,7 @@ export const routes: Routes = [
     { path: '', redirectTo: 'home' , pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'course', component: CourseComponent },
+    { path: 'course-sechdule/:courseId',component:CourseSechdulesComponent},
     { path: 'contact', component: ContactComponent },
     { path: 'about', component: AboutComponent },
     { path: 'signin', component: SigninComponent },

@@ -6,6 +6,7 @@ import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { PaymentDataService } from "../../../Service/Data/Payment_Data/payment-data.service";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
+import { EnrollmentService } from "../../../Service/API/Enrollment/enrollment.service";
 
 
 @Component({
@@ -19,7 +20,8 @@ export class StudentPaymentsComponent implements OnInit {
   constructor(private StudentDashDataService: StudentDashDataService,
     private StudentApiService: StudentService,
     private router: Router,
-    private PaymentService: PaymentDataService
+    private PaymentService: PaymentDataService,
+    private EnrollmentService: EnrollmentService
   ) {
   }
 
@@ -34,19 +36,21 @@ export class StudentPaymentsComponent implements OnInit {
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
   ngOnInit(): void {
-
-    this.getStudentDetails()
+    this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
+    this.enrollmentServiceLoad()
 
   }
 
-  getStudentDetails() {
-    this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
 
-    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
-      next: (student: Student) => {
-        this.Enrollments = student.enrollments
-      }, error: (error) => {
-        console.log(error)
+  enrollmentServiceLoad() {
+    console.log("Your Enrollments id" + this.StudentTokenDetails.Id)
+
+    this.EnrollmentService.getAllEnrollmentsByStudentId(this.StudentTokenDetails.Id).subscribe({
+      next: (response) => {
+        this.Enrollments = response
+        console.log(this.Enrollments[0])
+      }, error: () => {
+
       }, complete: () => {
         this.Enrollments.forEach((element: any) => {
           let amount: number = 0
@@ -63,6 +67,9 @@ export class StudentPaymentsComponent implements OnInit {
       }
     })
   }
+
+
+ 
 
   calculatePaymentProgress(amountPaid: number, courseFee: number): number {
     return (amountPaid / courseFee) * 100;

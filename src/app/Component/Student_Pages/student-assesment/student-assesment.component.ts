@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { FormsModule } from "@angular/forms";
+import { EnrollmentService } from "../../../Service/API/Enrollment/enrollment.service";
 
 @Component({
   selector: 'app-student-assesment',
@@ -17,7 +18,10 @@ export class StudentAssesmentComponent implements OnInit {
 
 
 
-  constructor(private StudentService: StudentService, private studentDataService: StudentDashDataService) {
+  constructor(private StudentService: StudentService,
+    private studentDataService: StudentDashDataService,
+    private EnrollmentService:EnrollmentService
+  ) {
 
   }
   paginateBeforeData: any[] = []; // Your full array of data
@@ -29,37 +33,34 @@ export class StudentAssesmentComponent implements OnInit {
   StatusCheck: string = "Completed"
   NotStartCheck: string = "NotStarted"
 
-  StudentDetails: any;
+  StudentTokenDetails: any;
   ngOnInit() {
+    this.StudentTokenDetails = this.studentDataService.GetStudentDeatilByLocalStorage()
 
     this.paginateAssesment()
-  }
-  // Update paginatedData based on currentPage and pageSize
-  updatePagination(): void {
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    this.paginatedAssesment = this.paginateBeforeData.slice(startIndex, endIndex);
-    this.totalPages = Math.ceil(this.paginateBeforeData.length / this.pageSize);
+    this.enrollmentServiceLoad()
   }
 
-  // Navigate to a specific page
-  goToPage(page: number): void {
-    if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page;
-      this.updatePagination();
-    }
+  Enrollments: any;
+
+
+  enrollmentServiceLoad() {
+    console.log("Your Enrollments id" + this.StudentTokenDetails.Id)
+
+    this.EnrollmentService.getAllEnrollmentsByStudentId(this.StudentTokenDetails.Id).subscribe({
+      next: (response) => {
+        this.Enrollments =  response
+        console.log(this.Enrollments[0])
+      }, error: () => {
+
+      }, complete: () => {
+      }
+    })
   }
 
   paginateAssesment() {
-    this.StudentDetails = this.studentDataService.GetStudentDeatilByLocalStorage()
-    
-    this.StudentService.getStudent(this.StudentDetails.Id).subscribe({
-      next: (d: any) => {
-        this.paginatedAssesment = d.enrollments
-      },error:(error)=>{
-        console.log(error)
-      }
-    })
+
+  
   }
 
 
@@ -76,5 +77,5 @@ export class StudentAssesmentComponent implements OnInit {
     }
   }
 
-  
+
 }

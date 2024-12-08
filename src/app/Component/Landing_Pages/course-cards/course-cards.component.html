@@ -66,7 +66,7 @@
                         <span>{{ course.level }}</span>
                     </div>
                     <!-- Course Image -->
-                    <img src="{{course.imageUrl}}"  class="card-img-top" alt="Course Image">
+                    <img src="{{course.imageUrl}}" class="card-img-top" alt="Course Image">
                 </div>
                 <div class="card-body">
                     <!-- Course Title -->
@@ -79,9 +79,9 @@
                     <p class="card-text text-danger fw-semibold">Rs {{ course.courseFee }}</p>
                     <!-- Enroll & View More -->
                     <div class="d-flex justify-content-between align-items-center mt-3">
-                        <button class="btn btn-primary btn-enroll" data-bs-toggle="modal" data-bs-target="#ScheduleView"
-                            (mouseenter)="changeNameEnter($event)" (mouseleave)="changeNameMouseleave($event)"
-                            (click)="viewProduct(course)">{{EnrollBtnName}}</button>
+                        <button class="btn btn-primary btn-enroll" 
+                            (mouseenter)="changeNameEnter($event)" 
+                            (click)="ViewSechduleRouting(course.id)">{{EnrollBtnName}}</button>
                         <a href="#" class="text-decoration-none view-more" data-bs-toggle="modal"
                             data-bs-target="#CourseView" (mouseenter)="viewProduct(course)">View More</a>
                     </div>
@@ -142,9 +142,8 @@
                                 <div>
                                     <p>{{ModalProduct[0].description}}</p>
                                 </div>
-                                <button class="btn btn-primary btn-enroll" data-bs-toggle="modal"
-                                    data-bs-target="#ScheduleView" (mouseenter)="changeNameEnter($event)"
-                                    (mouseleave)="changeNameMouseleave($event)">{{EnrollBtnName}}</button>
+                                <button class="btn btn-primary btn-enroll" (mouseenter)="changeNameEnter($event)"
+                                    (mouseleave)="changeNameMouseleave($event)"  (click)="ViewSechduleRouting(ModalProduct[0].id)" data-bs-dismiss="modal">{{EnrollBtnName}}</button>
                             </div>
                         </div>
                     </div>
@@ -153,136 +152,4 @@
         </div>
     </div>
 
-    <!-- SheduleView -->
-    <div class="modal fade" id="ScheduleView" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-custom">
-            <div class="modal-content">
-                <div>
-                    <div class="modal-body overflow-x-hidden">
-                        <div class="row">
-
-                            <div *ngIf="ModalProduct.length>0">
-                                <!-- Modal Header -->
-                                <div class="modal-header border-0 bg-white">
-                                    <h3 class="modal-title text-danger fw-bold" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
-                                        Your Course Schedules
-                                    </h3>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                                        (click)="ClearModal()"></button>
-                                </div>
-                                <p class="">{{ModalProduct[0].description}}</p>
-                                <!-- Schedule Cards -->
-                                <div class="row gy-4 justify-content-center">
-                                    <div *ngFor="let schedule of ModalProduct[0].schedules" class="col-lg-6 col-md-6 col-sm-12">
-                                        <div class="card border-0 shadow-sm h-100 pointer" (click)="sendPaymentData(schedule)" data-bs-toggle="modal" data-bs-target="#PaymmentConfirmation">
-                                            <div class="card-body p-4 d-flex flex-column justify-content-between">
-                                                <!-- Course Title -->
-                                                <h5 class="text-primary fw-bold mb-3">
-                                                    {{ ModalProduct[0].courseName }}
-                                                </h5>
-
-                                                <!-- Schedule Details -->
-                                                <div class="mb-3">
-                                                    <!-- Time -->
-                                                    <div class="d-flex align-items-center mb-2">
-                                                        <i class="bi bi-clock text-danger me-2 fs-5"></i>
-                                                        <p class="mb-0 text-secondary">{{ schedule.time }}</p>
-                                                    </div>
-
-                                                    <!-- Location -->
-                                                    <div class="d-flex align-items-center mb-2">
-                                                        <i class="bi bi-geo-alt-fill text-success me-2 fs-5"></i>
-                                                        <p class="mb-0 text-secondary">{{ schedule.location }}</p>
-                                                    </div>
-
-                                                    <!-- Date -->
-                                                    <div class="d-flex align-items-center mb-2">
-                                                        <i class="bi bi-calendar3 text-warning me-2 fs-5"></i>
-                                                        <p class="mb-0 text-secondary">
-                                                            {{ schedule.startDate }} <span class="px-2">-</span> {{ schedule.endDate }}
-                                                        </p>
-                                                    </div>
-
-                                                    <!-- Duration -->
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="bi bi-hourglass-split text-info me-2 fs-5"></i>
-                                                        <p class="mb-0 text-secondary">{{ schedule.duration }} Days</p>
-                                                    </div>
-                                                </div>
-
-                                                <hr class="my-3 text-muted" />
-
-                                                <!-- Academy Info -->
-                                                <div class="d-flex align-items-center">
-                                                    <img src="{{ ModalProduct[0].imageUrl }}" class="rounded-circle shadow-sm"
-                                                        width="50px" height="50px" alt="Academy Logo" />
-                                                    <p class="fs-6 fw-bold px-3 mb-0">Way Makers Academy</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer border-0 bg-white">
-                        <button type="button" class="btn btn-outline-danger px-4" data-bs-dismiss="modal" (click)="ClearModal()">
-                            Close
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-
-<!-- PaymentConfirm -->
-<!-- Modal -->
-<div class="modal fade" id="PaymmentConfirmation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="text-danger">Course Schedule Confirmation</h4>
-               
-            </div>
-            <img src="/course/finalSechdule.webp" class="card-img-top" alt="Course Image">
-            <div class="modal-body" *ngIf="PaymentCourse.length >0">
-
-                <p class="text-dark">You have successfully selected your course schedule. Please review the details
-                    below:</p>
-                <div class="d-flex py-2">
-                    <p class="fw-bold pe-1"><i class="bi bi-clock"></i> </p>
-                    <p>{{PaymentCourse[0].time}}</p>
-                </div>
-                <div class="d-flex py-1">
-                    <p class="fw-bold  pe-1"><i class="bi bi-geo-alt-fill"></i></p>
-                    <p>{{PaymentCourse[0].location}}</p>
-                </div>
-                <div class="d-flex py-1">
-                    <div class="d-flex">
-                        <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
-                        <p>{{PaymentCourse[0].startDate}}</p>
-                    </div>
-                    <p class="px-2">-</p>
-                    <div class="d-flex ">
-                        <p class="fw-bold pe-1"><i class="bi bi-calendar3"></i></p>
-                        <p>{{PaymentCourse[0].endDate}}</p>
-                    </div>
-                </div>
-
-                <div class="d-flex py-1">
-                    <p class="fw-bold pe-1"><i class="bi bi-hourglass-split"></i> </p>
-                    <p>{{PaymentCourse[0].duration}} Days</p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                    (click)="ConfirmationPayment()">Confirm</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                    (click)="CancelPurchase()">Cancel</button>
-            </div>
-        </div>
-    </div>
-</div>
+    

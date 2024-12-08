@@ -29,7 +29,7 @@
 
     <div *ngIf="TableView==1">
         <div class="row" *ngIf="paginatedAssesment">
-            <div class="col-12 col-sm-12 col-md-12 " *ngFor="let Sechdule of paginatedAssesment  let i = index">
+            <div class="col-12 col-sm-12 col-md-12 " *ngFor="let Sechdule of Enrollments  let i = index">
                 <div class="card my-4">
                     <h5 class="card-title fs-4   p-2 rounded-top-2 text-white m-0" style="background-color: #272829;">
                         <a>{{Sechdule.courseScheduleResponse.courseResponse.courseName}}</a>
@@ -110,7 +110,7 @@
 
     <div *ngIf="TableView==2">
 
-        <div class="row" *ngIf="paginatedAssesment">
+        <div class="row" *ngIf="Enrollments">
             <div class="col-12 col-sm-12 col-md-12">
                 <div class="card my-4">
                     <table class="table table-striped">
@@ -127,7 +127,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <ng-container *ngFor="let Sechdule of paginatedAssesment  let i = index">
+                            <ng-container *ngFor="let Sechdule of Enrollments  let i = index">
                                 <tr
                                     *ngFor="let assesment of Sechdule.courseScheduleResponse.courseResponse.assessmentResponse ">
                                     <ng-container *ngIf="assesment.assessmentStatus!==StatusCheck">

@@ -4,6 +4,8 @@ import { RouterModule, Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { PaymentDataService } from "../../../Service/Data/Payment_Data/payment-data.service";
 import { PaymentService } from "../../../Service/API/Payment/payment.service";
+import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
+import { MailServiceService } from "../../../Service/API/Mail/mail-service.service";
 
 @Component({
   selector: 'app-otp-authentication',
@@ -13,7 +15,13 @@ import { PaymentService } from "../../../Service/API/Payment/payment.service";
   styleUrl: './otp-authentication.component.css'
 })
 export class OtpAuthenticationComponent implements OnInit {
-  constructor(private router: Router, private paymentDataService: PaymentDataService, private toastr: ToastrService, private PaymentApiServices: PaymentService) {
+  constructor(private mailService: MailServiceService,
+    private studentDataService: StudentDashDataService,
+    private router: Router,
+    private paymentDataService: PaymentDataService,
+     private toastr: ToastrService,
+    private PaymentApiServices: PaymentService
+  ) {
 
   }
 
@@ -25,17 +33,15 @@ export class OtpAuthenticationComponent implements OnInit {
 
   getOtp() {
     this.otp = this.paymentDataService.GetOtp()
-    this.toastr.clear();
-    this.toastr.success('Your Otp is  ' + this.otp)
   }
 
   CheckOtp() {
     let enteredOtp = document.getElementById('otp') as HTMLInputElement
     if (enteredOtp.value == this.otp) {
       this.toastr.clear();
+      this.toastr.success('successfull')
       let data: any = JSON.parse(this.paymentDataService.getPendingPayment());
-      console.log(data)
-      console.log(data.installmentNumber)
+ 
 
       if (data.PaymentCheck) {
         let Enrollment = {
@@ -54,7 +60,6 @@ export class OtpAuthenticationComponent implements OnInit {
           next: (response: any) => {
             this.toastr.success("Your Payment is SuccessFully Completed")
             this.paymentDataService.ClearAllPAymentData()
-
             this.router.navigate(['/student-dashboard'])
           }, error: (error) => {
             this.toastr.error('There was an error processing your payment. Please try again later.');
@@ -84,6 +89,29 @@ export class OtpAuthenticationComponent implements OnInit {
       this.toastr.clear();
       this.toastr.error("Invalid OTP. Ensure you're entering the correct code.")
     }
+  }
+
+
+  sendOtpMail() {
+    const studentToken = this.studentDataService.GetStudentDeatilByLocalStorage()
+    if (this.paymentDataService.generateRandomNumber()) {
+      this.otp = this.paymentDataService.GetOtp()
+      let mail: any = {
+        name: studentToken.Name,
+        otp: this.otp,
+        email: studentToken.Email,
+        emailType: 1
+      }
+      this.mailService.sendMail(mail).subscribe({
+        next: () => {
+          this.toastr.success("Mail Recieved Succesfully")
+        }, error: () => {
+          this.toastr.error("Otp Send Failed")
+        }
+      })
+  
+    }
+   
   }
 
 }

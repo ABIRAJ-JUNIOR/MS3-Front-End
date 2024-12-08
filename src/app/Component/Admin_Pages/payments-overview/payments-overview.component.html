@@ -84,7 +84,7 @@
                             <td>{{transaction.paymentMethod}}</td>
                             <td>{{transaction.transactionDate | date}}</td>
                             <td>
-                                <i class="bi bi-receipt pointer"></i>
+                                <i class="bi bi-receipt pointer" (click)="GoToInvoice(transaction)"></i>
                             </td>
                         </tr>
                     </tbody>

@@ -110,11 +110,11 @@
 
   <!-- Actions Section -->
   <div class="d-flex justify-content-end align-items-center gap-3 flex-wrap mb-4">
-    <button class="btn btn-outline-dark d-flex align-items-center gap-2 px-4 py-2 shadow" style="border-radius: 4px">
-      <i class="bi bi-gear-fill"></i> Account Settings
+    <button class="btn btn-outline-dark d-flex align-items-center gap-2 px-4 py-2 shadow" style="border-radius: 4px" [routerLink]="['/admin-dashboard/account-settings']">
+      <i class="bi bi-gear-fill" ></i> Account Settings
     </button>
-    <button class="btn btn-danger d-flex align-items-center gap-2 px-4 py-2 shadow" style="border-radius: 4px">
-      <i class="bi bi-box-arrow-right"></i> Logout
+    <button class="btn btn-danger d-flex align-items-center gap-2 px-4 py-2 shadow" style="border-radius: 4px" (click)="logout()">
+      <i class="bi bi-box-arrow-right" ></i> Logout
     </button>
   </div>
 </div>

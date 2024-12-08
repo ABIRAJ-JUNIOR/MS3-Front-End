@@ -94,6 +94,12 @@ export class CourseSechdulesComponent {
     })
   }
 
+  FindStudentById(studentId:any){
+  return this.AllStudents.find((a:any)=>{
+      return a.id ===studentId
+    })
+  }
+
   PaymentCourse: any[] = []
 
   sendPaymentData(sechdule: any) {

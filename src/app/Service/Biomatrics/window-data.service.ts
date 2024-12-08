@@ -14,7 +14,7 @@ export class WindowDataService {
 
   async register() {
     try {
-      await this.webAuthnService.register();
+      await this.webAuthnService.register("anojan@gmail.com","sda");
       return true
     } catch (err) {
       return false
@@ -23,7 +23,7 @@ export class WindowDataService {
 
   async login() {
     try {
-      await this.webAuthnService.authenticate();
+      await this.webAuthnService.authenticate("anojan@gmail.com","sda");
       this.message = "Authentication successful!";
       return true;
     } catch (err) {

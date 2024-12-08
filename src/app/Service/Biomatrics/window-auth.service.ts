@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import Cookies from 'js-cookie';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WindowAuthService {
-
   constructor() { }
+
   private generateRandomBuffer(length: number): Uint8Array {
     const randomBuffer = new Uint8Array(length);
     window.crypto.getRandomValues(randomBuffer);
@@ -13,8 +14,12 @@ export class WindowAuthService {
   }
 
   // Registers a new credential (like a fingerprint or Face ID) for the user
-  async register() {
-    // Generate a unique challenge for the registration process
+  async register(email: string, password: string) {
+    // Store email and password securely in cookies
+    const studentId = 'some-unique-student-id'; // Generate a unique student ID
+    Cookies.set('student_credentials', JSON.stringify({ email, password, studentId }), { expires: 7 }); // Expires in 7 days
+
+    // Generate a unique challenge for the WebAuthn registration process
     const challenge = this.generateRandomBuffer(32);
 
     // PublicKeyCredentialCreationOptions is the core object needed for registration
@@ -25,8 +30,8 @@ export class WindowAuthService {
       },
       user: { // User information
         id: this.generateRandomBuffer(16), // A unique identifier for the user
-        name: "info.way.mmakers@gmail.com",
-        displayName: "Way Makers "
+        name: email,
+        displayName: "Example User"
       },
       pubKeyCredParams: [
         { type: "public-key", alg: -7 },
@@ -44,14 +49,28 @@ export class WindowAuthService {
       const credential = await navigator.credentials.create({ publicKey }) as PublicKeyCredential;
       this.storeCredential(credential, challenge);
       console.log("Registration successful!", credential);
-      return credential;
+      return studentId;
     } catch (err) {
       console.error("Registration failed:", err);
       throw err;
     }
   }
 
-  async authenticate() {
+  async authenticate(email: string, password: string) {
+    // Retrieve stored credentials from cookies
+    const storedCredentials = Cookies.get('student_credentials');
+    if (!storedCredentials) {
+      throw new Error("No stored credentials found. Please register first.");
+    }
+
+    const { storedEmail, storedPassword, studentId } = JSON.parse(storedCredentials);
+
+    // Check if the provided email and password match the stored ones
+    if (storedEmail !== email || storedPassword !== password) {
+      throw new Error("Invalid email or password.");
+    }
+
+    // WebAuthn authentication
     const storedCredential = this.getStoredCredential();
     if (!storedCredential) {
       throw new Error("No stored credential found. Please register first.");
@@ -68,10 +87,9 @@ export class WindowAuthService {
     };
 
     try {
-
       const credential = await navigator.credentials.get({ publicKey }) as PublicKeyCredential;
       console.log("Authentication successful!", credential);
-      return credential;
+      return { email, studentId: studentId };
     } catch (err) {
       console.error("Authentication failed:", err);
       throw err;

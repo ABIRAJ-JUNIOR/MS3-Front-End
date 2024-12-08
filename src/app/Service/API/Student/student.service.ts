@@ -42,7 +42,15 @@ export class StudentService {
   }
 
   updateStudent(studentId:string,student:StudenUpdateRequest){
-    return this.http.put(this.apiUrl +"/Student/Update-Full-Details/"+studentId,student)
+    return this.http.put(this.apiUrl +"/Student/Update-Personal-Details/"+studentId,student)
+  }
+
+  UpdateStudentPersonalInfo(studentId:string , student:StudenUpdateRequest){
+    return this.http.put(this.apiUrl + `/Student/Update-info-Details/${studentId}` , student)
+  }
+
+  ChangePassword( StudentId:string,auth:any){
+    return this.http.put(this.apiUrl + `/Student/changeStudentPassword/${StudentId}`, auth , {responseType:'text'})
   }
 }
 

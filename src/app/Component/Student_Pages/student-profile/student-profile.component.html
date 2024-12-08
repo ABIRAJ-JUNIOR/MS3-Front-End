@@ -157,7 +157,7 @@
                                             <!-- Additional Information Section -->
                                             <div class="col-md-12 mx-auto my-5">
                                                 <div class="py-5  rounded ">
-                                                    <h5 class="text-dark font-weight-bold">Performance Metrics</h5>
+                                                    <h5 class="text-dark font-weight-bold">Fees Metrics</h5>
 
                                                     <div class="col-md-12 mt-1">
                                                         <select class="form-select" aria-label="Default select example"
@@ -165,7 +165,7 @@
                                                             <option value="" selected disabled>Select Course and
                                                                 View Course State</option>
                                                             <option value="{{item.id}}"
-                                                                *ngFor="let item of StudentDetails?.enrollments">
+                                                                *ngFor="let item of Enrollments">
                                                                 {{item.courseScheduleResponse.courseResponse.courseName}}
                                                             </option>
                                                         </select>
@@ -178,13 +178,6 @@
                                                     </div>
 
                                                     <div *ngIf="SelectId">
-                                                        <div class="col-md-12 mt-3">
-                                                            <label class="labels">Grades</label>
-                                                            <input type="text" class="form-control"
-                                                                placeholder="Enter grades" value="{{selectedGrade}}"
-                                                                disabled>
-                                                        </div>
-
                                                         <div class="col-md-12 mt-3">
                                                             <label class="labels">Total Fees Paid</label>
                                                             <input type="text" class="form-control"

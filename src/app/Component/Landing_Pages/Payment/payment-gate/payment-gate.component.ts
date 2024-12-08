@@ -6,6 +6,9 @@ import { Router } from '@angular/router';
 import { jwtDecode } from "jwt-decode";
 import { Location } from '@angular/common';
 import { Enrollment } from '../../../../Modals/modals';
+import { StudentDashDataService } from '../../../../Service/Data/Student_Data/student-dash-data.service';
+import { MailServiceService } from '../../../../Service/API/Mail/mail-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-payment-gate',
@@ -22,7 +25,7 @@ export class PaymentGateComponent {
 
   CardFormData: FormGroup;
 
-  constructor( private PaymentDataService: PaymentDataService, private fb: FormBuilder, private router: Router ,private location: Location) {
+  constructor(private tostr: ToastrService, private mailService: MailServiceService, private studentDataService: StudentDashDataService, private PaymentDataService: PaymentDataService, private fb: FormBuilder, private router: Router, private location: Location) {
 
     this.CardFormData = this.fb.group({
       name: ['', [Validators.required]],
@@ -59,7 +62,7 @@ export class PaymentGateComponent {
 
   }
 
-  
+
   DeivdeInstallment: number = 0;
 
   SecondInstallment: any = ""
@@ -99,9 +102,9 @@ export class PaymentGateComponent {
       for (let i: number = 0; i < arrayLength; i++) {
         const element = array[i];
 
-        this.installmentTotal +=   Math.round(element.amountPaid * 100) / 100
+        this.installmentTotal += Math.round(element.amountPaid * 100) / 100
       }
-      this.installmentTotal = Math.round( (this.recievedModalItems[0].courseScheduleResponse.courseResponse.courseFee - this.installmentTotal) * 100) / 100
+      this.installmentTotal = Math.round((this.recievedModalItems[0].courseScheduleResponse.courseResponse.courseFee - this.installmentTotal) * 100) / 100
 
 
 
@@ -150,6 +153,7 @@ export class PaymentGateComponent {
   ConfirmPayment() {
 
     this.PaymentDataService.generateRandomNumber();
+    this.PaymentDataService.GetOtp();
     const token = localStorage.getItem("token");
     const decode: any = token != null ? jwtDecode(token) : ""
     let Payment: any;
@@ -194,10 +198,31 @@ export class PaymentGateComponent {
       }
 
     }
-
-    console.log(Payment)
     this.PaymentDataService.adddPendingpayment(Payment)
-    this.router.navigate(['paymen-auth/otp-auth'])
+    this.sendOtpMail();
+  }
+
+
+  sendOtpMail() {
+    const studentToken = this.studentDataService.GetStudentDeatilByLocalStorage()
+    if (this.PaymentDataService.generateRandomNumber()) {
+      const otp = this.PaymentDataService.GetOtp()
+      let mail: any = {
+        name: studentToken.Name,
+        otp: otp,
+        email: studentToken.Email,
+        emailType: 1
+      }
+      this.mailService.sendOtpMail(mail).subscribe({
+        next: () => {
+          this.router.navigate(['paymen-auth/otp-auth'])
+        }, error: () => {
+          this.tostr.error("Otp Send Failed")
+        }
+      })
+    }
+
+
   }
 
 }

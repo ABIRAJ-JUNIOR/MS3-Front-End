@@ -19,6 +19,7 @@ import { AuditLogRequest } from '../student-list/student-list.component';
 })
 export class AdminListComponent implements OnInit{
   admins: Admin[] = [];
+
   currentPage: number = 1;
   pageSize: number = 8;
   totalPages: number = 0;
@@ -95,7 +96,7 @@ export class AdminListComponent implements OnInit{
         this.currentLength = this.admins.length;
       },
       error: () => {
-        this.toastr.error('Failed to load data', '');
+        console.log('Failed to load data');
       }
     });
   }

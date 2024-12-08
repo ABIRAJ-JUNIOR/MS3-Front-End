@@ -62,7 +62,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let enroll of studentData.enrollments; let i = index">
+                <tr *ngFor="let enroll of enrollmentData; let i = index">
                     <th>{{i+1}}</th>
                     <td>{{enroll.courseScheduleResponse.courseResponse.courseName}}</td>
                     <td>{{enroll.courseScheduleResponse.courseResponse.level}}</td>
@@ -124,7 +124,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let assessment of studentData.studentAssessments; let i = index">
+                <tr *ngFor="let assessment of studentAssessments; let i = index">
                   <td>{{i+1}}</td>
                   <td>{{assessment.assessmentResponse.assessmentType}}</td>
                   <td>{{assessment.marksObtaines != null ? assessment.marksObtaines : 'Not Evaluvate'}}</td>

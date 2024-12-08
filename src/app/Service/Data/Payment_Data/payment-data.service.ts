@@ -18,14 +18,13 @@ export class PaymentDataService {
   PurchaseDetailGetLocal(): any {
     return localStorage.getItem('PurchaseCourse') || []
   }
-  generateRandomNumber() {
+  generateRandomNumber():boolean {
     let otp: number = Math.floor(100000 + Math.random() * 900000);
     sessionStorage.setItem('paymentOtp', JSON.stringify(otp))
-
+    return true
   }
 
   GetOtp(): any {
-    this.generateRandomNumber()
     return sessionStorage.getItem('paymentOtp')
   }
 
@@ -39,11 +38,11 @@ export class PaymentDataService {
     localStorage.setItem('pendingPayment', JSON.stringify(data))
   }
 
-  getPendingPayment():any{
+  getPendingPayment(): any {
     return localStorage.getItem('pendingPayment')
   }
 
-  ClearAllPAymentData(){
+  ClearAllPAymentData() {
     localStorage.removeItem('paymentOtp')
     localStorage.removeItem('PurchaseCourse')
     localStorage.removeItem('pendingPayment')

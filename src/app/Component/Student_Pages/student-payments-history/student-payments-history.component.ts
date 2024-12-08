@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
+import { EnrollmentService } from "../../../Service/API/Enrollment/enrollment.service";
 
 @Component({
   selector: 'app-student-payments-history',
@@ -13,7 +14,7 @@ import { StudentDashDataService } from "../../../Service/Data/Student_Data/stude
   styleUrl: './student-payments-history.component.css'
 })
 export class StudentPaymentsHistoryComponent {
-  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
+  constructor(private EnrollmentService : EnrollmentService, private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
 
   Enrollments: any;
@@ -24,21 +25,28 @@ export class StudentPaymentsHistoryComponent {
 
 
   ngOnInit(): void {
-
-   this.getStudentDetails()
+    this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
+    this.enrollmentServiceLoad()
 
 
 
   }
 
- getStudentDetails(){
-  this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
-  this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
-    next: (student: Student) => {
-      this.Enrollments = student.enrollments
-    }, error: (error) => {
-      console.log(error)
-    }
-  })
- }
+
+  enrollmentServiceLoad() {
+    console.log("Your Enrollments id" + this.StudentTokenDetails.Id)
+
+    this.EnrollmentService.getAllEnrollmentsByStudentId(this.StudentTokenDetails.Id).subscribe({
+      next: (response) => {
+        this.Enrollments = response
+        console.log(this.Enrollments[0])
+      }, error: () => {
+
+      }, complete: () => {
+
+      }
+    })
+  }
+
+
 }

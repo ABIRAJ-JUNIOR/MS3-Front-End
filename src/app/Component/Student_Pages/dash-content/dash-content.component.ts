@@ -9,6 +9,7 @@ import { CourseService } from "../../../Service/API/Course/course.service";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { FeedbackServiceService } from "../../../Service/API/Feedback/feedback-service.service";
 import { ToastrService } from "ngx-toastr";
+import { EnrollmentService } from "../../../Service/API/Enrollment/enrollment.service";
 
 @Component({
   selector: 'app-dash-content',
@@ -41,7 +42,8 @@ export class DashContentComponent implements OnInit {
     private CourseService: CourseService,
     private fb: FormBuilder,
     private feedbackService: FeedbackServiceService,
-    private tostr: ToastrService
+    private tostr: ToastrService,
+    private EnrollmentService: EnrollmentService
   ) {
     this.feedBackForm = this.fb.group({
       courseId: ['', Validators.required],
@@ -53,56 +55,79 @@ export class DashContentComponent implements OnInit {
 
   ngOnInit(): void {
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
+    this.enrollmentServiceLoad()
+  }
 
+  Enrollments: any;
+
+
+  enrollmentServiceLoad() {
+    console.log("Your Enrollments id" + this.StudentTokenDetails.Id)
+
+    this.EnrollmentService.getAllEnrollmentsByStudentId(this.StudentTokenDetails.Id).subscribe({
+      next: (response) => {
+        this.Enrollments = response
+        console.log(this.Enrollments[0])
+      }, error: () => {
+
+      }, complete: () => {
+        this.totalPaymentCalculate();
+
+        this.studentServiceLoad();
+      }
+    })
+  }
+
+  studentServiceLoad() {
     this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
       next: (StudentResponse: Student) => {
         this.StudentDetails = StudentResponse;
       },
       error: (error) => {
         this.tostr.error(error.message);
-      },
-      complete: () => {
-        this.totalPaymentCalculate();
-        this.ChartCalculation();
+      }, complete: () => {
+        this.courseServiceLoad();
       }
     });
-
+  }
+  courseServiceLoad() {
     this.CourseService.getCourses().subscribe({
       next: (CourseResponse: any) => {
         this.totalCourse = CourseResponse.length;
       },
       error: (error) => {
         this.tostr.error(error.message);
-      },
-      complete: () => {
-        this.totalPaymentCalculate();
+      }, complete: () => {
         this.ChartCalculation();
+
       }
     });
+
   }
 
   totalPaymentCalculate(): void {
-   if(this.StudentDetails != null){
-    for (let i = 0; i < this.StudentDetails.enrollments.length; i++) {
-      const element = this.StudentDetails.enrollments[i].paymentResponse;
-      this.TotalAssignments += this.StudentDetails.enrollments[i].courseScheduleResponse.courseResponse.assessmentResponse.length;
-      for (let p = 0; p < element.length; p++) {
-        this.TotalPayments += Number(element[p].amountPaid);
+    if (this.Enrollments != null) {
+      for (let i = 0; i < this.Enrollments.length; i++) {
+        const element = this.Enrollments[i].paymentResponse;
+        this.TotalAssignments += this.Enrollments[i].courseScheduleResponse.courseResponse.assessmentResponse.length;
+        for (let p = 0; p < element.length; p++) {
+          this.TotalPayments += Number(element[p].amountPaid);
+        }
       }
+
     }
-   }
   }
 
   ChartCalculation(): void {
     if (this.StudentDetails) {
-      for (let i = 0; i < this.StudentDetails.enrollments.length; i++) {
-        const element = this.StudentDetails.enrollments[i].paymentResponse;
-        if (this.StudentDetails.enrollments[i].paymentStatus === "InProcess") {
+      for (let i = 0; i < this.Enrollments.length; i++) {
+        const element = this.Enrollments[i].paymentResponse;
+        if (this.Enrollments[i].paymentStatus === "InProcess") {
           this.PendingPayments++;
           for (let installment = 0; installment < element.length; installment++) {
             this.TotalPayment++;
           }
-        } else if (this.StudentDetails.enrollments[i].paymentStatus === "Paid") {
+        } else if (this.Enrollments[i].paymentStatus === "Paid") {
           this.paidPayments++;
         }
       }
@@ -113,18 +138,18 @@ export class DashContentComponent implements OnInit {
         { name: 'TotalPayments', value: this.TotalPayment },
       ];
     }
-  
+
     this.createCourseChart();
   }
 
   createCourseChart(): void {
-   if (this.StudentDetails) {
-    this.courseData = [
-      { name: 'Assignments', value: this.TotalAssignments },
-      { name: 'Enrolled Course', value: this.StudentDetails.enrollments.length },
-      { name: 'TotalCourses', value: this.totalCourse },
-    ];
-   }
+    if (this.StudentDetails) {
+      this.courseData = [
+        { name: 'Assignments', value: this.TotalAssignments },
+        { name: 'Enrolled Course', value: this.Enrollments.length },
+        { name: 'TotalCourses', value: this.totalCourse },
+      ];
+    }
   }
 
   onSubmit(): void {

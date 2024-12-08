@@ -29,6 +29,10 @@ export class CourseCardsComponent implements OnInit {
     this.ModalProduct.push(product)
   }
 
+  ViewSechduleRouting(courseId:any){
+    this.route.navigate(['/course-sechdule/',courseId])
+  }
+
 
 
   ClearModal() {

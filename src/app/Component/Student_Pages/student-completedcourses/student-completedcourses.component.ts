@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
+import { EnrollmentService } from "../../../Service/API/Enrollment/enrollment.service";
 
 @Component({
   selector: 'app-student-completedcourses',
@@ -14,37 +15,41 @@ import { StudentDashDataService } from "../../../Service/Data/Student_Data/stude
 })
 export class StudentCompletedcoursesComponent {
   StatusCheck: string = "Completed";
-  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
+  constructor(private EnrollmentService: EnrollmentService, private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private router: Router) {
   }
 
-  StudentDetails: any[]=[];
+  StudentDetails: any[] = [];
 
-  studentFilterBefore:any;
   StudentTokenDetails: any;
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
   ngOnInit(): void {
     this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
+    this.enrollmentServiceLoad();
 
-    this.StudentApiService.getStudent(this.StudentTokenDetails.Id).subscribe({
-      next: (student: Student) => {
-        this.studentFilterBefore = student.enrollments
+  }
+  Enrollments: any;
 
+  enrollmentServiceLoad() {
+    console.log("Your Enrollments id" + this.StudentTokenDetails.Id)
 
-      }, error: (error) => {
-        console.log(error)
+    this.EnrollmentService.getAllEnrollmentsByStudentId(this.StudentTokenDetails.Id).subscribe({
+      next: (response) => {
+        this.Enrollments = response
+        console.log(this.Enrollments[0])
+      }, error: () => {
+
       }, complete: () => {
-        for (let i:number = 0; i < this.studentFilterBefore.length; i++) {
+        for (let i: number = 0; i < this.Enrollments.length; i++) {
           console.log("work")
-          const element = this.studentFilterBefore[i];
+          const element = this.Enrollments[i];
           if (element.courseScheduleResponse.scheduleStatus == this.StatusCheck) {
-                  this.StudentDetails.push(element)
+            this.StudentDetails.push(element)
           }
         }
 
       }
     })
-
   }
 
 

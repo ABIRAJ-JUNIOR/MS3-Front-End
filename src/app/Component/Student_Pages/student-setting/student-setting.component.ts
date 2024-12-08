@@ -21,6 +21,8 @@ export class StudentSettingComponent implements OnInit {
   StudentTokenDetails: any;
   studentForm: FormGroup;
 
+  changePass: FormGroup;
+
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
   constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private fb: FormBuilder, private toastr: ToastrService) {
@@ -41,14 +43,22 @@ export class StudentSettingComponent implements OnInit {
       })
     });
 
-  }
 
+    this.changePass = this.fb.group({
+      oldPassword: ['', [Validators.required]],
+      newPassword: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]]
+    })
+
+  }
+  dataHtml: string = ""
 
   StudentDetails: any;
 
   ngOnInit(): void {
 
     this.getStudentDetails()
+    this.studentForm.disable()
 
   }
 
@@ -68,12 +78,12 @@ export class StudentSettingComponent implements OnInit {
             timeOut: 4000,
             closeButton: true
           });
-        },complete:()=>{
+        }, complete: () => {
           this.assignStudentData();
 
         }
       });
-  
+
     }
   }
 
@@ -95,7 +105,7 @@ export class StudentSettingComponent implements OnInit {
       }
     }
 
-    this.StudentApiService.updateStudent(this.StudentTokenDetails.Id, student).subscribe({
+    this.StudentApiService.UpdateStudentPersonalInfo(this.StudentTokenDetails.Id, student).subscribe({
       next: (data: any) => {
         this.toastr.success("User Update Successful", "", {
           progressBar: true,
@@ -165,7 +175,21 @@ export class StudentSettingComponent implements OnInit {
       this.toastr.success("Your profile is now in view-only mode.", "")
     }
   }
+  changeStudentPassword() {
+    let obj: passwordRequest = {
+      oldPassword: this.changePass.get('oldPassword')?.value,
+      confirmPassword: this.changePass.get('confirmPassword')?.value
+    }
 
+    this.StudentApiService.ChangePassword(this.StudentTokenDetails.Id, obj).subscribe({
+      next: (response: any) => {
+        this.toastr.success(response);
+        this.changePass.reset();
+      }, error: (error) => {
+        this.toastr.error("password Change invalid try again Later");
+      }
+    })
+  }
 
 }
 
@@ -184,4 +208,9 @@ interface Address {
   city: string;
   postalCode: string;
   country: string;
+}
+
+interface passwordRequest {
+  oldPassword: string;
+  confirmPassword: string;
 }

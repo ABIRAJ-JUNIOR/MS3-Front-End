@@ -24,6 +24,7 @@ export class AccountSettingComponent implements OnInit {
   language = 'English';
   profilePicture = 'https://via.placeholder.com/150'; 
 
+
   passwordNotMatch:boolean = false 
   loginData:any 
   constructor(

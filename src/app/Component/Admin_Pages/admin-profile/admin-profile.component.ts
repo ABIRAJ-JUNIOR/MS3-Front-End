@@ -5,11 +5,13 @@ import { jwtDecode } from 'jwt-decode';
 import { AdminService } from '../../../Service/API/Admin/admin.service';
 import { Admin } from '../../../Modals/modals';
 import { ToastrService } from 'ngx-toastr';
+import { RouterLink } from '@angular/router';
+import { AuthService } from '../../../Service/API/Auth/auth.service';
 
 @Component({
   selector: 'app-admin-profile',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule,RouterLink],
   templateUrl: './admin-profile.component.html',
   styleUrl: './admin-profile.component.css'
 })
@@ -21,7 +23,11 @@ export class AdminProfileComponent implements OnInit{
   profileImageUrl: string | null = "";
   CoverImageUrl: string | null = "";
 
-  constructor(private fb: FormBuilder,private  adminService:AdminService,private toastr:ToastrService) {
+  constructor(
+    private readonly adminService:AdminService,
+    private readonly toastr:ToastrService,
+    private readonly authService:AuthService
+  ) {
   }
   ngOnInit(): void {
     this.loaddata()
@@ -107,6 +113,15 @@ export class AdminProfileComponent implements OnInit{
     };
     reader.readAsDataURL(file);
    }
+  }
+
+  logout(){
+    this.authService.logout();
+    this.refreshPage()
+  }
+
+  refreshPage(): void {
+    window.location.reload();
   }
   
 }

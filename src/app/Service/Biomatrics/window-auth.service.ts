@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from '../API/Auth/auth.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WindowAuthService {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService , private rout:Router) { }
 
   private generateRandomBuffer(length: number): Uint8Array {
     const randomBuffer = new Uint8Array(length);
@@ -16,7 +17,7 @@ export class WindowAuthService {
 
   // Registers a new credential (like a fingerprint or Face ID) for the user
   async register(email: string, password: string) {
-    
+
     // Generate a unique challenge for the registration process
     const challenge = this.generateRandomBuffer(32);
 
@@ -44,10 +45,23 @@ export class WindowAuthService {
     };
 
     try {
+      let auth = {
+        email: email,
+        password: password
+      }
+
       const credential = await navigator.credentials.create({ publicKey }) as PublicKeyCredential;
-      this.storeCredential(credential, challenge, password, email);
-      console.log("Registration successful!", credential);
-      return credential;
+
+      this.authService.signIn(auth).subscribe({
+        next: (res: string) => {
+          this.storeCredential(credential, challenge, password, email);
+          console.log("Registration successful!", credential);
+          return credential;
+        }, error: () => {
+             this.rout.navigate(['/bio'])
+        }
+      })
+
     } catch (err) {
       console.error("Registration failed:", err);
       throw err;

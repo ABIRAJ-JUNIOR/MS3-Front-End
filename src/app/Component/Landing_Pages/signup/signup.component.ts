@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { AuthService, SignUp } from '../../../Service/API/Auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { WindowDataService } from '../../../Service/Biomatrics/window-data.service';
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +18,7 @@ export class SignupComponent {
 
   StudentRegistration: FormGroup;
 
-  constructor( private fb: FormBuilder, private authService: AuthService, private toastr: ToastrService, private rout: Router) {
+  constructor( private fb: FormBuilder, private authService: AuthService, private toastr: ToastrService, private rout: Router ,private windowDataService:WindowDataService) {
     this.StudentRegistration = this.fb.group({
       nic: ['', [Validators.required, Validators.pattern('^[0-9]{9}[Vv]$|^[0-9]{12}$')]],
       firstName: ['', Validators.required],
@@ -49,12 +50,15 @@ export class SignupComponent {
         this.toastr.success("User SignUp Successfull", "")
         this.StudentRegistration.reset()
       }, complete: () => {
-        this.rout.navigate(['/signin'])
+       const authCheck=this.windowDataService.register()
+       
 
       }, error: (error) => {
         this.toastr.warning(error.error, "")
       }
     })
+
+   
 
   }
 

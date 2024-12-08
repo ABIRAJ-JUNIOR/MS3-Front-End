@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { WindowAuthService } from '../../../Service/Biomatrics/window-auth.service';
 import { CommonModule } from '@angular/common';
+import { WindowDataService } from '../../../Service/Biomatrics/window-data.service';
 
 @Component({
   selector: 'app-biomatrics',
@@ -10,32 +11,17 @@ import { CommonModule } from '@angular/common';
   styleUrl: './biomatrics.component.css'
 })
 export class BiomatricsComponent {
-  message: string | null = null; // Message to display feedback to the user
-  isSuccess: boolean = false; // Indicates if the last action was successful
 
-  constructor(private webAuthnService: WindowAuthService) { }
+  constructor(private windowDataService: WindowDataService) {
 
-  // Trigger registration process and update the UI based on the outcome
-  async register() {
-    try {
-      await this.webAuthnService.register();
-      this.message = "Registration successful!"; // Success message if registration works
-      this.isSuccess = true;
-    } catch (err) {
-      this.message = "Registration failed. Please try again."; // Error message if something goes wrong
-      this.isSuccess = false;
-    }
   }
 
-  // Trigger authentication process and update the UI based on the outcome
-  async login() {
-    try {
-      await this.webAuthnService.authenticate();
-      this.message = "Authentication successful!"; // Success message if authentication works
-      this.isSuccess = true;
-    } catch (err) {
-      this.message = "Authentication failed. Please try again."; // Error message if something goes wrong
-      this.isSuccess = false;
-    }
+
+  register() {
+    console.log(this.windowDataService.register())
   }
+  login() {
+    console.log(this.windowDataService.login())
+  }
+
 }

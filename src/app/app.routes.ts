@@ -41,6 +41,7 @@ import { ViewAllAnnouncementComponent } from './Component/common_components/view
 import { AccountSettingComponent } from './Component/Admin_Pages/account-setting/account-setting.component';
 import { InvoiceComponent } from './Component/common_components/invoice/invoice.component';
 import { CourseSechdulesComponent } from './Component/Landing_Pages/course-sechdules/course-sechdules.component';
+import { BiomatricsComponent } from './Component/common_components/biomatrics/biomatrics.component';
 
 
 export const routes: Routes = [
@@ -53,6 +54,7 @@ export const routes: Routes = [
     { path: 'about', component: AboutComponent },
     { path: 'signin', component: SigninComponent },
     { path: 'signup', component: SignupComponent },
+    { path: 'bio', component: BiomatricsComponent },
     {
         path: 'paymen-auth',
         component: PaymentAuthenticationComponent, children:[

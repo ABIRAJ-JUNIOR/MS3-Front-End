@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 })
 export class WindowAuthService {
 
-  constructor(private authService: AuthService , private rout:Router) { }
+  constructor(private authService: AuthService, private rout: Router) { }
 
   private generateRandomBuffer(length: number): Uint8Array {
     const randomBuffer = new Uint8Array(length);
@@ -58,7 +58,7 @@ export class WindowAuthService {
           console.log("Registration successful!", credential);
           return credential;
         }, error: () => {
-             this.rout.navigate(['/bio'])
+          this.rout.navigate(['/bio'])
         }
       })
 
@@ -101,6 +101,7 @@ export class WindowAuthService {
 
         }, complete: () => {
           console.log("User Login Successfull")
+          this.rout.navigate(['/home'])
         }
       })
       return credential;

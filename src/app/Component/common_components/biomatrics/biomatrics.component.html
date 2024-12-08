@@ -78,6 +78,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+                <div class="alert alert-info" role="alert">
+                    Before proceeding, we'll attempt biometric authentication. If it's not successful, please enter your email and password.
+                  </div>
+
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
                     <input type="email" class="form-control" id="email" name="email" required>
@@ -88,7 +92,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" (click)="register()">Sign In</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal"  (click)="register()">Sign In</button>
             </div>
         </div>
     </div>

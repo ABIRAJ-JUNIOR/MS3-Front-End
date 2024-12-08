@@ -16,6 +16,7 @@ export class WindowAuthService {
 
   // Registers a new credential (like a fingerprint or Face ID) for the user
   async register(email: string, password: string) {
+    
     // Generate a unique challenge for the registration process
     const challenge = this.generateRandomBuffer(32);
 
@@ -85,7 +86,7 @@ export class WindowAuthService {
         }, error: () => {
 
         }, complete: () => {
-            console.log("User Login Successfull")
+          console.log("User Login Successfull")
         }
       })
       return credential;

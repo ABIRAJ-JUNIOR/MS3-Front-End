@@ -104,8 +104,16 @@ export class SigninComponent {
   bioMatricsLogin() {
     const storedCredential = this.getStoredCredential();
     if (storedCredential) {
-      this.windowauth.login();
-    }else{
+      this.windowauth.login().then(logCheck => {
+        if (logCheck) {
+          this.rout.navigate(['/home'])
+        } else {
+        console.error("Biometric login failed:");
+        }
+      }).catch(error => {
+        console.error("Biometric login failed:", error);
+      });
+    } else {
       this.rout.navigate(['/bio'])
     }
   }

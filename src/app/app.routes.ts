@@ -56,7 +56,7 @@ export const routes: Routes = [
     { path: 'signin', component: SigninComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'bio', component: BiomatricsComponent },
-    { path: 'email-verified/:Id', component: EmailVerifiedComponent },
+    { path: 'email-verified/:id', component: EmailVerifiedComponent },
     {
         path: 'paymen-auth',
         component: PaymentAuthenticationComponent, children:[

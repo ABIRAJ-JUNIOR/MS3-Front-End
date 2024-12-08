@@ -42,6 +42,7 @@ import { AccountSettingComponent } from './Component/Admin_Pages/account-setting
 import { InvoiceComponent } from './Component/common_components/invoice/invoice.component';
 import { CourseSechdulesComponent } from './Component/Landing_Pages/course-sechdules/course-sechdules.component';
 import { BiomatricsComponent } from './Component/common_components/biomatrics/biomatrics.component';
+import { EmailVerifiedComponent } from './Component/common_components/email-verified/email-verified.component';
 
 
 export const routes: Routes = [
@@ -55,6 +56,7 @@ export const routes: Routes = [
     { path: 'signin', component: SigninComponent },
     { path: 'signup', component: SignupComponent },
     { path: 'bio', component: BiomatricsComponent },
+    { path: 'email-verified/:Id', component: EmailVerifiedComponent },
     {
         path: 'paymen-auth',
         component: PaymentAuthenticationComponent, children:[

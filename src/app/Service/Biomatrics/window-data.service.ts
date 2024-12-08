@@ -7,15 +7,15 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class WindowDataService {
 
-  message: string | null = null; 
-  isSuccess: boolean = false; 
+  message: string | null = null;
+  isSuccess: boolean = false;
 
-  constructor(private webAuthnService: WindowAuthService ,private tostre:ToastrService) { }
+  constructor(private webAuthnService: WindowAuthService, private tostre: ToastrService) { }
 
   async register() {
     try {
       await this.webAuthnService.register();
-     return true
+      return true
     } catch (err) {
       return false
     }
@@ -24,10 +24,10 @@ export class WindowDataService {
   async login() {
     try {
       await this.webAuthnService.authenticate();
-      this.message = "Authentication successful!"; 
+      this.message = "Authentication successful!";
       return true;
     } catch (err) {
-      this.message = "Authentication failed. Please try again."; 
+      this.message = "Authentication failed. Please try again.";
       return false;
     }
   }

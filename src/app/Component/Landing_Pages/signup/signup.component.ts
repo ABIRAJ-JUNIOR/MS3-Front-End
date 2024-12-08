@@ -18,7 +18,7 @@ export class SignupComponent {
 
   StudentRegistration: FormGroup;
 
-  constructor( private fb: FormBuilder, private authService: AuthService, private toastr: ToastrService, private rout: Router ,private windowDataService:WindowDataService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private toastr: ToastrService, private rout: Router, private windowDataService: WindowDataService) {
     this.StudentRegistration = this.fb.group({
       nic: ['', [Validators.required, Validators.pattern('^[0-9]{9}[Vv]$|^[0-9]{12}$')]],
       firstName: ['', Validators.required],
@@ -50,15 +50,24 @@ export class SignupComponent {
         this.toastr.success("User SignUp Successfull", "")
         this.StudentRegistration.reset()
       }, complete: () => {
-       const authCheck=this.windowDataService.register()
-       
+        (async () => {
+          const authCheck = await this.windowDataService.register();
+          if (authCheck) {
+            this.toastr.success("Window Authentication Register Succesfully.")
+            this.rout.navigate(['/login']);
+          }else{
+            this.rout.navigate(['/login'])
+            this.toastr.success("Registration failed. Please Enable In your Setting")
 
+
+          }
+        })();
       }, error: (error) => {
         this.toastr.warning(error.error, "")
       }
     })
 
-   
+
 
   }
 

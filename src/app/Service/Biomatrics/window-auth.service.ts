@@ -39,7 +39,7 @@ export class WindowAuthService {
 
     try {
       const credential = await navigator.credentials.create({ publicKey }) as PublicKeyCredential;
-      this.storeCredential(credential, challenge); // Store the credential details locally for demo purposes
+      this.storeCredential(credential, challenge); 
       console.log("Registration successful!", credential);
       return credential; // Return the credential object containing the user's public key and other details
     } catch (err) {

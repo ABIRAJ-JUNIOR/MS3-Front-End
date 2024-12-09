@@ -5,13 +5,19 @@ import { jwtDecode } from 'jwt-decode';
 import { AuditLogRequest } from '../../Component/Admin_Pages/student-list/student-list.component';
 import { AuditlogService } from '../API/AuditLog/auditlog.service';
 import { ToastrService } from 'ngx-toastr';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WindowAuthService {
 
-  constructor(private authService: AuthService, private rout: Router , private auditLogService:AuditlogService , private tostr:ToastrService) { }
+  constructor(private authService: AuthService, 
+    private rout: Router , 
+    private auditLogService:AuditlogService , 
+    private tostr:ToastrService,
+    private cookieService: CookieService
+  ) { }
 
   private generateRandomBuffer(length: number): Uint8Array {
     const randomBuffer = new Uint8Array(length);
@@ -132,18 +138,38 @@ export class WindowAuthService {
     }
   }
 
-  private storeCredential(credential: PublicKeyCredential, challenge: Uint8Array, password: string, email: string) {
+  private storeCredential(
+    credential: PublicKeyCredential,
+    challenge: Uint8Array,
+    password: string,
+    email: string
+  ) {
     const credentialData = {
       rawId: Array.from(new Uint8Array(credential.rawId)),
       challenge: Array.from(challenge),
       email: email,
-      password
+      password,
     };
-    localStorage.setItem('webauthn_credential', JSON.stringify(credentialData));
+  
+    const credentialString = JSON.stringify(credentialData);
+  
+    document.cookie = `webauthn_credential=${encodeURIComponent(
+      credentialString
+    )}; path=/; max-age=86400; secure; samesite=strict`;
   }
+  
 
   private getStoredCredential(): any {
-    const storedCredential = localStorage.getItem('webauthn_credential');
-    return storedCredential ? JSON.parse(storedCredential) : null;
+    const cookieName = 'webauthn_credential=';
+    const cookies = document.cookie.split(';');
+  
+    for (let i = 0; i < cookies.length; i++) {
+      let cookie = cookies[i].trim();
+      if (cookie.startsWith(cookieName)) {
+        const credentialString = cookie.substring(cookieName.length);
+        return JSON.parse(decodeURIComponent(credentialString));
+      }
+    }
+    return null; 
   }
 }

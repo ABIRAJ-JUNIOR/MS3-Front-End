@@ -74,14 +74,7 @@
             <div class="col-12">
               <h5>Biometrics Settings</h5>
               <div class="form-check form-switch d-flex align-items-center mb-3">
-                <input 
-                  class="form-check-input me-3" 
-                  type="checkbox" 
-                  id="biometricsToggle" 
-                  [(ngModel)]="isBiometricsEnabled" 
-                  name="biometricsEnabled" 
-                  (change)="onBiometricsToggle(biometricModal)"
-                />
+                <input class="form-check-input me-3" type="checkbox" id="biometricsToggle" [(ngModel)]="isBiometricsEnabled" name="biometricsEnabled" (change)="onBiometricsToggle(biometricModal)"/>
                 <label class="form-check-label" for="biometricsToggle">
                   Enable Biometrics for Login
                 </label>
@@ -107,7 +100,7 @@
 
   <ng-template #biometricModal>
     <div class="modal-header">
-      <h1 class="modal-title fs-5"><i class="bi bi-gear"></i> Biometric Settings</h1>
+      <h1 class="modal-title fs-5"><i class="bi bi-gear"></i>{{isBiometricsEnabled ? ' Enable Biometric' : ' Disable Biometric'}}</h1>
       <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
     </div>
     <div class="modal-body">

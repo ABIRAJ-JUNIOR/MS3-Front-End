@@ -111,7 +111,7 @@ export class AccountSettingComponent implements OnInit {
     if (this.isBiometricsEnabled) {
       this.openModal(template)
     } else {
-      this.removeStoredCredential();
+      this.openModal(template)
     }
   }
 
@@ -142,16 +142,30 @@ export class AccountSettingComponent implements OnInit {
       password:passwordInput.value
     }
 
-    this.authService.signIn(auth).subscribe({
-      next:(response:string)=>{
-      },complete:()=>{
-        this.windowDataService.register(email,password);
+    if(this.isBiometricsEnabled){
 
-      },
-      error:(error:any)=>{
-        this.toastr.warning(error.error, '');
-      }
-    })
+      this.authService.signIn(auth).subscribe({
+        next:(response:string)=>{
+        },complete:()=>{
+          this.windowDataService.register(email,password);
+        },
+        error:(error:any)=>{
+          this.toastr.warning(error.error, '');
+        }
+      })
+
+    }else{
+      this.authService.signIn(auth).subscribe({
+        next:(response:string)=>{
+        },complete:()=>{
+          this.removeStoredCredential();
+        },
+        error:(error:any)=>{
+          this.toastr.warning(error.error, '');
+        }
+      })
+
+    }
 
     this.closeModal();
   }

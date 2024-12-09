@@ -44,7 +44,7 @@
             <img src="profile.jpg" class="avatar img-fluid rounded" alt="">
           </a>
           <div class="dropdown-menu dropdown-menu-end">
-            <a class="dropdown-item" [routerLink]="['/student-dashboard']">Profile</a>
+            <a class="dropdown-item pointer" (click)="goToProfile()">Profile</a>
             <a class="dropdown-item pointer" (click)="goToDashboard()" >Dashboard</a>
             <a class="dropdown-item pointer" (click)="logout()">Logout</a>
           </div>

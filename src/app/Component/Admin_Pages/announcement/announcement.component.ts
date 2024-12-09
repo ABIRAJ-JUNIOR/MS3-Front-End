@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AnnouncementService } from '../../../Service/API/Announcement/announcement.service';
 import { ToastrService } from 'ngx-toastr';
 import { AuditlogService } from '../../../Service/API/AuditLog/auditlog.service';
@@ -8,18 +8,19 @@ import { jwtDecode } from 'jwt-decode';
 import { AuditLogRequest } from '../student-list/student-list.component';
 import { Announcement } from '../../../Modals/modals';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { SearchAnnouncementPipe } from '../../../Pipes/search-announcement.pipe';
 
 @Component({
   selector: 'app-announcement',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,BsDatepickerModule],
+  imports: [CommonModule,FormsModule, ReactiveFormsModule,BsDatepickerModule,SearchAnnouncementPipe],
   templateUrl: './announcement.component.html',
   styleUrl: './announcement.component.css'
 })
 export class AnnouncementComponent {
   announcementForm!: FormGroup;
   Announcements: Announcement[] = []
-
+  filterStatus: string = ""; 
   // Pagination
   currentPage: number = 1;
   pageSize: number = 12;

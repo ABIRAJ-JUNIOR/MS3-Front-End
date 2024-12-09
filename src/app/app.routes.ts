@@ -46,10 +46,10 @@ import { BiomatricsComponent } from './Component/common_components/biomatrics/bi
 
 export const routes: Routes = [
 
-    { path: '', redirectTo: 'home' , pathMatch: 'full' },
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'course', component: CourseComponent },
-    { path: 'course-sechdule/:courseId',component:CourseSechdulesComponent},
+    { path: 'course-sechdule/:courseId', component: CourseSechdulesComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'about', component: AboutComponent },
     { path: 'signin', component: SigninComponent },
@@ -57,24 +57,24 @@ export const routes: Routes = [
     { path: 'bio', component: BiomatricsComponent },
     {
         path: 'paymen-auth',
-        component: PaymentAuthenticationComponent, children:[
+        component: PaymentAuthenticationComponent, children: [
             {
-                path:'paymentgate',
-                component:PaymentGateComponent
+                path: 'paymentgate',
+                component: PaymentGateComponent
             },
             {
-                path:'otp-auth',
-                component:OtpAuthenticationComponent
-            } 
+                path: 'otp-auth',
+                component: OtpAuthenticationComponent
+            }
         ],
-        canActivate : [payAuthGuard]
+        canActivate: [payAuthGuard]
     },
-   
+
 
 
     {
         path: 'admin-dashboard', component: AdminDashboardComponent, children: [
-            { path: '', redirectTo: 'home' ,pathMatch:'full' },
+            { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: AdminHomeComponent },
             { path: 'student-list', component: StudentListComponent },
             { path: 'student-report/:id', component: StudentReportComponent },
@@ -84,36 +84,36 @@ export const routes: Routes = [
             { path: 'course-list', component: CourseListComponent },
             { path: 'schedule-list', component: CourseScheduleComponent },
             { path: 'assessment-list', component: CourseAssessmentComponent },
-            { path: 'announcement',component:AnnouncementComponent},
-            { path: 'contact-us',component:ContactUsComponent},
-            { path: 'student-assessments',component:StudentAssessmentsComponent},
-            { path: 'payment-overview',component:PaymentsOverviewComponent},
-            { path: 'all-announcement/:Role',component:ViewAllAnnouncementComponent},
-            { path: 'account-settings',component:AccountSettingComponent},
-            { path: 'invoice',component:InvoiceComponent},
-            { path: '**' , redirectTo:'home',pathMatch:'full'}
+            { path: 'announcement', component: AnnouncementComponent },
+            { path: 'contact-us', component: ContactUsComponent },
+            { path: 'student-assessments', component: StudentAssessmentsComponent },
+            { path: 'payment-overview', component: PaymentsOverviewComponent },
+            { path: 'all-announcement/:Role', component: ViewAllAnnouncementComponent },
+            { path: 'account-settings', component: AccountSettingComponent },
+            { path: 'invoice', component: InvoiceComponent },
+            { path: '**', redirectTo: 'home', pathMatch: 'full' }
         ],
         canActivate: [adminAuthGuard]
 
     },
     {
         path: 'student-dashboard', component: StudentDashboardComponent, children: [
-            { path: '', redirectTo: 'home' ,pathMatch:'full'},
-            { path: 'home', component: DashContentComponent},
-            { path: 'profile', component:StudentProfileComponent },
-            { path: 'setting',component:StudentSettingComponent},
-            { path: 'assesment',component:StudentAssesmentComponent},
-            { path: 'courses',component:StudentCourseComponent},
-            { path: 'mycourses',component:StudentMycoursesComponent},
-            { path: 'completed-Courses',component:StudentCompletedcoursesComponent},
-            { path: 'assesment-result',component:StudentResultComponent},
-            { path: 'enrollCourse-payment',component:StudentPaymentsComponent},
-            { path: 'enrollCourse-paymentHistory',component:StudentPaymentsHistoryComponent},
-            { path: 'all-announcement/:Role',component:ViewAllAnnouncementComponent},
-            { path: '**' , redirectTo:'home',pathMatch:'full'}
+            { path: '', redirectTo: 'home', pathMatch: 'full' },
+            { path: 'home', component: DashContentComponent },
+            { path: 'profile', component: StudentProfileComponent },
+            { path: 'setting', component: StudentSettingComponent },
+            { path: 'assesment', component: StudentAssesmentComponent },
+            { path: 'courses', component: StudentCourseComponent },
+            { path: 'mycourses', component: StudentMycoursesComponent },
+            { path: 'completed-Courses', component: StudentCompletedcoursesComponent },
+            { path: 'assesment-result', component: StudentResultComponent },
+            { path: 'enrollCourse-payment', component: StudentPaymentsComponent },
+            { path: 'enrollCourse-paymentHistory', component: StudentPaymentsHistoryComponent },
+            { path: 'all-announcement/:Role', component: ViewAllAnnouncementComponent },
+            { path: '**', redirectTo: 'home', pathMatch: 'full' }
         ],
         canActivate: [studentAuthGuard]
     },
-    {path:'test' , component:TestComponent},
+    { path: 'test', component: TestComponent },
     { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

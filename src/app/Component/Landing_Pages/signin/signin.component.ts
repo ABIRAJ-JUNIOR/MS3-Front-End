@@ -7,6 +7,7 @@ import { AuthService } from '../../../Service/API/Auth/auth.service';
 import { jwtDecode } from 'jwt-decode';
 import { AuditlogService } from '../../../Service/API/AuditLog/auditlog.service';
 import { AuditLogRequest } from '../../Admin_Pages/student-list/student-list.component';
+import { WindowDataService } from '../../../Service/Biomatrics/window-data.service';
 
 @Component({
   selector: 'app-signin',
@@ -17,17 +18,18 @@ import { AuditLogRequest } from '../../Admin_Pages/student-list/student-list.com
 })
 export class SigninComponent {
   textToType: string = "Your Sign-In Can Change the World";
-  displayedText: string = ""; 
-  typingSpeed: number = 100; 
+  displayedText: string = "";
+  typingSpeed: number = 100;
 
   signinForm!: FormGroup
 
-  constructor( 
-    private fb: FormBuilder, 
-    private auth: AuthService, 
-    private rout: Router, 
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private rout: Router,
     private toastr: ToastrService,
-    private readonly auditLogService:AuditlogService
+    private readonly auditLogService: AuditlogService,
+    private windowauth: WindowDataService
   ) {
     this.initializeForm();
   }
@@ -75,13 +77,13 @@ export class SigninComponent {
         const token: string = localStorage.getItem("token")!;
         const decode: any = jwtDecode(token)
         if (decode.Role == "Administrator" || decode.Role == "Instructor") {
-          const auditLog:AuditLogRequest = {
+          const auditLog: AuditLogRequest = {
             action: 'Login',
             details: `Admin logged in to the system`,
-            adminId:decode.Id,
+            adminId: decode.Id,
           }
           this.auditLogService.addAuditLog(auditLog).subscribe({
-            next:()=>{},
+            next: () => { },
             error: (error: any) => {
               console.error('Error adding audit log:', error.error);
             }
@@ -98,4 +100,17 @@ export class SigninComponent {
     })
   }
 
+
+  bioMatricsLogin() {
+    const storedCredential = this.getStoredCredential();
+    if (storedCredential) {
+      this.windowauth.login();
+    } else {
+      this.rout.navigate(['/bio'])
+    }
+  }
+  private getStoredCredential(): any {
+    const storedCredential = localStorage.getItem('webauthn_credential');
+    return storedCredential ? JSON.parse(storedCredential) : null;
+  }
 }

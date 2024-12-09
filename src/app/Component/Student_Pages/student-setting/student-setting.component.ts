@@ -6,6 +6,7 @@ import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
 import { StudentcommonProfileComponent } from "../../common_components/studentcommon-profile/studentcommon-profile.component";
+import { passwordValidator } from "../../Admin_Pages/account-setting/account-setting.component";
 
 @Component({
   selector: 'app-student-setting',
@@ -46,7 +47,7 @@ export class StudentSettingComponent implements OnInit {
 
     this.changePass = this.fb.group({
       oldPassword: ['', [Validators.required]],
-      newPassword: ['', [Validators.required]],
+      newPassword: ['', [Validators.required,passwordValidator()]],
       confirmPassword: ['', [Validators.required]]
     })
 

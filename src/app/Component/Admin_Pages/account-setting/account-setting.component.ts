@@ -159,6 +159,7 @@ export class AccountSettingComponent implements OnInit {
         },
         error:(error:any)=>{
           this.toastr.warning(error.error, '');
+          this.enabledOrDisabled();
         }
       })
 
@@ -168,8 +169,12 @@ export class AccountSettingComponent implements OnInit {
           this.removeStoredCredential();
           this.enabledOrDisabled();
         },
+        complete:()=>{
+          this.toastr.success("Biometrics disabled")
+        },
         error:(error:any)=>{
           this.toastr.warning(error.error, '');
+          this.enabledOrDisabled();
         }
       })
 

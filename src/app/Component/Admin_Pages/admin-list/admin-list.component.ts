@@ -8,6 +8,7 @@ import { AdminService } from '../../../Service/API/Admin/admin.service';
 import { jwtDecode } from 'jwt-decode';
 import { AuditlogService } from '../../../Service/API/AuditLog/auditlog.service';
 import { AuditLogRequest } from '../student-list/student-list.component';
+import { passwordValidator } from '../account-setting/account-setting.component';
 
 @Component({
   selector: 'app-admin-list',
@@ -71,7 +72,7 @@ export class AdminListComponent implements OnInit{
         lastName: ['', [Validators.required, Validators.minLength(2)]],
         email: ['', [Validators.required, Validators.email]],
         phone: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
-        password: ['', [Validators.required, Validators.minLength(6)]],
+        password: ['', [Validators.required,passwordValidator()]],
         confirmPassword: ['', Validators.required],
         role: ['', Validators.required],
       },

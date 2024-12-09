@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from '../API/Auth/auth.service';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
+import { AuditLogRequest } from '../../Component/Admin_Pages/student-list/student-list.component';
+import { AuditlogService } from '../API/AuditLog/auditlog.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WindowAuthService {
 
-  constructor(private authService: AuthService, private rout: Router) { }
+  constructor(private authService: AuthService, private rout: Router , private auditLogService:AuditlogService) { }
 
   private generateRandomBuffer(length: number): Uint8Array {
     const randomBuffer = new Uint8Array(length);
@@ -97,8 +100,24 @@ export class WindowAuthService {
         }, error: () => {
 
         }, complete: () => {
-          console.log("User Login Successfull")
-          this.rout.navigate(['/home'])
+          const token: string = localStorage.getItem("token")!;
+          const decode: any = jwtDecode(token)
+          if (decode.Role == "Administrator" || decode.Role == "Instructor") {
+            const auditLog: AuditLogRequest = {
+              action: 'Login',
+              details: `Admin logged in to the system`,
+              adminId: decode.Id,
+            }
+            this.auditLogService.addAuditLog(auditLog).subscribe({
+              next: () => { },
+              error: (error: any) => {
+                console.error('Error adding audit log:', error.error);
+              }
+            })
+            this.rout.navigate(['/admin-dashboard'])
+          } else if (decode.Role == "Student") {
+            this.rout.navigate(['/home'])
+          }
         }
       })
       return credential;

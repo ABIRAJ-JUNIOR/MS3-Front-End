@@ -566,12 +566,21 @@
                                                             <div class="form-outline mb-4">
                                                                 <label class="form-label" for="newPassword">New Password</label>
                                                                 <input type="password" id="newPassword" class="form-control" formControlName="newPassword"/>
+                                                                <div *ngIf="changePass.get('newPassword')?.errors?.['passwordInvalid']">
+                                                                    <small class="text-danger">{{ changePass.get('newPassword')?.errors?.['passwordInvalid'].message }}</small>
+                                                                  </div>
                                                             </div>
                     
                                                             <!-- Confirm Password -->
                                                             <div class="form-outline mb-4">
                                                                 <label class="form-label" for="confirmPassword">Confirm Password</label>
                                                                 <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword"/>
+                                                                <div *ngIf="changePass.controls['confirmPassword'].invalid && changePass.controls['confirmPassword'].touched" class="text-danger">
+                                                                    <div *ngIf="changePass.controls['confirmPassword'].hasError('required')">Confirm Password is required.</div>
+                                                                  </div>
+                                                                  <div *ngIf="changePass.controls['confirmPassword'].value !== changePass.controls['newPassword'].value && changePass.controls['confirmPassword'].touched" class="text-danger">
+                                                                    Passwords do not match.
+                                                                  </div>
                                                             </div>
                     
                                                             <!-- Submit Button -->

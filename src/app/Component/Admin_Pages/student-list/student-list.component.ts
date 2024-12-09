@@ -10,6 +10,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AuditlogService } from '../../../Service/API/AuditLog/auditlog.service';
 import { jwtDecode } from 'jwt-decode';
 import { HasRoleDirective } from '../../../Directives/has-role.directive';
+import { passwordValidator } from '../account-setting/account-setting.component';
 
 @Component({
   selector: 'app-student-list',
@@ -77,11 +78,7 @@ export class StudentListComponent implements OnInit {
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       password: [
         '',
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.pattern(/(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])/),
-        ],
+        passwordValidator(),
       ],
       confirmPassword: ['', Validators.required],
       address: this.fb.group({

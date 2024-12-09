@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { AuthService, SignUp } from '../../../Service/API/Auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { passwordValidator } from '../../Admin_Pages/account-setting/account-setting.component';
 
 @Component({
   selector: 'app-signup',
@@ -23,7 +24,7 @@ export class SignupComponent {
       firstName: ['', Validators.required],
       lastName: [''],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(4)]],
+      password: ['', [Validators.required, passwordValidator()]],
       confirmPassword: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
       gender: ['', Validators.required],

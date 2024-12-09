@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AdminService } from '../../../Service/API/Admin/admin.service';
 import { jwtDecode } from 'jwt-decode';
 import { ToastrService } from 'ngx-toastr';
@@ -13,23 +13,14 @@ import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-account-setting',
   standalone: true,
-  imports: [FormsModule,CommonModule,],
+  imports: [FormsModule,CommonModule ,ReactiveFormsModule],
   providers: [BsModalService],
   templateUrl: './account-setting.component.html',
   styleUrl: './account-setting.component.css'
 })
 export class AccountSettingComponent implements OnInit {
-  firstName = 'John';
-  lastName = 'Doe';
-  phone = '0702274212'
-  email = 'john.doe@example.com';
-  currentPassword = '';
-  newPassword = '';
-  confirmPassword = '';
-  language = 'English';
+  userForm!: FormGroup;
   profilePicture = 'https://via.placeholder.com/150'; 
-
-
   passwordNotMatch:boolean = false 
   loginData:any 
   constructor(
@@ -39,7 +30,9 @@ export class AccountSettingComponent implements OnInit {
     private readonly windowDataService: WindowDataService,
     private readonly authService:AuthService,
     private cookieService: CookieService
+    private fb: FormBuilder
   ){
+    this.initializeForm();
     const token = localStorage.getItem("token");
     if(token != null){
       const decode:any =jwtDecode(token)
@@ -55,13 +48,30 @@ export class AccountSettingComponent implements OnInit {
     }
   }
 
+  private initializeForm(): void {
+    this.userForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
+      email: ['', [Validators.required, Validators.email]],
+      currentPassword: ['', Validators.required],
+      newPassword: ['', [Validators.required, passwordValidator()]],
+      confirmPassword: ['', Validators.required]
+    });
+  }
+
+
   private loadAdminData():void{
     this.adminService.getadminbyID(this.loginData.Id).subscribe({
       next: (response:Admin) => {
-        this.firstName = response.firstName
-        this.lastName = response.lastName
-        this.phone = response.phone
-        this.email = response.email
+        
+        this.userForm.patchValue({
+          firstName:response.firstName,
+          lastName:response.lastName,
+          phone:response.phone,
+          email:response.email
+        })
+        
         this.profilePicture = response.imageUrl
       }
     })
@@ -78,22 +88,21 @@ export class AccountSettingComponent implements OnInit {
     }
   }
  
-  onSubmit() {
-    if (this.newPassword !== this.confirmPassword) {
+  onSubmit(){
+    if (this.userForm.value.newPassword !== this.userForm.value.confirmPassword) {
       this.passwordNotMatch = true
       return;
     }
- 
-    const accountDetails = {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.email,
-      phone: this.phone,
-      currentPassword: this.currentPassword != "" ? this.currentPassword : null,
-      newPassword: this.newPassword != "" ? this.newPassword : null,
+    
+    const form = this.userForm.value;
+
+    if(form){
+      for (const key in form) {
+        if (form[key] === '') form[key] = null;
+      }
     }
  
-    this.adminService.updateAdminProfile(this.loginData.Id,accountDetails).subscribe({
+    this.adminService.updateAdminProfile(this.loginData.Id,form).subscribe({
       next: (response) => {
         this.toastr.success('Changes saved successfully!', '');
       },error:(error:any)=>{
@@ -189,3 +198,37 @@ export class AccountSettingComponent implements OnInit {
   }
   
 }
+
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+
+export function passwordValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const password = control.value;
+    if (!password) return null; 
+
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasDigit = /\d/.test(password);
+    const hasSpecialChar = /[@$!%*?&]/.test(password);
+    const isValidLength = password.length >= 8;
+
+    if (!isValidLength) {
+      return { passwordInvalid: { message: 'Password must be at least 8 characters long.' } };
+    }
+    if (!hasUpperCase) {
+      return { passwordInvalid: { message: 'Password must contain at least one uppercase letter.' } };
+    }
+    if (!hasLowerCase) {
+      return { passwordInvalid: { message: 'Password must contain at least one lowercase letter.' } };
+    }
+    if (!hasDigit) {
+      return { passwordInvalid: { message: 'Password must contain at least one digit.' } };
+    }
+    if (!hasSpecialChar) {
+      return { passwordInvalid: { message: 'Password must contain at least one special character (@$!%*?&).' } };
+    }
+
+    return null;
+  };
+}
+

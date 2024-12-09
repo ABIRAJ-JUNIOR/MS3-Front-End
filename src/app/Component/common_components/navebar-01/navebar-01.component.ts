@@ -51,4 +51,12 @@ export class Navebar01Component {
       this.router.navigate(['/student-dashboard']);
     }
   }
+
+  goToProfile(){
+    if(this.isAdmin){
+      this.router.navigate(['/admin-dashboard/admin-profile']);
+    }else if(this.isStudent){
+      this.router.navigate(['/student-dashboard/profile']);
+    }
+  }
 }

@@ -23,6 +23,8 @@ export class SigninComponent {
 
   signinForm!: FormGroup
 
+  isBiometrics:boolean = false
+
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
@@ -36,6 +38,7 @@ export class SigninComponent {
 
   ngOnInit(): void {
     this.startTypingEffect();
+    this.enabledOrDisabled();
   }
 
 
@@ -107,6 +110,14 @@ export class SigninComponent {
       this.windowauth.login();
     } else {
       this.rout.navigate(['/bio'])
+    }
+  }
+  enabledOrDisabled():void{
+    const storedCredential = this.getStoredCredential();
+    if(storedCredential){
+      this.isBiometrics = true
+    }else{
+      this.isBiometrics = false
     }
   }
   

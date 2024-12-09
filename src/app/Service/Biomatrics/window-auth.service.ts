@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { AuditLogRequest } from '../../Component/Admin_Pages/student-list/student-list.component';
 import { AuditlogService } from '../API/AuditLog/auditlog.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WindowAuthService {
 
-  constructor(private authService: AuthService, private rout: Router , private auditLogService:AuditlogService) { }
+  constructor(private authService: AuthService, private rout: Router , private auditLogService:AuditlogService , private tostr:ToastrService) { }
 
   private generateRandomBuffer(length: number): Uint8Array {
     const randomBuffer = new Uint8Array(length);
@@ -56,13 +57,16 @@ export class WindowAuthService {
         next: (res: string) => {
           this.storeCredential(credential, challenge, password, email);
           console.log("Registration successful!", credential);
+          this.tostr.success("Registration successful!")
           return credential;
         }, error: () => {
+          this.tostr.error("Registration Failed! Check your Email & Password Try again.")
           this.rout.navigate(['/bio'])
         }
       })
 
     } catch (err) {
+      this.tostr.error("Registration Failed! Try again.")
       console.error("Registration failed:", err);
       throw err;
     }
@@ -98,7 +102,8 @@ export class WindowAuthService {
         next: (res: string) => {
           localStorage.setItem('token', res)
         }, error: () => {
-
+          this.rout.navigate(['/bio'])
+          this.tostr.error("Biomatrics failed. Please Register again.");
         }, complete: () => {
           const token: string = localStorage.getItem("token")!;
           const decode: any = jwtDecode(token)
@@ -111,7 +116,7 @@ export class WindowAuthService {
             this.auditLogService.addAuditLog(auditLog).subscribe({
               next: () => { },
               error: (error: any) => {
-                console.error('Error adding audit log:', error.error);
+             
               }
             })
             this.rout.navigate(['/admin-dashboard'])

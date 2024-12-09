@@ -112,9 +112,9 @@
         <div class="container py-5" *ngIf="courses">
             <h4 class="mb-0">Recent Feedbacks</h4>
             <p class="fw-light mb-4 pb-2">Latest Feedback section by Students</p>
-            <div class="row d-flex justify-content-center" style="height: 600px; overflow-y:scroll;">
-                <div class="col-md-12 col-lg-10" *ngFor="let item of courses.feedbacks">
-                    <div class="card text-body border-0 shadow-sm">
+            <div class="row d-flex justify-content-center" style="height: 400px; overflow-y:scroll;width: 100%;">
+                <div class="col-md-12 col-lg-10 " *ngFor="let item of courses.feedbacks">
+                    <div class="card text-body border-0 shadow-sm my-2 ">
                         <div class="card-body p-4">
                             <div class="d-flex flex-start">
                                 <img class="rounded-circle shadow-1-strong me-3" src="{{item.student.imageUrl}}"

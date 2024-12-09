@@ -26,10 +26,10 @@ export class WindowDataService {
   async login() {
     try {
       await this.webAuthnService.authenticate();
-      this.message = "Authentication successful!";
       return true;
     } catch (err) {
-      this.message = "Authentication failed. Please try again.";
+      this.route.navigate(['/signin'])
+      this.tostre.error("Biomatrics failed. Please Register again.");
       return false;
     }
   }

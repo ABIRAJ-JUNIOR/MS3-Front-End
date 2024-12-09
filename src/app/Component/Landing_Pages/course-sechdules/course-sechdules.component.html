@@ -107,38 +107,35 @@
         </button>
     </div>
 
-    <section style="background-color: #ffffff;" >
+    <section style="background-color: #ffffff;">
 
-        <div class="container-fluid py-5" *ngIf="courses">
+        <div class="container py-5" *ngIf="courses">
             <h4 class="mb-0">Recent Feedbacks</h4>
             <p class="fw-light mb-4 pb-2">Latest Feedback section by Students</p>
             <div class="row d-flex justify-content-center" style="height: 600px; overflow-y:scroll;">
                 <div class="col-md-12 col-lg-10" *ngFor="let item of courses.feedbacks">
-                    <div class="card text-body border-0">
+                    <div class="card text-body border-0 shadow-sm">
                         <div class="card-body p-4">
-
-
                             <div class="d-flex flex-start">
-                                <img class="rounded-circle shadow-1-strong me-3"
-                                    src="{{item.student.imageUrl}}" alt="avatar"
-                                    width="60" height="60" />
+                                <img class="rounded-circle shadow-1-strong me-3" src="{{item.student.imageUrl}}"
+                                    alt="avatar" width="60" height="60" />
                                 <div>
-                                    <h6 class="fw-bold mb-1">{{item.student.firstName}}</h6>
-                                    <div class="d-flex align-items-center mb-3">
-                                        <p class="mb-0">
-                                           {{item.feedBackDate | date}}
-                                        </p>
+
+                                        <h6 class="fw-bold mb-1">{{item.student.firstName}} {{item.student.lastName}}
+                                        </h6>
                                      
-                                        <a href="#!" class="link-muted"><i class="fas fa-heart ms-2" *ngFor="let item of [].constructor(item.rating)"></i></a>
-                                    </div>
+                                    <p class="mb-0 ">
+                                        {{item.feedBackDate | date}}
+                                    </p>
+
+                                    <a class="text-warning"><i class="fas fa-star"
+                                            *ngFor="let item of [].constructor(item.rating)"></i></a>
                                     <p class="mb-0">
-                                       {{item.feedBackText}}
+                                        {{item.feedBackText}}
                                     </p>
                                 </div>
                             </div>
                         </div>
-
-                        <hr class="my-0" />
                     </div>
                 </div>
             </div>

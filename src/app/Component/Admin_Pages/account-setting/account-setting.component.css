@@ -113,3 +113,14 @@
     color: #dc3545;
   }
   
+
+  /* Custom spacing for the biometrics section */
+#biometricsToggle {
+  width: 50px;
+  height: 25px;
+}
+
+.text-muted {
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}

@@ -109,8 +109,18 @@ export class SigninComponent {
       this.rout.navigate(['/bio'])
     }
   }
+  
   private getStoredCredential(): any {
-    const storedCredential = localStorage.getItem('webauthn_credential');
-    return storedCredential ? JSON.parse(storedCredential) : null;
+    const cookieName = 'webauthn_credential=';
+    const cookies = document.cookie.split(';');
+  
+    for (let i = 0; i < cookies.length; i++) {
+      let cookie = cookies[i].trim();
+      if (cookie.startsWith(cookieName)) {
+        const credentialString = cookie.substring(cookieName.length);
+        return JSON.parse(decodeURIComponent(credentialString));
+      }
+    }
+    return null; 
   }
 }

@@ -67,15 +67,31 @@
                 </div>
               </div>
             </div>
-              
-        
-            <!-- Password Mismatch Alert -->
-            <div class="alert alert-warning d-flex align-items-center gap-2" role="alert" *ngIf="passwordNotMatch">
-              <i class="bi bi-exclamation-triangle"></i>
-              <div>
-                Passwords do not match! Please try again.
+          </div>
+          <div class="alert alert-warning d-flex align-items-center gap-2" role="alert" *ngIf="passwordNotMatch">
+            <i class="bi bi-exclamation-triangle"></i>
+            <div>
+              Passwords do not match! Please try again.
+            </div>
+          </div>
+          
+  
+          <!-- Biometrics Enable Section -->
+          <div class="row mb-5">
+            <div class="col-12">
+              <h5>Biometrics Settings</h5>
+              <div class="form-check form-switch d-flex align-items-center mb-3">
+                <input class="form-check-input me-3" type="checkbox" id="biometricsToggle" [(ngModel)]="isBiometricsEnabled" name="biometricsEnabled" (change)="onBiometricsToggle(biometricModal)"/>
+                <label class="form-check-label" for="biometricsToggle">
+                  Enable Biometrics for Login
+                </label>
               </div>
-            </div>             
+              <small class="text-muted">
+                Enabling biometrics will allow you to use fingerprint or face recognition for a faster and secure login experience.
+              </small>
+            </div>
+          </div>
+
   
             <!-- Submit Button -->
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -84,4 +100,31 @@
       </div>
     </div>
   </div>
+  
+
+
+
+  <ng-template #biometricModal>
+    <div class="modal-header">
+      <h1 class="modal-title fs-5"><i class="bi bi-gear"></i>{{isBiometricsEnabled ? ' Enable Biometric' : ' Disable Biometric'}}</h1>
+      <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+    </div>
+    <div class="modal-body">
+      <div class="alert alert-info" role="alert">
+        Before proceeding, we'll attempt biometric authentication. If it's not successful, please enter your email and password.
+      </div>
+  
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email" required readonly/>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="register()">{{isBiometricsEnabled ? ' Enable' : ' Disable'}}</button>
+    </div>
+  </ng-template>
   

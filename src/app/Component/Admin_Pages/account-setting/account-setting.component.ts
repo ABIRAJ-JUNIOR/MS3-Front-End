@@ -1,15 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AdminService } from '../../../Service/API/Admin/admin.service';
 import { jwtDecode } from 'jwt-decode';
 import { ToastrService } from 'ngx-toastr';
 import { Admin } from '../../../Modals/modals';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { WindowDataService } from '../../../Service/Biomatrics/window-data.service';
 
 @Component({
   selector: 'app-account-setting',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule,CommonModule,],
+  providers: [BsModalService],
   templateUrl: './account-setting.component.html',
   styleUrl: './account-setting.component.css'
 })
@@ -29,7 +32,9 @@ export class AccountSettingComponent implements OnInit {
   loginData:any 
   constructor(
     private readonly adminService:AdminService,
-    private readonly toastr:ToastrService
+    private readonly toastr:ToastrService,
+    private modalService: BsModalService,
+    private windowDataService: WindowDataService
   ){
     const token = localStorage.getItem("token");
     if(token != null){
@@ -84,14 +89,49 @@ export class AccountSettingComponent implements OnInit {
       next: (response) => {
         this.toastr.success('Changes saved successfully!', '');
       },error:(error:any)=>{
-        this.toastr.warning(error.error, '', {
-          positionClass: 'toast-top-right',
-          progressBar: true,
-          timeOut:3000
-        });
+        this.toastr.warning(error.error, '');
       }
     })
 
     this.passwordNotMatch = false
+  }
+
+  //Bio Metrics
+  isBiometricsEnabled: boolean = false;
+
+  onBiometricsToggle() {
+    if (this.isBiometricsEnabled) {
+
+    } else {
+      console.log('Biometrics Disabled');
+    }
+  }
+
+  modalRef?: BsModalRef;
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, { class: 'modal-dialog-centered' });
+  }
+
+  closeModal() {
+    this.modalRef?.hide();
+    this.isBiometricsEnabled = false
+  }
+
+  register() {
+    const emailInput = document.getElementById('password') as HTMLInputElement
+    const passwordInput = document.getElementById('email') as HTMLInputElement
+
+    const email = emailInput?.value.trim();
+    const password = passwordInput?.value.trim();
+    if (!email || !password) {
+      alert('Please provide both email and password.');
+      return;
+    }
+    console.log(email,password)
+
+    this.windowDataService.register(password,email);
+
+    this.closeModal();
   }
 }

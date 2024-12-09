@@ -145,7 +145,7 @@ export class AccountSettingComponent implements OnInit {
     this.authService.signIn(auth).subscribe({
       next:(response:string)=>{
       },complete:()=>{
-        this.windowDataService.register(password,email);
+        this.windowDataService.register(email,password);
 
       },
       error:(error:any)=>{

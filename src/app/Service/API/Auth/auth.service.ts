@@ -24,6 +24,12 @@ export class AuthService {
     })
   }
 
+  emailVerify(userId:string){
+    return this.http.get(`${this.apiUrl}/Auth/Verify/${userId}`,{
+      responseType:'text'
+    })
+  }
+
   isLoggedInAdmin():boolean{
     const token = localStorage.getItem("token");
     if(token == null){

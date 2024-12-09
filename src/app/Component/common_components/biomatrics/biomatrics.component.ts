@@ -19,8 +19,8 @@ export class BiomatricsComponent {
 
 
   register() {
-    const emailInput = document.getElementById('password') as HTMLInputElement
-    const passwordInput = document.getElementById('email') as HTMLInputElement
+    const emailInput = document.getElementById('email') as HTMLInputElement
+    const passwordInput = document.getElementById('password') as HTMLInputElement
 
     const email = emailInput?.value.trim();
     const password = passwordInput?.value.trim();

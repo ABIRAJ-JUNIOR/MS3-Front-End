@@ -73,14 +73,14 @@
           <div class="row mb-5">
             <div class="col-12">
               <h5>Biometrics Settings</h5>
-              <div class="form-check form-switch d-flex align-items-center mb-3">
+              <div class="form-check form-switch d-flex align-items-center mb-3" *ngIf="!isBiometricsEnabled">
                 <input 
                   class="form-check-input me-3" 
                   type="checkbox" 
                   id="biometricsToggle" 
                   [(ngModel)]="isBiometricsEnabled" 
                   name="biometricsEnabled" 
-                  (change)="onBiometricsToggle() ; openModal(biometricModal)"
+                  (change)="onBiometricsToggle(biometricModal)"
                 />
                 <label class="form-check-label" for="biometricsToggle">
                   Enable Biometrics for Login
@@ -117,7 +117,7 @@
   
       <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="email" name="email" required />
+        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email" required readonly/>
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>

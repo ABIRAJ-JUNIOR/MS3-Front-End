@@ -7,6 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Admin } from '../../../Modals/modals';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { WindowDataService } from '../../../Service/Biomatrics/window-data.service';
+import { AuthService, SignIn } from '../../../Service/API/Auth/auth.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-account-setting',
@@ -33,8 +35,10 @@ export class AccountSettingComponent implements OnInit {
   constructor(
     private readonly adminService:AdminService,
     private readonly toastr:ToastrService,
-    private modalService: BsModalService,
-    private windowDataService: WindowDataService
+    private readonly modalService: BsModalService,
+    private readonly windowDataService: WindowDataService,
+    private readonly authService:AuthService,
+    private cookieService: CookieService
   ){
     const token = localStorage.getItem("token");
     if(token != null){
@@ -103,11 +107,11 @@ export class AccountSettingComponent implements OnInit {
   //Bio Metrics
   isBiometricsEnabled: boolean = false;
 
-  onBiometricsToggle() {
+  onBiometricsToggle(template: TemplateRef<any>) {
     if (this.isBiometricsEnabled) {
-
+      this.openModal(template)
     } else {
-      console.log('Biometrics Disabled');
+      this.removeStoredCredential();
     }
   }
 
@@ -123,8 +127,8 @@ export class AccountSettingComponent implements OnInit {
   }
 
   register() {
-    const emailInput = document.getElementById('password') as HTMLInputElement
-    const passwordInput = document.getElementById('email') as HTMLInputElement
+    const emailInput = document.getElementById('email') as HTMLInputElement
+    const passwordInput = document.getElementById('password') as HTMLInputElement
 
     const email = emailInput?.value.trim();
     const password = passwordInput?.value.trim();
@@ -132,9 +136,22 @@ export class AccountSettingComponent implements OnInit {
       alert('Please provide both email and password.');
       return;
     }
-    console.log(email,password)
 
-    this.windowDataService.register(password,email);
+    const auth:SignIn = {
+      email:emailInput.value,
+      password:passwordInput.value
+    }
+
+    this.authService.signIn(auth).subscribe({
+      next:(response:string)=>{
+      },complete:()=>{
+        this.windowDataService.register(password,email);
+
+      },
+      error:(error:any)=>{
+        this.toastr.warning(error.error, '');
+      }
+    })
 
     this.closeModal();
   }
@@ -152,4 +169,9 @@ export class AccountSettingComponent implements OnInit {
     }
     return null; 
   }
+
+  private removeStoredCredential() {
+    this.cookieService.delete('webauthn_credential', '/');
+  }
+  
 }

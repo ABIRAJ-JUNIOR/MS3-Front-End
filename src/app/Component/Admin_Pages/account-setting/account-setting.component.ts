@@ -45,6 +45,10 @@ export class AccountSettingComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadAdminData();
+    const storedCredential = this.getStoredCredential();
+    if(storedCredential){
+      this.isBiometricsEnabled = true
+    }
   }
 
   private loadAdminData():void{
@@ -133,5 +137,19 @@ export class AccountSettingComponent implements OnInit {
     this.windowDataService.register(password,email);
 
     this.closeModal();
+  }
+
+  private getStoredCredential(): any {
+    const cookieName = 'webauthn_credential=';
+    const cookies = document.cookie.split(';');
+  
+    for (let i = 0; i < cookies.length; i++) {
+      let cookie = cookies[i].trim();
+      if (cookie.startsWith(cookieName)) {
+        const credentialString = cookie.substring(cookieName.length);
+        return JSON.parse(decodeURIComponent(credentialString));
+      }
+    }
+    return null; 
   }
 }

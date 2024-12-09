@@ -29,7 +29,7 @@ export class AccountSettingComponent implements OnInit {
     private readonly modalService: BsModalService,
     private readonly windowDataService: WindowDataService,
     private readonly authService:AuthService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
     private fb: FormBuilder
   ){
     this.initializeForm();
@@ -42,10 +42,7 @@ export class AccountSettingComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadAdminData();
-    const storedCredential = this.getStoredCredential();
-    if(storedCredential){
-      this.isBiometricsEnabled = true
-    }
+    this.enabledOrDisabled();
   }
 
   private initializeForm(): void {
@@ -56,10 +53,23 @@ export class AccountSettingComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       currentPassword: ['', Validators.required],
       newPassword: ['', [Validators.required, passwordValidator()]],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', Validators.required],
+      biometrics:[false]
     });
   }
 
+  enabledOrDisabled():void{
+    const storedCredential = this.getStoredCredential();
+    if(storedCredential){
+      this.userForm.patchValue({
+        biometrics:true
+      })      
+    }else{
+      this.userForm.patchValue({
+        biometrics:false
+      })   
+    }
+  }
 
   private loadAdminData():void{
     this.adminService.getadminbyID(this.loginData.Id).subscribe({
@@ -75,17 +85,6 @@ export class AccountSettingComponent implements OnInit {
         this.profilePicture = response.imageUrl
       }
     })
-  }
-
-  onProfilePictureChange(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        this.profilePicture = reader.result as string;
-      };
-    }
   }
  
   onSubmit(){
@@ -105,6 +104,8 @@ export class AccountSettingComponent implements OnInit {
     this.adminService.updateAdminProfile(this.loginData.Id,form).subscribe({
       next: (response) => {
         this.toastr.success('Changes saved successfully!', '');
+        this.removeStoredCredential();
+        this.enabledOrDisabled();
       },error:(error:any)=>{
         this.toastr.warning(error.error, '');
       }
@@ -114,10 +115,9 @@ export class AccountSettingComponent implements OnInit {
   }
 
   //Bio Metrics
-  isBiometricsEnabled: boolean = false;
 
   onBiometricsToggle(template: TemplateRef<any>) {
-    if (this.isBiometricsEnabled) {
+    if (this.userForm.value.biometrics) {
       this.openModal(template)
     } else {
       this.openModal(template)
@@ -132,7 +132,7 @@ export class AccountSettingComponent implements OnInit {
 
   closeModal() {
     this.modalRef?.hide();
-    this.isBiometricsEnabled = false
+    this.userForm.value.biometrics = false
   }
 
   register() {
@@ -151,11 +151,10 @@ export class AccountSettingComponent implements OnInit {
       password:passwordInput.value
     }
 
-    if(this.isBiometricsEnabled){
+    if(this.userForm.value.biometrics){
 
       this.authService.signIn(auth).subscribe({
         next:(response:string)=>{
-        },complete:()=>{
           this.windowDataService.register(email,password);
         },
         error:(error:any)=>{
@@ -166,8 +165,8 @@ export class AccountSettingComponent implements OnInit {
     }else{
       this.authService.signIn(auth).subscribe({
         next:(response:string)=>{
-        },complete:()=>{
           this.removeStoredCredential();
+          this.enabledOrDisabled();
         },
         error:(error:any)=>{
           this.toastr.warning(error.error, '');

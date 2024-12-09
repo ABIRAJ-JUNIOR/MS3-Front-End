@@ -16,7 +16,6 @@ export class WindowDataService {
   async register(email:any,password:any) {
     try {
       await this.webAuthnService.register(email,password);
-      this.route.navigate(['/signin'])
       return true
     } catch (err) {
       return false

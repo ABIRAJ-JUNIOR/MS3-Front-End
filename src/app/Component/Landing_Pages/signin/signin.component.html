@@ -93,24 +93,23 @@
                                     Remember me
                                 </label>
                             </div>
-                            <!-- Forgot Password Link -->
                             <a [routerLink]="['/forgot-password']"
                                 class="text-decoration-none text-primary small fw-semibold">
                                 Forgot Password?
                             </a>
                         </div>
 
-                        <!-- Submit Button -->
-                        <div class="d-flex justify-content-between">
-                            <button type="submit" class="btn btn-danger w-75" [disabled]="signinForm.invalid"
-                                style="height: 48px;">
+                        <div class="d-flex justify-content-between align-items-center gap-3">
+                            <button type="submit" class="btn btn-danger flex-grow-1" [disabled]="signinForm.invalid" style="height: 48px; border-radius: 8px;">
                                 Sign In
                             </button>
-                            <button type="button" class="btn btn-outline-primary btn-sm "
-                                (click)="bioMatricsLogin()" style="height: 48px;" >
-                                <i class="bi bi-fingerprint"></i> Biometrics Login
+                        
+                            <button type="button" class="btn btn-outline-primary btn-sm flex-grow-1" (click)="bioMatricsLogin()" style="height: 48px; border-radius: 8px; width: 1px;" *ngIf="isBiometrics" >
+                                <i class="bi bi-fingerprint me-2" style="font-size: 1.2rem;"></i>
+                                Biometrics Login
                             </button>
                         </div>
+  
 
                         <!-- Registration Link -->
                         <p class="text-center mt-3 small text-muted">

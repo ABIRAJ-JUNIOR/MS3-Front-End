@@ -1,130 +1,130 @@
 <div class="container py-5">
-    <div class="row justify-content-center">
-      <div class="col-lg-9 col-md-10 col-12">
-        <div class="row mb-4">
-          <div class="col-12 text-center">
-            <h2>Account Settings</h2>
-            <p class="text-muted">Update your profile and account preferences.</p>
+  <div class="row justify-content-center">
+    <div class="col-lg-9 col-md-10 col-12">
+      <div class="row mb-4">
+        <div class="col-12 text-center">
+          <h2>Account Settings</h2>
+          <p class="text-muted">Update your profile and account preferences.</p>
+        </div>
+      </div>
+
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="row mb-5">
+          <div class="col-md-4 text-center" style="background-color: rgb(230, 226, 226);">
+            <div class="d-flex justify-content-center align-items-center" style="height: 100%;" >
+              <div>
+                <h5>Welcome Back, {{userForm.value.firstName}}!</h5>
+                <blockquote class="blockquote">
+                  <p>"The only way to achieve great work is to love what you do."</p>
+                  <footer class="blockquote-footer">Steve Jobs</footer>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Personal Information -->
+          <div class="col-md-8">
+            <div class="mb-3">
+              <label for="firstName" class="form-label">First Name</label>
+              <input type="text" class="form-control" id="firstName" formControlName="firstName" />
+            </div>
+      
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="lastName" formControlName="lastName" />
+            </div>
+      
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input type="text" class="form-control" id="phone" formControlName="phone" />
+            </div>
+      
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <input type="email" class="form-control" id="email" formControlName="email" />
+            </div>
+          </div>
+            
+          <!-- Change Password Section -->
+          <div class="row my-4 ">
+            <div class="col-12">
+              <h5>Change Password</h5>
+    
+              <div class="mb-3">
+                <label for="currentPassword" class="form-label">Current Password</label>
+                <input type="password" class="form-control" id="currentPassword" formControlName="currentPassword" />
+              </div>
+              <div class="mb-3">
+                <label for="newPassword" class="form-label">New Password</label>
+                <input type="password" class="form-control" id="newPassword" formControlName="newPassword" />
+                <div *ngIf="userForm.get('newPassword')?.errors?.['passwordInvalid']">
+                  <small class="text-danger">{{ userForm.get('newPassword')?.errors?.['passwordInvalid'].message }}</small>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" />
+              </div>
+            </div>
           </div>
         </div>
 
-        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-          <div class="row mb-5">
-              <div class="col-md-4 text-center" style="background-color: rgb(230, 226, 226);">
-                <div class="d-flex justify-content-center align-items-center" style="height: 100%;" >
-                  <div>
-                    <h5>Welcome Back, {{userForm.value.firstName}}!</h5>
-                    <blockquote class="blockquote">
-                      <p>"The only way to achieve great work is to love what you do."</p>
-                      <footer class="blockquote-footer">Steve Jobs</footer>
-                    </blockquote>
-                  </div>
-                </div>
-              </div>
-            
-              <!-- Personal Information -->
-              <div class="col-md-8">
-                <div class="mb-3">
-                  <label for="firstName" class="form-label">First Name</label>
-                  <input type="text" class="form-control" id="firstName" formControlName="firstName" />
-                </div>
-          
-                <div class="mb-3">
-                  <label for="lastName" class="form-label">Last Name</label>
-                  <input type="text" class="form-control" id="lastName" formControlName="lastName" />
-                </div>
-          
-                <div class="mb-3">
-                  <label for="phone" class="form-label">Phone Number</label>
-                  <input type="text" class="form-control" id="phone" formControlName="phone" />
-                </div>
-          
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email Address</label>
-                  <input type="email" class="form-control" id="email" formControlName="email" />
-                </div>
-              </div>
-              
-            <!-- Change Password Section -->
-            <div class="row my-5 ">
-              <div class="col-12">
-                <h5>Change Password</h5>
-      
-                <div class="mb-3">
-                  <label for="currentPassword" class="form-label">Current Password</label>
-                  <input type="password" class="form-control" id="currentPassword" formControlName="currentPassword" />
-                </div>
-                <div class="mb-3">
-                  <label for="newPassword" class="form-label">New Password</label>
-                  <input type="password" class="form-control" id="newPassword" formControlName="newPassword" />
-                  <div *ngIf="userForm.get('newPassword')?.errors?.['passwordInvalid']">
-                    <small class="text-danger">{{ userForm.get('newPassword')?.errors?.['passwordInvalid'].message }}</small>
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <label for="confirmPassword" class="form-label">Confirm New Password</label>
-                  <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" />
-                </div>
-              </div>
-            </div>
+        <div class="alert alert-warning d-flex align-items-center gap-2" role="alert" *ngIf="passwordNotMatch">
+          <i class="bi bi-exclamation-triangle"></i>
+          <div>
+            Passwords do not match! Please try again.
           </div>
-          <div class="alert alert-warning d-flex align-items-center gap-2" role="alert" *ngIf="passwordNotMatch">
-            <i class="bi bi-exclamation-triangle"></i>
-            <div>
-              Passwords do not match! Please try again.
-            </div>
-          </div>
-          
-  
-          <!-- Biometrics Enable Section -->
-          <div class="row mb-5">
-            <div class="col-12">
-              <h5>Biometrics Settings</h5>
-              <div class="form-check form-switch d-flex align-items-center mb-3">
-                <input class="form-check-input me-3" type="checkbox" id="biometricsToggle" [(ngModel)]="isBiometricsEnabled" name="biometricsEnabled" (change)="onBiometricsToggle(biometricModal)"/>
-                <label class="form-check-label" for="biometricsToggle">
-                  Enable Biometrics for Login
-                </label>
-              </div>
-              <small class="text-muted">
-                Enabling biometrics will allow you to use fingerprint or face recognition for a faster and secure login experience.
-              </small>
-            </div>
-          </div>
+        </div>
+        
+        <hr>
 
-  
-            <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary">Submit</button>
+        <!-- Biometrics Enable Section -->
+        <div class="row mb-5">
+          <div class="col-12">
+            <h5>
+              Biometrics Settings
+            </h5>
+            <div class="form-check form-switch d-flex align-items-center mb-3">
+              <input class="form-check-input me-3" type="checkbox" id="biometricsToggle" formControlName="biometrics" name="biometricsEnabled" (change)="onBiometricsToggle(biometricModal)"/>
+              <label class="form-check-label d-flex align-items-center" for="biometricsToggle">
+                Enable Biometrics for Login
+              </label>
+            </div>
+            <small class="text-muted">
+              <i class="bi bi-fingerprint me-2 fs-3"></i> 
+              Enabling biometrics will allow you to use fingerprint or face recognition for a faster and secure login experience.
+            </small>
           </div>
-        </form>
-      </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn button-31">Submit</button>
+      </form>
     </div>
   </div>
+</div>
   
 
-
-
-  <ng-template #biometricModal>
-    <div class="modal-header">
-      <h1 class="modal-title fs-5"><i class="bi bi-gear"></i>{{isBiometricsEnabled ? ' Enable Biometric' : ' Disable Biometric'}}</h1>
-      <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+<ng-template #biometricModal>
+  <div class="modal-header">
+    <h1 class="modal-title fs-5"><i class="bi bi-gear"></i>{{this.userForm.value.biometrics ? ' Enable Biometric' : ' Disable Biometric'}}</h1>
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+  </div>
+  <div class="modal-body">
+    <div class="alert alert-info" role="alert">
+      Before proceeding, we'll attempt biometric authentication. If it's not successful, please enter your email and password.
     </div>
-    <div class="modal-body">
-      <div class="alert alert-info" role="alert">
-        Before proceeding, we'll attempt biometric authentication. If it's not successful, please enter your email and password.
-      </div>
-  
-      <div class="mb-3">
-        <label for="email" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email" required readonly/>
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password" required />
-      </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input type="email" class="form-control" id="email" name="email" [(ngModel)]="userForm.value.email" required readonly/>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-primary" (click)="register()">{{isBiometricsEnabled ? ' Enable' : ' Disable'}}</button>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" name="password" required />
     </div>
-  </ng-template>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="register()">{{this.userForm.value.biometrics ? ' Enable' : ' Disable'}}</button>
+  </div>
+</ng-template>
   

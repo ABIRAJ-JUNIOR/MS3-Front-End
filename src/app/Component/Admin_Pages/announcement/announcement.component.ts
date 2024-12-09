@@ -7,11 +7,12 @@ import { AuditlogService } from '../../../Service/API/AuditLog/auditlog.service'
 import { jwtDecode } from 'jwt-decode';
 import { AuditLogRequest } from '../student-list/student-list.component';
 import { Announcement } from '../../../Modals/modals';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-announcement',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,BsDatepickerModule],
   templateUrl: './announcement.component.html',
   styleUrl: './announcement.component.css'
 })

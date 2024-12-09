@@ -90,10 +90,9 @@
                                 <div class="form-group">
                                     <input type="password" class="form-control px-2" placeholder="" style="width: 100%;" formControlName="password">
                                     <label for="">Password</label>
-                                    <div *ngIf="StudentRegistration.controls['password'].touched">
-                                        <p class="text-danger" *ngIf="StudentRegistration.controls['password']?.errors?.['required']">Password field is required.</p>
-                                        <p class="text-danger" *ngIf="StudentRegistration.controls['password']?.errors?.['minlength']">Password must be at least 4 characters long.</p>
-                                    </div>
+                                    <div *ngIf="StudentRegistration.get('password')?.errors?.['passwordInvalid']">
+                                        <small class="text-danger">{{ StudentRegistration.get('password')?.errors?.['passwordInvalid'].message }}</small>
+                                      </div>
                                 </div>
                             </div>
                 

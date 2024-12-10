@@ -17,9 +17,12 @@ import { Router, RouterModule } from '@angular/router';
 export class CourseCardsComponent implements OnInit {
 
 
-  constructor( private courseService:CourseService,private paymentService:PaymentDataService , private route:Router){
-    
-  }
+  constructor( 
+    private courseService:CourseService,
+    private paymentService:PaymentDataService , 
+    private route:Router
+  )
+  { }
 
 
   ModalProduct: any[] = [];
@@ -33,12 +36,9 @@ export class CourseCardsComponent implements OnInit {
     this.route.navigate(['/course-sechdule/',courseId])
   }
 
-
-
   ClearModal() {
     this.ModalProduct = []
   }
-
 
   // Btn Change Name Event Function
 
@@ -55,11 +55,11 @@ export class CourseCardsComponent implements OnInit {
 
   //pagination Courses
 
-  pageSize: number = 6; // Courses per page
-  currentPage: number = 1; // Current page index
-  totalPages: number = 0; // Total number of pages
-  pageNumbers: number[] = []; // Array of page numbers to display
-  paginatedCourses: any[] = [];
+  pageSize: number = 6; 
+  currentPage: number = 1; 
+  totalPages: number = 0; 
+  pageNumbers: number[] = []; 
+  paginatedCourses: Course[] = [];
 
   ngOnInit() {
     this.paginateCourses()
@@ -70,7 +70,7 @@ export class CourseCardsComponent implements OnInit {
 
     this.courseService.pagination(this.currentPage,this.pageSize).subscribe({
       next:((courses:any)=>{
-        this.paginatedCourses=courses.items
+        this.paginatedCourses = courses.items
         this.totalPages=courses.totalPages
         this.pageSize=courses.pageSize
         this.currentPage=courses.currentPage

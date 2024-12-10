@@ -482,7 +482,7 @@
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <p>Are you sure you want to deactivate your account?
+                                                                <p><span class="fw-bold">Are you sure you want to deactivate your account?</span> <br>
                                                                     This action is irreversible, and you will lose
                                                                     access to all features immediately. You can
                                                                     reactivate your account by logging in again.</p>
@@ -490,7 +490,7 @@
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Cancel</button>
-                                                                <button type="button" class="btn btn-danger btn-sm">Yes,
+                                                                <button type="button" class="btn btn-danger btn-md" (click)="deactivateStudent()">Yes,
                                                                     Deactivate</button>
                                                             </div>
                                                         </div>

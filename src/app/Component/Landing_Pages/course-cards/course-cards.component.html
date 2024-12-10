@@ -4,12 +4,10 @@
         <div class="row g-4">
             <!-- Added Filter -->
             <div class="col-lg-4 col-md-6 col-sm-12">
-                <label for="AddedFilter" class="form-label fw-semibold text-muted">Added:</label>
-                <select id="AddedFilter" class="form-select">
-                    <option selected>Pending</option>
-                    <option value="0">Recently</option>
-                    <option value="1">Past</option>
-                    <option value="2">Future</option>
+                <label for="AddedFilter" class="form-label fw-semibold text-muted">CategoryFilter:</label>
+                <select id="CategoryFilter" class="form-select" *ngIf="categories">
+                    <option selected>Allcategories</option>
+                    <option value="{{items.id}}" *ngFor="let items of categories">{{items.categoryName}}</option>
                 </select>
             </div>
             <!-- Level Filter -->
@@ -58,7 +56,7 @@
 
     <div class="row py-4" *ngIf="paginateCourses != null">
         <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-4"
-            *ngFor="let course of paginatedCourses  | courseFilter:filterlevel : filterPrice  let i =index">
+            *ngFor="let course of paginatedCourses  | courseFilter:filterlevel : filterPrice : filterCategory let i =index">
             <div class="card border-0  rounded-2 course-card">
                 <div class="position-relative">
                     <!-- Badge for Level -->

@@ -56,6 +56,7 @@ export interface Course {
   createdDate: Date;
   updatedDate: Date;
   schedulesCount: number;
+  feedBackRate:number;
 
   schedules: Schedule[];
   feedbacks:FeedBack[];
@@ -160,6 +161,8 @@ export interface FeedBack{
     feedBackDate:Date;
     studentId:string;
     courseId:string;
+
+    student:Student;
 }
 
 export interface ContactUs{

@@ -71,7 +71,7 @@
                     <h5 class="card-title mb-2 text-dark fw-bold">{{ course.courseName }}</h5>
                     <!--rating-->
                     <div class=" pb-2">
-                        <i class="bi bi-star-fill text-warning" *ngFor="let i of [].constructor(3)"></i>
+                        <i class="bi bi-star-fill text-warning" *ngFor="let i of [].constructor(course.feedBackRate)"></i>
                     </div>
                     <!-- Price -->
                     <p class="card-text text-danger fw-semibold">Rs {{ course.courseFee }}</p>

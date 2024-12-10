@@ -47,8 +47,8 @@
                   <span class="input-group-text bg-white"><i class="bi bi-people text-danger"></i></span>
                 </div>
                 <select formControlName="audienceType" class="form-control border-start-0">
-                  <option value="1">Admins</option>
-                  <option value="2">Students</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Student</option>
                   <option value="3">Everyone</option>
                 </select>
               </div>
@@ -98,8 +98,8 @@
                     <td>{{announcement.datePosted | date}}</td>
                     <td>{{announcement.expirationDate | date}}</td>
                     <td  [ngStyle]="{
-                      color: announcement.audienceType === 'Admins' ? 'darkred' :
-                      announcement.audienceType === 'Students' ? 'darkgreen' :
+                      color: announcement.audienceType === 'Admin' ? 'darkred' :
+                      announcement.audienceType === 'Student' ? 'darkgreen' :
                       announcement.audienceType === 'Everyone' ? 'darkblue' : 'black'
                     }">{{announcement.audienceType}}</td>
                     <td class="text-center">

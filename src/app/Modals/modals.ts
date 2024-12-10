@@ -160,6 +160,8 @@ export interface FeedBack{
     feedBackDate:Date;
     studentId:string;
     courseId:string;
+
+    student:Student;
 }
 
 export interface ContactUs{

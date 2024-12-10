@@ -200,41 +200,30 @@
         <div class="card-body p-0">
           <!-- Feedback List -->
           <ul class="list-group list-group-flush">
-            <!-- Feedback Item 1 -->
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-              <div class="ms-2 me-auto">
-                <div class="fw-bold text-primary">John Doe</div>
-                <small class="text-muted">2 hours ago</small>
-                <p class="mb-0 mt-1">"Great content, but more examples would help."</p>
-              </div>
-            </li>
-            <!-- Feedback Item 2 -->
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-              <div class="ms-2 me-auto">
-                <div class="fw-bold text-primary">Jane Smith</div>
-                <small class="text-muted">1 day ago</small>
-                <p class="mb-0 mt-1">"The course scheduling feature is fantastic!"</p>
-              </div>
-            </li>
-            <!-- Feedback Item 3 -->
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-              <div class="ms-2 me-auto">
-                <div class="fw-bold text-primary">Emily Clark</div>
-                <small class="text-muted">3 days ago</small>
-                <p class="mb-0 mt-1">"Please add more advanced topics in AI."</p>
-              </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-start">
-              <div class="ms-2 me-auto">
-                <div class="fw-bold text-primary">Emily Clark</div>
-                <small class="text-muted">3 days ago</small>
-                <p class="mb-0 mt-1">"Please add more advanced topics in AI."</p>
-              </div>
-            </li>
+            <ng-container *ngFor="let feedback of feedBacks">
+              <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                  <div class="fw-bold text-primary">
+                    {{feedback.student.firstName}} {{feedback.student.lastName}}
+                  </div>
+                  <small class="text-muted">{{feedback.feedBackDate | date}}</small>
+                  <p class="mb-0 mt-1">{{feedback.feedBackText}}</p>
+                </div>
+                <!-- Star Rating -->
+                <div class="mt-2">
+                  <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+                    <i 
+                      class="bi" 
+                      [ngClass]="feedback.rating > i ? 'bi-star-fill text-warning' : 'bi-star text-muted'">
+                    </i>
+                  </ng-container>
+                </div>
+              </li>
+            </ng-container>
           </ul>
         </div>
         <div class="card-footer bg-light text-center" >
-
+          
         </div>
       </div>
     </div>

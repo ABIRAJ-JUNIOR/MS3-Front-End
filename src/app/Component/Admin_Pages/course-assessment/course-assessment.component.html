@@ -173,7 +173,7 @@
               <label for="startDate" class="form-label fw-bold text-dark">Start Date</label>
               <div class="input-group">
                 <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-calendar-event"></i></span>
-                <input type="text" formControlName="startDate" class="form-control border rounded-end shadow-sm" bsDatepicker [bsConfig]="{ isAnimated: true }" required/>
+                <input type="text" formControlName="startDate" class="form-control border rounded-end shadow-sm" placeholder="Select Start Date" bsDatepicker [bsConfig]="{ isAnimated: true }" required/>
               </div>
               <div *ngIf="assessmentForm.controls['startDate'].touched && assessmentForm.controls['startDate'].invalid" class="text-danger small mt-1">
                 Start Date is required.
@@ -185,7 +185,7 @@
               <label for="endDate" class="form-label fw-bold text-dark">End Date</label>
               <div class="input-group">
                 <span class="input-group-text bg-light text-dark border rounded-start"><i class="bi bi-calendar-check"></i></span>
-                <input type="text" formControlName="endDate" class="form-control border rounded-end shadow-sm" bsDatepicker [bsConfig]="{ isAnimated: true }" required/>
+                <input type="text" formControlName="endDate" class="form-control border rounded-end shadow-sm" placeholder="Select End Date" bsDatepicker [bsConfig]="{ isAnimated: true }" required/>
               </div>
               <div *ngIf="assessmentForm.controls['endDate'].touched && assessmentForm.controls['endDate'].invalid" class="text-danger small mt-1">
                 End Date is required.

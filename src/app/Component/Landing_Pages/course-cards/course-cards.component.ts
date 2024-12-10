@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { CourseFilterPipe } from '../../../Pipes/course-filter.pipe';
 import { PaymentDataService } from '../../../Service/Data/Payment_Data/payment-data.service';
 import { Router, RouterModule } from '@angular/router';
+import { Course } from '../../../Modals/modals';
 
 @Component({
   selector: 'app-course-cards',

@@ -69,7 +69,7 @@ export class StudentListComponent implements OnInit {
 
   private initializeForm(): void {
     this.profileForm = this.fb.group({
-      nic: ['',Validators.required,],
+      nic: ['', [Validators.required, Validators.pattern(/^\d{9}[Vv]|\d{12}$/)]],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       dateOfBirth: ['', Validators.required],

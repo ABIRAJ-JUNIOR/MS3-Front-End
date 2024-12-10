@@ -109,7 +109,7 @@ export class CourseCardsComponent implements OnInit {
     this.filterlevel=level.value
     this.filterPrice=price.value
     this.filterCategory=CategoryFilter.value
-    this.paginateCourses()
+    this.paginateCourses();
   }
 
   PaymentCourse:any[]=[]

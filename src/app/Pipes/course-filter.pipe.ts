@@ -7,8 +7,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class CourseFilterPipe implements PipeTransform {
 
   transform(Courses: any[], level?: string, price?: string, categoryId?: string): any[] {
-
     if (!Courses) return [];
+
+  
+    if (categoryId) {
+      Courses = Courses.filter(item => item.courseCategoryId === categoryId);
+    }
+
     if (level) {
       if (level === '0') {
         Courses = Courses.filter(x => x.level.toLowerCase() === "beginner");
@@ -34,12 +39,7 @@ export class CourseFilterPipe implements PipeTransform {
         return true;
       });
     }
-    if (categoryId) {
-      Courses = Courses.filter(item => {
-        return item.courseCategoryId === categoryId
-      })
-      
-    }
+
 
     return Courses;
 

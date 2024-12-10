@@ -19,8 +19,8 @@ export class AnnouncementService {
     return this.http.get<Announcement[]>(`${this.apiUrl}/Announcement`);
   }
 
-  GetRecentAnnouncements(){
-    return this.http.get<Announcement[]>(`${this.apiUrl}/Announcement/Recent`)
+  GetRecentAnnouncements(type:number){
+    return this.http.get<Announcement[]>(`${this.apiUrl}/Announcement/Recent/${type}`)
   }
 
   deleteAnnouncement(id: string) {

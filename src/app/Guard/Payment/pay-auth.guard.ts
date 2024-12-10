@@ -20,6 +20,4 @@ export const payAuthGuard: CanActivateFn = (route, state) => {
     router.navigate(['/signin'])
     return false
   }
-
-  
 };

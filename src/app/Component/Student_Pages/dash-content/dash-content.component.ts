@@ -62,12 +62,9 @@ export class DashContentComponent implements OnInit {
 
 
   enrollmentServiceLoad() {
-    console.log("Your Enrollments id" + this.StudentTokenDetails.Id)
-
     this.EnrollmentService.getAllEnrollmentsByStudentId(this.StudentTokenDetails.Id).subscribe({
       next: (response) => {
         this.Enrollments = response
-        console.log(this.Enrollments[0])
       }, error: () => {
 
       }, complete: () => {

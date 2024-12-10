@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { RouterOutlet, RouterModule, Router } from "@angular/router";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
-import { Student } from "../../../Modals/modals";
+import { Announcement, Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { NotificationServiceService } from "../../../Service/API/Notification/notification-service.service";
 import { ToastrService } from "ngx-toastr";
@@ -26,7 +26,6 @@ export class StudentDashboardComponent implements OnInit {
 
   StudentDetails: any;
   StudentTokenDetails: any;
-  typeCheck: string = "Students"
 
 
 
@@ -39,6 +38,7 @@ export class StudentDashboardComponent implements OnInit {
     this.StudentsLoad();
     this.notificationLoadItems()
     this.AnnouncementLoad();
+    this.loadRecentAnnouncement();
 
   }
 
@@ -50,9 +50,8 @@ export class StudentDashboardComponent implements OnInit {
       next: (response: any) => {
         this.Notifications = response
         this.NotificationLength=this.Notifications.length
-        console.log(this.Notifications)
       }, error: (error) => {
- console.log(error.message)
+        console.log(error.message)
       }
     })
   }
@@ -77,19 +76,27 @@ export class StudentDashboardComponent implements OnInit {
   AnnouncementLoad() {
     this.anouncementService.GetAllAnouncement().subscribe({
       next: (data: any) => {
-        this.Announcements = data
       }, error: (error) => {
         console.log(error.message)
       }, complete: () => {
+        console.log(this.Announcements);
         for (let i: any = 0; i < this.Announcements.length; i++) {
           const element = this.Announcements[i];
           if (element.isActive === true) {
-            if (element.audienceType == "Students") {
+            if (element.audienceType != "Admin") {
               this.AnnouncementLength++;
             }
           }
 
         }
+      }
+    })
+  }
+
+  private loadRecentAnnouncement():void{
+    this.anouncementService.GetRecentAnnouncements(2).subscribe({
+      next:(res:Announcement[])=>{
+        this.Announcements = res
       }
     })
   }

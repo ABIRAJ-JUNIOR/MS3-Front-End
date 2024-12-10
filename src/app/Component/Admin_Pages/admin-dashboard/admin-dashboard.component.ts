@@ -19,9 +19,6 @@ import { HasRoleDirective } from '../../../Directives/has-role.directive';
 export class AdminDashboardComponent implements OnInit {
   announcements:Announcement[] = [];
   totalAnnouncements:number = 0
-  deleteAnnouncement(index: number): void {
-    this.announcements.splice(index, 1);
-  }
   
   loginData!:any
   adminData!:Admin;
@@ -57,7 +54,7 @@ export class AdminDashboardComponent implements OnInit {
     this.announcement.GetAllAnouncement().subscribe({
       next:(res:Announcement[])=>{
         res.forEach(a => {
-          if(a.audienceType != "Students"){
+          if(a.audienceType != "Student"){
             this.totalAnnouncements ++
           }
         })
@@ -66,7 +63,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   private loadRecentAnnouncement():void{
-    this.announcement.GetRecentAnnouncements().subscribe({
+    this.announcement.GetRecentAnnouncements(1).subscribe({
       next:(res:Announcement[])=>{
         this.announcements = res
       }

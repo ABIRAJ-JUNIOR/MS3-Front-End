@@ -181,7 +181,7 @@
                 <!-- Announcement Items -->
                 <li *ngFor="let announcement of Announcements; let i = index"
                   class="dropdown-item d-flex align-items-start">
-                  <div *ngIf="announcement.audienceType==typeCheck">
+                  <div *ngIf="announcement.audienceType != 'Admin'">
                     <p class="mb-1 fw-bold">{{ announcement.title }}</p>
                     <p class="mb-0 text-muted small">{{ announcement.datePosted |date }}</p>
                   </div>
@@ -245,7 +245,7 @@
       </div>
       <div class="modal-body" *ngIf="Announcements">
         <div *ngFor="let item of Announcements">
-          <div class="notification" *ngIf="item.isActive===true && item.audienceType==typeCheck">
+          <div class="notification" *ngIf="item.isActive == true && item.audienceType != 'Admin' ">
             <div class="notification-header">
               <span class="notification-type">{{item.datePosted}}</span>
               <span class="notification-time">{{item.expirationDate}}</span>

@@ -1,5 +1,13 @@
 <div class="container">
-  <div class="table-title">Audit Log</div>
+  <div class="table-title d-flex justify-content-between align-items-center">
+    <div>
+      Audit Log
+    </div>
+    <div>
+      <label for="actionDateFilter" class="me-2">Filter by Action Date:</label>
+      <input id="actionDateFilter" type="text" class="form-control text-center" style="display: inline-block; width: auto;" placeholder="Enter the Date" [(ngModel)]="filterDate" bsDatepicker [bsConfig]="{ isAnimated: true }"/>
+    </div>
+  </div>
   <div class="table-wrapper">
     <table class="table table-bordered table-hover">
       <thead>
@@ -13,7 +21,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of auditLog; let i = index">
+        <tr *ngFor="let item of auditLog | searchAuditLogs:filterDate; let i = index">
           <td data-label="#">{{i+1}}</td>
           <td data-label="Name">{{item.adminResponse.firstName}} {{item.adminResponse.lastName}}</td>
           <td data-label="Phone">{{item.adminResponse.phone}}</td>

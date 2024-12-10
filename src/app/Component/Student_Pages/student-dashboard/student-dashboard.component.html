@@ -179,7 +179,7 @@
                 </li>
 
                 <!-- Announcement Items -->
-                <li *ngFor="let announcement of Announcements; let i = index"
+                <li *ngFor="let announcement of ResentAnnouncements; let i = index"
                   class="dropdown-item d-flex align-items-start">
                   <div *ngIf="announcement.audienceType != 'Admin'">
                     <p class="mb-1 fw-bold">{{ announcement.title }}</p>

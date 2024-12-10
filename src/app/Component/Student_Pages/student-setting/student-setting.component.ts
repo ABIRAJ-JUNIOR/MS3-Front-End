@@ -197,7 +197,7 @@ export class StudentSettingComponent implements OnInit {
 export interface StudenUpdateRequest {
   firstName: string;
   lastName?: string;
-  dateOfBirth: string;
+  dateOfBirth: Date;
   gender: number;
   phone: string;
   address: Address

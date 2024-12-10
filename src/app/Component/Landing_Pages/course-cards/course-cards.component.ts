@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { CourseService } from '../../../Service/API/Course/course.service';
-import { Course } from '../../../Modals/modals';
 import { FormsModule } from '@angular/forms';
 import { CourseFilterPipe } from '../../../Pipes/course-filter.pipe';
 import { PaymentDataService } from '../../../Service/Data/Payment_Data/payment-data.service';
@@ -17,7 +16,7 @@ import { Router, RouterModule } from '@angular/router';
 export class CourseCardsComponent implements OnInit {
 
 
-  constructor( private courseService:CourseService,private paymentService:PaymentDataService , private route:Router){
+  constructor( private courseService:CourseService,private paymentService:PaymentDataService , private route:Router ){
     
   }
 
@@ -62,7 +61,8 @@ export class CourseCardsComponent implements OnInit {
   paginatedCourses: any[] = [];
 
   ngOnInit() {
-    this.paginateCourses()
+    this.paginateCourses();
+     this.getCourseCategories();
 
   }
 
@@ -92,6 +92,7 @@ export class CourseCardsComponent implements OnInit {
 
   filterlevel: string="";
   filterPrice: string="";
+  filterCategory:string="";
 
   toggleFilter() {
     this.isFilterVisible = !this.isFilterVisible;
@@ -104,9 +105,11 @@ export class CourseCardsComponent implements OnInit {
   applyFilter() {
     let level=document.getElementById('CourseLevel') as HTMLInputElement
     let price=document.getElementById('Price') as HTMLInputElement
+    let CategoryFilter=document.getElementById('CategoryFilter') as HTMLInputElement
     this.filterlevel=level.value
     this.filterPrice=price.value
-    this.paginateCourses()
+    this.filterCategory=CategoryFilter.value
+    this.paginateCourses();
   }
 
   PaymentCourse:any[]=[]
@@ -128,5 +131,15 @@ export class CourseCardsComponent implements OnInit {
  
   CancelPurchase(){
     this.PaymentCourse = []
+  }
+
+
+  categories:any;
+  getCourseCategories(){
+  this.courseService.GetAllCategory().subscribe({
+    next:(response:any)=>{
+      this.categories = response
+    }
+  })
   }
 }

@@ -1,0 +1,90 @@
+  <!-- Sign-In Form -->
+    <div class="form-container">
+        <form [formGroup]="signinForm" (ngSubmit)="onSubmit()"
+            class="shadow-sm rounded p-4 bg-white mx-auto">
+            <!-- Header Section -->
+            <div class="mb-4">
+                <!-- Logo Section -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="/logo.png" alt="Logo" height="60" class="logo-animation">
+                        <h3 class="m-0 text-dark">Way Makers</h3>
+                    </div>
+                    <div>
+                        <a [routerLink]="['/home']"
+                            class="text-decoration-none text-secondary d-flex align-items-center">
+                            <i class="bi bi-arrow-left"></i>
+                            <span class="ms-2">Back to Home</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- Welcome Message -->
+                <div class="text-center fade-in">
+                    <h4 class="fw-bold mb-2 text-dark">Welcome Back!</h4>
+                    <p class="text-muted small">Sign in to access your courses, manage your profile, and
+                        stay updated.</p>
+                </div>
+            </div>
+
+            <!-- Email Input -->
+            <div class="form-group mb-4">
+                <label for="email" class="form-label visually-hidden">Email Address</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light text-muted" id="btnGroupAddon"><i
+                            class="bi bi-envelope"></i></span>
+                    <input type="email" class="form-control" id="email" placeholder="Your Email"
+                        formControlName="email" aria-label="Email" aria-describedby="btnGroupAddon"
+                        style="height: 48px;" required>
+                </div>
+            </div>
+
+            <!-- Password Input -->
+            <div class="form-group mb-4">
+                <label for="password" class="form-label visually-hidden">Password</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light text-muted" id="btnGroupAddon"><i
+                            class="bi bi-lock"></i></span>
+                    <input type="password" class="form-control" id="password" placeholder="Password"
+                        formControlName="password" aria-label="Password" aria-describedby="btnGroupAddon"
+                        style="height: 48px;" required>
+                </div>
+            </div>
+
+            <!-- Remember Me Checkbox and Forgot Password -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <!-- Remember Me Checkbox -->
+                <div class="form-check">
+                    <input type="checkbox" id="rememberMe" formControlName="rememberMe"
+                        class="form-check-input">
+                    <label for="rememberMe" class="form-check-label text-secondary small">
+                        Remember me
+                    </label>
+                </div>
+                <a [routerLink]="['/forgot-password']"
+                    class="text-decoration-none text-primary small fw-semibold">
+                    Forgot Password?
+                </a>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center gap-3">
+                <button type="submit" class="btn btn-danger flex-grow-1" [disabled]="signinForm.invalid" style="height: 48px; border-radius: 8px;">
+                    Sign In
+                </button>
+            
+                <button type="button" class="btn btn-outline-primary btn-sm flex-grow-1" (click)="bioMatricsLogin()" style="height: 48px; border-radius: 8px; width: 1px;" *ngIf="isBiometrics" >
+                    <i class="bi bi-fingerprint me-2" style="font-size: 1.2rem;"></i>
+                    Biometrics Login
+                </button>
+            </div>
+
+
+            <!-- Registration Link -->
+            <p class="text-center mt-3 small text-muted">
+                Don't have an account?
+                <a [routerLink]="['/signup']" routerLinkActive="router-link-active"
+                    class="text-primary fw-semibold">
+                    Create one here
+                </a>.
+            </p>
+        </form>
+    </div>

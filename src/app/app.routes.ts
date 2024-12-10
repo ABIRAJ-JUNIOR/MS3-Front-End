@@ -43,6 +43,7 @@ import { InvoiceComponent } from './Component/common_components/invoice/invoice.
 import { CourseSechdulesComponent } from './Component/Landing_Pages/course-sechdules/course-sechdules.component';
 import { BiomatricsComponent } from './Component/common_components/biomatrics/biomatrics.component';
 import { EmailVerifiedComponent } from './Component/common_components/email-verified/email-verified.component';
+import { LoginComponent } from './Component/Landing_Pages/login/login.component';
 
 
 export const routes: Routes = [
@@ -53,7 +54,12 @@ export const routes: Routes = [
     { path: 'course-sechdule/:courseId', component: CourseSechdulesComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'about', component: AboutComponent },
-    { path: 'signin', component: SigninComponent },
+    { path: 'signin', component: SigninComponent, children:[
+        {
+            path:'',
+            component:LoginComponent
+        }
+    ]},
     { path: 'signup', component: SignupComponent },
     { path: 'bio', component: BiomatricsComponent },
     { path: 'email-verified/:id', component: EmailVerifiedComponent },

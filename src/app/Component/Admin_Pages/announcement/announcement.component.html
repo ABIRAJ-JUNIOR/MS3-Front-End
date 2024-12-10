@@ -69,7 +69,16 @@
       <div class="table-wrapper">
         <div class="table-title p-3 d-flex justify-content-between">
             <h4 class="mb-0">Announcements</h4>
-          </div>
+            <div>
+              <label class="form-label me-2">Filter:</label>
+              <select class="form-select w-auto d-inline-block" [(ngModel)]="filterStatus">
+                <option value="">All</option>
+                <option value="Admin">Admin</option>
+                <option value="Student">Student</option>
+                <option value="Everyone">Everyone</option>
+              </select>
+            </div>
+        </div>
         <div class="table-responsive">
           <table class="table table-striped table-hover mb-0">
             <thead>
@@ -83,7 +92,7 @@
                 </tr>
               </thead>
             <tbody>
-                <tr *ngFor="let announcement of Announcements;let i=index">
+                <tr *ngFor="let announcement of Announcements | searchAnnouncement:filterStatus;let i=index">
                     <td>{{i+1}}</td>
                     <td>{{announcement.title}}</td>
                     <td>{{announcement.datePosted | date}}</td>

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { OtpVerficationService } from '../../../Service/API/OTP/otp-verfication.service';
@@ -15,12 +15,14 @@ import { OtpVerficationService } from '../../../Service/API/OTP/otp-verfication.
 export class ResetOtpComponent {
   email: any;
   ValidationCheck: boolean = false;
+  changePasswordForm: FormGroup;
 
   constructor(
     private otpService: OtpVerficationService,
     private toastr: ToastrService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private fb:FormBuilder
   ) {
     this.route.paramMap.subscribe((params) => {
       this.email = params.get('email');
@@ -30,7 +32,22 @@ export class ResetOtpComponent {
     }
     });
 
+    this.changePasswordForm = this.fb.group({
+      newPassword: ['', Validators.required],
+      confirmPassword: ['', Validators.required]
+    }, {
+      validator: this.passwordMatchValidator
+    });
+    
+
   }
+  passwordMatchValidator(group: FormGroup) {
+    const newPassword = group.get('newPassword')?.value;
+    const confirmPassword = group.get('confirmPassword')?.value;
+    return newPassword === confirmPassword ? null : { mismatch: true };
+  }
+
+
   private isValidEmail(email: string): boolean {
     const emailPattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
     return emailPattern.test(email);

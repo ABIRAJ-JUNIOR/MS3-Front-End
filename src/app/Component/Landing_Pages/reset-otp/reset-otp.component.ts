@@ -58,7 +58,7 @@ export class ResetOtpComponent {
   onSubmit() {
     let otpGet=document.getElementById('otp') as HTMLInputElement
     let verify = {
-      otp: otpGet.value,
+      otp: otpGet.value.toString(),
       email: this.email
     }
     this.otpService.verifyOtp(verify).subscribe({

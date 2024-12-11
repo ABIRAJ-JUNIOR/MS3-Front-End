@@ -6,7 +6,7 @@
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label for="AddedFilter" class="form-label fw-semibold text-muted">CategoryFilter:</label>
                 <select id="CategoryFilter" class="form-select" *ngIf="categories">
-                    <option selected>Allcategories</option>
+                    <option value="" selected>Allcategories</option>
                     <option value="{{items.id}}" *ngFor="let items of categories">{{items.categoryName}}</option>
                 </select>
             </div>
@@ -14,7 +14,7 @@
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label for="CourseLevel" class="form-label fw-semibold text-muted">Level:</label>
                 <select id="CourseLevel" class="form-select">
-                    <option selected>All Levels</option>
+                    <option value="" selected>All Levels</option>
                     <option value="0">Beginner</option>
                     <option value="1">Intermediate</option>
                     <option value="2">Advanced</option>

@@ -58,7 +58,7 @@ export class CourseCardsComponent implements OnInit {
   currentPage: number = 1; 
   totalPages: number = 0; 
   pageNumbers: number[] = []; 
-  paginatedCourses: Course[] = [];
+  paginatedCourses:any[] = [];
 
   ngOnInit() {
     this.paginateCourses();
@@ -98,6 +98,7 @@ export class CourseCardsComponent implements OnInit {
     this.isFilterVisible = !this.isFilterVisible;
     this.filterlevel="";
     this.filterPrice=""
+    this.filterCategory=""
 
   }
 

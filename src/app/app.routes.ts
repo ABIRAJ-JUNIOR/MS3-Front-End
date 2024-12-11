@@ -44,6 +44,7 @@ import { CourseSechdulesComponent } from './Component/Landing_Pages/course-sechd
 import { BiomatricsComponent } from './Component/common_components/biomatrics/biomatrics.component';
 import { EmailVerifiedComponent } from './Component/common_components/email-verified/email-verified.component';
 import { LoginComponent } from './Component/Landing_Pages/login/login.component';
+import { ResetPasswordComponent } from './Component/Landing_Pages/reset-password/reset-password.component';
 
 
 export const routes: Routes = [
@@ -58,6 +59,9 @@ export const routes: Routes = [
         {
             path:'',
             component:LoginComponent
+        },{
+            path:'reset',
+            component:ResetPasswordComponent
         }
     ]},
     { path: 'signup', component: SignupComponent },

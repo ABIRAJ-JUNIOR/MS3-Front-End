@@ -8,41 +8,55 @@ import { OtpVerficationService } from '../../../Service/API/OTP/otp-verfication.
 @Component({
   selector: 'app-reset-otp',
   standalone: true,
-  imports: [CommonModule,RouterModule,FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './reset-otp.component.html',
   styleUrl: './reset-otp.component.css'
 })
 export class ResetOtpComponent {
-  email:string="";
-  ValidationCheck:boolean=false;
-  
+  email: any;
+  ValidationCheck: boolean = false;
+
   constructor(
     private otpService: OtpVerficationService,
     private toastr: ToastrService,
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.route.queryParams.subscribe(params => {
-      this.email = params['email'];
-      if (!this.email || !this.isValidEmail(this.email)) {
-        this.toastr.error('Invalid email address.', 'Error');
-        this.router.navigate(['/error-page']); 
-      }
+    this.route.paramMap.subscribe((params) => {
+      this.email = params.get('email');
+    if (!this.email || !this.isValidEmail(this.email)) {
+      this.toastr.error('Invalid email address.', 'Error');
+      this.router.navigate(['/signin/reset']);
+    }
     });
+
   }
   private isValidEmail(email: string): boolean {
     const emailPattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
     return emailPattern.test(email);
   }
 
-  OTP:number=0
+  OTP:string=""
 
- onSubmit() {
-  let verify={
-    email:
+  onSubmit() {
+    let verify = {
+      otp: this.OTP,
+      email: this.email
+    }
+    this.otpService.verifyOtp(verify).subscribe({
+      next: (response: any) => {
+        this.toastr.success(response)
+        this.ValidationCheck = true;
+      }, error: (error) => {
+        this.toastr.error(error.message)
+      }
+    })
+
+
   }
-   this.otpSerivce.verifyOtp()
-   
-      
- }
+
+
+  ChangePassword(){
+    
+  }
 }

@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +22,6 @@ export class OtpVerficationService {
 
   verifyOtp(payload:any){
     const endpoint = `${this.apiUrl}/Otp/otpVerification`;
-    return this.http.post(endpoint, payload , {responseType:'text'});
+    return this.http.post(endpoint, payload, {responseType:'text'});
   }
 }

@@ -33,9 +33,11 @@ export class ResetPasswordComponent {
       },error:(error)=>{
         this.tostr.error(error.message)
       },complete:()=> {
-        this.route.navigate(['/signin/reset-otp/email?='+this.verificationEmail])
+        this.route.navigate(['/signin/reset-otp/'+this.verificationEmail])
       },
      })
 
   }
+
+
 }

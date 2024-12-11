@@ -4,16 +4,16 @@
     <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.5); z-index: 1;">
     </div>
 
-    <div class="container d-flex align-items-center justify-content-center vh-100 position-relative"
+    <div class="container-fluid d-flex align-items-center justify-content-center vh-100 position-relative"
         style="z-index: 2;">
-        <div class="row w-100 align-items-center">
-            <div class="col-lg-6 text-white d-flex flex-column justify-content-center align-items-start"
+        <div class="row w-100 align-items-center justify-content-center">
+            <div class="col-lg-5 offset-lg-1 text-white d-flex flex-column justify-content-center align-items-start"
                 style="z-index: 2;">
                 <div class="position-relative">
                     <!-- Heading with Typing Effect -->
-                    <h1 id="typing-text" class="display-4 fw-bold mb-3"
+                    <h1 id="typing-text" class="display-6 fw-bold mb-3"
                         style="line-height: 1.2; text-shadow: 3px 3px 15px rgba(0, 0, 0, 0.6); font-family: 'Poppins', sans-serif;">
-                        {{ displayedText }}
+                        Welcome to Way Makers Academy. <br>{{ displayedText }}
                     </h1>
 
                     <!-- Subheading Text -->
@@ -30,7 +30,7 @@
                     </button>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <router-outlet></router-outlet>
             </div>
         </div>

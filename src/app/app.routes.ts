@@ -45,6 +45,7 @@ import { BiomatricsComponent } from './Component/common_components/biomatrics/bi
 import { EmailVerifiedComponent } from './Component/common_components/email-verified/email-verified.component';
 import { LoginComponent } from './Component/Landing_Pages/login/login.component';
 import { ResetPasswordComponent } from './Component/Landing_Pages/reset-password/reset-password.component';
+import { ResetOtpComponent } from './Component/Landing_Pages/reset-otp/reset-otp.component';
 
 
 export const routes: Routes = [
@@ -62,6 +63,9 @@ export const routes: Routes = [
         },{
             path:'reset',
             component:ResetPasswordComponent
+        },{
+            path:'reset-otp/:email',
+            component:ResetOtpComponent
         }
     ]},
     { path: 'signup', component: SignupComponent },

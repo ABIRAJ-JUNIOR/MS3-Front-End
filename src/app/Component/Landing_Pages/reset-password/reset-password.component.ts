@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { OtpVerficationService } from '../../../Service/API/OTP/otp-verfication.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reset-password',
@@ -13,11 +15,27 @@ import { RouterModule } from '@angular/router';
 export class ResetPasswordComponent {
 
    verificationEmail:string="";
-   constructor(){
+   constructor(
+    private otpSerivce:OtpVerficationService,
+    private tostr:ToastrService,
+    private route:Router        
+   ){
     
    }
 
   onSubmit() {
-       
+   let EmailVerfiy={
+    email:this.verificationEmail
+   }
+     this.otpSerivce.sendOtp(EmailVerfiy).subscribe({
+      next:(response:any)=>{
+        this.tostr.success(response)
+      },error:(error)=>{
+        this.tostr.error(error.message)
+      },complete:()=> {
+        this.route.navigate(['/signin/reset-otp/email?='+this.verificationEmail])
+      },
+     })
+
   }
 }

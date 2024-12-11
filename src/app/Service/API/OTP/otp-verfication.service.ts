@@ -11,18 +11,18 @@ export class OtpVerficationService {
   apiUrl:string=environment.apiUrl
   constructor(private http:HttpClient) { }
 
-   changePassword(payload:any): Observable<any> {
-    const endpoint = `${this.apiUrl}/changePassword`;
-    return this.http.post(endpoint, payload);
+   changePassword(payload:any) {
+    const endpoint = `${this.apiUrl}/Otp/changePassword`;
+    return this.http.post(endpoint, payload , {responseType:'text'});
   }
 
-  sendOtp(payload:any): Observable<any> {
-    const endpoint = `${this.apiUrl}/sendOtp`;
-    return this.http.post(endpoint, payload);
+  sendOtp(payload:any) {
+    const endpoint = `${this.apiUrl}/Otp/emailVerfication`;
+    return this.http.post(endpoint, payload , {responseType:'text'});
   }
 
-  verifyOtp(payload:any): Observable<any> {
-    const endpoint = `${this.apiUrl}/verifyOtp`;
-    return this.http.post(endpoint, payload);
+  verifyOtp(payload:any){
+    const endpoint = `${this.apiUrl}/Otp/otpVerification`;
+    return this.http.post(endpoint, payload , {responseType:'text'});
   }
 }

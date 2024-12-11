@@ -1,48 +1,101 @@
-  <!-- Sign-In Form -->
-  <div class="form-container">
-    <form 
-        class="shadow-sm rounded p-4 bg-white mx-auto">
-        <!-- Header Section -->
-        <div class="mb-4">
-            <!-- Logo Section -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <div class="d-flex align-items-center gap-3">
-                    <img src="/logo.png" alt="Logo" height="60" class="logo-animation">
-                    <h3 class="m-0 text-dark">Way Makers</h3>
+<!-- Sign-In Form -->
+<div class="form-container">
+
+    <div *ngIf="!ValidationCheck">
+        <form class="shadow-sm rounded p-4 bg-white mx-auto" (ngSubmit)="onSubmit()">
+            <!-- Header Section -->
+            <div class="mb-4">
+                <!-- Logo Section -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="/logo.png" alt="Logo" height="60" class="logo-animation">
+                        <h3 class="m-0 text-dark">Way Makers</h3>
+                    </div>
+                    <div>
+                        <a [routerLink]="['/home']"
+                            class="text-decoration-none text-secondary d-flex align-items-center">
+                            <i class="bi bi-arrow-left"></i>
+                            <span class="ms-2">Back to Home</span>
+                        </a>
+                    </div>
                 </div>
-                <div>
-                    <a [routerLink]="['/home']"
-                        class="text-decoration-none text-secondary d-flex align-items-center">
-                        <i class="bi bi-arrow-left"></i>
-                        <span class="ms-2">Back to Home</span>
-                    </a>
+                <!-- Welcome Message -->
+                <div class="text-center fade-in">
+                    <h4 class="fw-bold mb-2 text-dark">Welcome Back!</h4>
+                    <p class="text-muted small">Sign in to access your courses, manage your profile, and
+                        stay updated.</p>
                 </div>
             </div>
-            <!-- Welcome Message -->
-            <div class="text-center fade-in">
-                <h4 class="fw-bold mb-2 text-dark">Welcome Back!</h4>
-                <p class="text-muted small">Sign in to access your courses, manage your profile, and
-                    stay updated.</p>
+
+            <!-- Email Input -->
+            <div class="form-group mb-4">
+                <label for="email" class="form-label visually-hidden">OTP</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light text-muted" id="btnGroupAddon"><i
+                            class="bi bi-envelope"></i></span>
+                    <input type="number" class="form-control" id="email" placeholder="Your OTP" [(ngModel)]="OTP" name="OTP"
+                        aria-label="Email" aria-describedby="btnGroupAddon" style="height: 48px;" required>
+                </div>
             </div>
-        </div>
 
-        <!-- Email Input -->
-        <div class="form-group mb-4">
-            <label for="email" class="form-label visually-hidden">OTP</label>
-            <div class="input-group">
-                <span class="input-group-text bg-light text-muted" id="btnGroupAddon"><i
-                        class="bi bi-envelope"></i></span>
-                <input type="number" class="form-control" id="email" placeholder="Your Email"
-                    formControlName="email" aria-label="Email" aria-describedby="btnGroupAddon"
-                    style="height: 48px;" required>
+            <div class="d-flex justify-content-between align-items-center gap-3">
+                <button type="submit" class="btn btn-danger flex-grow-1" style="height: 48px; border-radius: 8px;">
+                    Enter OTP
+                </button>
             </div>
-        </div>
 
-        <div class="d-flex justify-content-between align-items-center gap-3">
-            <button type="submit" class="btn btn-danger flex-grow-1"  style="height: 48px; border-radius: 8px;">
-                Sign In
-            </button>
-        </div>
+        </form>
+    </div>
+    <div *ngIf="ValidationCheck">
+        <form class="shadow-sm rounded p-4 bg-white mx-auto">
+            <!-- Header Section -->
+            <div class="mb-4">
+                <!-- Logo Section -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="d-flex align-items-center gap-3">
+                        <img src="/logo.png" alt="Logo" height="60" class="logo-animation">
+                        <h3 class="m-0 text-dark">Way Makers</h3>
+                    </div>
+                    <div>
+                        <a [routerLink]="['/home']"
+                            class="text-decoration-none text-secondary d-flex align-items-center">
+                            <i class="bi bi-arrow-left"></i>
+                            <span class="ms-2">Back to Home</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- Welcome Message -->
+                <div class="text-center fade-in">
+                    <h4 class="fw-bold mb-2 text-dark">Welcome Back!</h4>
+                    <p class="text-muted small">Sign in to access your courses, manage your profile, and
+                        stay updated.</p>
+                </div>
+            </div>
 
-    </form>
+            <!-- Email Input -->
+            <div class="form-group mb-4">
+                <label for="email" class="form-label visually-hidden">Password</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-light text-muted" id="btnGroupAddon"><i
+                            class="bi bi-envelope"></i></span>
+                    <input type="number" class="form-control"  placeholder="New Password" aria-label="Email"
+                        aria-describedby="btnGroupAddon" style="height: 48px;"   required>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text bg-light text-muted" id="btnGroupAddon"><i
+                            class="bi bi-envelope"></i></span>
+                    <input type="number" class="form-control mt-3"  placeholder="Confirm Password"
+                        aria-label="Email" aria-describedby="btnGroupAddon" style="height: 48px;" required>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center gap-3">
+                <button type="submit" class="btn btn-danger flex-grow-1" style="height: 48px; border-radius: 8px;">
+                    Enter OTP
+                </button>
+            </div>
+
+        </form>
+    </div>
+
 </div>

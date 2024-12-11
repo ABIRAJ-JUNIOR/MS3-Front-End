@@ -2,7 +2,7 @@
 <div class="form-container">
 
     <div *ngIf="!ValidationCheck">
-        <form class="shadow-sm rounded p-4 bg-white mx-auto" (ngSubmit)="onSubmit()">
+        <form class="shadow-sm rounded p-4 bg-white mx-auto">
             <!-- Header Section -->
             <div class="mb-4">
                 <!-- Logo Section -->
@@ -33,21 +33,21 @@
                 <div class="input-group">
                     <span class="input-group-text bg-light text-muted" id="btnGroupAddon"><i
                             class="bi bi-envelope"></i></span>
-                    <input type="text" class="form-control" id="email" placeholder="Your OTP" [(ngModel)]="OTP" name="OTP"
+                    <input type="text" class="form-control" id="otp" placeholder="Your OTP"
                         aria-label="Email" aria-describedby="btnGroupAddon" style="height: 48px;" required>
                 </div>
             </div>
 
             <div class="d-flex justify-content-between align-items-center gap-3">
-                <button type="submit" class="btn btn-danger flex-grow-1" style="height: 48px; border-radius: 8px;">
+                <button type="button" (click)="onSubmit()" class="btn btn-danger flex-grow-1" style="height: 48px; border-radius: 8px;">
                     Enter OTP
-                </button>
+                </button >
             </div>
 
         </form>
     </div>
     <div *ngIf="ValidationCheck">
-        <form class="shadow-sm rounded p-4 bg-white mx-auto">
+        <form class="shadow-sm rounded p-4 bg-white mx-auto" [formGroup]="changePasswordForm" (ngSubmit)="ChangePassword()">
             <!-- Header Section -->
             <div class="mb-4">
                 <!-- Logo Section -->
@@ -78,19 +78,19 @@
                 <div class="input-group">
                     <span class="input-group-text bg-light text-muted" id="btnGroupAddon"><i
                             class="bi bi-envelope"></i></span>
-                    <input type="number" class="form-control"  placeholder="New Password" aria-label="Email"
+                    <input type="text" class="form-control" formControlName="newPassword"  placeholder="newPassword" aria-label="Email"
                         aria-describedby="btnGroupAddon" style="height: 48px;"   required>
                 </div>
-                <div class="input-group">
+                <div class="input-group mt-3">
                     <span class="input-group-text bg-light text-muted" id="btnGroupAddon"><i
                             class="bi bi-envelope"></i></span>
-                    <input type="number" class="form-control mt-3"  placeholder="Confirm Password"
+                    <input type="text" class="form-control" formControlName="confirmPassword"  placeholder="Confirm Password"
                         aria-label="Email" aria-describedby="btnGroupAddon" style="height: 48px;" required>
                 </div>
             </div>
 
             <div class="d-flex justify-content-between align-items-center gap-3">
-                <button type="submit" class="btn btn-danger flex-grow-1" style="height: 48px; border-radius: 8px;">
+                <button type="submit" [disabled]="changePasswordForm.invalid" class="btn btn-danger flex-grow-1" style="height: 48px; border-radius: 8px;">
                     Change Password
                 </button>
             </div>

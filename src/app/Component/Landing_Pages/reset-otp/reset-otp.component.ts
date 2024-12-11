@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { OtpVerficationService } from '../../../Service/API/OTP/otp-verfication.service';
@@ -8,7 +8,7 @@ import { OtpVerficationService } from '../../../Service/API/OTP/otp-verfication.
 @Component({
   selector: 'app-reset-otp',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule,ReactiveFormsModule , FormsModule],
   templateUrl: './reset-otp.component.html',
   styleUrl: './reset-otp.component.css'
 })
@@ -56,16 +56,18 @@ export class ResetOtpComponent {
   OTP:string=""
 
   onSubmit() {
+    let otpGet=document.getElementById('otp') as HTMLInputElement
     let verify = {
-      otp: this.OTP,
+      otp: otpGet.value,
       email: this.email
     }
     this.otpService.verifyOtp(verify).subscribe({
       next: (response: any) => {
         this.toastr.success(response)
         this.ValidationCheck = true;
-      }, error: (error) => {
-        this.toastr.error(error.message)
+      }, error: (error:any) => {
+        this.toastr.error(error.error || 'OTP verification failed. Please try again.')
+
       }
     })
 
@@ -74,6 +76,19 @@ export class ResetOtpComponent {
 
 
   ChangePassword(){
-    
+    let changePass={
+      email:this.email,
+      NewPassword:this.changePasswordForm.get('newPassword')?.value
+    }
+    console.log(changePass)
+    this.otpService.changePassword(changePass).subscribe({
+      next:(response:any)=>{
+        this.toastr.success(response)
+        this.router.navigate(['/signin'])
+
+      },error:(error)=>{
+        this.toastr.error(error.error)
+      }
+    })
   }
 }

@@ -142,8 +142,9 @@
                   <span class="input-group-text"><i class="bi bi-card-text"></i></span>
                   <input type="text" formControlName="nic" class="form-control border rounded-end-3 shadow-sm" placeholder="Enter NIC" >
                 </div>
-                <div *ngIf="profileForm.controls['nic'].invalid && profileForm.controls['nic'].touched" class="text-danger">
-                  NIC is required.
+                <div *ngIf="profileForm.get('nic')?.touched && profileForm.get('nic')?.invalid" class="text-danger small">
+                  <span *ngIf="profileForm.get('nic')?.hasError('required')">NIC is required.</span>
+                  <span *ngIf="profileForm.get('nic')?.hasError('pattern')">Invalid NIC format.</span>
                 </div>
               </div>
               <div class="col-12 col-md-6">

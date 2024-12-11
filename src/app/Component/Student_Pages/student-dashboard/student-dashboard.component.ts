@@ -71,13 +71,13 @@ export class StudentDashboardComponent implements OnInit {
 
 
   AnnouncementLength: number = 0;
-  Announcements: any[] = []
+  ResentAnnouncements:Announcement[] = []
+  Announcements: Announcement[] = []
 
   AnnouncementLoad() {
     this.anouncementService.GetAllAnouncement().subscribe({
-      next: (data: any) => {
-      }, error: (error) => {
-        console.log(error.message)
+      next: (data: Announcement[]) => {
+        this.Announcements = data
       }, complete: () => {
         console.log(this.Announcements);
         for (let i: any = 0; i < this.Announcements.length; i++) {
@@ -89,6 +89,9 @@ export class StudentDashboardComponent implements OnInit {
           }
 
         }
+        
+      }, error: (error) => {
+        console.log(error.message)
       }
     })
   }
@@ -96,7 +99,7 @@ export class StudentDashboardComponent implements OnInit {
   private loadRecentAnnouncement():void{
     this.anouncementService.GetRecentAnnouncements(2).subscribe({
       next:(res:Announcement[])=>{
-        this.Announcements = res
+        this.ResentAnnouncements = res
       }
     })
   }

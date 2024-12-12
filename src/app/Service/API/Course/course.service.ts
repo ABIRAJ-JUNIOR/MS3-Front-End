@@ -45,6 +45,10 @@ export class CourseService {
     return this.http.get<Course[]>(this.apiUrl + '/Course/Top3')
   }
 
+  SearchCourse(data:any){
+    return this.http.get<any>(this.apiUrl + `/Course/Search?searchText=${data}`)
+  }
+
 
   //Course Schedule
   schedulePagination(pageNumber:number , pageSize:number){
@@ -69,4 +73,6 @@ export class CourseService {
   GetAllCategory(){
     return this.http.get<CourseCategory[]>(this.apiUrl + '/CourseCategory/GetAllCategory')
   }
+
+
 }

@@ -1,0 +1,37 @@
+<div class="container">
+    
+    <div class="row py-4" *ngIf="Courses != null">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-4"
+            *ngFor="let course of Courses ">
+            <div class="card border-0  rounded-2 course-card">
+                <div class="position-relative">
+                    <!-- Badge for Level -->
+                    <div class="badge-level">
+                        <span>{{ course.level }}</span>
+                    </div>
+                    <!-- Course Image -->
+                    <img src="{{course.imageUrl}}" class="card-img-top" alt="Course Image">
+                </div>
+                <div class="card-body">
+                    <!-- Course Title -->
+                    <h5 class="card-title mb-2 text-dark fw-bold">{{ course.courseName }}</h5>
+                    <!--rating-->
+                    <div class=" pb-2">
+                        <i class="bi bi-star-fill text-warning" *ngFor="let i of [].constructor(course.feedBackRate)"></i>
+                    </div>
+                    <!-- Price -->
+                    <p class="card-text text-danger fw-semibold">Rs {{ course.courseFee }}</p>
+                    <!-- Enroll & View More -->
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <button class="btn btn-primary btn-enroll" 
+                            (mouseenter)="changeNameEnter($event)" 
+                            (click)="ViewSechduleRouting(course.id)">{{EnrollBtnName}}</button>
+                        <a href="#" class="text-decoration-none view-more" data-bs-toggle="modal"
+                            data-bs-target="#CourseView" (mouseenter)="viewProduct(course)">View More</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

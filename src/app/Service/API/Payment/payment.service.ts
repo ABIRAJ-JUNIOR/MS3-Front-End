@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { PayRequest } from '../../../Component/Landing_Pages/otp-authentication/otp-authentication.component';
 import { Payment, PaymentOverView } from '../../../Modals/modals';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '../../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'

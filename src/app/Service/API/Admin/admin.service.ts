@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Admin, AuditLog } from '../../../Modals/modals';
 import { AdminRequest } from '../../../Component/Admin_Pages/admin-list/admin-list.component';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '../../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'

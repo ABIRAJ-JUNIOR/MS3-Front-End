@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import {  ReactiveFormsModule } from '@angular/forms';
-import {  RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
@@ -12,7 +12,7 @@ import {  RouterModule } from '@angular/router';
   styleUrl: './signin.component.css'
 })
 export class SigninComponent implements OnInit {
-  textToType: string = "Your Sign-In Can Change the World";
+  textToType: string = " Start your journey of growth, learning, and success today";
   displayedText: string = "";
   typingSpeed: number = 100;
 
@@ -21,6 +21,8 @@ export class SigninComponent implements OnInit {
     this.startTypingEffect();
 
   }
+
+
 
   startTypingEffect(): void {
     let index = 0;
@@ -33,7 +35,13 @@ export class SigninComponent implements OnInit {
         clearInterval(typingInterval);
       }
     }, this.typingSpeed);
-  }
+    setTimeout(() => {
+      this.displayedText=""
+      this.startTypingEffect();
+    }, 10000);
 
+ 
+  }
+   
 
 }

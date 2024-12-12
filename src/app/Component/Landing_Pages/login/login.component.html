@@ -1,5 +1,5 @@
   <!-- Sign-In Form -->
-    <div class="form-container">
+    <div class="">
         <form [formGroup]="signinForm" (ngSubmit)="onSubmit()"
             class="shadow-sm rounded p-4 bg-white mx-auto">
             <!-- Header Section -->
@@ -81,7 +81,7 @@
             <!-- Registration Link -->
             <p class="text-center mt-3 small text-muted">
                 Don't have an account?
-                <a [routerLink]="['/signup']" routerLinkActive="router-link-active"
+                <a [routerLink]="['/signin/signup']" routerLinkActive="router-link-active"
                     class="text-primary fw-semibold">
                     Create one here
                 </a>.

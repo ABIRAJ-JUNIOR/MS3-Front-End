@@ -61,6 +61,9 @@ export const routes: Routes = [
             path:'',
             component:LoginComponent
         },{
+            path:'signup',
+            component:SignupComponent
+        },{
             path:'reset',
             component:ResetPasswordComponent
         },{
@@ -68,7 +71,6 @@ export const routes: Routes = [
             component:ResetOtpComponent
         }
     ]},
-    { path: 'signup', component: SignupComponent },
     { path: 'bio', component: BiomatricsComponent },
     { path: 'email-verified/:id', component: EmailVerifiedComponent },
     {

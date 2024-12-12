@@ -60,7 +60,7 @@
             <div class="card border-0  rounded-2 course-card">
                 <div class="position-relative">
                     <!-- Badge for Level -->
-                    <div class="badge-level">
+                    <div class="badge-level" [ngClass]="getStyles(course)">
                         <span>{{ course.level }}</span>
                     </div>
                     <!-- Course Image -->

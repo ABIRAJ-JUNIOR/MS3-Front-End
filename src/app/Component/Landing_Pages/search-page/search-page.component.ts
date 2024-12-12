@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CourseService } from '../../../Service/API/Course/course.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,28 +12,56 @@ import { CommonModule } from '@angular/common';
 })
 export class SearchPageComponent {
 
-CourseName:any;
-  constructor(private CourseApiService:CourseService,private routes:ActivatedRoute) {
+  CourseName: any;
+  constructor(private CourseApiService: CourseService, private routes: ActivatedRoute,private route:Router) {
     this.routes.paramMap.subscribe((params) => {
       this.CourseName = params.get('name');
       console.log(this.CourseName)
       this.SearchCourses();
     });
-  
+
   }
 
-Courses:any;
+  Courses: any;
 
-SearchCourses(){
-  this.CourseApiService.SearchCourse(this.CourseName).subscribe({
-    next:(response:any)=>{
-      this.Courses=response
-      console.log(this.Courses)
-    },error:(error)=>{
-      console.log(error.error);
-      window.history.back();
-    }
-  })
-}
+  SearchCourses() {
+    this.CourseApiService.SearchCourse(this.CourseName).subscribe({
+      next: (response: any) => {
+        this.Courses = response
+        console.log(this.Courses)
+      }, error: (error) => {
+        console.log(error.error);
+        window.history.back();
+      }
+    })
+  }
+
+
+  EnrollBtnName: string = "Enroll now"
+
+  changeNameMouseleave($event: MouseEvent) {
+    const buttonElement = event?.target as HTMLButtonElement;
+    buttonElement.innerText = "Enroll now"
+  }
+  changeNameEnter($event: MouseEvent) {
+    const buttonElement = event?.target as HTMLButtonElement;
+    buttonElement.innerText = "Click To Buy"
+  }
+
+
+  ModalProduct: any[] = [];
+
+  viewProduct(product: any) {
+    this.ModalProduct = []
+    this.ModalProduct.push(product)
+  }
+
+  ViewSechduleRouting(courseId: any) {
+    this.route.navigate(['/course-sechdule/', courseId])
+  }
+
+  ClearModal() {
+    this.ModalProduct = []
+  }
 
 }

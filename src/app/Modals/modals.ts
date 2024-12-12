@@ -163,6 +163,7 @@ export interface FeedBack{
     courseId:string;
 
     student:Student;
+    course:Course;
 }
 
 export interface ContactUs{

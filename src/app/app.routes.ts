@@ -46,6 +46,7 @@ import { EmailVerifiedComponent } from './Component/common_components/email-veri
 import { LoginComponent } from './Component/Landing_Pages/login/login.component';
 import { ResetPasswordComponent } from './Component/Landing_Pages/reset-password/reset-password.component';
 import { ResetOtpComponent } from './Component/Landing_Pages/reset-otp/reset-otp.component';
+import { CourseFeedbacksComponent } from './Component/Admin_Pages/course-feedbacks/course-feedbacks.component';
 import { SearchPageComponent } from './Component/Landing_Pages/search-page/search-page.component';
 
 
@@ -112,6 +113,7 @@ export const routes: Routes = [
             { path: 'all-announcement/:Role', component: ViewAllAnnouncementComponent },
             { path: 'account-settings', component: AccountSettingComponent },
             { path: 'invoice', component: InvoiceComponent },
+            { path: 'course-feedbacks', component: CourseFeedbacksComponent },
             { path: '**', redirectTo: 'home', pathMatch: 'full' }
         ],
         canActivate: [adminAuthGuard]

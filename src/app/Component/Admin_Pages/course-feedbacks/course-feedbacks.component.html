@@ -1,0 +1,56 @@
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Student Feedbacks</h2>
+  
+    <!-- Feedback Cards -->
+    <div class="row">
+      <div  class="col-md-4 mb-4" *ngFor="let feedback of feedbacks">
+        <div class="card shadow-sm border-primary">
+          <div class="card-body">
+            <h5 class="card-title text-primary">
+              {{ feedback.student.firstName + feedback.student.lastName }}
+            </h5>
+            <p class="card-text">
+              <strong>Course:</strong> {{ feedback.course.courseName }}
+            </p>
+            <p class="card-text">
+              <strong>Rating:</strong>
+              <span class="text-warning">
+                ★ {{ feedback.rating }}
+              </span>
+            </p>
+            <p class="card-text text-muted">
+              {{ feedback.feedBackText }}
+            </p>
+          </div>
+          <div class="card-footer bg-light">
+            <small class="text-muted">
+              Submitted on {{ feedback.feedBackDate | date: 'mediumDate' }}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination Section -->
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 bg-light border-top">
+      <div class="hint-text">
+        Showing <b>{{ currentLength }}</b> out of <b>{{ totalItems }}</b> entries
+      </div>
+      <ul class="pagination mb-0">
+        <li class="page-item pointer" [class.disabled]="currentPage === 1">
+          <a class="page-link" (click)="goToPage(currentPage - 1)">Previous</a>
+        </li>
+
+        <li class="page-item pointer" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+          <a class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</a>
+        </li>
+
+        <li class="page-item pointer" [class.disabled]="currentPage === totalPages">
+          <a class="page-link" (click)="goToPage(currentPage + 1)">Next</a>
+        </li>
+      </ul>
+    </div>
+    
+  </div>
+  
+      

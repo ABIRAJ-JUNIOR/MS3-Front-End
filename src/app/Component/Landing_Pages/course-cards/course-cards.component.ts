@@ -149,11 +149,11 @@ export class CourseCardsComponent implements OnInit {
     let colorClass = '';
 
     if (course.level === 'Advanced') {
-      colorClass = 'bg-success'; 
-    } else if (course.level === 'Beginner') {
       colorClass = 'bg-danger'; 
-    } else if (course.level === 'Intermediate') {
+    } else if (course.level === 'Beginner') {
       colorClass = 'bg-primary'; 
+    } else if (course.level === 'Intermediate') {
+      colorClass = 'bg-success'; 
     }
 
     return colorClass;

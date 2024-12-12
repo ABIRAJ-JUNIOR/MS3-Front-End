@@ -4,6 +4,7 @@ import { TopinfoComponent } from '../topinfo/topinfo.component';
 import { jwtDecode } from 'jwt-decode';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../Service/API/Auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-navebar-01',
@@ -19,7 +20,7 @@ export class Navebar01Component {
 
   sidebarCollapsed = false;
 
-  constructor(private authService:AuthService , private router:Router) {
+  constructor(private authService:AuthService , private router:Router , private tostr:ToastrService) {
     if(authService.isLoggedInAdmin()){
       this.isAdmin = true
       this.isStudent = false
@@ -64,7 +65,9 @@ export class Navebar01Component {
 
   SearchCourse() {
      let searchData=document.getElementById('searchData') as HTMLInputElement
-     this.router.navigate(['/search/'+searchData.value])
+     if (searchData.value) {
+      this.router.navigate(['/search/'+searchData.value])
+     }
     }
 
 }

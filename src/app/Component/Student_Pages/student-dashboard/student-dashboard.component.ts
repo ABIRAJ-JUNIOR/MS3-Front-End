@@ -20,6 +20,9 @@ import { AuthService } from "../../../Service/API/Auth/auth.service";
 export class StudentDashboardComponent implements OnInit {
   sidebarCollapsed = false;
   noImage: string = 'https://www.bing.com/ck/a?!&&p=7648fe0c3dc6be6b2188d54e324d5d9352d68f37b129c4ddaaaadf8174ec11a4JmltdHM9MTczMzAxMTIwMA&ptn=3&ver=2&hsh=4&fclid=1a548757-8fff-66c7-3ffe-93498efe67cc&u=a1L2ltYWdlcy9zZWFyY2g_cT1wcm9maWxlJTIwbm8lMjBpbWFnZSZGT1JNPUlRRlJCQSZpZD05MzAzNEM1QTRDQjMyOTE2NzIxNzM3Q0Y2NzE0NDI3NDU1MDRDRTMx&ntb=1';
+
+  NotifyLength: number=0;
+
   toggleSidebar() {
     this.sidebarCollapsed = !this.sidebarCollapsed;
   }

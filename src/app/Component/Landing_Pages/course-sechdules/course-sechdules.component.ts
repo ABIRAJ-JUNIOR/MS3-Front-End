@@ -131,19 +131,7 @@ export class CourseSechdulesComponent {
   }
 
 
-  getStyles(course: any) {
-    let colorClass = '';
-
-    if (course.level === 'Advanced') {
-      colorClass = 'bg-success'; 
-    } else if (course.level === 'Beginner') {
-      colorClass = 'bg-danger'; 
-    } else if (course.level === 'Intermediate') {
-      colorClass = 'bg-primary'; 
-    }
-
-    return colorClass;
-  }
+ 
 
 
 

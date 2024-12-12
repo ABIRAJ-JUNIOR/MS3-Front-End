@@ -49,4 +49,13 @@ export class CourseFeedbacksComponent implements OnInit {
     }
   }
 
+  getRatingBadgeClass(rating: number): string {
+    if (rating >= 4.5) {
+      return 'bg-success text-light';
+    } else if (rating >= 3.5) {
+      return 'bg-warning text-dark';
+    } else {
+      return 'bg-secondary text-light';
+    }
+  }
 }

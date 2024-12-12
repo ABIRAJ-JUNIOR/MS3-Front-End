@@ -3,32 +3,47 @@
   
     <!-- Feedback Cards -->
     <div class="row">
-      <div  class="slide-up col-md-4 mb-4" *ngFor="let feedback of feedbacks">
-        <div class="card shadow-sm border-primary">
+      <div class="slide-up col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let feedback of feedbacks">
+        <div class="card feedback-card shadow-sm border-primary">
           <div class="card-body">
+            <!-- Student Name -->
             <h5 class="card-title text-primary">
-              {{ feedback.student.firstName + feedback.student.lastName }}
+              {{ feedback.student.firstName + ' ' + feedback.student.lastName }}
             </h5>
+      
+            <!-- Course Name -->
             <p class="card-text">
               <strong>Course:</strong> {{ feedback.course.courseName }}
             </p>
+      
+            <!-- Rating -->
             <p class="card-text">
               <strong>Rating:</strong>
               <span class="text-warning">
                 ★ {{ feedback.rating }}
               </span>
             </p>
-            <p class="card-text text-muted">
-              {{ feedback.feedBackText }}
+      
+            <!-- Feedback Text (truncated) -->
+            <p class="card-text feedback-text text-muted">
+              {{ feedback.feedBackText.length > 100 ? (feedback.feedBackText | slice: 0:100) + '...' : feedback.feedBackText }}
             </p>
           </div>
-          <div class="card-footer bg-light">
+      
+          <!-- Footer with Submission Date -->
+          <div class="card-footer bg-light d-flex justify-content-between align-items-center">
             <small class="text-muted">
               Submitted on {{ feedback.feedBackDate | date: 'mediumDate' }}
+            </small>
+            <small>
+              <span class="badge rounded-3" [ngClass]="getRatingBadgeClass(feedback.rating)" >
+                {{ feedback.rating >= 4.5 ? 'Excellent' : feedback.rating >= 3.5 ? 'Good' : 'Average' }}
+              </span>
             </small>
           </div>
         </div>
       </div>
+      
     </div>
 
     <!-- Pagination Section -->

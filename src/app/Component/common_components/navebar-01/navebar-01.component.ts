@@ -13,6 +13,7 @@ import { AuthService } from '../../../Service/API/Auth/auth.service';
   styleUrl: './navebar-01.component.css'
 })
 export class Navebar01Component {
+
   isAdmin:boolean = false;
   isStudent:boolean = false;
 
@@ -59,4 +60,11 @@ export class Navebar01Component {
       this.router.navigate(['/student-dashboard/profile']);
     }
   }
+
+
+  SearchCourse() {
+     let searchData=document.getElementById('searchData') as HTMLInputElement
+     this.router.navigate(['/search/'+searchData.value])
+    }
+
 }

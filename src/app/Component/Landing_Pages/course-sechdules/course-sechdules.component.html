@@ -73,8 +73,8 @@
 
                                         <button class="btn btn-danger btn-md mt-2" type="submit"
                                             (click)="sendPaymentData(item)" data-bs-toggle="modal"
-                                            data-bs-target="#PaymmentConfirmation">
-                                            PURCHASE SECHDULE
+                                            data-bs-target="#PaymmentConfirmation" [disabled]="item.scheduleStatus=='Closed'">
+                                            ENROLL SECHDULE
                                             <i class="bi bi-bag-heart-fill"></i>
                                         </button>
                                     </div>

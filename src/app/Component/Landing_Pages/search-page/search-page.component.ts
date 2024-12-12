@@ -8,14 +8,14 @@ import { FooterComponent } from '../../common_components/footer/footer.component
 @Component({
   selector: 'app-search-page',
   standalone: true,
-  imports: [CommonModule,Navebar01Component,FooterComponent],
+  imports: [CommonModule, Navebar01Component, FooterComponent],
   templateUrl: './search-page.component.html',
   styleUrl: './search-page.component.css'
 })
 export class SearchPageComponent {
 
   CourseName: any;
-  constructor(private CourseApiService: CourseService, private routes: ActivatedRoute,private route:Router) {
+  constructor(private CourseApiService: CourseService, private routes: ActivatedRoute, private route: Router) {
     this.routes.paramMap.subscribe((params) => {
       this.CourseName = params.get('name');
       console.log(this.CourseName)
@@ -65,5 +65,20 @@ export class SearchPageComponent {
   ClearModal() {
     this.ModalProduct = []
   }
+  getStyles(course: any) {
+    let colorClass = '';
+
+    if (course.level === 'Advanced') {
+      colorClass = 'bg-success';
+    } else if (course.level === 'Beginner') {
+      colorClass = 'bg-danger';
+    } else if (course.level === 'Intermediate') {
+      colorClass = 'bg-primary';
+    }
+
+    return colorClass;
+  }
+
+
 
 }

@@ -1,0 +1,65 @@
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Student Feedbacks</h2>
+  
+    <!-- Feedback Cards -->
+    <div class="row">
+      <div 
+        class="col-md-4 mb-4" 
+        *ngFor="let feedback of paginatedFeedbacks"
+      >
+        <div class="card shadow-sm border-primary">
+          <div class="card-body">
+            <h5 class="card-title text-primary">
+              {{ feedback.studentName }}
+            </h5>
+            <p class="card-text">
+              <strong>Course:</strong> {{ feedback.courseName }}
+            </p>
+            <p class="card-text">
+              <strong>Rating:</strong>
+              <span class="text-warning">
+                ★ {{ feedback.rating }}
+              </span>
+            </p>
+            <p class="card-text text-muted">
+              {{ feedback.comments }}
+            </p>
+          </div>
+          <div class="card-footer bg-light">
+            <small class="text-muted">
+              Submitted on {{ feedback.date | date: 'mediumDate' }}
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Pagination -->
+    <nav aria-label="Page navigation" class="mt-4">
+      <ul class="pagination justify-content-center">
+        <li
+          class="page-item"
+          [class.disabled]="currentPage === 1"
+          (click)="goToPage(currentPage - 1)"
+        >
+          <a class="page-link">Previous</a>
+        </li>
+        <li
+          class="page-item"
+          *ngFor="let page of pages"
+          [class.active]="currentPage === page"
+          (click)="goToPage(page)"
+        >
+          <a class="page-link">{{ page }}</a>
+        </li>
+        <li
+          class="page-item"
+          [class.disabled]="currentPage === totalPages"
+          (click)="goToPage(currentPage + 1)"
+        >
+          <a class="page-link">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  

@@ -30,9 +30,12 @@
         </div>
       </div>
     </div>
-  
-    <!-- Pagination -->
-    <nav aria-label="Page navigation" class="mt-4">
+
+    <!-- Pagination Section -->
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 bg-light border-top">
+      <div class="hint-text">
+        Showing <b>{{ currentLength }}</b> out of <b>{{ totalItems }}</b> entries
+      </div>
       <ul class="pagination mb-0">
         <li class="page-item pointer" [class.disabled]="currentPage === 1">
           <a class="page-link" (click)="goToPage(currentPage - 1)">Previous</a>
@@ -46,6 +49,8 @@
           <a class="page-link" (click)="goToPage(currentPage + 1)">Next</a>
         </li>
       </ul>
-    </nav>
+    </div>
+    
   </div>
   
+      

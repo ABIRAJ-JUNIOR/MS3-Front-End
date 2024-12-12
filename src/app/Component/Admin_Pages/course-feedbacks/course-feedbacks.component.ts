@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { FeedbackServiceService } from '../../../Service/API/Feedback/feedback-service.service';
 import { Course, FeedBack } from '../../../Modals/modals';
 import { CourseService } from '../../../Service/API/Course/course.service';
+import { SearchFeedbackPipe } from '../../../Pipes/search-feedback.pipe';
 
 @Component({
   selector: 'app-course-feedbacks',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,SearchFeedbackPipe],
   templateUrl: './course-feedbacks.component.html',
   styleUrl: './course-feedbacks.component.css'
 })

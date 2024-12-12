@@ -17,7 +17,7 @@
         </li>
 
         <ng-container *ngFor="let course of courses">
-          <li (click)="search(course.courseName)" class="pointer dropdown-item d-flex align-items-center justify-content-between" [class.active]="searchText === course.courseName">
+          <li (click)="search(course.id)" class="pointer dropdown-item d-flex align-items-center justify-content-between" [class.active]="searchText === course.courseName">
             <span class="pe-4">{{ course.courseName }}</span>
             <i class="bi bi-check-circle-fill text-success" *ngIf="searchText === course.courseName"></i>
           </li>
@@ -29,7 +29,7 @@
   
     <!-- Feedback Cards -->
     <div class="row">
-      <div class="slide-up col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let feedback of feedbacks">
+      <div class="slide-up col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let feedback of feedbacks | searchFeedback:searchText">
         <div class="card feedback-card shadow-sm border-primary">
           <div class="card-body">
             <!-- Student Name -->

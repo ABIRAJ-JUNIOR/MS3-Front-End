@@ -40,3 +40,21 @@
     color: #fff;
   }
   
+
+  
+.dropdown-toggle {
+  background: linear-gradient(45deg, #4a90e2, #007bff);
+  color: #fff;
+  font-weight: 500;
+}
+
+.dropdown-menu {
+  background-color: #ffffff;
+}
+
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item.active {
+  background-color: #f0f8ff;
+  color: #007bff;
+  border-radius: 5px;
+}

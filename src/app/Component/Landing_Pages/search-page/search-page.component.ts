@@ -2,11 +2,14 @@ import { Component } from '@angular/core';
 import { CourseService } from '../../../Service/API/Course/course.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { TopinfoComponent } from '../../common_components/topinfo/topinfo.component';
+import { Navebar01Component } from '../../common_components/navebar-01/navebar-01.component';
+import { FooterComponent } from '../../common_components/footer/footer.component';
 
 @Component({
   selector: 'app-search-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,TopinfoComponent,Navebar01Component,FooterComponent],
   templateUrl: './search-page.component.html',
   styleUrl: './search-page.component.css'
 })

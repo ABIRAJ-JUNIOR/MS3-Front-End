@@ -1,6 +1,15 @@
+<app-navebar-01></app-navebar-01>
+
+<section class="hero bg-dark text-white py-5">
+    <div class="container text-center">
+        <h1>Find the Right Course for You</h1>
+        <p>Explore a wide range of courses and find the one that best suits your learning goals.</p>
+    </div>
+</section>
 <div class="container">
 
-    <div class="row py-4" *ngIf="Courses != null">
+
+    <div class="row py-5" *ngIf="Courses != null">
         <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-4" *ngFor="let course of Courses ">
             <div class="card border-0  rounded-2 course-card">
                 <div class="position-relative">
@@ -15,7 +24,7 @@
                     <!-- Course Title -->
                     <h5 class="card-title mb-2 text-dark fw-bold">{{ course.courseName }}</h5>
                     <!--rating-->
-                    <div class=" pb-2">
+                    <div class=" pb-2 d-none">
                         <i class="bi bi-star-fill text-warning"
                             *ngFor="let i of [].constructor(course.feedBackRate)"></i>
                     </div>
@@ -54,7 +63,7 @@
                                 <!-- Course Title -->
                                 <h5 class="card-title mb-2 text-dark fw-bold ">{{ ModalProduct[0].courseName }}</h5>
                                 <!--rating-->
-                                <div class=" pb-2">
+                                <div class=" pb-2 d-none">
                                     <i class="bi bi-star-fill text-warning" *ngFor="let i of [].constructor(3)"></i>
                                 </div>
 
@@ -78,3 +87,5 @@
     </div>
 
 </div>
+
+<app-footer></app-footer>

@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { FeedbackServiceService } from '../../../Service/API/Feedback/feedback-service.service';
+import { FeedBack } from '../../../Modals/modals';
 
 @Component({
   selector: 'app-course-feedbacks',
@@ -10,77 +12,36 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './course-feedbacks.component.css'
 })
 export class CourseFeedbacksComponent {
-  feedbacks = [
-    {
-      studentName: 'John Doe',
-      courseName: 'Angular Development',
-      rating: 4.5,
-      comments: 'Great course with an excellent instructor!',
-      date: new Date(),
-    },
-    {
-      studentName: 'Jane Smith',
-      courseName: 'Data Science Basics',
-      rating: 4.0,
-      comments: 'Very informative and easy to follow.',
-      date: new Date(),
-    },
-    {
-      studentName: 'Jane Smith',
-      courseName: 'Data Science Basics',
-      rating: 4.0,
-      comments: 'Very informative and easy to follow.',
-      date: new Date(),
-    },
-    {
-      studentName: 'Jane Smith',
-      courseName: 'Data Science Basics',
-      rating: 4.0,
-      comments: 'Very informative and easy to follow.',
-      date: new Date(),
-    },
-    {
-      studentName: 'Jane Smith',
-      courseName: 'Data Science Basics',
-      rating: 4.0,
-      comments: 'Very informative and easy to follow.',
-      date: new Date(),
-    },
-    {
-      studentName: 'Jane Smith',
-      courseName: 'Data Science Basics',
-      rating: 4.0,
-      comments: 'Very informative and easy to follow.',
-      date: new Date(),
-    },
-  ];
+  feedbacks:FeedBack[] = [];
+  currentPage: number = 1;
+  pageSize: number = 8;
+  totalPages: number = 0;
+  currentLength: number = 0;
+  totalItems: number = 0;
 
-  paginatedFeedbacks:any[] = [];
-  currentPage = 1;
-  itemsPerPage = 6; // Number of feedbacks per page
-  totalPages = 0;
-  pages:any[] = [];
+  constructor(private readonly feedbackService:FeedbackServiceService){}
+
 
   ngOnInit() {
-    this.calculatePagination();
-    this.paginate();
+    this.loadFeedBacks();
   }
 
-  calculatePagination() {
-    this.totalPages = Math.ceil(this.feedbacks.length / this.itemsPerPage);
-    this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  private loadFeedBacks():void{
+    this.feedbackService.pagination(this.currentPage,this.pageSize).subscribe({
+      next:(response:any)=>{
+        this.feedbacks = response;
+      },
+      error:(error:any)=>{
+        console.log(error.error);
+      }
+    })
   }
 
-  paginate() {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    this.paginatedFeedbacks = this.feedbacks.slice(startIndex, endIndex);
-  }
-
-  goToPage(page: number) {
+  goToPage(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
-      this.paginate();
+      this.loadFeedBacks();
     }
   }
+
 }

@@ -3,17 +3,14 @@
   
     <!-- Feedback Cards -->
     <div class="row">
-      <div 
-        class="col-md-4 mb-4" 
-        *ngFor="let feedback of paginatedFeedbacks"
-      >
+      <div  class="col-md-4 mb-4" *ngFor="let feedback of feedbacks">
         <div class="card shadow-sm border-primary">
           <div class="card-body">
             <h5 class="card-title text-primary">
-              {{ feedback.studentName }}
+              {{ feedback.student.firstName + feedback.student.lastName }}
             </h5>
             <p class="card-text">
-              <strong>Course:</strong> {{ feedback.courseName }}
+              <strong>Course:</strong> {{ feedback.course.courseName }}
             </p>
             <p class="card-text">
               <strong>Rating:</strong>
@@ -22,12 +19,12 @@
               </span>
             </p>
             <p class="card-text text-muted">
-              {{ feedback.comments }}
+              {{ feedback.feedBackText }}
             </p>
           </div>
           <div class="card-footer bg-light">
             <small class="text-muted">
-              Submitted on {{ feedback.date | date: 'mediumDate' }}
+              Submitted on {{ feedback.feedBackDate | date: 'mediumDate' }}
             </small>
           </div>
         </div>
@@ -36,28 +33,17 @@
   
     <!-- Pagination -->
     <nav aria-label="Page navigation" class="mt-4">
-      <ul class="pagination justify-content-center">
-        <li
-          class="page-item"
-          [class.disabled]="currentPage === 1"
-          (click)="goToPage(currentPage - 1)"
-        >
-          <a class="page-link">Previous</a>
+      <ul class="pagination mb-0">
+        <li class="page-item pointer" [class.disabled]="currentPage === 1">
+          <a class="page-link" (click)="goToPage(currentPage - 1)">Previous</a>
         </li>
-        <li
-          class="page-item"
-          *ngFor="let page of pages"
-          [class.active]="currentPage === page"
-          (click)="goToPage(page)"
-        >
-          <a class="page-link">{{ page }}</a>
+
+        <li class="page-item pointer" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+          <a class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</a>
         </li>
-        <li
-          class="page-item"
-          [class.disabled]="currentPage === totalPages"
-          (click)="goToPage(currentPage + 1)"
-        >
-          <a class="page-link">Next</a>
+
+        <li class="page-item pointer" [class.disabled]="currentPage === totalPages">
+          <a class="page-link" (click)="goToPage(currentPage + 1)">Next</a>
         </li>
       </ul>
     </nav>

@@ -18,4 +18,13 @@ export class FeedbackServiceService {
   getTopFeedBacks(){
     return this.http.get<FeedBack[]>(this.apiUrl + "/Feedbacks/TopFeedBacks")
   }
+
+  getFeedbackByStudentId(id:string){
+    return this.http.get<FeedBack[]>(this.apiUrl + `/Feedbacks/Student/${id}`)
+  }
+
+  pagination(pageNumber:number , pageSize:number){
+    return this.http.get<any>(this.apiUrl + `/Feedbacks/Pagination/${pageNumber}/${pageSize}`)
+  }
+  
 }

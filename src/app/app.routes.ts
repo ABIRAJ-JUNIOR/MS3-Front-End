@@ -47,6 +47,7 @@ import { LoginComponent } from './Component/Landing_Pages/login/login.component'
 import { ResetPasswordComponent } from './Component/Landing_Pages/reset-password/reset-password.component';
 import { ResetOtpComponent } from './Component/Landing_Pages/reset-otp/reset-otp.component';
 import { CourseFeedbacksComponent } from './Component/Admin_Pages/course-feedbacks/course-feedbacks.component';
+import { SearchPageComponent } from './Component/Landing_Pages/search-page/search-page.component';
 
 
 export const routes: Routes = [
@@ -57,21 +58,23 @@ export const routes: Routes = [
     { path: 'course-sechdule/:courseId', component: CourseSechdulesComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'about', component: AboutComponent },
-    { path: 'signin', component: SigninComponent, children:[
-        {
-            path:'',
-            component:LoginComponent
-        },{
-            path:'signup',
-            component:SignupComponent
-        },{
-            path:'reset',
-            component:ResetPasswordComponent
-        },{
-            path:'reset-otp/:email',
-            component:ResetOtpComponent
-        }
-    ]},
+    {
+        path: 'signin', component: SigninComponent, children: [
+            {
+                path: '',
+                component: LoginComponent
+            }, {
+                path: 'signup',
+                component: SignupComponent
+            }, {
+                path: 'reset',
+                component: ResetPasswordComponent
+            }, {
+                path: 'reset-otp/:email',
+                component: ResetOtpComponent
+            }
+        ]
+    },
     { path: 'bio', component: BiomatricsComponent },
     { path: 'email-verified/:id', component: EmailVerifiedComponent },
     {
@@ -87,10 +90,10 @@ export const routes: Routes = [
             }
         ],
         canActivate: [payAuthGuard]
+    }, {
+        path: 'search/:name',
+        component: SearchPageComponent
     },
-
-
-
     {
         path: 'admin-dashboard', component: AdminDashboardComponent, children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },

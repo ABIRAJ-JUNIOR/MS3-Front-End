@@ -94,9 +94,9 @@ export class CourseSechdulesComponent {
     })
   }
 
-  FindStudentById(studentId:any){
-  return this.AllStudents.find((a:any)=>{
-      return a.id ===studentId
+  FindStudentById(studentId: any) {
+    return this.AllStudents.find((a: any) => {
+      return a.id === studentId
     })
   }
 
@@ -129,6 +129,9 @@ export class CourseSechdulesComponent {
 
 
   }
+
+
+ 
 
 
 

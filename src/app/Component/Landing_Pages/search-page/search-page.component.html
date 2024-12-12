@@ -1,0 +1,100 @@
+<app-navebar-01></app-navebar-01>
+
+<section class="hero bg-dark text-white py-5">
+    <div class="container text-center">
+        <h1>Find the Right Course for You</h1>
+        <p>Explore a wide range of courses and find the one that best suits your learning goals.</p>
+    </div>
+</section>
+<div class="container">
+
+    <h4>
+
+        <div id="notfound" *ngIf="Courses.length == 0">
+            <div class="notfound">
+                <div>
+                  <img src="/Gif/404.gif" alt="" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </h4>
+    <div class="row py-5" *ngIf="Courses != null">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-4" *ngFor="let course of Courses ">
+            <div class="card border-0  rounded-2 course-card">
+                <div class="position-relative">
+                    <!-- Badge for Level -->
+                    <div class="badge-level" [ngClass]="getStyles(course)">
+                        <span>{{ course.level }}</span>
+                    </div>
+                    <!-- Course Image -->
+                    <img src="{{course.imageUrl}}" class="card-img-top" alt="Course Image">
+                </div>
+                <div class="card-body">
+                    <!-- Course Title -->
+                    <h5 class="card-title mb-2 text-dark fw-bold">{{ course.courseName }}</h5>
+                    <!--rating-->
+                    <div class=" pb-2 d-none">
+                        <i class="bi bi-star-fill text-warning"
+                            *ngFor="let i of [].constructor(course.feedBackRate)"></i>
+                    </div>
+                    <!-- Price -->
+                    <p class="card-text text-danger fw-semibold">Rs {{ course.courseFee }}</p>
+                    <!-- Enroll & View More -->
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <button class="btn btn-primary btn-enroll" (mouseenter)="changeNameEnter($event)"
+                            (click)="ViewSechduleRouting(course.id)">{{EnrollBtnName}}</button>
+                        <a href="#" class="text-decoration-none view-more" data-bs-toggle="modal"
+                            data-bs-target="#CourseView" (mouseenter)="viewProduct(course)">View More</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="CourseView" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div *ngIf="ModalProduct.length>0">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5 text-danger" id="staticBackdropLabel">Course Description</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            (click)="ClearModal()"></button>
+                    </div>
+                    <div class="modal-body overflow-x-hidden">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                                <img src="{{ModalProduct[0].imageUrl}}" alt="" class="modalImg" width="100%">
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-12  pt-lg-0 pt-md-2 pt-sm-2 pt-2">
+                                <!-- Course Title -->
+                                <h5 class="card-title mb-2 text-dark fw-bold ">{{ ModalProduct[0].courseName }}</h5>
+                                <!--rating-->
+                                <div class=" pb-2 d-none">
+                                    <i class="bi bi-star-fill text-warning" *ngFor="let i of [].constructor(3)"></i>
+                                </div>
+
+                                <!-- Price -->
+                                <p class="card-text text-primary fw-semibold">Rs {{ ModalProduct[0].courseFee }}</p>
+
+                                <!-- description -->
+                                <div>
+                                    <p>{{ModalProduct[0].description}}</p>
+                                </div>
+                                <button class="btn btn-primary btn-enroll" (mouseenter)="changeNameEnter($event)"
+                                    (mouseleave)="changeNameMouseleave($event)"
+                                    (click)="ViewSechduleRouting(ModalProduct[0].id)"
+                                    data-bs-dismiss="modal">{{EnrollBtnName}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<app-footer></app-footer>

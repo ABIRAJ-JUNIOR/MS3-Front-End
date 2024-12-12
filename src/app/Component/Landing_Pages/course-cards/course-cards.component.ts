@@ -10,19 +10,18 @@ import { Course } from '../../../Modals/modals';
 @Component({
   selector: 'app-course-cards',
   standalone: true,
-  imports: [CommonModule,FormsModule,CourseFilterPipe,RouterModule],
+  imports: [CommonModule, FormsModule, CourseFilterPipe, RouterModule],
   templateUrl: './course-cards.component.html',
   styleUrl: './course-cards.component.css'
 })
 export class CourseCardsComponent implements OnInit {
 
 
-  constructor( 
-    private courseService:CourseService,
-    private paymentService:PaymentDataService , 
-    private route:Router
-  )
-  { }
+  constructor(
+    private courseService: CourseService,
+    private paymentService: PaymentDataService,
+    private route: Router
+  ) { }
 
 
   ModalProduct: any[] = [];
@@ -32,8 +31,8 @@ export class CourseCardsComponent implements OnInit {
     this.ModalProduct.push(product)
   }
 
-  ViewSechduleRouting(courseId:any){
-    this.route.navigate(['/course-sechdule/',courseId])
+  ViewSechduleRouting(courseId: any) {
+    this.route.navigate(['/course-sechdule/', courseId])
   }
 
   ClearModal() {
@@ -45,7 +44,7 @@ export class CourseCardsComponent implements OnInit {
   EnrollBtnName: string = "Enroll now"
 
   changeNameMouseleave($event: MouseEvent) {
-  const buttonElement = event?.target as HTMLButtonElement;
+    const buttonElement = event?.target as HTMLButtonElement;
     buttonElement.innerText = "Enroll now"
   }
   changeNameEnter($event: MouseEvent) {
@@ -55,26 +54,26 @@ export class CourseCardsComponent implements OnInit {
 
   //pagination Courses
 
-  pageSize: number = 6; 
-  currentPage: number = 1; 
-  totalPages: number = 0; 
-  pageNumbers: number[] = []; 
-  paginatedCourses:any[] = [];
+  pageSize: number = 6;
+  currentPage: number = 1;
+  totalPages: number = 0;
+  pageNumbers: number[] = [];
+  paginatedCourses: any[] = [];
 
   ngOnInit() {
     this.paginateCourses();
-     this.getCourseCategories();
+    this.getCourseCategories();
 
   }
 
   paginateCourses() {
 
-    this.courseService.pagination(this.currentPage,this.pageSize).subscribe({
-      next:((courses:any)=>{
+    this.courseService.pagination(this.currentPage, this.pageSize).subscribe({
+      next: ((courses: any) => {
         this.paginatedCourses = courses.items
-        this.totalPages=courses.totalPages
-        this.pageSize=courses.pageSize
-        this.currentPage=courses.currentPage
+        this.totalPages = courses.totalPages
+        this.pageSize = courses.pageSize
+        this.currentPage = courses.currentPage
 
       })
     })
@@ -91,57 +90,75 @@ export class CourseCardsComponent implements OnInit {
 
   isFilterVisible: boolean = false;
 
-  filterlevel: string="";
-  filterPrice: string="";
-  filterCategory:string="";
+  filterlevel: string = "";
+  filterPrice: string = "";
+  filterCategory: string = "";
 
   toggleFilter() {
     this.isFilterVisible = !this.isFilterVisible;
-    this.filterlevel="";
-    this.filterPrice=""
-    this.filterCategory=""
+    this.filterlevel = "";
+    this.filterPrice = ""
+    this.filterCategory = ""
 
   }
 
 
   applyFilter() {
-    let level=document.getElementById('CourseLevel') as HTMLInputElement
-    let price=document.getElementById('Price') as HTMLInputElement
-    let CategoryFilter=document.getElementById('CategoryFilter') as HTMLInputElement
-    this.filterlevel=level.value
-    this.filterPrice=price.value
-    this.filterCategory=CategoryFilter.value
+    let level = document.getElementById('CourseLevel') as HTMLInputElement
+    let price = document.getElementById('Price') as HTMLInputElement
+    let CategoryFilter = document.getElementById('CategoryFilter') as HTMLInputElement
+    this.filterlevel = level.value
+    this.filterPrice = price.value
+    this.filterCategory = CategoryFilter.value
     this.paginateCourses();
   }
 
-  PaymentCourse:any[]=[]
+  PaymentCourse: any[] = []
 
-  sendPaymentData(sechdule:any) {
-    let PurchaseDetails={
-      "courseName":this.ModalProduct[0].courseName,
-      "courseFee":this.ModalProduct[0].courseFee,
-      "courseId":this.ModalProduct[0].id,
+  sendPaymentData(sechdule: any) {
+    let PurchaseDetails = {
+      "courseName": this.ModalProduct[0].courseName,
+      "courseFee": this.ModalProduct[0].courseFee,
+      "courseId": this.ModalProduct[0].id,
       ...sechdule,
-      "PaymentCheck":true
+      "PaymentCheck": true
     }
     this.PaymentCourse.push(PurchaseDetails)
-   
+
   }
-  ConfirmationPayment(){
+  ConfirmationPayment() {
     this.paymentService.PurchaseDetailsSetLocal(this.PaymentCourse[0]);
   }
- 
-  CancelPurchase(){
+
+  CancelPurchase() {
     this.PaymentCourse = []
   }
 
 
-  categories:any;
-  getCourseCategories(){
-  this.courseService.GetAllCategory().subscribe({
-    next:(response:any)=>{
-      this.categories = response
-    }
-  })
+  categories: any;
+  getCourseCategories() {
+    this.courseService.GetAllCategory().subscribe({
+      next: (response: any) => {
+        this.categories = response
+      }
+    })
   }
+
+
+  getStyles(course: any) {
+    let colorClass = '';
+
+    if (course.level === 'Advanced') {
+      colorClass = 'bg-danger'; 
+    } else if (course.level === 'Beginner') {
+      colorClass = 'bg-primary'; 
+    } else if (course.level === 'Intermediate') {
+      colorClass = 'bg-success'; 
+    }
+
+    return colorClass;
+  }
+
+
+
 }

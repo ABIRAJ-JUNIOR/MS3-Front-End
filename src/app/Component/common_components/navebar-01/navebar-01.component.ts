@@ -4,6 +4,7 @@ import { TopinfoComponent } from '../topinfo/topinfo.component';
 import { jwtDecode } from 'jwt-decode';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../Service/API/Auth/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-navebar-01',
@@ -13,12 +14,13 @@ import { AuthService } from '../../../Service/API/Auth/auth.service';
   styleUrl: './navebar-01.component.css'
 })
 export class Navebar01Component {
+
   isAdmin:boolean = false;
   isStudent:boolean = false;
 
   sidebarCollapsed = false;
 
-  constructor(private authService:AuthService , private router:Router) {
+  constructor(private authService:AuthService , private router:Router , private tostr:ToastrService) {
     if(authService.isLoggedInAdmin()){
       this.isAdmin = true
       this.isStudent = false
@@ -59,4 +61,13 @@ export class Navebar01Component {
       this.router.navigate(['/student-dashboard/profile']);
     }
   }
+
+
+  SearchCourse() {
+     let searchData=document.getElementById('searchData') as HTMLInputElement
+     if (searchData.value) {
+      this.router.navigate(['/search/'+searchData.value])
+     }
+    }
+
 }

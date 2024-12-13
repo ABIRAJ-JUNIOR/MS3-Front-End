@@ -167,4 +167,16 @@ export class DashContentComponent implements OnInit {
     }
   }
 
+
+  feedbacks:any;
+
+  feedBackLoad(){
+    this.feedbackService.getFeedbackByStudentId(this.StudentTokenDetails.Id).subscribe({
+      next:(response:any)=>{
+          this.feedbacks=response
+      },error:()=>{
+      console.log("Failed to load feedbacks");
+      }
+    })
+    }
 }

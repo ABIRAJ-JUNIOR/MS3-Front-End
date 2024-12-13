@@ -5,12 +5,13 @@ import { Navebar01Component } from '../../common_components/navebar-01/navebar-0
 import { AuthService } from '../../../Service/API/Auth/auth.service';
 import { Router, RouterModule } from '@angular/router';
 import { CourseService } from '../../../Service/API/Course/course.service';
+import { NetworkIssueComponent } from "../../common_components/network-issue/network-issue.component";
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,FooterComponent,Navebar01Component,RouterModule],
+  imports: [CommonModule, FooterComponent, Navebar01Component, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

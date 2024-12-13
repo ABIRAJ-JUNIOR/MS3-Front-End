@@ -48,6 +48,7 @@ import { ResetPasswordComponent } from './Component/Landing_Pages/reset-password
 import { ResetOtpComponent } from './Component/Landing_Pages/reset-otp/reset-otp.component';
 import { CourseFeedbacksComponent } from './Component/Admin_Pages/course-feedbacks/course-feedbacks.component';
 import { SearchPageComponent } from './Component/Landing_Pages/search-page/search-page.component';
+import { NotificationComponent } from './Component/common_components/notification/notification.component';
 
 
 export const routes: Routes = [
@@ -138,5 +139,6 @@ export const routes: Routes = [
         canActivate: [studentAuthGuard]
     },
     { path: 'test', component: TestComponent },
+    { path: 'notification', component: NotificationComponent },
     { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

@@ -152,6 +152,7 @@ export interface Notification{
     dateSent:Date;
     notificationType:string;
     isRead:boolean;
+    isExpand:boolean;
 }
 
 export interface FeedBack{

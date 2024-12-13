@@ -37,3 +37,20 @@
         width: auto;
     }
 }
+
+
+.dropdown-toggle {
+    color: #000000;
+    font-weight: 500;
+}
+
+.dropdown-menu {
+    background-color: #ffffff;
+}
+
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item.active {
+    background-color: #f0f8ff;
+    color: #007bff;
+    border-radius: 5px;
+}

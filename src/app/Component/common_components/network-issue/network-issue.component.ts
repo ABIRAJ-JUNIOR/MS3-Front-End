@@ -7,31 +7,26 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './network-issue.component.html',
-  styleUrl: './network-issue.component.css'
+  styleUrl: './network-issue.component.css',
 })
-export class NetworkIssueComponent implements OnInit{
+export class NetworkIssueComponent implements OnInit {
+  isOnline: boolean = true;
 
-
-  isOnline: boolean=true;
-
-  isSuccess:boolean=false;
+  isSuccess: boolean = false;
   constructor(private networkService: NetworkServiceService) {}
 
   ngOnInit() {
     this.networkService.getOnlineStatus().subscribe({
-      next:()=>{
+      next: () => {
         this.isOnline = this.networkService.isOnline();
-        if (this.isOnline) {
-          this.isSuccess=true
-          
+        window.scrollTo(0, 0);
+        if (this.isOnline == true) {
+          this.isSuccess = true;
           setTimeout(() => {
-            this.isSuccess=false
+            this.isSuccess = false;
           }, 3000);
         }
-      }
-    })
-   
+      },
+    });
   }
-
-  
 }

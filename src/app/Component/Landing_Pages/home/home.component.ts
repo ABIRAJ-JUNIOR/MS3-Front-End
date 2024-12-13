@@ -11,7 +11,7 @@ import { NetworkIssueComponent } from "../../common_components/network-issue/net
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FooterComponent, Navebar01Component, RouterModule, NetworkIssueComponent],
+  imports: [CommonModule, FooterComponent, Navebar01Component, RouterModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

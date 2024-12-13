@@ -28,6 +28,7 @@ export class CourseSechdulesComponent {
   courseId: any;
 
   ngOnInit(): void {
+    window.scrollTo(0,0)
     this.route.paramMap.subscribe((params) => {
       this.courseId = params.get('courseId');
       this.courseGetById()

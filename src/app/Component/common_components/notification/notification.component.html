@@ -14,7 +14,7 @@
     </div>
   
     <!-- Notifications List -->
-    <div class="list-group" style="max-height: 400px; overflow-y: auto">
+    <div class="list-group" style="max-height: 800px; overflow-y: auto">
       <!-- If no notifications are found -->
       <div *ngIf="notifications.length === 0" class="text-center text-muted py-4">
         <p class="mb-0">No notifications found.</p>
@@ -48,7 +48,7 @@
 
         <!-- Expandable Message Section with Smooth Animation -->
         <div *ngIf="notification.isExpand" class="border-top pt-2 fade-in" style="animation: fadeIn 0.3s">
-          <p class="mb-1 text-secondary">{{ notification.message }}</p>
+          <p class="mb-1 text-secondary" [innerHTML]="notification.message"></p>
         </div>
       </div>
 

@@ -38,7 +38,7 @@ export class SigninComponent implements OnInit {
     setTimeout(() => {
       this.displayedText=""
       this.startTypingEffect();
-    }, 10000);
+    }, 20000);
 
  
   }

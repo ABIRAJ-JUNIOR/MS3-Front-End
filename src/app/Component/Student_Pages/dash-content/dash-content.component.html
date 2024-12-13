@@ -133,48 +133,54 @@
   </div>
 
   <!-- Charts Section -->
-  
+
   <div class="container-fluid py-4">
     <div class="row g-4">
       <!-- Enrollment Stats Chart -->
       <div class="col-lg-6 col-md-6">
         <div class="card shadow-sm h-100 border-0">
           <div class="card-body p-4">
-            <h6 class="fw-semibold text-muted text-uppercase text-center">Payment Stats</h6>
-            <div class="chart-container" style="height: 250px;">
-            <ngx-charts-advanced-pie-chart
-            [results]="PaymentData"
-            [scheme]="'vivid'"
-            [animations]="true">
-            </ngx-charts-advanced-pie-chart>
+            <h6 class="fw-semibold text-muted text-uppercase text-center">
+              Payment Stats
+            </h6>
+            <div class="chart-container" style="height: 250px">
+              <ngx-charts-advanced-pie-chart
+                [results]="PaymentData"
+                [scheme]="'vivid'"
+                [animations]="true"
+              >
+              </ngx-charts-advanced-pie-chart>
             </div>
           </div>
         </div>
       </div>
-    
+
       <!-- Payment Overview Chart -->
       <div class="col-lg-6 col-md-6">
         <div class="card shadow-sm h-100 border-0">
           <div class="card-body p-4">
-            <h6 class="fw-semibold text-muted text-uppercase text-center">Course Overview</h6>
-            <div class="chart-container" style="height: 250px;">
+            <h6 class="fw-semibold text-muted text-uppercase text-center">
+              Course Overview
+            </h6>
+            <div class="chart-container" style="height: 250px">
               <ngx-charts-bar-vertical
-              [results]="courseData"
-              [scheme]="'vivid'"
-              [xAxis]="true"
-              [yAxis]="true"
-              [showXAxisLabel]="true"
-              [showYAxisLabel]="true"
-              xAxisLabel="Courses"
-              yAxisLabel="Enrollments"
-              [animations]="true"
-              [barPadding]="10">
-            </ngx-charts-bar-vertical>
+                [results]="courseData"
+                [scheme]="'vivid'"
+                [xAxis]="true"
+                [yAxis]="true"
+                [showXAxisLabel]="true"
+                [showYAxisLabel]="true"
+                xAxisLabel="Courses"
+                yAxisLabel="Enrollments"
+                [animations]="true"
+                [barPadding]="10"
+              >
+              </ngx-charts-bar-vertical>
             </div>
           </div>
         </div>
       </div>
-    </div> 
+    </div>
   </div>
 
   <!-- Recent Notifications Panel -->
@@ -182,13 +188,10 @@
     <div class="col-12 col-md-7 mx-auto">
       <div class="card">
         <div
-          class="card-header text-center text-light"
-          style="background-color: #272829"
+          class="card-header text-center text-light bg-dark"
         >
-          <h3 style="color: #a9a9a9">Course Feedback</h3>
-          <p class="lead" style="color: #ffffff">
-            Please share your thoughts about the course.
-          </p>
+          <h3 style="color: #ffffff">Course Feedback  <i class="bi bi-rss-fill"></i></h3>
+         
         </div>
         <div class="card-body">
           <!-- Rating Section -->
@@ -254,6 +257,7 @@
 
             <!-- Text Feedback Section -->
             <div class="form-group">
+              
               <label for="feedbackText">Your Feedback:</label>
               <textarea
                 formControlName="feedBackText"
@@ -279,64 +283,49 @@
     </div>
 
     <div class="col-12 col-md-5">
-      <section style="background-color: #ffffff">
-        <h4 class="mb-0">Recent Feedbacks</h4>
-        <p class="fw-light mb-4 pb-2">Latest Feedback section by Students</p>
-        <div class="container py-5" *ngIf="Enrollments.feedbacks">
-          <div
-            class="row d-flex justify-content-center"
-            style="height: 400px; overflow-y: scroll; width: 100%"
-          >
-            <div class="col-md-12 col-lg-10" *ngFor="let item of Enrollments">
-              <div class="card text-body border-0 shadow-sm my-2">
-                <div class="card-body p-4">
-                  <div class="d-flex flex-start">
-                    <img
-                      class="rounded-circle shadow-1-strong me-3"
-                      src="{{
-                        item.feedbacks.student.imageUrl ||
-                          'https://via.placeholder.com/150'
-                      }}"
-                      alt="avatar"
-                      width="60"
-                      height="60"
-                      style="
-                        background-position: center;
-                        background-size: cover;
-                        object-fit: cover;
-                      "
-                    />
+      <section style="background-color: #ffffff" class="shadow border-1 rounded-4">
+        <div class="bg-dark py-3 text-light text-center rounded-top-4">
+          <h4 class="mb-0">Recent Feedbacks <i class="bi bi-rss-fill"></i></h4>
+        </div>
+      
+        <div class="container" *ngIf="feedbacks; else loading">
+          <div class="row" style="height: 350px; overflow-y: auto; width: 100%">
+            <div class="col-md-12 col-lg-12" *ngFor="let item of feedbacks">
+              <div class="card text-body border-0 shadow-sm my-2" style="transition: transform 0.3s;">
+                <div class="card-body">
+                  <div class="d-flex align-items-center justify-content-between" style="height: auto;">
                     <div>
-                      <h6 class="fw-bold mb-1">
-                        {{ item.feedbacks.student.firstName }}
-                        {{ item.student.lastName }}
-                      </h6>
-
-                      <p class="mb-0">
-                        {{ item.feedbacks.feedBackDate | date }}
+                      <p class="mb-0 text-muted">
+                        {{ item.feedBackDate | date: 'short' }}
                       </p>
-
-                      <a class="text-warning"
-                        ><i
-                          class="fas fa-star"
-                          *ngFor="
-                            let item of [].constructor(item.feedbacks.rating)
-                          "
-                        ></i
-                      ></a>
-                      <p class="mb-0">
-                        {{ item.feedbacks.feedBackText }}
+                      <p class="mb-0 text-primary" [ngClass]="{'fw-bold , text-success': item.rating >= 4}">
+                        {{ item.feedBackText }}
                       </p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                      <div class="stars">
+                        <i class="fas fa-star text-warning" *ngFor="let star of [].constructor(item.rating)" aria-label="rating star"></i>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <hr />
         </div>
+      
+        <!-- Loading Spinner Template -->
+        <ng-template #loading>
+          <div class="d-flex justify-content-center align-items-center" style="height: 350px;">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </ng-template>
       </section>
+      
     </div>
+    
     <div class="col-12">
       <section class="bg-light py-5" id="about-us">
         <div class="container">

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { OtpVerficationService } from '../../../Service/API/OTP/otp-verfication.service';
+import { passwordValidator } from '../../Admin_Pages/account-setting/account-setting.component';
 
 @Component({
   selector: 'app-reset-otp',
@@ -33,7 +34,7 @@ export class ResetOtpComponent {
     });
 
     this.changePasswordForm = this.fb.group({
-      newPassword: ['', Validators.required],
+      newPassword: ['', Validators.required,passwordValidator()],
       confirmPassword: ['', Validators.required]
     }, {
       validator: this.passwordMatchValidator

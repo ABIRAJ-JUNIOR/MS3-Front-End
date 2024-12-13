@@ -32,6 +32,7 @@ export class InvoiceComponent implements OnInit{
   ngOnInit(): void {
     this.dataTransferService.currentData.subscribe((data) => {
       this.data = data
+      console.log(data)
     })
 
     this.studentService.getStudent(this.data.studentId).subscribe({
@@ -77,7 +78,7 @@ export class InvoiceComponent implements OnInit{
       studentId: this.data.studentId,
       studentName:this.data.studentName,
       email:this.studentData.email,
-      address:`${this.studentData.address.addressLine1}, ${this.studentData.address.addressLine2}, ${this.studentData.address.city}, ${this.studentData.address.country}`,
+      address:this.studentData.address != null ? `${this.studentData.address.addressLine1}, ${this.studentData.address.addressLine2}, ${this.studentData.address.city}, ${this.studentData.address.country}` : "",
       courseName:this.data.courseName,
       amountPaid:this.data.amountPaid,
       paymentType:this.data.paymentType,

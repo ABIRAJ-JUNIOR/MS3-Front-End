@@ -106,7 +106,10 @@ export class AccountSettingComponent implements OnInit {
         this.toastr.success('Changes saved successfully!', '');
         this.removeStoredCredential();
         this.enabledOrDisabled();
-      },error:(error:any)=>{
+      },complete:()=>{
+        
+      }
+      ,error:(error:any)=>{
         this.toastr.warning(error.error, '');
       }
     })

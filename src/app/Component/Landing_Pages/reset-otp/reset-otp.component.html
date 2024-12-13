@@ -82,17 +82,15 @@
             <div class="form-group mb-4">
                 <label for="email" class="form-label visually-hidden">Password</label>
                 <div class="input-group">
-                    <span class="input-group-text bg-light text-muted" id="btnGroupAddon"><i
-                            class="bi bi-envelope"></i></span>
-                    <input type="text" class="form-control" formControlName="newPassword" placeholder="newPassword"
-                        aria-label="Email" aria-describedby="btnGroupAddon" style="height: 48px;" required>
+                    <span class="input-group-text bg-light text-muted" id="btnGroupAddon"><i class="bi bi-envelope"></i></span>
+                    <input type="text" class="form-control" formControlName="newPassword" placeholder="newPassword" aria-label="Email" aria-describedby="btnGroupAddon" style="height: 48px;" required>
+                    <div *ngIf="changePasswordForm.get('newPassword')?.errors?.['passwordInvalid']">
+                        <small class="text-danger">{{ changePasswordForm.get('newPassword')?.errors?.['passwordInvalid'].message }}</small>
+                      </div>
                 </div>
                 <div class="input-group mt-3">
-                    <span class="input-group-text bg-light text-muted" id="btnGroupAddon"><i
-                            class="bi bi-envelope"></i></span>
-                    <input type="text" class="form-control" formControlName="confirmPassword"
-                        placeholder="Confirm Password" aria-label="Email" aria-describedby="btnGroupAddon"
-                        style="height: 48px;" required>
+                    <span class="input-group-text bg-light text-muted" id="btnGroupAddon"><i class="bi bi-envelope"></i></span>
+                    <input type="text" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password" aria-label="Email" aria-describedby="btnGroupAddon" style="height: 48px;" required>
                 </div>
             </div>
 

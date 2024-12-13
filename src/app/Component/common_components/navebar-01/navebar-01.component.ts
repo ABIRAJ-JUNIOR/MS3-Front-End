@@ -23,9 +23,11 @@ export class Navebar01Component {
 
 
   constructor(
-    private authService: AuthService,
-    private router: Router,
-    private tostr: ToastrService
+    private readonly authService: AuthService,
+    private readonly router: Router,
+    private readonly tostr: ToastrService,
+    private readonly EnrollmentService:EnrollmentService,
+    private readonly studentDataService:StudentDashDataService
   ) {
     if (authService.isLoggedInAdmin()) {
       this.isAdmin = true;
@@ -95,6 +97,6 @@ export class Navebar01Component {
      if (searchData.value) {
       this.router.navigate(['/search/'+searchData.value])
      }
-    }
   }
+  
 }

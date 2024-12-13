@@ -21,14 +21,16 @@ export class NetworkIssueComponent implements OnInit{
     this.networkService.getOnlineStatus().subscribe({
       next:()=>{
         this.isOnline = this.networkService.isOnline();
+        if (this.isOnline) {
+          this.isSuccess=true
+          
+          setTimeout(() => {
+            this.isSuccess=false
+          }, 3000);
+        }
       }
     })
-    if (this.isOnline) {
-      this.isSuccess=true
-      setTimeout(() => {
-        this.isSuccess=false
-      }, 5000);
-    }
+   
   }
 
   

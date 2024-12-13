@@ -134,11 +134,11 @@ export const routes: Routes = [
             { path: 'enrollCourse-payment', component: StudentPaymentsComponent },
             { path: 'enrollCourse-paymentHistory', component: StudentPaymentsHistoryComponent },
             { path: 'all-announcement/:Role', component: ViewAllAnnouncementComponent },
+            { path: 'notification', component: NotificationComponent },
             { path: '**', redirectTo: 'home', pathMatch: 'full' }
         ],
         canActivate: [studentAuthGuard]
     },
     { path: 'test', component: TestComponent },
-    { path: 'notification', component: NotificationComponent },
     { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

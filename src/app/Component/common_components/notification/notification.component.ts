@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { NotificationServiceService } from '../../../Service/API/Notification/notification-service.service';
 import { jwtDecode } from 'jwt-decode';
 import { Notification as AppNotification, Notification } from '../../../Modals/modals';
+import { SearchNotificationPipe } from '../../../Pipes/search-notification.pipe';
 
 @Component({
   selector: 'app-notification',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,SearchNotificationPipe],
   templateUrl: './notification.component.html',
   styleUrl: './notification.component.css'
 })

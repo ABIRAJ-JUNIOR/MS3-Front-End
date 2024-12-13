@@ -21,7 +21,7 @@
       </div>
   
       <!-- Notifications -->
-      <div *ngFor="let notification of notifications; let i = index" [ngClass]="{ 'list-group-item-warning': !notification.isRead }" class="list-group-item d-flex flex-column gap-3">
+      <div *ngFor="let notification of notifications | searchNotification:searchQuery; let i = index" [ngClass]="{ 'list-group-item-warning': !notification.isRead }" class="list-group-item d-flex flex-column gap-3">
         <div class="d-flex justify-content-between align-items-start">
           <div>
             <h5 class="mb-1 fw-bold">

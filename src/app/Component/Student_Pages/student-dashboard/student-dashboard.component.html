@@ -137,20 +137,11 @@
           <button class="btn" id="sidebar-toggle" type="button" (click)="toggleSidebar()">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <!-- <div class="container-fluid ">
-            <form class="d-flex ms-auto">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-              <button class="btn btn-outline-dark OverideBtn" type="button">
-                <i class="bi bi-search"></i>
-              </button>
-            </form>
-          </div> -->
         </div>
+
         <div class="d-flex align-items-center mx-5">
-          <!-- Button trigger modal -->
           <!-- Notification Button -->
-          <button class="btn btn-sm btn-outline-dark mx-2 position-relative OverideBtn" type="button"
-            data-bs-toggle="modal" data-bs-target="#topLeftModal">
+          <button class="btn btn-sm btn-outline-dark mx-2 position-relative OverideBtn" type="button" [routerLink]="['/student-dashboard/notification']">
             <i class="bi bi-bell-fill"></i>
             <span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger">
               {{NotificationLength}}
@@ -229,11 +220,6 @@
   </div>
 </div>
 
-
-<!-- Modal Section -->
-
-
-
 <!-- Anouncement -->
 <div class="modal fade" id="Anouncement" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -265,7 +251,7 @@
 </div>
 
 <!-- Modal Structure -->
-<div class="modal fade" id="topLeftModal" tabindex="-1" aria-labelledby="topLeftModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="topLeftModal" tabindex="-1" aria-labelledby="topLeftModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -295,7 +281,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">

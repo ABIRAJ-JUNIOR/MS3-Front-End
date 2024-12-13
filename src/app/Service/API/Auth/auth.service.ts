@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { jwtDecode } from "jwt-decode";
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '../../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,12 @@ export class AuthService {
 
   signIn(auth:SignIn){
     return this.http.post(`${this.apiUrl}/Auth/SignIn`, auth,{
+      responseType:'text'
+    })
+  }
+
+  emailVerify(userId:string){
+    return this.http.get(`${this.apiUrl}/Auth/Verify/${userId}`,{
       responseType:'text'
     })
   }

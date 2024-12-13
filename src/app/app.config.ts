@@ -17,6 +17,6 @@ export const appConfig: ApplicationConfig = {
       timeOut: 2600,
     }), 
     provideHttpClient(withInterceptors([authInterceptorInterceptor])),
-    importProvidersFrom([BrowserAnimationsModule])
+    importProvidersFrom([BrowserAnimationsModule]),
   ]
 };

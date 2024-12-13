@@ -4,7 +4,7 @@ import { Course, CourseCategory, Schedule } from '../../../Modals/modals';
 import { CourseRequest } from '../../../Component/Admin_Pages/course-list/course-list.component';
 import { CourseScheduleRequest } from '../../../Component/Admin_Pages/course-schedule/course-schedule.component';
 import { AssessmentRequest } from '../../../Component/Admin_Pages/course-assessment/course-assessment.component';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '../../../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +45,10 @@ export class CourseService {
     return this.http.get<Course[]>(this.apiUrl + '/Course/Top3')
   }
 
+  SearchCourse(data:any){
+    return this.http.get<any>(this.apiUrl + `/Course/Search?searchText=${data}`)
+  }
+
 
   //Course Schedule
   schedulePagination(pageNumber:number , pageSize:number){
@@ -69,4 +73,6 @@ export class CourseService {
   GetAllCategory(){
     return this.http.get<CourseCategory[]>(this.apiUrl + '/CourseCategory/GetAllCategory')
   }
+
+
 }

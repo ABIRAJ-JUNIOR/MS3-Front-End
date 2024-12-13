@@ -4,19 +4,17 @@
         <div class="row g-4">
             <!-- Added Filter -->
             <div class="col-lg-4 col-md-6 col-sm-12">
-                <label for="AddedFilter" class="form-label fw-semibold text-muted">Added:</label>
-                <select id="AddedFilter" class="form-select">
-                    <option selected>Pending</option>
-                    <option value="0">Recently</option>
-                    <option value="1">Past</option>
-                    <option value="2">Future</option>
+                <label for="AddedFilter" class="form-label fw-semibold text-muted">CategoryFilter:</label>
+                <select id="CategoryFilter" class="form-select" *ngIf="categories">
+                    <option value="" selected>Allcategories</option>
+                    <option value="{{items.id}}" *ngFor="let items of categories">{{items.categoryName}}</option>
                 </select>
             </div>
             <!-- Level Filter -->
             <div class="col-lg-4 col-md-6 col-sm-12">
                 <label for="CourseLevel" class="form-label fw-semibold text-muted">Level:</label>
                 <select id="CourseLevel" class="form-select">
-                    <option selected>All Levels</option>
+                    <option value="" selected>All Levels</option>
                     <option value="0">Beginner</option>
                     <option value="1">Intermediate</option>
                     <option value="2">Advanced</option>
@@ -58,11 +56,11 @@
 
     <div class="row py-4" *ngIf="paginateCourses != null">
         <div class="col-lg-4 col-md-6 col-sm-6 col-12 mb-4"
-            *ngFor="let course of paginatedCourses  | courseFilter:filterlevel : filterPrice  let i =index">
+            *ngFor="let course of paginatedCourses  | courseFilter:filterlevel : filterPrice : filterCategory let i =index">
             <div class="card border-0  rounded-2 course-card">
                 <div class="position-relative">
                     <!-- Badge for Level -->
-                    <div class="badge-level">
+                    <div class="badge-level" [ngClass]="getStyles(course)">
                         <span>{{ course.level }}</span>
                     </div>
                     <!-- Course Image -->
@@ -73,7 +71,7 @@
                     <h5 class="card-title mb-2 text-dark fw-bold">{{ course.courseName }}</h5>
                     <!--rating-->
                     <div class=" pb-2">
-                        <i class="bi bi-star-fill text-warning" *ngFor="let i of [].constructor(3)"></i>
+                        <i class="bi bi-star-fill text-warning" *ngFor="let i of [].constructor(course.feedBackRate)"></i>
                     </div>
                     <!-- Price -->
                     <p class="card-text text-danger fw-semibold">Rs {{ course.courseFee }}</p>
@@ -132,7 +130,7 @@
                                 <h5 class="card-title mb-2 text-dark fw-bold ">{{ ModalProduct[0].courseName }}</h5>
                                 <!--rating-->
                                 <div class=" pb-2">
-                                    <i class="bi bi-star-fill text-warning" *ngFor="let i of [].constructor(3)"></i>
+                                    <i class="bi bi-star-fill text-warning" *ngFor="let i of [].constructor(ModalProduct[0].feedBackRate)"></i>
                                 </div>
 
                                 <!-- Price -->

@@ -99,14 +99,6 @@
             Courses
           </a>
         </li>
-
-        <!-- Support Section -->
-        <li class="sidebar-item mt-1">
-          <a href="#" class="sidebar-link" [routerLinkActive]="['active_Link']">
-            <i class="fa-solid fa-life-ring pe-2"></i>
-            Support
-          </a>
-        </li>
       </ul>
       <div style="margin-top: 50px;" *ngIf="StudentDetails">
       
@@ -137,20 +129,11 @@
           <button class="btn" id="sidebar-toggle" type="button" (click)="toggleSidebar()">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="container-fluid ">
-            <form class="d-flex ms-auto">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-              <button class="btn btn-outline-dark OverideBtn" type="button">
-                <i class="bi bi-search"></i>
-              </button>
-            </form>
-          </div>
         </div>
+
         <div class="d-flex align-items-center mx-5">
-          <!-- Button trigger modal -->
           <!-- Notification Button -->
-          <button class="btn btn-sm btn-outline-dark mx-2 position-relative OverideBtn" type="button"
-            data-bs-toggle="modal" data-bs-target="#topLeftModal">
+          <button class="btn btn-sm btn-outline-dark mx-2 position-relative OverideBtn" type="button" [routerLink]="['/student-dashboard/notification']">
             <i class="bi bi-bell-fill"></i>
             <span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger">
               {{NotificationLength}}
@@ -179,9 +162,9 @@
                 </li>
 
                 <!-- Announcement Items -->
-                <li *ngFor="let announcement of Announcements; let i = index"
+                <li *ngFor="let announcement of ResentAnnouncements; let i = index"
                   class="dropdown-item d-flex align-items-start">
-                  <div *ngIf="announcement.audienceType==typeCheck">
+                  <div *ngIf="announcement.audienceType != 'Admin'">
                     <p class="mb-1 fw-bold">{{ announcement.title }}</p>
                     <p class="mb-0 text-muted small">{{ announcement.datePosted |date }}</p>
                   </div>
@@ -208,7 +191,7 @@
     </nav>
 
     <!-- Main Content Area for Student Dashboard -->
-    <main class="content px-3 py-2 " style="background-color: #ffffff;">
+    <main class="content  p-4 " style="background-color: #ffffff;">
       <router-outlet></router-outlet>
     </main>
 
@@ -229,11 +212,6 @@
   </div>
 </div>
 
-
-<!-- Modal Section -->
-
-
-
 <!-- Anouncement -->
 <div class="modal fade" id="Anouncement" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -245,7 +223,7 @@
       </div>
       <div class="modal-body" *ngIf="Announcements">
         <div *ngFor="let item of Announcements">
-          <div class="notification" *ngIf="item.isActive===true && item.audienceType==typeCheck">
+          <div class="notification" *ngIf="item.isActive == true && item.audienceType != 'Admin' ">
             <div class="notification-header">
               <span class="notification-type">{{item.datePosted}}</span>
               <span class="notification-time">{{item.expirationDate}}</span>
@@ -259,35 +237,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Structure -->
-<div class="modal fade" id="topLeftModal" tabindex="-1" aria-labelledby="topLeftModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="topLeftModalLabel">Notifications</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" *ngIf="Notifications">
-        <div *ngFor="let item of Notifications">
-          <div class="notification" *ngIf="item.isRead===false">
-            <div class="notification-header">
-              <span class="notification-type">{{item.notificationType}}</span>
-              <span class="notification-time">{{item.dateSent}}</span>
-            </div>
-            <div class="notification-body">
-              <p class="message" [innerHTML]="item.message"></p>
-            </div>
-            <div class="notification-footer">
-              <button class="mark-read-btn" (click)="MarkAsRead(item.id)">Mark as Read</button>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>

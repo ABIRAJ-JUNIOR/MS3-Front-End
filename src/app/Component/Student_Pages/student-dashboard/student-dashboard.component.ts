@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { RouterOutlet, RouterModule, Router } from "@angular/router";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
-import { Student } from "../../../Modals/modals";
+import { Announcement, Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { NotificationServiceService } from "../../../Service/API/Notification/notification-service.service";
 import { ToastrService } from "ngx-toastr";
@@ -20,13 +20,15 @@ import { AuthService } from "../../../Service/API/Auth/auth.service";
 export class StudentDashboardComponent implements OnInit {
   sidebarCollapsed = false;
   noImage: string = 'https://www.bing.com/ck/a?!&&p=7648fe0c3dc6be6b2188d54e324d5d9352d68f37b129c4ddaaaadf8174ec11a4JmltdHM9MTczMzAxMTIwMA&ptn=3&ver=2&hsh=4&fclid=1a548757-8fff-66c7-3ffe-93498efe67cc&u=a1L2ltYWdlcy9zZWFyY2g_cT1wcm9maWxlJTIwbm8lMjBpbWFnZSZGT1JNPUlRRlJCQSZpZD05MzAzNEM1QTRDQjMyOTE2NzIxNzM3Q0Y2NzE0NDI3NDU1MDRDRTMx&ntb=1';
+
+  NotifyLength: number=0;
+
   toggleSidebar() {
     this.sidebarCollapsed = !this.sidebarCollapsed;
   }
 
   StudentDetails: any;
   StudentTokenDetails: any;
-  typeCheck: string = "Students"
 
 
 
@@ -39,6 +41,7 @@ export class StudentDashboardComponent implements OnInit {
     this.StudentsLoad();
     this.notificationLoadItems()
     this.AnnouncementLoad();
+    this.loadRecentAnnouncement();
 
   }
 
@@ -50,9 +53,8 @@ export class StudentDashboardComponent implements OnInit {
       next: (response: any) => {
         this.Notifications = response
         this.NotificationLength=this.Notifications.length
-        console.log(this.Notifications)
       }, error: (error) => {
- console.log(error.message)
+        console.log(error.message)
       }
     })
   }
@@ -72,24 +74,35 @@ export class StudentDashboardComponent implements OnInit {
 
 
   AnnouncementLength: number = 0;
-  Announcements: any[] = []
+  ResentAnnouncements:Announcement[] = []
+  Announcements: Announcement[] = []
 
   AnnouncementLoad() {
     this.anouncementService.GetAllAnouncement().subscribe({
-      next: (data: any) => {
+      next: (data: Announcement[]) => {
         this.Announcements = data
-      }, error: (error) => {
-        console.log(error.message)
       }, complete: () => {
+        console.log(this.Announcements);
         for (let i: any = 0; i < this.Announcements.length; i++) {
           const element = this.Announcements[i];
           if (element.isActive === true) {
-            if (element.audienceType == "Students") {
+            if (element.audienceType != "Admin") {
               this.AnnouncementLength++;
             }
           }
 
         }
+        
+      }, error: (error) => {
+        console.log(error.message)
+      }
+    })
+  }
+
+  private loadRecentAnnouncement():void{
+    this.anouncementService.GetRecentAnnouncements(2).subscribe({
+      next:(res:Announcement[])=>{
+        this.ResentAnnouncements = res
       }
     })
   }

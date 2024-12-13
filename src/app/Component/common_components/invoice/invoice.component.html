@@ -27,7 +27,7 @@
             <div class="mt-4 mt-md-0">
                 <ul class="list-unstyled">
                     <li><span class="fw-semibold">Invoice Date:</span> {{data.transactionDate | date}}</li>
-                    <li><span class="fw-semibold">Due Date:</span> {{data.dueDate | date}}</li>
+                    <li><span class="fw-semibold" *ngIf="data.dueDate">Due Date:</span> {{data.dueDate | date}}</li>
                 </ul>
             </div>
         </div>
@@ -40,7 +40,7 @@
                 <ul class="list-unstyled">
                     <li>Student ID: {{studentData.id}}</li>
                     <li>Email: {{studentData.email}}</li>
-                    <li>Address: {{studentData.address.addressLine1}} {{studentData.address.addressLine2}} {{studentData.address.city}} {{studentData.address.country}}</li>
+                    <li *ngIf="studentData.address">Address: {{studentData.address.addressLine1}} {{studentData.address.addressLine2}} {{studentData.address.city}} {{studentData.address.country}}</li>
                 </ul>
             </div>
             <div class="mt-4 mt-md-0">

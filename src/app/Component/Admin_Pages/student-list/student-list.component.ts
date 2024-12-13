@@ -3,13 +3,14 @@ import { StudentService } from '../../../Service/API/Student/student.service';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuditLog, Student } from '../../../Modals/modals';
+import { Student } from '../../../Modals/modals';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ToastrService } from 'ngx-toastr';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AuditlogService } from '../../../Service/API/AuditLog/auditlog.service';
 import { jwtDecode } from 'jwt-decode';
 import { HasRoleDirective } from '../../../Directives/has-role.directive';
+import { passwordValidator } from '../account-setting/account-setting.component';
 
 @Component({
   selector: 'app-student-list',
@@ -68,7 +69,7 @@ export class StudentListComponent implements OnInit {
 
   private initializeForm(): void {
     this.profileForm = this.fb.group({
-      nic: ['',Validators.required,],
+      nic: ['', [Validators.required, Validators.pattern(/^\d{9}[Vv]|\d{12}$/)]],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
@@ -77,11 +78,7 @@ export class StudentListComponent implements OnInit {
       phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       password: [
         '',
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.pattern(/(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])/),
-        ],
+        passwordValidator(),
       ],
       confirmPassword: ['', Validators.required],
       address: this.fb.group({

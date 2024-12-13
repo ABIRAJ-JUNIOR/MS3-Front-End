@@ -1,0 +1,222 @@
+coursetype {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 500;
+}
+
+/* Course Card Styles */
+.course-card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.course-card:hover {
+    box-shadow: rgba(54, 18, 18, 0.16) 0px 10px 36px 0px, rgba(59, 29, 29, 0.06) 0px 0px 0px 1px;
+    transform: translateY(-2px);
+}
+
+
+.badge-level {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: #198754;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 4px;
+    z-index: 10;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.card-title {
+    font-size: 1.1rem;
+}
+
+
+.card-text {
+    font-size: 1rem;
+}
+
+.btn-enroll {
+    background-image: linear-gradient(to right, #FF512F 0%, #DD2476 51%, #FF512F 100%);
+    text-transform: uppercase;
+    padding: 6px 16px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    display: block;
+    border: none;
+}
+
+.btn-enroll:hover {
+    background-position: right center;
+    /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+
+}
+
+.view-more {
+    font-size: 0.9rem;
+    color: #0d6efd;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.view-more:hover {
+    color: #0b5ed7;
+    text-decoration: underline;
+}
+
+.modalImg {
+    min-height: 300px;
+    height: 100%;
+}
+
+.sceduleModalimg {
+
+    min-height: 300px;
+    height: 300px;
+}
+
+
+.modal-custom {
+    max-width: 55%;
+}
+
+.ScheduleBody p {
+    margin: 1px;
+}
+
+.card-custom {
+    max-width: 27rem;
+    cursor: pointer;
+}
+
+.filter-options {
+    border: 1px solid #ddd;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+
+@media screen and (max-width: 1005px) {
+    .modal-custom {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .card-custom {
+        max-width: 25rem;
+    }
+}
+
+
+#notfound {
+    position: relative;
+    height: 50vh;
+  }
+  
+  #notfound .notfound {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  }
+  
+  .notfound {
+    max-width: 520px;
+    width: 100%;
+    line-height: 1.4;
+    text-align: center;
+  }
+  
+  .notfound .notfound-404 {
+    position: relative;
+    height: 240px;
+  }
+  
+  .notfound .notfound-404 h1 {
+    font-family: 'Montserrat', sans-serif;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    font-size: 252px;
+    font-weight: 900;
+    margin: 0px;
+    color: #262626;
+    text-transform: uppercase;
+    letter-spacing: -40px;
+    margin-left: -20px;
+  }
+  
+  .notfound .notfound-404 h1>span {
+    text-shadow: -8px 0px 0px #fff;
+  }
+  
+  .notfound .notfound-404 h3 {
+    font-family: 'Cabin', sans-serif;
+    position: relative;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #262626;
+    margin: 0px;
+    letter-spacing: 3px;
+    padding-left: 6px;
+  }
+  
+  .notfound h2 {
+    font-family: 'Cabin', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #ff0000;
+    margin-top: 0px;
+    margin-bottom: 25px;
+  }
+  
+  @media only screen and (max-width: 767px) {
+    .notfound .notfound-404 {
+      height: 200px;
+    }
+    .notfound .notfound-404 h1 {
+      font-size: 200px;
+    }
+  }
+  
+  @media only screen and (max-width: 480px) {
+    .notfound .notfound-404 {
+      height: 162px;
+    }
+    .notfound .notfound-404 h1 {
+      font-size: 162px;
+      height: 150px;
+      line-height: 162px;
+    }
+    .notfound h2 {
+      font-size: 16px;
+    }
+  }
+  

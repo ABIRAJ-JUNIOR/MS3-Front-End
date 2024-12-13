@@ -19,14 +19,18 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class PaymentGateComponent {
 
-  recievedModalItems: any[] = []; // Array to hold the received data
-
-
+  recievedModalItems: any[] = []; 
 
   CardFormData: FormGroup;
 
-  constructor(private tostr: ToastrService, private mailService: MailServiceService, private studentDataService: StudentDashDataService, private PaymentDataService: PaymentDataService, private fb: FormBuilder, private router: Router, private location: Location) {
-
+  constructor(
+    private tostr: ToastrService, 
+    private mailService: MailServiceService, 
+    private studentDataService: StudentDashDataService, 
+    private PaymentDataService: PaymentDataService, 
+    private fb: FormBuilder, private router: Router, 
+    private location: Location
+  ) {
     this.CardFormData = this.fb.group({
       name: ['', [Validators.required]],
       number: ['', [
@@ -43,10 +47,6 @@ export class PaymentGateComponent {
       ],
       ],
     });
-
-
-
-
   }
 
 
@@ -123,12 +123,6 @@ export class PaymentGateComponent {
 
   }
 
-
-
-
-
-
-
   AddCardDetails() {
     this.LocalCardDetails = JSON.parse(this.PaymentDataService.GetCardDetails())
   }
@@ -139,10 +133,6 @@ export class PaymentGateComponent {
     this.AddCardDetails()
 
   }
-
-
-
-
 
   CancelPayment() {
     this.location.back();

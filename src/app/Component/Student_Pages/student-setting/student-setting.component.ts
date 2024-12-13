@@ -6,6 +6,8 @@ import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
 import { StudentcommonProfileComponent } from "../../common_components/studentcommon-profile/studentcommon-profile.component";
+import { passwordValidator } from "../../Admin_Pages/account-setting/account-setting.component";
+import { AuthService } from "../../../Service/API/Auth/auth.service";
 
 @Component({
   selector: 'app-student-setting',
@@ -25,7 +27,7 @@ export class StudentSettingComponent implements OnInit {
 
   NoImage: string = "https://cdn-icons-png.flaticon.com/512/9193/9193906.png"
 
-  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private fb: FormBuilder, private toastr: ToastrService) {
+  constructor(private StudentDashDataService: StudentDashDataService, private StudentApiService: StudentService, private fb: FormBuilder, private toastr: ToastrService ,private authService:AuthService) {
 
 
     this.studentForm = this.fb.group({
@@ -46,7 +48,7 @@ export class StudentSettingComponent implements OnInit {
 
     this.changePass = this.fb.group({
       oldPassword: ['', [Validators.required]],
-      newPassword: ['', [Validators.required]],
+      newPassword: ['', [Validators.required,passwordValidator()]],
       confirmPassword: ['', [Validators.required]]
     })
 
@@ -191,12 +193,21 @@ export class StudentSettingComponent implements OnInit {
     })
   }
 
+  deactivateStudent(){
+    this.StudentApiService.deleteStudent(this.StudentTokenDetails.Id).subscribe({
+      next:()=>{
+        this.toastr.success("Student Deactivates SuccessFully")
+        this.authService.logout();
+      }
+    })
+  }
+
 }
 
 export interface StudenUpdateRequest {
   firstName: string;
   lastName?: string;
-  dateOfBirth: string;
+  dateOfBirth: Date;
   gender: number;
   phone: string;
   address: Address

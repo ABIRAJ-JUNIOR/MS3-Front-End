@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { SearchStudentsPipe } from '../../../Pipes/search-students.pipe';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { Assessment, Course, Payment, PaymentOverView, Student } from '../../../Modals/modals';
+import { Assessment, Course, FeedBack, Payment, PaymentOverView, Student } from '../../../Modals/modals';
 import { PaymentService } from '../../../Service/API/Payment/payment.service';
 import { CourseService } from '../../../Service/API/Course/course.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { AssesmentService } from '../../../Service/API/Assessment/assesment.service';
+import { FeedbackServiceService } from '../../../Service/API/Feedback/feedback-service.service';
 
 @Component({
   selector: 'app-admin-home',
@@ -28,6 +29,7 @@ export class AdminHomeComponent {
   students: Student[] = [];
   courses: Course[] = [];
   assessments:Assessment[] = [];
+  feedBacks:FeedBack[] = []
 
   recentPayments: Payment[] = [];
   SearchText: string = '';
@@ -45,6 +47,7 @@ export class AdminHomeComponent {
     private paymentService: PaymentService,
     private courseService: CourseService,
     private assessmentService:AssesmentService,
+    private feedBackService:FeedbackServiceService,
   ) {}
 
   ngOnInit(): void {
@@ -53,6 +56,7 @@ export class AdminHomeComponent {
     this.loadCourses();
     this.loadPaymentOverview()
     this.loadAllAssessment();
+    this.loadFeedBacks();
   }
 
   loadStudents(): void {
@@ -115,13 +119,21 @@ export class AdminHomeComponent {
     })
   }
 
-  loadAllAssessment(){
+  private loadAllAssessment():void{
     this.assessmentService.getAllAssesment().subscribe({
       next: (response: Assessment[]) => {
         this.assessments = response
       },
       complete:()=>{
         this.numberOfAssessments = this.assessments.length
+      }
+    })
+  }
+
+  private loadFeedBacks():void{
+    this.feedBackService.getTopFeedBacks().subscribe({
+      next:(response:FeedBack[])=>{
+        this.feedBacks = response
       }
     })
   }

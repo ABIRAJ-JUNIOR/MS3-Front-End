@@ -1,0 +1,57 @@
+<div class="container mt-4">
+    <!-- Page Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="fw-bold">Notifications</h2>
+      <button class="btn btn-outline-primary btn-sm" (click)="goBack()">
+        <i class="bi bi-arrow-left"></i> Back
+      </button>
+    </div>
+  
+    <!-- Search Bar -->
+    <div class="input-group mb-3">
+      <span class="input-group-text"><i class="bi bi-search"></i></span>
+      <input type="text" class="form-control" placeholder="Search notifications..." [(ngModel)]="searchQuery"/>
+    </div>
+  
+    <!-- Notifications List -->
+    <div class="list-group" style="max-height: 800px; overflow-y: auto">
+      <!-- If no notifications are found -->
+      <div *ngIf="notifications.length === 0" class="text-center text-muted py-4">
+        <p class="mb-0">No notifications found.</p>
+      </div>
+  
+      <!-- Notifications -->
+      <div *ngFor="let notification of notifications | searchNotification:searchQuery; let i = index" [ngClass]="{ 'list-group-item-warning': !notification.isRead }" class="list-group-item d-flex flex-column gap-3">
+        <div class="d-flex justify-content-between align-items-start">
+          <div>
+            <h5 class="mb-1 fw-bold">
+              {{ notification.notificationType }}
+              <span class="badge bg-primary ms-2" *ngIf="!notification.isRead">New</span>
+            </h5>
+            <p class="mb-0 text-muted small">
+              <i class="bi bi-calendar3"></i> {{ notification.dateSent }}
+            </p>
+          </div>
+
+          <div class="d-flex align-items-center gap-2">
+            <!-- Expand/Collapse Button -->
+            <button class="btn btn-outline-secondary btn-sm" (click)="toggleNotification(notification)">
+              {{ notification.isExpand ? 'Collapse' : 'Expand' }}
+            </button>
+
+            <!-- Delete Button -->
+            <button class="btn btn-outline-danger btn-sm" (click)="deleteNotification(notification.id)" title="Delete Notification">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Expandable Message Section with Smooth Animation -->
+        <div *ngIf="notification.isExpand" class="border-top pt-2 fade-in" style="animation: fadeIn 0.3s">
+          <p class="mb-1 text-secondary" [innerHTML]="notification.message"></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  

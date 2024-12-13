@@ -1,0 +1,29 @@
+.top-bar {
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(119, 119, 119, 0.2);
+  }
+  
+  .top-bar .contact-info span {
+    font-weight: 500;
+  }
+  
+  .top-bar .social-links a {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .top-bar .social-links a:hover {
+    color: #0dcaf0; /* Bootstrap Primary Color */
+    transform: scale(1.1);
+  }
+  
+  .top-bar .btn-outline-primary {
+    border: 1px solid #0dcaf0;
+    color: #0dcaf0;
+    padding: 2px 10px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .top-bar .btn-outline-primary:hover {
+    background-color: #0dcaf0;
+    color: #fff;
+  }

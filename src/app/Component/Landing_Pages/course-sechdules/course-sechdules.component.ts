@@ -7,6 +7,7 @@ import { Course } from '../../../Modals/modals';
 import { CommonModule } from '@angular/common';
 import { PaymentDataService } from '../../../Service/Data/Payment_Data/payment-data.service';
 import { TopinfoComponent } from "../../common_components/topinfo/topinfo.component";
+import { StudentService } from '../../../Service/API/Student/student.service';
 
 @Component({
   selector: 'app-course-sechdules',
@@ -20,17 +21,20 @@ export class CourseSechdulesComponent {
   constructor(private route: ActivatedRoute,
     private courseService: CourseService,
     private paymentService: PaymentDataService,
-    private router: Router
+    private router: Router,
+    private studentService: StudentService,
   ) { }
 
   courseId: any;
 
   ngOnInit(): void {
+    window.scrollTo(0,0)
     this.route.paramMap.subscribe((params) => {
       this.courseId = params.get('courseId');
       this.courseGetById()
     });
     this.getAllCourses();
+    this.allstudentLoad();
   }
 
   courses: any;
@@ -80,6 +84,22 @@ export class CourseSechdulesComponent {
       this.CourseRating = 0;
     }
   }
+  AllStudents: any;
+  allstudentLoad() {
+    this.studentService.getStudents().subscribe({
+      next: (response: any) => {
+        this.AllStudents = response
+      }, error: (error) => {
+        console.log(error.message)
+      }
+    })
+  }
+
+  FindStudentById(studentId: any) {
+    return this.AllStudents.find((a: any) => {
+      return a.id === studentId
+    })
+  }
 
   PaymentCourse: any[] = []
 
@@ -110,6 +130,9 @@ export class CourseSechdulesComponent {
 
 
   }
+
+
+ 
 
 
 

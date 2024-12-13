@@ -19,7 +19,7 @@
         <p class="mb-0">No announcements found.</p>
       </div>
   
-      <div *ngFor="let announcement of announcements | searchAnnouncment:searchQuery; let i = index" class="list-group-item d-flex align-items-start gap-3">
+      <div *ngFor="let announcement of announcements | searchAnnouncement:searchQuery; let i = index" class="list-group-item d-flex align-items-start gap-3">
         <div>
           <h5 class="mb-1 fw-bold">{{ announcement.title }}</h5>
           <p class="mb-1 text-secondary small">{{ announcement.description }}</p>

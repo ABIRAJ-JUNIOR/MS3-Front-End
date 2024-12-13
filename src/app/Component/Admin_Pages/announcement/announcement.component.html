@@ -35,7 +35,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text bg-white"><i class="bi bi-calendar text-danger"></i></span>
                 </div>
-                <input formControlName="expirationDate" type="date" class="form-control border-start-0">
+                <input formControlName="expirationDate" type="text" class="form-control border-start-0" bsDatepicker [bsConfig]="{ isAnimated: true }">
               </div>
             </div>
     
@@ -47,8 +47,8 @@
                   <span class="input-group-text bg-white"><i class="bi bi-people text-danger"></i></span>
                 </div>
                 <select formControlName="audienceType" class="form-control border-start-0">
-                  <option value="1">Admins</option>
-                  <option value="2">Students</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Student</option>
                   <option value="3">Everyone</option>
                 </select>
               </div>
@@ -69,7 +69,16 @@
       <div class="table-wrapper">
         <div class="table-title p-3 d-flex justify-content-between">
             <h4 class="mb-0">Announcements</h4>
-          </div>
+            <div>
+              <label class="form-label me-2">Filter:</label>
+              <select class="form-select w-auto d-inline-block" [(ngModel)]="filterStatus">
+                <option value="">All</option>
+                <option value="Admin">Admin</option>
+                <option value="Student">Student</option>
+                <option value="Everyone">Everyone</option>
+              </select>
+            </div>
+        </div>
         <div class="table-responsive">
           <table class="table table-striped table-hover mb-0">
             <thead>
@@ -83,14 +92,14 @@
                 </tr>
               </thead>
             <tbody>
-                <tr *ngFor="let announcement of Announcements;let i=index">
+                <tr *ngFor="let announcement of Announcements | searchAnnouncement:filterStatus;let i=index">
                     <td>{{i+1}}</td>
                     <td>{{announcement.title}}</td>
                     <td>{{announcement.datePosted | date}}</td>
                     <td>{{announcement.expirationDate | date}}</td>
                     <td  [ngStyle]="{
-                      color: announcement.audienceType === 'Admins' ? 'darkred' :
-                      announcement.audienceType === 'Students' ? 'darkgreen' :
+                      color: announcement.audienceType === 'Admin' ? 'darkred' :
+                      announcement.audienceType === 'Student' ? 'darkgreen' :
                       announcement.audienceType === 'Everyone' ? 'darkblue' : 'black'
                     }">{{announcement.audienceType}}</td>
                     <td class="text-center">

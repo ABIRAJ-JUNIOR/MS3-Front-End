@@ -1,22 +1,27 @@
-import { CommonModule } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { Student } from "../../../Modals/modals";
-import { StudentService } from "../../../Service/API/Student/student.service";
-import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
-import { NgxChartsModule } from "@swimlane/ngx-charts";
-import { CourseService } from "../../../Service/API/Course/course.service";
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
-import { FeedbackServiceService } from "../../../Service/API/Feedback/feedback-service.service";
-import { ToastrService } from "ngx-toastr";
-import { EnrollmentService } from "../../../Service/API/Enrollment/enrollment.service";
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Student } from '../../../Modals/modals';
+import { StudentService } from '../../../Service/API/Student/student.service';
+import { StudentDashDataService } from '../../../Service/Data/Student_Data/student-dash-data.service';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { CourseService } from '../../../Service/API/Course/course.service';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { FeedbackServiceService } from '../../../Service/API/Feedback/feedback-service.service';
+import { ToastrService } from 'ngx-toastr';
+import { EnrollmentService } from '../../../Service/API/Enrollment/enrollment.service';
 
 @Component({
   selector: 'app-dash-content',
   standalone: true,
   imports: [CommonModule, NgxChartsModule, ReactiveFormsModule],
   templateUrl: './dash-content.component.html',
-  styleUrl: './dash-content.component.css'
+  styleUrl: './dash-content.component.css',
 })
 export class DashContentComponent implements OnInit {
   StudentDetails: any;
@@ -54,28 +59,29 @@ export class DashContentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.StudentTokenDetails = this.StudentDashDataService.GetStudentDeatilByLocalStorage();
-    this.enrollmentServiceLoad()
+    this.StudentTokenDetails =
+      this.StudentDashDataService.GetStudentDeatilByLocalStorage();
+    this.enrollmentServiceLoad();
+    this.feedBackLoad();
   }
 
   Enrollments: any;
 
-
   enrollmentServiceLoad() {
-    console.log("Your Enrollments id" + this.StudentTokenDetails.Id)
-
-    this.EnrollmentService.getAllEnrollmentsByStudentId(this.StudentTokenDetails.Id).subscribe({
+    this.EnrollmentService.getAllEnrollmentsByStudentId(
+      this.StudentTokenDetails.Id
+    ).subscribe({
       next: (response) => {
-        this.Enrollments = response
-        console.log(this.Enrollments[0])
-      }, error: () => {
-
-      }, complete: () => {
+        this.Enrollments = response;
+        console.log(this.Enrollments);
+      },
+      error: () => {},
+      complete: () => {
         this.totalPaymentCalculate();
 
         this.studentServiceLoad();
-      }
-    })
+      },
+    });
   }
 
   studentServiceLoad() {
@@ -85,9 +91,10 @@ export class DashContentComponent implements OnInit {
       },
       error: (error) => {
         this.tostr.error(error.message);
-      }, complete: () => {
+      },
+      complete: () => {
         this.courseServiceLoad();
-      }
+      },
     });
   }
   courseServiceLoad() {
@@ -97,24 +104,25 @@ export class DashContentComponent implements OnInit {
       },
       error: (error) => {
         this.tostr.error(error.message);
-      }, complete: () => {
+      },
+      complete: () => {
         this.ChartCalculation();
-
-      }
+      },
     });
-
   }
 
   totalPaymentCalculate(): void {
     if (this.Enrollments != null) {
       for (let i = 0; i < this.Enrollments.length; i++) {
         const element = this.Enrollments[i].paymentResponse;
-        this.TotalAssignments += this.Enrollments[i].courseScheduleResponse.courseResponse.assessmentResponse.length;
+        this.TotalAssignments +=
+          this.Enrollments[
+            i
+          ].courseScheduleResponse.courseResponse.assessmentResponse.length;
         for (let p = 0; p < element.length; p++) {
           this.TotalPayments += Number(element[p].amountPaid);
         }
       }
-
     }
   }
 
@@ -122,12 +130,16 @@ export class DashContentComponent implements OnInit {
     if (this.StudentDetails) {
       for (let i = 0; i < this.Enrollments.length; i++) {
         const element = this.Enrollments[i].paymentResponse;
-        if (this.Enrollments[i].paymentStatus === "InProcess") {
+        if (this.Enrollments[i].paymentStatus === 'InProcess') {
           this.PendingPayments++;
-          for (let installment = 0; installment < element.length; installment++) {
+          for (
+            let installment = 0;
+            installment < element.length;
+            installment++
+          ) {
             this.TotalPayment++;
           }
-        } else if (this.Enrollments[i].paymentStatus === "Paid") {
+        } else if (this.Enrollments[i].paymentStatus === 'Paid') {
           this.paidPayments++;
         }
       }
@@ -157,14 +169,31 @@ export class DashContentComponent implements OnInit {
       this.feedBackForm.get('studentId')?.setValue(this.StudentTokenDetails.Id);
       this.feedbackService.SendFeedback(this.feedBackForm.value).subscribe({
         next: () => {
-          this.tostr.success("Feedback Send Successfully");
+          this.tostr.success('Feedback Send Successfully');
           this.feedBackForm.reset();
+          this.feedBackLoad();
         },
         error: () => {
-          this.tostr.error("Feedback Send Failed");
+          this.tostr.error('Feedback Send Failed');
           this.feedBackForm.reset();
-        }
+        },
       });
     }
+  }
+
+  feedbacks: any;
+
+  feedBackLoad() {
+    this.feedbackService
+      .getFeedbackByStudentId(this.StudentTokenDetails.Id)
+      .subscribe({
+        next: (response: any) => {
+          this.feedbacks = response;
+          console.log(this.feedbacks);
+        },
+        error: () => {
+          console.log('Failed to load feedbacks');
+        },
+      });
   }
 }

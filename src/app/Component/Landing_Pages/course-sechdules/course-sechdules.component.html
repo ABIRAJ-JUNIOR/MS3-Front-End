@@ -1,11 +1,5 @@
 <app-topinfo></app-topinfo>
-<div class="container">
-    <div class="row">
-        <div class="col-12 text-end mt-3">
-        <a [routerLink]="['/course']" class="text-primary fs-5 " style="text-decoration: none;">Cancel & Return Wepsite</a>
-        </div>
-    </div>
-</div>
+
 <div class="container-fluid">
     <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner" *ngIf="courses">
@@ -13,17 +7,12 @@
                 <div class="carousel-item" [class.active]="i === 0" data-bs-interval="10000">
                     <main class="mt-5 pt-4">
                         <div class="container mt-5">
-                            <!-- Grid row -->
                             <div class="row">
-                                <!-- Grid column -->
                                 <div class="col-md-12 col-lg-6 col-12 mb-4">
                                     <img src="{{courses.imageUrl}}" class="img-fluid" alt="" />
                                 </div>
-                                <!-- Grid column -->
 
-                                <!-- Grid column -->
                                 <div class="col-md-12 col-lg-6 col-12 mb-4">
-                                    <!-- Content -->
                                     <div class="p-4">
                                         <div class="mb-1">
                                             <p>
@@ -84,16 +73,13 @@
 
                                         <button class="btn btn-danger btn-md mt-2" type="submit"
                                             (click)="sendPaymentData(item)" data-bs-toggle="modal"
-                                            data-bs-target="#PaymmentConfirmation">
-                                            PURCHASE SECHDULE
+                                            data-bs-target="#PaymmentConfirmation" [disabled]="item.scheduleStatus=='Closed'">
+                                            ENROLL SECHDULE
                                             <i class="bi bi-bag-heart-fill"></i>
                                         </button>
                                     </div>
-                                    <!-- Content -->
                                 </div>
-                                <!-- Grid column -->
                             </div>
-                            <!-- Grid row -->
 
                             <hr />
                         </div>
@@ -112,13 +98,52 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
+
+    <section style="background-color: #ffffff;">
+
+        <div class="container py-5" *ngIf="courses">
+            <h4 class="mb-0">Recent Feedbacks</h4>
+            <p class="fw-light mb-4 pb-2">Latest Feedback section by Students</p>
+            <div class="row d-flex justify-content-center" style="height: 400px; overflow-y:scroll;width: 100%;">
+                <div class="col-md-12 col-lg-10 " *ngFor="let item of courses.feedbacks">
+                    <div class="card text-body border-0 shadow-sm my-2 ">
+                        <div class="card-body p-4">
+                            <div class="d-flex flex-start">
+                                <img class="rounded-circle shadow-1-strong me-3" src="{{item.student.imageUrl||'https://via.placeholder.com/150'}}"
+                                    alt="avatar" width="60" height="60" style="background-position: center; background-size: cover; object-fit: cover;" />
+                                <div>
+
+                                        <h6 class="fw-bold mb-1">{{item.student.firstName}} {{item.student.lastName}}
+                                        </h6>
+                                     
+                                    <p class="mb-0 ">
+                                        {{item.feedBackDate | date}}
+                                    </p>
+
+                                    <a class="text-warning"><i class="fas fa-star"
+                                            *ngFor="let item of [].constructor(item.rating)"></i></a>
+                                    <p class="mb-0">
+                                        {{item.feedBackText}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </section>
+</div>
+
+<div class="container">
     <!--Grid row-->
     <div class="row d-flex justify-content-center my-3">
         <!-- Introduction Section -->
         <div class="col-md-8 text-center">
             <h4 class="card-title fw-bold"> Top 3 Courses</h4>
             <p class="card-text my-3">
-                 Our top courses are
+                Our top courses are
                 designed to equip you with practical skills and knowledge, helping you excel in your career journey.
                 Each course is crafted to offer in-depth insights, hands-on learning experiences, and access to expert
                 guidance.
@@ -147,8 +172,6 @@
     <div class="text-center text-muted" *ngIf="!topCourses || topCourses.length === 0">
         <p>No top courses are available at the moment. Please check back later!</p>
     </div>
-
-
 </div>
 
 <app-footer></app-footer>

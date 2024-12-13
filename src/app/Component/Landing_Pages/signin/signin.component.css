@@ -4,7 +4,7 @@
     margin-bottom: 1rem;
 }
 
-.form-container .btn-primary {
+/* .form-container .btn-primary {
     background: #f80429;
     border: none;
     padding: 0.8rem;
@@ -13,7 +13,7 @@
 
 .form-container .btn-primary:hover {
     background: #810505;
-}
+} */
 
 .form-container .form-check-label {
     font-size: 0.9rem;

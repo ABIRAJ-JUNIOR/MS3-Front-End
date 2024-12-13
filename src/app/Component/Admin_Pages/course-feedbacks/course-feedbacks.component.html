@@ -1,0 +1,97 @@
+<div class="container mt-4">
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
+    <!-- Title -->
+    <h2 class="text-center text-primary mb-3 mb-md-0" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Student Feedbacks</h2>
+    
+    <!-- Filter By Courses -->
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle d-flex align-items-center px-4 py-2 shadow-sm rounded" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-funnel-fill me-2"></i>
+        <span>Filter By Course</span>
+      </button>
+
+      <ul class="dropdown-menu shadow-lg rounded-3 border-0 p-2" aria-labelledby="filterDropdown" style="max-height: 300px; overflow-y: auto;">
+        <li (click)="search('')" class="pointer dropdown-item d-flex align-items-center justify-content-between">
+          <span class="pe-4">All</span>
+          <i class="bi bi-check-circle-fill text-success" *ngIf="searchText === ''"></i>
+        </li>
+
+        <ng-container *ngFor="let course of courses">
+          <li (click)="search(course.id)" class="pointer dropdown-item d-flex align-items-center justify-content-between" [class.active]="searchText === course.courseName">
+            <span class="pe-4">{{ course.courseName }}</span>
+            <i class="bi bi-check-circle-fill text-success" *ngIf="searchText === course.courseName"></i>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  
+  </div>
+  
+    <!-- Feedback Cards -->
+    <div class="row">
+      <div class="slide-up col-lg-4 col-md-6 col-sm-12 mb-4" *ngFor="let feedback of feedbacks | searchFeedback:searchText">
+        <div class="card feedback-card shadow-sm border-primary">
+          <div class="card-body">
+            <!-- Student Name -->
+            <h5 class="card-title text-primary">
+              {{ feedback.student.firstName + ' ' + feedback.student.lastName }}
+            </h5>
+      
+            <!-- Course Name -->
+            <p class="card-text">
+              <strong>Course:</strong> {{ feedback.course.courseName }}
+            </p>
+      
+            <!-- Rating -->
+            <p class="card-text">
+              <strong>Rating:</strong>
+              <span class="text-warning">
+                ★ {{ feedback.rating }}
+              </span>
+            </p>
+      
+            <!-- Feedback Text (truncated) -->
+            <p class="card-text feedback-text text-muted">
+              {{ feedback.feedBackText.length > 100 ? (feedback.feedBackText | slice: 0:100) + '...' : feedback.feedBackText }}
+            </p>
+          </div>
+      
+          <!-- Footer with Submission Date -->
+          <div class="card-footer bg-light d-flex justify-content-between align-items-center">
+            <small class="text-muted">
+              Submitted on {{ feedback.feedBackDate | date: 'mediumDate' }}
+            </small>
+            <small>
+              <span class="badge rounded-3" [ngClass]="getRatingBadgeClass(feedback.rating)" >
+                {{ feedback.rating >= 4.5 ? 'Excellent' : feedback.rating >= 3.5 ? 'Good' : 'Average' }}
+              </span>
+            </small>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- Pagination Section -->
+    <div class="d-flex justify-content-between align-items-center px-3 py-2 bg-light border-top">
+      <div class="hint-text">
+        Showing <b>{{ currentLength }}</b> out of <b>{{ totalItems }}</b> entries
+      </div>
+      <ul class="pagination mb-0">
+        <li class="page-item pointer" [class.disabled]="currentPage === 1">
+          <a class="page-link" (click)="goToPage(currentPage - 1)">Previous</a>
+        </li>
+
+        <li class="page-item pointer" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+          <a class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</a>
+        </li>
+
+        <li class="page-item pointer" [class.disabled]="currentPage === totalPages">
+          <a class="page-link" (click)="goToPage(currentPage + 1)">Next</a>
+        </li>
+      </ul>
+    </div>
+    
+  </div>
+  
+      

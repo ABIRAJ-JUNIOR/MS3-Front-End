@@ -12,19 +12,23 @@ import { CommonModule } from '@angular/common';
 export class NetworkIssueComponent implements OnInit{
 
 
-  isOnline: boolean=false;
+  isOnline: boolean=true;
 
+  isSuccess:boolean=false;
   constructor(private networkService: NetworkServiceService) {}
 
   ngOnInit() {
-    this.isOnline = this.networkService.isOnline();
-
     this.networkService.getOnlineStatus().subscribe({
       next:()=>{
         this.isOnline = this.networkService.isOnline();
-        console.log("jhsdfjk")
       }
     })
+    if (this.isOnline) {
+      this.isSuccess=true
+      setTimeout(() => {
+        this.isSuccess=false
+      }, 5000);
+    }
   }
 
   

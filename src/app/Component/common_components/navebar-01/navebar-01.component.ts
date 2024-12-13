@@ -38,13 +38,16 @@ export class Navebar01Component {
   enrollmentLength:number=0;
   ngOnInit() {
     this.StudentTokenDetails = this.studentDataService.GetStudentDeatilByLocalStorage()
-    this.EnrollmentService.getAllEnrollmentsByStudentId(this.StudentTokenDetails).subscribe({
+   if (this.StudentTokenDetails) {
+    this.EnrollmentService.getAllEnrollmentsByStudentId(this.StudentTokenDetails.Id).subscribe({
       next:(response:any)=>{
         this.enrollmentLength = response.length
+        console.log(response)
       },error:(error)=>{
         console.log(error.error)
       }
     })
+   }
 
   }
 
@@ -66,6 +69,7 @@ export class Navebar01Component {
     if(this.isAdmin){
       this.router.navigate(['/admin-dashboard']);
     }else if(this.isStudent){
+      console.log(this.enrollmentLength)
       if (this.enrollmentLength > 0) {
       this.router.navigate(['/student-dashboard']);
       }else{

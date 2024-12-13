@@ -48,6 +48,7 @@ import { ResetPasswordComponent } from './Component/Landing_Pages/reset-password
 import { ResetOtpComponent } from './Component/Landing_Pages/reset-otp/reset-otp.component';
 import { CourseFeedbacksComponent } from './Component/Admin_Pages/course-feedbacks/course-feedbacks.component';
 import { SearchPageComponent } from './Component/Landing_Pages/search-page/search-page.component';
+import { HomeProfileComponent } from './Component/Landing_Pages/home-profile/home-profile.component';
 
 
 export const routes: Routes = [
@@ -58,6 +59,7 @@ export const routes: Routes = [
     { path: 'course-sechdule/:courseId', component: CourseSechdulesComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'about', component: AboutComponent },
+    { path: 'profile', component: HomeProfileComponent },
     {
         path: 'signin', component: SigninComponent, children: [
             {

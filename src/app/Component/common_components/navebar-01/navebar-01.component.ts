@@ -11,26 +11,30 @@ import { EnrollmentService } from '../../../Service/API/Enrollment/enrollment.se
 @Component({
   selector: 'app-navebar-01',
   standalone: true,
-  imports: [RouterModule,TopinfoComponent,CommonModule],
+  imports: [RouterModule, TopinfoComponent, CommonModule],
   templateUrl: './navebar-01.component.html',
-  styleUrl: './navebar-01.component.css'
+  styleUrl: './navebar-01.component.css',
 })
 export class Navebar01Component {
-
-  isAdmin:boolean = false;
-  isStudent:boolean = false;
+  isAdmin: boolean = false;
+  isStudent: boolean = false;
 
   sidebarCollapsed = false;
 
-  constructor(private authService:AuthService , private router:Router , private tostr:ToastrService , private EnrollmentService: EnrollmentService , private studentDataService:StudentDashDataService) {
-    if(authService.isLoggedInAdmin()){
-      this.isAdmin = true
-      this.isStudent = false
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private tostr: ToastrService
+  ) {
+    if (authService.isLoggedInAdmin()) {
+      this.isAdmin = true;
+      this.isStudent = false;
     }
 
-    if(authService.isLoggedInStudent()){
-      this.isAdmin = false
-      this.isStudent = true
+    if (authService.isLoggedInStudent()) {
+      this.isAdmin = false;
+      this.isStudent = true;
     }
   }
   
@@ -51,26 +55,26 @@ export class Navebar01Component {
 
   }
 
-
   toggleSidebar() {
     this.sidebarCollapsed = !this.sidebarCollapsed;
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
-    this.refreshPage()
+    this.refreshPage();
   }
 
   refreshPage(): void {
     window.location.reload();
   }
 
-  goToDashboard(){
-    if(this.isAdmin){
+  goToDashboard() {
+    if (this.isAdmin) {
       this.router.navigate(['/admin-dashboard']);
     }else if(this.isStudent){
       console.log(this.enrollmentLength)
       if (this.enrollmentLength > 0) {
+
       this.router.navigate(['/student-dashboard']);
       }else{
         this.tostr.error('You have not enrolled in any course yet') 
@@ -78,21 +82,19 @@ export class Navebar01Component {
     }
   }
 
-  goToProfile(){
-    if(this.isAdmin){
+  goToProfile() {
+    if (this.isAdmin) {
       this.router.navigate(['/admin-dashboard/admin-profile']);
     }else if(this.isStudent){
       this.router.navigate(['/profile']);
     }
   }
 
-
   SearchCourse() {
      let searchData=document.getElementById('searchData') as HTMLInputElement
      if (searchData.value) {
       this.router.navigate(['/search/'+searchData.value])
-  
      }
     }
-
+  }
 }

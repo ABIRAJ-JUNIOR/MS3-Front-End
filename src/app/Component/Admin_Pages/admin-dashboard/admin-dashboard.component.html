@@ -140,7 +140,7 @@
 
                 <!-- Announcement Items -->
                 <li *ngFor="let announcement of announcements; let i = index" class="dropdown-item d-flex align-items-start">
-                  <div>
+                  <div class="pointer">
                     <p class="mb-1 fw-bold">{{ announcement.title }}</p>
                     <p class="mb-0 text-muted small">{{ announcement.datePosted |date }}</p>
                   </div>

@@ -1,0 +1,60 @@
+.slide-up {
+    animation: slideUp 1.5s ease-in-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+.feedback-card {
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .feedback-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .feedback-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #6c757d; 
+  }
+  
+  .btn-outline-primary {
+    transition: background-color 0.2s, color 0.2s;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+
+  
+.dropdown-toggle {
+  background: linear-gradient(45deg, #4a90e2, #007bff);
+  color: #fff;
+  font-weight: 500;
+}
+
+.dropdown-menu {
+  background-color: #ffffff;
+}
+
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item.active {
+  background-color: #f0f8ff;
+  color: #007bff;
+  border-radius: 5px;
+}

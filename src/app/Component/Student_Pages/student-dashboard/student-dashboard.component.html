@@ -137,20 +137,11 @@
           <button class="btn" id="sidebar-toggle" type="button" (click)="toggleSidebar()">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <!-- <div class="container-fluid ">
-            <form class="d-flex ms-auto">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-              <button class="btn btn-outline-dark OverideBtn" type="button">
-                <i class="bi bi-search"></i>
-              </button>
-            </form>
-          </div> -->
         </div>
+
         <div class="d-flex align-items-center mx-5">
-          <!-- Button trigger modal -->
           <!-- Notification Button -->
-          <button class="btn btn-sm btn-outline-dark mx-2 position-relative OverideBtn" type="button"
-            data-bs-toggle="modal" data-bs-target="#topLeftModal">
+          <button class="btn btn-sm btn-outline-dark mx-2 position-relative OverideBtn" type="button" [routerLink]="['/student-dashboard/notification']">
             <i class="bi bi-bell-fill"></i>
             <span class="position-absolute top-0 start-90 translate-middle badge rounded-pill bg-danger">
               {{NotificationLength}}
@@ -229,11 +220,6 @@
   </div>
 </div>
 
-
-<!-- Modal Section -->
-
-
-
 <!-- Anouncement -->
 <div class="modal fade" id="Anouncement" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
   aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -259,39 +245,6 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Structure -->
-<div class="modal fade" id="topLeftModal" tabindex="-1" aria-labelledby="topLeftModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="topLeftModalLabel">Notifications</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" *ngIf="Notifications">
-        <div *ngFor="let item of Notifications">
-          <div class="notification" *ngIf="item.isRead===false">
-            <div class="notification-header">
-              <span class="notification-type">{{item.notificationType}}</span>
-              <span class="notification-time">{{item.dateSent}}</span>
-            </div>
-            <div class="notification-body">
-              <p class="message" [innerHTML]="item.message"></p>
-            </div>
-            <div class="notification-footer">
-              <button class="mark-read-btn" (click)="MarkAsRead(item.id)">Mark as Read</button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div class="modal-body" *ngIf="NotificationLength ===0">
-        <h3 class="m-0 text-center">Not Found</h3>
-        <img src="Notification/notify.avif" class="img-fluid ms-5" alt="" style="position: relative;">
       </div>
     </div>
   </div>

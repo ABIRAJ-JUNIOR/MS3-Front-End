@@ -80,28 +80,38 @@
 
             <!-- Email Input -->
             <div class="form-group mb-4">
-                <label for="email" class="form-label visually-hidden">Password</label>
+                <label for="newPassword" class="form-label">New Password</label>
                 <div class="input-group">
-                    <span class="input-group-text bg-light text-muted" id="btnGroupAddon"><i
-                            class="bi bi-envelope"></i></span>
-                    <input type="text" class="form-control" formControlName="newPassword" placeholder="newPassword"
-                        aria-label="Email" aria-describedby="btnGroupAddon" style="height: 48px;" required>
+                  <input type="password" class="form-control"
+                    formControlName="newPassword"
+                    placeholder="New Password"
+                    required
+                  />
                 </div>
-                <div class="input-group mt-3">
-                    <span class="input-group-text bg-light text-muted" id="btnGroupAddon"><i
-                            class="bi bi-envelope"></i></span>
-                    <input type="text" class="form-control" formControlName="confirmPassword"
-                        placeholder="Confirm Password" aria-label="Email" aria-describedby="btnGroupAddon"
-                        style="height: 48px;" required>
+                <div
+                  *ngIf="changePasswordForm.get('newPassword')?.errors?.['passwordInvalid']"
+                  class="text-danger"
+                >
+                  <small
+                    >{{ changePasswordForm.get('newPassword')?.errors?.['passwordInvalid'].message }}</small
+                  >
                 </div>
-            </div>
-
-            <div class="d-flex justify-content-between align-items-center gap-3">
-                <button type="submit" [disabled]="changePasswordForm.invalid" class="btn btn-danger flex-grow-1"
-                    style="height: 48px; border-radius: 8px;">
-                    Change Password
-                </button>
-            </div>
+              </div>
+            
+              <!-- Confirm Password Input -->
+              <div class="form-group mb-4">
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <div class="input-group">
+                  <input type="password" class="form-control" formControlName="confirmPassword" placeholder="Confirm Password" required>
+                </div>
+                <div *ngIf="changePasswordForm.errors?.['passwordMismatch']" class="text-danger">
+                  <small>Passwords do not match.</small>
+                </div>
+              </div>
+            
+              <button type="submit" [disabled]="changePasswordForm.invalid" class="btn btn-danger flex-grow-1" style="height: 48px; border-radius: 8px;">
+                Change Password
+              </button>
 
         </form>
     </div>

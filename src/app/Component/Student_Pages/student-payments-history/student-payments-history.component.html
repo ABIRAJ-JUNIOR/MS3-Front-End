@@ -22,7 +22,6 @@
                 <th> Payment Date</th>
                 <th> Payment Method</th>
                 <th> Payment Type</th>
-                <th> Action</th>
             </tr>
         </thead>
         <tbody *ngIf="Enrollments">
@@ -36,11 +35,6 @@
                     <td>{{item.paymentResponse[item.paymentResponse.length-1].paymentDate}}</td>
                     <td>{{item.paymentResponse[item.paymentResponse.length-1].paymentMethod}}</td>
                     <td>{{item.paymentResponse[item.paymentResponse.length-1].paymentType}}</td>
-                    <td>
-                        <button class="btn btn-outline-primary btn-sm p-0 py-2 px-3 m-1">
-                            <i class="bi bi-download"></i> Receipt
-                        </button>
-                    </td>
                 </tr>
             </ng-container>
 

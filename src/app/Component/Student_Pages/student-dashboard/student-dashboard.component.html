@@ -250,39 +250,6 @@
   </div>
 </div>
 
-<!-- Modal Structure -->
-<!-- <div class="modal fade" id="topLeftModal" tabindex="-1" aria-labelledby="topLeftModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="topLeftModalLabel">Notifications</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" *ngIf="Notifications">
-        <div *ngFor="let item of Notifications">
-          <div class="notification" *ngIf="item.isRead===false">
-            <div class="notification-header">
-              <span class="notification-type">{{item.notificationType}}</span>
-              <span class="notification-time">{{item.dateSent}}</span>
-            </div>
-            <div class="notification-body">
-              <p class="message" [innerHTML]="item.message"></p>
-            </div>
-            <div class="notification-footer">
-              <button class="mark-read-btn" (click)="MarkAsRead(item.id)">Mark as Read</button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div class="modal-body" *ngIf="NotificationLength ===0">
-        <h3 class="m-0 text-center">Not Found</h3>
-        <img src="Notification/notify.avif" class="img-fluid ms-5" alt="" style="position: relative;">
-      </div>
-    </div>
-  </div>
-</div> -->
-
 
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
   <div class="modal-dialog">

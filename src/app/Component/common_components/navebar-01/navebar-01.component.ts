@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { TopinfoComponent } from '../topinfo/topinfo.component';
-import { jwtDecode } from 'jwt-decode';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../Service/API/Auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { StudentService } from '../../../Service/API/Student/student.service';
+import { StudentDashDataService } from '../../../Service/Data/Student_Data/student-dash-data.service';
+import { EnrollmentService } from '../../../Service/API/Enrollment/enrollment.service';
 
 @Component({
   selector: 'app-navebar-01',
@@ -20,7 +22,7 @@ export class Navebar01Component {
 
   sidebarCollapsed = false;
 
-  constructor(private authService:AuthService , private router:Router , private tostr:ToastrService) {
+  constructor(private authService:AuthService , private router:Router , private tostr:ToastrService , private EnrollmentService: EnrollmentService , private studentDataService:StudentDashDataService) {
     if(authService.isLoggedInAdmin()){
       this.isAdmin = true
       this.isStudent = false
@@ -30,6 +32,20 @@ export class Navebar01Component {
       this.isAdmin = false
       this.isStudent = true
     }
+  }
+  
+  StudentTokenDetails: any;
+  enrollmentLength:number=0;
+  ngOnInit() {
+    this.StudentTokenDetails = this.studentDataService.GetStudentDeatilByLocalStorage()
+    this.EnrollmentService.getAllEnrollmentsByStudentId(this.StudentTokenDetails).subscribe({
+      next:(response:any)=>{
+        this.enrollmentLength = response.length
+      },error:(error)=>{
+        console.log(error.error)
+      }
+    })
+
   }
 
 
@@ -50,7 +66,11 @@ export class Navebar01Component {
     if(this.isAdmin){
       this.router.navigate(['/admin-dashboard']);
     }else if(this.isStudent){
+      if (this.enrollmentLength > 0) {
       this.router.navigate(['/student-dashboard']);
+      }else{
+        this.tostr.error('You have not enrolled in any course yet') 
+      }
     }
   }
 
@@ -58,7 +78,7 @@ export class Navebar01Component {
     if(this.isAdmin){
       this.router.navigate(['/admin-dashboard/admin-profile']);
     }else if(this.isStudent){
-      this.router.navigate(['/student-dashboard/profile']);
+      this.router.navigate(['/profile']);
     }
   }
 
@@ -67,6 +87,7 @@ export class Navebar01Component {
      let searchData=document.getElementById('searchData') as HTMLInputElement
      if (searchData.value) {
       this.router.navigate(['/search/'+searchData.value])
+  
      }
     }
 

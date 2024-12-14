@@ -1,33 +1,35 @@
 <app-navebar-01></app-navebar-01>
-<header>   
-  <section>
-    <div id="intro" class="bg-image vh-100" style="
-          background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)), url('Home/pexels-molnartamasphotography-14031189.jpg');
-          background-position: center;
-          background-size: cover;
-        ">
+<header>
+  <!-- Hero Section -->
+  <section id="intro" class="vh-100 d-flex align-items-center justify-content-center position-relative">
+    <!-- Background -->
+    <div class="bg-overlay vh-100 position-absolute w-100 h-100"></div>
+    <div 
+      class="bg-image vh-100 w-100 position-absolute"
+      style="background-image: url('Home/pexels-molnartamasphotography-14031189.jpg'); background-size: cover; background-position: center; z-index: -1;">
     </div>
-    <div class="text-center" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);">
-      <div class="text-white">
-        <h1 class="fade-in" style="font-weight: bolder; font-size: 55px;">World's Biggest Academy</h1>
-        <p class="slide-up" style="font-size:20px ;">"Education is the most powerful weapon which you can use to change the world."<br>An investment in knowledge payes the best interest</p>
-      </div>
-      <button class="text-white login-btn" [routerLink]="['/signin']" routerLinkActive="router-link-active"  *ngIf="!isAdmin && !isStudent" >
+    
+    <!-- Text Content -->
+    <div class="text-center text-white position-absolute" style="z-index: 2; top: 200px;">
+      <h1 class="hero-title mb-3">World's Biggest Academy</h1>
+      <p class="hero-subtitle mb-4">
+        "Education is the most powerful weapon which you can use to change the world."<br>
+        An investment in knowledge pays the best interest.
+      </p>
+      <button class="btn login-btn" [routerLink]="['/signin']" *ngIf="!isAdmin && !isStudent">
         Sign in Here
       </button>
     </div>
-    <div style="position: absolute; top: 97%; left: 50%; transform: translate(-50%,-50%);">
-      <div class="bounce">
-        <a href="#down" style="text-decoration: none; color: white; font-size: 1.6rem;">
-          <div class="swipe-down">
-            <div class="arrows">
-              <span>&#x25BC; </span>
-              <span>SWIPE DOWN</span>
-              <span> &#x25BC;</span>
-            </div>
+
+    <!-- Swipe Down -->
+    <div class="swipe-down position-absolute text-center" style="bottom: 110px; left: 50%; transform: translateX(-50%); z-index: 2;">
+      <a href="#down" class="text-white text-decoration-none d-inline-block">
+        <div class="bounce d-flex flex-column align-items-center">
+          <span class="arrow">&#x25BC;</span>
+          <span class="swipe-text">SWIPE DOWN</span>
+          <span class="arrow">&#x25BC;</span>
         </div>
-        </a>
-      </div>
+      </a>
     </div>
   </section>
 </header>

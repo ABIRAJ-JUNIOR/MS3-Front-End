@@ -117,11 +117,6 @@ export class AdminProfileComponent implements OnInit{
 
   logout(){
     this.authService.logout();
-    this.refreshPage()
-  }
-
-  refreshPage(): void {
-    window.location.reload();
   }
   
 }

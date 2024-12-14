@@ -61,11 +61,6 @@ export class Navebar01Component {
 
   logout() {
     this.authService.logout();
-    this.refreshPage();
-  }
-
-  refreshPage(): void {
-    window.location.reload();
   }
 
   goToDashboard() {

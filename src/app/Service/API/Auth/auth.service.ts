@@ -2,13 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { jwtDecode } from "jwt-decode";
 import { environment } from '../../../../environments/environment.prod';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http:HttpClient) { }
+  constructor(
+    private readonly http:HttpClient,
+    private readonly router:Router  
+  ) { }
 
   private apiUrl = environment.apiUrl
 
@@ -68,6 +72,7 @@ export class AuthService {
   logout(){
     localStorage.removeItem("token");
     localStorage.removeItem("PurchaseCourse");
+    this.router.navigate(['/home'])
   }
 
 }

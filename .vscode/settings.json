@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/4afad0a9-9fa2-4993-b63d-1ba6eb66258a/resourceGroups/WayMakers/providers/Microsoft.Web/sites/WayMakers-Front-End",
+    "appService.deploySubpath": "dist\\it-institute-course-management-system"
+}

@@ -203,3 +203,96 @@
   scale: 0.98;
 }
 
+
+
+
+ /* Medium Devices (Tablets) */
+ @media (max-width: 992px) {
+  .hero-title {
+    font-size: 3rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    line-height: 1.6;
+  }
+
+  .login-btn {
+    font-size: 1.1rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  .arrow {
+    font-size: 1.2rem;
+  }
+
+  .swipe-text {
+    font-size: 0.9rem;
+  }
+}
+
+/* Small Devices (Phones) */
+@media (max-width: 768px) {
+  .hero-content {
+    top: 150px;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    line-height: 1.5;
+  }
+
+  .login-btn {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .swipe-down {
+    bottom: 90px;
+  }
+
+  .arrow {
+    font-size: 1rem;
+  }
+
+  .swipe-text {
+    font-size: 0.8rem;
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 576px) {
+  .hero-content {
+    top: 100px;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .login-btn {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .swipe-down {
+    bottom: 70px;
+  }
+
+  .arrow {
+    font-size: 0.9rem;
+  }
+
+  .swipe-text {
+    font-size: 0.75rem;
+  }
+}

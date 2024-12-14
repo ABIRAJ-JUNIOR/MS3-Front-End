@@ -1,8 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Router } from "@angular/router";
-import html2canvas from "html2canvas";
-import { Student } from "../../../Modals/modals";
 import { StudentService } from "../../../Service/API/Student/student.service";
 import { PaymentDataService } from "../../../Service/Data/Payment_Data/payment-data.service";
 import { StudentDashDataService } from "../../../Service/Data/Student_Data/student-dash-data.service";
@@ -114,17 +112,30 @@ export class StudentPaymentsComponent implements OnInit {
 
   @ViewChild('table', { static: false }) table!: ElementRef;
 
-  downloadTableAsImage() {
-    // Capture the table using html2canvas
-    html2canvas(this.table.nativeElement).then(canvas => {
-      // Convert the canvas to an image (PNG format)
+  async downloadTableAsImage() {
+    try {
+      if (!this.table || !this.table.nativeElement) {
+        console.error('Table element not found!');
+        return;
+      }
+  
+      const html2canvas = (await import('html2canvas')).default;
+  
+      const canvas = await html2canvas(this.table.nativeElement, {
+        scale: 3, 
+        useCORS: true, 
+        backgroundColor: '#ffffff', 
+      });
+  
       const imageData = canvas.toDataURL('image/png');
-
-      // Create a link element to trigger the download
+  
       const link = document.createElement('a');
       link.href = imageData;
-      link.download = 'table-image.png';  // Set the filename for the download
-      link.click();  // Trigger the download
-    });
+      link.download = 'table-image.png'; 
+      link.click(); 
+    } catch (error) {
+      console.error('Error downloading table as image:', error);
+    }
   }
+  
 }

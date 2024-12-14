@@ -3,9 +3,7 @@ import { Payment, Student } from '../../../Modals/modals';
 import { DataTransferService } from '../../../Service/Data/Data_Transfer/data-transfer.service';
 import { Transaction } from '../../Admin_Pages/payments-overview/payments-overview.component';
 import { StudentService } from '../../../Service/API/Student/student.service';
-import { ResolveEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import html2canvas from 'html2canvas';
 import { MailServiceService } from '../../../Service/API/Mail/mail-service.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -50,27 +48,37 @@ export class InvoiceComponent implements OnInit{
     window.history.back()
   }
 
-  downloadInvoice() {
-    const element = document.getElementById('invoiceContent');
-    if (!element) {
-      console.error('Element not found!');
-      return;
+  async downloadInvoice() {
+    try {
+      const element = document.getElementById('invoiceContent');
+      if (!element) {
+        console.error('Invoice content element not found!');
+        return;
+      }
+  
+      const html2canvas = (await import('html2canvas')).default;
+  
+      const canvas = await html2canvas(element, {
+        scale: 3, 
+        useCORS: true, 
+        backgroundColor: '#ffffff', 
+      });
+  
+      const imageData = canvas.toDataURL('image/png', 1.0);
+  
+      const link = document.createElement('a');
+      link.href = imageData;
+  
+      const firstName = this.studentData?.firstName || 'Student';
+      const lastName = this.studentData?.lastName || 'Invoice';
+  
+      link.download = `${firstName}-${lastName}.png`;
+      link.click();
+    } catch (error) {
+      console.error('Error generating invoice PNG:', error);
     }
-    html2canvas(element, {
-      scale: 3,
-      useCORS: true,
-      backgroundColor: '#ffffff',
-    })
-      .then((canvas:any) => {
-        const imageData = canvas.toDataURL('image/png', 1.0);
-
-        const link = document.createElement('a');
-        link.href = imageData;
-        link.download = `${this.studentData.firstName}-${this.studentData.lastName}.png`;
-        link.click();
-      })
-      .catch((err:any) => console.error('Error generating high-quality PNG:', err));
   }
+  
 
   sendEmail() {
     const invoice:Invoice = {

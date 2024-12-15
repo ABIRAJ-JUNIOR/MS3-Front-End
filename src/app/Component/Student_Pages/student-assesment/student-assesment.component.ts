@@ -64,26 +64,27 @@ export class StudentAssesmentComponent implements OnInit {
   }
 
   assesmentLink: string = "";
-
+  Data:any;
   examdataTransfer(assessment:Assessment) {
     this.assesmentLink = assessment.assessmentLink
 
-    const Data:any = {
+    this.Data= {
       studentId:this.loginData.Id,
       assessmentId:assessment.id
     }
 
-    this.studentAssessmentService.addStudentAssessment(Data).subscribe({
-      next:(response:any)=>{
-      }
-    })
+  
   }
 
 
   GoExam() {
-    alert(this.assesmentLink)
+    this.studentAssessmentService.addStudentAssessment(this.Data).subscribe({
+      next:(response:any)=>{
+      }
+    })
     if (this.assesmentLink) {
       window.open(this.assesmentLink, '_blank');
     }
+
   }
 }

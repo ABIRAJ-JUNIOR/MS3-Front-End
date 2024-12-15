@@ -107,8 +107,8 @@
         <div class="row">
             <div class="col-lg-6 gap">
                 <div class="form-group">
-                    <input type="date" class="form-control px-2" placeholder="" style="width: 100%;"
-                        formControlName="dateOfBirth">
+                    <input type="text" class="form-control px-2" placeholder="" style="width: 100%;"
+                        formControlName="dateOfBirth" bsDatepicker  placement="top" >
                     <label for="">DateOfBirth</label>
                     <div *ngIf="StudentRegistration.controls['dateOfBirth'].touched">
                         <p class="text-danger"

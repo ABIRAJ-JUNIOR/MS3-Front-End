@@ -21,11 +21,11 @@
         <section class="h-100 gradient-custom-2 ">
             <div class="container-fluid py-1 h-100">
                 <div class="row d-flex justify-content-center">
-                    <div class="col col-lg-12 col-xl-12">
+                    <div class="col-lg-12 col-xl-12">
                         <div class="card bg-light">
                             <app-studentcommon-profile></app-studentcommon-profile>
 
-                            <div class="card-body p-4 mt-5 text-blac ">
+                            <div class="card-body pt-3 p-0 p-md-4  p-lg-4 mt-5 text-blac ">
                                 <!-- Card Header -->
                                 <p class="card-text text-center text-danger fs-5" *ngIf="selectedQuote">
                                     "{{ selectedQuote }}"
@@ -144,21 +144,21 @@
                                                 </div>
                                             </div>
                                             <!-- Action Buttons -->
-                                            <div class="col-md-12 d-flex gap-3 ">
+                                            <div class="col-12 col-md-6 col-lg-4 d-flex flex-wrap gap-2">
                                                 <button
-                                                    class="btn btn-outline-dark btn-md d-flex align-items-center gap-2 px-4 py-2 shadow-sm"
+                                                    class="btn btn-outline-dark btn-lg-md btn-md d-flex align-items-center gap-2 p-2 p-md-3 shadow-sm"
                                                     [routerLink]="['/student-dashboard/setting']"
                                                     style="border-radius: 4px;">
-                                                    <i class="bi bi-gear-fill"></i> Account Settings
+                                                    <i class="bi bi-gear-fill d-none d-sm-inline"></i> Account Settings
                                                 </button>
                                                 <button
-                                                    class="btn btn-outline-primary btn-md d-flex align-items-center gap-2 px-4 py-2 shadow-sm"
+                                                    class="btn btn-outline-primary btn-md d-flex align-items-center gap-2 p-2 p-md-3 shadow-sm"
                                                     [routerLink]="['/bio']"
                                                     style="border-radius: 4px;">
-                                                    <i class="bi bi-gear-fill"></i> Biomatrics Settings
+                                                    <i class="bi bi-gear-fill d-none d-sm-inline"></i> Biomatrics Settings
                                                 </button>
-                                             
                                             </div>
+                                            
 
                                             <!-- Additional Information Section -->
                                             <div class="col-md-12 mx-auto my-5">

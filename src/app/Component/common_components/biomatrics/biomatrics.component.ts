@@ -28,9 +28,7 @@ export class BiomatricsComponent {
       alert('Please provide both email and password.');
       return;
     }
-    console.log(email,password)
-
-    this.windowDataService.register(password,email);
+    this.windowDataService.register(email,password);
 
   }
 }

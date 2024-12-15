@@ -63,8 +63,6 @@ export class StudentAssesmentComponent implements OnInit {
     })
   }
 
-
-
   assesmentLink: string = "";
 
   examdataTransfer(assessment:Assessment) {
@@ -74,7 +72,7 @@ export class StudentAssesmentComponent implements OnInit {
       studentId:this.loginData.Id,
       assessmentId:assessment.id
     }
-    
+
     this.studentAssessmentService.addStudentAssessment(Data).subscribe({
       next:(response:any)=>{
       }

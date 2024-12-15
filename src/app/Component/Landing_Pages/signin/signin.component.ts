@@ -12,36 +12,30 @@ import { RouterModule } from '@angular/router';
   styleUrl: './signin.component.css'
 })
 export class SigninComponent implements OnInit {
-  textToType: string = " Start your journey of growth, learning, and success today";
+  textToType: string = "Start your journey of growth, learning, and success today";
   displayedText: string = "";
   typingSpeed: number = 100;
-
+  restartDelay: number = 10000; 
+  
   ngOnInit(): void {
-
     this.startTypingEffect();
-
   }
-
-
-
+  
   startTypingEffect(): void {
-    let index = 0;
-
+    let index = 0; 
+    this.displayedText = "";
+  
     const typingInterval = setInterval(() => {
       if (index < this.textToType.length) {
         this.displayedText += this.textToType[index];
         index++;
       } else {
-        clearInterval(typingInterval);
+        clearInterval(typingInterval); 
+  
+        setTimeout(() => {
+          this.startTypingEffect();
+        }, this.restartDelay);
       }
     }, this.typingSpeed);
-    setTimeout(() => {
-      this.displayedText=""
-      this.startTypingEffect();
-    }, 20000);
-
- 
   }
-   
-
 }

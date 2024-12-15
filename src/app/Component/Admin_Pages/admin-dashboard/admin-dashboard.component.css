@@ -8,7 +8,6 @@ li {
     list-style: none;
 }
 
-/* Layout for admin dashboard */
 
 .wrapper {
     align-items: stretch;
@@ -35,7 +34,6 @@ li {
 
 }
 
-/* Sidebar Elements Style */
 #sidebar {
     background-color: #004085;
 }
@@ -130,7 +128,6 @@ a.sidebar-link {
     width: 100%;
 }
 
-/* Sidebar Toggle */
 
 #sidebar.collapsed {
     margin-left: -264px;
@@ -168,7 +165,6 @@ button .badge {
     z-index: 10;
 }
 
-/* Footer and Nav */
 
 @media (max-width:767.98px) {
 

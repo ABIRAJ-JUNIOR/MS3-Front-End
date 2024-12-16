@@ -73,7 +73,6 @@ export class AuthService {
     localStorage.removeItem("token");
     localStorage.removeItem("PurchaseCourse");
     this.router.navigate(['/Way/home'])
-    window.location.reload();
   }
 
 }

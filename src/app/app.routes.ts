@@ -54,13 +54,19 @@ import { HomeProfileComponent } from './Component/Landing_Pages/home-profile/hom
 
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent },
-    { path: 'course', component: CourseComponent },
+    { path: '', redirectTo: 'Way', pathMatch: 'full' },
+    {
+        path: 'Way', component:TestComponent,children:[
+            { path: '', redirectTo: 'home', pathMatch: 'full' },
+            { path: 'home', component: HomeComponent },
+            { path: 'course', component: CourseComponent },
+            { path: 'contact', component: ContactComponent },
+            { path: 'about', component: AboutComponent },
+            { path: 'profile', component: HomeProfileComponent },
+            { path: 'bio', component: BiomatricsComponent },
+        ]
+    },
     { path: 'course-sechdule/:courseId', component: CourseSechdulesComponent },
-    { path: 'contact', component: ContactComponent },
-    { path: 'about', component: AboutComponent },
-    { path: 'profile', component: HomeProfileComponent },
     {
         path: 'signin', component: SigninComponent, children: [
             { path: '', component: LoginComponent },
@@ -69,7 +75,6 @@ export const routes: Routes = [
             { path: 'reset-otp/:email', component: ResetOtpComponent }
         ]
     },
-    { path: 'bio', component: BiomatricsComponent },
     { path: 'email-verified/:id', component: EmailVerifiedComponent },
     {
         path: 'paymen-auth',
@@ -81,7 +86,6 @@ export const routes: Routes = [
         ]
     },
     { path: 'search/:name', component: SearchPageComponent },
-
     // Admin Dashboard Routes
     {
         path: 'admin-dashboard',
@@ -132,8 +136,6 @@ export const routes: Routes = [
             { path: '**', redirectTo: 'home', pathMatch: 'full' }
         ]
     },
-
-    { path: 'test', component: TestComponent },
     { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 

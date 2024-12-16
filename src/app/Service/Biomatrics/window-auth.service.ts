@@ -67,7 +67,7 @@ export class WindowAuthService {
           return credential;
         }, error: () => {
           this.tostr.error("Registration Failed! Check your Email & Password Try again.")
-          this.rout.navigate(['/bio'])
+          this.rout.navigate(['/Way/bio'])
         }
       })
 
@@ -108,7 +108,7 @@ export class WindowAuthService {
         next: (res: string) => {
           localStorage.setItem('token', res)
         }, error: () => {
-          this.rout.navigate(['/bio'])
+          this.rout.navigate(['/Way/bio'])
           this.tostr.error("Biomatrics failed. Please Register again.");
         }, complete: () => {
           const token: string = localStorage.getItem("token")!;
@@ -127,7 +127,7 @@ export class WindowAuthService {
             })
             this.rout.navigate(['/admin-dashboard'])
           } else if (decode.Role == "Student") {
-            this.rout.navigate(['/home'])
+            this.rout.navigate(['/Way/home'])
           }
         }
       })

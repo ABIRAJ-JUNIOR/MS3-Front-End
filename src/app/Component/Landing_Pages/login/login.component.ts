@@ -76,7 +76,7 @@ export class LoginComponent {
           })
           this.rout.navigate(['/admin-dashboard'])
         } else if (decode.Role == "Student") {
-          this.rout.navigate(['/home'])
+          this.rout.navigate(['/Way/home'])
         }
 
       }
@@ -92,7 +92,7 @@ export class LoginComponent {
     if (storedCredential) {
       this.windowauth.login();
     } else {
-      this.rout.navigate(['/bio'])
+      this.rout.navigate(['/Way/bio'])
     }
   }
   enabledOrDisabled():void{

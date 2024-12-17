@@ -13,17 +13,17 @@ export class FooterComponent {
   constructor(private router:Router){}
 
   GoToHome(){
-      this.router.navigate(['/home'])
+      this.router.navigate(['/Way/home'])
   }
   GoToAbout(){
-    this.router.navigate(['/about'])
+    this.router.navigate(['/Way/about'])
   }
 
   GoToContact(){
-    this.router.navigate(['/contact'])
+    this.router.navigate(['/Way/contact'])
   }
 
   GoToCourse(){
-    this.router.navigate(['/course'])
+    this.router.navigate(['/Way/course'])
   }
 }

@@ -72,11 +72,6 @@ export class AdminDashboardComponent implements OnInit {
 
   logout(){
     this.authService.logout();
-    this.refreshPage()
-  }
-
-  refreshPage(): void {
-    window.location.reload();
   }
 
   sidebarCollapsed = false;

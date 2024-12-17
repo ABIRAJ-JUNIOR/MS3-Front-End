@@ -28,13 +28,13 @@ export class CourseFilterPipe implements PipeTransform {
       Courses = Courses.filter(item => {
         const priceRange = item.courseFee;
         if (price === '0') {
-          return priceRange >= 100 && priceRange <= 500;
+          return priceRange >= 10000 && priceRange <= 20000;
         } else if (price === '1') {
-          return priceRange >= 500 && priceRange <= 1000;
+          return priceRange >= 20000 && priceRange <= 30000;
         } else if (price === '2') {
-          return priceRange >= 1000 && priceRange <= 1500;
+          return priceRange >= 30000 && priceRange <= 40000;
         } else if (price === '3') {
-          return priceRange >= 1500 && priceRange <= 2000;
+          return priceRange >= 40000 && priceRange <= 50000;
         }
         return true;
       });

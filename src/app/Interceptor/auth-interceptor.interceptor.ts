@@ -20,7 +20,7 @@ export const authInterceptorInterceptor: HttpInterceptorFn = (req, next) => {
   return next(clonedReq).pipe(
     catchError(err => {
       if ([401, 403].includes(err.status)) {
-        rout.navigate(['home']);
+        rout.navigate(['/Way/home']);
       }
       return throwError(() => err);
     }),

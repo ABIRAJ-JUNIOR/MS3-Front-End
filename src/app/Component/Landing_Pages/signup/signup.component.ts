@@ -5,11 +5,12 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService, SignUp } from '../../../Service/API/Auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { passwordValidator } from '../../Admin_Pages/account-setting/account-setting.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, CommonModule],
+  imports: [RouterModule, ReactiveFormsModule, CommonModule,BsDatepickerModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })

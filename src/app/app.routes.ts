@@ -54,52 +54,44 @@ import { HomeProfileComponent } from './Component/Landing_Pages/home-profile/hom
 
 
 export const routes: Routes = [
-
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent },
-    { path: 'course', component: CourseComponent },
-    { path: 'course-sechdule/:courseId', component: CourseSechdulesComponent },
-    { path: 'contact', component: ContactComponent },
-    { path: 'about', component: AboutComponent },
-    { path: 'profile', component: HomeProfileComponent },
+    { path: '', redirectTo: 'Way', pathMatch: 'full' },
     {
-        path: 'signin', component: SigninComponent, children: [
-            {
-                path: '',
-                component: LoginComponent
-            }, {
-                path: 'signup',
-                component: SignupComponent
-            }, {
-                path: 'reset',
-                component: ResetPasswordComponent
-            }, {
-                path: 'reset-otp/:email',
-                component: ResetOtpComponent
-            }
+        path: 'Way', component:TestComponent,children:[
+            { path: '', redirectTo: 'home', pathMatch: 'full' },
+            { path: 'home', component: HomeComponent },
+            { path: 'course', component: CourseComponent },
+            { path: 'contact', component: ContactComponent },
+            { path: 'about', component: AboutComponent },
+            { path: 'profile', component: HomeProfileComponent },
+            { path: 'bio', component: BiomatricsComponent },
         ]
     },
-    { path: 'bio', component: BiomatricsComponent },
+    { path: 'course-sechdule/:courseId', component: CourseSechdulesComponent },
+    {
+        path: 'signin', component: SigninComponent, children: [
+            { path: '', component: LoginComponent },
+            { path: 'signup', component: SignupComponent },
+            { path: 'reset', component: ResetPasswordComponent },
+            { path: 'reset-otp/:email', component: ResetOtpComponent }
+        ]
+    },
     { path: 'email-verified/:id', component: EmailVerifiedComponent },
     {
         path: 'paymen-auth',
-        component: PaymentAuthenticationComponent, children: [
-            {
-                path: 'paymentgate',
-                component: PaymentGateComponent
-            },
-            {
-                path: 'otp-auth',
-                component: OtpAuthenticationComponent
-            }
-        ],
-        canActivate: [payAuthGuard]
-    }, {
-        path: 'search/:name',
-        component: SearchPageComponent
+        component: PaymentAuthenticationComponent,
+        canActivate: [payAuthGuard],
+        children: [
+            { path: 'paymentgate', component: PaymentGateComponent },
+            { path: 'otp-auth', component: OtpAuthenticationComponent }
+        ]
     },
+    { path: 'search/:name', component: SearchPageComponent },
+    // Admin Dashboard Routes
     {
-        path: 'admin-dashboard', component: AdminDashboardComponent, children: [
+        path: 'admin-dashboard',
+        component: AdminDashboardComponent,
+        canActivate: [adminAuthGuard],
+        children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: AdminHomeComponent },
             { path: 'student-list', component: StudentListComponent },
@@ -119,12 +111,15 @@ export const routes: Routes = [
             { path: 'invoice', component: InvoiceComponent },
             { path: 'course-feedbacks', component: CourseFeedbacksComponent },
             { path: '**', redirectTo: 'home', pathMatch: 'full' }
-        ],
-        canActivate: [adminAuthGuard]
-
+        ]
     },
+
+    // Student Dashboard Routes
     {
-        path: 'student-dashboard', component: StudentDashboardComponent, children: [
+        path: 'student-dashboard',
+        component: StudentDashboardComponent,
+        canActivate: [studentAuthGuard],
+        children: [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: DashContentComponent },
             { path: 'profile', component: StudentProfileComponent },
@@ -139,9 +134,8 @@ export const routes: Routes = [
             { path: 'all-announcement/:Role', component: ViewAllAnnouncementComponent },
             { path: 'notification', component: NotificationComponent },
             { path: '**', redirectTo: 'home', pathMatch: 'full' }
-        ],
-        canActivate: [studentAuthGuard]
+        ]
     },
-    { path: 'test', component: TestComponent },
     { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
+

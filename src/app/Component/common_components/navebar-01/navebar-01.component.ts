@@ -61,11 +61,6 @@ export class Navebar01Component {
 
   logout() {
     this.authService.logout();
-    this.refreshPage();
-  }
-
-  refreshPage(): void {
-    window.location.reload();
   }
 
   goToDashboard() {
@@ -86,7 +81,7 @@ export class Navebar01Component {
     if (this.isAdmin) {
       this.router.navigate(['/admin-dashboard/admin-profile']);
     }else if(this.isStudent){
-      this.router.navigate(['/profile']);
+      this.router.navigate(['/Way/profile']);
     }
   }
 

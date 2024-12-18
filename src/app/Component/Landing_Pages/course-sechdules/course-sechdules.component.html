@@ -4,10 +4,10 @@
     <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner" *ngIf="courses">
             <ng-container *ngFor="let item of courses.schedules; let i = index">
-                <div class="carousel-item" [class.active]="i === 0" data-bs-interval="10000">
-                    <main class="mt-5 pt-4">
+                <div class="carousel-item" [class.active]="i === 0" data-bs-interval="10000" >
+                    <main class="mt-5 pt-4" >
                         <div class="container mt-5">
-                            <div class="row">
+                            <div class="row" >
                                 <div class="col-md-12 col-lg-6 col-12 mb-4">
                                     <img src="{{courses.imageUrl}}" class="img-fluid" alt="" />
                                 </div>
@@ -73,7 +73,7 @@
 
                                         <button class="btn btn-danger btn-md mt-2" type="submit"
                                             (click)="sendPaymentData(item)" data-bs-toggle="modal"
-                                            data-bs-target="#PaymmentConfirmation" [disabled]="item.scheduleStatus=='Closed'">
+                                            data-bs-target="#PaymmentConfirmation" [disabled]="item.scheduleStatus=='Closed' || item.scheduleStatus=='Completed'">
                                             ENROLL SECHDULE
                                             <i class="bi bi-bag-heart-fill"></i>
                                         </button>

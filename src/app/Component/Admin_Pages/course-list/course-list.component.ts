@@ -8,11 +8,12 @@ import { CourseService } from '../../../Service/API/Course/course.service';
 import { jwtDecode } from 'jwt-decode';
 import { AuditlogService } from '../../../Service/API/AuditLog/auditlog.service';
 import { AuditLogRequest } from '../student-list/student-list.component';
+import { HasRoleDirective } from '../../../Directives/has-role.directive';
 
 @Component({
   selector: 'app-course-list',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule,ReactiveFormsModule,HasRoleDirective],
   providers: [BsModalService],
   templateUrl: './course-list.component.html',
   styleUrl: './course-list.component.css'

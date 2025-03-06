@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { StudentReqest } from "../../../Component/Admin_Pages/student-list/student-list.component";
 import { StudenUpdateRequest } from "../../../Component/Student_Pages/student-setting/student-setting.component";
 import { Student } from "../../../Modals/modals";
-import { environment } from "../../../../environments/environment.prod";
+import { environment } from "../../../../environments/environment.development";
 
 @Injectable({
   providedIn: 'root'

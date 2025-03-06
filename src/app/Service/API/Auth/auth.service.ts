@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { jwtDecode } from "jwt-decode";
-import { environment } from '../../../../environments/environment.prod';
+import { environment } from '../../../../environments/environment.development';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -72,6 +72,7 @@ export class AuthService {
   logout(){
     localStorage.removeItem("token");
     localStorage.removeItem("PurchaseCourse");
+    location.reload();
     this.router.navigate(['/Way/home'])
   }
 

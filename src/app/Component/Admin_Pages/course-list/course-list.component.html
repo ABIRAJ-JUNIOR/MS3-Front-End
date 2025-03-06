@@ -38,7 +38,7 @@
                               <td>{{i + 1}}</td>
                               <td>{{course.courseName}}</td>
                               <td>
-                                  <img src="{{course.imageUrl || 'https://via.placeholder.com/150'}}" alt="Course image" class="rounded pointer" width="45" height="45" (click)="openPreviewModal(template, course.imageUrl)"> 
+                                  <img src="{{course.imageUrl || 'https://res.cloudinary.com/dgpyq5til/image/upload/v1738518297/imageonline-co-placeholder-image_bvdvnc.jpg'}}" alt="Course image" class="rounded pointer" width="45" height="45" (click)="openPreviewModal(template, course.imageUrl)"> 
                               </td>
                               <td [ngStyle]="{
                                 color: course.level === 'Beginner' ? 'red' :
@@ -91,7 +91,7 @@
       <button type="button" class="btn-close" (click)="modalRef?.hide()" aria-label="Close"></button>
     </div>
     <div class="modal-body text-center p-4">
-      <img [src]="courseImageUrl || 'https://via.placeholder.com/150'" class="img-fluid rounded shadow-lg" alt="Full Image" />
+      <img [src]="courseImageUrl || 'https://res.cloudinary.com/dgpyq5til/image/upload/v1738518297/imageonline-co-placeholder-image_bvdvnc.jpg'" class="img-fluid rounded shadow-lg" alt="Full Image" />
     </div>
   </ng-template>
   
@@ -139,7 +139,7 @@
                     <!-- Course Picture Section -->
                     <div class="col-12 col-md-3 d-flex flex-column align-items-center text-center">
                         <div class="position-relative">
-                            <img [src]="courseImageUrl || 'https://via.placeholder.com/150'" alt="Course Picture"
+                            <img [src]="courseImageUrl || 'https://res.cloudinary.com/dgpyq5til/image/upload/v1738518297/imageonline-co-placeholder-image_bvdvnc.jpg'" alt="Course Picture"
                                 class="rounded border border-white shadow-lg"
                                 style="width: 120px; height: 120px; object-fit: cover" />
                             <input type="file" id="courseImgInput" #fileInput class="d-none" accept="image/*"

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Admin } from '../../../Modals/modals';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -134,7 +134,7 @@ export class AdminListComponent implements OnInit{
       lastName: formData.lastName,
       email: formData.email,
       phone: formData.phone,
-      password: formData.password,
+      password: formData.password != "" ? formData.password : null,
       role: formData.role,
     };
 

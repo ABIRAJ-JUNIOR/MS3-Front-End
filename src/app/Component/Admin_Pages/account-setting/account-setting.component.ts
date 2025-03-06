@@ -20,7 +20,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AccountSettingComponent implements OnInit {
   userForm!: FormGroup;
-  profilePicture = 'https://via.placeholder.com/150'; 
+  profilePicture = 'https://res.cloudinary.com/dgpyq5til/image/upload/v1738518297/imageonline-co-placeholder-image_bvdvnc.jpg'; 
   passwordNotMatch:boolean = false 
   loginData:any 
   constructor(

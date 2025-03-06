@@ -39,7 +39,7 @@
                 <td>{{ i + 1 }}</td>
                 <td>{{ admin.nic }}</td>
                 <td>
-                  <img src="{{admin.imageUrl || 'https://via.placeholder.com/150'}}" alt="profile image" class="rounded" width="50" height="50" class="pointer" (click)="openPreviewModal(template, admin.imageUrl)" />
+                  <img src="{{admin.imageUrl || 'https://res.cloudinary.com/dgpyq5til/image/upload/v1738518297/imageonline-co-placeholder-image_bvdvnc.jpg'}}" alt="profile image" class="rounded" width="50" height="50" class="pointer" (click)="openPreviewModal(template, admin.imageUrl)" />
                 </td>
                 <td>{{ admin.firstName }} {{ admin.lastName }}</td>
                 <td>{{ admin.phone }}</td>
@@ -93,7 +93,7 @@
     <button type="button" class="btn-close" (click)="modalRef?.hide()" aria-label="Close"></button>
   </div>
   <div class="modal-body text-center p-4">
-    <img [src]="profileImageUrl || 'https://via.placeholder.com/150'" class="img-fluid rounded shadow-lg" alt="Full Image" />
+    <img [src]="profileImageUrl || 'https://res.cloudinary.com/dgpyq5til/image/upload/v1738518297/imageonline-co-placeholder-image_bvdvnc.jpg'" class="img-fluid rounded shadow-lg" alt="Full Image" />
   </div>
 </ng-template>
 
@@ -139,7 +139,7 @@
           <!-- Profile Picture Section -->
           <div class="col-12 col-md-3 d-flex flex-column align-items-center text-center">
             <div class="position-relative">
-              <img [src]="profileImageUrl || 'https://via.placeholder.com/150'" alt="Profile Picture" class="rounded border border-white shadow-lg" style="width: 120px; height: 120px; object-fit: cover" />
+              <img [src]="profileImageUrl || 'https://res.cloudinary.com/dgpyq5til/image/upload/v1738518297/imageonline-co-placeholder-image_bvdvnc.jpg'" alt="Profile Picture" class="rounded border border-white shadow-lg" style="width: 120px; height: 120px; object-fit: cover" />
               <input type="file" id="imgInput" #fileInput class="d-none" accept="image/*" (change)="onFileSelected($event)"/>
               <button type="button" class="btn btn-light btn-sm rounded-circle shadow position-absolute" style="bottom: 0; right: -10px; border-radius: 4px" data-bs-toggle="tooltip" data-bs-placement="top" title="Change Profile Picture" (click)="fileInput.click()">
                 <i class="bi bi-pencil-fill"></i>
